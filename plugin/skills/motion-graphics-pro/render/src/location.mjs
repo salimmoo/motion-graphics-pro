@@ -95,7 +95,7 @@ export function legacyManual() {
     openvoice: path.join(h, "vsu-model", "openvoice"),
     whisper: path.join(h, ".cache", "huggingface", "hub"),
     hf: path.join(h, "vgb-model", "hf"),
-    // rembg by hand (the P3 ad: venv vrb + rembg's own model folder ~/.rembg; older rembg: ~/.u2net)
+    // rembg by hand (in a real production: venv vrb + rembg's own model folder ~/.rembg; older rembg: ~/.u2net)
     pythonCutout: venvPython(path.join(h, "vrb")),
     rembg: path.join(h, ".rembg"),
   };

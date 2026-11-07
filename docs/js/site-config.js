@@ -4,10 +4,10 @@
          it starts with "000201..."). The donation dialog turns it into a dynamic QRIS with the chosen amount.
          Leave empty to show qrisImage instead (a picture of your QRIS), or a "segera" note when both are empty. */
 window.SITE = {
-  version: "2.4.1",
+  version: "2.4.2",
   updated: "November 2026",
   owner: "Salim Muhammad",
-  zip: "download/motion-graphics-pro-plugin-v2.4.1.zip",   // Claude plugin ZIP (skill/tools/build_plugin.py)
+  zip: "download/motion-graphics-pro-plugin-v2.4.2.zip",   // Claude plugin ZIP (skill/tools/build_plugin.py)
   // Claude Code marketplace: /plugin marketplace add <repo>, then /plugin install <plugin>@<name>
   marketplace: { repo: "salimmoo/motion-graphics-pro", name: "salimmoo", plugin: "motion-graphics-pro" },
   // donations inside Indonesia: every provider left empty is hidden; an empty tab shows "segera hadir"

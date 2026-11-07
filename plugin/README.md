@@ -1,4 +1,4 @@
-# Motion Graphics Pro (Claude plugin) v2.4.1
+# Motion Graphics Pro (Claude plugin) v2.4.2
 
 Three Claude skills that take a motion graphics video from a plain-language brief to a finished file:
 `motion-graphics-pro` (production flow, mgp renderer, 260 blocks, 104 motion packs), `motion-graphics`

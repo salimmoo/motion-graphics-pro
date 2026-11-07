@@ -1,5 +1,11 @@
 # Changelog
 
+## v2.4.2 (08-11-2026)
+
+### Dokumen
+- README: bagian baru **Free and Ultra** (tabel edisi gratis dan berbayar). Edisi gratis tetap lengkap.
+- Rujukan audio, lipsync, `audit.mjs`, `location.mjs`, dan dokumen skill EN: label produksi internal diganti teks umum.
+
 ## v2.4.1 (07-11-2026)
 
 Perbaikan dari dua produksi nyata (iklan 90 dan 85 detik dibuat penuh dengan skill ini).

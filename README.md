@@ -2,12 +2,13 @@
   <img src="docs/assets/img/gate/timur/thumb.webp" width="88" alt="">
 </p>
 
-<h1 align="center">Motion Graphics Pro v2.4.1</h1>
+<h1 align="center">Motion Graphics Pro v2.4.2</h1>
 <p align="center"><b>Atelier Kertas</b> · a plugin for Claude that takes a motion graphics video from a plain-language brief to a finished file</p>
 <p align="center">
   <a href="https://salimmoo.github.io/motion-graphics-pro/"><b>Open the interactive guide ↗</b></a> ·
   <a href="#install"><b>Install</b></a> ·
-  <a href="docs/download/motion-graphics-pro-plugin-v2.4.1.zip">Download the plugin</a> ·
+  <a href="docs/download/motion-graphics-pro-plugin-v2.4.2.zip">Download the plugin</a> ·
+  <a href="#free-and-ultra">Free and Ultra</a> ·
   <a href="CHANGELOG.md">Changelog</a> ·
   <a href="LICENSE.md">Licence</a> ·
   <a href="NOTICE.md">Credits</a> ·
@@ -79,7 +80,7 @@ HyperFrames, GSAP, OpenCV and Skia are not needed.
 
 ### A. claude.ai or Cowork
 
-1. Download the plugin: [`motion-graphics-pro-plugin-v2.4.1.zip`](docs/download/motion-graphics-pro-plugin-v2.4.1.zip) (≈9.5 MB). **Do not unzip it.**
+1. Download the plugin: [`motion-graphics-pro-plugin-v2.4.2.zip`](docs/download/motion-graphics-pro-plugin-v2.4.2.zip) (≈9.5 MB). **Do not unzip it.**
 2. In Claude, open **Settings → Capabilities** and make sure **Code execution** is on.
 3. Open **Customize → Plugins**.
 4. Click **Upload plugin** and choose the ZIP. As an alternative to steps 1 and 4, click **Add marketplace**, type `salimmoo/motion-graphics-pro`, then install **motion-graphics-pro** from the list.
@@ -107,7 +108,7 @@ In the chat sandbox the brief, concept, script, templates, asset prompts, compos
 
 ### C. Manual install (plain skills)
 
-1. Download the [plugin ZIP](docs/download/motion-graphics-pro-plugin-v2.4.1.zip) and unzip it, or clone this repo.
+1. Download the [plugin ZIP](docs/download/motion-graphics-pro-plugin-v2.4.2.zip) and unzip it, or clone this repo.
 2. Copy the three folders inside `skills/` (repo: `plugin/skills/`) into your skills folder:
    - macOS / Linux: `~/.claude/skills/`
    - Windows: `%USERPROFILE%\.claude\skills\`
@@ -293,6 +294,22 @@ The in-house engines were tested side by side with the tools people usually use 
 
 Collaboration ideas, bug reports or requests for new styles: open an *Issue* in this repo, or use the channels in the **About** menu on the [site](https://salimmoo.github.io/motion-graphics-pro/). If this package helps you, support it through the **Donate** menu on the site (payment options are being added).
 
+## Free and Ultra
+
+Motion Graphics Pro is **free** and complete: everything in this repo (the plugin, `mgp`, all packs and blocks, the guide and the example previews) stays free. **Motion Graphics Ultra** is an optional paid edition for people who want to start from finished work.
+
+| | **Pro (free, this repo)** | **Ultra (paid)** |
+|---|---|---|
+| Plugin with 3 skills, `mgp` CLI, local render | ✓ | ✓ |
+| 104 motion packs, 260 blocks, motion library, guide | ✓ | ✓ |
+| Preview videos of the ad and the 12 example clips | ✓ | ✓ |
+| Editable source projects of the ad and all 12 clips | | ✓ |
+| Premium packs and blocks | | ✓ |
+| Early access to new versions, priority support | | ✓ |
+| Team / commercial licence | | ✓ |
+
+Ultra is delivered as access to a private GitHub repository. Availability and price will be announced on the [site](https://salimmoo.github.io/motion-graphics-pro/).
+
 ## Licence
 
 [Motion Graphics Pro licence](LICENSE.md): free to use and modify for personal and client work, and you may sell the videos you make. The package itself may not be sold, redistributed or claimed as your own work. The models installed by `mgp install` (FLUX.2 [klein] 4B, Chatterbox) have their own licences, which allow commercial use.
@@ -356,12 +373,13 @@ Motion Graphics Pro was written from scratch. It learned principles and ideas fr
 - **Bahasa.** Dokumen skill berbahasa Inggris, tetapi Claude membalas dalam bahasamu: pengguna Indonesia dilayani penuh dalam Bahasa Indonesia, termasuk brief T1, pesan gerbang, dan laporan (`references/template.id.md`). `mgp new --lang id` menulis `brief.md` dan `STATUS.md` dalam Bahasa Indonesia, dan `MGP_LANG=id` membuat pesan CLI berbahasa Indonesia. [Panduan interaktif](https://salimmoo.github.io/motion-graphics-pro/) tersedia dalam Bahasa Indonesia (bawaan) dan Inggris.
 - **Mulai cepat.** `mgp new` → `mgp check` → `mgp add` → `mgp contact --times poses` (blocking) → `mgp curves` → `mgp audit` → `mgp render` (lihat [Quick start](#quick-start)).
 - **Nama lama tetap jalan.** Sejak v2.4 perintah dan folder bernama Inggris (`rekam` → `mgp`, `blok/` → `blocks/`, `rujukan/` → `references/`, `proyek.json` → `project.json`, Gerak → `mgp.motion`). Nama lama berbahasa Indonesia (`rekam baru --rasio`, `rekam tambah … --ke`, `rekam pasang suara --latar`) tetap diterima sebagai alias, dan proyek lama tetap bisa dibuka dan dirender.
+- **Gratis dan Ultra.** Semua isi repo ini tetap gratis dan lengkap. **Motion Graphics Ultra** (berbayar, opsional) menambah file proyek sumber iklan + 12 klip contoh yang bisa diedit, paket dan blok premium, akses versi baru lebih awal, dukungan prioritas, dan lisensi tim. Ultra diberikan lewat akses ke repo GitHub privat; ketersediaan dan harga diumumkan di situs. Lihat [Free and Ultra](#free-and-ultra).
 - **Data paket motion** (`packs.json`, `motion-packs.html`) masih berbahasa Indonesia.
 
 ### Cara pasang (langkah demi langkah)
 
 **A. claude.ai atau Cowork**
-1. Unduh [ZIP plugin](docs/download/motion-graphics-pro-plugin-v2.4.1.zip) (±9,5 MB). **Jangan diekstrak.**
+1. Unduh [ZIP plugin](docs/download/motion-graphics-pro-plugin-v2.4.2.zip) (±9,5 MB). **Jangan diekstrak.**
 2. Buka **Settings → Capabilities**, pastikan **Code execution** aktif.
 3. Buka **Customize → Plugins** → **Upload plugin** → pilih ZIP tadi. Bisa juga lewat **Add marketplace**, ketik `salimmoo/motion-graphics-pro`, lalu pasang **motion-graphics-pro**.
 4. Buka chat baru dan tulis brief, misalnya *"Buatkan iklan 15 detik 9:16 gaya kolase kertas untuk es kopi"*.

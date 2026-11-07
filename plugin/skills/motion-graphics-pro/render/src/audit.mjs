@@ -131,7 +131,7 @@ async function critSafe(comp, o, info, platform) {
       const boxes = await s.page.evaluate(([bx]) => {
         const vw = window.innerWidth, vh = window.innerHeight, out = [];
         const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-        // The text itself, not the block box: a 1080 px wide centred title only has glyphs in its middle (P2 iklan-105:
+        // The text itself, not the block box: a 1080 px wide centred title only has glyphs in its middle (in a real ad:
         // "173 px out" for a centred word). Range rects = the line boxes of the glyph runs (after transforms), united
         // per element over all its own text nodes.
         const ink = new Map(), range = document.createRange();
