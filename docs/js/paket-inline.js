@@ -1,252 +1,50 @@
-/* paket-inline.js — Paket Motion inside the guide (topic #paket).
-   Vertical accordion of numbered categories (one open at a time, GSAP height/opacity). Inside an open category:
-   left = package list, right = a drag/arrow/keyboard carousel of live canvas previews + the rich description.
-   Data: paket/data.js (window.PAKET, built by tools/build_paket_page.py). Previews: js/paket-scenes*.js (canvas).
-   Loaded lazily by guide.js (mountLazy "paket"). Only the selected card of the open category animates, and only
-   while the block is on screen. */
-window.PaketInline = (() => {
-  const SCRIPTS = ["paket/data.js", "js/paket-scenes.js"], SCENES = ["a1", "a2", "b", "c", "d", "e", "t"].map((k) => `js/paket-scenes-${k}.js`);
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  const pad = (n) => String(n).padStart(2, "0");
-  const load = (src) => new Promise((res) => { if (document.querySelector(`script[data-pki="${src}"]`)) return res(); const s = document.createElement("script"); s.src = src; s.dataset.pki = src; s.onload = res; s.onerror = res; document.head.appendChild(s); });
-  const G = () => window.gsap;
-
-  let root, D, KAT, BYK, open = null, visible = false, raf = 0, t0 = performance.now();
-  const ST = {};   // per category state: {el, body, items, cards, players, sel, pos, ...}
-
-  async function mount(el) {
-    root = el; el.innerHTML = `<p class="lazy-msg">Memuat paket…</p>`;
-    if (!window.PAKET) await load(SCRIPTS[0]);
-    if (!window.PaketScenes) await load(SCRIPTS[1]);
-    await Promise.all(SCENES.map(load));
-    D = window.PAKET;
-    if (!D || !window.PaketScenes) { el.innerHTML = `<div class="pki-fail"><a class="btn gold" href="paket/index.html">Buka Paket Motion ↗</a></div>`; return; }
-    KAT = D.kategori; BYK = {};
-    D.paket.forEach((p) => (BYK[p.kat] = BYK[p.kat] || []).push(p));
-    render();
-    new IntersectionObserver((es) => { visible = es[0].isIntersecting; if (visible) kick(); }, { rootMargin: "100px 0px" }).observe(root);
-    document.addEventListener("visibilitychange", kick);
-    addEventListener("resize", () => { if (open) { fitAll(ST[open]); layoutCar(ST[open]); } });
-    toggle(KAT[0].id, true);
-  }
-
-  /* ------------------------------------------------ markup */
-  function render() {
-    const n = D.paket.length;
-    root.innerHTML = `<div class="pki">
+window.PaketInline=(()=>{const SCRIPTS=["paket/data.js","js/paket-scenes.js"],SCENES=["a1","a2","b","c","d","e","t"].map(k=>`js/paket-scenes-${k}.js`);const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"})[c]);const pad=n=>String(n).padStart(2,"0");const load=src=>new Promise(res=>{if(document.querySelector(`script[data-pki="${src}"]`))return res();const s=document.createElement("script");s.src=src;s.dataset.pki=src;s.onload=res;s.onerror=res;document.head.appendChild(s)});const G=()=>window.gsap;let root,D,KAT,BYK,open=null,visible=false,raf=0,t0=performance.now();const ST={};async function mount(el){root=el;el.innerHTML=`<p class="lazy-msg">Memuat paket…</p>`;if(!window.PAKET)await load(SCRIPTS[0]);if(!window.PaketScenes)await load(SCRIPTS[1]);await Promise.all(SCENES.map(load));D=window.PAKET;if(!D||!window.PaketScenes){el.innerHTML=`<div class="pki-fail"><a class="btn gold" href="paket/index.html">Buka Paket Motion ↗</a></div>`;return}KAT=D.kategori;BYK={};D.paket.forEach(p=>(BYK[p.kat]=BYK[p.kat]||[]).push(p));render();new IntersectionObserver(es=>{visible=es[0].isIntersecting;if(visible)kick()},{rootMargin:"100px 0px"}).observe(root);document.addEventListener("visibilitychange",kick);addEventListener("resize",()=>{if(open){fitAll(ST[open]);layoutCar(ST[open])}});toggle(KAT[0].id,true)}function render(){const n=D.paket.length;root.innerHTML=`<div class="pki">
       <div class="pki-top">
         <div class="pki-top-l"><p class="pki-k">${KAT.length} kategori · ${n} paket · preview hidup</p>
           <p class="pki-note">Buka satu kategori, pilih paket di daftar, lalu geser kartu preview dengan mouse, jari, tombol panah, atau keyboard. Paket bertanda <b>★</b> adalah pilihan kami.</p></div>
         <a class="btn pki-full" href="paket/index.html">Pustaka lengkap &amp; koleksi ↗</a>
       </div>
       <ol class="pki-acc">${KAT.map(catHtml).join("")}</ol>
-    </div>`;
-    root.querySelectorAll(".pki-cat").forEach((li) => {
-      const k = li.dataset.k;
-      ST[k] = { el: li, bar: li.querySelector(".pki-bar"), body: li.querySelector(".pki-body"), list: BYK[k] || [], sel: -1, pos: 0, players: [], built: false };
-      li.querySelector(".pki-bar").addEventListener("click", () => toggle(k));
-    });
-  }
-  function catHtml(k, i) {
-    const list = BYK[k.id] || [], best = list.find((p) => p.unggulan) || list[0];
-    return `<li class="pki-cat" data-k="${k.id}" style="--kc:${best ? best.pal[2] : "#f2d796"}">
+    </div>`;root.querySelectorAll(".pki-cat").forEach(li=>{const k=li.dataset.k;ST[k]={el:li,bar:li.querySelector(".pki-bar"),body:li.querySelector(".pki-body"),list:BYK[k]||[],sel:-1,pos:0,players:[],built:false};li.querySelector(".pki-bar").addEventListener("click",()=>toggle(k))})}function catHtml(k,i){const list=BYK[k.id]||[],best=list.find(p=>p.unggulan)||list[0];return`<li class="pki-cat" data-k="${k.id}" style="--kc:${best?best.pal[2]:"#f2d796"}">
       <button type="button" class="pki-bar" aria-expanded="false" aria-controls="pkib-${k.id}" id="pkih-${k.id}">
-        <span class="pki-n">${pad(k.nomor || i + 1)}</span>
+        <span class="pki-n">${pad(k.nomor||i+1)}</span>
         <span class="pki-name"><b>${esc(k.nama)}</b><small>${esc(k.definisi)}</small></span>
-        <span class="pki-sw" aria-hidden="true">${list.map((p) => `<i style="background:linear-gradient(135deg,${p.pal[2]},${p.pal[3] || p.pal[2]})"></i>`).join("")}</span>
+        <span class="pki-sw" aria-hidden="true">${list.map(p=>`<i style="background:linear-gradient(135deg,${p.pal[2]},${p.pal[3]||p.pal[2]})"></i>`).join("")}</span>
         <span class="pki-cnt">${list.length} paket</span>
         <span class="pki-chev" aria-hidden="true"></span>
       </button>
       <div class="pki-body" id="pkib-${k.id}" role="region" aria-labelledby="pkih-${k.id}" hidden></div>
-    </li>`;
-  }
-  function bodyHtml(k) {
-    const S = ST[k], list = S.list, K = KAT.find((x) => x.id === k);
-    return `<div class="pki-in">
-      <div class="pki-list" role="listbox" aria-label="Paket ${esc(K.nama)}">${list.map((p, i) => `<button type="button" role="option" class="pki-it${p.unggulan ? " best" : ""}" data-i="${i}" aria-selected="false">
-          <span class="pki-it-n">${pad(i + 1)}</span><span class="pki-it-t"><b>${esc(p.nama)}</b><small>${esc(p.pv.ar)} · ${esc(p.durasi)}</small></span>
-          <span class="pki-it-p" aria-hidden="true">${p.pal.slice(0, 4).map((c) => `<i style="background:${c}"></i>`).join("")}</span>${p.unggulan ? `<em class="pki-star" title="Pilihan kami">★</em>` : ""}</button>`).join("")}</div>
+    </li>`}function bodyHtml(k){const S=ST[k],list=S.list,K=KAT.find(x=>x.id===k);return`<div class="pki-in">
+      <div class="pki-list" role="listbox" aria-label="Paket ${esc(K.nama)}">${list.map((p,i)=>`<button type="button" role="option" class="pki-it${p.unggulan?" best":""}" data-i="${i}" aria-selected="false">
+          <span class="pki-it-n">${pad(i+1)}</span><span class="pki-it-t"><b>${esc(p.nama)}</b><small>${esc(p.pv.ar)} · ${esc(p.durasi)}</small></span>
+          <span class="pki-it-p" aria-hidden="true">${p.pal.slice(0,4).map(c=>`<i style="background:${c}"></i>`).join("")}</span>${p.unggulan?`<em class="pki-star" title="Pilihan kami">★</em>`:""}</button>`).join("")}</div>
       <div class="pki-stage">
         <div class="pki-view" tabindex="0" aria-roledescription="carousel" aria-label="Preview paket — geser atau pakai panah kiri/kanan">
-          ${list.map((p, i) => `<figure class="pki-card" data-i="${i}" style="--c0:${p.pal[0]};--c2:${p.pal[2]};--c3:${p.pal[3]}">
-            <div class="pki-frame ar-${p.pv.ar.replace(":", "x")}"><canvas aria-label="Preview ${esc(p.nama)}"></canvas></div>
-            <figcaption><span>${esc(p.id)}</span><b>${esc(p.nama)}</b>${p.unggulan ? `<em>★ Pilihan kami</em>` : ""}</figcaption>
+          ${list.map((p,i)=>`<figure class="pki-card" data-i="${i}" style="--c0:${p.pal[0]};--c2:${p.pal[2]};--c3:${p.pal[3]}">
+            <div class="pki-frame ar-${p.pv.ar.replace(":","x")}"><canvas aria-label="Preview ${esc(p.nama)}"></canvas></div>
+            <figcaption><span>${esc(p.id)}</span><b>${esc(p.nama)}</b>${p.unggulan?`<em>★ Pilihan kami</em>`:""}</figcaption>
           </figure>`).join("")}
           <span class="pki-live" aria-hidden="true"><i></i>Live</span>
         </div>
         <div class="pki-ctl">
           <button type="button" class="pki-arr prev" aria-label="Paket sebelumnya"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
-          <div class="pki-dots">${list.map((p, i) => `<button type="button" data-i="${i}" aria-label="${esc(p.nama)}"></button>`).join("")}</div>
+          <div class="pki-dots">${list.map((p,i)=>`<button type="button" data-i="${i}" aria-label="${esc(p.nama)}"></button>`).join("")}</div>
           <span class="pki-count"><b>01</b> / ${pad(list.length)}</span>
           <button type="button" class="pki-arr next" aria-label="Paket berikutnya"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
         </div>
         <div class="pki-desc" aria-live="polite"></div>
       </div>
-    </div>`;
-  }
-  function descHtml(p, K) {
-    const sl = p.slot || {};
-    return `<div class="pki-d-head"><p class="pki-d-k">${esc(p.id)} · ${esc(K.nama)}</p><h4>${esc(p.nama)}</h4>
-        ${p.unggulan ? `<p class="pki-d-best"><b>★ Pilihan kami</b> ${esc(K.unggulan_alasan || "")}</p>` : ""}</div>
+    </div>`}function descHtml(p,K){const sl=p.slot||{};return`<div class="pki-d-head"><p class="pki-d-k">${esc(p.id)} · ${esc(K.nama)}</p><h4>${esc(p.nama)}</h4>
+        ${p.unggulan?`<p class="pki-d-best"><b>★ Pilihan kami</b> ${esc(K.unggulan_alasan||"")}</p>`:""}</div>
       <p class="pki-d-inti">${esc(p.inti)}</p>
       <dl class="pki-facts">
         <div><dt>Untuk apa</dt><dd>${esc(p.cocok)}</dd></div>
         <div><dt>Kapan dipakai</dt><dd>${esc(p.kapan)}</dd></div>
         <div><dt>Durasi ideal</dt><dd>${esc(p.durasi)}</dd></div>
-        <div><dt>Rasio &amp; irama</dt><dd>${esc(p.pv.ar)} · ${esc(sl.Irama || "")}</dd></div>
+        <div><dt>Rasio</dt><dd>${esc(p.pv.ar)}</dd></div>
       </dl>
-      <div class="pki-moves"><p class="pki-lab">Gerak kunci</p><ol>${(p.gerak || []).map((g) => `<li>${esc(g)}</li>`).join("")}</ol></div>
       <div class="pki-kit">
-        <div><p class="pki-lab">Palet</p><div class="pki-pal">${p.pal.map((c) => `<span style="--c:${c}"><i></i>${esc(c)}</span>`).join("")}</div></div>
-        <div><p class="pki-lab">Huruf</p><p class="pki-fonts"><b>${esc(p.font[0])}</b> judul · <b>${esc(p.font[1])}</b> isi</p>
-          <p class="pki-lab">Audio</p><p class="pki-fonts">${esc(sl.Audio || "")}</p></div>
+        <div><p class="pki-lab">Palet</p><div class="pki-pal">${p.pal.map(c=>`<span style="--c:${c}"><i></i>${esc(c)}</span>`).join("")}</div></div>
+        <div><p class="pki-lab">Huruf</p><p class="pki-fonts"><b>${esc(p.font[0])}</b> judul · <b>${esc(p.font[1])}</b> isi</p></div>
       </div>
-      <div class="pki-brief"><div class="pki-brief-h"><p class="pki-lab">Brief siap salin</p><button type="button" class="copy pki-copy" data-copy="brief">Salin brief</button></div><p class="pki-brief-t">${esc(p.brief)}</p></div>
-      <div class="pki-cmd"><code>${esc(p.add)}</code><button type="button" class="copy pki-copy" data-copy="add">Salin perintah</button></div>`;
-  }
-
-  /* ------------------------------------------------ accordion */
-  function toggle(k, instant) {
-    if (open === k) { close(k); open = null; return; }
-    const prev = open; open = k;
-    const S = ST[k], bar = S.bar, top0 = bar.getBoundingClientRect().top;
-    S.body.hidden = false;
-    if (!S.built) build(k);
-    S.el.classList.add("on"); bar.setAttribute("aria-expanded", "true");
-    if (prev) close(prev);
-    fitAll(S); layoutCar(S, true);
-    const g = G(), dur = instant || reduce || !g ? 0 : .75;
-    const keep = () => { if (instant) return; const d = bar.getBoundingClientRect().top - top0; if (Math.abs(d) > 1) scrollBy(0, d); };
-    if (g && dur) {
-      g.killTweensOf(S.body);
-      g.fromTo(S.body, { height: 0, opacity: 0 }, { height: "auto", opacity: 1, duration: dur, ease: "power3.inOut", onUpdate: keep, onComplete: () => { S.body.style.height = ""; settle(bar); } });
-      g.fromTo(S.body.querySelectorAll(".pki-it"), { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: .5, stagger: .035, delay: .18, ease: "power2.out" });
-      g.fromTo(S.body.querySelector(".pki-stage"), { opacity: 0, y: 24, scale: .985 }, { opacity: 1, y: 0, scale: 1, duration: .8, delay: .15, ease: "power3.out" });
-    } else { S.body.style.height = ""; S.body.style.opacity = 1; }
-    kick();
-  }
-  function close(k) {
-    const S = ST[k], g = G();
-    S.el.classList.remove("on"); S.bar.setAttribute("aria-expanded", "false");
-    if (g && !reduce) { g.killTweensOf(S.body); g.to(S.body, { height: 0, opacity: 0, duration: .6, ease: "power3.inOut", onComplete: () => { if (open !== k) S.body.hidden = true; } }); }
-    else S.body.hidden = true;
-  }
-  // if the opened bar sits low in the viewport, glide it up so the content is visible
-  function settle(bar) {
-    const r = bar.getBoundingClientRect();
-    if (r.top > innerHeight * .42 || r.top < 60) scrollTo({ top: scrollY + r.top - 88, behavior: reduce ? "auto" : "smooth" });
-  }
-
-  /* ------------------------------------------------ build one category */
-  function build(k) {
-    const S = ST[k], K = KAT.find((x) => x.id === k);
-    S.body.innerHTML = bodyHtml(k); S.built = true;
-    S.items = [...S.body.querySelectorAll(".pki-it")]; S.cards = [...S.body.querySelectorAll(".pki-card")];
-    S.dots = [...S.body.querySelectorAll(".pki-dots button")]; S.view = S.body.querySelector(".pki-view"); S.desc = S.body.querySelector(".pki-desc");
-    S.count = S.body.querySelector(".pki-count b"); S.K = K;
-    S.players = S.list.map((p, i) => window.PaketScenes.player(S.cards[i].querySelector("canvas"), p, K));
-    S.players.forEach((pl, i) => pl.ready.then(() => { if (i !== S.sel || !visible) { pl.fit(); pl.draw(poster(S.list[i])); } }));
-    S.items.forEach((b) => b.addEventListener("click", () => select(k, +b.dataset.i)));
-    S.dots.forEach((b) => b.addEventListener("click", () => select(k, +b.dataset.i)));
-    S.body.querySelector(".prev").addEventListener("click", () => select(k, S.sel - 1));
-    S.body.querySelector(".next").addEventListener("click", () => select(k, S.sel + 1));
-    S.view.addEventListener("keydown", (e) => { if (e.key === "ArrowLeft") { e.preventDefault(); select(k, S.sel - 1); } if (e.key === "ArrowRight") { e.preventDefault(); select(k, S.sel + 1); } });
-    S.body.querySelector(".pki-list").addEventListener("keydown", (e) => { const d = { ArrowDown: 1, ArrowUp: -1 }[e.key]; if (!d) return; e.preventDefault(); select(k, S.sel + d); S.items[S.sel].focus(); });
-    S.desc.addEventListener("click", (e) => { const b = e.target.closest("[data-copy]"); if (b) copy(b, S.list[S.sel][b.dataset.copy]); });
-    drag(k);
-    const best = Math.max(0, S.list.findIndex((p) => p.unggulan));
-    S.pos = best; select(k, best, true);
-    if (window.ResizeObserver) new ResizeObserver(() => { if (open === k) { fitAll(S); layoutCar(S); } }).observe(S.view);
-  }
-  const poster = (p) => 2.7;
-
-  function fitAll(S) { S.players.forEach((pl, i) => { pl.fit(); if (i !== S.sel) pl.draw(poster(S.list[i])); }); }
-
-  function select(k, i, instant) {
-    const S = ST[k], n = S.list.length; i = Math.max(0, Math.min(n - 1, i));
-    const changed = i !== S.sel; S.sel = i;
-    S.items.forEach((b, j) => { b.classList.toggle("on", j === i); b.setAttribute("aria-selected", j === i); });
-    S.dots.forEach((b, j) => b.classList.toggle("on", j === i));
-    S.cards.forEach((c, j) => c.classList.toggle("on", j === i));
-    S.count.textContent = pad(i + 1);
-    S.body.querySelector(".prev").disabled = i === 0; S.body.querySelector(".next").disabled = i === n - 1;
-    // keep the list item in view (inside its own scroll box only)
-    const lb = S.body.querySelector(".pki-list"), it = S.items[i];
-    if (lb.scrollHeight > lb.clientHeight + 4) { const y = lb.scrollTop + it.getBoundingClientRect().top - lb.getBoundingClientRect().top - lb.clientHeight / 2 + it.offsetHeight / 2; lb.scrollTo({ top: y, behavior: instant || reduce ? "auto" : "smooth" }); }
-    if (lb.scrollWidth > lb.clientWidth + 4) { const x = lb.scrollLeft + it.getBoundingClientRect().left - lb.getBoundingClientRect().left - lb.clientWidth / 2 + it.offsetWidth / 2; lb.scrollTo({ left: x, behavior: instant || reduce ? "auto" : "smooth" }); }
-    // carousel
-    const g = G();
-    if (g && !instant && !reduce) g.to(S, { pos: i, duration: .7, ease: "power3.out", overwrite: true, onUpdate: () => layoutCar(S) });
-    else { S.pos = i; layoutCar(S); }
-    // description crossfade
-    if (changed || !S.desc.innerHTML) {
-      const put = () => { S.desc.innerHTML = descHtml(S.list[i], S.K); if (g && !reduce) g.fromTo(S.desc.children, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: .45, stagger: .04, ease: "power2.out" }); };
-      if (g && !instant && !reduce && S.desc.innerHTML) g.to(S.desc, { opacity: 0, duration: .16, onComplete: () => { put(); g.set(S.desc, { opacity: 1 }); } });
-      else put();
-    }
-    // restart the live loop on the new card
-    S.players.forEach((pl, j) => { if (j !== i) pl.draw(poster(S.list[j])); });
-    t0 = performance.now(); kick();
-  }
-
-  /* ------------------------------------------------ carousel layout + drag */
-  function layoutCar(S, force) {
-    if (!S.view) return;
-    const vw = S.view.clientWidth, mob = vw < 520;
-    const cw = Math.min(vw * (mob ? .84 : .74), 680), gap = mob ? 14 : 22;
-    S.cw = cw + gap;
-    const vh = Math.round(cw * 9 / 16 + 34); if (S.vh !== vh) { S.vh = vh; S.view.style.height = vh + "px"; force = true; }
-    S.cards.forEach((c, j) => {
-      const d = j - S.pos, ad = Math.abs(d);
-      if (ad > 2.6) { c.style.visibility = "hidden"; return; }
-      c.style.visibility = "";
-      const x = d * S.cw * (1 - Math.min(ad, 1) * .08), sc = 1 - Math.min(ad, 1.6) * .1, op = Math.max(0, 1 - ad * .55);
-      c.style.width = cw + "px";
-      c.style.transform = `translate3d(calc(-50% + ${x.toFixed(1)}px), 0, 0) scale(${sc.toFixed(3)})`;
-      c.style.opacity = op.toFixed(3); c.style.zIndex = String(10 - Math.round(ad * 2));
-      c.style.filter = ad > .05 ? `saturate(${(1 - Math.min(ad, 1) * .35).toFixed(2)}) brightness(${(1 - Math.min(ad, 1) * .25).toFixed(2)})` : "";
-    });
-    if (force) S.players.forEach((pl) => pl.fit());
-  }
-  function drag(k) {
-    const S = ST[k], v = S.view; let x0 = 0, p0 = 0, down = false, moved = false, lastX = 0, lastT = 0, vel = 0, id = null;
-    v.addEventListener("pointerdown", (e) => {
-      if (e.button !== 0) return; down = true; moved = false; x0 = lastX = e.clientX; lastT = performance.now(); p0 = S.pos; vel = 0; id = e.pointerId;
-      G() && G().killTweensOf(S); v.classList.add("drag");
-    });
-    v.addEventListener("pointermove", (e) => {
-      if (!down || e.pointerId !== id) return; const dx = e.clientX - x0;
-      if (!moved && Math.abs(dx) > 5) { moved = true; try { v.setPointerCapture(id); } catch (_) {} }
-      if (!moved) return;
-      const now = performance.now(); vel = (e.clientX - lastX) / Math.max(1, now - lastT); lastX = e.clientX; lastT = now;
-      let p = p0 - dx / S.cw; const n = S.list.length - 1; if (p < 0) p *= .35; if (p > n) p = n + (p - n) * .35;
-      S.pos = p; layoutCar(S); e.preventDefault();
-    });
-    const up = (e) => {
-      if (!down) return; down = false; v.classList.remove("drag");
-      if (!moved) { const card = e.target.closest(".pki-card"); if (card && +card.dataset.i !== S.sel) select(k, +card.dataset.i); return; }
-      const target = Math.round(S.pos - vel * 260 / S.cw);
-      select(k, Math.max(Math.min(target, Math.round(p0) + 3), Math.round(p0) - 3));
-    };
-    v.addEventListener("pointerup", up); v.addEventListener("pointercancel", up); v.addEventListener("lostpointercapture", (e) => { if (down) up(e); });
-    v.addEventListener("dragstart", (e) => e.preventDefault());
-  }
-
-  /* ------------------------------------------------ live loop: only the selected card of the open category */
-  function kick() { if (!raf && open && visible && !document.hidden) raf = requestAnimationFrame(tick); }
-  function tick(now) {
-    raf = 0; if (!open || !visible || document.hidden) return;
-    const S = ST[open]; if (!S || !S.players.length) return;
-    const pl = S.players[S.sel]; if (pl) pl.draw(reduce ? poster() : (now - t0) / 1000);
-    if (!reduce) raf = requestAnimationFrame(tick);
-  }
-
-  function copy(btn, text) {
-    const done = () => { const o = btn.textContent; btn.textContent = "Tersalin ✓"; btn.classList.add("ok"); setTimeout(() => { btn.textContent = o; btn.classList.remove("ok"); }, 1600); };
-    if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, () => fallback(text, done)); else fallback(text, done);
-  }
-  function fallback(text, done) { const ta = document.createElement("textarea"); ta.value = text; ta.style.cssText = "position:fixed;opacity:0"; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); } catch (_) {} ta.remove(); done(); }
-
-  return { mount, open: (k) => ST[k] && open !== k && toggle(k), state: () => ({ open, ST }) };
-})();
+      <div class="pki-cmd"><code>${esc(p.add)}</code><button type="button" class="copy pki-copy" data-copy="add">Salin perintah</button></div>`}function toggle(k,instant){if(open===k){close(k);open=null;return}const prev=open;open=k;const S=ST[k],bar=S.bar,top0=bar.getBoundingClientRect().top;S.body.hidden=false;if(!S.built)build(k);S.el.classList.add("on");bar.setAttribute("aria-expanded","true");if(prev)close(prev);fitAll(S);layoutCar(S,true);const g=G(),dur=instant||reduce||!g?0:.75;const keep=()=>{if(instant)return;const d=bar.getBoundingClientRect().top-top0;if(Math.abs(d)>1)scrollBy(0,d)};if(g&&dur){g.killTweensOf(S.body);g.fromTo(S.body,{height:0,opacity:0},{height:"auto",opacity:1,duration:dur,ease:"power3.inOut",onUpdate:keep,onComplete:()=>{S.body.style.height="";settle(bar)}});g.fromTo(S.body.querySelectorAll(".pki-it"),{opacity:0,x:-14},{opacity:1,x:0,duration:.5,stagger:.035,delay:.18,ease:"power2.out"});g.fromTo(S.body.querySelector(".pki-stage"),{opacity:0,y:24,scale:.985},{opacity:1,y:0,scale:1,duration:.8,delay:.15,ease:"power3.out"})}else{S.body.style.height="";S.body.style.opacity=1}kick()}function close(k){const S=ST[k],g=G();S.el.classList.remove("on");S.bar.setAttribute("aria-expanded","false");if(g&&!reduce){g.killTweensOf(S.body);g.to(S.body,{height:0,opacity:0,duration:.6,ease:"power3.inOut",onComplete:()=>{if(open!==k)S.body.hidden=true}})}else S.body.hidden=true}function settle(bar){const r=bar.getBoundingClientRect();if(r.top>innerHeight*.42||r.top<60)scrollTo({top:scrollY+r.top-88,behavior:reduce?"auto":"smooth"})}function build(k){const S=ST[k],K=KAT.find(x=>x.id===k);S.body.innerHTML=bodyHtml(k);S.built=true;S.items=[...S.body.querySelectorAll(".pki-it")];S.cards=[...S.body.querySelectorAll(".pki-card")];S.dots=[...S.body.querySelectorAll(".pki-dots button")];S.view=S.body.querySelector(".pki-view");S.desc=S.body.querySelector(".pki-desc");S.count=S.body.querySelector(".pki-count b");S.K=K;S.players=S.list.map((p,i)=>window.PaketScenes.player(S.cards[i].querySelector("canvas"),p,K));S.players.forEach((pl,i)=>pl.ready.then(()=>{if(i!==S.sel||!visible){pl.fit();pl.draw(poster(S.list[i]))}}));S.items.forEach(b=>b.addEventListener("click",()=>select(k,+b.dataset.i)));S.dots.forEach(b=>b.addEventListener("click",()=>select(k,+b.dataset.i)));S.body.querySelector(".prev").addEventListener("click",()=>select(k,S.sel-1));S.body.querySelector(".next").addEventListener("click",()=>select(k,S.sel+1));S.view.addEventListener("keydown",e=>{if(e.key==="ArrowLeft"){e.preventDefault();select(k,S.sel-1)}if(e.key==="ArrowRight"){e.preventDefault();select(k,S.sel+1)}});S.body.querySelector(".pki-list").addEventListener("keydown",e=>{const d={ArrowDown:1,ArrowUp:-1}[e.key];if(!d)return;e.preventDefault();select(k,S.sel+d);S.items[S.sel].focus()});S.desc.addEventListener("click",e=>{const b=e.target.closest("[data-copy]");if(b)copy(b,S.list[S.sel][b.dataset.copy])});drag(k);const best=Math.max(0,S.list.findIndex(p=>p.unggulan));S.pos=best;select(k,best,true);if(window.ResizeObserver)new ResizeObserver(()=>{if(open===k){fitAll(S);layoutCar(S)}}).observe(S.view)}const poster=p=>2.7;function fitAll(S){S.players.forEach((pl,i)=>{pl.fit();if(i!==S.sel)pl.draw(poster(S.list[i]))})}function select(k,i,instant){const S=ST[k],n=S.list.length;i=Math.max(0,Math.min(n-1,i));const changed=i!==S.sel;S.sel=i;S.items.forEach((b,j)=>{b.classList.toggle("on",j===i);b.setAttribute("aria-selected",j===i)});S.dots.forEach((b,j)=>b.classList.toggle("on",j===i));S.cards.forEach((c,j)=>c.classList.toggle("on",j===i));S.count.textContent=pad(i+1);S.body.querySelector(".prev").disabled=i===0;S.body.querySelector(".next").disabled=i===n-1;const lb=S.body.querySelector(".pki-list"),it=S.items[i];if(lb.scrollHeight>lb.clientHeight+4){const y=lb.scrollTop+it.getBoundingClientRect().top-lb.getBoundingClientRect().top-lb.clientHeight/2+it.offsetHeight/2;lb.scrollTo({top:y,behavior:instant||reduce?"auto":"smooth"})}if(lb.scrollWidth>lb.clientWidth+4){const x=lb.scrollLeft+it.getBoundingClientRect().left-lb.getBoundingClientRect().left-lb.clientWidth/2+it.offsetWidth/2;lb.scrollTo({left:x,behavior:instant||reduce?"auto":"smooth"})}const g=G();if(g&&!instant&&!reduce)g.to(S,{pos:i,duration:.7,ease:"power3.out",overwrite:true,onUpdate:()=>layoutCar(S)});else{S.pos=i;layoutCar(S)}if(changed||!S.desc.innerHTML){const put=()=>{S.desc.innerHTML=descHtml(S.list[i],S.K);if(g&&!reduce)g.fromTo(S.desc.children,{opacity:0,y:10},{opacity:1,y:0,duration:.45,stagger:.04,ease:"power2.out"})};if(g&&!instant&&!reduce&&S.desc.innerHTML)g.to(S.desc,{opacity:0,duration:.16,onComplete:()=>{put();g.set(S.desc,{opacity:1})}});else put()}S.players.forEach((pl,j)=>{if(j!==i)pl.draw(poster(S.list[j]))});t0=performance.now();kick()}function layoutCar(S,force){if(!S.view)return;const vw=S.view.clientWidth,mob=vw<520;const cw=Math.min(vw*(mob?.84:.74),680),gap=mob?14:22;S.cw=cw+gap;const vh=Math.round(cw*9/16+34);if(S.vh!==vh){S.vh=vh;S.view.style.height=vh+"px";force=true}S.cards.forEach((c,j)=>{const d=j-S.pos,ad=Math.abs(d);if(ad>2.6){c.style.visibility="hidden";return}c.style.visibility="";const x=d*S.cw*(1-Math.min(ad,1)*.08),sc=1-Math.min(ad,1.6)*.1,op=Math.max(0,1-ad*.55);c.style.width=cw+"px";c.style.transform=`translate3d(calc(-50% + ${x.toFixed(1)}px), 0, 0) scale(${sc.toFixed(3)})`;c.style.opacity=op.toFixed(3);c.style.zIndex=String(10-Math.round(ad*2));c.style.filter=ad>.05?`saturate(${(1-Math.min(ad,1)*.35).toFixed(2)}) brightness(${(1-Math.min(ad,1)*.25).toFixed(2)})`:""});if(force)S.players.forEach(pl=>pl.fit())}function drag(k){const S=ST[k],v=S.view;let x0=0,p0=0,down=false,moved=false,lastX=0,lastT=0,vel=0,id=null;v.addEventListener("pointerdown",e=>{if(e.button!==0)return;down=true;moved=false;x0=lastX=e.clientX;lastT=performance.now();p0=S.pos;vel=0;id=e.pointerId;G()&&G().killTweensOf(S);v.classList.add("drag")});v.addEventListener("pointermove",e=>{if(!down||e.pointerId!==id)return;const dx=e.clientX-x0;if(!moved&&Math.abs(dx)>5){moved=true;try{v.setPointerCapture(id)}catch(_){}}if(!moved)return;const now=performance.now();vel=(e.clientX-lastX)/Math.max(1,now-lastT);lastX=e.clientX;lastT=now;let p=p0-dx/S.cw;const n=S.list.length-1;if(p<0)p*=.35;if(p>n)p=n+(p-n)*.35;S.pos=p;layoutCar(S);e.preventDefault()});const up=e=>{if(!down)return;down=false;v.classList.remove("drag");if(!moved){const card=e.target.closest(".pki-card");if(card&&+card.dataset.i!==S.sel)select(k,+card.dataset.i);return}const target=Math.round(S.pos-vel*260/S.cw);select(k,Math.max(Math.min(target,Math.round(p0)+3),Math.round(p0)-3))};v.addEventListener("pointerup",up);v.addEventListener("pointercancel",up);v.addEventListener("lostpointercapture",e=>{if(down)up(e)});v.addEventListener("dragstart",e=>e.preventDefault())}function kick(){if(!raf&&open&&visible&&!document.hidden)raf=requestAnimationFrame(tick)}function tick(now){raf=0;if(!open||!visible||document.hidden)return;const S=ST[open];if(!S||!S.players.length)return;const pl=S.players[S.sel];if(pl)pl.draw(reduce?poster():(now-t0)/1e3);if(!reduce)raf=requestAnimationFrame(tick)}function copy(btn,text){const done=()=>{const o=btn.textContent;btn.textContent="Tersalin ✓";btn.classList.add("ok");setTimeout(()=>{btn.textContent=o;btn.classList.remove("ok")},1600)};if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(text).then(done,()=>fallback(text,done));else fallback(text,done)}function fallback(text,done){const ta=document.createElement("textarea");ta.value=text;ta.style.cssText="position:fixed;opacity:0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy")}catch(_){}ta.remove();done()}return{mount,open:k=>ST[k]&&open!==k&&toggle(k),state:()=>({open,ST})}})();
