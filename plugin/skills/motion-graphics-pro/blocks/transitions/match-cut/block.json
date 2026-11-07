@@ -1,0 +1,162 @@
+{
+ "id": "transitions/match-cut",
+ "name": "Match Cut",
+ "name_id": "Match Cut",
+ "category": "transitions",
+ "description": {
+  "id": "Potongan keras yang dicocokkan: bentuk atau teks melaju di satu kurva easy-ease, berganti adegan tepat di puncak kecepatan lalu meneruskan geraknya; atau judul terbelah dan panel adegan baru tumbuh dari celahnya.",
+  "en": "Matched hard cut: a shape or a line of text rides one easy-ease curve and swaps scene at peak speed, continuing its motion; or a headline splits while the next scene grows from the gap."
+ },
+ "tags": [
+  "transisi",
+  "match cut",
+  "potong",
+  "teks",
+  "bentuk",
+  "headline",
+  "split",
+  "transitions",
+  "match",
+  "cut"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "mode": {
+   "default": "shape",
+   "type": "enum",
+   "options": [
+    "shape",
+    "text",
+    "split"
+   ],
+   "hint": "bentuk = lingkaran dicocokkan; teks = satu baris berganti di tengah gerak; belah = judul terbelah, panel tumbuh dari celah",
+   "option_aliases": {
+    "bentuk": "shape",
+    "teks": "text",
+    "belah": "split"
+   }
+  },
+  "style": {
+   "default": "scale",
+   "type": "enum",
+   "options": [
+    "scale",
+    "tracking",
+    "slide"
+   ],
+   "hint": "Gerak teks (mode teks)",
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "skala": "scale",
+    "geser": "slide"
+   }
+  },
+  "text_a": {
+   "default": "Kemarin",
+   "type": "text",
+   "hint": "Teks adegan lama / judul yang terbelah",
+   "aliases": [
+    "teks_a"
+   ]
+  },
+  "text_b": {
+   "default": "Hari ini",
+   "type": "text",
+   "hint": "Teks adegan baru (mode teks)",
+   "aliases": [
+    "teks_b"
+   ]
+  },
+  "color_a": {
+   "default": "#ffd27a",
+   "type": "color",
+   "hint": "Warna lingkaran di adegan lama",
+   "aliases": [
+    "warna_a"
+   ]
+  },
+  "color_b": {
+   "default": "#7ee0d6",
+   "type": "color",
+   "hint": "Warna lingkaran di adegan baru",
+   "aliases": [
+    "warna_b"
+   ]
+  },
+  "text_color": {
+   "default": "#ffffff",
+   "type": "color",
+   "hint": "Warna teks",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@800;900",
+   "type": "font",
+   "hint": "Font teks"
+  },
+  "size": {
+   "default": 170,
+   "type": "number",
+   "hint": "Ukuran teks (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Letak vertikal teks (% layar)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "influence": {
+   "default": 85,
+   "type": "number",
+   "hint": "Pengaruh easy-ease (%), makin besar makin tajam puncaknya",
+   "aliases": [
+    "pengaruh"
+   ]
+  }
+ },
+ "duration": 2.4,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/match-cut",
+  "match-cut",
+  "text-match-cut",
+  "type-match-cut"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.8,
+  "duration": 3.4,
+  "font": [
+   "Inter:wght@400;500;600;700;800;900"
+  ]
+ }
+}

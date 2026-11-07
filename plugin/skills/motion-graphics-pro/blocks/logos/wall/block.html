@@ -1,0 +1,49 @@
+<!-- Block logos/wall · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="logos/wall" data-start="0" data-duration="5" data-track-index="20" class="blk blk-logos-wall">
+<script type="application/json" data-block-props>
+{"style": "wall", "title": "Dipercaya tim-tim terbaik", "brand": ["Arunika", "Batik Lab", "Kopi Senja", "Nusa Data", "Sawah Pintar", "Laut Biru", "Rantai", "Gerak", "Pelita", "Tenun", "Rimba", "Kirana"], "cols": 4, "color": "#f2efe8", "card_color": "#191b22", "bg": "#0e1016", "font": "Inter:wght@500;700;800", "font2": "JetBrains Mono:wght@500;700", "seed": 7}
+</script>
+</div>
+<style>
+.blk-logos-wall{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-logos-wall .blk-wrap{position:absolute;left:50%;top:50%;width:max-content;max-width:92%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center}
+.blk-logos-wall .blk-jd{font-family:var(--f2);text-transform:uppercase;letter-spacing:.24em;font-size:calc(var(--s)*26px);opacity:.6;margin-bottom:calc(var(--s)*44px)}
+.blk-logos-wall .blk-grid{display:grid;gap:calc(var(--s)*20px)}
+.blk-logos-wall .blk-sel{display:flex;align-items:center;justify-content:center;gap:calc(var(--s)*16px);width:calc(var(--s)*330px);height:calc(var(--s)*140px);border-radius:calc(var(--s)*22px);white-space:nowrap;font-size:calc(var(--s)*34px)}
+.blk-logos-wall .blk-sel svg{width:calc(var(--s)*46px);height:calc(var(--s)*46px);flex:none}
+.blk-logos-wall .blk-strip{display:flex;align-items:center;gap:calc(var(--s)*64px);flex-wrap:wrap;justify-content:center;max-width:100%}
+.blk-logos-wall .blk-wmk{font-family:var(--f2);text-transform:uppercase;letter-spacing:.3em;font-size:calc(var(--s)*34px);font-weight:700;white-space:nowrap}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, D = k.dur, E = BLOCK.el, R = k.root, ac = k.random;
+  if (P.bg) R.style.background = P.bg;
+  R.style.cssText += ";--s:" + s + ";--f2:" + BLOCK.family(P.font2, "monospace");
+  var wrap = E("div", { class: "blk-wrap", style: "color:" + P.color + ";font-family:" + BLOCK.family(P.font) }, R);
+  var jd = P.title ? E("div", { class: "blk-jd" }, wrap, BLOCK.esc(P.title)) : null;
+  var merek = (Array.isArray(P.brand) ? P.brand : []).filter(Boolean);
+  if (jd) tl.fromTo(jd, { autoAlpha: 0, y: 12 * s }, { autoAlpha: 0.6, y: 0, duration: 0.6, ease: "power2.out" }, 0.1);
+  if (P.style === "strip") {
+    // baris monokrom: hanya opasitas, kiri ke kanan, lalu diam
+    var st = E("div", { class: "blk-strip" }, wrap), el = merek.slice(0, k.w > k.h ? 5 : 6).map(function (m) { return E("div", { class: "blk-wmk" }, st, BLOCK.esc(m)); });
+    tl.fromTo(el, { opacity: 0 }, { opacity: 0.78, duration: 0.7, ease: "power1.out", stagger: 0.16 }, 0.4);
+    tl.fromTo(st, { opacity: 1 }, { opacity: 0.92, duration: Math.max(0.5, D - 2), ease: "sine.inOut", immediateRender: false }, 1.8);
+    return;
+  }
+  // dinding: logo huruf tiruan (tanda geometris + nama), masuk per sel dengan stagger berseed
+  var kol = Math.max(1, Math.round(k.w < k.h ? Math.min(P.cols, 2) : P.cols));
+  var grid = E("div", { class: "blk-grid", style: "grid-template-columns:repeat(" + kol + ",auto)" }, wrap);
+  var B = ['<circle cx="12" cy="12" r="10" fill="C"/>', '<rect x="2" y="2" width="20" height="20" rx="5" fill="C"/>', '<path d="M12 2l10 18H2z" fill="C"/>',
+    '<path d="M2 12a10 10 0 0 1 20 0z" fill="C"/><path d="M2 14h20v3H2z" fill="C"/>', '<path d="M4 4h7v7H4zM13 13h7v7h-7z" fill="C"/>', '<path d="M12 2c5 4 5 16 0 20-5-4-5-16 0-20z" fill="C"/>'];
+  var gayaT = ["font-weight:800;letter-spacing:-.03em", "font-weight:500;letter-spacing:.06em;text-transform:uppercase;font-size:.78em", "font-weight:700;font-style:italic;letter-spacing:-.01em", "font-weight:800;text-transform:lowercase;letter-spacing:-.04em"];
+  var sel = merek.map(function (m, i) {
+    var c = E("div", { class: "blk-sel", style: "background:" + P.card_color }, grid);
+    E("span", null, c, '<svg viewBox="0 0 24 24">' + B[(i * 5 + Math.floor(ac() * 2)) % B.length].replace(/C/g, P.color) + "</svg>");
+    E("span", { style: gayaT[Math.floor(ac() * gayaT.length)] }, c, BLOCK.esc(m));
+    return c;
+  });
+  var urut = sel.map(function (c, i) { return { c: c, t: 0.35 + (i % kol) * 0.07 + Math.floor(i / kol) * 0.1 + ac() * 0.18 }; });
+  urut.forEach(function (u) { tl.fromTo(u.c, { autoAlpha: 0, scale: 0.86 }, { autoAlpha: 1, scale: 1, duration: 0.6, ease: "back.out(1.6)" }, u.t); });
+  tl.fromTo(grid, { scale: 1 }, { scale: 1.02, duration: Math.max(0.5, D - 1.5), ease: "none", immediateRender: false }, 1.5);
+}, { font: true });
+</script>

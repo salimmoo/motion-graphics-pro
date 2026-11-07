@@ -1,0 +1,1069 @@
+/* Motion Graphics Pro v2 guide: extra "contoh hasil" demos.
+   Registers peta, sebab, vo, jalan, gaya, persona, render, potong, tanpa through Demos.add(id, fn).
+   Every number comes from content/SKILL.md and the section is cited in each caption.
+   Works from file://: local images are only drawn, never read back (kit data comes from
+   window.LAYOUT + numbers precomputed by tools/build_assets.py). External libraries load lazily. */
+(() => {
+  "use strict";
+  if (!window.Demos || !Demos.add) return;
+  const { $, $$, esc, clamp, sm, copyText, visLoop } = Demos.util;
+  const SRC = document.currentScript && document.currentScript.src;
+  const IMG = (n) => (SRC ? new URL("../assets/img/" + n, SRC).href : "assets/img/" + n);
+  const KIT = (window.LAYOUT || {}).kit || [];
+  const KN = ["matahari", "awan", "bukit jauh", "bukit dekat", "rumah", "pohon", "rumput", "perahu"];
+  const kitAR = (i) => (KIT[i] ? KIT[i].h / KIT[i].w : 1);
+  const G = () => window.gsap;
+  const D2R = Math.PI / 180;
+  const lerp = (a, b, u) => a + (b - a) * u;
+  const nf = (v, d = 2) => (+v).toFixed(d).replace(".", ",");
+  const q12 = (t) => Math.floor(t * 12 + 1e-6) / 12;
+  const rng = (a) => () => { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  const mk = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+  const DPR = () => Math.min(2, window.devicePixelRatio || 1);
+
+  /* ---------- shared textures (generated, never read from files) ---------- */
+  const noiseCanvas = (n, seed, lo, hi, fib) => {
+    const c = document.createElement("canvas"); c.width = c.height = n;
+    const g = c.getContext("2d"), id = g.createImageData(n, n), r = rng(seed);
+    for (let p = 0; p < id.data.length; p += 4) { const v = lo + r() * (hi - lo); id.data[p] = id.data[p + 1] = id.data[p + 2] = v; id.data[p + 3] = 255; }
+    g.putImageData(id, 0, 0);
+    if (fib) { g.globalAlpha = .2; g.strokeStyle = "#7d6c52"; g.lineWidth = .7; for (let i = 0; i < fib; i++) { const x = r() * n, y = r() * n, a = r() * Math.PI, l = 3 + r() * 10; g.beginPath(); g.moveTo(x, y); g.quadraticCurveTo(x + Math.cos(a + .4) * l * .5, y + Math.sin(a + .4) * l * .5, x + Math.cos(a) * l, y + Math.sin(a) * l); g.stroke(); } }
+    return c;
+  };
+  let FIB = null;
+  const fibre = () => FIB || (FIB = noiseCanvas(256, 11, 206, 255, 700));
+  let styled = false;
+  const ensureStyle = () => {
+    if (styled) return; styled = true;
+    const s = document.createElement("style");
+    s.textContent = `.dp{--dp-grain:url(${noiseCanvas(128, 23, 120, 255, 0).toDataURL()});--dp-fibre:url(${fibre().toDataURL()})}`;
+    document.head.appendChild(s);
+  };
+
+  /* ---------- helpers ---------- */
+  const fit = (stage, cb) => { const ro = new ResizeObserver(() => { const w = stage.clientWidth, h = stage.clientHeight; if (w && h) cb(w, h); }); ro.observe(stage); };
+  // world of W x H logical px, contain-fit into stage via CSS variables (all .dp-world children follow)
+  const fitStage = (stage, W, H, mode = "contain") => fit(stage, (w, h) => {
+    const s = mode === "cover" ? Math.max(w / W, h / H) : Math.min(w / W, h / H);
+    stage.style.setProperty("--dp-s", s.toFixed(5)); stage.style.setProperty("--dp-x", ((w - W * s) / 2).toFixed(1) + "px"); stage.style.setProperty("--dp-y", ((h - H * s) / 2).toFixed(1) + "px");
+  });
+  const seg = (items, cur, extra = "") => `<div class="dp-seg" ${extra}>${items.map(([v, l]) => `<button type="button" class="dp-b${v === cur ? " on" : ""}" data-v="${v}">${l}</button>`).join("")}</div>`;
+  const bindSeg = (segEl, fn) => segEl.addEventListener("click", (e) => { const b = e.target.closest(".dp-b"); if (!b || !segEl.contains(b)) return; $$(".dp-b", segEl).forEach((x) => x.classList.toggle("on", x === b)); fn(b.dataset.v, b); });
+  const cap = (sec, html) => `<p class="dp-cap"><span class="dp-capt">${html}</span></p>`;
+  const setT = (el, x, y, sx, sy, a) => {
+    const g = G();
+    if (g) g.set(el, { x, y, scaleX: sx, scaleY: sy, opacity: a });
+    else { el.style.transform = `translate(${x}px,${y}px) scale(${sx},${sy})`; el.style.opacity = a; }
+  };
+  const hash = (arr) => { let h = 0x811c9dc5; const s = arr.map((v) => v.map((x) => x.toFixed(3)).join(",")).join(";"); for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return (h >>> 0).toString(16).toUpperCase().padStart(8, "0"); };
+  const loaded = {};
+  const loadJS = (src) => loaded[src] || (loaded[src] = new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.async = true; s.onload = res; s.onerror = () => { delete loaded[src]; rej(new Error("load " + src)); }; document.head.appendChild(s); }));
+  const loadCSS = (href) => { if ($$(`link[href="${href}"]`, document).length) return; const l = document.createElement("link"); l.rel = "stylesheet"; l.href = href; document.head.appendChild(l); };
+
+  /* ======================================================================
+     PAPER COLLAGE SCENES (world 1280 x 720, kit pieces + code sky/light/grain, §3.2)
+     ====================================================================== */
+  const SKY = {
+    day: "linear-gradient(180deg,#2C67B0 0%,#78ACDC 33%,#D9E8F2 61%,#D9E8F2 100%)",
+    dusk: "linear-gradient(180deg,#1E2152 0%,#6B4483 28%,#D2707A 48%,#F2AE6A 62%,#F7D39A 100%)",
+    night: "linear-gradient(180deg,#060A1A 0%,#12204A 42%,#2C3D66 70%,#3E4C70 100%)",
+  };
+  // d: kit index i, centre x, bottom b, width w, parallax k (§3.2), entry from/off/t0 (§6.2)
+  const VILLAGE = [
+    { i: 0, cx: 1040, b: 250, w: 180, k: .12, from: "t", off: 300, t0: .32 },
+    { i: 1, cx: 300, b: 190, w: 230, k: .15, from: "l", off: 360, t0: .15, cloud: 1 },
+    { i: 1, cx: 840, b: 140, w: 150, k: .18, from: "r", off: 340, t0: .3, cloud: 1, flip: 1 },
+    { i: 2, cx: 640, b: 500, w: 1500, k: .25, from: "b", off: 220, t0: .5 },
+    { i: 3, cx: 640, b: 625, w: 1560, k: .4, from: "b", off: 300, t0: .7 },
+    { i: 5, cx: 700, b: 565, w: 190, k: .55, from: "b", off: 200, t0: 1.05 },
+    { i: 4, cx: 430, b: 568, w: 250, k: .72, from: "pop", off: 0, t0: 1.8, hero: 1 },
+    { i: 3, cx: 640, b: 780, w: 1720, k: .88, from: "b", off: 270, t0: 2.15, flip: 1, tone: "brightness(.84) saturate(1.08)" },
+    { i: 6, cx: 180, b: 770, w: 520, k: .9, from: "b", off: 270, t0: 2.3 },
+    { i: 6, cx: 1110, b: 780, w: 560, k: .92, from: "b", off: 280, t0: 2.45, flip: 1 },
+  ];
+  const HARBOR = [
+    { i: 0, cx: 250, b: 290, w: 170, k: .12 },
+    { i: 1, cx: 990, b: 180, w: 250, k: .15, cloud: 1 },
+    { i: 1, cx: 560, b: 122, w: 140, k: .18, cloud: 1, flip: 1 },
+    { i: 2, cx: 640, b: 452, w: 1720, k: .25 },
+    { sea: 1 },
+    { i: 7, cx: 700, b: 612, w: 380, k: .72, hero: 1 },
+    { i: 6, cx: 100, b: 800, w: 470, k: .9 },
+    { i: 6, cx: 1210, b: 810, w: 400, k: .92, flip: 1 },
+  ];
+  const VILLAGE2 = [
+    { i: 1, cx: 520, b: 170, w: 240, k: .15, cloud: 1 },
+    { i: 1, cx: 1120, b: 210, w: 160, k: .18, cloud: 1, flip: 1 },
+    { i: 2, cx: 420, b: 500, w: 1500, k: .25, flip: 1 },
+    { i: 3, cx: 860, b: 625, w: 1560, k: .4, flip: 1 },
+    { i: 5, cx: 250, b: 566, w: 200, k: .55 },
+    { i: 5, cx: 480, b: 556, w: 150, k: .55, flip: 1 },
+    { i: 4, cx: 960, b: 570, w: 220, k: .62, flip: 1, hero: 1 },
+    { i: 3, cx: 640, b: 780, w: 1720, k: .88, tone: "brightness(.84) saturate(1.08)" },
+    { i: 6, cx: 640, b: 790, w: 520, k: .9 },
+    { i: 6, cx: 1220, b: 770, w: 420, k: .92, flip: 1 },
+  ];
+  const SHORE = [
+    { i: 0, cx: 1080, b: 240, w: 160, k: .12 },
+    { i: 1, cx: 380, b: 170, w: 220, k: .15, cloud: 1 },
+    { i: 2, cx: 640, b: 500, w: 1500, k: .25 },
+    { i: 3, cx: 640, b: 625, w: 1560, k: .4 },
+    { i: 4, cx: 230, b: 568, w: 210, k: .62 },
+    { i: 5, cx: 1100, b: 565, w: 170, k: .55, flip: 1 },
+    { i: 7, cx: 700, b: 612, w: 380, k: .72, hero: 1 },
+    { i: 3, cx: 640, b: 780, w: 1720, k: .88, flip: 1, tone: "brightness(.84) saturate(1.08)" },
+    { i: 6, cx: 1150, b: 790, w: 500, k: .92, flip: 1 },
+  ];
+  const tone = (arr, t, sunTone) => arr.map((d) => (d.i === 0 && sunTone ? { ...d, ...sunTone } : d.sea ? d : { ...d, tone: t + (d.tone ? " " + d.tone : "") }));
+  const WIN = [[355, 495], [502, 495]]; // village house windows (world px)
+  const PRE = {
+    village: { sky: "day", pcs: VILLAGE },
+    dusk: { sky: "dusk", pcs: tone(VILLAGE, "brightness(.74) saturate(.9) sepia(.16)", { cx: 960, b: 540, w: 220, tone: "saturate(1.25) hue-rotate(-14deg)" }), glow: WIN, light: "warm" },
+    night: { sky: "night", pcs: tone(VILLAGE, "brightness(.42) saturate(.5) hue-rotate(10deg)", { cx: 1010, b: 220, w: 120, tone: "grayscale(1) brightness(1.5)" }), glow: WIN, light: "cold" },
+    close: { sky: "day", pcs: VILLAGE, cam: [1.9, 430, 455] },
+    harbor: { sky: "day", pcs: HARBOR },
+    village2: { sky: "day", pcs: VILLAGE2 },
+    shore: { sky: "day", pcs: SHORE },
+  };
+  function scene(kind, o = {}) {
+    ensureStyle();
+    if (kind === "chapter") {
+      const w = mk("div", "dp-world dp-chap");
+      w.innerHTML = `<div class="dp-chap-frame"></div><img class="dp-chap-sun" src="${IMG("kit-0.webp")}" alt=""><p class="dp-chap-k">Bab 2</p><h4 class="dp-chap-t">Pelabuhan</h4><p class="dp-chap-s">tempat muatan berangkat</p><i class="dp-chap-r"></i><div class="dp-grain"></div>`;
+      return { el: w, pcs: [], kind };
+    }
+    const P = PRE[kind];
+    const w = mk("div", "dp-world dp-col");
+    w.innerHTML = `<div class="dp-sky"></div><div class="dp-cam"></div><div class="dp-light ${P.light || ""}"></div><div class="dp-grain"></div>`;
+    $(".dp-sky", w).style.background = SKY[P.sky];
+    const cam = $(".dp-cam", w);
+    if (P.cam) cam.style.transform = `translate(${640 - P.cam[1] * P.cam[0]}px,${400 - P.cam[2] * P.cam[0]}px) scale(${P.cam[0]})`;
+    const pcs = [];
+    P.pcs.forEach((d) => {
+      if (d.sea) { cam.appendChild(mk("div", "dp-sea")); return; }
+      const im = new Image(); im.src = IMG(`kit-${d.i}.webp`); im.alt = ""; im.draggable = false;
+      im.className = "dp-pc" + (d.cloud ? " cl" : "") + (d.i === 5 ? " k5" : "");
+      const hh = d.w * kitAR(d.i);
+      Object.assign(im.style, { left: d.cx - d.w / 2 + "px", top: d.b - hh + "px", width: d.w + "px", height: hh + "px" });
+      if (d.tone) im.style.filter = d.tone + (d.cloud ? " drop-shadow(0 4px 6px rgba(25,55,90,.22))" : " drop-shadow(0 6px 10px rgba(45,28,12,.32))");
+      if (o.hide === d.i) im.style.visibility = "hidden";
+      cam.appendChild(im); pcs.push({ d, im });
+      if (d.hero && P.glow) P.glow.forEach(([x, y]) => { const g = mk("i", "dp-glow"); g.style.left = x + "px"; g.style.top = y + "px"; cam.appendChild(g); });
+    });
+    const S = { el: w, pcs, kind, cam };
+    if (o.label) { const lb = mk("div", "dp-lab", `<b>${esc(o.label)}</b>`); w.insertBefore(lb, $(".dp-light", w)); S.label = lb; }
+    pcs.forEach((p) => setT(p.im, 0, 0, p.d.flip ? -1 : 1, 1, 1));
+    return S;
+  }
+  // §6.2 entry + §6.3 camera push + §3.2 boil, as a pure function of t (deterministic)
+  const PIV = [430, 457];
+  function drawEntry(S, t, o = {}) {
+    const tq = q12(t), f = Math.floor(t * 12 + 1e-6), z = 1 + .05 * sm(tq / 2.4), out = [];
+    S.pcs.forEach((p, idx) => {
+      const d = p.d; let x = 0, y = 0, sc = 1, a = 1;
+      if (d.t0 != null && !(o.plate && (d.i === 2 || (d.i === 3 && !d.flip)))) {
+        const u = tq - d.t0;
+        if (u < 0) a = 0;
+        else { const e = Math.exp(-u / .17), off = d.off * e; x = d.from === "l" ? -off : d.from === "r" ? off : 0; y = d.from === "b" ? off : d.from === "t" ? -off : 0; sc = d.from === "pop" ? 1 - .08 * e : 1; a = Math.min(1, u / .2); }
+      }
+      const zl = Math.pow(z, .25 + .75 * d.k);
+      const bx = o.rand ? (Math.random() - .5) * 1.4 : Math.sin(f * 12.9898 + idx * 78.233 + 1) * .7;
+      const by = o.rand ? (Math.random() - .5) * 1.4 : Math.sin(f * 12.9898 + idx * 78.233 + 2) * .7;
+      const v = [PIV[0] + (d.cx + x + bx - PIV[0]) * zl - d.cx, PIV[1] + (d.b + y + by - PIV[1]) * zl - d.b, sc * zl, a];
+      setT(p.im, v[0], v[1], (d.flip ? -1 : 1) * v[2], v[2], v[3]); out.push(v);
+    });
+    if (S.label) { const u = tq - 3; const e = u < 0 ? 1 : Math.exp(-u / .17); const v = [-420 * e, 0, 1, u < 0 ? 0 : Math.min(1, u / .2)]; setT(S.label, v[0], 0, 1, 1, v[3]); out.push(v); }
+    return out;
+  }
+
+  /* ======================================================================
+     1 · PETA  (§9) Natural Earth karton / 3D / OpenStreetMap
+     ====================================================================== */
+  const CDN = {
+    d3: "https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js",
+    topo: "https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js",
+    atlas: "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json",
+    lcss: "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css",
+    ljs: "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js",
+  };
+  // ports: approximate harbour-basin positions read from OpenStreetMap, rounded to 0.01 deg (demo data)
+  const PORTS = [{ n: "Tanjung Priok", s: "Jakarta", c: [106.88, -6.10] }, { n: "Tanjung Perak", s: "Surabaya", c: [112.73, -7.20] }, { n: "Makassar", s: "Sulawesi Selatan", c: [119.41, -5.12] }];
+  // sea lane waypoints (lng, lat), kept off the coast (checked against land in the test harness)
+  const LEGS = [
+    [[106.88, -6.10], [106.98, -5.93], [107.45, -5.76], [108.35, -6.0], [109.3, -6.6], [110.25, -6.55], [110.78, -6.2], [111.45, -6.45], [112.2, -6.66], [112.64, -6.78], [112.71, -6.95], [112.72, -7.1], [112.73, -7.20]],
+    [[112.73, -7.20], [112.72, -7.1], [112.73, -6.93], [113.05, -6.72], [113.9, -6.62], [115.0, -6.52], [116.4, -6.1], [117.6, -5.6], [118.7, -5.27], [119.2, -5.14], [119.41, -5.12]],
+  ];
+  Demos.add("peta", (el) => {
+    ensureStyle();
+    el.innerHTML = `<div class="dp dp-peta">
+      <div class="dp-stage dp-map" data-look="karton">
+        <div class="dp-persp"><div class="dp-plane"></div></div>
+        <div class="dp-leaf"></div>
+        <div class="dp-fog"></div>
+        <div class="dp-hud tl"><i class="dp-dot"></i><span data-h>Memuat Natural Earth…</span></div>
+        <div class="dp-hud br" data-src>Natural Earth 1:50m · world-atlas@2</div>
+        <div class="dp-msg" hidden></div>
+      </div>
+      <div class="dp-bar">${seg([["karton", "Karton"], ["3d", "3D"], ["asli", "Asli · OSM"]], "karton", 'data-lk')}<button type="button" class="dp-b gold" data-a="replay">Putar ulang</button><span class="dp-read" data-r></span></div>
+      ${cap("", "")}</div>`;
+    const stage = $(".dp-map", el), plane = $(".dp-plane", el), hud = $("[data-h]", el), srcHud = $("[data-src]", el), msg = $(".dp-msg", el), read = $("[data-r]", el), capt = $(".dp-capt", el), leafBox = $(".dp-leaf", el);
+    const PW = 1600, PH = 1000;
+    let look = "karton", T = 0, ready = false, data = null, leaf = null;
+    const COORD = `Koordinat pelabuhan di sini hanya contoh (dibaca dari OpenStreetMap): ${PORTS.map((p) => `${p.n} ${nf(p.c[1])}; ${nf(p.c[0])}`).join(" · ")}. Untuk video sungguhan, pakai koordinat dari sumber tepercaya dan catat sumbernya.`;
+    const CAPS = {
+      karton: "Garis pantai diambil dari data peta terbuka Natural Earth, jadi bentuk dan proporsinya benar, lalu digambar ulang sebagai daratan kertas bertekstur dengan bayangan tepi. Rute tumbuh dari ujungnya, berhenti sebentar di tiap kota, dan kamera mengikuti dengan lembut.",
+      "3d": "Data yang sama, kini daratannya ditebalkan dan dimiringkan seperti maket, dengan cahaya lembut dari kiri atas dan kamera yang melayang pelan. Perahu selalu menghadap arah rute dan berbelok dengan halus.",
+      asli: "Peta asli OpenStreetMap dengan rute yang tumbuh di atasnya. Peta nyata seperti ini hanya pilihan tambahan; bawaannya tetap peta kertas.",
+    };
+    const setCap = () => { capt.textContent = CAPS[look] + " " + COORD; };
+    setCap();
+    const showMsg = (t) => { msg.hidden = false; msg.innerHTML = `<b>Peta belum bisa dimuat</b><span>${t}</span><button type="button" class="dp-b gold" data-a="retry">Coba lagi</button>`; };
+
+    // timeline: hold 0.6 → leg 1 (3.4 s) → stop 1.0 → leg 2 (3.6 s) → stop 1.8 (§9.5)
+    const TL = [{ k: "hold", d: .6 }, { k: "go", s: 0, d: 3.4 }, { k: "stop", d: 1 }, { k: "go", s: 1, d: 3.6 }, { k: "stop", d: 1.8 }];
+    const DUR = TL.reduce((a, b) => a + b.d, 0);
+    const REACH = [.25, .6 + 3.4, .6 + 3.4 + 1 + 3.6];
+    const stateAt = (t) => { let acc = 0, done = 0; for (const s of TL) { if (t < acc + s.d) { if (s.k === "go") return { leg: s.s, u: sm((t - acc) / s.d), moving: true }; return { leg: Math.max(0, done - 1), u: done ? 1 : 0, moving: false }; } acc += s.d; if (s.k === "go") done++; } return { leg: 1, u: 1, moving: false }; };
+
+    async function build() {
+      msg.hidden = true; hud.textContent = "Memuat Natural Earth…";
+      try {
+        await loadJS(CDN.d3); await loadJS(CDN.topo);
+        const topo = await (await fetch(CDN.atlas)).json();
+        const d3 = window.d3, tj = window.topojson;
+        const keep = new Set(["360", "458", "096", "702", "626"]);
+        const geoms = topo.objects.countries.geometries.filter((g) => keep.has(String(g.id)));
+        const land = tj.merge(topo, geoms);
+        const borders = tj.mesh(topo, { type: "GeometryCollection", geometries: geoms }, (a, b) => a !== b);
+        const all = LEGS.flat();
+        const proj = d3.geoMercator().fitExtent([[230, 300], [1370, 700]], { type: "LineString", coordinates: all });
+        // route in plane px: Catmull-Rom per leg
+        const cr = (pts, n = 12) => { const o = []; for (let i = 0; i < pts.length - 1; i++) { const p0 = pts[Math.max(0, i - 1)], p1 = pts[i], p2 = pts[i + 1], p3 = pts[Math.min(pts.length - 1, i + 2)]; for (let k = 0; k < n; k++) { const t = k / n, t2 = t * t, t3 = t2 * t; o.push([0, 1].map((j) => .5 * (2 * p1[j] + (-p0[j] + p2[j]) * t + (2 * p0[j] - 5 * p1[j] + 4 * p2[j] - p3[j]) * t2 + (-p0[j] + 3 * p1[j] - 3 * p2[j] + p3[j]) * t3))); } } o.push(pts[pts.length - 1]); return o; };
+        const legs = LEGS.map((L) => { const p = cr(L.map((c) => proj(c))); const len = [0]; for (let i = 1; i < p.length; i++) len.push(len[i - 1] + Math.hypot(p[i][0] - p[i - 1][0], p[i][1] - p[i - 1][1])); return { p, len, L: len[len.length - 1] }; });
+        const at = (lg, dd) => { let i = 1; while (i < lg.len.length - 1 && lg.len[i] < dd) i++; const a = lg.p[i - 1], b = lg.p[i], u = clamp((dd - lg.len[i - 1]) / ((lg.len[i] - lg.len[i - 1]) || 1)); return [lerp(a[0], b[0], u), lerp(a[1], b[1], u)]; };
+        const Ltot = legs[0].L + legs[1].L;
+        const headAt = (t) => { const s = stateAt(t), lg = legs[s.leg], d = s.u * lg.L; return { s, lg, d, p: at(lg, d), total: (s.leg ? legs[0].L : 0) + d }; };
+        // heading table per frame at 24 fps, smoothed tangent, max turn 120 deg/s (§9.4)
+        const HD = []; let hh = null;
+        for (let i = 0; i <= Math.ceil(DUR * 24); i++) { const H = headAt(i / 24); const a = at(H.lg, Math.max(0, H.d - 12)), b = at(H.lg, Math.min(H.lg.L, H.d + 12)); const raw = Math.atan2(b[1] - a[1], b[0] - a[0]); if (hh === null) hh = raw; if (H.s.moving) { const dl = Math.atan2(Math.sin(raw - hh), Math.cos(raw - hh)), mx = 120 * D2R / 24; hh += clamp(dl, -mx, mx); } HD.push(hh); }
+        // ---- bake paper layers (canvas → blob → <img>, nothing is read back) ----
+        const RS = 1.5, cw = PW * RS, ch = PH * RS;
+        const mkc = () => { const c = document.createElement("canvas"); c.width = cw; c.height = ch; const g = c.getContext("2d"); g.scale(RS, RS); return [c, g]; };
+        const [cs, gs] = mkc(), [ct, gt] = mkc(), [cd, gd] = mkc();
+        const pS = d3.geoPath(proj, gs), pT = d3.geoPath(proj, gt), pD = d3.geoPath(proj, gd);
+        gs.fillStyle = "#86AFC2"; gs.fillRect(0, 0, PW, PH);
+        gs.globalCompositeOperation = "multiply"; gs.globalAlpha = .22; gs.fillStyle = gs.createPattern(fibre(), "repeat"); gs.fillRect(0, 0, PW, PH); gs.globalAlpha = 1; gs.globalCompositeOperation = "source-over";
+        gs.save(); gs.shadowColor = "rgba(20,36,52,.42)"; gs.shadowBlur = 12 * RS; gs.shadowOffsetX = 3 * RS; gs.shadowOffsetY = 7 * RS; gs.beginPath(); pS(land); gs.fillStyle = "#6F95A8"; gs.fill(); gs.restore();
+        // top: cardboard land, fibre texture, soft light from upper left, cream cut rim (§3.2)
+        gt.save(); gt.beginPath(); pT(land); gt.clip();
+        const lg = gt.createLinearGradient(0, 0, PW * .7, PH); lg.addColorStop(0, "#F1E4C6"); lg.addColorStop(1, "#D9C39A"); gt.fillStyle = lg; gt.fillRect(0, 0, PW, PH);
+        gt.globalCompositeOperation = "multiply"; gt.globalAlpha = .75; gt.fillStyle = gt.createPattern(fibre(), "repeat"); gt.fillRect(0, 0, PW, PH);
+        gt.globalCompositeOperation = "screen"; gt.globalAlpha = 1; const rg = gt.createRadialGradient(PW * .3, PH * .2, 0, PW * .3, PH * .2, PW * .8); rg.addColorStop(0, "rgba(255,240,205,.28)"); rg.addColorStop(1, "rgba(255,240,205,0)"); gt.fillStyle = rg; gt.fillRect(0, 0, PW, PH);
+        gt.restore();
+        gt.beginPath(); pT(land); gt.strokeStyle = "rgba(252,246,232,.95)"; gt.lineWidth = 2; gt.stroke();
+        gt.beginPath(); pT(borders); gt.setLineDash([5, 5]); gt.strokeStyle = "rgba(120,92,56,.55)"; gt.lineWidth = 1.1; gt.stroke(); gt.setLineDash([]);
+        // side: extrusion colour for the 3D look
+        gd.beginPath(); pD(land); gd.fillStyle = "#9C7A4E"; gd.fill(); gd.strokeStyle = "#7E5F3A"; gd.lineWidth = 1.5; gd.stroke();
+        const url = (c) => new Promise((r) => c.toBlob((b) => r(URL.createObjectURL(b)), "image/png"));
+        const [uS, uT, uD] = await Promise.all([url(cs), url(ct), url(cd)]);
+        // ---- assemble plane ----
+        const path = "M" + legs.map((l) => l.p.map((p) => p[0].toFixed(1) + " " + p[1].toFixed(1)).join(" L")).join(" L");
+        const CP = PORTS.map((p) => proj(p.c));
+        plane.innerHTML = `<img class="dp-ly sea" src="${uS}" alt="">${[1, 2, 3, 4, 5, 6].map((z) => `<img class="dp-ly side" style="--z:${z}" src="${uD}" alt="">`).join("")}<img class="dp-ly top" src="${uT}" alt="">
+          <svg class="dp-ly dp-route" viewBox="0 0 ${PW} ${PH}"><path class="sh" pathLength="100" d="${path}"/><path class="rim" pathLength="100" d="${path}"/><path class="ln" pathLength="100" d="${path}"/>${CP.map((p, i) => `<g class="city" data-i="${i}"><circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="9" class="halo"/><circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="5.5"/></g>`).join("")}</svg>
+          <div class="dp-ly dp-ov">${CP.map((p, i) => `<div class="dp-city" data-i="${i}" style="left:${p[0].toFixed(1)}px;top:${p[1].toFixed(1)}px"><div><b>${PORTS[i].n}</b><small>${PORTS[i].s}</small></div></div>`).join("")}<div class="dp-trav"><i class="dp-chev"></i><img src="${IMG("kit-7.webp")}" alt=""></div></div>`;
+        data = { legs, at, headAt, HD, Ltot, CP, proj, paths: $$(".dp-route path", plane), cities: $$(".dp-city", plane), dots: $$(".dp-route .city", plane), trav: $(".dp-trav", plane), boat: $(".dp-trav img", plane), cam: null };
+        ready = true; T = 0;
+        if (look === "asli") initLeaf();
+      } catch (err) { console.warn(err); hud.textContent = "Offline"; showMsg("Peta nyata memuat garis pantai Natural Earth dan pustaka d3 dari CDN, jadi butuh koneksi internet. Sambungkan internet lalu coba lagi."); }
+    }
+
+    async function initLeaf() {
+      if (leaf || !data) return;
+      try {
+        loadCSS(CDN.lcss); await loadJS(CDN.ljs);
+        const L = window.L;
+        const map = L.map(leafBox, { zoomControl: false, scrollWheelZoom: false, attributionControl: true, zoomSnap: .25, keyboard: false });
+        map.attributionControl.setPrefix('<a href="https://leafletjs.com">Leaflet</a>');
+        const OSM = ["https://tile.openstreetmap.org/{z}/{x}/{y}.png", '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'];
+        const CARTO = ["https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png", '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>'];
+        let ok = 0, bad = 0, alt = false;
+        const tl = L.tileLayer(OSM[0], { attribution: OSM[1], maxZoom: 18, crossOrigin: false }).addTo(map);
+        tl.on("tileload", () => ok++);
+        tl.on("tileerror", () => { bad++; if (!alt && !ok && bad >= 3) { alt = true; tl.setUrl(CARTO[0]); map.attributionControl.removeAttribution(OSM[1]); map.attributionControl.addAttribution(CARTO[1]); srcHud.textContent = "Ubin OSM (CARTO Voyager)"; } });
+        const ll = (p) => { const g = data.proj.invert(p); return [g[1], g[0]]; };
+        const LL = data.legs.map((lg) => lg.p.map(ll));
+        const bounds = L.latLngBounds(LL.flat()), refit = () => { map.invalidateSize(); map.fitBounds(bounds, { paddingTopLeft: [30, 50], paddingBottomRight: [Math.min(170, leafBox.clientWidth * .22), 30] }); };
+        refit();
+        const rim = L.polyline([], { color: "#FBF6EA", weight: 8, opacity: .95, lineCap: "round", lineJoin: "round" }).addTo(map);
+        const line = L.polyline([], { color: "#B23A32", weight: 4, lineCap: "round", lineJoin: "round" }).addTo(map);
+        PORTS.forEach((p) => L.circleMarker([p.c[1], p.c[0]], { radius: 5, color: "#FBF6EA", weight: 2, fillColor: "#1C2B45", fillOpacity: 1 }).addTo(map));
+        const labels = PORTS.map((p) => L.marker([p.c[1], p.c[0]], { icon: L.divIcon({ className: "dp-lflab", html: `<div><b>${p.n}</b><small>${p.s}</small></div>`, iconSize: [0, 0] }), interactive: false }));
+        const boat = L.marker(LL[0][0], { icon: L.divIcon({ className: "dp-lfboat", html: `<i class="dp-chev"></i><img src="${IMG("kit-7.webp")}" alt="">`, iconSize: [0, 0] }), interactive: false }).addTo(map);
+        leaf = { map, rim, line, labels, boat, LL, last: -1, refit };
+        new ResizeObserver(() => refit()).observe(leafBox);
+      } catch (err) { console.warn(err); showMsg("Leaflet atau ubin OpenStreetMap tidak bisa dimuat. Periksa koneksi internet lalu coba lagi."); }
+    }
+
+    bindSeg($("[data-lk]", el), (v) => { look = v; stage.dataset.look = v; setCap(); srcHud.textContent = v === "asli" ? "Ubin © OpenStreetMap contributors" : "Natural Earth 1:50m · world-atlas@2"; if (v === "asli") { if (leaf) requestAnimationFrame(leaf.refit); else initLeaf(); } if (data) data.cam = null; });
+    el.addEventListener("click", (e) => { const a = e.target.closest("[data-a]")?.dataset.a; if (a === "replay") T = 0; if (a === "retry") { if (!ready) build(); else { msg.hidden = true; leaf = null; leafBox.innerHTML = ""; leafBox.className = "dp-leaf"; initLeaf(); } } });
+    let SW = 0, SH = 0; fit(stage, (w, h) => { SW = w; SH = h; });
+    build();
+
+    visLoop(el, (dt) => {
+      if (!ready || !SW) return;
+      T += dt; if (T > DUR + .6) T = 0;
+      const t = q12(T), D = data, H = D.headAt(t), hd = D.HD[Math.min(D.HD.length - 1, Math.round(t * 24))];
+      const reached = REACH.filter((r) => t >= r).length;
+      // route grows from its tip: dashoffset 110 → 0
+      const off = H.total <= 0 ? 110 : 100 * (1 - H.total / D.Ltot);
+      D.paths.forEach((p) => (p.style.strokeDashoffset = off.toFixed(2)));
+      D.dots.forEach((g, i) => g.classList.toggle("on", reached > i));
+      D.cities.forEach((c, i) => { const u = t - REACH[i]; if (u < 0) { c.style.opacity = 0; c.style.setProperty("--pop", .92); return; } const e = Math.exp(-u / .17); c.style.opacity = Math.min(1, u / .2).toFixed(3); c.style.setProperty("--pop", (1 - .08 * e).toFixed(4)); });
+      const [hx, hy] = H.p, left = Math.cos(hd) < 0;
+      D.trav.style.left = hx.toFixed(1) + "px"; D.trav.style.top = hy.toFixed(1) + "px";
+      D.trav.style.setProperty("--hd", (hd / D2R).toFixed(1) + "deg");
+      D.trav.style.setProperty("--bh", (left ? hd / D2R - 180 : hd / D2R).toFixed(1) + "deg");
+      D.trav.style.setProperty("--fl", left ? -1 : 1);
+      // camera follows the head with bounds (§9.5)
+      const tgt = [hx, hy];
+      if (!D.cam) D.cam = tgt.slice();
+      D.cam[0] += (tgt[0] - D.cam[0]) * .06; D.cam[1] += (tgt[1] - D.cam[1]) * .06;
+      if (look === "karton") {
+        const s = Math.max(Math.max(SW / 1280, SH / 720) * 1.12, .6), hw = SW / 2 / s, hh = SH / 2 / s;
+        const cx = clamp(D.cam[0], hw, PW - hw), cy = clamp(D.cam[1], hh, PH - hh);
+        plane.style.transform = `translate(${(SW / 2 - cx * s).toFixed(1)}px,${(SH / 2 - cy * s).toFixed(1)}px) scale(${s.toFixed(4)})`;
+      } else if (look === "3d") {
+        const s = Math.max(Math.max(SW / 1280, SH / 720) * 1.05, .55), rz = Math.sin(T * .35) * 5 - 4, hw = SW / 2 / s;
+        const cx = clamp(D.cam[0], hw + 60, PW - hw - 60), cy = clamp(D.cam[1] - 40, 380, PH - 300);
+        plane.style.transform = `translate(${(SW / 2).toFixed(1)}px,${(SH * .6).toFixed(1)}px) rotateX(${(52 + Math.sin(T * .27) * 2).toFixed(2)}deg) rotateZ(${rz.toFixed(2)}deg) scale(${s.toFixed(4)}) translate(${(-cx).toFixed(1)}px,${(-cy).toFixed(1)}px)`;
+      } else if (leaf) {
+        const f = Math.floor(t * 12);
+        if (f !== leaf.last) {
+          leaf.last = f; const s = H.s, LL = leaf.LL, lg = D.legs[s.leg];
+          let i = 0; while (i < lg.len.length - 1 && lg.len[i + 1] <= H.d) i++;
+          const head = D.proj.invert(H.p), pts = (s.leg ? LL[0] : []).concat(LL[s.leg].slice(0, i + 1), [[head[1], head[0]]]);
+          const show = H.total > 0 ? pts : [];
+          leaf.rim.setLatLngs(show); leaf.line.setLatLngs(show);
+          leaf.boat.setLatLng([head[1], head[0]]);
+          const be = leaf.boat.getElement(); if (be) { be.style.setProperty("--hd", (hd / D2R).toFixed(1) + "deg"); be.style.setProperty("--bh", (left ? hd / D2R - 180 : hd / D2R).toFixed(1) + "deg"); be.style.setProperty("--fl", left ? -1 : 1); }
+          leaf.labels.forEach((m, k) => { const on = reached > k; if (on && !leaf.map.hasLayer(m)) m.addTo(leaf.map); if (!on && leaf.map.hasLayer(m)) m.remove(); });
+        }
+      }
+      hud.textContent = `heading ${Math.round(((hd / D2R) % 360 + 360) % 360)}° · belok maks 120°/s`;
+      read.textContent = `t ${nf(t, 2)} s · dashoffset ${nf(Math.min(110, off), 1)} · ${reached}/3 kota`;
+    });
+  });
+
+  /* ======================================================================
+     2 · SEBAB  (§8) transisi bersebab between two real collage scenes
+     ====================================================================== */
+  Demos.add("sebab", (el) => {
+    const C = [
+      { k: "lokasi", n: "Ganti lokasi", tr: "wipe", tn: "Wipe kertas sobek", d: .5, a: "village", b: "harbor", why: "Tempatnya berganti, jadi lembar lama disobek dan set baru yang nyata tampak di baliknya." },
+      { k: "waktu", n: "Waktu berlalu", tr: "page", tn: "Page-turn", d: .7, a: "village", b: "dusk", why: "Halaman dibalik: set yang sama di jam yang lain. Bayangan lipatan menandai waktu yang lewat." },
+      { k: "bab", n: "Ganti bab", tr: "shut", tn: "Shutters", d: .65, a: "village", b: "chapter", why: "Bilah menutup rapat lalu membuka lagi. Scene ditukar tepat di 50%, jadi jeda antarbab terasa tegas." },
+      { k: "fokus", n: "Fokus", tr: "iris", tn: "Iris 0 → 72%", d: .55, a: "village", b: "close", why: "Lingkaran tumbuh dari pusat hero, membawa mata penonton langsung ke rumah." },
+      { k: "lanjut", n: "Kontinuitas", tr: "slide", tn: "Slide", d: .45, a: "village", b: "village2", why: "Lembar berikutnya masuk dari kanan dengan bayangan tepi. Ceritanya berlanjut ke arah yang sama." },
+      { k: "benda", n: "Benda pindah set", tr: "bridge", tn: "Bridge carry-over", d: .8, a: "harbor", b: "shore", why: "Perahu tetap di overlay sementara set lama sobek di belakangnya. Bendanya menjadi jembatan antarlokasi." },
+      { k: "putus", n: "Pemutusan makna", tr: "split", tn: "Torn split", d: 22 / 24, a: "village", b: "night", why: "Dua belahan berputar ±10° dan bergeser ±20% lebar. Makna sebelumnya sengaja dipatahkan." },
+      { k: "impact", n: "Impact", tr: "cut", tn: "Cut", d: 0, a: "village", b: "harbor", why: "Hentakan di frame tercepat. Tanpa transisi, karena kejutannya ada di potongan itu sendiri." },
+    ];
+    const dTxt = (c) => (c.tr === "split" ? "22 f" : c.d ? nf(c.d, 2).replace(/0$/, "") + " s" : "0");
+    el.innerHTML = `<div class="dp dp-sebab"><div class="dp-grid">
+      <div class="dp-main">
+        <div class="dp-stage dp-r169"><div class="dp-lyr A"></div><div class="dp-lyr B"></div><div class="dp-lyr L"></div><div class="dp-lyr R"></div>
+          <div class="dp-tearw"><div class="dp-tear"></div></div><i class="dp-fold"></i><i class="dp-ring"></i><div class="dp-bars">${"<i></i>".repeat(7)}</div>
+          <img class="dp-carry" src="${IMG("kit-7.webp")}" alt=""><div class="dp-stamp" hidden><b>Ditolak</b><span>Memudarkan seluruh layar tidak dipakai</span></div>
+          <div class="dp-hud tl"><i class="dp-dot"></i><span data-h></span></div></div>
+        <div class="dp-bar"><div class="dp-prog"><i></i></div><span class="dp-read" data-r></span><button type="button" class="dp-b warn" data-a="fade">Crossfade seluruh scene?</button></div>
+      </div>
+      <aside class="dp-side"><p class="dp-k">Pilih sebab</p><div class="dp-list">${C.map((c, i) => `<button type="button" class="dp-cause${i ? "" : " on"}" data-i="${i}"><b>${c.n}</b><span>${c.tn}</span><em>${dTxt(c)}</em></button>`).join("")}</div>
+        <div class="dp-why"><p class="dp-k">Kenapa</p><p data-why></p></div></aside></div>
+      ${cap("", "Transisi dipilih dari alasannya: robek kertas untuk pindah tempat, lipat halaman untuk pindah waktu, iris untuk fokus, dan seterusnya. Tiap transisi punya durasi sendiri dan bergerak halus di awal serta akhir. Satu film cukup memakai 3-5 jenis transisi; potongan langsung paling banyak sepertiga sambungan, dan memudarkan seluruh layar tidak dipakai.")}</div>`;
+    const stage = $(".dp-stage", el), LA = $(".A", el), LB = $(".B", el), LL = $(".L", el), LR = $(".R", el);
+    const tearW = $(".dp-tearw", el), tear = $(".dp-tear", el), fold = $(".dp-fold", el), ring = $(".dp-ring", el), bars = $$(".dp-bars i", el), carry = $(".dp-carry", el), stamp = $(".dp-stamp", el);
+    const hud = $("[data-h]", el), read = $("[data-r]", el), prog = $(".dp-prog i", el), why = $("[data-why]", el);
+    fitStage(stage, 1280, 720);
+    const cache = {};
+    const get = (k, o) => { const key = k + (o ? JSON.stringify(o) : ""); return cache[key] || (cache[key] = scene(k, o)); };
+    const put = (layer, S) => { layer.innerHTML = ""; if (S) layer.appendChild(S.el); };
+    const r = rng(9), JAG = Array.from({ length: 25 }, () => r() - .5);
+    const edge = (u, amp = 2.6) => JAG.map((j, i) => [u * 116 - 8 + j * amp * 2 + Math.sin(i * 1.7) * .8, i / 24 * 100]);
+    const poly = (pts) => pts.map(([x, y]) => `${x.toFixed(2)}% ${y.toFixed(2)}%`).join(",");
+    let cur = 0, t = 0, fade = false;
+    const reset = () => {
+      [LA, LB, LL, LR].forEach((x) => { x.style.cssText = ""; });
+      LL.style.display = LR.style.display = "none";
+      tearW.style.display = "none"; fold.style.opacity = 0; ring.style.opacity = 0; bars.forEach((b) => (b.style.transform = "scaleY(0)")); carry.style.opacity = 0; stamp.hidden = true;
+    };
+    const choose = (i) => {
+      cur = i; t = 0; fade = false; const c = C[i];
+      $$(".dp-cause", el).forEach((b, k) => b.classList.toggle("on", k === i));
+      const hide = c.tr === "bridge" ? { hide: 7 } : undefined;
+      put(LA, get(c.a, hide)); put(LB, get(c.b, hide));
+      if (c.tr === "split") { put(LL, get(c.a, { copy: "L" })); put(LR, get(c.a, { copy: "R" })); }
+      why.textContent = c.why; reset();
+      if (G()) G().fromTo(why, { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: .45, ease: "power2.out" });
+    };
+    $(".dp-list", el).addEventListener("click", (e) => { const b = e.target.closest(".dp-cause"); if (b) choose(+b.dataset.i); });
+    $("[data-a=fade]", el).addEventListener("click", () => { choose(cur); fade = true; });
+    choose(0);
+    const HOLD = .8, AFTER = 1.5;
+    visLoop(el, (dt) => {
+      const c = C[cur], d = fade ? .6 : c.d; t += dt;
+      if (t > HOLD + d + AFTER + .25) { t = 0; reset(); }
+      const u = d ? sm((t - HOLD) / d) : t >= HOLD ? 1 : 0, raw = d ? clamp((t - HOLD) / d) : u;
+      const W = stage.clientWidth, H = stage.clientHeight;
+      LA.style.zIndex = 1; LB.style.zIndex = 2;
+      prog.style.transform = `scaleX(${raw.toFixed(3)})`;
+      read.textContent = `${fade ? "Crossfade" : c.tn} · ${fade ? "0,6 s" : dTxt(c)} · u ${nf(u, 2)}`;
+      hud.textContent = t < HOLD ? "scene A · tahan 0,8 s" : u < 1 ? "transisi berjalan" : "scene B · tahan";
+      if (fade) { LB.style.opacity = u; stamp.hidden = !(t > HOLD); return; }
+      const k = c.tr;
+      if (k === "cut") { LB.style.visibility = u >= 1 ? "visible" : "hidden"; return; }
+      if (k === "wipe" || k === "bridge") {
+        const pts = edge(u); LB.style.clipPath = u <= 0 ? "inset(0 100% 0 0)" : u >= 1 ? "none" : `polygon(-2% -2%,${poly(pts)},-2% 102%)`;
+        tearW.style.display = u > 0 && u < 1 ? "block" : "none";
+        tear.style.clipPath = `polygon(${poly(pts)},${poly(pts.map(([x, y]) => [x + 1.6 + Math.abs(Math.sin(y)) * .6, y]).reverse())})`;
+        if (k === "bridge") { carry.style.opacity = 1; const L = 700 - 190, B = 612; carry.style.left = (L / 1280 * 100) + "%"; carry.style.top = ((B - 380 * kitAR(7)) / 720 * 100) + "%"; carry.style.width = (380 / 1280 * 100) + "%"; carry.style.transform = `translateY(${(-14 * Math.sin(Math.PI * u)).toFixed(1)}px) rotate(${(-2 * Math.sin(Math.PI * u)).toFixed(2)}deg)`; }
+        return;
+      }
+      if (k === "page") {
+        const x = 100 - u * 100; LB.style.clipPath = u >= 1 ? "none" : `inset(0 0 0 ${x.toFixed(2)}%)`;
+        fold.style.opacity = u > 0 && u < 1 ? 1 : 0; fold.style.left = x + "%"; fold.style.width = (Math.sin(Math.PI * u) * 16).toFixed(2) + "%";
+        return;
+      }
+      if (k === "shut") {
+        const v = u < .5 ? u * 2 : (1 - u) * 2; LB.style.visibility = u >= .5 ? "visible" : "hidden";
+        bars.forEach((b, i) => { b.style.transformOrigin = u < .5 ? "50% 0" : "50% 100%"; b.style.transform = `scaleY(${clamp(v * 1.2 - i * .03).toFixed(3)})`; });
+        return;
+      }
+      if (k === "iris") {
+        const cx = 430 / 1280 * 100, cy = 457 / 720 * 100; LB.style.clipPath = u >= 1 ? "none" : `circle(${(u * 72).toFixed(2)}% at ${cx}% ${cy}%)`;
+        const R = u * .72 * Math.hypot(W, H) / Math.SQRT2; ring.style.opacity = u > 0 && u < 1 ? 1 : 0;
+        Object.assign(ring.style, { left: cx + "%", top: cy + "%", width: 2 * R + "px", height: 2 * R + "px" });
+        return;
+      }
+      if (k === "slide") { LB.style.transform = `translateX(${((1 - u) * 100).toFixed(2)}%)`; LB.style.boxShadow = u > 0 && u < 1 ? "-26px 0 40px rgba(0,0,0,.5)" : "none"; LA.style.transform = `translateX(${(-u * 25).toFixed(2)}%)`; return; }
+      if (k === "split") {
+        const on = t >= HOLD && u < 1; LA.style.visibility = on || u >= 1 ? "hidden" : "visible";
+        [LL, LR].forEach((l, i) => {
+          l.style.display = on ? "block" : "none"; if (!on) return; const s = i ? 1 : -1; l.style.zIndex = 3;
+          const mid = JAG.map((j, n) => `${(50 + j * 5).toFixed(2)}% ${(n / 24 * 100).toFixed(2)}%`);
+          l.style.clipPath = i ? `polygon(102% -2%,${mid.join(",")},102% 102%)` : `polygon(-2% -2%,${mid.join(",")},-2% 102%)`;
+          l.style.transformOrigin = "50% 100%"; l.style.transform = `translateX(${(s * 20 * u).toFixed(2)}%) rotate(${(s * 10 * u).toFixed(2)}deg)`; l.style.opacity = (1 - clamp((u - .72) / .28)).toFixed(3);
+        });
+      }
+    });
+  });
+
+  /* ======================================================================
+     3 · VO  (§10) mix map: lanes, playhead, optional WebAudio synthesis
+     ====================================================================== */
+  Demos.add("vo", (el) => {
+    const DUR = 8, F = 1 / 24, DUCK = Math.pow(10, -5 / 20);
+    const VO = [
+      { a: .5, b: 3.2, w: [["Kapal", .5, .9], ["berangkat", .95, 1.62], ["dari", 1.67, 1.88], ["pelabuhan", 1.93, 2.6], ["pagi", 2.66, 2.94], ["ini.", 2.98, 3.2]] },
+      { a: 4.0, b: 7.4, w: [["Tiga", 4.0, 4.3], ["hari", 4.34, 4.64], ["kemudian,", 4.68, 5.32], ["muatan", 5.56, 6.0], ["tiba", 6.04, 6.34], ["di", 6.38, 6.5], ["Makassar.", 6.55, 7.4]] },
+    ];
+    const PIC = [{ t: .2, n: "kertas geser", k: "geser", i: 1 }, { t: 1.4, n: "label pop", k: "pop", i: 4 }, { t: 3.45, n: "sobek", k: "sobek", i: 3 }, { t: 4.8, n: "pop", k: "pop", i: 7 }, { t: 6.1, n: "langkah", k: "langkah", i: 6 }, { t: 7.55, n: "pop", k: "pop", i: 0 }];
+    const voAt = (s) => VO.some((v) => s >= v.a && s <= v.b);
+    const takes = {}; PIC.forEach((p) => { takes[p.k] = (takes[p.k] || 0) + 1; p.take = "ABC"[(takes[p.k] - 1) % 3]; p.ts = p.t + F; p.g = voAt(p.ts) ? DUCK : 1; });
+    const pct = (s) => (s / DUR * 100).toFixed(3) + "%";
+    el.innerHTML = `<div class="dp dp-vo">
+      <div class="dp-mix">
+        <div class="dp-lbl"><span class="ru"></span><span>Gambar</span><span>SFX</span><span>VO</span><span>Musik</span><span>Master</span></div>
+        <div class="dp-tracks">
+          <div class="dp-row ru">${Array.from({ length: DUR + 1 }, (_, s) => `<i style="left:${pct(s)}">${s}s</i>`).join("")}</div>
+          <div class="dp-row pic">${PIC.map((p) => `<div class="ev" style="left:${pct(p.t)}"><img src="${IMG(`kit-${p.i}.webp`)}" alt=""><span>${p.n}</span></div>`).join("")}</div>
+          <div class="dp-row sfx">${VO.map((v) => `<div class="duck" style="left:${pct(v.a)};width:${pct(v.b - v.a)}"><span>duck −5 dB</span></div>`).join("")}${PIC.map((p, i) => `<div class="sp${p.g < 1 ? " dk" : ""}" style="left:${pct(p.ts)};--g:${p.g.toFixed(3)}"><i></i><b>${p.take}</b>${i === 0 ? "<em>+1 frame</em>" : ""}</div>`).join("")}</div>
+          <div class="dp-row vo"><canvas></canvas>${VO.flatMap((v) => v.w).map(([w, a, b]) => `<span class="wd" style="left:${pct(a)};width:${pct(b - a)}">${w}</span>`).join("")}<div class="gap" style="left:${pct(3.2)};width:${pct(.8)}"><span>jeda 0,8 s</span></div></div>
+          <div class="dp-row mus"><span class="off">tanpa musik (sesuai proyek)</span><div class="bed"><span>musik ±0,14 di bawah VO</span></div></div>
+          <div class="dp-row mst"><div class="meter"><i class="lv"></i><b class="tg" style="left:${((30 - 14) / 30 * 100)}%"><span>−14 LUFS</span></b><b class="tp" style="left:${((30 - 1.5) / 30 * 100)}%"><span>TP −1,5</span></b></div></div>
+          <div class="dp-ph"><i></i></div>
+        </div>
+      </div>
+      <div class="dp-bar"><button type="button" class="dp-b gold" data-a="play">Jeda</button><button type="button" class="dp-b" data-a="hear">Dengar</button><button type="button" class="dp-b" data-a="mus">Musik: tidak</button><span class="dp-read" data-r></span></div>
+      ${cap("", "<b>Ilustrasi susunan suara, bukan hasil ukur.</b> Teks narator menjadi jam untuk kata yang muncul di layar, dengan jeda 0,8 detik antarbagian. Efek suara hanya untuk aksi yang terlihat, berbunyi sesaat setelah gambarnya, dan mengecil saat narator bicara. Musik bersifat opsional. Volume akhir diukur dengan alat, bukan ditebak telinga. Tombol Dengar membuat bunyi kertas langsung di browser.")}</div>`;
+    const tracks = $(".dp-tracks", el), ph = $(".dp-ph", el), cv = $(".vo canvas", el), read = $("[data-r]", el), lv = $(".lv", el), mus = $(".mus", el);
+    const sp = $$(".sp", el), evs = $$(".ev", el), wds = $$(".wd", el);
+    // waveform from word envelopes (deterministic)
+    const drawWave = () => {
+      const w = cv.clientWidth, h = cv.clientHeight; if (!w) return; const d = DPR(); cv.width = w * d; cv.height = h * d;
+      const g = cv.getContext("2d"); g.scale(d, d); const r = rng(4), N = Math.floor(w / 2.5);
+      g.fillStyle = "rgba(120,180,230,.9)";
+      for (let i = 0; i < N; i++) { const s = i / N * DUR; let a = 0; VO.forEach((v) => v.w.forEach(([wd, a0, b0]) => { if (s >= a0 && s <= b0) { const n = Math.max(1, Math.round(wd.length / 3)), u = (s - a0) / (b0 - a0); a = Math.max(a, Math.pow(Math.sin(Math.PI * u * n), 2) * .7 + .25); } })); if (!a) continue; const amp = a * (.55 + r() * .45) * h * .42; g.fillRect(i / N * w, h / 2 - amp, 1.6, amp * 2); }
+    };
+    new ResizeObserver(drawWave).observe(cv);
+    let t = 0, playing = true, music = false, audio = null;
+    const seek = (s) => { t = clamp(s, 0, DUR - .001); if (audio) audio.restart(); };
+    tracks.addEventListener("pointerdown", (e) => { const r = tracks.getBoundingClientRect(); seek((e.clientX - r.left) / r.width * DUR); });
+    // ---- WebAudio (created only after a click) ----
+    const makeAudio = () => {
+      const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null;
+      const ctx = new AC(), master = ctx.createGain(), lim = ctx.createDynamicsCompressor();
+      lim.threshold.value = -3; lim.ratio.value = 12; lim.attack.value = .002; lim.release.value = .08;
+      master.gain.value = .7; master.connect(lim).connect(ctx.destination);
+      const nb = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate), ch = nb.getChannelData(0), rr = rng(7); for (let i = 0; i < ch.length; i++) ch[i] = rr() * 2 - 1;
+      let nodes = [];
+      const noise = (at, dur, f, q, gain, sweep) => { const s = ctx.createBufferSource(); s.buffer = nb; const bp = ctx.createBiquadFilter(); bp.type = "bandpass"; bp.frequency.setValueAtTime(f, at); if (sweep) bp.frequency.exponentialRampToValueAtTime(sweep, at + dur); bp.Q.value = q; const g = ctx.createGain(); g.gain.setValueAtTime(0, at); g.gain.linearRampToValueAtTime(gain, at + Math.min(.01, dur * .2)); g.gain.exponentialRampToValueAtTime(.0008, at + dur); s.connect(bp).connect(g).connect(master); s.start(at, rr() * 1.5); s.stop(at + dur + .05); nodes.push(s); };
+      const tone = (at, dur, f0, f1, gain, type = "sine") => { const o = ctx.createOscillator(); o.type = type; o.frequency.setValueAtTime(f0, at); o.frequency.exponentialRampToValueAtTime(f1, at + dur); const g = ctx.createGain(); g.gain.setValueAtTime(gain, at); g.gain.exponentialRampToValueAtTime(.0008, at + dur); o.connect(g).connect(master); o.start(at); o.stop(at + dur + .05); nodes.push(o); };
+      const SFX = { pop: (a, g) => { noise(a, .06, 2400, 1.3, .9 * g); tone(a, .05, 700, 220, .25 * g); }, geser: (a, g) => noise(a, .32, 1700, .8, .5 * g, 900), sobek: (a, g) => { for (let i = 0; i < 6; i++) noise(a + i * .035, .07, 1200 + i * 350, 2, .45 * g); }, langkah: (a, g) => { tone(a, .09, 120, 60, .6 * g); noise(a, .07, 500, 1, .3 * g); } };
+      const schedule = () => {
+        const now = ctx.currentTime + .05, from = t;
+        PIC.forEach((p) => { if (p.ts >= from) SFX[p.k](now + p.ts - from, p.g); });
+        VO.forEach((v) => v.w.forEach(([wd, a, b]) => { const n = Math.max(1, Math.round(wd.length / 3)), L = (b - a) / n; for (let i = 0; i < n; i++) { const s0 = a + i * L; if (s0 < from) continue; const at = now + s0 - from, f = [650, 850, 520, 1100][(wd.charCodeAt(i) || 0) % 4]; noise(at, L * .95, f, 5, .55, f * 1.15); noise(at, L * .9, f * 2.1, 7, .3); const o = ctx.createOscillator(); o.type = "sawtooth"; o.frequency.setValueAtTime(135 + (i % 2) * 12, at); const lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 900; const g = ctx.createGain(); g.gain.setValueAtTime(0, at); g.gain.linearRampToValueAtTime(.06, at + .03); g.gain.linearRampToValueAtTime(0, at + L * .95); o.connect(lp).connect(g).connect(master); o.start(at); o.stop(at + L); nodes.push(o); } }));
+        if (music) [220, 277.2, 329.6].forEach((f) => { const o = ctx.createOscillator(); o.frequency.value = f; const g = ctx.createGain(); g.gain.setValueAtTime(.0001, now); g.gain.linearRampToValueAtTime(.14 * .25, now + .4); g.gain.setValueAtTime(.14 * .25, now + Math.max(.5, DUR - from - .3)); g.gain.linearRampToValueAtTime(.0001, now + DUR - from); o.connect(g).connect(master); o.start(now); o.stop(now + DUR - from + .05); nodes.push(o); });
+      };
+      const stop = () => { nodes.forEach((n) => { try { n.stop(); } catch (e) {} }); nodes = []; };
+      return { ctx, restart() { stop(); if (playing && ctx.state === "running") schedule(); }, stop, close() { stop(); ctx.close(); } };
+    };
+    el.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-a]"); if (!b) return; const a = b.dataset.a;
+      if (a === "play") { playing = !playing; b.textContent = playing ? "Jeda" : "Putar"; if (audio) audio.restart(); }
+      if (a === "hear") { if (audio) { audio.close(); audio = null; b.classList.remove("on"); b.textContent = "Dengar"; return; } audio = makeAudio(); if (!audio) return; b.classList.add("on"); b.textContent = "Dengar: aktif"; audio.ctx.resume().then(() => audio && audio.restart()); }
+      if (a === "mus") { music = !music; mus.classList.toggle("on", music); b.classList.toggle("on", music); b.textContent = music ? "Musik: 0,14" : "Musik: tidak"; if (audio) audio.restart(); }
+    });
+    let wasOn = true;
+    visLoop(el, (dt) => {
+      if (playing) { t += dt; if (t >= DUR) { t = 0; if (audio) audio.restart(); } }
+      ph.style.left = pct(t);
+      const vo = voAt(t), f = Math.round(t * 24);
+      sp.forEach((s, i) => s.classList.toggle("hit", t >= PIC[i].ts && t < PIC[i].ts + .25));
+      evs.forEach((s, i) => s.classList.toggle("hit", t >= PIC[i].t && t < PIC[i].t + .3));
+      wds.forEach((w, i) => { const all = VO.flatMap((v) => v.w); w.classList.toggle("on", t >= all[i][1] && t <= all[i][2]); });
+      // illustrative momentary loudness around the -14 LUFS target
+      const hitS = PIC.some((p) => t >= p.ts && t < p.ts + .12);
+      const mom = vo ? -14 + Math.sin(t * 9) * 1.6 + (hitS ? 1.2 : 0) : hitS ? -18 : music ? -27 : -40;
+      lv.style.width = clamp((mom + 30) / 30 * 100, 0, 100).toFixed(2) + "%";
+      lv.classList.toggle("hot", mom > -12);
+      read.textContent = `t ${nf(t, 2)} s · frame ${String(f).padStart(3, "0")} · ${vo ? "VO bicara → SFX −5 dB" : "VO diam"} · momentary ${mom < -35 ? "senyap" : nf(mom, 1) + " LUFS"}`;
+      wasOn = true;
+    });
+    // stop sound when the demo scrolls away
+    new IntersectionObserver(([e]) => { if (!e.isIntersecting && audio) audio.stop(); else if (e.isIntersecting && audio && wasOn) audio.restart(); }, { threshold: .05 }).observe(el);
+  });
+
+  /* ======================================================================
+     4 · JALAN  (§6.4) 6-drawing walk, planted foot locked, ground scroll = stride
+     ====================================================================== */
+  const FR = (() => { const Lg = [{ a: 26, k: 3, fa: 8 }, { a: 14, k: 20, fa: 0 }, { a: 0, k: 6, fa: 0 }], Bg = [{ a: -24, k: 14, fa: -38 }, { a: -28, k: 42, fa: -55 }, { a: 16, k: 68, fa: -25 }]; return [0, 1, 2].map((i) => ({ A: Lg[i], B: Bg[i] })).concat([0, 1, 2].map((i) => ({ A: Bg[i], B: Lg[i] }))); })();
+  const FIG = { th: 78, sh: 76, ft: 30, to: 100, hr: 27, ua: 58, fa: 52 };
+  const legFK = (l) => { const a = l.a * D2R, k = (l.a - l.k) * D2R; const kn = [FIG.th * Math.sin(a), FIG.th * Math.cos(a)]; const an = [kn[0] + FIG.sh * Math.sin(k), kn[1] + FIG.sh * Math.cos(k)]; const fa = l.fa * D2R; const toe = [an[0] + FIG.ft * Math.cos(fa), an[1] - FIG.ft * Math.sin(fa)]; return { kn, an, toe }; };
+  const poseOf = (fr) => { const A = legFK(fr.A), B = legFK(fr.B); const low = Math.max(A.an[1], A.toe[1], B.an[1], B.toe[1]); const contact = (L) => (L.toe[1] > L.an[1] ? L.toe : L.an); return { A, B, low, cA: contact(A), cB: contact(B) }; };
+  const POSES = FR.map(poseOf);
+  const LOCK = ["A", "A", "A", "B", "B", "B"]; // planted leg for drawing i → i+1
+  const STEP = POSES.map((p, i) => { const k = LOCK[i], n = POSES[(i + 1) % 6]; return (k === "A" ? p.cA[0] - n.cA[0] : p.cB[0] - n.cB[0]); });
+  const CYCLE = STEP.reduce((a, b) => a + b, 0);
+  function drawFigure(g, fr, P, X, base, s, shade = 1) {
+    g.save(); g.translate(X, base); g.scale(s, s); g.translate(0, -P.low - 4);
+    const sh = (on) => { if (on) { g.shadowColor = "rgba(45,28,12,.32)"; g.shadowBlur = 6; g.shadowOffsetY = 3; } else g.shadowColor = "transparent"; };
+    const limb = (pts, w, col) => { g.lineCap = "round"; g.lineJoin = "round"; g.beginPath(); g.moveTo(pts[0][0], pts[0][1]); for (let i = 1; i < pts.length; i++) g.lineTo(pts[i][0], pts[i][1]); sh(true); g.strokeStyle = "rgba(251,246,234,.95)"; g.lineWidth = w + 3.4; g.stroke(); sh(false); g.strokeStyle = col; g.lineWidth = w; g.stroke(); };
+    const sho = [Math.sin(4 * D2R) * FIG.to, -Math.cos(4 * D2R) * FIG.to];
+    const arm = (legA, col) => { const a = -legA * .85 * D2R, b = a + 20 * D2R * (legA > 0 ? .4 : 1); const el = [sho[0] + FIG.ua * Math.sin(a), sho[1] + FIG.ua * Math.cos(a)]; const hd = [el[0] + FIG.fa * Math.sin(b), el[1] + FIG.fa * Math.cos(b)]; limb([sho, el, hd], 15, col); g.fillStyle = "#C98E66"; g.beginPath(); g.arc(hd[0], hd[1], 8, 0, 7); g.fill(); };
+    const leg = (L, col, shoe) => { limb([[0, 0], L.kn, L.an], 21, col); limb([L.an, L.toe], 11, shoe); };
+    arm(fr.B.a, shade ? "#B58530" : "#9a7a3a"); leg(P.B, "#243A55", "#2A1E17");
+    limb([[0, -8], [sho[0] * .5, sho[1] * .5], sho], 46, "#D9A441");
+    g.fillStyle = "rgba(255,255,255,.18)"; g.fillRect(-6, -90, 4, 70);
+    leg(P.A, "#2F4A6B", "#3A2A20"); arm(fr.A.a, "#E0AC48");
+    g.fillStyle = "#C98E66"; g.beginPath(); g.arc(sho[0] + 3, sho[1] - 14 - FIG.hr, FIG.hr, 0, 7); sh(true); g.fill(); sh(false);
+    g.fillStyle = "#2A1E17"; g.beginPath(); g.arc(sho[0] + 1, sho[1] - 16 - FIG.hr, FIG.hr + 2, Math.PI * .95, Math.PI * 2.05); g.fill();
+    g.restore();
+  }
+  Demos.add("jalan", (el) => {
+    const LBL = ["contact", "down", "passing", "contact", "down", "passing"];
+    el.innerHTML = `<div class="dp dp-jalan"><div class="dp-grid">
+      <div class="dp-main"><div class="dp-stage dp-r169"><canvas></canvas><div class="dp-hud tl"><i class="dp-dot"></i><span data-h></span></div><div class="dp-hud br" data-s></div></div></div>
+      <aside class="dp-side"><p class="dp-k">Sheet 6 gambar · satu siklus</p><div class="dp-strip">${LBL.map((l, i) => `<figure data-i="${i}"><canvas></canvas><figcaption><b>F${i + 1}</b>${l}</figcaption></figure>`).join("")}</div>
+        <p class="dp-k">Tempo</p>${seg([["2", "On twos · 0,5 s"], ["4", "Santai · tahan 4 f"]], "2", "data-hold")}
+        <p class="dp-k">Kecepatan geser</p>${seg([["ok", "2 × L / T"], ["bad", "Asal (meluncur)"]], "ok", "data-mode")}
+        <div class="dp-num" data-n></div></aside></div>
+      ${cap("", "Satu langkah jalan dari samping terdiri dari tiga pose (menapak, turun, melintas), lalu diulang untuk kaki lain: 6 gambar untuk satu siklus. Tanah, bukit, dan rumput bergeser tepat sejauh langkah, sehingga kaki yang menapak tidak terlihat meluncur. Menggeser satu gambar diam bukan cara berjalan.")}</div>`;
+    const stage = $(".dp-stage", el), cv = $(".dp-stage canvas", el), g = cv.getContext("2d"), hud = $("[data-h]", el), sv = $("[data-s]", el), num = $("[data-n]", el);
+    const cells = $$(".dp-strip figure", el);
+    const W = 880, H = 495, SC = .82, BASE = 418, HIPX = 360;
+    const ims = [2, 3, 6].reduce((o, i) => { const im = new Image(); im.src = IMG(`kit-${i}.webp`); o[i] = im; return o; }, {});
+    let hold = 2, mode = "ok", t = 0, S = 1;
+    bindSeg($("[data-hold]", el), (v) => { hold = +v; t = 0; });
+    bindSeg($("[data-mode]", el), (v) => { mode = v; t = 0; });
+    fit(stage, (w, h) => { const d = DPR(); cv.width = w * d; cv.height = h * d; S = Math.min(w / W, h / H) * d; });
+    const drawStrip = () => cells.forEach((c, i) => { const k = $("canvas", c), w = k.clientWidth, h = k.clientHeight; if (!w) return; const d = DPR(); k.width = w * d; k.height = h * d; const x = k.getContext("2d"); x.scale(d, d); x.fillStyle = "#FBF7EE"; x.fillRect(0, 0, w, h); x.strokeStyle = "rgba(0,0,0,.12)"; x.setLineDash([3, 3]); x.beginPath(); x.moveTo(0, h - 8); x.lineTo(w, h - 8); x.stroke(); x.setLineDash([]); drawFigure(x, FR[i], POSES[i], w / 2 - 4, h - 8, (h - 14) / 330); });
+    new ResizeObserver(drawStrip).observe($(".dp-strip", el));
+    // ground world position of the hip after n drawings (planted foot locked)
+    const hipAt = (n) => { const c = Math.floor(n / 6); let x = c * CYCLE; for (let i = 0; i < n % 6; i++) x += STEP[i]; return x * SC; };
+    const L = CYCLE / 2 * SC;
+    let lastN = -1, slip = 0, prevFoot = null;
+    visLoop(el, (dt) => {
+      t += dt; const T = 6 * hold / 24, n = Math.floor(t / (hold / 24)), di = n % 6, P = POSES[di];
+      const v = 2 * L / T;
+      const tq = n * hold / 24;
+      const gx = mode === "ok" ? hipAt(n) : v * .62 * tq; // ground offset under the hip
+      // planted foot world x (should stay constant inside a stance)
+      const cOf = (pose, leg) => (leg === "A" ? pose.cA[0] : pose.cB[0]) * SC;
+      const lk = LOCK[di], cx = cOf(P, lk);
+      if (n !== lastN) {
+        // foot that stayed planted from drawing n-1 to n: its world x must not change
+        const pl = LOCK[(n + 5) % 6];
+        if (prevFoot && lastN === n - 1) slip = Math.abs(gx + cOf(P, pl) - (prevFoot.gx + cOf(POSES[(n + 5) % 6], pl)));
+        prevFoot = { gx }; lastN = n; cells.forEach((c, i) => c.classList.toggle("on", i === di));
+      }
+      // ---- render ----
+      g.setTransform(S, 0, 0, S, 0, 0);
+      const sky = g.createLinearGradient(0, 0, 0, H); sky.addColorStop(0, "#2C67B0"); sky.addColorStop(.45, "#78ACDC"); sky.addColorStop(.8, "#D9E8F2"); g.fillStyle = sky; g.fillRect(0, 0, W, H);
+      // middle 88% of the piece, every other copy mirrored so neighbouring cut edges match
+      const tile = (im, k, y, w) => { if (!im.complete || !im.naturalWidth) return; const nw = im.naturalWidth, nh = im.naturalHeight, hh = w / .88 * nh / nw, off = gx * k; for (let j = Math.floor(off / w) - 1; j * w - off < W + w; j++) { const X = j * w - off; g.save(); if (j & 1) { g.translate(X + w, 0); g.scale(-1, 1); } else g.translate(X, 0); g.drawImage(im, nw * .06, 0, nw * .88, nh, -.5, y - hh, w + 1, hh); g.restore(); } };
+      g.save(); g.shadowColor = "rgba(45,28,12,.25)"; g.shadowBlur = 9; g.shadowOffsetY = 5;
+      tile(ims[2], .25, 352, 900); tile(ims[3], .4, BASE + 22, 1000); g.restore();
+      // paper ground strip with cut pebbles every 60 px (scrolls 1:1 with the planted foot)
+      g.save(); g.shadowColor = "rgba(45,28,12,.3)"; g.shadowBlur = 10; g.shadowOffsetY = -3; g.fillStyle = "#C9A577"; g.fillRect(0, BASE, W, H - BASE); g.restore();
+      g.globalAlpha = .45; g.fillStyle = g.createPattern(fibre(), "repeat"); g.globalCompositeOperation = "multiply"; g.fillRect(0, BASE, W, H - BASE); g.globalCompositeOperation = "source-over"; g.globalAlpha = 1;
+      const o60 = ((gx % 60) + 60) % 60; g.fillStyle = "#A9845A"; for (let x = -o60; x < W + 60; x += 60) { g.fillRect(x, BASE + 10, 26, 5); g.fillRect(x + 30, BASE + 30, 14, 4); }
+      g.fillStyle = "rgba(255,248,230,.65)"; g.fillRect(0, BASE, W, 2);
+      // contact shadow §3.2 (0,36-0,42 × figure width)
+      const sw = 70; g.save(); g.translate(HIPX, BASE + 2); g.scale(1, 12 / sw); const rg = g.createRadialGradient(0, 0, 0, 0, 0, sw); rg.addColorStop(0, "rgba(40,25,10,.3)"); rg.addColorStop(1, "rgba(40,25,10,0)"); g.fillStyle = rg; g.beginPath(); g.arc(0, 0, sw, 0, 7); g.fill(); g.restore();
+      drawFigure(g, FR[di], P, HIPX, BASE, SC);
+      // planted-foot marker
+      const fx = HIPX + cx, bad = mode !== "ok" && slip > .5;
+      g.strokeStyle = bad ? "#ff8a78" : "#f2d796"; g.lineWidth = 2; g.beginPath(); g.arc(fx, BASE + 1, 7, 0, 7); g.stroke();
+      g.fillStyle = bad ? "#ff8a78" : "#f2d796"; g.font = "500 12px 'Geist Mono', monospace"; g.fillText(bad ? "meluncur" : "kaki tanam", fx - 30, BASE + 28);
+      tile(ims[6], 1.25, H + 34, 240);
+      hud.textContent = `F${di + 1} · ${LBL[di]} · gambar ${n}`;
+      sv.textContent = `slip ${nf(mode === "ok" ? 0 : slip, 1)} px`;
+      sv.classList.toggle("bad", bad);
+      num.innerHTML = `<div><span>Langkah L</span><b>${Math.round(L)} px</b></div><div><span>Siklus T</span><b>${nf(T, 2)} s</b></div><div><span>v = 2 × L / T</span><b>${Math.round(v)} px/s</b></div><div><span>Gambar</span><b>${hold === 2 ? "12" : "6"} / s</b></div>`;
+    });
+  });
+
+  /* ======================================================================
+     5 · GAYA  (§2.3) four style frames, each with a 3-5 s test clip loop
+     ====================================================================== */
+  const ent = (el, tq, t0, from, off, base = "") => {
+    const u = tq - t0; if (u < 0) { el.style.opacity = 0; return; }
+    const e = Math.exp(-u / .17), o = off * e;
+    const dx = from === "l" ? -o : from === "r" ? o : 0, dy = from === "b" ? o : from === "t" ? -o : 0, sc = from === "pop" ? 1 - .08 * e : 1;
+    el.style.opacity = Math.min(1, u / .2).toFixed(3); el.style.transform = `translate(${dx.toFixed(1)}px,${dy.toFixed(1)}px) scale(${sc.toFixed(4)}) ${base}`;
+  };
+  const tornPoly = (seed, amp = 1.6, n = 22) => { const r = rng(seed), top = [], bot = []; for (let i = 0; i <= n; i++) { top.push(`${(i / n * 100).toFixed(1)}% ${(r() * amp).toFixed(2)}%`); bot.push(`${(100 - i / n * 100).toFixed(1)}% ${(100 - r() * amp).toFixed(2)}%`); } return `polygon(${top.join(",")},${bot.join(",")})`; };
+  const STYLES = [
+    { k: "collage", n: "Paper collage", tag: "default ★", d: 4.6, ciri: "Kit kertas matte, 7-12 lapis, cahaya hangat, warna natural cerah", cocok: "Sejarah, kisah, explainer", risiko: "Aset banyak; potongan wajib bersih",
+      build() { const S = scene("village", { label: "Desa Tepi Pantai" }); return { el: S.el, draw: (t) => drawEntry(S, t) }; } },
+    { k: "vox", n: "Vox editorial", d: 4.2, ciri: "Halftone, sobekan, selotip, kliping, field warna kuat per beat", cocok: "Argumen, data, opini", risiko: "Mudah jadi poster bergerak",
+      build() {
+        const w = mk("div", "dp-world dp-vox");
+        w.innerHTML = `<div class="ht"></div><div class="strip s1" style="clip-path:${tornPoly(3, 6)}"><i></i></div><div class="card" style="clip-path:${tornPoly(8, 3)}"><img src="${IMG("kit-4.webp")}" alt=""><div class="ht2"></div></div><i class="tape"></i><div class="slab"><b>Kenapa harga</b><b>naik?</b></div><div class="num">+38<small>%</small></div><div class="strip s2" style="clip-path:${tornPoly(5, 7)}"><i></i></div><div class="dp-grain"></div>`;
+        const [s1, card, tape, slab, numEl, s2] = [".s1", ".card", ".tape", ".slab", ".num", ".s2"].map((s) => $(s, w));
+        return { el: w, draw(t) { const tq = q12(t); ent(s1, tq, .1, "t", 260, "rotate(-2deg)"); ent(s2, tq, .3, "b", 260, "rotate(1.5deg)"); ent(card, tq, .7, "pop", 0, "rotate(3deg)"); const u = tq - 1.15; tape.style.opacity = u < 0 ? 0 : 1; tape.style.transform = `rotate(18deg) scale(${u < 0 ? 1.3 : (1 + .3 * Math.exp(-u / .08)).toFixed(3)})`; const v = tq - 1.5, e = v < 0 ? 1 : 1 - Math.pow(2, -10 * v / .6); slab.style.opacity = v < 0 ? 0 : 1; slab.style.transform = `translateX(${(-760 * (1 - e)).toFixed(1)}px) rotate(-2deg)`; ent(numEl, tq, 2.3, "pop", 0, "rotate(-4deg)"); numEl.firstChild.textContent = "+" + Math.round(38 * clamp((tq - 2.3) / .6)); } };
+      } },
+    { k: "manus", n: "Manuskrip emas", d: 5, ciri: "Halaman gading, bintang 8, jendela lengkung, garis emas, serif + italic emas", cocok: "Dalil, kutipan, judul bab", risiko: "Statis bila lebih dari 6 s",
+      build() {
+        const w = mk("div", "dp-world dp-man");
+        w.innerHTML = `<i class="b1"></i><i class="b2"></i><div class="arch"><div class="star"><i></i><i></i><span></span></div><i class="halo"></i></div><div class="tx"><p class="k">Bab satu</p><h4>Sebuah</h4><h4 class="it">pelabuhan tua</h4><i class="rl"></i><p class="s">Di sinilah semua muatan bermula.</p></div><div class="dp-grain"></div>`;
+        const [b1, b2, arch, star, halo, k, h1, h2, rl, s] = [".b1", ".b2", ".arch", ".star", ".halo", ".k", "h4", ".it", ".rl", ".s"].map((x) => $(x, w));
+        return { el: w, draw(t) { const tq = q12(t); const u1 = sm(tq / .8); b1.style.transform = `scale(${u1.toFixed(3)})`; b2.style.transform = `scale(${sm((tq - .2) / .8).toFixed(3)})`; ent(arch, tq, .35, "b", 180); star.style.transform = `rotate(${(t * 8).toFixed(2)}deg)`; halo.style.opacity = (.55 + .25 * Math.sin(t * 1.3)).toFixed(3); ent(k, tq, 1.2, "l", 60); ent(h1, tq, 1.4, "b", 40); ent(h2, tq, 1.6, "b", 40); rl.style.transform = `scaleX(${sm((tq - 2.0) / .6).toFixed(3)})`; ent(s, tq, 2.4, "b", 30); } };
+      } },
+    { k: "bright", n: "Bright paper", d: 4, ciri: "Field kromatik luas, minimal 3 hue, aksen hangat 3-15%", cocok: "Edukasi ceria, produk", risiko: "Kekanakan tanpa tekstur kertas asli",
+      build() {
+        const w = mk("div", "dp-world dp-bri");
+        w.innerHTML = `<i class="sun"></i><i class="band b1"></i><i class="band b2"></i><img class="hs" src="${IMG("kit-4.webp")}" alt=""><img class="tr" src="${IMG("kit-5.webp")}" alt=""><img class="gr" src="${IMG("kit-6.webp")}" alt=""><div class="card"><b>Paket</b><em>datang!</em></div><div class="dp-grain"></div>`;
+        const [sun, b1, b2, hs, tr, gr, card] = [".sun", ".b1", ".b2", ".hs", ".tr", ".gr", ".card"].map((x) => $(x, w));
+        return { el: w, draw(t) { const tq = q12(t); ent(sun, tq, .1, "t", 260); ent(b1, tq, .3, "b", 300); ent(b2, tq, .5, "b", 320); ent(tr, tq, 1.0, "b", 200); ent(hs, tq, 1.4, "pop", 0); ent(gr, tq, 1.8, "b", 260); ent(card, tq, 2.2, "l", 420, "rotate(-2deg)"); if (tq > 2.6) { const f = Math.floor(t * 12); gr.style.transform = `translate(${(Math.sin(f * .9) * 1.2).toFixed(1)}px,0)`; } } };
+      } },
+  ];
+  Demos.add("gaya", (el) => {
+    ensureStyle();
+    el.innerHTML = `<div class="dp dp-gaya"><div class="dp-grid">
+      <div class="dp-main"><div class="dp-stage dp-r169"><div class="dp-hud tl"><i class="dp-dot"></i><span data-h></span></div><div class="dp-hud br" data-c></div><div class="dp-tl"><i></i></div></div></div>
+      <aside class="dp-side"><p class="dp-k">Contoh gaya</p><div class="dp-cards">${STYLES.map((s, i) => `<button type="button" class="dp-card${i ? "" : " on"}" data-i="${i}"><div class="dp-thumb"></div><b>${s.n}</b>${s.tag ? `<em>${s.tag}</em>` : ""}</button>`).join("")}</div>
+        <dl class="dp-dl"><dt>Ciri</dt><dd data-f="ciri"></dd><dt>Cocok</dt><dd data-f="cocok"></dd><dt>Risiko</dt><dd data-f="risiko"></dd></dl></aside></div>
+      ${cap("", "Claude menyarankan satu gaya utama plus 2-3 alternatif, masing-masing dengan contoh gambar dan klip uji 3-5 detik. Elemen dikonfirmasi satu per satu, tidak ditebak, dan klip uji dibuat sebelum produksi dimulai. Klip di atas dirakit dari potongan kertas yang sama, hanya gayanya yang berbeda.")}</div>`;
+    const stage = $(".dp-stage", el), hud = $("[data-h]", el), clk = $("[data-c]", el), bar = $(".dp-tl i", el);
+    fitStage(stage, 1280, 720);
+    const inst = STYLES.map((s) => s.build());
+    inst.forEach((x) => { x.el.style.display = "none"; stage.insertBefore(x.el, stage.firstChild); });
+    $$(".dp-thumb", el).forEach((th, i) => { const x = STYLES[i].build(); th.appendChild(x.el); x.draw(STYLES[i].d - .05); fitStage(th, 1280, 720); });
+    let cur = 0, t = 0;
+    const pick = (i) => { cur = i; t = 0; inst.forEach((x, k) => (x.el.style.display = k === i ? "" : "none")); $$(".dp-card", el).forEach((c, k) => c.classList.toggle("on", k === i)); ["ciri", "cocok", "risiko"].forEach((f) => ($(`[data-f=${f}]`, el).textContent = STYLES[i][f])); if (G()) G().fromTo($(".dp-dl", el), { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: .5, ease: "power2.out" }); };
+    $(".dp-cards", el).addEventListener("click", (e) => { const b = e.target.closest(".dp-card"); if (b) pick(+b.dataset.i); });
+    pick(0);
+    visLoop(el, (dt) => {
+      const s = STYLES[cur]; t += dt; if (t > s.d) t = 0;
+      inst[cur].draw(t);
+      bar.style.transform = `scaleX(${(t / s.d).toFixed(4)})`;
+      hud.textContent = `Klip uji · ${s.n}`; clk.textContent = `${nf(t, 1)} / ${nf(s.d, 1)} s · loop`;
+    });
+  });
+
+  /* ======================================================================
+     6 · PERSONA  (§2.2 data jadi benda + §6.7 benda berwajah)
+     ====================================================================== */
+  const FACES = {
+    normal: { brow: "M-34 -40 L-14 -40 M14 -40 L34 -40", mouth: "M-14 8 Q0 14 14 8", eye: 1, fill: 0 },
+    senang: { brow: "M-34 -44 Q-24 -50 -14 -44 M14 -44 Q24 -50 34 -44", mouth: "M-20 4 Q0 26 20 4 Z", eye: .55, fill: 1 },
+    sedih: { brow: "M-34 -36 L-14 -44 M14 -44 L34 -36", mouth: "M-14 16 Q0 4 14 16", eye: .9, fill: 0 },
+    kaget: { brow: "M-34 -52 Q-24 -58 -14 -52 M14 -52 Q24 -58 34 -52", mouth: "M-8 10 a8 10 0 1 0 16 0 a8 10 0 1 0 -16 0", eye: 1.25, fill: 1 },
+    cemas: { brow: "M-34 -38 L-14 -46 M14 -46 L34 -38", mouth: "M-16 12 q4 -5 8 0 t8 0 t8 0", eye: 1.05, fill: 0 },
+  };
+  const faceSVG = (x, y, s, sticker) => `<g class="fc" transform="translate(${x} ${y}) scale(${s})">${sticker ? '<ellipse class="stk" rx="54" ry="46" cy="-14"/>' : ""}<g class="eyes"><ellipse class="eye" cx="-24" cy="-22" rx="8" ry="10"/><ellipse class="eye" cx="24" cy="-22" rx="8" ry="10"/><circle class="gl" cx="-21" cy="-26" r="2.6"/><circle class="gl" cx="27" cy="-26" r="2.6"/></g><path class="brow"/><path class="mouth"/></g>`;
+  const applyFace = (fc, m, blink, look = 0, lead = 0) => { const F = FACES[m]; $(".brow", fc).setAttribute("d", F.brow); const mo = $(".mouth", fc); mo.setAttribute("d", F.mouth); mo.classList.toggle("fill", !!F.fill); $$(".eye", fc).forEach((e) => e.setAttribute("ry", blink ? 1.2 : (10 * F.eye).toFixed(1))); $(".eyes", fc).setAttribute("transform", `translate(${(look * 6).toFixed(1)} ${lead.toFixed(1)})`); $$(".gl", fc).forEach((g) => g.setAttribute("opacity", blink ? 0 : 1)); };
+  // one "take": eyes lead 2 drawings, squash 3 drawings, new face at the deepest point, elastic settle (§6.7.3)
+  const takeSy = (k) => { if (k < .17) return [1, -6 * (k / .17), false]; const a = k - .17; if (a < .25) return [1 - .18 * sm(a / .25), 0, false]; const s = a - .25; return [1 - .18 * Math.exp(-5 * s) * Math.cos(2 * Math.PI * 3 * s), 0, true]; };
+  Demos.add("persona", (el) => {
+    const EX = [
+      { k: "karung", n: "Karung", min: 1, max: 6, v: 3, unit: (v) => `${v} karung = ${v} juta ton`, cap: "Data jadi benda: angka menjadi tumpukan yang bisa dihitung. Satu karung = satu juta ton." },
+      { k: "baterai", n: "Baterai", min: 0, max: 100, v: 80, unit: (v) => `${v}% · ${v >= 60 ? "senang" : v >= 25 ? "normal" : "sedih"}`, cap: "Nilai menentukan mood berkunci. Mood berganti lewat satu take: antisipasi, wajah baru di squash terdalam, lalu settle." },
+      { k: "termo", n: "Termometer", min: 20, max: 40, v: 29, unit: (v) => `${v} °C · ${v < 25 ? "kedinginan" : v <= 32 ? "nyaman" : "kepanasan"}`, cap: "Suhu menjadi tokoh: menggigil saat dingin, berkeringat saat panas. Gerak murah tanpa jalan kaki." },
+    ];
+    el.innerHTML = `<div class="dp dp-persona"><div class="dp-grid">
+      <div class="dp-main"><div class="dp-stage dp-r169 dp-pstage"><svg viewBox="0 0 900 506" preserveAspectRatio="xMidYMid meet"><defs><filter id="dpsh" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="rgb(45,28,12)" flood-opacity=".32"/></filter><radialGradient id="dpcs"><stop offset="0" stop-color="rgb(40,25,10)" stop-opacity=".32"/><stop offset="1" stop-color="rgb(40,25,10)" stop-opacity="0"/></radialGradient><linearGradient id="dpbg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F6E9CC"/><stop offset="1" stop-color="#E9D3A9"/></linearGradient></defs>
+        <rect width="900" height="506" fill="url(#dpbg)"/><image href="${IMG("kit-0.webp")}" x="80" y="70" width="120" height="122" opacity=".9"/><image href="${IMG("kit-2.webp")}" x="-40" y="268" width="980" height="158" opacity=".55"/><path d="M0 430 Q450 412 900 432 L900 506 L0 506 Z" fill="#CDAF80" filter="url(#dpsh)"/><g class="world"></g></svg>
+        <div class="dp-hud tl"><i class="dp-dot"></i><span data-h></span></div><div class="dp-big" data-b></div></div></div>
+      <aside class="dp-side"><p class="dp-k">Contoh</p>${seg(EX.map((x) => [x.k, x.n]), "karung", "data-ex")}
+        <label class="dp-range"><span data-l></span><input type="range" data-v></label><p class="dp-exc" data-c></p>
+        <ul class="dp-rules"><li>Benda polos + stiker wajah, ditempel dari jangkar wajah per frame.</li><li>Squash menjaga luas: sx = 1 + (1 − sy) × 0,5, jangkar di dasar.</li><li>Mata memimpin, badan menyusul 2-5 frame; kerumunan berselang 0,07 s.</li><li>Bayangan kontak mengecil saat melompat. Kedip = mata dipipihkan jadi garis.</li></ul></aside></div>
+      ${cap("", "Wajah hanya diberikan pada benda, bukan orang. Gerak benda diatur lewat posisi, kempis-mengembang, sudut, mata, dan mulut. Wajah tidak pernah berganti mendadak: benda selalu ancang-ancang dulu, wajah baru muncul di titik terdalam, lalu memantul pelan sampai diam.")}</div>`;
+    const world = $(".world", el), hud = $("[data-h]", el), big = $("[data-b]", el), inp = $("[data-v]", el), lab = $("[data-l]", el), exc = $("[data-c]", el);
+    let ex = 0, objs = [], clock = 0;
+    const shadow = (w) => `<ellipse class="cs" cx="0" cy="2" rx="${w}" ry="11" fill="url(#dpcs)"/>`;
+    const SACK = `<path class="pc" d="M-52 0 Q-62 -62 -42 -102 Q-30 -120 -15 -124 L-22 -136 Q0 -146 22 -136 L15 -124 Q30 -120 42 -102 Q62 -62 52 0 Q0 9 -52 0 Z" fill="#C9A46A"/><path d="M-17 -125 Q0 -118 17 -125" stroke="#7a5a2e" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M-40 -18 Q0 -10 40 -18" stroke="#b08a52" stroke-width="2" fill="none"/><text y="-26" text-anchor="middle" class="stc">1 JT TON</text>`;
+    const mkObj = (html, x, fx, fy, fs, sticker) => { const g = document.createElementNS("http://www.w3.org/2000/svg", "g"); g.innerHTML = `<g class="sh">${shadow(56)}</g><g class="bd" filter="url(#dpsh)">${html}${faceSVG(fx, fy, fs, sticker)}</g>`; world.appendChild(g); return { g, bd: $(".bd", g), sh: $(".sh", g), fc: $(".fc", g), x, lift: 0, mood: "senang", take: -1, want: null, hop: -1, hop0: 0, drop: -1, out: -1, look: 0, blinkT: 1 + objs.length * .7 }; };
+    const sackX = (i, n) => 450 + (i - (n - 1) / 2) * Math.min(150, 800 / Math.max(1, n));
+    function build() {
+      world.innerHTML = ""; objs = []; const E = EX[ex];
+      inp.min = E.min; inp.max = E.max; inp.value = E.v; exc.textContent = E.cap;
+      if (E.k === "karung") for (let i = 0; i < E.v; i++) { const o = mkObj(SACK, sackX(i, E.v), 0, -70, .62); objs.push(o); }
+      if (E.k === "baterai") { const o = mkObj(`<rect x="-26" y="-282" width="52" height="22" rx="6" fill="#3a4466"/><rect class="pc" x="-80" y="-266" width="160" height="266" rx="24" fill="#2c3550"/><rect x="-62" y="-248" width="124" height="230" rx="14" fill="#141a2c"/><rect class="lvl" x="-62" width="124" rx="12"/><rect x="-54" y="-240" width="12" height="200" rx="6" fill="rgba(255,255,255,.12)"/>`, 450, 0, -128, .95, true); objs.push(o); }
+      if (E.k === "termo") { const o = mkObj(`<rect class="pc" x="-30" y="-330" width="60" height="290" rx="30" fill="#F4ECD8"/>${Array.from({ length: 9 }, (_, i) => `<path d="M14 ${-300 + i * 28} h12" stroke="#9c7a3c" stroke-width="2"/>`).join("")}<rect class="merc" x="-11" width="22" rx="11" fill="#D9473A"/><circle cx="0" cy="-48" r="52" fill="#D9473A" class="pc"/><g class="drops"></g>`, 450, 0, -40, .62, true); objs.push(o); }
+      lab.textContent = E.unit(E.v);
+    }
+    const moodFor = (v) => { const E = EX[ex]; if (E.k === "baterai") return v >= 60 ? "senang" : v >= 25 ? "normal" : "sedih"; if (E.k === "termo") return v < 25 ? "cemas" : v <= 32 ? "senang" : "sedih"; return "senang"; };
+    bindSeg($("[data-ex]", el), (v) => { ex = EX.findIndex((x) => x.k === v); build(); objs.forEach((o) => (o.mood = moodFor(EX[ex].v))); });
+    inp.addEventListener("input", () => {
+      const E = EX[ex], v = +inp.value; E.v = v; lab.textContent = E.unit(v);
+      if (E.k === "karung") {
+        const live = objs.filter((o) => o.out < 0);
+        if (v > live.length) { for (let i = live.length; i < v; i++) { const o = mkObj(SACK, 0, 0, -70, .62); o.drop = 0; o.mood = "kaget"; objs.push(o); } }
+        else if (v < live.length) live.slice(v).forEach((o) => { o.out = 0; o.mood = "sedih"; });
+        const L = objs.filter((o) => o.out < 0), n = L.length; L.forEach((o, i) => { o.tx = sackX(i, n); if (o.drop >= 0 && !o.x) o.x = o.tx; if (o.drop < 0) { o.hop = 0; o.hop0 = Math.abs(i - (n - 1)) * .07; o.look = 1; } });
+      } else { const m = moodFor(v); const o = objs[0]; if (m !== (o.want || o.mood)) { o.want = m; o.take = 0; } }
+    });
+    build(); objs.forEach((o) => (o.tx = o.x));
+    visLoop(el, (dt) => {
+      clock += dt; const tq = q12(clock), f = Math.floor(clock * 12), E = EX[ex];
+      objs.forEach((o, i) => {
+        let sy = 1, lift = 0, lead = 0, dx = 0;
+        if (o.tx != null) o.x += (o.tx - o.x) * Math.min(1, dt * 8);
+        if (o.drop >= 0) { o.drop += dt; const k = q12(o.drop); if (k < .35) { const u = k / .35; lift = 300 * (1 - u * u); sy = 1.08; } else { const s = k - .35; sy = 1 - .2 * Math.exp(-6 * s) * Math.cos(18 * s); if (s > .5) { o.mood = "senang"; } if (s > 1) o.drop = -1; } }
+        if (o.out >= 0) { o.out += dt; const u = clamp(q12(o.out) / .6); lift = 120 * Math.sin(Math.PI * u); dx = 520 * u; o.bd.setAttribute("opacity", (1 - u).toFixed(2)); if (u >= 1) { o.g.remove(); o.dead = 1; } }
+        if (o.hop >= 0) { o.hop += dt; const u = (q12(o.hop) - o.hop0) / .25; if (u >= 0 && u <= 1) lift = Math.max(lift, 14 * Math.sin(Math.PI * u)); if (u > 2) { o.hop = -1; o.look = 0; } }
+        if (o.take >= 0) { o.take += dt; const [s, ld, swap] = takeSy(q12(o.take)); sy = s; lead = ld; if (swap && o.want) { o.mood = o.want; o.want = null; } if (o.take > 1.6) o.take = -1; }
+        if (E.k === "termo" && o.mood === "cemas") dx += (f % 2 ? 2.5 : -2.5);
+        const sx = 1 + (1 - sy) * .5;
+        o.g.setAttribute("transform", `translate(${(o.x + dx).toFixed(1)} 432) scale(${E.k === "karung" ? 1.32 : 1})`);
+        o.bd.setAttribute("transform", `translate(0 ${(-lift).toFixed(1)}) scale(${sx.toFixed(3)} ${sy.toFixed(3)})`);
+        const ss = Math.max(.4, 1 - lift / 260); o.sh.setAttribute("transform", `scale(${ss.toFixed(3)} 1)`); o.sh.setAttribute("opacity", ss.toFixed(2));
+        o.blinkT -= dt; const blink = o.blinkT < 0 && o.blinkT > -.17; if (o.blinkT < -.17) o.blinkT = 2.4 + ((i * 1.37 + f * .013) % 1) * 2.5;
+        applyFace(o.fc, o.mood, blink, o.look ? 1 : Math.sin(tq * .7) * .3, lead);
+      });
+      objs = objs.filter((o) => !o.dead);
+      if (E.k === "baterai" && objs[0]) { const v = E.v / 100, h = 230 * v, r = $(".lvl", objs[0].g); r.setAttribute("y", (-18 - h).toFixed(1)); r.setAttribute("height", Math.max(0, h).toFixed(1)); r.setAttribute("fill", v >= .6 ? "#5FBF7A" : v >= .25 ? "#E3B04B" : "#D9473A"); }
+      if (E.k === "termo" && objs[0]) { const v = (E.v - 20) / 20, h = 40 + 240 * v, m = $(".merc", objs[0].g); m.setAttribute("y", (-60 - h).toFixed(1)); m.setAttribute("height", h.toFixed(1)); const dr = $(".drops", objs[0].g); dr.innerHTML = objs[0].mood === "sedih" ? [0, 1, 2].map((k) => { const u = ((tq * .9 + k / 3) % 1); return `<path d="M0 -6 Q5 2 0 6 Q-5 2 0 -6 Z" fill="#7FB6E6" transform="translate(${k % 2 ? 46 : -46} ${(-260 + u * 120).toFixed(1)}) scale(1.6)" opacity="${(1 - u).toFixed(2)}"/>`; }).join("") : ""; $(".pc", objs[0].g).setAttribute("fill", objs[0].mood === "cemas" ? "#DDE9F3" : "#F4ECD8"); }
+      const o0 = objs[0];
+      hud.textContent = E.k === "karung" ? `${objs.filter((o) => o.out < 0).length} benda · on twos` : `mood: ${o0 ? (o0.want ? o0.mood + " → " + o0.want : o0.mood) : "-"}${o0 && o0.take >= 0 ? " · take" : ""}`;
+      big.textContent = E.unit(E.v);
+    });
+  });
+
+  /* ======================================================================
+     7 · RENDER  (§11) deterministic seek via a paused GSAP timeline + proxy tween
+     ====================================================================== */
+  Demos.add("render", (el) => {
+    const DUR = 6.5, NF = Math.round(DUR * 24);
+    el.innerHTML = `<div class="dp dp-render"><div class="dp-grid">
+      <div class="dp-main"><div class="dp-stage dp-r169"><div class="dp-badge" data-bd><i></i><span>preview = render</span></div><div class="dp-hud br" data-fr></div></div>
+        <div class="dp-scrub"><button type="button" class="dp-b gold dp-play" data-a="play" aria-label="Putar">▶</button><input type="range" min="0" max="${NF - 1}" step="1" value="48" data-s aria-label="Frame"><span class="dp-read" data-t></span></div>
+        <div class="dp-contact">${[0, .25, .5, .75, 1].map((p, i) => `<button type="button" class="dp-th" data-p="${p}"><div class="dp-mini"></div><span>${["awal", "25%", "50%", "75%", "akhir"][i]}</span></button>`).join("")}</div></div>
+      <aside class="dp-side"><p class="dp-k">Seek</p><div class="dp-read2" data-r></div>
+        <div class="dp-row2"><button type="button" class="dp-b" data-a="again">Ulang frame ini</button><button type="button" class="dp-b" data-a="rand">Seek acak</button></div>
+        <label class="dp-chk"><input type="checkbox" data-a="bad"> Boil pakai <code>Math.random()</code> tanpa seed</label>
+        <div class="dp-log" data-log></div>
+        <pre class="dp-code">tl = gsap.timeline({ paused: true })
+tl.to(proxy, { t: ${DUR}, duration: ${DUR},
+  ease: "none", onUpdate: () => draw(proxy.t) })
+window.__timelines["s01"] = tl</pre></aside></div>
+      ${cap("", "Saat render, video diputar ulang gambar demi gambar dari satu garis waktu, jadi pratinjau sama persis dengan hasil akhir. Tidak ada unsur acak atau jam sungguhan; getar halus pun dihitung dari nomor gambar, sehingga gambar yang sama selalu identik. Lembar kontak di awal, 25%, 50%, 75%, dan akhir dipakai untuk mengecek.")}</div>`;
+    const stage = $(".dp-stage", el), sl = $("[data-s]", el), tread = $("[data-t]", el), rr = $("[data-r]", el), fr = $("[data-fr]", el), bd = $("[data-bd]", el), log = $("[data-log]", el), playB = $("[data-a=play]", el);
+    fitStage(stage, 1280, 720);
+    const S = scene("village", { label: "Desa Tepi Pantai" }); stage.insertBefore(S.el, stage.firstChild);
+    let bad = false, last = [];
+    const draw = (t) => { last = drawEntry(S, Math.min(t, DUR - 1e-4), { rand: bad, plate: 1 }); };
+    const g = G(), proxy = { t: 0 };
+    const tl = g ? g.timeline({ paused: true }) : null;
+    if (tl) tl.to(proxy, { t: DUR, duration: DUR, ease: "none", onUpdate: () => draw(proxy.t) });
+    const seek = (t) => { if (tl) { tl.seek(t, false); draw(proxy.t); } else draw(t); };
+    $$(".dp-th", el).forEach((b) => { const m = $(".dp-mini", b), M = scene("village", { label: "Desa Tepi Pantai" }); m.appendChild(M.el); fitStage(m, 1280, 720); drawEntry(M, Math.min(+b.dataset.p * DUR, DUR - 1e-3), { plate: 1 }); });
+    let t = 48 / 24, playing = false;
+    const say = (html, ok) => { const d = mk("div", ok ? "ok" : "no", html); log.prepend(d); while (log.children.length > 4) log.lastChild.remove(); if (g) g.fromTo(d, { opacity: 0, x: -8 }, { opacity: 1, x: 0, duration: .35 }); };
+    const paint = () => {
+      seek(t); const f = Math.min(NF - 1, Math.floor(t * 24 + 1e-6)), h = hash(last);
+      if (!playing) sl.value = f;
+      tread.textContent = `frame ${String(f).padStart(3, "0")} / ${NF}`;
+      fr.textContent = `t ${nf(f / 24, 3)} s`;
+      rr.innerHTML = `<div><span>frame</span><b>${String(f).padStart(3, "0")}</b></div><div><span>t</span><b>${nf(f / 24, 3)} s</b></div><div><span>tq (on twos)</span><b>${nf(q12(f / 24), 3)}</b></div><div><span>gambar</span><b>${Math.floor(f / 2) + 1}</b></div><div class="w"><span>hash frame</span><b>${h}</b></div>`;
+      return h;
+    };
+    const check = () => {
+      const f = Math.floor(t * 24 + 1e-6), t0 = f / 24; t = t0; const a = paint();
+      const hs = [0, 1, 2].map(() => { seek(Math.random() * DUR); seek(t0); return hash(last); });
+      const same = hs.every((x) => x === a); bd.classList.toggle("bad", !same); $("span", bd).textContent = same ? "preview = render" : "preview ≠ render";
+      say(`frame ${String(f).padStart(3, "0")} · ${same ? `3/3 identik <b>${a}</b>` : `berbeda: ${[a, ...hs].map((x) => x.slice(0, 4)).join(" / ")}`}`, same);
+      paint();
+    };
+    sl.addEventListener("input", () => { playing = false; playB.textContent = "▶"; t = +sl.value / 24; paint(); });
+    el.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-a],[data-p]"); if (!b) return;
+      if (b.dataset.p != null) { playing = false; playB.textContent = "▶"; t = Math.min(DUR - 1 / 24, +b.dataset.p * DUR); paint(); check(); return; }
+      const a = b.dataset.a;
+      if (a === "play") { playing = !playing; b.textContent = playing ? "❚❚" : "▶"; if (playing && t >= DUR - .05) t = 0; }
+      if (a === "again") check();
+      if (a === "rand") { t = Math.floor(Math.random() * NF) / 24; paint(); check(); }
+    });
+    $("[data-a=bad]", el).addEventListener("change", (e) => { bad = e.target.checked; check(); });
+    paint(); setTimeout(check, 400);
+    visLoop(el, (dt) => { if (!playing) return; t += dt; if (t >= DUR) t = 0; paint(); sl.value = Math.floor(t * 24); });
+  });
+
+  /* ======================================================================
+     8 · POTONG  (§5.1) kit cutting visualised from LAYOUT boxes over kit-sheet.jpg
+     ====================================================================== */
+  // precomputed from assets/src/kit.png (1344 x 576) with tools/build_assets.py: box (px) and foreground area d > 28
+  const AREA = [24997, 26959, 57070, 72496, 47323, 28834, 56857, 27051];
+  Demos.add("potong", (el) => {
+    const SW = 1344, SH = 576;
+    const P = KIT.map((k, i) => { const [x0, y0, x1, y1] = k.box; const x = Math.round(x0 * SW), y = Math.round(y0 * SH); return { i, n: KN[i], x, y, w: Math.round(x1 * SW) - x, h: Math.round(y1 * SH) - y, a: AREA[i] }; });
+    const ORD = P.slice().sort((a, b) => Math.floor(a.y / 60) - Math.floor(b.y / 60) || a.x - b.x);
+    const STEPS = ["Latar = median piksel 3 px dari 4 tepi → rgb(254, 254, 254)", "d = jarak RGB ke latar; d > tol 28 = potongan", "Open 3 × 3, close 5 × 5, flood fill dari pojok, lubang diisi", "Simpan komponen ≥ minarea (600 px di 1K, 2400 px di 2K)", "Alpha = clip((d − 0,6 tol) / (0,8 tol), 0, 1) + Gaussian σ 0,7", "Urut pita baris (y // 60) lalu x → PNG + meta.json"];
+    const meta = `{\n "sheet": "kit.png",\n "size": [${SW}, ${SH}],\n "tol": 28,\n "pieces": [\n${ORD.map((p) => `  {"name": "${p.n}", "w": ${p.w}, "h": ${p.h}, "x": ${p.x}, "y": ${p.y}}`).join(",\n")}\n ]\n}`;
+    el.innerHTML = `<div class="dp dp-potong"><div class="dp-grid">
+      <div class="dp-main"><div class="dp-stage dp-kit"><div class="dp-world kw">
+          <img class="sheet" src="${IMG("kit-sheet.jpg")}" alt="Lembar kit kertas">
+          <div class="qc"></div>
+          ${P.map((p) => `<img class="kp" data-i="${p.i}" src="${IMG(`kit-${p.i}.webp`)}" alt="${p.n}" style="left:${p.x}px;top:${p.y}px;width:${p.w}px;height:${p.h}px">`).join("")}
+          <svg class="ov" viewBox="0 0 ${SW} ${SH}"><rect class="edge" x="1.5" y="1.5" width="${SW - 3}" height="${SH - 3}"/>${Array.from({ length: 9 }, (_, i) => `<path class="band" d="M0 ${(i + 1) * 60} H${SW}"/>`).join("")}${P.map((p) => `<rect class="bx" data-i="${p.i}" x="${p.x}" y="${p.y}" width="${p.w}" height="${p.h}" pathLength="100"/>`).join("")}</svg>
+          ${P.map((p) => `<div class="tag" data-i="${p.i}" style="left:${p.x}px;top:${p.y}px"><b>${ORD.indexOf(p)}</b>${p.n}<small>${p.w}×${p.h}</small></div>`).join("")}
+          <i class="scan"></i></div>
+        <div class="dp-hud bl"><i class="dp-dot"></i><span data-h></span></div></div>
+        <div class="dp-bar"><button type="button" class="dp-b gold" data-a="run">Pindai ulang</button>${seg([["sheet", "Lembar"], ["qc", "Lembar kontak QC"]], "sheet", "data-view")}<span class="dp-read" data-r>Ketuk potongan untuk melihat PNG beralpha</span></div></div>
+      <aside class="dp-side"><ol class="dp-steps">${STEPS.map((s, i) => `<li data-s="${i}">${s}</li>`).join("")}</ol>
+        <div class="dp-meta"><div class="dp-mh"><span>meta.json</span><button type="button" class="dp-b sm" data-a="copy">Salin</button></div><pre data-m></pre></div></aside></div>
+      ${cap("", "Kotak dan ukuran diambil dari pemotongan nyata lembar ini. Tiap potongan dicek di atas latar gelap supaya sisa putih, bintik, atau tepi kotor langsung terlihat. Celah yang memang disengaja, seperti sela pagar, dibuka kembali setelah lubang kecil ditutup.")}</div>`;
+    const stage = $(".dp-kit", el), world = $(".kw", el), hud = $("[data-h]", el), read = $("[data-r]", el), pre = $("[data-m]", el);
+    fitStage(stage, SW, SH);
+    const scan = $(".scan", el), qc = $(".qc", el), steps = $$(".dp-steps li", el), bxs = $$(".bx", el), tags = $$(".tag", el), kps = $$(".kp", el), bands = $$(".band", el), edgeR = $(".edge", el);
+    let view = "sheet", T = 0, run = true;
+    const RUN = 7.2, SC0 = .9, SC1 = 3.3;
+    const stepAt = (t) => (t < SC0 ? 0 : t < SC0 + .8 ? 1 : t < SC0 + 1.6 ? 2 : t < SC1 ? 3 : t < 4.2 ? 4 : 5);
+    bindSeg($("[data-view]", el), (v) => { view = v; stage.dataset.view = v; });
+    el.addEventListener("click", (e) => {
+      const a = e.target.closest("[data-a]")?.dataset.a;
+      if (a === "run") { T = 0; run = true; }
+      if (a === "copy") copyText(meta, e.target.closest("button"));
+      const k = e.target.closest(".kp,.tag"); if (k) { const p = P[+k.dataset.i]; kps.forEach((x) => x.classList.toggle("lift", x === kps[p.i] && !x.classList.contains("lift"))); read.textContent = `${p.n} · ${p.w}×${p.h} px · x ${p.x}, y ${p.y} · luas ${p.a.toLocaleString("id-ID")} px ≥ 2400 · pita ${Math.floor(p.y / 60)}`; }
+    });
+    let typed = -1;
+    visLoop(el, (dt) => {
+      if (run) { T += dt; if (T > RUN + 3) run = false; }
+      const t = T, st = stepAt(t);
+      steps.forEach((s, i) => { s.classList.toggle("on", i === st); s.classList.toggle("done", i < st); });
+      edgeR.style.opacity = t < SC0 ? (.5 + .5 * Math.sin(t * 10)).toFixed(2) : 0;
+      const sy = clamp((t - SC0) / (SC1 - SC0)) * SH;
+      scan.style.transform = `translateY(${sy.toFixed(1)}px)`; scan.style.opacity = t > SC0 && t < SC1 + .2 ? 1 : 0;
+      const qcOn = view === "qc" || (t > SC0 && t < 4.6);
+      const rev = view === "qc" ? SH : t >= 4.6 ? 0 : sy;
+      qc.style.clipPath = `inset(0 0 ${(SH - rev).toFixed(1)}px 0)`; qc.style.opacity = qcOn || view === "qc" ? 1 : 0;
+      kps.forEach((k, i) => { const p = P[i]; const inq = view === "qc" || (t < 4.6 && sy > p.y + p.h * .5); k.classList.toggle("vis", inq); });
+      bxs.forEach((b, i) => { const p = P[i], u = clamp((sy - (p.y + p.h)) / 120 + (t > SC1 ? 1 : 0)); b.style.strokeDashoffset = (100 - 100 * sm(u)).toFixed(1); });
+      tags.forEach((g, i) => { const p = P[i], on = sy >= p.y + p.h || t > SC1; g.classList.toggle("on", on); g.classList.toggle("num", t > 4.2); });
+      bands.forEach((b, i) => (b.style.opacity = t > 4.2 && t < RUN + 2 ? .9 : 0));
+      const ch = t < 4.6 ? 0 : Math.floor(clamp((t - 4.6) / 2.2) * meta.length);
+      if (ch !== typed) { typed = ch; pre.textContent = ch ? meta.slice(0, ch) + (ch < meta.length ? "▍" : "") : "// menunggu potongan…"; pre.scrollTop = pre.scrollHeight; }
+      hud.textContent = ["Ambil latar dari tepi", "Pindai d > tol 28", "Morfologi + isi lubang", "Komponen ≥ minarea", "Alpha lunak", "Urut y // 60, lalu x"][st] + (t > SC0 ? ` · ${ORD.filter((p) => sy >= p.y + p.h || t > SC1).length}/8 potongan` : "");
+    });
+  });
+
+  /* ======================================================================
+     9 · TANPA  a rich layered paper scene drawn 100% in code (canvas 2D).
+     AI kit pieces (kit-0 sun, kit-1 cloud, kit-2 far hills, kit-7 boat) are only an optional upgrade.
+     ====================================================================== */
+  Demos.add("tanpa", (el) => {
+    ensureStyle();
+    const LAY = [["Langit gradasi", ""], ["Matahari", 0], ["Awan kertas", 1], ["Bukit jauh", 2], ["Bukit dekat", ""], ["Ombak berlapis ×3", ""], ["Perahu kertas", 7], ["Meja kayu", ""], ["Cangkir kertas 3D", ""], ["Uap kopi", ""], ["Serat kertas + grain", ""]];
+    el.innerHTML = `<div class="dp dp-tanpa"><div class="dp-grid"><div class="dp-main">
+      <div class="dp-stage dp-r169 dp-tp-stage"><canvas aria-label="Adegan kolase kertas yang digambar dengan kode"></canvas>
+        <div class="dp-hud tl"><span data-h></span></div><div class="dp-hud br" data-c></div></div>
+      <div class="dp-bar">${seg([["kode", "Kode saja"], ["ai", "+ aset AI"]], "kode", "data-md")}<button type="button" class="dp-b on" data-a="twos">On twos</button><button type="button" class="dp-b on" data-a="grain">Grain</button>
+        <label class="dp-tp-light"><span>Arah cahaya</span><input type="range" min="-70" max="70" value="-38" data-l aria-label="Arah cahaya"></label></div>
+      </div>
+      <aside class="dp-side"><p class="dp-k">Lapisan adegan</p><ul class="dp-tp-ly">${LAY.map(([n, k], i) => `<li data-i="${i}"><span>${n}</span><em class="${k === "" ? "c" : "s"}">Kode</em></li>`).join("")}</ul>
+        <div class="dp-num"><div><span>File gambar</span><b data-n>0</b></div><div><span>Kredit AI</span><b data-k>0</b></div></div></aside></div>
+      ${cap("", "<b>Higgsfield tidak wajib.</b> Seluruh adegan ini digambar dengan kode saja: tekstur kertas, bentuk vektor, cangkir kertas 3D yang berputar dan diterangi dari satu arah, ombak berlapis, parallax, grain, dan bayangan, semuanya bergerak 12 gambar per detik. Aset AI dipakai untuk meningkatkan hasil, misalnya matahari, awan, bukit, dan perahu dari satu lembar kit, bukan syarat untuk mulai.")}</div>`;
+    const stage = $(".dp-tp-stage", el), cv = $("canvas", stage), g = cv.getContext("2d"), hud = $("[data-h]", el), hudC = $("[data-c]", el), lis = $$(".dp-tp-ly li", el), nEl = $("[data-n]", el), kEl = $("[data-k]", el), lightIn = $("[data-l]", el);
+    const RM = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const KI = {}; [0, 1, 2, 7].forEach((i) => { const im = new Image(); im.decoding = "async"; im.src = IMG(`kit-${i}.webp`); im.onload = () => (dirty = true); KI[i] = im; });
+    const ok = (im) => im && im.complete && im.naturalWidth > 0;
+    const grain = noiseCanvas(160, 41, 90, 255, 0), fib = fibre();
+    let W = 0, H = 0, sc = 1, mode = "kode", m = 0, twos = true, useGrain = true, L = -38 * D2R, t = RM ? 3.2 : 0, lastQ = -1, dirty = true;
+    const size = () => { const r = DPR(); W = stage.clientWidth; H = stage.clientHeight; if (!W || !H) return; cv.width = Math.round(W * r); cv.height = Math.round(H * r); sc = cv.width / 1280; dirty = true; };
+    fit(stage, size);
+    const ui = () => {
+      const ai = mode === "ai";
+      hud.textContent = ai ? "+ aset AI · 1 lembar kit, 4 potongan" : "Kode saja · 0 file gambar";
+      hudC.textContent = ai ? "±2,75 kredit" : "0 kredit";
+      nEl.textContent = ai ? "1 lembar" : "0"; kEl.textContent = ai ? "±2,75" : "0";
+      lis.forEach((li, i) => { const e = $("em", li), sw = LAY[i][1] !== ""; e.textContent = ai && sw ? "AI" : "Kode"; e.className = ai && sw ? "a" : sw ? "s" : "c"; li.classList.toggle("on", ai && sw); });
+    };
+    bindSeg($("[data-md]", el), (v) => { mode = v; ui(); dirty = true; });
+    el.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-a]"); if (!b) return;
+      if (b.dataset.a === "twos") { twos = !twos; b.classList.toggle("on", twos); b.textContent = twos ? "On twos" : "Halus"; }
+      if (b.dataset.a === "grain") { useGrain = !useGrain; b.classList.toggle("on", useGrain); }
+      dirty = true;
+    });
+    lightIn.addEventListener("input", () => { L = +lightIn.value * D2R; dirty = true; });
+    ui();
+
+    /* ---------- drawing ---------- */
+    const lx = () => Math.sin(L), lz = () => Math.cos(L);
+    const shade = (c, b) => `rgb(${Math.min(255, c[0] * b) | 0},${Math.min(255, c[1] * b) | 0},${Math.min(255, c[2] * b) | 0})`;
+    const shadow = (blur, dx, dy, a = .32) => { g.shadowColor = `rgba(38,24,10,${a})`; g.shadowBlur = blur * sc; g.shadowOffsetX = dx * sc; g.shadowOffsetY = dy * sc; };
+    const noShadow = () => { g.shadowColor = "transparent"; g.shadowBlur = 0; g.shadowOffsetX = g.shadowOffsetY = 0; };
+    const sdx = () => -lx() * 7;                                    // cast shadows away from the light
+    const ridge = (x0, x1, base, fn) => { g.beginPath(); g.moveTo(x0, 760); for (let x = x0; x <= x1; x += 16) g.lineTo(x, base + fn(x)); g.lineTo(x1, 760); g.closePath(); };
+    const wave = (x, y0, a, f, ph) => y0 + a * Math.sin(x * f + ph) + a * .45 * Math.sin(x * f * 2.3 - ph * 1.3 + 1.7);
+    const sunXY = () => [640 + lx() * 470, 150 + Math.abs(lx()) * 70];
+    const kitDraw = (i, cx, bottom, w, alpha, rot = 0, flip = false) => {
+      const im = KI[i]; if (!ok(im) || alpha <= 0) return;
+      const h = w * kitAR(i); g.save(); g.globalAlpha = alpha; g.translate(cx, bottom); g.rotate(rot); if (flip) g.scale(-1, 1);
+      shadow(14, sdx(), 8, .3); g.drawImage(im, -w / 2, -h, w, h); g.restore(); noShadow();
+    };
+    const cloud = (x, y, s, alpha) => {
+      if (alpha <= 0) return;
+      g.save(); g.globalAlpha = alpha; g.translate(x, y); g.scale(s, s); shadow(12, sdx(), 6, .22);
+      g.fillStyle = "#FBF8F1"; g.beginPath(); g.moveTo(-90, 0); g.arc(-58, -10, 34, Math.PI * .95, Math.PI * 1.65); g.arc(-8, -30, 46, Math.PI * 1.15, Math.PI * 1.9); g.arc(48, -14, 36, Math.PI * 1.3, Math.PI * 2.05); g.lineTo(90, 0); g.closePath(); g.fill();
+      noShadow(); g.fillStyle = "rgba(160,190,215,.22)"; g.fillRect(-88, -6, 176, 6); g.restore();
+    };
+    const paperBoat = (x, y, rot, alpha) => {
+      if (alpha <= 0) return;
+      const b = .78 + .22 * lx();
+      g.save(); g.globalAlpha = alpha; g.translate(x, y); g.rotate(rot); g.scale(1.35, 1.35); shadow(10, sdx(), 6, .3);
+      g.fillStyle = shade([246, 240, 226], .92 + .08 * lz()); g.beginPath(); g.moveTo(-12, -14); g.lineTo(6, -96); g.lineTo(36, -14); g.closePath(); g.fill();       // sail
+      noShadow(); g.fillStyle = shade([230, 220, 200], b * .9); g.beginPath(); g.moveTo(6, -96); g.lineTo(36, -14); g.lineTo(14, -14); g.closePath(); g.fill();
+      shadow(10, sdx(), 6, .3);
+      g.fillStyle = shade([240, 232, 214], 1 - .12 * lx()); g.beginPath(); g.moveTo(-78, -22); g.lineTo(78, -22); g.lineTo(50, 6); g.lineTo(-50, 6); g.closePath(); g.fill();       // hull
+      noShadow(); g.fillStyle = shade([215, 204, 182], .9 + .1 * lx()); g.beginPath(); g.moveTo(0, -22); g.lineTo(78, -22); g.lineTo(50, 6); g.lineTo(0, 6); g.closePath(); g.fill();
+      g.strokeStyle = "rgba(120,100,70,.35)"; g.lineWidth = 1.2; g.beginPath(); g.moveTo(-60, -22); g.lineTo(-30, 6); g.moveTo(60, -22); g.lineTo(30, 6); g.stroke();
+      g.restore();
+    };
+    // pseudo-3D paper cup: frustum lit per vertical strip, rotating print on the kraft sleeve
+    const band = (cx, y0, y1, r0, r1, e) => { g.beginPath(); g.moveTo(cx - r0, y0); g.lineTo(cx - r1, y1); g.ellipse(cx, y1, r1, r1 * e, 0, Math.PI, 0, true); g.lineTo(cx + r0, y0); g.ellipse(cx, y0, r0, r0 * e, 0, 0, Math.PI, false); g.closePath(); };
+    const litGrad = (cx, r, base, amb = .5, k = .55) => {
+      const gr = g.createLinearGradient(cx - r, 0, cx + r, 0);
+      for (let s = 0; s <= 1.0001; s += 1 / 14) { const xn = 2 * s - 1, ph = Math.asin(clamp(xn, -1, 1)), d = Math.max(0, Math.sin(ph) * lx() + Math.cos(ph) * lz()); gr.addColorStop(s, shade(base, (amb + k * d) * (1 - Math.pow(Math.abs(xn), 6) * .25))); }
+      return gr;
+    };
+    const cup = (cx, base, th) => {
+      const Hh = 250, rt = 92, rb = 66, e = .2, yt = base - Hh, rAt = (y) => rb + (rt - rb) * (base - y) / Hh;
+      // cast shadow on the table
+      g.save(); g.filter = `blur(${(9 * sc).toFixed(1)}px)`; g.fillStyle = "rgba(40,22,8,.42)"; g.beginPath(); g.ellipse(cx - lx() * 70, base + 6, rb + 26 + Math.abs(lx()) * 40, 15, 0, 0, Math.PI * 2); g.fill(); g.restore();
+      // body
+      band(cx, yt, base, rt, rb, e); g.fillStyle = litGrad(cx, rt, [248, 242, 230]); g.fill();
+      g.strokeStyle = "rgba(110,95,70,.4)"; g.lineWidth = 1.4; g.stroke();
+      // rotating seam
+      const sa = th + .9; if (Math.cos(sa) > .05) { g.strokeStyle = `rgba(150,130,100,${(.45 * Math.cos(sa)).toFixed(2)})`; g.lineWidth = 1.6; g.beginPath(); g.moveTo(cx + rt * Math.sin(sa), yt + rt * e * Math.cos(sa)); g.lineTo(cx + rb * Math.sin(sa), base + rb * e * Math.cos(sa)); g.stroke(); }
+      // kraft sleeve
+      const s0 = base - Hh * .66, s1 = base - Hh * .3, r0 = rAt(s0) + 2.5, r1 = rAt(s1) + 2.5;
+      shadow(6, 0, 3, .25); band(cx, s0, s1, r0, r1, e); g.fillStyle = litGrad(cx, r0, [206, 146, 88], .48, .6); g.fill(); noShadow();
+      // printed hearts that turn with the cup
+      for (let k = 0; k < 7; k++) {
+        const a = th + k * Math.PI * 2 / 7, c = Math.cos(a); if (c <= .08) continue;
+        const ym = (s0 + s1) / 2, rr = rAt(ym) + 2.5, px = cx + rr * Math.sin(a), py = ym + rr * e * c, d = Math.max(0, Math.sin(a) * lx() + c * lz());
+        g.save(); g.translate(px, py); g.scale(c, 1); g.fillStyle = shade([252, 240, 214], .7 + .35 * d); g.globalAlpha = .55 + .45 * c;
+        g.beginPath(); g.moveTo(0, 12); g.bezierCurveTo(-20, -2, -12, -18, 0, -8); g.bezierCurveTo(12, -18, 20, -2, 0, 12); g.fill(); g.restore();
+      }
+      g.strokeStyle = "rgba(255,236,200,.35)"; g.setLineDash([4, 5]); g.lineWidth = 1.2;
+      [s0 + 7, s1 - 7].forEach((yy) => { const rr = rAt(yy) + 2.5; g.beginPath(); g.ellipse(cx, yy, rr, rr * e, 0, 0, Math.PI, false); g.stroke(); }); g.setLineDash([]);
+      // lid: rim band, flat top, raised dome, sip hole that turns
+      const lr = rt + 7; shadow(8, sdx() * .6, 4, .25);
+      band(cx, yt - 16, yt + 2, lr, lr, e); g.fillStyle = litGrad(cx, lr, [250, 247, 240], .55, .5); g.fill(); noShadow();
+      const top = g.createRadialGradient(cx + lx() * 40, yt - 20, 10, cx, yt - 16, lr); top.addColorStop(0, "#FFFDF8"); top.addColorStop(1, "#DDD5C6");
+      g.fillStyle = top; g.beginPath(); g.ellipse(cx, yt - 16, lr, lr * e, 0, 0, Math.PI * 2); g.fill();
+      band(cx, yt - 30, yt - 18, lr * .78, lr * .86, e); g.fillStyle = litGrad(cx, lr * .86, [244, 239, 229], .55, .5); g.fill();
+      g.fillStyle = "#F7F3EA"; g.beginPath(); g.ellipse(cx, yt - 30, lr * .78, lr * .78 * e, 0, 0, Math.PI * 2); g.fill();
+      g.strokeStyle = "rgba(110,95,70,.35)"; g.lineWidth = 1.2; g.stroke();
+      const ha = th + 1.2; g.fillStyle = "#5B4732"; g.beginPath(); g.ellipse(cx + lr * .5 * Math.sin(ha), yt - 30 + lr * .5 * e * Math.cos(ha), 13, 3.4, 0, 0, Math.PI * 2); g.fill();
+      return yt - 34;
+    };
+    const steam = (cx, y, tq) => {
+      g.save(); g.lineCap = "round";
+      for (let i = 0; i < 3; i++) {
+        const u = (tq * .45 + i / 3) % 1, x0 = cx - 26 + i * 26, a = Math.sin(Math.PI * u) * .7;
+        g.strokeStyle = `rgba(255,252,244,${a.toFixed(3)})`; g.lineWidth = 10 - u * 5; g.beginPath();
+        for (let k = 0; k <= 12; k++) { const yy = y - u * 40 - k * 7, xx = x0 + Math.sin(k * .55 + tq * 2.4 + i) * (6 + k * .8); k ? g.lineTo(xx, yy) : g.moveTo(xx, yy); }
+        g.stroke();
+      }
+      g.restore();
+    };
+    const draw = (tq) => {
+      g.setTransform(sc, 0, 0, sc, 0, 0); noShadow(); g.globalAlpha = 1; g.globalCompositeOperation = "source-over";
+      const cam = Math.sin(tq * .22) * 26, P = (k) => cam * k;            // parallax camera sway
+      // sky
+      const sky = g.createLinearGradient(0, 0, 0, 480); sky.addColorStop(0, "#6FA6D6"); sky.addColorStop(.55, "#B9D8EA"); sky.addColorStop(1, "#F6E5C4");
+      g.fillStyle = sky; g.fillRect(0, 0, 1280, 720);
+      const [sx, sy] = sunXY();
+      const glow = g.createRadialGradient(sx, sy, 20, sx, sy, 300); glow.addColorStop(0, "rgba(255,240,200,.65)"); glow.addColorStop(1, "rgba(255,240,200,0)"); g.fillStyle = glow; g.fillRect(0, 0, 1280, 720);
+      // sun: code disc <-> kit piece
+      if (m < 1) { g.save(); g.globalAlpha = 1 - m; shadow(16, sdx(), 6, .25); g.fillStyle = "#FCE29C"; g.beginPath(); g.arc(sx + P(.1), sy, 62, 0, Math.PI * 2); g.fill(); noShadow(); g.fillStyle = "#FFF1C6"; g.beginPath(); g.arc(sx + P(.1) - 8, sy - 8, 44, 0, Math.PI * 2); g.fill(); g.restore(); }
+      kitDraw(0, sx + P(.1), sy + 80, 170, m);
+      // clouds drift (wrap), code shapes <-> kit cloud
+      [[180, 120, 1, .12], [760, 90, .75, .16], [1100, 210, .6, .2], [430, 230, .55, .18]].forEach(([x0, y, s, k], i) => {
+        const x = ((x0 + tq * 14 * (1 + k * 2) + P(k)) % 1560) - 140;
+        cloud(x, y, s, 1 - m); kitDraw(1, x, y + 10, 230 * s, m, 0, i % 2 === 1);
+      });
+      // far + near hills (code), far hills can be the kit piece
+      if (m < 1) { g.save(); g.globalAlpha = 1 - m; shadow(14, sdx(), -2, .22); g.fillStyle = "#9CC3A2"; ridge(-40, 760, 440, (x) => -60 * Math.exp(-Math.pow((x - 240 - P(.25)) / 200, 2)) - 40 * Math.exp(-Math.pow((x - 560 - P(.25)) / 160, 2)) + Math.sin(x * .03) * 3); g.fill(); g.restore(); noShadow(); }
+      kitDraw(2, 110 + P(.25), 490, 700, m); kitDraw(2, 795 + P(.25), 490, 700, m, 0, true);
+      shadow(16, sdx(), -3, .26); g.fillStyle = "#6FA37D"; ridge(-40, 520, 470, (x) => -46 * Math.exp(-Math.pow((x - 120 - P(.4)) / 170, 2)) - 18 * Math.exp(-Math.pow((x - 380 - P(.4)) / 90, 2))); g.fill(); noShadow();
+      // waves (three paper layers), the boat rides between mid and front
+      const WV = [[478, 6, .010, "#6AA6D2", .55, .6], [522, 9, .0085, "#4483BC", .8, .75], [574, 12, .007, "#2D659C", 1.05, .9]];
+      WV.forEach(([y0, a, f, col, sp, k], i) => {
+        const ph = tq * sp * 1.6 + i * 2;
+        shadow(12, 0, -4, .25); g.fillStyle = col; g.beginPath(); g.moveTo(-20, 760);
+        for (let x = -20; x <= 1300; x += 14) g.lineTo(x, wave(x + P(k) * 2, y0, a, f, ph)); g.lineTo(1300, 760); g.closePath(); g.fill(); noShadow();
+        g.strokeStyle = "rgba(240,248,252,.55)"; g.lineWidth = 2.6; g.beginPath(); for (let x = -20; x <= 1300; x += 14) { const y = wave(x + P(k) * 2, y0, a, f, ph) + 2; x === -20 ? g.moveTo(x, y) : g.lineTo(x, y); } g.stroke();
+        if (i === 1) {
+          const bx = 930 + Math.sin(tq * .35) * 60, by = wave(bx + P(k) * 2, y0, a, f, ph), sl = (wave(bx + 12 + P(k) * 2, y0, a, f, ph) - wave(bx - 12 + P(k) * 2, y0, a, f, ph)) / 24;
+          paperBoat(bx, by + 2, Math.atan(sl) * .9, 1 - m); kitDraw(7, bx, by + 14, 190, m, Math.atan(sl) * .9);
+        }
+      });
+      // table: warm paper strip with wood grain
+      shadow(18, 0, -6, .35); const tb = g.createLinearGradient(0, 612, 0, 720); tb.addColorStop(0, "#C58A55"); tb.addColorStop(1, "#8E5C35"); g.fillStyle = tb; g.fillRect(-10, 612, 1300, 120); noShadow();
+      g.fillStyle = "rgba(255,226,180,.35)"; g.fillRect(-10, 612, 1300, 3);
+      g.strokeStyle = "rgba(90,55,28,.28)"; g.lineWidth = 1.4; for (let i = 0; i < 6; i++) { const y = 632 + i * 15; g.beginPath(); for (let x = 0; x <= 1280; x += 40) g.lineTo(x, y + Math.sin(x * .011 + i * 1.7) * 2.6); g.stroke(); }
+      // hero cup + steam
+      const lidTop = cup(340, 676, tq * .65);
+      steam(340, lidTop - 6, tq);
+      // paper fibre, grain (boils on twos), soft vignette
+      g.save(); g.globalCompositeOperation = "multiply"; g.globalAlpha = .22; g.fillStyle = g.createPattern(fib, "repeat"); g.fillRect(0, 0, 1280, 720); g.restore();
+      if (useGrain) { const f = Math.floor(tq * 12), r = rng(f + 7); g.save(); g.globalCompositeOperation = "multiply"; g.globalAlpha = .14; const pt = g.createPattern(grain, "repeat"); g.translate(-(r() * 160) | 0, -(r() * 160) | 0); g.fillStyle = pt; g.fillRect(0, 0, 1280 + 160, 720 + 160); g.restore(); }
+      const vg = g.createRadialGradient(640, 360, 380, 640, 360, 820); vg.addColorStop(0, "rgba(10,8,20,0)"); vg.addColorStop(1, "rgba(10,8,20,.32)"); g.fillStyle = vg; g.fillRect(0, 0, 1280, 720);
+    };
+    visLoop(el, (dt) => {
+      if (!RM) t += dt;
+      const tgt = mode === "ai" ? 1 : 0;
+      if (m !== tgt) { m = RM ? tgt : clamp(m + (tgt > m ? 1 : -1) * dt / .6); dirty = true; }
+      const tq = twos ? q12(t) : t;
+      if (!W || (!dirty && tq === lastQ)) return;
+      lastQ = tq; dirty = false; draw(tq);
+    });
+  });
+})();

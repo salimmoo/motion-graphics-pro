@@ -1,0 +1,203 @@
+{
+ "id": "hands/bubble",
+ "name": "Bubble",
+ "name_id": "Gelembung Tulisan Tangan",
+ "category": "hands",
+ "description": {
+  "id": "Gelembung bicara coretan tangan (awan, bulat, atau kotak) dengan ekor yang bisa diarahkan ke titik mana pun: garis tepi tergambar, isi kertas memudar masuk, lalu teks tulisan tangan diketik per huruf. Bergoyang.",
+  "en": "Hand-drawn speech bubble (cloud, round or box) with a positionable tail: outline draws on, paper fill fades in, handwritten text types per character. Boils."
+ },
+ "tags": [
+  "tangan",
+  "gelembung",
+  "speech-bubble",
+  "awan",
+  "dialog",
+  "ketik",
+  "hands",
+  "bubble"
+ ],
+ "props": {
+  "text": {
+   "default": "Eh, ternyata begini caranya!",
+   "type": "text",
+   "hint": "Isi gelembung",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "shape": {
+   "default": "cloud",
+   "type": "enum",
+   "options": [
+    "cloud",
+    "round",
+    "box"
+   ],
+   "aliases": [
+    "bentuk"
+   ],
+   "option_aliases": {
+    "awan": "cloud",
+    "bulat": "round",
+    "kotak": "box"
+   }
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Pusat X (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 42,
+   "type": "number",
+   "hint": "Pusat Y (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "width": {
+   "default": 760,
+   "type": "number",
+   "hint": "Lebar gelembung (px pada 1080)",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "height": {
+   "default": 400,
+   "type": "number",
+   "hint": "Tinggi gelembung",
+   "aliases": [
+    "tinggi"
+   ]
+  },
+  "tail_x": {
+   "default": 36,
+   "type": "number",
+   "hint": "Ujung ekor X (%)",
+   "aliases": [
+    "ekor_x"
+   ]
+  },
+  "tail_y": {
+   "default": 77,
+   "type": "number",
+   "hint": "Ujung ekor Y (%)",
+   "aliases": [
+    "ekor_y"
+   ]
+  },
+  "texture": {
+   "default": "plain",
+   "type": "enum",
+   "options": [
+    "plain",
+    "soft",
+    "sharp",
+    "spray"
+   ],
+   "hint": "Tekstur goresan: polos, lembut (kabur halus), tajam (tipis), semprot (cat semprot berbintik)",
+   "aliases": [
+    "tekstur"
+   ],
+   "option_aliases": {
+    "polos": "plain",
+    "lembut": "soft",
+    "tajam": "sharp",
+    "semprot": "spray"
+   }
+  },
+  "color": {
+   "default": "#26211d",
+   "type": "color",
+   "hint": "Warna garis",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "fill_color": {
+   "default": "#fffdf6",
+   "type": "color",
+   "hint": "Warna isi kertas",
+   "aliases": [
+    "warna_isi"
+   ]
+  },
+  "text_color": {
+   "default": "#26211d",
+   "type": "color",
+   "hint": "Warna teks",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "thickness": {
+   "default": 8,
+   "type": "number",
+   "hint": "Tebal garis",
+   "aliases": [
+    "tebal"
+   ]
+  },
+  "font": {
+   "default": "Caveat:wght@700",
+   "type": "font",
+   "hint": "Google Font tulisan tangan: Caveat, Kalam, Patrick Hand, Permanent Marker"
+  },
+  "size": {
+   "default": 84,
+   "type": "number",
+   "hint": "Ukuran teks",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "start": {
+   "default": 0.2,
+   "type": "number",
+   "hint": "Detik mulai",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "kps": {
+   "default": 22,
+   "type": "number",
+   "hint": "Huruf per detik"
+  },
+  "wobble": {
+   "default": 1,
+   "type": "number",
+   "hint": "Kekuatan goyang/boil tangan (0 = diam)",
+   "aliases": [
+    "goyang"
+   ]
+  },
+  "seed": {
+   "default": 19,
+   "type": "number",
+   "hint": "Seed"
+  }
+ },
+ "duration": 4.5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "tangan/gelembung",
+  "hw-text-cloud"
+ ],
+ "example": {
+  "bg": "paper",
+  "font": [
+   "Caveat:wght@700"
+  ]
+ }
+}

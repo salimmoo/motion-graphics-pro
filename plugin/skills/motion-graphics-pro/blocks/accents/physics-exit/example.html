@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Physics Exit · block example accents/physics-exit</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;800&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="3.1">
+<div id="adegan" class="adegan ad-gelap"></div>
+<!-- Block accents/physics-exit · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-physics-exit" data-block="accents/physics-exit" data-start="0" data-duration="2.6" data-track-index="30" class="blk blk-accents-physics-exit">
+<script type="application/json" data-block-props>
+{"mode": "throw", "direction": "right", "text": "Tugas selesai", "sub": "Laporan bulanan sudah terkirim ke tim.", "exit_time": 0.45, "speed": 1500, "gravity": 4200, "width": 620, "height": 300, "card_color": "#ffffff", "text_color": "#16181d", "font": "Inter:wght@400;800", "size": 60, "position_x": 50, "position_y": 50}
+</script>
+<div class="blk-kt"><b class="blk-j"></b><span class="blk-s"></span></div>
+</div>
+<style>
+.blk-accents-physics-exit{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-accents-physics-exit .blk-kt{position:absolute;left:0;top:0;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;will-change:transform}
+.blk-accents-physics-exit .blk-j{font-weight:800;line-height:1.05;letter-spacing:-.01em}
+.blk-accents-physics-exit .blk-s{opacity:.65;margin-top:.5em;line-height:1.35}
+</style>
+<script>
+BLOCK.mount("blk-physics-exit", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, fs = function (v) { return (v * s).toFixed(1) + "px"; };
+  var kt = R.querySelector(".blk-kt"), W = P.width * s, H = P.height * s;
+  kt.style.cssText += ";width:" + W + "px;height:" + H + "px;padding:" + fs(48) + ";background:" + P.card_color + ";color:" + P.text_color + ";border-radius:" + fs(28) +
+    ";font-family:" + BLOCK.family(P.font) + ";box-shadow:0 " + fs(28) + " " + fs(60) + " rgba(0,0,0,.35)";
+  var J = kt.querySelector(".blk-j"), S = kt.querySelector(".blk-s");
+  J.textContent = P.text; J.style.fontSize = fs(P.size); S.textContent = P.sub; S.style.fontSize = fs(P.size * 0.42);
+  var cx = k.w * P.position_x / 100 - W / 2, cy = k.h * P.position_y / 100 - H / 2, dir = P.direction === "left" ? -1 : 1;
+  var tE = Math.max(0.6, k.dur * P.exit_time), ant = 0.16, g = P.gravity * s, eIn = gsap.parseEase("back.out(1.7)");
+  // pose bentuk tertutup per mode; tanpa memudar, terus sampai di luar bingkai
+  function pose(t) {
+    var x = 0, y = 0, r = 0, sc = 1;
+    if (t < 0.45) { var e = eIn(BLOCK.progress(t, 0.05, 0.45)); sc = 0.85 + 0.15 * e; y = (1 - e) * 40 * s; }
+    var a = BLOCK.smooth(BLOCK.progress(t, tE - ant, tE)) * (1 - BLOCK.progress(t, tE, tE + 0.06));   // antisipasi kecil
+    var u = Math.max(0, t - tE);
+    if (P.mode === "throw") {
+      x = -dir * 24 * s * a + dir * P.speed * s * u; y += -26 * s * a - 0.55 * P.speed * s * u + 0.5 * g * u * u; r = -dir * 4 * a + dir * 320 * u;
+    } else if (P.mode === "drop") {
+      y += -18 * s * a + 0.5 * g * u * u; x = dir * 60 * s * u; r = dir * (-2 * a + 90 * u * u + 20 * u);
+    } else {
+      var acc = P.speed * 2.4 * s; x = -dir * 30 * s * a + dir * 0.5 * acc * u * u + dir * P.speed * 0.25 * s * u;
+      r = dir * BLOCK.clamp(u * 20, 0, 6) - dir * 2 * a;
+    }
+    return { x: x, y: y, r: r, sc: sc, sk: P.mode === "slide" ? -dir * BLOCK.clamp(u * 25, 0, 8) : 0 };
+  }
+  BLOCK.onTime(tl, function (t) {
+    var p = pose(t);
+    kt.style.transform = "translate(" + (cx + p.x).toFixed(1) + "px," + (cy + p.y).toFixed(1) + "px) rotate(" + p.r.toFixed(2) + "deg) skewX(" + p.sk.toFixed(2) + "deg) scale(" + p.sc.toFixed(3) + ")";
+    kt.style.opacity = BLOCK.progress(t, 0.05, 0.2).toFixed(3);
+  }, k.dur);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 3.1;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 3.1);
+</script>
+</body>
+</html>

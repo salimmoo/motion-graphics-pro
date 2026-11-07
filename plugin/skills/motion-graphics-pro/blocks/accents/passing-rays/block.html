@@ -1,0 +1,70 @@
+<!-- Block accents/passing-rays · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="accents/passing-rays" data-start="0" data-duration="3.5" data-track-index="40" class="blk blk-accents-passing-rays">
+<script type="application/json" data-block-props>
+{"label": ["Unggah", "Proses", "Terbit"], "element": [], "position_x": 50, "position_y": 50, "width": 64, "size": 260, "curve": 16, "color": "#1d2333", "accent_color": "#5ce1ff", "font": "Inter:wght@600;700", "start": 0.4, "cross_duration": 2.2}
+</script>
+<svg class="blk-sv"></svg>
+</div>
+<style>
+.blk-accents-passing-rays{position:absolute;inset:0;pointer-events:none}
+.blk-accents-passing-rays .blk-sv{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.blk-accents-passing-rays .blk-node{position:absolute;display:flex;align-items:center;box-sizing:border-box;white-space:nowrap;font-weight:700}
+.blk-accents-passing-rays .blk-no{display:flex;align-items:center;justify-content:center;border-radius:50%;flex:none}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, root = k.root, sv = root.querySelector(".blk-sv"), t0 = +P.start || 0, D = +P.cross_duration || 2.2;
+  sv.setAttribute("viewBox", "0 0 " + k.w + " " + k.h);
+  var rr = root.getBoundingClientRect(), titik = [], nodes = [];
+  var host = (P.element || []).map(function (q) { return BLOCK.find(q); }).filter(Boolean);
+  if (host.length >= 2) {
+    // pakai elemen host: pusatnya jadi titik lintasan, elemennya yang terangkat
+    host.forEach(function (e) { var r = e.getBoundingClientRect(); titik.push([r.left - rr.left + r.width / 2, r.top - rr.top + r.height / 2]); nodes.push(e); });
+  } else {
+    var tegak = k.h > k.w * 1.1, n = Math.max(2, (P.label || []).length), W = P.size * s, H = W * 0.3;
+    for (var i = 0; i < n; i++) {
+      var f = n === 1 ? 0.5 : i / (n - 1), sp = P.width / 100;
+      var x = tegak ? k.w * P.position_x / 100 : k.w * (P.position_x / 100 + (f - 0.5) * sp);
+      var y = tegak ? k.h * (P.position_y / 100 + (f - 0.5) * sp * 0.75) : k.h * P.position_y / 100;
+      var nd = BLOCK.el("div", { class: "blk-node", style: "left:" + (x - W / 2) + "px;top:" + (y - H / 2) + "px;width:" + W + "px;height:" + H + "px;padding:0 " + Math.round(H * 0.25) +
+        "px;gap:" + Math.round(H * 0.25) + "px;border-radius:" + Math.round(H * 0.3) + "px;background:" + P.color + ";border:" + Math.max(1, Math.round(2 * s)) + "px solid rgba(255,255,255,.12);color:#e8ecf5;font-family:" +
+        BLOCK.family(P.font) + ";font-size:" + Math.round(H * 0.32) + "px;box-shadow:0 " + Math.round(8 * s) + "px " + Math.round(24 * s) + "px rgba(0,0,0,.35)" }, root);
+      BLOCK.el("span", { class: "blk-no", style: "width:" + Math.round(H * 0.56) + "px;height:" + Math.round(H * 0.56) + "px;background:rgba(255,255,255,.08);font-size:" + Math.round(H * 0.26) + "px" }, nd).textContent = i + 1;
+      BLOCK.el("span", null, nd).textContent = (P.label || [])[i] || "Langkah " + (i + 1);
+      titik.push([x, y]); nodes.push(nd);
+      tl.fromTo(nd, { opacity: 0, y: 20 * s }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, Math.max(0, t0 - 0.35) + i * 0.07);
+    }
+  }
+  // lintasan: kurva kubik antar titik dengan lengkung bergantian; panjang tiap ruas untuk waktu tiba
+  var d = "M" + titik[0][0] + " " + titik[0][1], ruas = [0];
+  for (var j = 1; j < titik.length; j++) {
+    var a = titik[j - 1], b = titik[j], dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy) || 1, sg = j % 2 ? 1 : -1, o = P.curve / 100 * L * sg;
+    var nx = -dy / L * o, ny = dx / L * o, seg = "C" + (a[0] + dx / 3 + nx) + " " + (a[1] + dy / 3 + ny) + " " + (a[0] + dx * 2 / 3 + nx) + " " + (a[1] + dy * 2 / 3 + ny) + " " + b[0] + " " + b[1];
+    var tmp = BLOCK.svg("path", { d: "M" + a[0] + " " + a[1] + seg }, sv); ruas.push(ruas[j - 1] + tmp.getTotalLength()); tmp.remove();
+    d += seg;
+  }
+  var trek = BLOCK.svg("path", { d: d, fill: "none", stroke: "rgba(255,255,255,.18)", "stroke-width": 2 * s, "stroke-dasharray": 6 * s + " " + 8 * s }, sv);
+  var halo = BLOCK.svg("path", { d: d, fill: "none", stroke: P.accent_color, "stroke-width": 14 * s, "stroke-linecap": "round", opacity: 0.35, style: "filter:blur(" + Math.round(6 * s) + "px)" }, sv);
+  var sinar = BLOCK.svg("path", { d: d, fill: "none", stroke: P.accent_color, "stroke-width": 5 * s, "stroke-linecap": "round" }, sv);
+  var kepala = BLOCK.svg("circle", { r: 9 * s, fill: "#ffffff", style: "filter:drop-shadow(0 0 " + Math.round(10 * s) + "px " + P.accent_color + ")" }, sv);
+  var Lt = sinar.getTotalLength(), panjang = Math.min(Lt * 0.22, 260 * s);
+  [sinar, halo].forEach(function (p) { p.style.strokeDasharray = panjang + " " + (Lt + panjang * 2); });
+  tl.fromTo(trek, { opacity: 0 }, { opacity: 1, duration: 0.4 }, Math.max(0, t0 - 0.3));
+  // elemen terangkat & menyala saat kepala sinar tiba, lalu tetap "terkunjungi"
+  nodes.forEach(function (nd, i) {
+    var tiba = Math.max(t0 + D * ruas[i] / (Lt + panjang), host.length >= 2 ? 0 : Math.max(0, t0 - 0.35) + i * 0.07 + 0.55);
+    tl.to(nd, { y: -12 * s, scale: 1.05, borderColor: P.accent_color, boxShadow: "0 " + Math.round(18 * s) + "px " + Math.round(40 * s) + "px " + BLOCK.rgba(P.accent_color, 0.45), filter: "brightness(1.25)", duration: 0.3, ease: "back.out(2)" }, tiba - 0.05)
+      .to(nd, { y: -5 * s, scale: 1.02, filter: "brightness(1.1)", boxShadow: "0 " + Math.round(10 * s) + "px " + Math.round(26 * s) + "px " + BLOCK.rgba(P.accent_color, 0.25), duration: 0.5, ease: "power2.out" }, tiba + 0.3);
+  });
+  BLOCK.onTime(tl, function (t) {
+    var p = BLOCK.clamp((t - t0) / D, 0, 1), dpos = p * (Lt + panjang);
+    var off = (panjang - dpos).toFixed(2);
+    sinar.style.strokeDashoffset = off; halo.style.strokeDashoffset = off;
+    var vis = t >= t0 && p < 1;
+    sinar.style.opacity = vis ? 1 : 0; halo.style.opacity = vis ? 0.35 : 0;
+    var hp = sinar.getPointAtLength(BLOCK.clamp(dpos, 0, Lt));
+    kepala.setAttribute("cx", hp.x.toFixed(1)); kepala.setAttribute("cy", hp.y.toFixed(1));
+    kepala.style.opacity = vis && dpos <= Lt ? 1 : 0;
+  }, k.dur);
+}, { font: true });
+</script>

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Orb · block example backgrounds/orb</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="8.5">
+
+<!-- Block backgrounds/orb · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-orb" data-block="backgrounds/orb" data-start="0" data-duration="8" data-track-index="0" class="blk blk-backgrounds-orb">
+<script type="application/json" data-block-props>
+{"material": "chrome", "color1": "", "color2": "", "bg": "#000000", "size": 0.34, "speed": 1, "resolution": 0.5}
+</script>
+</div>
+<style>
+.blk-backgrounds-orb{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-backgrounds-orb canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+</style>
+<script>
+BLOCK.mount("blk-orb", function (k) {
+  var P = k.P;
+  var UMUM = [
+    "vec3 rotY(vec3 d,float a){float c=cos(a),s=sin(a);return vec3(c*d.x+s*d.z,d.y,-s*d.x+c*d.z);}",
+    "vec3 studio(vec3 d){vec2 a=vec2(d.x+.38,d.y-.62);float sb=smoothstep(.34,.24,abs(a.x))*smoothstep(.2,.12,abs(a.y));",
+    "vec2 b=vec2(d.x-.72,d.y-.05);float sb2=smoothstep(.12,.05,abs(b.x))*smoothstep(.55,.4,abs(b.y));",
+    "float lan=.05+.16*smoothstep(-.05,.95,d.y)+.07*smoothstep(0.,-.7,d.y)+.32*exp(-pow((d.y-.04)/.09,2.));return vec3(sb*1.7+sb2*.9+lan);}",
+    "float hT;",
+    "vec3 env(vec3 d){return studio(rotY(d,.35*sin(hT*.25)));}",
+    "vec3 therm(float x){x=clamp(x,0.,1.);vec3 c=mix(vec3(.02,0.,.06),vec3(.35,.05,.55),smoothstep(0.,.28,x));c=mix(c,vec3(.9,.1,.15),smoothstep(.25,.5,x));",
+    "c=mix(c,vec3(1.,.55,0.),smoothstep(.5,.72,x));c=mix(c,vec3(1.,.95,.35),smoothstep(.72,.88,x));return mix(c,vec3(1.),smoothstep(.9,1.,x));}",
+    "vec3 SH(vec3 n,vec2 s,float t);float R(float a,float t);vec3 LUAR(vec2 p,float q,float a,float t);",
+    "void main(){float t=u_t*u_kec;hT=t;vec2 p=(gl_FragCoord.xy-.5*u_res)/(min(u_res.x,u_res.y)*u_uk);p.y-=.025*sin(t*.7);",
+    "float a=atan(p.y,p.x);float Rr=R(a,t);float q=length(p)/Rr;vec2 uv=gl_FragCoord.xy/u_res;",
+    "vec3 col=u_lat*(1.-.25*length(uv-.5));col+=vec3(.02)*exp(-pow(length(p*vec2(.6,3.)+vec2(0.,3.2)),2.));",
+    "if(q<1.){vec2 s=p/Rr;vec3 n=normalize(vec3(s,sqrt(max(1.-dot(s,s),0.))));vec3 c=SH(n,s,t);",
+    "float aa=clamp((1.-q)*u_res.y*u_uk*Rr*.5,0.,1.);col=mix(col,c,aa);}",
+    "col+=LUAR(p,q,a,t);col=1.-exp(-col*1.6);col+=(h21(gl_FragCoord.xy+fract(u_t))-.5)/128.;gl_FragColor=vec4(col,1.);}",
+    "vec3 L=normalize(vec3(-.5,.62,.6));",
+    "float dif(vec3 n){return max(dot(n,L),0.);}",
+    "float spc(vec3 n,float k){return pow(max(dot(reflect(-L,n),vec3(0.,0.,1.)),0.),k);}",
+    "vec3 RF(vec3 n){return reflect(vec3(0.,0.,-1.),n);}",
+    "float FR(vec3 n,float k){return pow(1.-max(n.z,0.),k);}",
+    "vec3 gang(vec2 s,float t,float k,float f){return vec3(vnoise(s*f+vec2(t*.6,0.))-.5,vnoise(s*f+vec2(7.,-t*.5))-.5,0.)*k;}"
+  ].join("\n");
+  // tiap bahan: [warna1, warna2 bawaan, R (siluet), LUAR (cahaya luar), SH (shading)]
+  var BAHAN = {
+    "chrome": ["#e8ecf2", "#9aa4b5", "float R(float a,float t){return 1.;}", "vec3 LUAR(vec2 p,float q,float a,float t){return vec3(0.);}", "vec3 SH(vec3 n,vec2 s,float t){vec3 r=RF(n);return env(r)*u_c1*.95+u_c2*.04*(1.-FR(n,1.))+spc(n,120.)*.6;}"],
+    "plastic": ["#f4f4f2", "#cfd6e0", "float R(float a,float t){return 1.;}", "vec3 LUAR(vec2 p,float q,float a,float t){return vec3(0.);}", "vec3 SH(vec3 n,vec2 s,float t){vec3 b=u_c1*(.1+.82*dif(n))+u_c2*.08*n.y;return b+spc(n,70.)*.9+env(RF(n))*FR(n,3.)*.55;}"],
+    "obsidian": ["#ff4fb0", "#2ee6ff", "float R(float a,float t){return 1.;}", "vec3 LUAR(vec2 p,float q,float a,float t){return vec3(0.);}", "vec3 SH(vec3 n,vec2 s,float t){float f=FR(n,1.6);vec3 ir=mix(u_c1,u_c2,.5+.5*sin(n.x*3.2+n.y*2.4+t*.5));return vec3(.012,.012,.02)+env(RF(n))*.32*(.25+f)+ir*f*1.25+spc(n,90.)*mix(u_c1,u_c2,.5)*.8;}"],
+    "holographic": ["#ffffff", "#b8c4ff", "float R(float a,float t){return 1.;}", "vec3 LUAR(vec2 p,float q,float a,float t){return vec3(0.);}", "vec3 SH(vec3 n,vec2 s,float t){vec3 r=RF(n);float h=.55*(r.x+r.y)+.9*n.z+t*.07+.08*vnoise(s*5.);return hsv2rgb(vec3(h,.5,1.))*u_c1*(.35+.6*dif(n))+spc(n,60.)+env(r)*.25*u_c2;}"],
+    "thin-film": ["#ffffff", "#0a0c14", "float R(float a,float t){return 1.;}", "vec3 LUAR(vec2 p,float q,float a,float t){float g=exp(-max(q-1.,0.)*30.)*step(1.,q);return hsv2rgb(vec3(a*.16+t*.05,.6,1.))*g*.25;}", "vec3 SH(vec3 n,vec2 s,float t){float f=FR(n,1.3);float h=f*1.3+t*.05+.18*vnoise(s*3.+vec2(t*.2,0.));return u_c2+env(RF(n))*.14+hsv2rgb(vec3(h,.7,1.))*u_c1*f*1.15+spc(n,90.)*.7;}"],
+    "ice": ["#6fb8ff", "#0b2a66", "float R(float a,float t){return 1.;}", "vec3 LUAR(vec2 p,float q,float a,float t){return vec3(0.);}", "vec3 SH(vec3 n,vec2 s,float t){vec3 c=mix(u_c2,u_c1,.2+.7*dif(n))+env(RF(n))*FR(n,2.)*.45;float g=.95-.65*exp(-t*.22);float fr=fbm(s*5.+n.z*2.);float e=1.-n.z+.35*(fr-.5);float m=smoothstep(1.-g-.06,1.-g+.06,e);vec3 ic=vec3(.82,.92,1.)*(.75+.45*vnoise(s*18.))*(.55+.5*dif(n));return mix(c,ic,m)+spc(n,80.)*.7;}"],
+    "thermal": ["#ffffff", "#ff3a1f", "float R(float a,float t){return 1.;}", "vec3 LUAR(vec2 p,float q,float a,float t){return q>1.?u_c2*exp(-(q-1.)*7.)*.35:vec3(0.);}", "vec3 SH(vec3 n,vec2 s,float t){float v=fbm(s*2.2+vec2(t*.25,-t*.18)+n.z*1.5)*(.55+.55*n.z)+.15*n.z;return therm(v)*u_c1*1.1+spc(n,60.)*.25;}"],
+    "hologram": ["#8fd8ff", "#2a6cff", "float R(float a,float t){return 1.;}", "vec3 LUAR(vec2 p,float q,float a,float t){return q>1.?u_c1*exp(-(q-1.)*12.)*.3:vec3(0.);}", "vec3 SH(vec3 n,vec2 s,float t){float f=FR(n,2.);float sc=.5+.5*sin(s.y*90.-t*6.);float rg=smoothstep(.86,1.,sin(n.y*16.+t*2.));float fl=.82+.18*h21(vec2(floor(t*14.),3.));return (u_c2*.08+u_c1*(.12+f*.95+.18*sc+rg*.55))*fl;}"],
+    "nebula": ["#ff5fb4", "#3b5bff", "float R(float a,float t){return 1.;}", "vec3 LUAR(vec2 p,float q,float a,float t){return q>1.?u_c2*exp(-(q-1.)*14.)*.35:vec3(0.);}", "vec3 SH(vec3 n,vec2 s,float t){float lo=atan(n.x,n.z)+t*.15;vec2 g=vec2(lo*1.4,asin(n.y)*2.);float w=fbm(g*1.6+vec2(t*.05,0.));float v=fbm(g*2.+w*2.2);vec3 c=mix(u_c2*.6,u_c1,smoothstep(.35,.75,v))*smoothstep(.2,.7,v)*1.5;c*=.55+.45*smoothstep(.3,.6,w);float st=step(.985,h21(floor(g*70.)))*(.6+.4*sin(t*3.+h21(floor(g*70.)+3.)*40.));return c+vec3(st)+u_c2*FR(n,2.5)*.6;}"],
+    "goo": ["#4dff6e", "#0a5c22", "float R(float a,float t){return 1.+.028*sin(5.*a+t*1.3)+.018*sin(9.*a-t*2.1);}", "vec3 LUAR(vec2 p,float q,float a,float t){return vec3(0.);}", "vec3 SH(vec3 n,vec2 s,float t){n=normalize(n+gang(s,t,.55,3.5));return u_c2*.25+u_c1*(.12+.7*dif(n))+spc(n,90.)*1.2+env(RF(n))*FR(n,2.5)*.5+u_c1*.18*(1.-n.z);}"],
+    "liquid-metal": ["#e6ebf2", "#8a93a6", "float R(float a,float t){return 1.+.02*sin(6.*a+t*1.6)+.012*sin(11.*a-t*2.4);}", "vec3 LUAR(vec2 p,float q,float a,float t){return vec3(0.);}", "vec3 SH(vec3 n,vec2 s,float t){n=normalize(n+gang(s+vec2(0.,t*.15),t*1.4,.75,2.6));vec3 r=RF(n);return env(r)*u_c1+u_c2*.05+spc(n,140.)*.8;}"],
+    "water": ["#7ec8ff", "#04294f", "float R(float a,float t){return 1.+.01*sin(7.*a+t*2.);}", "vec3 LUAR(vec2 p,float q,float a,float t){return vec3(0.);}", "vec3 SH(vec3 n,vec2 s,float t){vec3 w=vec3(sin(s.x*16.+t*2.2+3.*vnoise(s*3.+t*.4))*.12,cos(s.y*13.-t*1.8+3.*vnoise(s*3.-t*.3))*.12,0.);n=normalize(n+w);vec3 r=RF(n);vec3 sky=mix(vec3(.85,.93,1.),u_c1,smoothstep(-.1,.8,r.y))*(r.y>-.1?1.:.3);float f=.15+.85*FR(n,2.);return mix(u_c2,sky,f*.85)+spc(n,160.)*1.2;}"],
+    "rim-light": ["#a24bff", "#29e3ff", "float R(float a,float t){return 1.;}", "vec3 LUAR(vec2 p,float q,float a,float t){if(q<1.)return vec3(0.);float l1=pow(.5+.5*cos(a-t*1.8),8.),l2=pow(.5+.5*cos(a-t*1.8+3.1416),8.);return (u_c1*l1+u_c2*l2)*exp(-(q-1.)*16.)*.9;}", "vec3 SH(vec3 n,vec2 s,float t){float a=atan(s.y,s.x);float l1=pow(.5+.5*cos(a-t*1.8),8.),l2=pow(.5+.5*cos(a-t*1.8+3.1416),8.);float e=FR(n,4.);return vec3(.01)+.03*dif(n)+(u_c1*(l1+.08)+u_c2*(l2+.08))*e*2.2;}"],
+    "blob": ["#ff7a6b", "#ff4fa0", "float R(float a,float t){return 1.+.085*sin(3.*a+t*.7)+.05*sin(5.*a-t*.9+1.)+.04*sin(2.*a+t*1.1+2.);}", "vec3 LUAR(vec2 p,float q,float a,float t){return vec3(0.);}", "vec3 SH(vec3 n,vec2 s,float t){vec3 b=mix(u_c2,u_c1,.5+.5*s.y);return b*(.28+.7*dif(n))+spc(n,25.)*vec3(1.,.88,.72)*.65+b*FR(n,2.)*.25;}"]
+  };
+  var B = BAHAN[P.material] || BAHAN.chrome;
+  var c1 = P.color1 || B[0], c2 = P.color2 || B[1];
+  var cv = BLOCK.el("canvas", null, k.root);
+  var r = Math.max(0.1, Math.min(1, +P.resolution || 0.5));
+  cv.width = Math.round(k.w * r); cv.height = Math.round(k.h * r);
+  var sh = BLOCK.shader(cv, UMUM + "\n" + B[2] + "\n" + B[3] + "\n" + B[4], { u_c1: BLOCK.vec3(c1), u_c2: BLOCK.vec3(c2), u_lat: BLOCK.vec3(P.bg), u_uk: +P.size, u_kec: +P.speed });
+  if (!sh.ok) { cv.remove(); k.root.style.background = "radial-gradient(circle at 42% 38%, #fff 0, " + c1 + " " + (P.size * 18) + "%, " + c2 + " " + (P.size * 60) + "%, " + P.bg + " " + (P.size * 62) + "%)"; return; }
+  BLOCK.onTime(k.tl, function (t) { sh.draw(t); }, k.dur);
+});
+</script>
+</div>
+<script>
+  window.__duration = 8.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 8.5);
+</script>
+</body>
+</html>

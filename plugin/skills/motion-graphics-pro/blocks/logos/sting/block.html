@@ -1,0 +1,65 @@
+<!-- Block logos/sting · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="logos/sting" data-start="0" data-duration="3" data-track-index="20" class="blk blk-logos-sting">
+<script type="application/json" data-block-props>
+{"brand_name": "LANGKAH", "shape": "circle", "color": "#ffffff", "accent_color": "#ff5a36", "bg": "#0d0f14", "font": "Archivo Black", "size": 170, "stomp_time": 0.55, "flash": true, "ring": true}
+</script>
+<div class="blk-kilat"></div>
+<div class="blk-tengah"><div class="blk-lock"></div></div>
+</div>
+<style>
+.blk-logos-sting{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-logos-sting .blk-tengah{position:absolute;left:50%;top:50%;width:max-content;transform:translate(-50%,-50%)}
+.blk-logos-sting .blk-lock{display:flex;align-items:center;gap:calc(var(--s)*34px);white-space:nowrap;line-height:1}
+.blk-logos-sting .blk-tanda{width:1em;height:1em;flex:none}
+.blk-logos-sting .blk-tanda svg{width:100%;height:100%;display:block}
+.blk-logos-sting .blk-wm{letter-spacing:-.02em}
+.blk-logos-sting .blk-cin{position:absolute;left:50%;top:50%;border-radius:50%;box-sizing:border-box}
+.blk-logos-sting .blk-kilat{position:absolute;inset:0;background:#fff;opacity:0}
+</style>
+<script>
+(function () {
+// tunggu font benar-benar termuat sebelum mengukur teks (stylesheet Google Fonts + FontFace)
+function blkTungguFont(spek, berat) {
+  var fam = String(spek || "").split(":")[0];
+  if (!fam || !document.fonts || !document.fonts.load) return Promise.resolve();
+  var ls = Array.prototype.filter.call(document.querySelectorAll('link[href*="fonts.googleapis"]'), function (l) { return l.href.indexOf(fam.replace(/ /g, "+")) >= 0; });
+  return Promise.all(ls.map(function (l) { return l.sheet ? 0 : new Promise(function (r) { l.addEventListener("load", r); l.addEventListener("error", r); }); }))
+    .then(function () { return document.fonts.load((berat || 700) + ' 64px "' + fam + '"'); }).catch(function () {});
+}
+BLOCK.mount("__ID__", function (k) {
+  return blkTungguFont(k.P.font, 400).then(function () { bangun(k); });
+}, { font: true });
+function bangun(k) {
+  var P = k.P, tl = k.tl, s = k.s, D = k.dur, E = BLOCK.el, R = k.root, T = +P.stomp_time;
+  if (P.bg) R.style.background = P.bg;
+  R.style.cssText += ";--s:" + s;
+  var lock = R.querySelector(".blk-lock"), tengah = R.querySelector(".blk-tengah"), kilat = R.querySelector(".blk-kilat");
+  lock.style.cssText = "font-family:" + BLOCK.family(P.font) + ";font-size:" + Math.round(P.size * s) + "px;color:" + P.color;
+  var BENTUK = {
+    circle: '<circle cx="50" cy="50" r="46" fill="W"/><circle cx="64" cy="36" r="16" fill="A"/>',
+    box: '<rect x="8" y="8" width="84" height="84" rx="20" fill="W"/><rect x="30" y="30" width="40" height="40" rx="8" fill="A"/>',
+    triangle: '<path d="M50 6L95 90H5z" fill="W"/><path d="M50 46l18 34H32z" fill="A"/>',
+    leaf: '<path d="M10 90C10 40 40 10 90 10c0 50-30 80-80 80z" fill="W"/><path d="M18 82L70 30" stroke="A" stroke-width="8" stroke-linecap="round"/>'
+  };
+  if (BENTUK[P.shape]) E("div", { class: "blk-tanda" }, lock, '<svg viewBox="0 0 100 100">' + BENTUK[P.shape].replace(/W/g, P.color).replace(/A/g, P.accent_color) + "</svg>");
+  var wm = E("div", { class: "blk-wm" }, lock); wm.textContent = P.brand_name;
+  // hentak: masuk dari skala besar + blur, mendarat tepat di T dengan sedikit pantulan
+  tl.fromTo(lock, { scale: 3.2, autoAlpha: 0, filter: "blur(18px)" }, { scale: 1, autoAlpha: 1, filter: "blur(0px)", duration: T, ease: "power4.in" }, 0)
+    .to(lock, { scale: 0.96, duration: 0.07, ease: "power2.out" }, T)
+    .to(lock, { scale: 1, duration: 0.4, ease: "back.out(3)" }, T + 0.07);
+  // guncang kecil saat tumbukan, deterministik
+  var ac = k.random;
+  for (var i = 0; i < 4; i++) tl.to(lock, { x: ac.range(-1, 1) * 14 * s * (1 - i / 4), y: ac.range(-1, 1) * 10 * s * (1 - i / 4), duration: 0.04, ease: "none" }, T + i * 0.04);
+  tl.to(lock, { x: 0, y: 0, duration: 0.06 }, T + 0.16);
+  if (P.ring) {
+    var d0 = lock.offsetWidth * 0.5, cin = E("div", { class: "blk-cin", style: "width:" + d0 + "px;height:" + d0 + "px;margin:" + (-d0 / 2) + "px 0 0 " + (-d0 / 2) + "px;border:" + Math.round(10 * s) + "px solid " + P.accent_color }, R);
+    R.insertBefore(cin, tengah);
+    tl.fromTo(cin, { scale: 0.3, autoAlpha: 0 }, { scale: 0.32, autoAlpha: 1, duration: 0.01 }, T)
+      .to(cin, { scale: 3.4, borderWidth: 1, autoAlpha: 0, duration: 0.9, ease: "power3.out" }, T + 0.01);
+  }
+  if (P.flash) tl.fromTo(kilat, { opacity: 0 }, { opacity: 0.95, duration: 0.01 }, T).to(kilat, { opacity: 0, duration: 0.12, ease: "power1.in" }, T + 0.045);
+  // tahan: nyaris diam (drift 1%) supaya tetap hidup
+  tl.fromTo(lock, { scale: 1 }, { scale: 1.012, duration: Math.max(0.3, D - T - 0.5), ease: "none", immediateRender: false }, T + 0.47);
+}
+})();
+</script>

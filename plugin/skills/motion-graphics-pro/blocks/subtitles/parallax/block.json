@@ -1,0 +1,136 @@
+{
+ "id": "subtitles/parallax",
+ "name": "Parallax",
+ "name_id": "Subtitle Paralaks",
+ "category": "subtitles",
+ "description": {
+  "id": "Teks raksasa berada di belakang sosok: siluet sosok disalin sebagai topeng di atas teks, lapis garis luar bergerak lebih lambat untuk kedalaman, kata masuk dengan regangan vertikal.",
+  "en": "Giant text sits behind the subject: the subject silhouette is duplicated as a mask above the text, an outline layer drifts slower for depth, and words land with a vertical stretch."
+ },
+ "tags": [
+  "subtitle",
+  "caption",
+  "paralaks",
+  "belakang-sosok",
+  "3d",
+  "lapisan",
+  "subtitles",
+  "parallax"
+ ],
+ "props": {
+  "text": {
+   "default": "Mimpi besar dimulai dari sini",
+   "type": "text",
+   "hint": "Teks subtitle; *kata* = kata kunci (bila didukung). Dipakai bila kata kosong",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "words": {
+   "default": [],
+   "type": "timed-words",
+   "hint": "[{teks, mulai, akhir}] dari transkrip; kosong = dihitung dari teks",
+   "aliases": [
+    "kata"
+   ]
+  },
+  "kps": {
+   "default": 1.6,
+   "type": "number",
+   "hint": "Kata per detik bila tanpa transkrip"
+  },
+  "max_words": {
+   "default": 2,
+   "type": "number",
+   "hint": "Maksimum kata per halaman subtitle",
+   "aliases": [
+    "maks_kata"
+   ]
+  },
+  "font": {
+   "default": "Anton:wght@400",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "size": {
+   "default": 250,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "bottom": {
+   "default": 24,
+   "type": "number",
+   "hint": "Jarak dari bawah (%)",
+   "aliases": [
+    "bawah"
+   ]
+  },
+  "uppercase": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "huruf_besar"
+   ]
+  },
+  "figure": {
+   "default": "#adegan .sosok",
+   "type": "selector",
+   "hint": "Selektor elemen sosok yang disalin sebagai topeng (kosong = tanpa topeng)",
+   "aliases": [
+    "sosok"
+   ]
+  },
+  "layer_color": {
+   "default": "#ffd23f",
+   "type": "color",
+   "aliases": [
+    "warna_lapis"
+   ]
+  },
+  "stretch": {
+   "default": 2.4,
+   "type": "number",
+   "hint": "Regangan vertikal awal",
+   "aliases": [
+    "regang"
+   ]
+  },
+  "depth": {
+   "default": 1,
+   "type": "number",
+   "hint": "Besar gerak paralaks",
+   "aliases": [
+    "kedalaman"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "subtitle/paralaks",
+  "caption-parallax-layers"
+ ],
+ "example": {
+  "bg": "photo",
+  "aspect": "9:16",
+  "font": [
+   "Anton:wght@400"
+  ]
+ }
+}

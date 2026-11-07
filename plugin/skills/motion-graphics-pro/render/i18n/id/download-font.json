@@ -1,0 +1,8 @@
+{
+  "no face for {}": "tidak ada face untuk {}",
+  "not WOFF2: {}": "bukan WOFF2: {}",
+  "licence not found for {}": "lisensi tidak ditemukan untuk {}",
+  "{}: {} files, {} KB, {}": "{}: {} berkas, {} KB, {}",
+  "unknown family: {}": "keluarga tidak dikenal: {}",
+  "done: {} families, {} MB -> {}": "selesai: {} keluarga, {} MB -> {}"
+}

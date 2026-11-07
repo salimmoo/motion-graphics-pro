@@ -1,0 +1,76 @@
+{
+ "id": "backgrounds/marble",
+ "name": "Marble",
+ "name_id": "Marmer",
+ "category": "backgrounds",
+ "description": {
+  "id": "Urat tinta gelap berkelok di atas marmer putih dan bergeser perlahan. Shader WebGL dengan domain warping.",
+  "en": "Ink-dark veins wind through white marble and slowly shift. WebGL shader with domain warping."
+ },
+ "tags": [
+  "latar",
+  "background",
+  "marmer",
+  "marble",
+  "shader",
+  "webgl",
+  "tekstur",
+  "mewah",
+  "backgrounds"
+ ],
+ "props": {
+  "base_color": {
+   "default": "#f4f1ec",
+   "type": "color",
+   "aliases": [
+    "warna_dasar"
+   ]
+  },
+  "vein_color": {
+   "default": "#16161c",
+   "type": "color",
+   "aliases": [
+    "warna_urat"
+   ]
+  },
+  "scale": {
+   "default": 2,
+   "type": "number",
+   "hint": "Kerapatan urat",
+   "aliases": [
+    "skala"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali kecepatan gerak",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "resolution": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Skala resolusi shader (0.25-1); kecil = lebih cepat",
+   "aliases": [
+    "resolusi"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "latar/marmer",
+  "marble"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

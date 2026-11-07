@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Tunnel · block example backgrounds/tunnel</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="8.5">
+
+<!-- Block backgrounds/tunnel · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-tunnel" data-block="backgrounds/tunnel" data-start="0" data-duration="8" data-track-index="0" class="blk blk-backgrounds-tunnel">
+<script type="application/json" data-block-props>
+{"color": ["#ff3d6e", "#ffb000", "#21c7a8", "#3a6bff", "#9b5cff"], "bg": "#07070c", "end_color": "#ffffff", "tile": 3, "speed": 1}
+</script>
+</div>
+<style>
+.blk-backgrounds-tunnel{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-backgrounds-tunnel canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+</style>
+<script>
+BLOCK.mount("blk-tunnel", function (k) {
+  var P = k.P;
+  var K = BLOCK.canvas(k.root, k.w, k.h), x = K.ctx;
+  var pal = (Array.isArray(P.color) && P.color.length) ? P.color : ["#ff3d6e", "#ffb000", "#21c7a8", "#3a6bff", "#9b5cff"];
+  var M = Math.max(1, Math.round(+P.tile || 3)), JAUH = 14, DEKAT = 0.32, F = Math.min(k.w, k.h) * 0.62;
+  function hs(a, b, c) { var s = Math.sin(a * 127.1 + b * 311.7 + c * 74.7) * 43758.5453; return s - Math.floor(s); }
+  // dinding: titik (u, z) -> 3D; u di -1..1 sepanjang lebar dinding
+  var DIN = [function (u) { return [u, -1]; }, function (u) { return [1, u]; }, function (u) { return [-u, 1]; }, function (u) { return [-1, -u]; }];
+  function gambar(t) {
+    var cam = t * (+P.speed || 1) * 1.6, ox = k.w / 2 + Math.sin(t * 0.5) * 0.03 * k.w, oy = k.h / 2 + Math.cos(t * 0.37) * 0.025 * k.h;
+    var rol = Math.sin(t * 0.3) * 0.05, cr = Math.cos(rol), sr = Math.sin(rol);
+    function pr(X, Y, z) { var a = X * cr - Y * sr, b = X * sr + Y * cr; return [ox + a / z * F, oy - b / z * F]; }
+    x.fillStyle = P.bg; x.fillRect(0, 0, k.w, k.h);
+    var s0 = Math.floor(cam);
+    for (var s = s0 + JAUH; s >= s0; s--) {
+      var z0 = s - cam, z1 = z0 + 1; if (z1 <= DEKAT) continue; z0 = Math.max(z0, DEKAT);
+      var kabut = BLOCK.smooth((z0 - 2) / (JAUH - 3));
+      for (var w = 0; w < 4; w++) for (var j = 0; j < M; j++) {
+        var u0 = -1 + 2 * j / M + 0.04, u1 = -1 + 2 * (j + 1) / M - 0.04, za = z0 + 0.04, zb = z1 - 0.04; if (zb <= za) continue;
+        var h = hs(s, w, j), c = pal[Math.floor(h * pal.length) % pal.length];
+        var A0 = DIN[w](u0), A1 = DIN[w](u1);
+        var q = [pr(A0[0], A0[1], za), pr(A1[0], A1[1], za), pr(A1[0], A1[1], zb), pr(A0[0], A0[1], zb)];
+        x.globalAlpha = 1; x.fillStyle = BLOCK.mix(c, P.bg, kabut * 0.92 + (w === 0 || w === 2 ? 0.08 : 0));
+        x.beginPath(); x.moveTo(q[0][0], q[0][1]); for (var n = 1; n < 4; n++) x.lineTo(q[n][0], q[n][1]); x.closePath(); x.fill();
+        // tekstur panel: garis-garis atau bingkai dalam, berganti per panel
+        var um = (u0 + u1) / 2, zm = (za + zb) / 2, ui = (u1 - u0) * 0.32, zi = (zb - za) * 0.3;
+        x.fillStyle = BLOCK.rgba("#ffffff", 0.16 * (1 - kabut));
+        if (h > 0.5) {
+          var B0 = DIN[w](um - ui), B1 = DIN[w](um + ui), r = [pr(B0[0], B0[1], zm - zi), pr(B1[0], B1[1], zm - zi), pr(B1[0], B1[1], zm + zi), pr(B0[0], B0[1], zm + zi)];
+          x.beginPath(); x.moveTo(r[0][0], r[0][1]); for (n = 1; n < 4; n++) x.lineTo(r[n][0], r[n][1]); x.closePath(); x.fill();
+        } else {
+          for (var g = 0; g < 3; g++) {
+            var ua = u0 + (u1 - u0) * (0.18 + g * 0.26), ub = ua + (u1 - u0) * 0.1, C0 = DIN[w](ua), C1 = DIN[w](ub);
+            var e = [pr(C0[0], C0[1], za), pr(C1[0], C1[1], za), pr(C1[0], C1[1], zb), pr(C0[0], C0[1], zb)];
+            x.beginPath(); x.moveTo(e[0][0], e[0][1]); for (n = 1; n < 4; n++) x.lineTo(e[n][0], e[n][1]); x.closePath(); x.fill();
+          }
+        }
+      }
+    }
+    var p = pr(0, 0, 1), g2 = x.createRadialGradient(p[0], p[1], 0, p[0], p[1], F / JAUH * 2.2);
+    g2.addColorStop(0, BLOCK.rgba(P.end_color, 0.95)); g2.addColorStop(0.5, BLOCK.rgba(P.end_color, 0.3)); g2.addColorStop(1, BLOCK.rgba(P.end_color, 0));
+    x.fillStyle = g2; x.fillRect(0, 0, k.w, k.h);
+  }
+  BLOCK.onTime(k.tl, gambar, k.dur);
+});
+</script>
+</div>
+<script>
+  window.__duration = 8.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 8.5);
+</script>
+</body>
+</html>

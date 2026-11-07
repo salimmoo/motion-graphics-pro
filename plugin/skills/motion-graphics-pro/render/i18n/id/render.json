@@ -1,0 +1,20 @@
+{
+ "ffmpeg is not on PATH (or set MGP_FFMPEG).": "ffmpeg tidak ada di PATH (atau isi MGP_FFMPEG).",
+ "{} script errors on the page; render stopped (add --ignore-errors to render anyway):": "{} galat skrip di halaman; render dihentikan (tambah --ignore-errors untuk tetap merender):",
+ "warning: {} script errors ignored (--ignore-errors):": "peringatan: {} galat skrip diabaikan (--ignore-errors):",
+ "mgp: {}  {}x{}  {} fps  {} → {}  ({} frames, driver: {}, {} workers)": "mgp: {}  {}x{}  {} fps  {} → {}  ({} frame, penggerak: {}, {} pekerja)",
+ "  ·  animation engine: {}": "  ·  mesin animasi: {}",
+ "encoder: {}": "encoder: {}",
+ "encoder: --encoder {} is for MP4 only; {} uses the CPU encoder": "encoder: --encoder {} hanya untuk MP4; {} memakai encoder CPU",
+ "  {}%  {}/{} frames": "  {}%  {}/{} frame",
+ "(encoder {} failed during the render; run again with --encoder cpu)": "(encoder {} gagal di tengah render; ulangi dengan --encoder cpu)",
+ "  warning: audio {} not found locally, skipped": "  peringatan: audio {} tidak ditemukan secara lokal, dilewati",
+ "--audio not found: {}": "--audio tidak ditemukan: {}",
+ "  audio written to {}": "  audio ditulis ke {}",
+ "  audio: {} tracks mixed": "  audio: {} trek dicampur",
+ "done: {}  ({} frames in {} s, {} frames/s)": "selesai: {}  ({} frame dalam {} s, {} frame/s)",
+ "warning: {} page notes:": "peringatan: {} catatan halaman:",
+ "{} script errors appeared while rendering ({} was written, but its frames may be wrong; --ignore-errors to accept):": "{} galat skrip muncul saat merender (berkas {} sudah ditulis, tetapi frame-nya bisa salah; --ignore-errors untuk menerima):",
+ "warning: {} script errors while rendering ignored (--ignore-errors):": "peringatan: {} galat skrip saat merender diabaikan (--ignore-errors):",
+ "warning: {} script errors on the page (the frame is taken anyway):": "peringatan: {} galat skrip di halaman (frame tetap diambil):"
+}

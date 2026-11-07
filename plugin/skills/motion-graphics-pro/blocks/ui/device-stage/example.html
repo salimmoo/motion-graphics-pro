@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Device Stage · block example ui/device-stage</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="5.5">
+
+<!-- Block ui/device-stage · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-device-stage" data-block="ui/device-stage" data-start="0" data-duration="5" data-track-index="30" class="blk blk-ui-device-stage">
+<script type="application/json" data-block-props>
+{"frame": "browser", "image": "", "image_2": "", "replace_screen": true, "address": "contoh.id/dasbor", "title": "Catatan", "accent_color": "#5b5bf0", "bg": "#e9ebf3", "float": true, "font": "Inter:wght@500;600;700"}
+</script>
+<div class="blk-st"><div class="blk-dv"></div></div>
+</div>
+<style>
+.blk-ui-device-stage{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-ui-device-stage .blk-st{position:absolute;inset:0;perspective:1600px}
+.blk-ui-device-stage .blk-dv{position:absolute;box-sizing:border-box;overflow:hidden}
+.blk-ui-device-stage .blk-bar{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;box-sizing:border-box}
+.blk-ui-device-stage .blk-bar i{display:block;border-radius:50%}
+.blk-ui-device-stage .blk-url{flex:1;display:flex;align-items:center;justify-content:center;color:#6b7180;font-weight:500;border-radius:999px;background:#eceef3}
+.blk-ui-device-stage .blk-lyr{position:absolute;overflow:hidden;background:#f7f8fb}
+.blk-ui-device-stage .blk-sc{position:absolute;inset:0;background:#f7f8fb}
+.blk-ui-device-stage .blk-sc img{width:100%;height:100%;object-fit:cover;display:block}
+.blk-ui-device-stage .blk-sk{position:absolute;border-radius:var(--r)}
+.blk-ui-device-stage .blk-bay{position:absolute;left:50%;border-radius:50%;background:radial-gradient(closest-side,rgba(20,25,60,.28),rgba(20,25,60,0))}
+</style>
+<script>
+BLOCK.mount("blk-device-stage", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, W = k.w, H = k.h, A = P.accent_color, b = P.frame;
+  R.style.fontFamily = BLOCK.family(P.font); if (P.bg) R.style.background = P.bg;
+  var dv = R.querySelector(".blk-dv"), st = R.querySelector(".blk-st"), dw, dh, bar = 0, rad, bez = 0;
+  if (b === "phone") { dh = H * 0.82; dw = dh * 0.48; if (dw > W * 0.8) { dw = W * 0.8; dh = dw / 0.48; } rad = dw * 0.14; bez = dw * 0.03; }
+  else if (b === "tablet") { var land = W > H; dh = Math.min(H * 0.8, W * 0.85 / (land ? 1.4 : 0.75)); dw = dh * (land ? 1.4 : 0.75); rad = Math.min(dw, dh) * 0.06; bez = Math.min(dw, dh) * 0.035; }
+  else { dw = Math.min(W * 0.82, H * 1.28); dh = Math.min(dw * 0.62, H * 0.8); rad = 20 * s; bar = 56 * s; }
+  var dx = (W - dw) / 2, dy = (H - dh) / 2;
+  dv.style.cssText += ";left:" + dx + "px;top:" + dy + "px;width:" + dw + "px;height:" + dh + "px;border-radius:" + rad + "px;background:" + (bez ? "#11131a" : "#fff") + ";box-shadow:0 " + 40 * s + "px " + 90 * s + "px rgba(20,25,60,.28),0 0 0 1px rgba(20,25,60,.08)";
+  var bay = BLOCK.el("div", { class: "blk-bay", style: "width:" + dw * 0.9 + "px;height:" + 60 * s + "px;top:" + (dy + dh + 30 * s) + "px;margin-left:" + -dw * 0.45 + "px" }, st);
+  st.insertBefore(bay, dv);
+  if (bar) {
+    var br = BLOCK.el("div", { class: "blk-bar", style: "height:" + bar + "px;padding:0 " + 22 * s + "px;gap:" + 10 * s + "px;background:#fafbfc;border-bottom:1px solid #e6e8ee" }, dv);
+    ["#ff5f57", "#febc2e", "#28c840"].forEach(function (c) { BLOCK.el("i", { style: "width:" + 14 * s + "px;height:" + 14 * s + "px;background:" + c }, br); });
+    if (b === "window") BLOCK.el("div", { style: "flex:1;text-align:center;font-weight:600;color:#3a3f4c;font-size:" + 20 * s + "px;margin-right:" + 60 * s + "px" }, br, BLOCK.esc(P.title));
+    else BLOCK.el("div", { class: "blk-url", style: "height:" + 34 * s + "px;font-size:" + 18 * s + "px;margin:0 " + 90 * s + "px 0 " + 30 * s + "px" }, br, BLOCK.esc(P.address));
+  }
+  var ly = BLOCK.el("div", { class: "blk-lyr", style: "left:" + bez + "px;right:" + bez + "px;top:" + (bar || bez) + "px;bottom:" + bez + "px;border-radius:" + (bez ? rad - bez : 0) + "px" }, dv);
+  var lw = dw - 2 * bez, lh = dh - (bar || bez) - bez, kecil = lw < 700 * s;
+  // kerangka layar bawaan (bila tanpa gambar): tata letak aplikasi generik bertoken warna aksen
+  function kerangka(sc, varian) {
+    var r = 12 * s, blk = [], g = 0.04 * lw, add = function (x, y, w, h, c) { var e = BLOCK.el("div", { class: "blk-sk", style: "--r:" + r + "px;left:" + x + "px;top:" + y + "px;width:" + w + "px;height:" + h + "px;background:" + c }, sc); blk.push(e); return e; };
+    var top = b === "phone" ? lh * 0.07 : 0;
+    if (!kecil && b !== "phone") {
+      add(0, 0, lw * 0.2, lh, "#eef0f6"); add(g * 0.6, g, lw * 0.2 - g * 1.2, lh * 0.06, BLOCK.rgba(A, 0.9));
+      for (var i = 0; i < 5; i++) add(g * 0.6, g + lh * (0.14 + i * 0.08), lw * (0.12 - (i % 2) * 0.03), lh * 0.035, i === varian ? BLOCK.rgba(A, 0.35) : "#dde1ea");
+      var x0 = lw * 0.2 + g, cw = lw - x0 - g;
+      add(x0, g, cw * 0.4, lh * 0.06, "#d6dae4");
+      if (varian === 0) { add(x0, g + lh * 0.12, cw, lh * 0.36, "linear-gradient(120deg," + BLOCK.rgba(A, 0.85) + "," + BLOCK.rgba(A, 0.45) + ")"); for (var j = 0; j < 3; j++) add(x0 + j * (cw / 3 + g / 6), lh * 0.58, cw / 3 - g * 0.5, lh * 0.34, "#ffffff"); }
+      else { for (var q = 0; q < 6; q++) add(x0 + (q % 3) * (cw / 3 + g / 6), g + lh * 0.12 + Math.floor(q / 3) * lh * 0.4, cw / 3 - g * 0.5, lh * 0.36, q === 1 ? BLOCK.rgba(A, 0.25) : "#ffffff"); }
+    } else {
+      var gx = lw * 0.07, ww = lw - gx * 2;
+      add(gx, top + lh * 0.03, ww * 0.5, lh * 0.035, "#d6dae4");
+      add(gx, top + lh * 0.1, ww, lh * 0.25, varian === 0 ? "linear-gradient(140deg," + BLOCK.rgba(A, 0.9) + "," + BLOCK.rgba(A, 0.45) + ")" : "#ffffff");
+      for (var m = 0; m < 4; m++) { add(gx, top + lh * (0.39 + m * 0.13), ww * 0.22, lh * 0.1, m === varian ? BLOCK.rgba(A, 0.4) : "#e2e5ee"); add(gx + ww * 0.28, top + lh * (0.41 + m * 0.13), ww * 0.6, lh * 0.03, "#d6dae4"); add(gx + ww * 0.28, top + lh * (0.46 + m * 0.13), ww * 0.4, lh * 0.025, "#e5e8ef"); }
+    }
+    return blk;
+  }
+  function layar(url, varian) { var sc = BLOCK.el("div", { class: "blk-sc" }, ly), bl = []; if (url) BLOCK.el("img", { src: url, alt: "" }, sc); else bl = kerangka(sc, varian); return { sc: sc, bl: bl }; }
+  var L1 = layar(P.image, 0), D = k.dur;
+  // satu masuk yang mengendap: naik dari bawah dengan sedikit miring, lalu tegak
+  tl.fromTo(dv, { y: H * 0.35, rotationX: 22, scale: 0.9, autoAlpha: 0 }, { y: 0, rotationX: 0, scale: 1, autoAlpha: 1, duration: 1.1, ease: "blockSpringSoft" }, 0.1)
+    .fromTo(bay, { autoAlpha: 0, scale: 0.6 }, { autoAlpha: 1, scale: 1, duration: 1.0, ease: "power2.out" }, 0.3);
+  if (L1.bl.length) tl.fromTo(L1.bl, { autoAlpha: 0, y: 14 * s }, { autoAlpha: 1, y: 0, duration: 0.45, ease: "power2.out", stagger: 0.035 }, 0.6);
+  if (P.replace_screen) {
+    var L2 = layar(P.image_2, 1), tg = D * 0.58;
+    tl.fromTo(L2.sc, { xPercent: 100 }, { xPercent: 0, duration: 0.6, ease: "power3.inOut" }, tg).fromTo(L1.sc, { xPercent: 0 }, { xPercent: -30, duration: 0.6, ease: "power3.inOut" }, tg);
+    if (L2.bl.length) tl.fromTo(L2.bl, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3, stagger: 0.02 }, tg + 0.25);
+  }
+  if (P.float) {
+    // melayang pelan saat diam (fungsi murni dari waktu)
+    var inner = R.querySelector(".blk-st");
+    BLOCK.onTime(tl, function (t) { var a = BLOCK.progress(t, 1.0, 1.8); inner.style.transform = "translateY(" + (Math.sin((t - 1) * 1.6) * 8 * s * a).toFixed(2) + "px)"; }, D);
+  }
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 5.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5.5);
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+{
+ "id": "ui/form",
+ "name": "Form",
+ "name_id": "Formulir Interaktif",
+ "category": "ui",
+ "description": {
+  "id": "Alur formulir yang hidup. Mode daftar: tombol akun sosial, surel dan kata sandi diketik dengan cincin fokus, tombol kirim ditekan, berputar, lalu kartu sukses bercentang. Mode onboarding: rel tonggak terisi, kartu langkah bergeser, tombol Lanjut ditekan tiap tahap. Mode masukan: isian salah bergetar merah dengan pesan galat, dihapus lewat tombol silang, diketik ulang lalu berubah hijau valid.",
+  "en": "Living form flows. Signup mode: social button, email and password typed with focus rings, submit presses and spins into a success card. Onboarding mode: a milestone rail fills while step cards slide and the Next button is pressed. Feedback mode: a wrong entry shakes red with an error, is cleared by the x affordance, retyped and turns green."
+ },
+ "tags": [
+  "ui",
+  "formulir",
+  "form",
+  "signup",
+  "onboarding",
+  "input",
+  "validasi",
+  "stepper"
+ ],
+ "props": {
+  "mode": {
+   "default": "list",
+   "type": "enum",
+   "options": [
+    "list",
+    "onboarding",
+    "input"
+   ],
+   "option_aliases": {
+    "daftar": "list",
+    "masukan": "input"
+   }
+  },
+  "title": {
+   "default": "Buat akun",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "email": {
+   "default": "nadia@contoh.id",
+   "type": "text",
+   "hint": "Surel yang diketik (benar)",
+   "aliases": [
+    "surel"
+   ]
+  },
+  "invalid_email": {
+   "default": "nadia@contoh",
+   "type": "text",
+   "hint": "Ketikan salah (mode masukan)",
+   "aliases": [
+    "surel_salah"
+   ]
+  },
+  "password_length": {
+   "default": 10,
+   "type": "number",
+   "aliases": [
+    "sandi_panjang"
+   ]
+  },
+  "button": {
+   "default": "Daftar",
+   "type": "text",
+   "aliases": [
+    "tombol"
+   ]
+  },
+  "success_text": {
+   "default": "Akun berhasil dibuat",
+   "type": "text",
+   "aliases": [
+    "teks_sukses"
+   ]
+  },
+  "error_text": {
+   "default": "Format surel belum benar",
+   "type": "text",
+   "aliases": [
+    "teks_galat"
+   ]
+  },
+  "valid_text": {
+   "default": "Surel valid",
+   "type": "text",
+   "aliases": [
+    "teks_valid"
+   ]
+  },
+  "steps": {
+   "default": [
+    [
+     "Profil",
+     "Ceritakan sedikit tentang kamu"
+    ],
+    [
+     "Minat",
+     "Pilih topik yang kamu suka"
+    ],
+    [
+     "Tim",
+     "Undang rekan kerja"
+    ],
+    [
+     "Selesai",
+     "Semua siap digunakan"
+    ]
+   ],
+   "type": "list",
+   "hint": "[[judul, keterangan]] tahap onboarding",
+   "aliases": [
+    "langkah"
+   ]
+  },
+  "accent_color": {
+   "default": "#4f46e5",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg": {
+   "default": "#eef0f6",
+   "type": "color",
+   "hint": "Kosong = transparan",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700",
+   "type": "font"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/formulir",
+  "signup-flow",
+  "onboarding-stepper-flow",
+  "input-feedback"
+ ],
+ "example": {
+  "bg": "empty",
+  "aspect": "9:16"
+ }
+}

@@ -1,0 +1,48 @@
+<!-- Block accents/beat-burst · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="accents/beat-burst" data-start="0" data-duration="3" data-track-index="40" class="blk blk-accents-beat-burst">
+<script type="application/json" data-block-props>
+{"target": "#adegan", "beats": [0.4, 1.35, 2.3], "position_x": 50, "position_y": 50, "size": 620, "color": "#ffffff", "accent_color": "#ffd23f", "flash": 0.55, "pulse": 0.035, "shake": 8, "line": 10}
+</script>
+<div class="blk-kilat"></div>
+<div class="blk-pos"><div class="blk-cincin"></div><div class="blk-garis"></div></div>
+</div>
+<style>
+.blk-accents-beat-burst{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-accents-beat-burst .blk-kilat{position:absolute;inset:0;opacity:0}
+.blk-accents-beat-burst .blk-pos{position:absolute;width:0;height:0}
+.blk-accents-beat-burst .blk-cincin{position:absolute;border-radius:50%;opacity:0}
+.blk-accents-beat-burst .blk-garis span{position:absolute;left:0;top:0;transform-origin:0 50%;border-radius:99px}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, root = k.root, tg = BLOCK.find(P.target);
+  var kil = root.querySelector(".blk-kilat"), pos = root.querySelector(".blk-pos"), cin = root.querySelector(".blk-cincin"), gw = root.querySelector(".blk-garis");
+  var R = P.size * s / 2, hits = (P.beats || []).map(Number).filter(function (x) { return x >= 0; }).sort(function (a, b) { return a - b; });
+  pos.style.left = P.position_x + "%"; pos.style.top = P.position_y + "%";
+  kil.style.background = "radial-gradient(circle at " + P.position_x + "% " + P.position_y + "%," + P.color + " 0%," + BLOCK.rgba(P.color, 0.6) + " 45%," + BLOCK.rgba(P.color, 0.25) + " 100%)";
+  cin.style.cssText += ";left:" + (-R) + "px;top:" + (-R) + "px;width:" + 2 * R + "px;height:" + 2 * R + "px;border:" + Math.round(10 * s) + "px solid " + P.accent_color +
+    ";box-shadow:0 0 " + Math.round(30 * s) + "px " + P.accent_color;
+  var gs = [];
+  for (var i = 0; i < P.line; i++) gs.push(BLOCK.el("span", { style: "height:" + Math.max(3, Math.round(8 * s)) + "px;margin-top:" + (-Math.round(4 * s)) + "px;background:" + P.accent_color }, gw));
+  // satu sengatan = kilat + cincin kejut + garis radial + denyut skala & guncang pada target; semuanya fungsi murni dari t
+  BLOCK.onTime(tl, function (t) {
+    var tb = -1;
+    for (var i = 0; i < hits.length; i++) if (t >= hits[i]) tb = hits[i];
+    var dt = tb < 0 ? 99 : t - tb, e = Math.exp(-dt * 9);
+    kil.style.opacity = (P.flash * Math.exp(-dt * 14)).toFixed(3);
+    var p = BLOCK.clamp(dt / 0.5, 0, 1), q = 1 - Math.pow(1 - p, 3);
+    cin.style.opacity = dt < 0.5 ? (1 - p).toFixed(3) : "0";
+    cin.style.transform = "scale(" + (0.15 + q * 0.95).toFixed(3) + ")";
+    gs.forEach(function (g, j) {
+      var a = (j / gs.length) * 360 + 11, d0 = R * (0.25 + q * 0.75), L = R * 0.5 * (1 - p);
+      g.style.opacity = dt < 0.5 ? "1" : "0";
+      g.style.width = Math.max(0, L).toFixed(1) + "px";
+      g.style.transform = "rotate(" + a + "deg) translateX(" + d0.toFixed(1) + "px)";
+    });
+    if (tg) {
+      var sc = 1 + P.pulse * e, gx = P.shake * s * Math.exp(-dt * 16) * Math.sin(dt * 90);
+      gsap.set(tg, { scale: sc, x: dt < 1 ? gx : 0, transformOrigin: "50% 50%" });
+    }
+  }, k.dur);
+});
+</script>

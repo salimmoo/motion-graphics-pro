@@ -1,0 +1,159 @@
+{
+ "id": "social/follow",
+ "name": "Follow",
+ "name_id": "Ajakan Ikuti / Langganan",
+ "category": "social",
+ "description": {
+  "id": "Kartu profil atau label bawah ajakan mengikuti: avatar bercincin, nama, akun, jumlah pengikut yang menghitung, lalu kursor mengeklik tombol yang berubah menjadi Mengikuti. Skema warna gaya foto, video pendek, utas mikro, atau kanal video (tanpa logo merek).",
+  "en": "Follow call-to-action as profile card or lower third: ringed avatar, name, handle, counting followers, then a cursor clicks the button into its followed state. Colour schemes after photo, short-video, microblog or video-channel apps, with no brand logos."
+ },
+ "tags": [
+  "sosial",
+  "ikuti",
+  "follow",
+  "subscribe",
+  "langganan",
+  "profil",
+  "cta",
+  "ui",
+  "social"
+ ],
+ "props": {
+  "platform": {
+   "default": "instagram",
+   "type": "enum",
+   "options": [
+    "instagram",
+    "tiktok",
+    "x",
+    "youtube"
+   ],
+   "hint": "Hanya skema warna/tata letak generik, tanpa logo merek"
+  },
+  "layout": {
+   "default": "auto",
+   "type": "enum",
+   "options": [
+    "auto",
+    "card",
+    "label"
+   ],
+   "hint": "otomatis = label untuk youtube, kartu untuk lainnya",
+   "aliases": [
+    "tata"
+   ],
+   "option_aliases": {
+    "otomatis": "auto",
+    "kartu": "card"
+   }
+  },
+  "name": {
+   "default": "Dapur Nusantara",
+   "type": "text",
+   "aliases": [
+    "nama"
+   ]
+  },
+  "account": {
+   "default": "@dapurnusantara",
+   "type": "text",
+   "aliases": [
+    "akun"
+   ]
+  },
+  "followers": {
+   "default": 128400,
+   "type": "number",
+   "aliases": [
+    "pengikut"
+   ]
+  },
+  "caption": {
+   "default": "Resep rumahan tiap Jumat",
+   "type": "text",
+   "hint": "Bio singkat (tata kartu)",
+   "aliases": [
+    "keterangan"
+   ]
+  },
+  "button_text": {
+   "default": "Ikuti",
+   "type": "text",
+   "aliases": [
+    "teks_tombol"
+   ]
+  },
+  "after_text": {
+   "default": "Mengikuti",
+   "type": "text",
+   "hint": "Teks tombol setelah diklik",
+   "aliases": [
+    "teks_sesudah"
+   ]
+  },
+  "cursor": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "kursor"
+   ]
+  },
+  "theme": {
+   "default": "light",
+   "type": "enum",
+   "options": [
+    "light",
+    "dark"
+   ],
+   "aliases": [
+    "tema"
+   ],
+   "option_aliases": {
+    "terang": "light",
+    "gelap": "dark"
+   }
+  },
+  "position": {
+   "default": "center",
+   "type": "enum",
+   "options": [
+    "center",
+    "bottom-left",
+    "bottom-right"
+   ],
+   "aliases": [
+    "posisi"
+   ],
+   "option_aliases": {
+    "tengah": "center",
+    "kiri-bawah": "bottom-left",
+    "kanan-bawah": "bottom-right"
+   }
+  },
+  "font": {
+   "default": "Inter:wght@400;500;700;800",
+   "type": "font"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "sosial/ikuti",
+  "instagram-follow",
+  "tiktok-follow",
+  "x-follow-card",
+  "yt-lower-third"
+ ],
+ "example": {
+  "bg": "photo",
+  "font": [
+   "Inter:wght@400;500;700;800"
+  ]
+ }
+}

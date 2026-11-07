@@ -1,0 +1,124 @@
+{
+ "id": "titles/light-cursor",
+ "name": "Light Cursor",
+ "name_id": "Kursor Cahaya",
+ "category": "titles",
+ "description": {
+  "id": "Pengungkapan teks dramatis di panggung hitam: kursor bercahaya menyapu dan menyingkap huruf, cahaya berarah dari kursor menerangi permukaan, sinar bayangan kromatik memancar dengan tepi spektral merah dan biru. Digambar di kanvas per bingkai.",
+  "en": "Dramatic text reveal on a black stage: a glowing cursor sweeps and reveals the letters, directional light from the cursor shades the face, and chromatic shadow rays fan out with red and blue spectral edges. Drawn on canvas per frame."
+ },
+ "tags": [
+  "judul",
+  "kursor",
+  "cahaya",
+  "sinar",
+  "kromatik",
+  "reveal",
+  "kanvas",
+  "dramatis",
+  "titles",
+  "light",
+  "cursor"
+ ],
+ "props": {
+  "text": {
+   "default": "CAHAYA PERTAMA",
+   "type": "text",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "hot_color": {
+   "default": "#ff5a2a",
+   "type": "color",
+   "hint": "Tepi spektral hangat & halo kursor",
+   "aliases": [
+    "warna_panas"
+   ]
+  },
+  "cold_color": {
+   "default": "#3a7bff",
+   "type": "color",
+   "hint": "Tepi spektral dingin",
+   "aliases": [
+    "warna_dingin"
+   ]
+  },
+  "bg": {
+   "default": "#000000",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "font": {
+   "default": "Archivo Black",
+   "type": "font"
+  },
+  "size": {
+   "default": 140,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "reveal_start": {
+   "default": 0.4,
+   "type": "number",
+   "hint": "Detik mulai kursor menyapu",
+   "aliases": [
+    "mulai_ungkap"
+   ]
+  },
+  "reveal_duration": {
+   "default": 2.2,
+   "type": "number",
+   "hint": "Lama sapuan (detik)",
+   "aliases": [
+    "lama_ungkap"
+   ]
+  },
+  "ray_length": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali panjang sinar",
+   "aliases": [
+    "panjang_sinar"
+   ]
+  },
+  "resolution": {
+   "default": 0.75,
+   "type": "number",
+   "hint": "Skala resolusi kanvas (0.75 bawaan; turunkan bila berat)",
+   "aliases": [
+    "resolusi"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "judul/kursor-cahaya",
+  "vfx-text-cursor"
+ ],
+ "example": {
+  "bg": "empty",
+  "font": [
+   "Archivo Black"
+  ]
+ }
+}

@@ -1,0 +1,95 @@
+{
+ "id": "backgrounds/falling-lines",
+ "name": "Falling Lines",
+ "name_id": "Garis Jatuh",
+ "category": "backgrounds",
+ "description": {
+  "id": "Garis-garis putih jatuh menuruni layar dengan kecepatan berbeda, masing-masing memudar menjadi jejak. Cocok untuk suasana data atau hujan cahaya.",
+  "en": "White lines fall down the frame at varied speeds, each fading into a trail. Suits data or light-rain moods."
+ },
+ "tags": [
+  "latar",
+  "background",
+  "garis",
+  "jatuh",
+  "hujan",
+  "data",
+  "shader",
+  "webgl",
+  "jejak",
+  "backgrounds",
+  "falling",
+  "lines"
+ ],
+ "props": {
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "bg": {
+   "default": "#000000",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "count": {
+   "default": 70,
+   "type": "number",
+   "hint": "Jumlah kolom garis",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "thickness": {
+   "default": 3,
+   "type": "number",
+   "hint": "Tebal garis (px pada 1080)",
+   "aliases": [
+    "tebal"
+   ]
+  },
+  "length": {
+   "default": 0.35,
+   "type": "number",
+   "hint": "Panjang jejak (fraksi tinggi layar)",
+   "aliases": [
+    "panjang"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali kecepatan gerak",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "resolution": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Skala resolusi shader (0.25-1); kecil = lebih cepat",
+   "aliases": [
+    "resolusi"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "latar/garis-jatuh",
+  "falling-lines"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

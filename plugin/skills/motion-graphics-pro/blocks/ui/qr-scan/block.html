@@ -1,0 +1,74 @@
+<!-- Block ui/qr-scan · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="ui/qr-scan" data-start="0" data-duration="5" data-track-index="30" class="blk blk-ui-qr-scan">
+<script type="application/json" data-block-props>
+{"hint": "Arahkan kamera ke kode QR", "ok_title": "Terverifikasi", "ok_sub": "Tiket masuk · Gerbang B", "accent_color": "#36e08a", "bg": "#1a2230", "lock": 2.2, "font": "Inter:wght@400;500;600;700;800", "seed": 21}
+</script>
+</div>
+<style>
+.blk-ui-qr-scan{position:absolute;inset:0;pointer-events:none;overflow:hidden;font-family:"Inter",system-ui,sans-serif}
+.blk-ui-qr-scan .kam{position:absolute;inset:-4%}
+.blk-ui-qr-scan .qr{position:absolute;left:50%;top:50%;background:#f7f5ef;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.blk-ui-qr-scan svg{position:absolute;left:0;top:0;overflow:visible}
+.blk-ui-qr-scan .pt{position:absolute;left:0;right:0;text-align:center;color:#fff;font-weight:600}
+.blk-ui-qr-scan .ok{position:absolute;left:50%;display:flex;align-items:center;background:#fff;color:#111827}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, E = BLOCK.el, s = k.s, W = k.w, H = k.h, rng = k.random, ac = P.accent_color, tk = +P.lock;
+  // latar kamera: ruang buram buatan + sedikit goyang tangan
+  var kam = E("div", { class: "kam", style: "background:radial-gradient(60% 50% at 30% 30%," + BLOCK.mix(P.bg, "#c9b89a", .35) + ",transparent 70%),radial-gradient(50% 60% at 80% 70%," + BLOCK.mix(P.bg, "#5a7aa0", .4) + ",transparent 70%)," + P.bg + ";filter:blur(" + 6 * s + "px)" }, k.root);
+  var q = Math.min(W, H) * 0.42, qx = W / 2 - q / 2, qy = H / 2 - q / 2 - H * 0.03;
+  var qr = E("div", { class: "qr", style: "width:" + q + "px;height:" + q + "px;margin:" + (-q / 2 - H * 0.03) + "px 0 0 " + (-q / 2) + "px;border-radius:" + q * 0.06 + "px" }, k.root);
+  var n = 25, m = q * 0.1, c = (q - 2 * m) / n, sv = BLOCK.svg("svg", { width: q, height: q }, qr), d = "";
+  function finder(x, y) { return x < 8 && y < 8 || x >= n - 8 && y < 8 || x < 8 && y >= n - 8; }
+  for (var y = 0; y < n; y++) for (var x = 0; x < n; x++) if (!finder(x, y) && rng() < 0.5) d += "M" + (m + x * c) + " " + (m + y * c) + "h" + c + "v" + c + "h" + -c + "z";
+  [[0, 0], [n - 7, 0], [0, n - 7]].forEach(function (f) {
+    var X = m + f[0] * c, Y = m + f[1] * c;
+    d += "M" + X + " " + Y + "h" + 7 * c + "v" + 7 * c + "h" + -7 * c + "z M" + (X + c) + " " + (Y + c) + "v" + 5 * c + "h" + 5 * c + "v" + -5 * c + "z M" + (X + 2 * c) + " " + (Y + 2 * c) + "h" + 3 * c + "v" + 3 * c + "h" + -3 * c + "z";
+  });
+  BLOCK.svg("path", { d: d, fill: "#121620", "fill-rule": "evenodd" }, sv);
+  // gelap di luar jendela bidik
+  var ov = BLOCK.svg("svg", { width: W, height: H }, k.root), pad = q * 0.08;
+  var gelap = BLOCK.svg("path", { fill: "rgba(0,0,0,.45)", "fill-rule": "evenodd" }, ov);
+  var br = [0, 1, 2, 3].map(function () { return BLOCK.svg("path", { fill: "none", stroke: "#fff", "stroke-width": 6 * s, "stroke-linecap": "round", "stroke-linejoin": "round" }, ov); });
+  var sap = BLOCK.svg("rect", { height: 3 * s, fill: ac }, ov), sapG = BLOCK.svg("rect", { fill: ac, "fill-opacity": 0.14 }, ov);
+  var pulsa = BLOCK.svg("rect", { fill: "none", stroke: ac, "stroke-width": 4 * s }, ov);
+  var pt = E("div", { class: "pt", style: "top:" + (qy + q + pad + 40 * s) + "px;font-size:" + 30 * s + "px" }, k.root, BLOCK.esc(P.hint));
+  // kotak bidik: dari besar (lepas) menyempit dan mengunci ke batas kode
+  var A = { x: W * 0.18, y: H * 0.14, w: W * 0.64, h: H * 0.72 }, Bq = { x: qx - pad, y: qy - pad, w: q + 2 * pad, h: q + 2 * pad };
+  if (A.w / A.h > 1.4) { A.w = A.h * 1.2; A.x = W / 2 - A.w / 2; }
+  BLOCK.onTime(tl, function (t) {
+    var e = BLOCK.spring(BLOCK.clamp(t - (tk - 0.7), 0, 3), 1.4, 0.45), r = {};
+    ["x", "y", "w", "h"].forEach(function (k2) { r[k2] = BLOCK.lerp(A[k2], Bq[k2], e); });
+    var gx = BLOCK.noise(t * 1.3, 4) * 6 * s * (1 - BLOCK.clamp(e, 0, 1)), gy = BLOCK.noise(t * 1.1, 9) * 6 * s * (1 - BLOCK.clamp(e, 0, 1));
+    kam.style.transform = qr.style.transform = "translate(" + gx + "px," + gy + "px) rotate(" + (-3 + 3 * BLOCK.clamp(e, 0, 1)) + "deg)";
+    var L = Math.min(r.w, r.h) * 0.18, rr = 18 * s;
+    gelap.setAttribute("d", "M0 0H" + W + "V" + H + "H0Z M" + r.x + " " + r.y + "v" + r.h + "h" + r.w + "v" + -r.h + "z");
+    [[r.x, r.y, 1, 1], [r.x + r.w, r.y, -1, 1], [r.x + r.w, r.y + r.h, -1, -1], [r.x, r.y + r.h, 1, -1]].forEach(function (p, i) {
+      br[i].setAttribute("d", "M" + p[0] + " " + (p[1] + p[3] * L) + "V" + (p[1] + p[3] * rr) + "Q" + p[0] + " " + p[1] + " " + (p[0] + p[2] * rr) + " " + p[1] + "H" + (p[0] + p[2] * L));
+      br[i].setAttribute("stroke", t > tk ? ac : "#fff");
+    });
+    // garis sapu bolak-balik sebelum terkunci
+    var sw = t < tk ? 0.5 - 0.5 * Math.cos(t * Math.PI * 1.4) : -1, yy = r.y + sw * r.h;
+    sap.setAttribute("x", r.x + 10 * s); sap.setAttribute("width", Math.max(0, r.w - 20 * s)); sap.setAttribute("y", yy);
+    sapG.setAttribute("x", r.x); sapG.setAttribute("width", r.w); sapG.setAttribute("y", yy - 40 * s); sapG.setAttribute("height", 40 * s);
+    sap.style.opacity = sapG.style.opacity = sw < 0 ? 0 : 1;
+    var pq = BLOCK.clamp((t - tk) / 0.7, 0, 1), gr = pq * 40 * s;
+    pulsa.setAttribute("x", r.x - gr); pulsa.setAttribute("y", r.y - gr); pulsa.setAttribute("width", r.w + 2 * gr); pulsa.setAttribute("height", r.h + 2 * gr);
+    pulsa.setAttribute("rx", rr + gr); pulsa.style.opacity = pq > 0 && pq < 1 ? 1 - pq : 0;
+  }, D);
+  // langkah berikutnya: kartu terverifikasi naik
+  var ok = E("div", { class: "ok", style: "bottom:" + 8 * s + "%;gap:" + 20 * s + "px;padding:" + 22 * s + "px " + 34 * s + "px " + 22 * s + "px " + 22 * s + "px;border-radius:" + 28 * s + "px;box-shadow:0 20px 60px rgba(0,0,0,.4);transform:translateX(-50%)" }, k.root);
+  var ic = BLOCK.svg("svg", { viewBox: "0 0 60 60", width: 76 * s, height: 76 * s, style: "position:static" }, ok);
+  BLOCK.svg("circle", { cx: 30, cy: 30, r: 28, fill: ac }, ic);
+  var cn = BLOCK.svg("path", { d: "M17 31 L26 40 L44 21", fill: "none", stroke: "#fff", "stroke-width": 6, "stroke-linecap": "round", "stroke-linejoin": "round" }, ic);
+  var tx = E("div", null, ok);
+  E("div", { style: "font-weight:800;font-size:" + 34 * s + "px" }, tx, BLOCK.esc(P.ok_title));
+  E("div", { style: "font-size:" + 22 * s + "px;opacity:.6;margin-top:" + 4 * s + "px" }, tx, BLOCK.esc(P.ok_sub));
+  var Lc = BLOCK.prepareStroke(cn);
+  tl.fromTo(pt, { autoAlpha: 0, y: 10 * s }, { autoAlpha: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.2).to(pt, { autoAlpha: 0, duration: 0.25 }, tk + 0.1)
+    .fromTo(ok, { autoAlpha: 0, y: 80 * s }, { autoAlpha: 1, y: 0, duration: 0.7, ease: "blockSpring" }, tk + 0.55)
+    .fromTo(cn, { strokeDashoffset: Lc }, { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, tk + 0.8)
+    .fromTo(qr, { filter: "brightness(1)" }, { filter: "brightness(.8)", duration: 0.5 }, tk + 0.5);
+}, { font: true });
+</script>

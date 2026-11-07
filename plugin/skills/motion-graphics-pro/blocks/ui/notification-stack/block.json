@@ -1,0 +1,185 @@
+{
+ "id": "ui/notification-stack",
+ "name": "Notification Stack",
+ "name_id": "Tumpukan Notifikasi",
+ "category": "ui",
+ "description": {
+  "id": "Layar kunci ponsel yang dibanjiri notifikasi. Mode tumpuk: kabar datang makin cepat, setiap kartu baru mendorong tumpukan ke bawah hingga menjadi menara padat yang gelisah. Mode kaskade: notifikasi mendarat berurutan lalu seluruh tumpukan terangkat dan digantikan kartu penutup berisi pesan dan tombol ajakan.",
+  "en": "A phone lock screen flooded with notifications. Pileup mode: alerts arrive faster and faster, each pushing the stack into a dense anxious tower. Cascade mode: banners land one after another, then the whole stack lifts away into a closing card with a call to action."
+ },
+ "tags": [
+  "ui",
+  "notifikasi",
+  "layar kunci",
+  "pileup",
+  "cascade",
+  "iklan",
+  "ponsel",
+  "tumpukan",
+  "notification",
+  "stack"
+ ],
+ "props": {
+  "mode": {
+   "default": "stack",
+   "type": "enum",
+   "options": [
+    "stack",
+    "cascade"
+   ],
+   "hint": "tumpuk = makin cepat jadi menara padat; kaskade = ritme tetap lalu tumpukan terangkat ke kartu penutup",
+   "option_aliases": {
+    "tumpuk": "stack",
+    "kaskade": "cascade"
+   }
+  },
+  "list": {
+   "default": [
+    {
+     "aplikasi": "Pesan",
+     "judul": "Rina",
+     "isi": "Ada waktu sebentar?"
+    },
+    {
+     "aplikasi": "Surel",
+     "judul": "Bima",
+     "isi": "Tolong cek dokumen ini ya"
+    },
+    {
+     "aplikasi": "Kalender",
+     "judul": "Rapat dimajukan",
+     "isi": "Mulai 5 menit lagi"
+    },
+    {
+     "aplikasi": "Obrolan Tim",
+     "judul": "Sari",
+     "isi": "Klien sudah menunggu di panggilan"
+    },
+    {
+     "aplikasi": "Pesan",
+     "judul": "Rina",
+     "isi": "Kamu di mana?"
+    },
+    {
+     "aplikasi": "Panggilan",
+     "judul": "Panggilan video",
+     "isi": "Dodi mengajak bergabung"
+    },
+    {
+     "aplikasi": "Obrolan Tim",
+     "judul": "Tim Proyek",
+     "isi": "PENTING: balas segera"
+    },
+    {
+     "aplikasi": "Surel",
+     "judul": "Atasan",
+     "isi": "Revisi harus masuk hari ini"
+    },
+    {
+     "aplikasi": "Panggilan",
+     "judul": "3 panggilan tak terjawab",
+     "isi": "Dodi, Sari, Bima"
+    },
+    {
+     "aplikasi": "Pesan",
+     "judul": "Rina",
+     "isi": "Halo??"
+    }
+   ],
+   "type": "list",
+   "hint": "[{aplikasi, judul, isi}] urut tiba; warna ikon diturunkan dari nama aplikasi",
+   "aliases": [
+    "daftar"
+   ]
+  },
+  "start_pause": {
+   "default": 0.6,
+   "type": "number",
+   "hint": "Jeda antar notifikasi pertama (kaskade: tetap). Kaskade: durasi blok kira-kira jumlah x jeda + 2 detik",
+   "aliases": [
+    "jeda_awal"
+   ]
+  },
+  "acceleration": {
+   "default": 0.8,
+   "type": "number",
+   "hint": "Pengali jeda tiap notifikasi (tumpuk); < 1 = makin cepat",
+   "aliases": [
+    "percepatan"
+   ]
+  },
+  "clock": {
+   "default": "09.41",
+   "type": "text",
+   "aliases": [
+    "jam"
+   ]
+  },
+  "date": {
+   "default": "Rabu, 5 November",
+   "type": "text",
+   "aliases": [
+    "tanggal"
+   ]
+  },
+  "outro_title": {
+   "default": "Satu tempat untuk semua kabar.",
+   "type": "text",
+   "hint": "Kartu penutup (kaskade)",
+   "aliases": [
+    "penutup_judul"
+   ]
+  },
+  "outro_sub": {
+   "default": "Ringkas, tenang, terkendali.",
+   "type": "text",
+   "aliases": [
+    "penutup_sub"
+   ]
+  },
+  "outro_button": {
+   "default": "Coba sekarang",
+   "type": "text",
+   "aliases": [
+    "penutup_tombol"
+   ]
+  },
+  "accent_color": {
+   "default": "#7c5cff",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg": {
+   "default": "#1d1840",
+   "type": "color",
+   "hint": "Warna layar kunci",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700;800",
+   "type": "font"
+  }
+ },
+ "duration": 4.5,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/tumpukan-notif",
+  "notification-pileup",
+  "notification-cascade",
+  "slack-notification-ad"
+ ],
+ "example": {
+  "bg": "empty",
+  "aspect": "9:16"
+ }
+}

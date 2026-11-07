@@ -1,0 +1,62 @@
+<!-- Block gallery/cinemagraph · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="gallery/cinemagraph" data-start="0" data-duration="6" data-track-index="5" class="blk blk-gallery-cinemagraph">
+<script type="application/json" data-block-props>
+{"image": "", "period": 2, "steam_x": 50, "steam_y": 55, "steam_height": 34, "window_width": 26, "blob_count": 16, "strength": 0.75, "steam_color": "#ffffff", "wall_color": "#3b2c26", "cup_color": "#efe7dc", "seed": 9}
+</script>
+<div class="blk-foto"></div>
+</div>
+<style>
+.blk-gallery-cinemagraph{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-gallery-cinemagraph .blk-foto{position:absolute;inset:0;background-size:cover;background-position:center}
+.blk-gallery-cinemagraph canvas{position:absolute;inset:0;width:100%;height:100%}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, w = k.w, h = k.h, M = Math.min(w, h), r = k.random;
+  var cx = w * P.steam_x / 100, cy = h * P.steam_y / 100, foto = k.root.querySelector(".blk-foto");
+  if (P.image) foto.style.backgroundImage = "url('" + P.image + "')";
+  else {
+    // "foto" diam: dinding hangat, cahaya jendela, meja, cangkir di atas lepek (digambar sekali)
+    var st = BLOCK.canvas(foto, w, h), x = st.ctx, cw = 0.17 * M, ch = 0.15 * M, mejaY = cy + ch + 0.03 * M;
+    var gd = x.createRadialGradient(w * 0.25, h * 0.1, 0, w * 0.4, h * 0.3, Math.max(w, h));
+    gd.addColorStop(0, BLOCK.mix(P.wall_color, "#ffd9a8", 0.55)); gd.addColorStop(0.5, P.wall_color); gd.addColorStop(1, BLOCK.mix(P.wall_color, "#000000", 0.6));
+    x.fillStyle = gd; x.fillRect(0, 0, w, h);
+    x.fillStyle = "rgba(255,226,180,.10)"; x.beginPath(); x.moveTo(w * 0.05, 0); x.lineTo(w * 0.38, 0); x.lineTo(w * 0.62, mejaY); x.lineTo(w * 0.18, mejaY); x.fill();
+    var gm = x.createLinearGradient(0, mejaY, 0, h); gm.addColorStop(0, "#6b4a35"); gm.addColorStop(1, "#2a1c15");
+    x.fillStyle = gm; x.fillRect(0, mejaY, w, h - mejaY);
+    for (var i = 0; i < 26; i++) { x.strokeStyle = "rgba(0,0,0," + r.range(0.04, 0.12) + ")"; x.lineWidth = r.range(1, 3) * k.s; var yy = mejaY + r() * (h - mejaY); x.beginPath(); x.moveTo(0, yy); x.bezierCurveTo(w * 0.3, yy + r.range(-8, 8), w * 0.7, yy + r.range(-8, 8), w, yy); x.stroke(); }
+    x.fillStyle = "rgba(0,0,0,.35)"; x.beginPath(); x.ellipse(cx + 0.04 * M, mejaY + 0.01 * M, cw * 1.25, 0.035 * M, 0, 0, 7); x.fill();
+    x.fillStyle = BLOCK.mix(P.cup_color, "#8a7a6a", 0.25); x.beginPath(); x.ellipse(cx, mejaY - 0.005 * M, cw * 1.05, 0.03 * M, 0, 0, 7); x.fill();
+    var gc = x.createLinearGradient(cx - cw / 2, 0, cx + cw / 2, 0);
+    gc.addColorStop(0, BLOCK.mix(P.cup_color, "#000000", 0.25)); gc.addColorStop(0.35, P.cup_color); gc.addColorStop(1, BLOCK.mix(P.cup_color, "#000000", 0.45));
+    x.strokeStyle = BLOCK.mix(P.cup_color, "#000000", 0.3); x.lineWidth = 0.022 * M; x.beginPath(); x.ellipse(cx + cw * 0.55, cy + ch * 0.45, cw * 0.2, ch * 0.24, 0, -1.4, 1.4); x.stroke();
+    x.fillStyle = gc; x.beginPath(); x.moveTo(cx - cw / 2, cy); x.lineTo(cx + cw / 2, cy); x.bezierCurveTo(cx + cw / 2, cy + ch * 1.0, cx + cw * 0.3, cy + ch, cx, cy + ch); x.bezierCurveTo(cx - cw * 0.3, cy + ch, cx - cw / 2, cy + ch, cx - cw / 2, cy); x.fill();
+    x.fillStyle = "#3a2015"; x.beginPath(); x.ellipse(cx, cy, cw / 2, 0.018 * M, 0, 0, 7); x.fill();
+    x.strokeStyle = BLOCK.mix(P.cup_color, "#ffffff", 0.4); x.lineWidth = 2 * k.s; x.stroke();
+    var vg = x.createRadialGradient(w / 2, h / 2, M * 0.3, w / 2, h / 2, Math.max(w, h) * 0.75); vg.addColorStop(0, "rgba(0,0,0,0)"); vg.addColorStop(1, "rgba(0,0,0,.55)");
+    x.fillStyle = vg; x.fillRect(0, 0, w, h);
+  }
+  // wilayah hidup: gumpal uap periodik (periode membagi durasi -> render berulang mulus)
+  var uap = BLOCK.canvas(k.root, w, h), u = uap.ctx, Np = Math.max(4, Math.round(P.blob_count));
+  var T = k.dur / Math.max(1, Math.round(k.dur / P.period)), H = P.steam_height / 100 * h, R = P.window_width / 100 * M;
+  var gump = []; for (var j = 0; j < Np; j++) gump.push({ f: j / Np, x: r.range(-0.3, 0.3), a: r.range(0.6, 1.4), s: r.range(0, 6.28), n: r.int(1, 2) });
+  BLOCK.onTime(k.tl, function (t) {
+    u.clearRect(0, 0, w, h); u.globalCompositeOperation = "source-over";
+    var ph = t / T;
+    for (var j = 0; j < Np; j++) {
+      var g = gump[j], age = ((ph * g.n + g.f) % 1 + 1) % 1;
+      var px = cx + R * 0.25 * (g.x + 0.35 * Math.sin(age * 5 + g.s + 2 * Math.PI * g.n * ph) * age);
+      var py = cy - age * H, rad = (0.03 + 0.09 * age) * M * g.a, al = Math.sin(Math.PI * age) * 0.32 * P.strength;
+      var gr = u.createRadialGradient(px, py, 0, px, py, rad);
+      gr.addColorStop(0, BLOCK.rgba(P.steam_color, al)); gr.addColorStop(1, BLOCK.rgba(P.steam_color, 0));
+      u.fillStyle = gr; u.beginPath(); u.arc(px, py, rad, 0, 7); u.fill();
+    }
+    // jendela berbulu: hanya area di atas cangkir yang hidup
+    u.globalCompositeOperation = "destination-in";
+    var mk = u.createRadialGradient(cx, cy - H * 0.45, 0, cx, cy - H * 0.45, Math.max(R, H * 0.6));
+    mk.addColorStop(0, "rgba(0,0,0,1)"); mk.addColorStop(0.7, "rgba(0,0,0,.85)"); mk.addColorStop(1, "rgba(0,0,0,0)");
+    u.fillStyle = mk; u.fillRect(0, 0, w, h);
+    u.globalCompositeOperation = "source-over";
+  }, k.dur);
+});
+</script>

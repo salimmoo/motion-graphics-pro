@@ -1,0 +1,8 @@
+{
+  "script error: {}": "script error: {}",
+  "error {}": "error {}",
+  "console: {}": "console: {}",
+  "request failed: {}": "request failed: {}",
+  "asset {}: {}": "asset {}: {}",
+  "... and {} more (mgp check <composition> lists them all)": "... and {} more (mgp check <composition> lists them all)"
+}

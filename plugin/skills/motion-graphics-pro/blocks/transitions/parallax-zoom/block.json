@@ -1,0 +1,119 @@
+{
+ "id": "transitions/parallax-zoom",
+ "name": "Parallax Zoom",
+ "name_id": "Zoom Paralaks",
+ "category": "transitions",
+ "description": {
+  "id": "Adegan lama mengecil menjadi kartu di tengah kisi sementara kartu-kartu tetangga masuk berparalaks, kamera bergeser ke kartu adegan baru, lalu kartu itu membesar memenuhi layar dan tetangganya terlempar keluar lebih cepat.",
+  "en": "The old scene shrinks into the centre card of a grid as siblings parallax in, the camera pans to the next card, then that card scales up to fill the frame while siblings fly outward faster."
+ },
+ "tags": [
+  "transisi",
+  "zoom",
+  "paralaks",
+  "kartu",
+  "grid",
+  "unzoom",
+  "parallax",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "mode": {
+   "default": "full",
+   "type": "enum",
+   "options": [
+    "full",
+    "zoom",
+    "unzoom"
+   ],
+   "hint": "penuh = unzoom, geser, zoom; zoom = kisi langsung tampil lalu kartu baru membesar; unzoom = adegan lama mengecil ke kisi lalu pudar ke adegan baru",
+   "option_aliases": {
+    "penuh": "full"
+   }
+  },
+  "label": {
+   "default": [
+    "Pembuka",
+    "Riset",
+    "Sketsa",
+    "Warna",
+    "Gerak",
+    "Suara",
+    "Uji",
+    "Rilis",
+    "Arsip"
+   ],
+   "type": "list",
+   "hint": "Label kartu tetangga"
+  },
+  "palette": {
+   "default": [
+    "#efe4cc",
+    "#c9a77a",
+    "#a9b89a",
+    "#9db4c8",
+    "#d98c6a",
+    "#e2b65a"
+   ],
+   "type": "list",
+   "hint": "Warna kartu tetangga",
+   "aliases": [
+    "palet"
+   ]
+  },
+  "parallax": {
+   "default": 0.6,
+   "type": "number",
+   "hint": "Seberapa cepat tetangga terlempar dibanding kartu fokus",
+   "aliases": [
+    "paralaks"
+   ]
+  },
+  "bg_color": {
+   "default": "#1a1815",
+   "type": "color",
+   "hint": "Latar di belakang kisi",
+   "aliases": [
+    "warna_latar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@700;800",
+   "type": "font",
+   "hint": "Font label"
+  }
+ },
+ "duration": 3,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/paralaks-zoom",
+  "parallax-zoom",
+  "parallax-unzoom"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.6,
+  "duration": 4
+ }
+}

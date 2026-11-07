@@ -1,0 +1,139 @@
+{
+ "id": "text/svg-mask",
+ "name": "SVG Mask",
+ "name_id": "Topeng Wordmark SVG",
+ "category": "text",
+ "description": {
+  "id": "Media hanya terlihat melalui huruf wordmark SVG yang bisa diedit. Sapuan lembut berwarna aksen membuka media dari kiri ke kanan, lalu media terus bergerak pelan di dalam huruf. Tanpa gambar: pemandangan laut buatan SVG, atau isi url gambar sendiri.",
+  "en": "Media shows only through an editable SVG wordmark mask. A soft accent-coloured sweep reveals it left to right, then the media keeps drifting inside the letters. Built-in SVG seascape placeholder, or your own image url."
+ },
+ "tags": [
+  "teks",
+  "mask",
+  "svg",
+  "wordmark",
+  "reveal",
+  "media",
+  "sweep",
+  "text"
+ ],
+ "props": {
+  "text": {
+   "default": "LAUTAN",
+   "type": "text",
+   "hint": "Wordmark; \\n = baris baru",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "font": {
+   "default": "Anton",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "size": {
+   "default": 340,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "weight": {
+   "default": 400,
+   "type": "number",
+   "aliases": [
+    "berat"
+   ]
+  },
+  "color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "hint": "Warna garis luar huruf sebelum terbuka",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffb547",
+   "type": "color",
+   "hint": "Warna sapuan",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi vertikal (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "image": {
+   "default": "",
+   "type": "text",
+   "hint": "URL gambar media (kosong = pemandangan SVG bawaan)",
+   "aliases": [
+    "gambar"
+   ]
+  },
+  "start": {
+   "default": 0.3,
+   "type": "number",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "sweep_duration": {
+   "default": 1.6,
+   "type": "number",
+   "aliases": [
+    "durasi_sapu"
+   ]
+  },
+  "soft": {
+   "default": 0.16,
+   "type": "number",
+   "hint": "Kelembutan tepi sapuan (0-0.5)",
+   "aliases": [
+    "lembut"
+   ]
+  },
+  "outline": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Tampilkan garis luar huruf sebelum terbuka",
+   "aliases": [
+    "garis_luar"
+   ]
+  },
+  "media_motion": {
+   "default": 1,
+   "type": "number",
+   "hint": "Kekuatan gerak media di dalam huruf",
+   "aliases": [
+    "gerak_media"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "teks/topeng-svg",
+  "svg-mask-reveal"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Anton",
+   "Inter:wght@400;500;600;700;800;900"
+  ]
+ }
+}

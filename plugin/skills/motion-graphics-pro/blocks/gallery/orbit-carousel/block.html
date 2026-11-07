@@ -1,0 +1,81 @@
+<!-- Block gallery/orbit-carousel · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="gallery/orbit-carousel" data-start="0" data-duration="6" data-track-index="8" class="blk blk-gallery-orbit-carousel">
+<script type="application/json" data-block-props>
+{"mode": "ball-card", "image": [], "label": [], "count": 24, "radius": 0.34, "card_size": 190, "card_aspect": 0.8, "turns": 0.12, "swing": 0.6, "period": 2, "tilt": 18, "camera_distance": 2.8, "dolly": true, "title": "Fitur Baru", "body": "Semua catatan tersinkron otomatis di setiap perangkat.", "dot_color": "#9fd4ff", "card_color": "#ffffff", "text_color": "#16203a", "font": "Inter:wght@500;700;800", "seed": 7}
+</script>
+<div class="blk-panggung"></div>
+</div>
+<style>
+.blk-gallery-orbit-carousel{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-gallery-orbit-carousel .blk-panggung{position:absolute;inset:0}
+.blk-gallery-orbit-carousel .blk-kartu{position:absolute;left:0;top:0;overflow:hidden;box-shadow:0 1.1em 2.4em rgba(0,0,0,.4)}
+.blk-gallery-orbit-carousel .blk-no{position:absolute;left:9%;bottom:7%;font:800 calc(var(--kw)*.22px)/1 "Inter",system-ui,sans-serif;color:rgba(255,255,255,.94)}
+.blk-gallery-orbit-carousel .blk-lb{position:absolute;left:9%;top:8%;font:600 calc(var(--kw)*.075px)/1.1 "Inter",system-ui,sans-serif;color:rgba(255,255,255,.85);text-transform:uppercase;letter-spacing:.12em}
+.blk-gallery-orbit-carousel .blk-fitur{position:absolute;left:0;top:0;box-sizing:border-box;padding:1.6em 1.7em;border-radius:1.1em;box-shadow:0 1.4em 3em rgba(0,0,0,.35)}
+.blk-gallery-orbit-carousel .blk-fitur b{display:block;font-weight:800;font-size:2.1em;letter-spacing:-.02em;margin:.5em 0 .3em}
+.blk-gallery-orbit-carousel .blk-fitur p{margin:0;font-weight:500;font-size:1.15em;line-height:1.35;opacity:.75}
+.blk-gallery-orbit-carousel .blk-ikon{width:2.6em;height:2.6em;border-radius:.8em}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, w = k.w, h = k.h, st = k.root.querySelector(".blk-panggung"), M = Math.min(w, h);
+  var PAL = [["#ff9a62", "#d9465f"], ["#7ee0d6", "#2d6cdf"], ["#ffd36e", "#ef7b45"], ["#b69cff", "#5b3fd1"], ["#a8e48a", "#2f8f6a"], ["#ff9cc2", "#a23d8a"], ["#93d8ff", "#3150a8"], ["#f6c28b", "#8a4b2e"]];
+  var POLA = ["radial-gradient(circle at 72% 28%,rgba(255,255,255,.4) 0 14%,transparent 15%)", "repeating-linear-gradient(135deg,rgba(255,255,255,.14) 0 7%,transparent 7% 14%)",
+    "radial-gradient(rgba(255,255,255,.3) 14%,transparent 16%) 0 0/16% 12%", "linear-gradient(170deg,transparent 58%,rgba(0,0,0,.2) 58%)"];
+  var tunggal = P.mode === "single-card";
+  var N = tunggal ? 220 : Math.max(4, Math.round(P.count)), kw = P.card_size * k.s, kh = kw / (P.card_aspect || 0.8);
+  k.root.style.setProperty("--kw", kw);
+  // titik bola Fibonacci
+  var GA = Math.PI * (3 - Math.sqrt(5)), pts = [];
+  for (var i = 0; i < N; i++) { var y = 1 - 2 * (i + 0.5) / N, r = Math.sqrt(1 - y * y); pts.push([r * Math.cos(GA * i), y, r * Math.sin(GA * i)]); }
+  var g = P.image || [], off = k.random.int(0, 7), el = [], kv = null, fit = null;
+  if (tunggal) {
+    kv = BLOCK.canvas(st, w, h);
+    fit = BLOCK.el("div", { class: "blk-fitur", style: "width:" + 420 * k.s + "px;font-size:" + 16 * k.s + "px;background:" + P.card_color + ";color:" + P.text_color + ";font-family:" + BLOCK.family(P.font) }, st,
+      '<div class="blk-ikon" style="background:linear-gradient(140deg,#7ee0d6,#2d6cdf)"></div><b>' + BLOCK.esc(P.title) + "</b><p>" + BLOCK.esc(P.body) + "</p>");
+  } else for (i = 0; i < N; i++) {
+    var c = BLOCK.el("div", { class: "blk-kartu", style: "width:" + kw + "px;height:" + kh + "px;font-size:" + 16 * k.s + "px;border-radius:" + 14 * k.s + "px" }, st);
+    if (g.length) c.style.background = "center/cover no-repeat url('" + g[i % g.length] + "')";
+    else {
+      var p = PAL[(i + off) % PAL.length];
+      c.style.background = POLA[i % POLA.length] + ",linear-gradient(150deg," + p[0] + "," + p[1] + ")";
+      BLOCK.el("span", { class: "blk-no" }, c, ("0" + (i + 1)).slice(-2));
+      if (P.label && P.label[i]) BLOCK.el("span", { class: "blk-lb" }, c, BLOCK.esc(P.label[i]));
+    }
+    el.push(c);
+  }
+  function ayun(t) { var u = t / P.period, n = Math.floor(u), q = u - n; return n + q + P.swing * Math.sin(2 * Math.PI * q) / (2 * Math.PI); }
+  var D = P.camera_distance, R = P.radius * M, tl0 = P.tilt * Math.PI / 180;
+  function proyeksi(v, yaw, tilt, dist) {
+    var x = v[0] * Math.cos(yaw) + v[2] * Math.sin(yaw), z = -v[0] * Math.sin(yaw) + v[2] * Math.cos(yaw), y = v[1];
+    var y2 = y * Math.cos(tilt) - z * Math.sin(tilt), z2 = y * Math.sin(tilt) + z * Math.cos(tilt);
+    var f = dist / (dist - z2); return [w / 2 + x * R * f, h / 2 + y2 * R * f, f, z2];
+  }
+  BLOCK.onTime(k.tl, function (t) {
+    var yaw = ayun(t) * P.turns * 2 * Math.PI * P.period, masuk = BLOCK.smooth(t / 1.0), keluar = 1 - BLOCK.smooth((t - (k.dur - 0.5)) / 0.5);
+    var dist = P.dolly ? D + (1 - masuk) * 3 : D, tilt = tl0 + (P.dolly ? (1 - masuk) * 0.5 : 0);
+    if (tunggal) {
+      var x = kv.ctx; x.clearRect(0, 0, w, h);
+      for (var i = 0; i < N; i++) {
+        var q = proyeksi(pts[i], yaw * 0.6, tilt, dist), a = (0.25 + 0.75 * (q[3] + 1) / 2) * masuk * keluar;
+        x.globalAlpha = a; x.fillStyle = P.dot_color; x.beginPath(); x.arc(q[0], q[1], 4.2 * k.s * q[2], 0, 7); x.fill();
+      }
+      x.globalAlpha = 1;
+      // kartu mengorbit pada lintasan miring di luar bola
+      var ang = t / k.dur * Math.PI * 2 * 0.75 - 0.6, orb = [1.45 * Math.sin(ang), 0.25 * Math.sin(ang * 2) - 0.1, 1.45 * Math.cos(ang)];
+      var o = proyeksi(orb, 0, tilt * 0.6, dist), fw = 420 * k.s;
+      fit.style.transform = "translate(" + (o[0] - fw / 2) + "px," + (o[1] - fit.offsetHeight / 2) + "px) scale(" + (o[2] * 0.85 * (0.6 + 0.4 * masuk)).toFixed(4) + ") rotateZ(" + (-6 * Math.sin(ang)).toFixed(2) + "deg)";
+      fit.style.opacity = masuk * keluar;
+      fit.style.zIndex = 5; kv.canvas.style.zIndex = o[3] > 0 ? 1 : 9;
+      return;
+    }
+    for (i = 0; i < N; i++) {
+      var q2 = proyeksi(pts[i], yaw, tilt, dist), dd = (q2[3] + 1) / 2, c = el[i];
+      c.style.transform = "translate(" + (q2[0] - kw / 2) + "px," + (q2[1] - kh / 2) + "px) scale(" + (q2[2] * 0.75).toFixed(4) + ")";
+      c.style.zIndex = Math.round(dd * 1000);
+      c.style.opacity = (masuk * keluar).toFixed(3);
+      c.style.filter = "brightness(" + (0.4 + 0.6 * dd).toFixed(3) + ")";
+    }
+  }, k.dur);
+}, { font: true });
+</script>

@@ -1,0 +1,140 @@
+{
+ "id": "ui/segmentation",
+ "name": "Segmentation",
+ "name_id": "Banjir Segmentasi",
+ "category": "ui",
+ "description": {
+  "id": "Bacaan penglihatan mesin atas sebuah gambar: mask segmentasi tembus pandang membanjiri tiap wilayah dalam langkah scanline terkuantisasi, setiap wilayah mendapat braket tipis dan label mono, HUD berkedip dua frame secara deterministik, lalu mask dibersihkan.",
+  "en": "A machine-vision read of a subject: translucent segmentation masks flood on in quantized scanline steps, each region gets a thin bracket and mono chip, a deterministic two-frame HUD flicker rides the pass, then the masks clear."
+ },
+ "tags": [
+  "ui",
+  "ai",
+  "segmentasi",
+  "computer-vision",
+  "hud",
+  "mask",
+  "overlay",
+  "teknologi",
+  "segmentation"
+ ],
+ "props": {
+  "region": {
+   "default": [
+    {
+     "label": "ORANG 0.97",
+     "x": 39.4,
+     "y": 42.5,
+     "l": 7.4,
+     "t": 40,
+     "bentuk": "kapsul",
+     "warna": "#ff4d8d"
+    },
+    {
+     "label": "MATAHARI 0.91",
+     "x": 61.5,
+     "y": 21,
+     "l": 14.5,
+     "t": 26.5,
+     "bentuk": "elips",
+     "warna": "#ffd84d"
+    },
+    {
+     "label": "BUKIT 0.88",
+     "x": 30,
+     "y": 46,
+     "l": 70,
+     "t": 34,
+     "bentuk": "bukit",
+     "warna": "#4dffb8"
+    },
+    {
+     "label": "TANAH 0.93",
+     "x": 0,
+     "y": 76,
+     "l": 100,
+     "t": 24,
+     "bentuk": "kotak",
+     "warna": "#4da6ff"
+    }
+   ],
+   "type": "list",
+   "hint": "[{label, x, y, l, t (%), bentuk: kotak|elips|kapsul|bukit, warna}]",
+   "aliases": [
+    "wilayah"
+   ]
+  },
+  "steps": {
+   "default": 10,
+   "type": "number",
+   "hint": "Jumlah langkah scanline per banjir",
+   "aliases": [
+    "langkah"
+   ]
+  },
+  "dense": {
+   "default": 0.38,
+   "type": "number",
+   "hint": "Kepekatan mask (0..1)",
+   "aliases": [
+    "pekat"
+   ]
+  },
+  "pause": {
+   "default": 0.35,
+   "type": "number",
+   "hint": "Jeda antar wilayah (detik)",
+   "aliases": [
+    "jeda"
+   ]
+  },
+  "start": {
+   "default": 0.3,
+   "type": "number",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "delete": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Bersihkan mask di akhir",
+   "aliases": [
+    "hapus"
+   ]
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "hint": "Warna teks HUD",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "font": {
+   "default": "JetBrains Mono:wght@400;500;700",
+   "type": "font"
+  },
+  "seed": {
+   "default": 3,
+   "type": "number"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/segmentasi",
+  "segmentation-flood"
+ ],
+ "example": {
+  "bg": "photo",
+  "font": [
+   "JetBrains Mono:wght@400;500;700"
+  ]
+ }
+}

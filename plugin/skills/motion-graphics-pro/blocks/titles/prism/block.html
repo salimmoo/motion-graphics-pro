@@ -1,0 +1,49 @@
+<!-- Block titles/prism · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="titles/prism" data-start="0" data-duration="5" data-track-index="20" class="blk blk-titles-prism">
+<script type="application/json" data-block-props>
+{"text": "SINYAL\\nDARI JAUH", "color": "#ffffff", "left_color": "#ff2d55", "right_color": "#2d7bff", "slide": 26, "margin": 6, "breath": 4, "arc": 22, "font": "Anton", "size": 210, "line_spacing": 0.92, "position_y": 50}
+</script>
+<div class="blk-st"><div class="blk-bw"></div></div>
+</div>
+<style>
+.blk-titles-prism{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-titles-prism .blk-st{position:absolute;left:0;right:0;transform:translateY(-50%);perspective:calc(var(--s)*900px)}
+.blk-titles-prism .blk-bw{position:relative;display:grid;place-items:center}
+.blk-titles-prism .blk-ly{grid-area:1/1;text-align:center;white-space:pre;text-transform:uppercase;letter-spacing:.01em}
+.blk-titles-prism .blk-fr{mix-blend-mode:screen}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, D = k.dur, E = BLOCK.el, R = k.root;
+  var st = R.querySelector(".blk-st"), bw = R.querySelector(".blk-bw");
+  st.style.top = P.position_y + "%";
+  R.style.cssText += ";--s:" + s;
+  var teks = String(P.text).replace(/\\n/g, "\n");
+  var nBaris = teks.split("\n").length, maxLen = Math.max.apply(null, teks.split("\n").map(function (b) { return b.length; }));
+  var fs = Math.min(P.size * s, k.w * 0.9 / Math.max(3, maxLen * 0.5), k.h * 0.8 / (nBaris * P.line_spacing));
+  bw.style.cssText = "font-family:" + BLOCK.family(P.font) + ";font-size:" + Math.round(fs) + "px;line-height:" + P.line_spacing;
+  // tiga lapis: pinggiran merah & biru (screen) + inti
+  var kiri = E("div", { class: "blk-ly blk-fr", style: "color:" + P.left_color }, bw), kanan = E("div", { class: "blk-ly blk-fr", style: "color:" + P.right_color }, bw);
+  var inti = E("div", { class: "blk-ly", style: "color:" + P.color }, bw);
+  kiri.textContent = kanan.textContent = inti.textContent = teks;
+  var g = P.slide * s, o = { f: 1, b: 0 };
+  function pinggir() {
+    var d = g * o.f + (P.margin + o.b) * s;
+    kiri.style.transform = "translate(" + (-d).toFixed(2) + "px," + (d * 0.18).toFixed(2) + "px)";
+    kanan.style.transform = "translate(" + d.toFixed(2) + "px," + (-d * 0.18).toFixed(2) + "px)";
+    kiri.style.opacity = kanan.style.opacity = (0.75 + 0.25 * o.f).toFixed(3);
+  }
+  // masuk: fokus dari kabur, pinggiran lebar lalu mengendap
+  tl.fromTo(bw, { filter: "blur(" + Math.round(28 * s) + "px)", autoAlpha: 0, scale: 1.12 }, { filter: "blur(0px)", autoAlpha: 1, scale: 1, duration: 1.1, ease: "power3.out" }, 0.1);
+  tl.fromTo(o, { f: 1 }, { f: 0, duration: 1.4, ease: "power3.out", onUpdate: pinggir }, 0.3);
+  // napas pinggiran (terhitung, bukan tak terhingga)
+  var siklus = 1.3, n = Math.max(1, Math.floor((D - 2) / siklus));
+  tl.fromTo(o, { b: 0 }, { b: P.breath, duration: siklus / 2, ease: "sine.inOut", yoyo: true, repeat: n * 2 - 1, onUpdate: pinggir, immediateRender: false }, 1.6);
+  // busur perspektif dan hanyut skala pelan
+  tl.fromTo(bw, { rotationX: P.arc }, { rotationX: 0, duration: 1.6, ease: "power3.out" }, 0.1)
+    .fromTo(st, { scale: 1 }, { scale: 1.05, duration: D, ease: "none" }, 0)
+    .fromTo(bw, { rotationY: -3 }, { rotationY: 3, duration: D, ease: "sine.inOut", immediateRender: false }, 0);
+  tl.to(bw, { autoAlpha: 0, filter: "blur(" + Math.round(16 * s) + "px)", duration: 0.5, ease: "power2.in" }, D - 0.55);
+  pinggir();
+}, { font: true });
+</script>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Chip Ring · block example accents/chip-ring</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;800&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="5.5">
+<div id="adegan" class="adegan ad-gelap"></div>
+<!-- Block accents/chip-ring · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-chip-ring" data-block="accents/chip-ring" data-start="0" data-duration="5" data-track-index="30" class="blk blk-accents-chip-ring">
+<script type="application/json" data-block-props>
+{"mode": "surround", "subject": "Kamu", "item": ["Rapat pagi", "Tenggat laporan", "Email klien", "Revisi desain", "Tagihan", "Pesan grup", "Jadwal ulang", "Presentasi"], "count": 26, "converge": true, "pause": 0.12, "radius": 300, "subject_size": 240, "color": "#f5f3ee", "accent_color": "#7cc4ff", "subject_color": "#3b5bdb", "card_color": "#252838", "ping_color": "#ff4d4f", "font": "Inter:wght@500;600;800", "position_x": 50, "position_y": 50, "seed": 3}
+</script>
+<div class="blk-redup"></div>
+<div class="blk-pusat"><div class="blk-sub"></div></div>
+</div>
+<style>
+.blk-accents-chip-ring{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-accents-chip-ring .blk-redup{position:absolute;inset:0;opacity:0}
+.blk-accents-chip-ring .blk-pusat{position:absolute;left:0;top:0;width:0;height:0}
+.blk-accents-chip-ring .blk-sub{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:800;line-height:1.05}
+.blk-accents-chip-ring .blk-c{position:absolute;left:0;top:0;white-space:nowrap;display:flex;align-items:center;box-sizing:border-box}
+.blk-accents-chip-ring .blk-c i{display:block;border-radius:50%;flex:none}
+</style>
+<script>
+BLOCK.mount("blk-chip-ring", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, rng = k.random, fs = function (v) { return (v * s).toFixed(1) + "px"; };
+  var pus = R.querySelector(".blk-pusat"), sub = R.querySelector(".blk-sub"), redup = R.querySelector(".blk-redup"), desak = P.mode === "push";
+  R.style.fontFamily = BLOCK.family(P.font); R.style.color = P.color;
+  pus.style.left = P.position_x + "%"; pus.style.top = P.position_y + "%";
+  var sr = P.subject_size * s / 2;
+  sub.style.cssText += ";left:" + (-sr) + "px;top:" + (-sr) + "px;width:" + 2 * sr + "px;height:" + 2 * sr + "px;font-size:" + fs(P.subject_size * 0.16) +
+    ";background:radial-gradient(circle at 35% 30%," + BLOCK.mix(P.subject_color, "#ffffff", 0.25) + "," + P.subject_color + ");box-shadow:0 0 0 " + fs(10) + " " + BLOCK.rgba(P.subject_color, 0.18) + ",0 " + fs(30) + " " + fs(80) + " rgba(0,0,0,.35)";
+  sub.textContent = P.subject;
+  redup.style.background = "radial-gradient(ellipse at " + P.position_x + "% " + P.position_y + "%,rgba(0,0,0,0) 30%,rgba(0,0,0,.75) 100%)";
+  var rx = Math.min(k.w * 0.42, P.radius * s * (k.w > k.h ? 1.6 : 1)), ry = Math.min(k.h * 0.4, P.radius * s * (k.w > k.h ? 1 : 1.5));
+  var items = P.item || [], t0 = 0.5;
+  tl.fromTo(sub, { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)" }, 0);
+  function chip(label, ping) {
+    var c = BLOCK.el("div", { class: "blk-c" }, pus);
+    if (ping) {
+      var z = 54 * s; c.style.cssText += ";width:" + z + "px;height:" + z + "px;justify-content:center;border-radius:50%;background:" + P.ping_color + ";color:#fff;font-weight:800;font-size:" + fs(24);
+      c.textContent = label;
+    } else {
+      c.style.cssText += ";font-size:" + fs(desak ? 24 : 27) + ";padding:" + fs(desak ? 14 : 12) + " " + fs(24) + ";border-radius:" + fs(desak ? 18 : 40) +
+        (desak ? ";background:" + P.card_color + ";box-shadow:0 " + fs(10) + " " + fs(26) + " rgba(0,0,0,.3);font-weight:600" : ";border:1px solid " + BLOCK.rgba(P.color, 0.55) + ";background:" + BLOCK.rgba(P.color, 0.04));
+      BLOCK.el("i", { style: "width:" + fs(desak ? 20 : 9) + ";height:" + fs(desak ? 20 : 9) + ";margin-right:" + fs(12) + ";background:" + (desak ? BLOCK.mix(P.accent_color, P.ping_color, rng()) : P.accent_color) + (desak ? ";border-radius:" + fs(6) : "") }, c);
+      c.appendChild(document.createTextNode(label));
+    }
+    return c;
+  }
+  if (!desak) {
+    // kepung: chip garis rambut berkumpul di cincin elips, lalu opsional merapat ke dalam
+    var n = items.length;
+    items.forEach(function (it, i) {
+      var c = chip(it), a = -Math.PI / 2 + i / n * Math.PI * 2, cw = c.offsetWidth / 2, ch = c.offsetHeight / 2;
+      var x = Math.cos(a) * rx - cw, y = Math.sin(a) * ry - ch, t = t0 + i * P.pause;
+      tl.fromTo(c, { x: x * 1.45, y: y * 1.45 + ch * 0.45, opacity: 0, filter: "blur(8px)" }, { x: x, y: y, opacity: 1, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, t);
+      if (P.converge) tl.to(c, { x: Math.cos(a) * rx * 0.7 - cw, y: Math.sin(a) * ry * 0.7 - ch, duration: 1.1, ease: "power2.inOut" }, k.dur - 1.9);
+    });
+    if (P.converge) tl.fromTo(redup, { opacity: 0 }, { opacity: 0.7, duration: 1.1, ease: "power2.inOut" }, k.dur - 1.9);
+  } else {
+    // desak: tugas, tab, ping datang makin cepat dari luar bingkai dan menumpuk di sekitar subjek yang tenang
+    var N = P.count, span = k.dur - 1.6, far = Math.hypot(k.w, k.h) * 0.62;
+    for (var i = 0; i < N; i++) {
+      var ping = i % 4 === 3, c = chip(ping ? String(rng.int(2, 99)) : items[i % Math.max(items.length, 1)] || "", ping);
+      var a = rng() * Math.PI * 2, r = rng.range(0.5, 1.05), cw = c.offsetWidth / 2, ch = c.offsetHeight / 2;
+      var tx = Math.cos(a) * rx * r - cw, ty = Math.sin(a) * ry * r - ch, t = t0 + span * Math.sqrt(i / N), d = BLOCK.lerp(0.9, 0.45, i / N);
+      tl.fromTo(c, { x: Math.cos(a) * far - cw, y: Math.sin(a) * far - ch, rotation: rng.range(-25, 25), opacity: 1 },
+        { x: tx, y: ty, rotation: rng.range(-8, 8), duration: d, ease: "power3.in" }, t - d);
+      tl.fromTo(c, { scale: 1 }, { scale: 1.08, duration: 0.07, ease: "power1.out", yoyo: true, repeat: 1, immediateRender: false }, t);
+    }
+    tl.fromTo(redup, { opacity: 0 }, { opacity: 0.65, duration: span, ease: "power2.in" }, t0);
+    tl.fromTo(sub, { scale: 1 }, { scale: 1.03, duration: 1.2, ease: "sine.inOut", yoyo: true, repeat: 1 }, 1);
+  }
+  tl.to(R, { opacity: 0, duration: 0.4, ease: "power2.in" }, k.dur - 0.45);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 5.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5.5);
+</script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+{
+ "id": "labels/bold",
+ "name": "Bold",
+ "name_id": "Label Nama Tebal",
+ "category": "labels",
+ "description": {
+  "id": "Lower third berenergi tinggi: blok gelap yang tersapu dengan nama menghentak dan tag aksen, blok warna yang meluncur dengan pantulan, dua bilah bertumpuk dari arah berlawanan, atau gaya berita dengan kotak rapat dan bayangan tegas.",
+  "en": "High-energy lower third: dark block wipe with slam-up name and accent tag, overshooting colour block, two stacked bars from opposite sides, or news style with tight boxes and hard drop shadows."
+ },
+ "tags": [
+  "label",
+  "lower-third",
+  "nama",
+  "tebal",
+  "berita",
+  "podcast",
+  "bilah",
+  "labels",
+  "bold"
+ ],
+ "props": {
+  "style": {
+   "default": "block",
+   "type": "enum",
+   "options": [
+    "block",
+    "color",
+    "stack",
+    "news"
+   ],
+   "hint": "blok = blok gelap + tag aksen; warna = blok warna aksen; tumpuk = dua bilah; berita = kotak putih + bayangan aksen",
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "blok": "block",
+    "warna": "color",
+    "tumpuk": "stack",
+    "berita": "news"
+   }
+  },
+  "name": {
+   "default": "Dimas Arya",
+   "type": "text",
+   "aliases": [
+    "nama"
+   ]
+  },
+  "role": {
+   "default": "Pembawa Acara",
+   "type": "text",
+   "aliases": [
+    "peran"
+   ]
+  },
+  "accent_color": {
+   "default": "#ff3d2e",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "dark_color": {
+   "default": "#111216",
+   "type": "color",
+   "hint": "Warna blok gelap",
+   "aliases": [
+    "warna_gelap"
+   ]
+  },
+  "position": {
+   "default": "bottom-left",
+   "type": "enum",
+   "options": [
+    "bottom-left",
+    "bottom-right",
+    "bottom-center"
+   ],
+   "aliases": [
+    "posisi"
+   ],
+   "option_aliases": {
+    "kiri-bawah": "bottom-left",
+    "kanan-bawah": "bottom-right",
+    "tengah-bawah": "bottom-center"
+   }
+  },
+  "enter": {
+   "default": "style",
+   "type": "enum",
+   "options": [
+    "style",
+    "sweep",
+    "slide",
+    "pop",
+    "fade"
+   ],
+   "hint": "gaya = animasi masuk khas tiap gaya",
+   "aliases": [
+    "masuk"
+   ],
+   "option_aliases": {
+    "gaya": "style",
+    "sapu": "sweep",
+    "geser": "slide",
+    "pudar": "fade"
+   }
+  },
+  "exit": {
+   "default": "sweep",
+   "type": "enum",
+   "options": [
+    "sweep",
+    "fade",
+    "down",
+    "no"
+   ],
+   "aliases": [
+    "keluar"
+   ],
+   "option_aliases": {
+    "sapu": "sweep",
+    "pudar": "fade",
+    "turun": "down",
+    "tidak": "no"
+   }
+  },
+  "font": {
+   "default": "Oswald:wght@500;600;700",
+   "type": "font",
+   "hint": "Font nama (condensed cocok)"
+  },
+  "font2": {
+   "default": "JetBrains Mono:wght@500;700",
+   "type": "font",
+   "hint": "Font peran (mono)"
+  },
+  "size": {
+   "default": 64,
+   "type": "number",
+   "hint": "Ukuran nama (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "uppercase": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "huruf_besar"
+   ]
+  },
+  "bottom": {
+   "default": 11,
+   "type": "number",
+   "hint": "Jarak dari bawah (%)",
+   "aliases": [
+    "bawah"
+   ]
+  },
+  "edge": {
+   "default": 6,
+   "type": "number",
+   "hint": "Jarak dari tepi samping (%)",
+   "aliases": [
+    "tepi"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "label/tebal",
+  "lt-bold-block",
+  "lt-color-block",
+  "lt-stack-bars",
+  "lower-third-bild"
+ ],
+ "example": {
+  "bg": "photo",
+  "font": [
+   "Oswald:wght@500;600;700",
+   "JetBrains Mono:wght@500;700"
+  ]
+ }
+}

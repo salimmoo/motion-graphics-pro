@@ -1,0 +1,129 @@
+{
+ "id": "text/stitch",
+ "name": "Stitch",
+ "name_id": "Teks Jahitan",
+ "category": "text",
+ "description": {
+  "id": "Teks dijahit huruf demi huruf: alfabet garis tunggal buatan sendiri digambar sebagai tusukan benang berjarak dengan sudut sedikit acak, lubang jarum, jarum yang memimpin di ujung benang, dan ekor benang yang terlontar di akhir tiap huruf.",
+  "en": "Text stitched letter by letter: a custom single-stroke alphabet drawn as spaced thread stitches with seeded angle jitter, needle holes, a leading needle and a thread-tail overshoot at the end of each letter."
+ },
+ "tags": [
+  "teks",
+  "jahit",
+  "stitch",
+  "benang",
+  "kerajinan",
+  "handmade",
+  "garis",
+  "text"
+ ],
+ "props": {
+  "text": {
+   "default": "JAHIT\nRAPI",
+   "type": "text",
+   "hint": "Huruf A-Z, 0-9, . , ! ? - ; \\n = baris baru",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "size": {
+   "default": 220,
+   "type": "number",
+   "hint": "Tinggi huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "color": {
+   "default": "#d6453d",
+   "type": "color",
+   "hint": "Warna benang",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#3a2c24",
+   "type": "color",
+   "hint": "Warna lubang jarum",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "needle_color": {
+   "default": "#a9b2bc",
+   "type": "color",
+   "aliases": [
+    "warna_jarum"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi vertikal (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "stitch_length": {
+   "default": 1,
+   "type": "number",
+   "hint": "Faktor panjang tusukan",
+   "aliases": [
+    "panjang_tusuk"
+   ]
+  },
+  "thickness": {
+   "default": 1,
+   "type": "number",
+   "hint": "Faktor tebal benang",
+   "aliases": [
+    "tebal"
+   ]
+  },
+  "start": {
+   "default": 0.3,
+   "type": "number",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "letter_duration": {
+   "default": 0.55,
+   "type": "number",
+   "aliases": [
+    "durasi_huruf"
+   ]
+  },
+  "pause": {
+   "default": 0.32,
+   "type": "number",
+   "hint": "Jeda mulai antar huruf",
+   "aliases": [
+    "jeda"
+   ]
+  },
+  "seed": {
+   "default": "jahit",
+   "type": "text"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "teks/jahit",
+  "stitched-text-draw"
+ ],
+ "example": {
+  "bg": "paper",
+  "font": [
+   "Inter:wght@400;500;600;700;800;900"
+  ]
+ }
+}

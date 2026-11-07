@@ -1,0 +1,216 @@
+{
+ "id": "accents/path-arc",
+ "name": "Path Arc",
+ "name_id": "Busur & Jalur",
+ "category": "accents",
+ "description": {
+  "id": "Label callout terbang mengikuti busur atau jalur SVG bebas, berputar mengikuti arah garis singgung, lalu tegak kembali saat berhenti supaya terbaca. Masuk melengkung, diam, lalu keluar melengkung; jejak tipis tergambar di belakangnya. Tanpa plugin MotionPath.",
+  "en": "A callout flies along an arc or any SVG path with tangent rotation, levels out at rest for legibility, then exits on a curve, leaving a thin trail. Curved entry and exit without the MotionPath plugin."
+ },
+ "tags": [
+  "aksen",
+  "jalur",
+  "busur",
+  "motion-path",
+  "callout",
+  "rotasi",
+  "lintasan",
+  "accents",
+  "path",
+  "arc"
+ ],
+ "props": {
+  "mode": {
+   "default": "arc",
+   "type": "enum",
+   "options": [
+    "arc",
+    "path"
+   ],
+   "hint": "busur = dari titik ke titik; jalur = path SVG bebas (props jalur)",
+   "option_aliases": {
+    "busur": "arc",
+    "jalur": "path"
+   }
+  },
+  "text": {
+   "default": "Fitur baru",
+   "type": "text",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "from_x": {
+   "default": 8,
+   "type": "number",
+   "hint": "Titik awal busur (%)",
+   "aliases": [
+    "dari_x"
+   ]
+  },
+  "from_y": {
+   "default": 86,
+   "type": "number",
+   "aliases": [
+    "dari_y"
+   ]
+  },
+  "to_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Titik henti (%)",
+   "aliases": [
+    "ke_x"
+   ]
+  },
+  "to_y": {
+   "default": 46,
+   "type": "number",
+   "aliases": [
+    "ke_y"
+   ]
+  },
+  "exit": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Lanjut terbang keluar setelah diam",
+   "aliases": [
+    "keluar"
+   ]
+  },
+  "exit_x": {
+   "default": 108,
+   "type": "number",
+   "hint": "Titik akhir busur keluar (%)",
+   "aliases": [
+    "keluar_x"
+   ]
+  },
+  "exit_y": {
+   "default": 30,
+   "type": "number",
+   "aliases": [
+    "keluar_y"
+   ]
+  },
+  "arc_height": {
+   "default": 26,
+   "type": "number",
+   "hint": "Lengkung busur (% tinggi)",
+   "aliases": [
+    "tinggi_busur"
+   ]
+  },
+  "path": {
+   "default": "M -6 70 C 18 96, 32 30, 50 50 S 82 6, 108 26",
+   "type": "text",
+   "hint": "Path SVG dalam koordinat persen (M L C Q S T absolut)",
+   "aliases": [
+    "jalur"
+   ]
+  },
+  "stop": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Titik diam di sepanjang jalur (0..1, mode jalur)",
+   "aliases": [
+    "henti"
+   ]
+  },
+  "rotation": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Berputar mengikuti garis singgung",
+   "aliases": [
+    "rotasi"
+   ]
+  },
+  "show_path": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Garis pemandu & jejak",
+   "aliases": [
+    "tampil_jalur"
+   ]
+  },
+  "enter_duration": {
+   "default": 1.1,
+   "type": "number",
+   "aliases": [
+    "durasi_masuk"
+   ]
+  },
+  "exit_duration": {
+   "default": 0.9,
+   "type": "number",
+   "aliases": [
+    "durasi_keluar"
+   ]
+  },
+  "ease": {
+   "default": "power3.out",
+   "type": "ease",
+   "hint": "Ease masuk"
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "hint": "Warna chip",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "text_color": {
+   "default": "#15161d",
+   "type": "color",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "accent_color": {
+   "default": "#ff6a3d",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "path_color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna_jalur"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@700",
+   "type": "font"
+  },
+  "size": {
+   "default": 44,
+   "type": "number",
+   "hint": "px pada 1080",
+   "aliases": [
+    "ukuran"
+   ]
+  }
+ },
+ "duration": 4,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "aksen/busur-jalur",
+  "arc-motion-path",
+  "offset-path-traveler"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@700"
+  ]
+ }
+}

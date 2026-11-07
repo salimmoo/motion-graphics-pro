@@ -1,0 +1,26 @@
+<!-- Block paper/origami · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="paper/origami" data-start="0" data-duration="8" data-track-index="4" class="blk blk-paper-origami">
+<script type="application/json" data-block-props>
+{"front_color": "#d94a3f", "front_color2": "#e8675a", "back_color": "#f7eedb", "fold_lines": true, "open": true, "label": false, "bg": "paper", "bg_color": "#efe6d2", "size": 1}
+</script>
+</div>
+<style>
+.blk-paper-origami{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.blk-paper-origami .blk-wadah{position:absolute;inset:0}
+.blk-paper-origami canvas{position:absolute;inset:0;width:100% !important;height:100% !important}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+var P = k.P;
+  if (!window.MGP || !MGP.origamiFold) { console.error("[blok] paper/origami needs lib:mgp.js"); return; }
+  // ukuran logis: sisi pendek 720 (skala rancangan modul), piksel kanvas = resolusi penuh lewat dpr
+  var f = Math.min(k.w, k.h) / 720, W = Math.round(k.w / f), H = Math.round(k.h / f);
+  var wadah = BLOCK.el("div", { class: "blk-wadah" }, k.root);
+  var R = Math.min(W * 0.3, H * 0.36) * (+P.size || 1);
+  var inst = MGP.origamiFold.create(wadah, { width: W, height: H, dpr: f, fit: true, duration: k.dur, loop: false,
+    front: P.front_color, frontAlt: P.front_color2, back: P.back_color, backAlt: BLOCK.mix(P.back_color, "#b89a6a", 0.25),
+    crease: !!P.fold_lines, unfold: !!P.open, stepLabels: !!P.label, size: R,
+    bg: P.bg === "paper" ? "paper" : P.bg === "color" ? P.bg_color : null });
+  return Promise.resolve(inst.ready).then(function () { BLOCK.onTime(k.tl, function (t) { inst.seek(t); }, k.dur); });
+});
+</script>

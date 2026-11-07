@@ -1,0 +1,130 @@
+{
+ "id": "titles/cta",
+ "name": "CTA",
+ "name_id": "Penutup Ajakan (CTA)",
+ "category": "titles",
+ "description": {
+  "id": "Penutup video dengan ajakan: kalimat aksi berskala besar mendarat per kata dan satu kapsul tombol meletup sekali; lockup dengan baris tersingkap, kapsul aksen, dan teks kecil pendukung; atau kartu akhir aplikasi dengan judul pendek di atas dua lencana unduh generik berukuran sama.",
+  "en": "Call-to-action close: a display action line lands per word and one CTA capsule pops with a single overshoot; a lockup with revealed lines, accent capsule and microcopy; or a mobile end card with a short headline above two equal-size generic download badges."
+ },
+ "tags": [
+  "judul",
+  "cta",
+  "ajakan",
+  "penutup",
+  "tombol",
+  "end-card",
+  "aplikasi",
+  "lencana",
+  "titles"
+ ],
+ "props": {
+  "mode": {
+   "default": "outro",
+   "type": "enum",
+   "options": [
+    "outro",
+    "lockup",
+    "store"
+   ],
+   "option_aliases": {
+    "penutup": "outro",
+    "toko": "store"
+   }
+  },
+  "title": {
+   "default": "Mulai rapikan keuanganmu hari ini",
+   "type": "text",
+   "hint": "Kalimat aksi; \n = baris baru (mode lockup per baris)",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "button": {
+   "default": "Coba gratis",
+   "type": "text",
+   "aliases": [
+    "tombol"
+   ]
+  },
+  "micro": {
+   "default": "Tanpa kartu kredit · Batal kapan saja",
+   "type": "text",
+   "hint": "Teks kecil pendukung (lockup, toko)",
+   "aliases": [
+    "mikro"
+   ]
+  },
+  "badge": {
+   "default": [
+    [
+     "Unduh di",
+     "Toko Aplikasi"
+    ],
+    [
+     "Dapatkan di",
+     "Pasar Aplikasi"
+    ]
+   ],
+   "type": "list",
+   "hint": "[[teks atas, nama toko], ...] maks 2, generik tanpa logo",
+   "aliases": [
+    "lencana"
+   ]
+  },
+  "color": {
+   "default": "#15161a",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#2f6bff",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg": {
+   "default": "#f5f2ec",
+   "type": "color",
+   "hint": "Kosong = transparan",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;700;800;900",
+   "type": "font"
+  },
+  "size": {
+   "default": 120,
+   "type": "number",
+   "hint": "Ukuran judul (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  }
+ },
+ "duration": 4,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "judul/cta",
+  "cta-close",
+  "cta-lockup",
+  "store-badge-lockup"
+ ],
+ "example": {
+  "bg": "empty",
+  "font": [
+   "Inter:wght@500;700;800;900"
+  ]
+ }
+}

@@ -1,0 +1,33 @@
+<!-- Block camera/float · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="camera/float" data-start="0" data-duration="8" data-track-index="30" class="blk blk-camera-float">
+<script type="application/json" data-block-props>
+{"target": "#adegan", "cycle": 4, "rotation": 0.8, "breath": 0.025, "slide": 10, "sweep": true, "sweep_color": "#ffffff", "sweep_strength": 0.16, "overscan": true}
+</script>
+<div class="blk-sapu"></div>
+</div>
+<style>
+.blk-camera-float{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-camera-float .blk-sapu{position:absolute;top:-25%;bottom:-25%;width:34%;left:0;mix-blend-mode:screen;transform:skewX(-18deg);opacity:0}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, T = BLOCK.find(P.target), sp = k.root.querySelector(".blk-sapu");
+  var S = Math.max(0.5, +P.cycle || 4), TAU = Math.PI * 2, g = (+P.slide || 0) * k.s;
+  sp.style.background = "linear-gradient(90deg,transparent," + BLOCK.rgba(P.sweep_color, P.sweep_strength) + " 50%,transparent)";
+  if (T) T.style.transformOrigin = "50% 50%";
+  // overscan: perbesar sedikit supaya rotasi/geser tidak membuka tepi adegan layar penuh
+  var os = P.overscan ? (Math.abs(P.rotation) * 0.0175 * (k.w + k.h) * 0.5 + 2.2 * Math.abs(g)) / Math.min(k.w, k.h) : 0;
+  // semua gerak = harmonik bulat dari satu siklus, jadi pas berulang (loop-exact) dan tahan seek
+  BLOCK.onTime(k.tl, function (t) {
+    var ph = TAU * t / S;
+    if (T) T.style.transform = "translate(" + (g * 0.6 * Math.sin(2 * ph)).toFixed(2) + "px," + (g * Math.cos(ph) - g).toFixed(2) + "px) rotate(" +
+      (P.rotation * Math.sin(ph)).toFixed(4) + "deg) scale(" + (1 + os + P.breath * (0.5 - 0.5 * Math.cos(ph))).toFixed(5) + ")";
+    if (P.sweep) {
+      // satu sapuan cahaya pelan per dua siklus, terlihat di sekitar paruh pertama
+      var f = (t / (2 * S)) % 1, x = BLOCK.remap(f, 0.05, 0.6, -45, 125);
+      sp.style.left = x + "%";
+      sp.style.opacity = Math.sin(Math.PI * BLOCK.progress(f, 0.05, 0.6)).toFixed(3);
+    }
+  }, k.dur);
+});
+</script>

@@ -1,0 +1,25 @@
+<!-- Block characters/object-face · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="characters/object-face" data-start="0" data-duration="7" data-track-index="6" class="blk blk-characters-object-face">
+<script type="application/json" data-block-props>
+{"object": "cup", "mood": [[0, "normal"], [2, "senang"], [4.4, "kaget"]], "jump": [4.4], "scene": "cafe", "steam": true, "emote": true, "scale": 0.86, "position_x": 0}
+</script>
+</div>
+<style>
+.blk-characters-object-face{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.blk-characters-object-face .blk-wadah{position:absolute;inset:0}
+.blk-characters-object-face canvas{position:absolute;inset:0;width:100% !important;height:100% !important}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+var P = k.P;
+  if (!window.MGP || !MGP.chibiObject) { console.error("[blok] characters/object-face needs lib:mgp.js"); return; }
+  // ukuran logis: sisi pendek 720 (skala rancangan modul), piksel kanvas = resolusi penuh lewat dpr
+  var f = Math.min(k.w, k.h) / 720, W = Math.round(k.w / f), H = Math.round(k.h / f);
+  var wadah = BLOCK.el("div", { class: "blk-wadah" }, k.root);
+  var body = { cup: "cup", box: "box", phone: "phone", pot: "pot", ball: "ball" }[P.object] || "cup";
+  var inst = MGP.chibiObject.create(wadah, { width: W, height: H, dpr: f, fit: true, duration: k.dur, body: body,
+    moods: P.mood, jumps: P.jump || [], scene: { cafe: "cafe", plain: "plain", none: "none" }[P.scene] || "cafe",
+    steam: P.steam ? null : false, emote: !!P.emote, scale: +P.scale || 0.86, x: +P.position_x || 0 });
+  return Promise.resolve(inst.ready).then(function () { BLOCK.onTime(k.tl, function (t) { inst.seek(t); }, k.dur); });
+});
+</script>

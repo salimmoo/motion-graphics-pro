@@ -1,0 +1,161 @@
+{
+ "id": "subtitles/neon",
+ "name": "Neon",
+ "name_id": "Subtitle Neon",
+ "category": "subtitles",
+ "description": {
+  "id": "Kata menyala seperti tabung neon saat diucapkan: berkedip lalu bersinar. Gaya glow (sian + magenta untuk kata kunci) atau aksen (banyak warna, kata melayang bergoyang).",
+  "en": "Words ignite like neon tubes as they are spoken: flicker, then glow. Glow style (cyan with magenta keywords) or accent style (multi-colour with wiggle drift)."
+ },
+ "tags": [
+  "subtitle",
+  "caption",
+  "neon",
+  "glow",
+  "malam",
+  "subtitles"
+ ],
+ "props": {
+  "text": {
+   "default": "Malam ini kota bersinar lebih *terang* dari *biasanya*",
+   "type": "text",
+   "hint": "Teks subtitle; *kata* = kata kunci (bila didukung). Dipakai bila kata kosong",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "words": {
+   "default": [],
+   "type": "timed-words",
+   "hint": "[{teks, mulai, akhir}] dari transkrip; kosong = dihitung dari teks",
+   "aliases": [
+    "kata"
+   ]
+  },
+  "kps": {
+   "default": 2.4,
+   "type": "number",
+   "hint": "Kata per detik bila tanpa transkrip"
+  },
+  "max_words": {
+   "default": 3,
+   "type": "number",
+   "hint": "Maksimum kata per halaman subtitle",
+   "aliases": [
+    "maks_kata"
+   ]
+  },
+  "font": {
+   "default": "Tilt Neon:wght@400",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "size": {
+   "default": 84,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "color": {
+   "default": "#f4fdff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "bottom": {
+   "default": 16,
+   "type": "number",
+   "hint": "Jarak dari bawah (%)",
+   "aliases": [
+    "bawah"
+   ]
+  },
+  "uppercase": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "huruf_besar"
+   ]
+  },
+  "style": {
+   "default": "glow",
+   "type": "enum",
+   "options": [
+    "glow",
+    "accent"
+   ],
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "aksen": "accent"
+   }
+  },
+  "neon_color": {
+   "default": "#19e6ff",
+   "type": "color",
+   "aliases": [
+    "warna_neon"
+   ]
+  },
+  "accent_color": {
+   "default": "#ff2bd6",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "palette": {
+   "default": [
+    "#ff2bd6",
+    "#ffe14a",
+    "#5cff8a",
+    "#ff8a2b"
+   ],
+   "type": "list",
+   "hint": "Warna untuk gaya aksen",
+   "aliases": [
+    "palet"
+   ]
+  },
+  "keywords": {
+   "default": [],
+   "type": "list",
+   "hint": "Daftar kata kunci (tanpa tanda baca) selain penanda *kata*",
+   "aliases": [
+    "kunci"
+   ]
+  },
+  "wobble": {
+   "default": 1,
+   "type": "number",
+   "hint": "Kekuatan goyang (gaya aksen)",
+   "aliases": [
+    "goyang"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "subtitle/neon",
+  "caption-neon-glow",
+  "caption-neon-accent"
+ ],
+ "example": {
+  "bg": "dark",
+  "aspect": "9:16",
+  "font": [
+   "Tilt Neon:wght@400"
+  ]
+ }
+}

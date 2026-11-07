@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1080x1920">
+<title>Notification · block example ui/notification</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1080" data-height="1920" data-duration="4.5">
+<div id="adegan" class="adegan ad-foto"><div class="mth"></div><div class="bk1"></div><div class="bk2"></div><div class="tanah"></div><div class="sosok"></div></div>
+<!-- Block ui/notification · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-notification" data-block="ui/notification" data-start="0" data-duration="4" data-track-index="50" class="blk blk-ui-notification">
+<script type="application/json" data-block-props>
+{"style": "ios", "app": "Pesan", "icon": "message", "icon_color": "#34c759", "title": "Nadia Putri", "body": "Fotonya bagus banget! Kirim versi aslinya ya.", "time": "sekarang", "list": [{"aplikasi": "Kalender", "ikon": "kalender", "warna_ikon": "#ff3b30", "judul": "Rapat tim 10.00", "isi": "Ruang Merapi · 30 menit lagi"}, {"aplikasi": "Surel", "ikon": "surat", "warna_ikon": "#2f80ff", "judul": "Laporan bulanan", "isi": "Bima: lampiran sudah saya perbarui"}, {"aplikasi": "Pesan", "ikon": "pesan", "warna_ikon": "#34c759", "judul": "Nadia Putri", "isi": "Fotonya bagus banget! Kirim versi aslinya ya."}], "focus": 0, "pause": 0.7, "start": 0.3, "exit": true, "theme": "light", "font": "Inter:wght@400;500;600;700"}
+</script>
+</div>
+<style>
+.blk-ui-notification{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-ui-notification .blk-nt{position:absolute;display:flex;align-items:flex-start;box-sizing:border-box;-webkit-backdrop-filter:blur(26px) saturate(1.6);backdrop-filter:blur(26px) saturate(1.6)}
+.blk-ui-notification .blk-ik{flex:none;display:flex;align-items:center;justify-content:center}
+.blk-ui-notification .blk-tx{flex:1;min-width:0}
+.blk-ui-notification .blk-ap{display:flex;justify-content:space-between;font-weight:500;opacity:.6}
+.blk-ui-notification .blk-jd{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.blk-ui-notification .blk-is{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.9}
+</style>
+<script>
+BLOCK.mount("blk-notification", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, W = k.w, H = k.h, g = P.style, gelap = P.theme === "dark";
+  R.style.fontFamily = BLOCK.family(P.font);
+  var GL = { message: '<path d="M10 9h20a6 6 0 0 1 6 6v9a6 6 0 0 1-6 6H18l-7 5v-5h-1a6 6 0 0 1-6-6v-9a6 6 0 0 1 6-6z" fill="#fff"/>',
+    calendar: '<rect x="6" y="9" width="28" height="25" rx="5" fill="#fff"/><rect x="6" y="9" width="28" height="8" rx="4" fill="rgba(0,0,0,.18)"/><path d="M13 5v7M27 5v7" stroke="#fff" stroke-width="3" stroke-linecap="round"/>',
+    mail: '<rect x="5" y="10" width="30" height="21" rx="4" fill="#fff"/><path d="M6 12l14 10 14-10" fill="none" stroke="rgba(0,0,0,.25)" stroke-width="2.4"/>',
+    bell: '<path d="M20 6a9 9 0 0 1 9 9v7l3 5H8l3-5v-7a9 9 0 0 1 9-9z" fill="#fff"/><circle cx="20" cy="31" r="3.5" fill="#fff"/>' };
+  // kartu notifikasi: ikon aplikasi + baris aplikasi/waktu + judul + isi
+  function kartu(d, lebar, mac) {
+    var e = BLOCK.el("div", { class: "blk-nt", style: "width:" + lebar + "px;padding:" + (mac ? 18 : 22) * s + "px " + 24 * s + "px;gap:" + 18 * s + "px;border-radius:" + (mac ? 24 : 38) * s + "px;color:" + (gelap ? "#f5f6fa" : "#111") + ";background:" + (gelap ? "rgba(40,42,52,.78)" : "rgba(246,246,250,.82)") + ";box-shadow:0 " + 18 * s + "px " + 50 * s + "px rgba(0,0,0,.22)," + "0 0 0 1px rgba(255,255,255," + (gelap ? ".08" : ".5") + ") inset" }, R);
+    var iz = (mac ? 64 : 76) * s;
+    BLOCK.el("div", { class: "blk-ik", style: "width:" + iz + "px;height:" + iz + "px;border-radius:" + iz * 0.26 + "px;background:linear-gradient(160deg," + BLOCK.mix(d.warna_ikon || "#888", "#ffffff", 0.25) + "," + (d.warna_ikon || "#888") + ")" }, e,
+      '<svg width="68%" height="68%" viewBox="0 0 40 40">' + (GL[d.ikon] || GL[{ pesan: "message", kalender: "calendar", surat: "mail", lonceng: "bell" }[d.ikon]] || GL.bell) + "</svg>");
+    BLOCK.el("div", { class: "blk-tx", style: "font-size:" + 27 * s + "px;line-height:1.3" }, e,
+      '<div class="blk-ap" style="font-size:' + 22 * s + 'px;margin-bottom:' + 3 * s + 'px"><span>' + BLOCK.esc(mac ? d.aplikasi : String(d.aplikasi || "").toUpperCase()) + "</span><span>" + BLOCK.esc(d.waktu || P.time) + '</span></div><div class="blk-jd">' + BLOCK.esc(d.judul) + '</div><div class="blk-is">' + BLOCK.esc(d.isi) + "</div>");
+    return e;
+  }
+  var t0 = P.start, D = k.dur;
+  if (g === "stack") {
+    var L = (P.list || []).slice(0, 5), n = L.length, lw = Math.min(W * 0.88, 860 * s), x = (W - lw) / 2, gap = 16 * s, C = [];
+    L.forEach(function (d, i) { C.push(kartu(d, lw, false)); });
+    var ch = C.length ? C[0].offsetHeight : 120 * s, step = ch + gap, y0 = (H - (n * step - gap)) / 2;
+    C.forEach(function (e, i) {
+      var tj = t0 + i * P.pause;
+      // kartu baru masuk di puncak, yang lama terdorong satu slot ke bawah
+      tl.fromTo(e, { x: x, y: y0 - 60 * s, autoAlpha: 0, scale: 0.92 }, { x: x, y: y0, autoAlpha: 1, scale: 1, duration: 0.6, ease: "blockSpringSoft" }, tj);
+      for (var j = 0; j < i; j++) tl.to(C[j], { y: y0 + (i - j) * step, duration: 0.55, ease: "blockSpringSoft" }, tj);
+    });
+    var tf = t0 + n * P.pause + 0.2, fk = BLOCK.clamp(P.focus | 0, 0, n - 1);
+    // fokus: satu kartu (indeks dari atas) membesar dan terang, sisanya meredup sesuai posisi
+    C.forEach(function (e, i) {
+      var pos = n - 1 - i, f = pos === fk;
+      tl.to(e, { scale: f ? 1.05 : 0.97, opacity: f ? 1 : Math.max(0.35, 1 - 0.2 * Math.abs(pos - fk)), filter: f ? "brightness(1.05)" : "brightness(0.9)", duration: 0.5, ease: "power2.out" }, tf);
+      if (f) tl.set(e, { zIndex: 5 }, tf);
+    });
+    if (P.exit) tl.to(C, { autoAlpha: 0, y: "-=" + 40 * s, duration: 0.4, ease: "power2.in", stagger: 0.04 }, D - 0.5);
+    return;
+  }
+  var mac = g === "macos", lw2 = mac ? Math.min(W * 0.34, 640 * s) : Math.min(W * 0.9, 820 * s), e = kartu({ aplikasi: P.app, ikon: P.icon, warna_ikon: P.icon_color, judul: P.title, isi: P.body, waktu: P.time }, lw2, mac);
+  if (mac) {
+    var mx = W - lw2 - 28 * s;
+    tl.fromTo(e, { x: W + 20 * s, y: 70 * s }, { x: mx, y: 70 * s, duration: 0.75, ease: "blockSpringSoft" }, t0);
+    if (P.exit) tl.to(e, { x: W + 20 * s, duration: 0.45, ease: "power3.in" }, D - 0.6);
+  } else {
+    var ix = (W - lw2) / 2, iy = 40 * s, eh = e.offsetHeight;
+    // tiba cepat dari atas, sedikit kebablasan, lalu mengendap
+    tl.fromTo(e, { x: ix, y: -eh - 30 * s, scale: 0.96 }, { x: ix, y: iy, scale: 1, duration: 0.8, ease: "blockSpringSoft" }, t0);
+    if (P.exit) tl.to(e, { y: -eh - 30 * s, scale: 0.97, duration: 0.42, ease: "power3.in" }, D - 0.6);
+  }
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 4.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 4.5);
+</script>
+</body>
+</html>

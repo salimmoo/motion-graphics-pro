@@ -1,0 +1,107 @@
+{
+ "id": "transitions/rubber",
+ "name": "Rubber",
+ "name_id": "Bumper Karet",
+ "category": "transitions",
+ "description": {
+  "id": "Adegan lama ditarik melawan hambatan yang makin besar, tertahan bergetar di titik tegang, lalu lepas menembus tepi layar seperti karet, sementara adegan baru mapan di belakangnya dengan pegas.",
+  "en": "The outgoing panel pulls against rising resistance, holds trembling at tension, then snaps past the edge like a rubber band while the incoming scene settles behind it on a spring."
+ },
+ "tags": [
+  "transisi",
+  "karet",
+  "rubber band",
+  "pegas",
+  "snap",
+  "elastis",
+  "bumper",
+  "transitions",
+  "rubber"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "direction": {
+   "default": "left",
+   "type": "enum",
+   "options": [
+    "left",
+    "right",
+    "top",
+    "bottom"
+   ],
+   "hint": "Arah tarikan dan lepas",
+   "aliases": [
+    "arah"
+   ],
+   "option_aliases": {
+    "kiri": "left",
+    "kanan": "right",
+    "atas": "top",
+    "bawah": "bottom"
+   }
+  },
+  "pull": {
+   "default": 0.12,
+   "type": "number",
+   "hint": "Jarak tarikan sebelum lepas (bagian layar)",
+   "aliases": [
+    "tarik"
+   ]
+  },
+  "stretch": {
+   "default": 0.06,
+   "type": "number",
+   "hint": "Besar regangan panel",
+   "aliases": [
+    "regang"
+   ]
+  },
+  "shake": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Getar tegang saat tertahan",
+   "aliases": [
+    "getar"
+   ]
+  },
+  "shadow": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Bayangan di tepi panel",
+   "aliases": [
+    "bayangan"
+   ]
+  }
+ },
+ "duration": 2,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/karet",
+  "rubber-band-bumper"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.6,
+  "duration": 3
+ }
+}

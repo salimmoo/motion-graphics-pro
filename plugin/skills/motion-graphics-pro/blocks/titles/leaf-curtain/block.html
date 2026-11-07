@@ -1,0 +1,91 @@
+<!-- Block titles/leaf-curtain · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="titles/leaf-curtain" data-start="0" data-duration="6" data-track-index="20" class="blk blk-titles-leaf-curtain">
+<script type="application/json" data-block-props>
+{"text": "HUTAN BERBISIK", "text2": "DENGARKAN PELAN", "color": "#fbf6ea", "leaf_color": "#2f6b3a", "leaf_color2": "#9cc44f", "light_color": "#ffe6a8", "direction": "right", "count": 80, "sweep_count": 16, "open": 1.4, "second_sweep": 3.6, "dark": 0.35, "font": "DM Serif Display", "size": 170, "position_y": 50}
+</script>
+<div class="blk-gelap"></div><div class="blk-cahaya"></div><div class="blk-panggung"></div>
+</div>
+<style>
+.blk-titles-leaf-curtain{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-titles-leaf-curtain .blk-gelap,.blk-titles-leaf-curtain .blk-cahaya,.blk-titles-leaf-curtain .blk-panggung{position:absolute;inset:0}
+.blk-titles-leaf-curtain .blk-daun{position:absolute;left:0;top:0;will-change:transform}
+.blk-titles-leaf-curtain .blk-daun svg{display:block;width:100%;height:100%;overflow:visible}
+.blk-titles-leaf-curtain .blk-jd{position:absolute;left:0;right:0;text-align:center;line-height:1.02;padding:0 4%}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, D = k.dur, W = k.w, H = k.h, ac = k.random, R = k.root, E = BLOCK.el, B = BLOK;
+  var pg = R.querySelector(".blk-panggung"), L = Math.max(W, H), arah = P.direction === "left" ? -1 : 1;
+  R.querySelector(".blk-gelap").style.background = "radial-gradient(120% 90% at 50% 50%,rgba(0,0,0," + (P.dark * 0.4) + ") 0%,rgba(0,0,0," + P.dark + ") 100%)";
+  var cahaya = R.querySelector(".blk-cahaya");
+  cahaya.style.background = "radial-gradient(45% 40% at 50% " + P.position_y + "%," + B.rgba(P.light_color, 0.55) + " 0%," + B.rgba(P.light_color, 0) + " 100%)";
+  cahaya.style.mixBlendMode = "screen";
+  var BENTUK = ["M0,-100 C40,-60 46,40 0,100 C-46,40 -40,-60 0,-100Z", "M0,-100 C70,-70 64,60 0,100 C-64,60 -70,-70 0,-100Z", "M0,-100 C24,-50 30,50 0,100 C-30,50 -24,-50 0,-100Z"];
+  var SISI = ["M0,-100 C-40,-60 -46,40 0,100Z", "M0,-100 C-70,-70 -64,60 0,100Z", "M0,-100 C-24,-50 -30,50 0,100Z"];
+  function daun(z, sapu) {
+    var b = ac.int(0, 2), rasio = [0.46, 0.66, 0.3][b];
+    var tg = L * (0.07 + 0.3 * Math.pow(z, 1.4)), lb = tg * rasio;
+    var warna = B.campur(P.leaf_color, P.leaf_color2, ac() * 0.85);
+    warna = B.campur(warna, "#05110a", z < 0.3 ? 0.45 - z : z > 0.72 ? (z - 0.72) * 1.6 : 0);
+    var blur = z > 0.72 ? (z - 0.72) * 46 * s : z < 0.3 ? (0.3 - z) * 14 * s : 0;
+    var el = E("div", { class: "blk-daun", style: "width:" + lb.toFixed(1) + "px;height:" + tg.toFixed(1) + "px;z-index:" + (sapu ? 60 : z < 0.3 ? 1 : 10 + Math.round(z * 40)) + (blur > 0.5 ? ";filter:blur(" + blur.toFixed(1) + "px)" : "") }, pg);
+    el.innerHTML = '<svg viewBox="-50 -100 100 200" preserveAspectRatio="none"><path d="' + BENTUK[b] + '" fill="' + warna + '"/><path d="' + SISI[b] + '" fill="#000" opacity=".2"/>' +
+      '<path d="M0,-94 L0,104 M0,-50 L26,-72 M0,-10 L32,-36 M0,30 L28,6 M0,-30 L-28,-54 M0,10 L-32,-14 M0,50 L-26,28" stroke="' + B.campur(warna, "#ffffff", 0.22) + '" stroke-width="2.4" fill="none" opacity=".55" vector-effect="non-scaling-stroke"/></svg>';
+    return { el: el, z: z, w: lb, h: tg, hx: ac.range(-0.08, 1.08) * W, hy: ac.range(-0.08, 1.08) * H, rot: ac.range(-80, 80), ph: ac() * 6.28,
+      d1: ac() * 0.45 + (1 - z) * 0.2, jauh: ac.range(1.1, 1.6), naik: ac.range(-0.12, 0.04) * H, sisi: 0, ujung: 0 };
+  }
+  var semua = [], n = Math.max(8, Math.round(P.count)), i, d;
+  for (i = 0; i < n; i++) {
+    d = daun(Math.pow(ac(), 0.8), false);
+    d.sisi = d.hx < W / 2 ? -1 : 1;
+    // setelah membelah, daun membingkai tepi (daun depan lebih ke luar)
+    var ext = d.h * 0.5 * d.z;
+    d.ujung = d.sisi > 0 ? W * ac.range(0.9, 1.03) + ext * 0.6 : W * ac.range(-0.03, 0.1) - ext * 0.6;
+    d.d2 = Math.abs(d.hx / W - 0.5) * 0.5 + ac() * 0.15;
+    semua.push(d);
+  }
+  var sapu = [], T2 = +P.second_sweep, ada2 = String(P.text2 || "").trim() && T2 > 0;
+  if (ada2) for (i = 0; i < Math.round(P.sweep_count); i++) {
+    d = daun(B.lerp(0.55, 1, ac()), true); d.hy = ac.range(0.05, 0.95) * H; d.d1 = ac() * 0.5; sapu.push(d);
+  }
+  // judul
+  var fam = B.keluarga(P.font, "Georgia, serif");
+  function judul(teks) {
+    var j = E("div", { class: "blk-jd", style: "z-index:5;top:" + P.position_y + "%;color:" + P.color + ";font-family:" + fam + ";text-shadow:0 " + (4 * s) + "px " + (30 * s) + "px rgba(0,0,0,.45)" }, pg);
+    var panjang = Math.max.apply(null, String(teks).split(/\\n|\n/).map(function (b) { return b.length; }));
+    j.style.fontSize = Math.round(Math.min(P.size * s, W * 0.64 / Math.max(4, panjang * 0.64))) + "px";
+    j.style.transform = "translateY(-50%)";
+    return { el: j, u: B.pecah(j, teks, "huruf") };
+  }
+  var J1 = judul(P.text), J2 = ada2 ? judul(P.text2) : null, T1 = +P.open;
+  tl.fromTo(J1.u, { autoAlpha: 0, y: 40 * s, filter: "blur(" + Math.round(14 * s) + "px)" }, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 1.1, ease: "power3.out", stagger: 0.035 }, T1 + 0.15);
+  tl.fromTo(cahaya, { autoAlpha: 0 }, { autoAlpha: 1, duration: 1.6, ease: "sine.inOut" }, T1);
+  tl.to(J1.u, { autoAlpha: 0, y: -24 * s, filter: "blur(" + Math.round(10 * s) + "px)", duration: 0.4, ease: "power2.in", stagger: 0.012 }, ada2 ? T2 + 0.45 : D - 0.5);
+  if (J2) {
+    B.awal(tl, J2.u, { autoAlpha: 0 });
+    tl.fromTo(J2.u, { autoAlpha: 0, y: 36 * s, filter: "blur(" + Math.round(12 * s) + "px)" }, { autoAlpha: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: "power3.out", stagger: 0.03, immediateRender: false }, T2 + 0.75);
+    tl.to(J2.u, { autoAlpha: 0, duration: 0.45, ease: "power2.in" }, D - 0.5);
+  }
+  function e3(x) { x = B.clamp(x, 0, 1); return 1 - Math.pow(1 - x, 3); }
+  function io(x) { x = B.clamp(x, 0, 1); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
+  function taruh(d, x, y, r) {
+    d.el.style.transform = "translate(" + (x - d.w / 2).toFixed(1) + "px," + (y - d.h / 2).toFixed(1) + "px) rotate(" + r.toFixed(1) + "deg)";
+  }
+  B.waktu(tl, function (t) {
+    semua.forEach(function (d) {
+      var p1 = e3((t - d.d1) / (1.15 + d.z * 0.3)), p2 = io((t - T1 - d.d2) / 1.5);
+      var x0 = d.hx + arah * W * d.jauh * (0.7 + d.z * 0.6);
+      var x = B.lerp(B.lerp(x0, d.hx, p1), d.ujung, p2), y = d.hy + (1 - p1) * d.naik * 0.6 + p2 * d.naik * (0.5 + d.z);
+      var goy = Math.sin(t * (0.9 + d.z * 0.7) + d.ph) * (5 + d.z * 9) * s;
+      var r = d.rot + (1 - p1) * arah * 40 + p2 * d.sisi * 18 + Math.sin(t * 1.3 + d.ph) * (3 + 4 * d.z);
+      taruh(d, x + goy, y + goy * 0.6, r);
+    });
+    sapu.forEach(function (d) {
+      var p = io((t - T2 - d.d1 * 0.6) / 1.35);
+      var x = B.lerp(W + d.w * 1.2, -d.w * 1.2, p), xr = arah > 0 ? x : W - x;
+      taruh(d, xr, d.hy + Math.sin(p * 3.1 + d.ph) * 40 * s, d.rot - arah * p * 60);
+      d.el.style.visibility = p <= 0 || p >= 1 ? "hidden" : "visible";
+    });
+  }, D);
+}, { font: true });
+</script>

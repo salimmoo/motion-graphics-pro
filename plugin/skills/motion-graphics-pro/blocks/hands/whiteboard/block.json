@@ -1,0 +1,141 @@
+{
+ "id": "hands/whiteboard",
+ "name": "Whiteboard",
+ "name_id": "Papan Tulis Tinta",
+ "category": "hands",
+ "description": {
+  "id": "Sketsa papan tulis tergambar satu goresan demi satu goresan dengan waktu terukur sesuai panjangnya, sementara ujung spidol mengikuti titik tinta aktif dan terangkat di antara goresan. Sketsa bawaan lampu, alur, roket, atau goresan SVG sendiri; goresan aksen berwarna lain.",
+  "en": "A whiteboard sketch draws one measured stroke at a time while a marker nib follows the active tip and lifts between strokes. Presets (bulb, flow, rocket) or your own multi-stroke SVG paths; accent strokes use a second colour."
+ },
+ "tags": [
+  "tangan",
+  "papan-tulis",
+  "whiteboard",
+  "sketsa",
+  "spidol",
+  "draw-on",
+  "pena",
+  "hands"
+ ],
+ "props": {
+  "sketch": {
+   "default": "lamp",
+   "type": "enum",
+   "options": [
+    "lamp",
+    "flow",
+    "rocket"
+   ],
+   "aliases": [
+    "sketsa"
+   ],
+   "option_aliases": {
+    "lampu": "lamp",
+    "alur": "flow",
+    "roket": "rocket"
+   }
+  },
+  "stroke": {
+   "default": [],
+   "type": "list",
+   "hint": "Daftar goresan sendiri [{d, aksen?}] dalam ruang 1000x700 (menggantikan sketsa)",
+   "aliases": [
+    "goresan"
+   ]
+  },
+  "color": {
+   "default": "#1f2a44",
+   "type": "color",
+   "hint": "Warna tinta",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#e4572e",
+   "type": "color",
+   "hint": "Warna goresan aksen",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "thickness": {
+   "default": 7,
+   "type": "number",
+   "hint": "Tebal tinta",
+   "aliases": [
+    "tebal"
+   ]
+  },
+  "speed": {
+   "default": 900,
+   "type": "number",
+   "hint": "Laju pena (satuan ruang per detik)",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "lift_pause": {
+   "default": 0.12,
+   "type": "number",
+   "hint": "Jeda angkat pena antar goresan (detik)",
+   "aliases": [
+    "jeda_angkat"
+   ]
+  },
+  "start": {
+   "default": 0.4,
+   "type": "number",
+   "hint": "Detik mulai",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "pen": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Tampilkan spidol",
+   "aliases": [
+    "pena"
+   ]
+  },
+  "pen_color": {
+   "default": "#2d6cdf",
+   "type": "color",
+   "hint": "Warna badan spidol",
+   "aliases": [
+    "warna_pena"
+   ]
+  },
+  "scale": {
+   "default": 0.82,
+   "type": "number",
+   "hint": "Skala sketsa",
+   "aliases": [
+    "skala"
+   ]
+  },
+  "board": {
+   "default": false,
+   "type": "boolean",
+   "hint": "Gambar bingkai papan putih",
+   "aliases": [
+    "papan"
+   ]
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "tangan/papan-tulis",
+  "whiteboard-ink"
+ ],
+ "example": {
+  "bg": "light"
+ }
+}

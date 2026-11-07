@@ -1,0 +1,58 @@
+<!-- Block transitions/before-after · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/before-after" data-start="0" data-duration="3.2" data-track-index="20" class="blk blk-transitions-before-after">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "mode": "hold", "position": 50, "label_a": "Sebelum", "label_b": "Sesudah", "dim_before": true, "color": "#fffaf0", "text_color": "#1d1b18", "font": "Inter:wght@600;700"}
+</script>
+</div>
+<style>
+.blk-transitions-before-after{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-transitions-before-after .blk-klon{position:absolute;inset:0}
+.blk-transitions-before-after .blk-klon>*{position:absolute;inset:0}
+.blk-transitions-before-after .blk-garis{position:absolute;top:0;bottom:0;left:0}
+.blk-transitions-before-after .blk-gagang{position:absolute;top:50%;left:50%;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}
+.blk-transitions-before-after .blk-label{position:absolute;top:6%;border-radius:999px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, W = k.w, s = k.s, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to);
+  var mode = P.mode || "slide", pos = BLOCK.clamp(+P.position || 50, 2, 98), fam = BLOCK.family(P.font);
+  var FLAT = "saturate(0.3) contrast(0.82) brightness(1.06) sepia(0.12)";
+  // lapisan "sebelum" dan "sesudah": geser/tahan memakai A dan B; grade memakai A dua kali (datar vs hasil akhir)
+  var depan, flat = null;
+  if (mode === "grade") {
+    if (A) { flat = BLOCK.el("div", { class: "blk-klon" }, k.root); var c = A.cloneNode(true); c.removeAttribute("id"); c.querySelectorAll("[id]").forEach(function (e) { e.removeAttribute("id"); }); c.style.cssText += ";visibility:inherit;opacity:1;filter:" + FLAT; flat.appendChild(c); }
+  } else depan = Bk;
+  var gw = Math.max(2, Math.round(4 * s));
+  var garis = BLOCK.el("div", { class: "blk-garis", style: "width:" + gw + "px;margin-left:" + (-gw / 2) + "px;background:" + P.color + ";box-shadow:0 0 " + Math.round(18 * s) + "px rgba(0,0,0,.35)" }, k.root);
+  var gs = Math.round(74 * s);
+  BLOCK.el("div", { class: "blk-gagang", style: "width:" + gs + "px;height:" + gs + "px;margin:" + (-gs / 2) + "px 0 0 " + (-gs / 2) + "px;background:" + P.color + ";color:" + P.text_color + ";font:700 " + Math.round(30 * s) + "px/1 " + fam + ";box-shadow:0 " + Math.round(8 * s) + "px " + Math.round(20 * s) + "px rgba(0,0,0,.35)" }, garis, "&#8249;&nbsp;&#8250;");
+  var lb = [P.label_a, P.label_b].map(function (t, i) {
+    var e = BLOCK.el("div", { class: "blk-label", style: (i ? "right:4%" : "left:4%") + ";padding:" + Math.round(12 * s) + "px " + Math.round(26 * s) + "px;font-family:" + fam + ";font-size:" + Math.round(26 * s) + "px;background:" + P.color + ";color:" + P.text_color + ";box-shadow:0 " + Math.round(6 * s) + "px " + Math.round(16 * s) + "px rgba(0,0,0,.25)" }, k.root);
+    e.textContent = t; return e;
+  });
+  // jalur pembatas (persen dari kiri): masuk dari kanan, berhenti di posisi; tahan/grade lalu menuntaskan ke kiri
+  var t0 = D * 0.12, t1 = D * 0.42, t2 = D * 0.7, t3 = D * 0.92, tuntas = mode !== "slide";
+  var ez = function (x) { return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+  function x(t) {
+    var v = BLOCK.lerp(100, pos, ez(BLOCK.progress(t, t0, t1)));
+    if (tuntas) v = BLOCK.lerp(v, 0, ez(BLOCK.progress(t, t2, t3)));
+    return v;
+  }
+  function gambar(t) {
+    var xv = x(t), muncul = BLOCK.progress(t, t0 - 0.1, t0 + 0.1) * (tuntas ? 1 - BLOCK.progress(t, t3 - 0.15, t3) : 1);
+    garis.style.transform = "translateX(" + (xv / 100 * W).toFixed(1) + "px)";
+    garis.style.opacity = muncul.toFixed(3);
+    lb.forEach(function (e, i) { var a = BLOCK.progress(t, t0 + 0.1 * i, t0 + 0.25 + 0.1 * i) * (tuntas ? 1 - BLOCK.progress(t, t2 - 0.1, t2 + 0.1) : 1); e.style.opacity = a.toFixed(3); e.style.transform = "translateY(" + ((1 - a) * -20 * s).toFixed(1) + "px)"; });
+    var klip = t >= D || (tuntas && t >= t3) ? "none" : "inset(0 0 0 " + xv.toFixed(3) + "%)";
+    if (depan) depan.style.clipPath = klip;
+    // grade: lapisan datar menutup penuh (pudar masuk), lalu tepi tajam menyingkap hasil akhir di kanannya
+    if (flat) { flat.style.opacity = BLOCK.progress(t, 0, t0).toFixed(3); flat.style.clipPath = "inset(0 " + (100 - xv).toFixed(3) + "% 0 0)"; flat.style.visibility = tuntas && t >= t3 ? "hidden" : ""; }
+  }
+  BLOCK.onTime(tl, gambar, D);
+  if (mode !== "grade") {
+    if (Bk) BLOCK.initial(tl, Bk, { autoAlpha: 1 });
+    if (A && P.dim_before) tl.fromTo(A, { filter: "saturate(1) contrast(1) brightness(1) sepia(0)" }, { filter: FLAT, duration: t0, ease: "power1.inOut" }, 0);
+    if (A) tl.set(A, { autoAlpha: 0, filter: "none" }, tuntas ? t3 : D);
+  }
+});
+</script>

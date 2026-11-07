@@ -1,0 +1,189 @@
+{
+ "id": "gallery/orbit-carousel",
+ "name": "Orbit Carousel",
+ "name_id": "Korsel Orbit Bola",
+ "category": "gallery",
+ "description": {
+  "id": "Kartu gambar tersebar di bola Fibonacci 3D yang berputar, selalu menghadap kamera dan membesar saat mendekat. Mode kartu tunggal: satu kartu fitur mengorbit bola titik dengan gerak kamera.",
+  "en": "Image cards on a spinning 3D Fibonacci sphere, billboarded and sized by camera distance. Single-card mode: one feature card orbits a dot sphere with a camera move."
+ },
+ "tags": [
+  "galeri",
+  "korsel",
+  "orbit",
+  "bola",
+  "3d",
+  "fibonacci",
+  "kartu",
+  "gallery",
+  "carousel"
+ ],
+ "props": {
+  "mode": {
+   "default": "ball-card",
+   "type": "enum",
+   "options": [
+    "ball-card",
+    "single-card"
+   ],
+   "hint": "bola-kartu = bola kartu gambar; kartu-tunggal = kartu fitur mengorbit bola titik",
+   "option_aliases": {
+    "bola-kartu": "ball-card",
+    "kartu-tunggal": "single-card"
+   }
+  },
+  "image": {
+   "default": [],
+   "type": "list",
+   "hint": "Daftar url gambar (opsional). Kosong = kartu placeholder bergradien bernomor",
+   "aliases": [
+    "gambar"
+   ]
+  },
+  "label": {
+   "default": [],
+   "type": "list",
+   "hint": "Daftar label kecil per kartu placeholder (opsional)"
+  },
+  "count": {
+   "default": 24,
+   "type": "number",
+   "hint": "Jumlah kartu di bola",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "radius": {
+   "default": 0.34,
+   "type": "number",
+   "hint": "Radius bola (pecahan sisi pendek layar)"
+  },
+  "card_size": {
+   "default": 190,
+   "type": "number",
+   "hint": "Lebar kartu (px pada 1080)",
+   "aliases": [
+    "ukuran_kartu"
+   ]
+  },
+  "card_aspect": {
+   "default": 0.8,
+   "type": "number",
+   "hint": "Lebar/tinggi kartu",
+   "aliases": [
+    "rasio_kartu"
+   ]
+  },
+  "turns": {
+   "default": 0.12,
+   "type": "number",
+   "hint": "Putaran bola per detik",
+   "aliases": [
+    "putaran"
+   ]
+  },
+  "swing": {
+   "default": 0.6,
+   "type": "number",
+   "hint": "Kekuatan ayunan cepat-lambat-cepat (0 = rata, 0.95 = hampir berhenti di tengah)",
+   "aliases": [
+    "ayunan"
+   ]
+  },
+  "period": {
+   "default": 2,
+   "type": "number",
+   "hint": "Lama satu ayunan (detik)",
+   "aliases": [
+    "periode"
+   ]
+  },
+  "tilt": {
+   "default": 18,
+   "type": "number",
+   "hint": "Kemiringan sumbu (derajat)"
+  },
+  "camera_distance": {
+   "default": 2.8,
+   "type": "number",
+   "hint": "Jarak kamera (kelipatan radius); kecil = perspektif kuat",
+   "aliases": [
+    "jarak_kamera"
+   ]
+  },
+  "dolly": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Kamera mendekat di awal"
+  },
+  "title": {
+   "default": "Fitur Baru",
+   "type": "text",
+   "hint": "Judul kartu fitur",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "body": {
+   "default": "Semua catatan tersinkron otomatis di setiap perangkat.",
+   "type": "text",
+   "hint": "Isi kartu fitur",
+   "aliases": [
+    "isi"
+   ]
+  },
+  "dot_color": {
+   "default": "#9fd4ff",
+   "type": "color",
+   "hint": "Warna titik bola",
+   "aliases": [
+    "warna_titik"
+   ]
+  },
+  "card_color": {
+   "default": "#ffffff",
+   "type": "color",
+   "hint": "Latar kartu fitur",
+   "aliases": [
+    "warna_kartu"
+   ]
+  },
+  "text_color": {
+   "default": "#16203a",
+   "type": "color",
+   "hint": "Warna teks kartu fitur",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;700;800",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "seed": {
+   "default": 7,
+   "type": "number",
+   "hint": "Seed warna placeholder"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "galeri/korsel-orbit",
+  "carousel-orbit-1",
+  "carousel-orbit-2",
+  "carousel-orbit-3",
+  "carousel-orbit-4",
+  "carousel-orbit-5",
+  "orbit-card"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

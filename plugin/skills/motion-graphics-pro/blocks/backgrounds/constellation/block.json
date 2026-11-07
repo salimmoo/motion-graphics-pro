@@ -1,0 +1,114 @@
+{
+ "id": "backgrounds/constellation",
+ "name": "Constellation",
+ "name_id": "Rasi Bintang",
+ "category": "backgrounds",
+ "description": {
+  "id": "Langit malam berkelip dengan spiral debu emas, elips orbit yang tergambar perlahan, dan rasi bintang bergaris lengkung bercahaya. Percikan cahaya berjalan di sepanjang garis; tiap rasi bisa berlabel, dan satu rasi bisa disorot.",
+  "en": "A twinkling night sky with a golden dust spiral, slowly drawn orbit ellipses and glowing curved constellation lines. Sparks travel along the lines; constellations can be labelled and one can be spotlit."
+ },
+ "tags": [
+  "latar",
+  "background",
+  "rasi",
+  "bintang",
+  "constellation",
+  "malam",
+  "kosmos",
+  "emas",
+  "backgrounds"
+ ],
+ "props": {
+  "constellation": {
+   "default": [],
+   "type": "list",
+   "hint": "[{x, y, label, sub, stars:[[dx,dy],...]}] dalam satuan cincin (-1..1); kosong = set contoh",
+   "aliases": [
+    "rasi"
+   ]
+  },
+  "label": {
+   "default": true,
+   "type": "boolean"
+  },
+  "star": {
+   "default": 280,
+   "type": "number",
+   "hint": "Jumlah bintang latar",
+   "aliases": [
+    "bintang"
+   ]
+  },
+  "dust": {
+   "default": 1500,
+   "type": "number",
+   "hint": "Butir debu spiral; 0 = tanpa spiral",
+   "aliases": [
+    "debu"
+   ]
+  },
+  "orbit": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Elips orbit"
+  },
+  "line_color": {
+   "default": "#fff2cf",
+   "type": "color",
+   "aliases": [
+    "warna_garis"
+   ]
+  },
+  "bg_color": {
+   "default": "#050816",
+   "type": "color",
+   "aliases": [
+    "warna_latar"
+   ]
+  },
+  "nebula": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Nebula prosedural di latar"
+  },
+  "highlight": {
+   "default": -1,
+   "type": "number",
+   "hint": "Indeks rasi yang disorot; -1 = tidak",
+   "aliases": [
+    "sorot"
+   ]
+  },
+  "highlight_start": {
+   "default": 5,
+   "type": "number",
+   "hint": "Detik mulai sorot",
+   "aliases": [
+    "sorot_mulai"
+   ]
+  },
+  "seed": {
+   "default": 11,
+   "type": "number"
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [
+  "lib:mgp.js"
+ ],
+ "aliases": [
+  "latar/rasi"
+ ],
+ "example": {
+  "bg": "empty",
+  "props": {
+   "highlight": 1
+  }
+ }
+}

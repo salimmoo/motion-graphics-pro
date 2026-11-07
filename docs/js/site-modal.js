@@ -1,0 +1,280 @@
+/* Header menu: "Tentang" (about the skill, version, benefits, strengths, socials, ZIP download)
+   and "Donasi" (QRIS GoPay). Downloading the ZIP opens the donation dialog first.
+   A static QRIS payload from js/site-config.js is turned into a dynamic one per amount
+   (tag 01 = 12, tag 54 = amount, CRC-16/CCITT-FALSE recomputed). */
+(() => {
+  const S = window.SITE || {};
+  const $ = (s, r = document) => r.querySelector(s);
+  const rp = (n) => "Rp" + n.toLocaleString("id-ID");
+
+  // ---------- QRIS ----------
+  const crc16 = (s) => {
+    let c = 0xffff;
+    for (let i = 0; i < s.length; i++) { c ^= s.charCodeAt(i) << 8; for (let k = 0; k < 8; k++) c = c & 0x8000 ? ((c << 1) ^ 0x1021) & 0xffff : (c << 1) & 0xffff; }
+    return c.toString(16).toUpperCase().padStart(4, "0");
+  };
+  const tlv = (s) => { const out = []; let i = 0; while (i + 4 <= s.length) { const id = s.slice(i, i + 2), n = +s.slice(i + 2, i + 4); out.push([id, s.slice(i + 4, i + 4 + n)]); i += 4 + n; } return out; };
+  const dyn = (base, amount) => {
+    const f = tlv(base.trim()).filter(([id]) => id !== "63" && id !== "54").map(([id, v]) => (id === "01" ? [id, "12"] : [id, v]));
+    if (amount) { const a = String(Math.round(amount)); const k = f.findIndex(([id]) => +id > 54); f.splice(k < 0 ? f.length : k, 0, ["54", a]); }
+    const body = f.map(([id, v]) => id + String(v.length).padStart(2, "0") + v).join("") + "6304";
+    return body + crc16(body);
+  };
+  let qrLib = null;
+  const loadQR = () => qrLib || (qrLib = new Promise((ok, no) => {
+    if (window.QRCode) return ok();
+    const sc = document.createElement("script"); sc.src = "https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"; sc.onload = ok; sc.onerror = no; document.head.appendChild(sc);
+  }));
+
+  // ---------- markup ----------
+  const soc = S.social || {};
+  const ICON = {
+    instagram: '<path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4zm5 5a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm5.5-1.5h.01"/>',
+    tiktok: '<path d="M14 3v11.5a3.5 3.5 0 1 1-3.5-3.5M14 3c.5 2.6 2.4 4.4 5 4.6"/>',
+    github: '<path d="M9 19c-4 1.3-4-2-6-2.5M15 21v-3.4a3 3 0 0 0-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.7 4.7 0 0 0-1.3-3.2 4.4 4.4 0 0 0-.1-3.2s-1-.3-3.4 1.3a11.7 11.7 0 0 0-6.2 0C6.3 2.6 5.3 2.9 5.3 2.9a4.4 4.4 0 0 0-.1 3.2A4.7 4.7 0 0 0 3.9 9.3c0 4.7 2.8 5.7 5.5 6a3 3 0 0 0-.8 2.3V21"/>',
+    paypal: '<path d="M7 21l1.5-9h4a5 5 0 0 0 0-10H7L4 21zM9.5 12h3.5a4.5 4.5 0 0 0 4.4-3.6"/>',
+    kofi: '<path d="M4 8h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5zM17 9h1.5a2.5 2.5 0 0 1 0 5H17M10.5 15s-3-1.8-3-3.6a1.5 1.5 0 0 1 3-.4 1.5 1.5 0 0 1 3 .4c0 1.8-3 3.6-3 3.6z"/>',
+    bmac: '<path d="M6 8h12l-1.5 12h-9zM5 8l1-3h12l1 3M9 12h6"/>',
+    youtube: '<path d="M3 8.5C3 6.6 4.4 5.4 6.3 5.3 8.2 5.1 10.1 5 12 5s3.8.1 5.7.3c1.9.1 3.3 1.3 3.3 3.2v7c0 1.9-1.4 3.1-3.3 3.2-1.9.2-3.8.3-5.7.3s-3.8-.1-5.7-.3C4.4 18.6 3 17.4 3 15.5zM10 9.5v5l4.5-2.5z"/>',
+  };
+  const socLink = (k, label) => soc[k]
+    ? `<a class="sm-soc" href="${soc[k]}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24">${ICON[k]}</svg>${label}</a>`
+    : `<span class="sm-soc off" title="Segera"><svg viewBox="0 0 24 24">${ICON[k]}</svg>${label}<i>segera</i></span>`;
+
+  // donation providers (js/site-config.js): every empty one is hidden; an empty tab shows a "coming soon" line
+  const esc = (v) => String(v).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+  const MK = Object.assign({ repo: "salimmoo/motion-graphics-pro", name: "salimmoo", plugin: "motion-graphics-pro" }, S.marketplace || {});
+  ICON.heart = '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>';
+  ICON.bank = '<path d="M3 10l9-6 9 6M5 10v8M9.7 10v8M14.3 10v8M19 10v8M3 20.5h18"/>';
+  ICON.cup = ICON.bmac;
+  const D = S.donate || {}, bank = D.bank || {}, BANK = !!bank.account, HASQR = !!(S.qris || S.qrisImage);
+  const DOM = [["trakteer", "Trakteer"], ["saweria", "Saweria"]].filter(([k]) => D[k]);
+  const INTL = [["kofi", "Ko-fi", "kofi"], ["paypal", "PayPal", "paypal"], ["bmac", "Buy Me a Coffee", "cup"], ["sponsors", "GitHub Sponsors", "github"]].filter(([k]) => (S.intl || {})[k]);
+  const HASDOM = DOM.length || BANK || HASQR;
+  const provLink = (u, n, ic) => `<a class="sm-soc big" href="${esc(u)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true">${ICON[ic] || ICON.heart}</svg>${n}</a>`;
+  // contact form (js/site-config.js `contact`): web3forms first (the owner's address never reaches the page),
+  // else a mailto: draft, else "segera hadir"; the Instagram button copies the message and opens a DM
+  const CT = S.contact || {}, W3F = (CT.web3formsKey || "").trim(), MAIL = !W3F && (CT.email || "").trim();
+  const IGU = (() => { const v = String(soc.instagram || "").trim(); if (!v) return ""; const m = v.match(/instagram\.com\/([A-Za-z0-9._]+)/i) || v.match(/^@?([A-Za-z0-9._]+)$/); return m ? m[1] : ""; })();
+  const FORM = !!(W3F || MAIL || IGU);
+  const wrap = document.createElement("div");
+  wrap.innerHTML = `
+  <div class="sm" id="smAbout" role="dialog" aria-modal="true" aria-labelledby="smAboutT" hidden>
+    <div class="sm-back" data-close></div>
+    <div class="sm-card wide">
+      <button class="sm-x" type="button" data-close aria-label="Tutup">×</button>
+      <p class="sm-k">Tentang · versi ${S.version || ""} · ${S.updated || ""}</p>
+      <h2 id="smAboutT">Motion Graphics <em>Pro</em></h2>
+      <p class="sm-lead">Satu paket skill untuk Claude yang mengubah brief jadi video motion graphics utuh: explainer, iklan, music video, dokumenter, dan konten edukasi. Gaya vektor, 3D, tipografi, pixel art, origami, sampai kolase kertas, dari ide sampai file video.</p>
+      <div class="sm-grid">
+        <div><h3>Manfaatnya</h3><ul>
+          <li>Cukup menulis brief dalam bahasa sehari-hari. Claude yang merancang, menganimasikan, dan merender.</li>
+          <li>Kamu tetap memegang keputusan di lima titik penting: konsep, naskah, biaya, contoh pertama, render.</li>
+          <li>Biaya terkendali: aset AI hanya dipakai kalau memang menaikkan hasil.</li>
+          <li>Seratus lebih resep gaya siap pakai lengkap dengan brief untuk disalin.</li>
+        </ul></div>
+        <div><h3>Keunggulannya</h3><ul>
+          <li>Gerak terukur: pegas, jalan dari data gait, kontak tanah dan bayangan dari pose 3D.</li>
+          <li>Tokoh konsisten dari kit vektor, benda yang punya wajah, dan lip-sync per huruf.</li>
+          <li>Transisi yang punya alasan, peta nyata dengan rute yang tumbuh, suara sebagai jam.</li>
+          <li>Dicek mutunya sebelum dikirim, dan proyek panjang tetap utuh.</li>
+        </ul></div>
+      </div>
+      <div class="sm-grid">
+        <div><h3>Baru di v2.4</h3><ul>
+          <li>Pilihan frame di awal: 9:16, 16:9, 1:1, 4:5, 21:9, atau multi-format, lengkap dengan resolusi dan fps.</li>
+          <li>Mesin suara dan gambar lokal dipasang sekali per komputer di latar; model tidak ikut ZIP.</li>
+          <li>Klon suaramu sendiri secara lokal (dengan izin), ulang satu kalimat, peta lafal, tanda cek telinga.</li>
+          <li>Perintah dan folder berbahasa Inggris (mgp, blocks/, project.json) dengan nama lama sebagai alias, pesan CLI dwibahasa, dan mgp audit sebelum render.</li>
+          <li>Kit tokoh dan plate gratis dari model lokal atau cloud gratis; mutunya di bawah Higgsfield.</li>
+        </ul></div>
+        <div><h3>Diuji berdampingan</h3><ul>
+          <li>Render lokal mgp 2-3x lebih cepat dari HyperFrames dengan hasil nyaris identik.</li>
+          <li>Mesin animasi mgp.motion setara GSAP; lapisan Python setara mutu tetapi lebih lambat.</li>
+          <li>Prinsip gerak lanjutan: pegas, inersia, kurva QC, origami lipat kaku, FACS, medan.</li>
+          <li>Tahap blocking sebelum spline, project.json, Studio, dan 260 blok siap pakai.</li>
+        </ul></div>
+      </div>
+      <div class="sm-row">
+        <div><h3>Kolaborasi</h3><div class="sm-socs">${socLink("instagram", "Instagram")}${socLink("tiktok", "TikTok")}${socLink("youtube", "YouTube")}${S.repo ? `<a class="sm-soc" href="${S.repo}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24">${ICON.github}</svg>GitHub</a>` : `<span class="sm-soc off"><svg viewBox="0 0 24 24">${ICON.github}</svg>GitHub<i>segera</i></span>`}</div></div>
+        <div class="sm-dl"><h3>Unduh paket skill</h3><p>Satu plugin Claude berisi tiga skill (Motion Graphics Pro, Motion, Vektor), mgp, 260 blok, pustaka paket motion, dan catatan perubahan. Model suara dan gambar dipasang terpisah dengan mgp install.</p>
+          <p class="sm-note"><b>claude.ai / Cowork:</b> Customize → Plugins → Upload plugin dengan ZIP ini, atau Add marketplace <code>${esc(MK.repo)}</code>. <b>Claude Code:</b> jalankan dua perintah ini. Di chat claude.ai render butuh Node, Chrome, dan ffmpeg yang biasanya tidak ada, jadi render di Claude Code atau di komputer sendiri.</p>
+          <pre class="sm-cmd" id="smCmd"><code>/plugin marketplace add ${esc(MK.repo)}
+/plugin install ${esc(MK.plugin)}@${esc(MK.name)}</code></pre>
+          <div class="sm-facts"><button class="sm-btn gold" type="button" data-dl>Unduh plugin v${S.version || ""}</button><button class="sm-btn" type="button" data-copy-cmd>Salin perintah</button></div></div>
+      </div>
+      <div class="sm-contact" id="smContact"><h3>Kirim pesan</h3>
+        ${FORM ? `<form id="smForm" novalidate>
+          <label><span>Emailmu</span><input name="email" type="email" required autocomplete="email" inputmode="email" maxlength="160" placeholder="nama@contoh.com"></label>
+          <label><span>Subjek</span><input name="subject" type="text" required maxlength="120" placeholder="Kolaborasi, pertanyaan, atau laporan bug"></label>
+          <label class="full"><span>Pesan</span><textarea name="message" required rows="4" maxlength="4000" placeholder="Ceritakan singkat apa yang kamu butuhkan."></textarea></label>
+          <input class="sm-hp" type="text" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div class="sm-facts">${W3F || MAIL ? `<button type="submit" class="sm-btn gold" id="smSend">Kirim</button>` : ""}${IGU ? `<button type="button" class="sm-btn" id="smIg"><svg viewBox="0 0 24 24" aria-hidden="true">${ICON.instagram}</svg>Kirim lewat DM Instagram</button>` : ""}</div>
+          <p class="sm-fmsg" id="smFmsg" role="status" aria-live="polite"></p>
+        </form>` : `<p class="sm-soon">Formulir kontak segera hadir.</p>`}
+      </div>
+    </div>
+  </div>
+  <div class="sm" id="smDonasi" role="dialog" aria-modal="true" aria-labelledby="smDonT" hidden>
+    <div class="sm-back" data-close></div>
+    <div class="sm-card">
+      <button class="sm-x" type="button" data-close aria-label="Tutup">×</button>
+      <p class="sm-k" id="smDonK">Donasi</p>
+      <h2 id="smDonT">Dukung <em>atelier</em> ini</h2>
+      <p class="sm-lead">Paket ini gratis. Kalau bermanfaat, traktir kopi supaya pembaruan berikutnya terus jalan.</p>
+      <div class="sm-tabs" role="tablist"><button type="button" class="on" data-tab="id">Indonesia</button><button type="button" data-tab="intl">International</button></div>
+      <div class="sm-pane" data-pane="id">
+        ${DOM.length ? `<div class="sm-intl">${DOM.map(([k, n]) => provLink(D[k], n, "heart")).join("")}</div><p class="sm-note">Nominal dipilih langsung di halaman ${DOM.map(([, n]) => n).join(" / ")}.</p>` : ""}
+        ${BANK ? `<div class="sm-bank"><svg viewBox="0 0 24 24" aria-hidden="true">${ICON.bank}</svg><div class="sm-bank-t"><b>${esc(bank.name || "Transfer bank")}</b><span class="sm-acc">${esc(bank.account)}</span>${bank.holder ? `<small>a.n. ${esc(bank.holder)}</small>` : ""}</div><button type="button" class="sm-btn" data-copy-acc>Salin nomor</button></div>` : ""}
+        ${HASQR ? `<div class="sm-amts">${(S.amounts || []).map((a, i) => `<button type="button" class="${i === 0 ? "on" : ""}" data-amt="${a}">${rp(a)}</button>`).join("")}
+          <label class="sm-own"><span>Nominalmu</span><input id="smOwn" type="number" inputmode="numeric" min="${S.minAmount || 25000}" step="1000" placeholder="${(S.minAmount || 25000).toLocaleString("id-ID")}+"></label></div>
+        <p class="sm-min" id="smMin">Minimal ${rp(S.minAmount || 25000)}.</p>
+        <div class="sm-qr"><div class="sm-qrbox" id="smQr"></div><p class="sm-qrcap" id="smQrCap"></p></div>` : ""}
+        ${HASDOM ? "" : `<p class="sm-soon">Donasi dalam negeri segera hadir.</p>`}
+      </div>
+      <div class="sm-pane" data-pane="intl" hidden>
+        ${INTL.length ? `<p class="sm-lead">Outside Indonesia? Support the atelier with the platform you like:</p>
+        <div class="sm-intl">${INTL.map(([k, n, ic]) => provLink(S.intl[k], n, ic)).join("")}</div><p class="sm-note">You choose the amount on the platform's own page.</p>` : `<p class="sm-soon">International support is coming soon.</p>`}
+      </div>
+      <div class="sm-acts" id="smActs"></div>
+    </div>
+  </div>`;
+  document.body.append(...wrap.children);
+  const about = $("#smAbout"), don = $("#smDonasi");
+  let afterDon = null, lastFocus = null;
+
+  const open = (m) => { lastFocus = document.activeElement; m.hidden = false; requestAnimationFrame(() => m.classList.add("on")); (m.querySelector(".sm-x") || m).focus(); };
+  const LINK = { "#donasi": "donasi", "#donate": "donasi", "#tentang": "about", "#about": "about" };
+  const close = (m) => {
+    m.classList.remove("on"); setTimeout(() => { m.hidden = true; }, 300); lastFocus?.focus?.();
+    if (LINK[location.hash.toLowerCase()]) try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+  };
+  [about, don].forEach((m) => m.addEventListener("click", (e) => { if (e.target.closest("[data-close]")) close(m); }));
+  addEventListener("keydown", (e) => { if (e.key === "Escape") [about, don].forEach((m) => !m.hidden && close(m)); });
+
+  // ---------- donation ----------
+  const MIN = S.minAmount || 25000;
+  let amount = (S.amounts || [])[0] || MIN;
+  async function drawQR() {
+    const box = $("#smQr"), cap = $("#smQrCap");
+    if (!box) return;                         // no QRIS configured: the amount picker and QR box are not rendered
+    box.innerHTML = "";
+    if (S.qris) {
+      try {
+        await loadQR();
+        const payload = dyn(S.qris, amount);
+        new QRCode(box, { text: payload, width: 220, height: 220, colorDark: "#111", colorLight: "#fff", correctLevel: QRCode.CorrectLevel.M });
+        cap.innerHTML = `${S.payee || "GoPay"}<br><b>${rp(amount)}</b> · pindai dengan GoPay, OVO, DANA, ShopeePay, atau m-banking`;
+      } catch { box.innerHTML = `<p class="sm-none">QR belum bisa dimuat. Periksa koneksi internet.</p>`; cap.textContent = ""; }
+    } else if (S.qrisImage) {
+      box.innerHTML = `<img src="${S.qrisImage}" alt="QRIS GoPay ${S.payee || ""}" width="220" height="220">`;
+      cap.innerHTML = `${S.payee || "GoPay"} · masukkan nominal ${rp(amount)} (minimal ${rp(MIN)}) saat membayar`;
+    } else {
+      box.innerHTML = `<p class="sm-none">QRIS donasi segera hadir.</p>`; cap.textContent = "";
+    }
+  }
+  if (HASQR) {
+  don.querySelector(".sm-amts").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-amt]"); if (!b) return;
+    don.querySelectorAll(".sm-amts button").forEach((x) => x.classList.toggle("on", x === b));
+    $("#smOwn").value = ""; $("#smMin").classList.remove("warn");
+    amount = +b.dataset.amt; drawQR();
+  });
+  // own amount: never below the minimum; the QR follows after a short pause in typing
+  let ownT = 0;
+  $("#smOwn").addEventListener("input", (e) => {
+    clearTimeout(ownT);
+    const v = Math.round(+e.target.value || 0);
+    don.querySelectorAll(".sm-amts button").forEach((x) => x.classList.remove("on"));
+    const ok = v >= MIN; $("#smMin").classList.toggle("warn", !ok && v > 0);
+    ownT = setTimeout(() => { amount = ok ? v : MIN; drawQR(); }, 350);
+  });
+  $("#smOwn").addEventListener("blur", (e) => { const v = Math.round(+e.target.value || 0); if (v && v < MIN) { e.target.value = MIN; amount = MIN; $("#smMin").classList.remove("warn"); drawQR(); } });
+  }
+  don.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-copy-acc]"); if (!b) return;
+    const v = String(bank.account).replace(/\s+/g, ""), done = () => { b.textContent = "Tersalin ✓"; setTimeout(() => (b.textContent = "Salin nomor"), 1600); };
+    if (navigator.clipboard?.writeText) navigator.clipboard.writeText(v).then(done, () => {});
+    else { const ta = document.createElement("textarea"); ta.value = v; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); done(); }
+  });
+  don.querySelector(".sm-tabs").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-tab]"); if (!b) return;
+    don.querySelectorAll(".sm-tabs button").forEach((x) => x.classList.toggle("on", x === b));
+    don.querySelectorAll(".sm-pane").forEach((p) => (p.hidden = p.dataset.pane !== b.dataset.tab));
+  });
+  const download = () => { const a = document.createElement("a"); a.href = S.zip; a.download = ""; document.body.appendChild(a); a.click(); a.remove(); };
+  function openDonasi(forDownload) {
+    afterDon = forDownload ? download : null;
+    $("#smDonK").textContent = forDownload ? "Sebelum mengunduh" : "Donasi";
+    $("#smActs").innerHTML = forDownload
+      ? `<button class="sm-btn gold" type="button" data-go-dl>Sudah donasi, unduh</button><button class="sm-btn" type="button" data-go-dl>Unduh gratis dulu</button>`
+      : `<button class="sm-btn" type="button" data-close>Tutup</button>`;
+    drawQR(); open(don);
+  }
+  don.addEventListener("click", (e) => { if (e.target.closest("[data-go-dl]")) { close(don); afterDon && afterDon(); } });
+  about.querySelector("[data-dl]").addEventListener("click", () => { close(about); setTimeout(() => openDonasi(true), 280); });
+  // marketplace commands for Claude Code: copy both lines
+  about.querySelector("[data-copy-cmd]").addEventListener("click", (e) => {
+    const b = e.currentTarget, v = $("#smCmd").textContent, label = b.textContent;
+    const done = () => { b.textContent = "Tersalin ✓"; setTimeout(() => (b.textContent = label), 1600); };
+    if (navigator.clipboard?.writeText) navigator.clipboard.writeText(v).then(done, () => {});
+    else { const ta = document.createElement("textarea"); ta.value = v; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); } catch (x) {} ta.remove(); done(); }
+  });
+
+  // ---------- contact ----------
+  const form = $("#smForm");
+  const env = { go: (u) => { location.href = u; }, open: (u) => window.open(u, "_blank", "noopener") };   // swappable in tests
+  if (form) {
+    const msg = $("#smFmsg"), send = $("#smSend"), F = (n) => form.elements[n];
+    const say = (t, kind) => { msg.textContent = t; msg.className = "sm-fmsg" + (kind ? " " + kind : ""); };
+    const val = () => ({ email: F("email").value.trim(), subject: F("subject").value.trim(), message: F("message").value.trim() });
+    function check(needEmail) {
+      const v = val(), bad = [];
+      if (needEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.email)) bad.push("email");
+      if (!v.subject) bad.push("subject");
+      if (v.message.length < 10) bad.push("message");
+      ["email", "subject", "message"].forEach((n) => F(n).setAttribute("aria-invalid", bad.includes(n) ? "true" : "false"));
+      if (bad.length) { say(bad[0] === "email" ? "Tulis alamat email yang benar." : bad[0] === "subject" ? "Subjek belum diisi." : "Pesannya minimal 10 karakter.", "err"); F(bad[0]).focus(); return null; }
+      return v;
+    }
+    const text = (v) => `${v.subject}\n\n${v.message}\n\n${v.email ? "Dari: " + v.email : ""}`.trim();
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!send || send.disabled) return;
+      const v = check(true); if (!v) return;
+      if (F("botcheck").value) { say("Terima kasih, pesanmu terkirim.", "ok"); form.reset(); return; }   // honeypot: quietly drop bots
+      if (MAIL) {
+        env.go(`mailto:${MAIL}?subject=${encodeURIComponent(v.subject)}&body=${encodeURIComponent(v.message + "\n\n" + "Dari: " + v.email)}`);
+        say("Aplikasi email-mu dibuka dengan pesan yang sudah terisi.", "ok"); return;
+      }
+      const label = send.textContent; send.disabled = true; send.textContent = "Mengirim…"; say("");
+      try {
+        const r = await fetch("https://api.web3forms.com/submit", { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({ access_key: W3F, email: v.email, subject: "[Motion Graphics Pro] " + v.subject, message: v.message, from_name: "Situs Motion Graphics Pro", botcheck: "" }) });
+        const j = await r.json().catch(() => ({}));
+        if (r.ok && j.success) { say("Terima kasih, pesanmu terkirim.", "ok"); form.reset(); }
+        else say("Pesan belum terkirim. Coba lagi sebentar lagi" + (IGU ? " atau kirim lewat DM Instagram." : "."), "err");
+      } catch (err) { say("Pesan belum terkirim. Periksa koneksi internet lalu coba lagi.", "err"); }
+      finally { send.disabled = false; send.textContent = label; }
+    });
+    const ig = $("#smIg");
+    if (ig) ig.addEventListener("click", async () => {
+      const v = check(false); if (!v) return;
+      const t = text(v);
+      try { await navigator.clipboard.writeText(t); }
+      catch (e) { const ta = document.createElement("textarea"); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); } catch (x) {} ta.remove(); }
+      env.open(`https://ig.me/m/${IGU}`);
+      say("Pesan sudah disalin, tinggal tempel di DM Instagram.", "ok");
+    });
+  }
+
+  // ---------- header ----------
+  document.addEventListener("click", (e) => {
+    const t = e.target.closest("[data-modal]"); if (!t) return;
+    e.preventDefault();
+    if (t.dataset.modal === "about") open(about); else openDonasi(false);
+  });
+  const fromHash = () => { const k = LINK[location.hash.toLowerCase()]; if (!k) return false; if (k === "about") { if (about.hidden) open(about); } else if (don.hidden) openDonasi(false); return true; };
+  addEventListener("hashchange", fromHash);
+  window.SiteModal = { about: () => open(about), donasi: () => openDonasi(false), download: () => openDonasi(true), fromHash, isLink: (h) => !!LINK[String(h).toLowerCase()], _env: env, _dyn: dyn, _crc: crc16 };
+})();

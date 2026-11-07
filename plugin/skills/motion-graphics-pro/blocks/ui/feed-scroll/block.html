@@ -1,0 +1,70 @@
+<!-- Block ui/feed-scroll · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="ui/feed-scroll" data-start="0" data-duration="6" data-track-index="30" class="blk blk-ui-feed-scroll">
+<script type="application/json" data-block-props>
+{"mode": "skeleton", "frame": true, "count": 7, "turns": 2, "restless": 0.6, "trail": true, "accent_color": "#6c8cff", "screen": "#f1f3f8", "card": "#ffffff", "skeleton": "#e2e6ee", "seed": 11}
+</script>
+</div>
+<style>
+.blk-ui-feed-scroll{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-ui-feed-scroll .hp{position:absolute;left:50%;top:50%;background:#0c0e13;box-shadow:0 30px 90px rgba(0,0,0,.5),inset 0 0 0 2px #2a2e38}
+.blk-ui-feed-scroll .ly{position:absolute;overflow:hidden}
+.blk-ui-feed-scroll .kol{position:absolute;left:0;right:0;top:0}
+.blk-ui-feed-scroll .kr{position:relative;overflow:hidden;box-shadow:0 2px 10px rgba(20,30,60,.06)}
+.blk-ui-feed-scroll .sk{position:relative;border-radius:99px}
+.blk-ui-feed-scroll .gb{position:relative;overflow:hidden}
+.blk-ui-feed-scroll .baris{display:flex;align-items:center}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, E = BLOCK.el, rng = k.random, isi = P.mode === "fill";
+  var ph, pw, u, wadah;
+  if (P.frame) {
+    ph = Math.min(k.h * 0.88, k.w * 0.92 * 2.1); pw = ph / 2.1; u = pw / 400;
+    var hp = E("div", { class: "hp", style: "width:" + pw + "px;height:" + ph + "px;margin:" + (-ph / 2) + "px 0 0 " + (-pw / 2) + "px;border-radius:" + 60 * u + "px" }, k.root);
+    wadah = E("div", { class: "ly", style: "inset:" + 13 * u + "px;border-radius:" + 48 * u + "px;background:" + P.screen }, hp);
+  } else {
+    pw = Math.min(k.w * 0.9, 620 * k.s); u = pw / 400;
+    wadah = E("div", { class: "ly", style: "left:50%;width:" + pw + "px;margin-left:" + (-pw / 2) + "px;top:0;bottom:0" }, k.root);
+  }
+  var px = function (v) { return v * u + "px"; }, gap = 14 * u;
+  var warna = ["#ff8a5b", "#4fb7ff", "#9b7bff", "#33d39a", "#ffc94d"];
+  var sk = function (par, w, h, c) { return E("div", { class: "sk", style: "width:" + w + ";height:" + px(h) + ";margin-top:" + px(10) + ";background:" + (c || P.skeleton) }, par); };
+  // satu set kartu bervariasi (deterministik dari seed)
+  var resep = [];
+  for (var i = 0; i < P.count; i++) resep.push({ jenis: ["teks", "gambar", "gambar", "jajak", "teks"][Math.floor(rng() * 5)], w: rng(), c: warna[Math.floor(rng() * warna.length)], n: 2 + Math.floor(rng() * 3) });
+  function set(par) {
+    var s = E("div", null, par);
+    resep.forEach(function (r) {
+      var kr = E("div", { class: "kr", style: "margin:" + gap + "px " + px(16) + " 0;padding:" + px(18) + ";border-radius:" + px(22) + ";background:" + P.card }, s);
+      var b = E("div", { class: "baris", style: "gap:" + px(12) }, kr);
+      E("div", { style: "flex:none;width:" + px(46) + ";height:" + px(46) + ";border-radius:50%;background:" + (isi ? r.c : P.skeleton) }, b);
+      var nm = E("div", { style: "flex:1" }, b); sk(nm, (40 + r.w * 30) + "%", 12, isi ? "#9aa3b5" : null).style.marginTop = 0; sk(nm, "28%", 10);
+      if (r.jenis === "gambar") E("div", { class: "gb", style: "margin-top:" + px(16) + ";height:" + px(170 + r.w * 60) + ";border-radius:" + px(16) + ";background:" + (isi ? "linear-gradient(150deg," + BLOCK.mix(r.c, "#ffffff", .35) + "," + r.c + " 60%," + BLOCK.mix(r.c, "#101425", .4) + ")" : P.skeleton) }, kr);
+      for (var j = 0; j < r.n; j++) sk(kr, (j === r.n - 1 ? 45 + r.w * 25 : 92 - j * 4) + "%", 13);
+      if (r.jenis === "jajak") [70, 45, 25].forEach(function (p, j) {
+        var o = E("div", { style: "margin-top:" + px(12) + ";height:" + px(36) + ";border-radius:" + px(12) + ";background:" + P.skeleton + ";overflow:hidden" }, kr);
+        E("div", { style: "height:100%;width:" + p + "%;background:" + (isi ? BLOCK.rgba(j ? "#9aa3b5" : P.accent_color, j ? 0.35 : 0.8) : BLOCK.mix(P.skeleton, "#000000", 0.05)) }, o);
+      });
+      var a = E("div", { class: "baris", style: "gap:" + px(18) + ";margin-top:" + px(14) }, kr);
+      for (j = 0; j < 3; j++) E("div", { style: "width:" + px(40) + ";height:" + px(12) + ";border-radius:99px;background:" + P.skeleton }, a);
+    });
+    return s;
+  }
+  // kolom utama + dua salinan jejak gerak (tertinggal sesuai kecepatan)
+  var lap = [], nj = P.trail ? 2 : 0;
+  for (i = nj; i >= 0; i--) {
+    var kol = E("div", { class: "kol", style: "opacity:" + [1, 0.22, 0.1][i] }, wadah);
+    var s1 = set(kol); set(kol); set(kol);
+    lap[i] = { kol: kol, s: s1 };
+  }
+  var Hs = lap[0].s.offsetHeight, kilau = E("div", { style: "position:absolute;inset:0;background:linear-gradient(100deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);background-size:250% 100%" }, wadah);
+  // posisi gulir: laju dasar + gangguan periodik (gelisah), kembali tepat ke kelipatan Hs di akhir -> bisa diulang
+  var tot = Hs * P.turns, g = +P.restless;
+  function S(t) { var x = t / D, tp = 2 * Math.PI; return tot * (x - g * (Math.sin(tp * 2 * x) / (tp * 2) * 0.9 + Math.sin(tp * 5 * x) / (tp * 5) * 0.7)); }
+  BLOCK.onTime(tl, function (t) {
+    var y = S(t), v = (S(t + 1 / 60) - y) * 60;
+    lap.forEach(function (L, i) { L.kol.style.transform = "translateY(" + (-((y - v * 0.025 * i) % Hs + Hs) % Hs).toFixed(2) + "px)"; });
+    if (!isi) kilau.style.backgroundPosition = (100 - ((t * 0.8) % 1) * 160) + "% 0"; else kilau.style.opacity = 0;
+  }, D);
+}, {});
+</script>

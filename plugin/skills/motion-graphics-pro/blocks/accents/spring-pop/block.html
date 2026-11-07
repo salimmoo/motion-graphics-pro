@@ -1,0 +1,50 @@
+<!-- Block accents/spring-pop · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="accents/spring-pop" data-start="0" data-duration="3" data-track-index="40" class="blk blk-accents-spring-pop">
+<script type="application/json" data-block-props>
+{"mode": "badge", "text": "Baru!", "number": 12, "position_x": 50, "position_y": 45, "size": 120, "color": "#ff3b5c", "accent_color": "#ffffff", "font": "Poppins:wght@700;800", "start_scale": 0.55, "ease": "back.out(2.4)", "start": 0.3, "exit": true}
+</script>
+<div class="blk-pos"><div class="blk-pop"><div class="blk-ping"></div><div class="blk-isi"></div></div></div>
+</div>
+<style>
+.blk-accents-spring-pop{position:absolute;inset:0;pointer-events:none}
+.blk-accents-spring-pop .blk-pos{position:absolute;transform:translate(-50%,-50%)}
+.blk-accents-spring-pop .blk-pop{position:relative}
+.blk-accents-spring-pop .blk-ping{position:absolute;inset:0}
+.blk-accents-spring-pop .blk-isi{position:relative;display:flex;align-items:center;justify-content:center;white-space:nowrap;font-weight:800;line-height:1}
+.blk-accents-spring-pop .blk-roda{display:inline-block;overflow:hidden;height:1em;vertical-align:top}
+.blk-accents-spring-pop .blk-roda div{line-height:1em;text-align:center}
+.blk-accents-spring-pop .blk-titik{display:inline-block;border-radius:50%}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, root = k.root;
+  var pos = root.querySelector(".blk-pos"), pop = root.querySelector(".blk-pop"), ping = root.querySelector(".blk-ping"), isi = root.querySelector(".blk-isi");
+  var H = P.size * s, t0 = +P.start || 0;
+  pos.style.left = P.position_x + "%"; pos.style.top = P.position_y + "%";
+  isi.style.cssText += ";font-family:" + BLOCK.family(P.font) + ";color:" + P.accent_color + ";background:" + P.color +
+    ";box-shadow:0 " + Math.round(H * 0.12) + "px " + Math.round(H * 0.35) + "px " + BLOCK.rgba(P.color, 0.45);
+  var roda = null, n = Math.max(0, Math.round(+P.number || 0));
+  if (P.mode === "notification") {
+    // lingkaran angka: hitungan bergulir naik saat lencana mendarat
+    isi.style.cssText += ";width:" + H + "px;height:" + H + "px;border-radius:50%;font-size:" + Math.round(H * 0.5) + "px";
+    roda = BLOCK.el("span", { class: "blk-roda" }, isi);
+    var dari = Math.max(0, n - 9), kol = BLOCK.el("div", null, roda);
+    for (var i = dari; i <= n; i++) BLOCK.el("div", null, kol, n > 99 && i === n ? "99+" : String(i));
+    ping.style.borderRadius = "50%";
+    tl.fromTo(kol, { y: 0 }, { y: -(n - dari) * H * 0.5, duration: 0.7, ease: "power3.out" }, t0 + 0.18);
+  } else {
+    var pil = P.mode === "pill";
+    isi.style.cssText += ";height:" + H + "px;padding:0 " + Math.round(H * 0.42) + "px;border-radius:" + Math.round(H / 2) + "px;font-size:" + Math.round(H * 0.46) + "px;gap:" + Math.round(H * 0.18) + "px";
+    ping.style.borderRadius = Math.round(H / 2) + "px";
+    if (pil) { var d = BLOCK.el("span", { class: "blk-titik", style: "width:" + Math.round(H * 0.24) + "px;height:" + Math.round(H * 0.24) + "px;background:" + P.accent_color }, isi);
+      tl.fromTo(d, { opacity: 1 }, { opacity: 0.25, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: Math.max(1, Math.floor((k.dur - t0 - 0.6) / 0.5)) }, t0 + 0.5); }
+    BLOCK.el("span", null, isi).textContent = P.text;
+  }
+  ping.style.border = Math.max(2, Math.round(H * 0.05)) + "px solid " + P.color;
+  // pop: dari skala dekat-diam, lewat ukuran penuh sekali, lalu diam
+  tl.fromTo(pop, { scale: P.start_scale, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: P.ease }, t0);
+  var np = Math.max(1, Math.floor((k.dur - t0 - 0.9) / 1.1));
+  tl.fromTo(ping, { scale: 1, opacity: 0.7 }, { scale: 1.7, opacity: 0, duration: 0.9, ease: "power2.out", repeat: np - 1, repeatDelay: 0.2 }, t0 + 0.25);
+  if (P.exit) tl.to(pop, { scale: 0.6, opacity: 0, duration: 0.3, ease: "power2.in" }, k.dur - 0.35);
+}, { font: true });
+</script>

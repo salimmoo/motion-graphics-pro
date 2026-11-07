@@ -1,0 +1,31 @@
+<!-- Block paper/miura · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="paper/miura" data-start="0" data-duration="6" data-track-index="4" class="blk blk-paper-miura">
+<script type="application/json" data-block-props>
+{"title": "MIURA-ORI", "sub": "lipat kaku · satu derajat kebebasan", "motion": "open", "front_color": "#e8553d", "front_color2": "#ffb347", "back_color": "#f4ecd8", "cols": 14, "rows": 5, "bg": "color", "bg_color": "#1c2236", "size": 0.8, "ease": "pegas.sigap", "label": false}
+</script>
+</div>
+<style>
+.blk-paper-miura{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.blk-paper-miura .blk-wadah{position:absolute;inset:0}
+.blk-paper-miura canvas{position:absolute;inset:0;width:100% !important;height:100% !important}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P;
+  if (!window.MGP || !MGP.foldPattern) { console.error("[blok] paper/miura needs lib:mgp.js"); return; }
+  // ukuran logis: sisi pendek 720, piksel kanvas = resolusi penuh lewat dpr
+  var f = Math.min(k.w, k.h) / 720, W = Math.round(k.w / f), H = Math.round(k.h / f);
+  var wadah = BLOCK.el("div", { class: "blk-wadah" }, k.root);
+  var isi = function (g, w, h) {
+    var gr = g.createLinearGradient(0, 0, w, h); gr.addColorStop(0, P.front_color2); gr.addColorStop(1, P.front_color); g.fillStyle = gr; g.fillRect(0, 0, w, h);
+    g.fillStyle = "#fff7ea"; g.textAlign = "center"; g.textBaseline = "middle";
+    g.font = "900 " + Math.round(h * 0.3) + "px " + BLOCK.family("Inter"); g.fillText(String(P.title || ""), w / 2, h * 0.45);
+    g.font = "600 " + Math.round(h * 0.1) + "px " + BLOCK.family("Inter"); g.fillText(String(P.sub || ""), w / 2, h * 0.7);
+  };
+  var inst = MGP.foldPattern.create(wadah, { width: W, height: H, dpr: f, fit: true, duration: k.dur, pattern: "miura", cols: +P.cols || 14, rows: +P.rows || 5, fill: isi, yaw: [[0, -25], [k.dur, -8]], pitch: 58,
+    motion: P.motion, start: Math.min(0.5, k.dur * 0.08), foldDuration: Math.max(0.6, k.dur * (P.motion === "pingpong" ? 0.36 : 0.5)), ease: P.ease,
+    front: P.front_color, back: P.back_color, size: +P.size || 0.8, label: !!P.label,
+    bg: P.bg === "color" ? P.bg_color : null, shadow: P.bg === "color" });
+  return Promise.resolve(inst.ready).then(function () { BLOCK.onTime(k.tl, function (t) { inst.seek(t); }, k.dur); });
+}, { font: true });
+</script>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Gradient Mesh · block example backgrounds/gradient-mesh</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="8.5">
+
+<!-- Block backgrounds/gradient-mesh · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-gradient-mesh" data-block="backgrounds/gradient-mesh" data-start="0" data-duration="8" data-track-index="0" class="blk blk-backgrounds-gradient-mesh">
+<script type="application/json" data-block-props>
+{"style": "mesh", "color1": "#ff7a59", "color2": "#ffb347", "color3": "#7b5cff", "color4": "#2a1b5e", "speed": 1, "resolution": 0.5}
+</script>
+</div>
+<style>
+.blk-backgrounds-gradient-mesh{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-backgrounds-gradient-mesh canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+</style>
+<script>
+BLOCK.mount("blk-gradient-mesh", function (k) {
+  var P = k.P;
+  var KEPALA = [
+    "vec3 pal(float x){x=fract(x)*4.;vec3 a=u_c1,b=u_c2;if(x>=1.){a=u_c2;b=u_c3;}if(x>=2.){a=u_c3;b=u_c4;}if(x>=3.){a=u_c4;b=u_c1;}return mix(a,b,smoothstep(0.,1.,fract(x)));}",
+    "void main(){vec2 uv=gl_FragCoord.xy/u_res;float ar=u_res.x/u_res.y;vec2 p=vec2(uv.x*ar,uv.y);float t=u_t*u_kec;vec3 col;"
+  ].join("\n");
+  var GAYA = {
+    "mesh": [
+    "p+=0.12*(vec2(vnoise(p*1.8+vec2(t*.15,0.)),vnoise(p*1.8+vec2(4.,t*.12)))-0.5);",
+    "vec2 q1=vec2(ar*(.25+.12*sin(t*.31)),.3+.15*cos(t*.27));vec2 q2=vec2(ar*(.75+.1*cos(t*.23)),.25+.12*sin(t*.37+1.));",
+    "vec2 q3=vec2(ar*(.7+.12*sin(t*.29+2.)),.78+.1*cos(t*.33));vec2 q4=vec2(ar*(.28+.1*cos(t*.21+3.)),.75+.12*sin(t*.25));",
+    "float w1=exp(-dot(p-q1,p-q1)*5.),w2=exp(-dot(p-q2,p-q2)*5.),w3=exp(-dot(p-q3,p-q3)*5.),w4=exp(-dot(p-q4,p-q4)*5.);",
+    "col=(u_c1*w1+u_c2*w2+u_c3*w3+u_c4*w4)/(w1+w2+w3+w4+1e-4);"
+  ].join("\n"),
+    "flow": [
+    "float x=uv.x*.55+.22*sin(uv.y*3.+t*.5)+.35*fbm(p*1.1+vec2(t*.08,-t*.05))-t*.05;",
+    "col=pal(x);col*=.9+.1*sin(uv.y*2.+x*6.);"
+  ].join("\n"),
+    "color-wheel": [
+    "float h=uv.x*.55+.08*sin(uv.y*2.5+t*.3)+.05*fbm(p*1.5+t*.05)+t*.035;",
+    "col=hsv2rgb(vec3(h,.62,.97));"
+  ].join("\n"),
+    "swirl": [
+    "vec2 c=p-vec2(ar*.5,.5);float r=length(c);float a=atan(c.y,c.x)+2.2*exp(-r*1.6)*sin(t*.22)+t*.12+1.4*r;",
+    "vec2 q=vec2(cos(a),sin(a))*r;float f=.5+.5*sin(q.x*4.5+t*.4+2.*fbm(q*1.5+t*.06))*cos(q.y*3.5-t*.3);",
+    "col=pal(f*.5+.1*sin(t*.1));"
+  ].join("\n"),
+    "soft": [
+    "vec2 b1=vec2(ar*(.32+.1*sin(t*.23)),.42+.12*cos(t*.19));vec2 b2=vec2(ar*(.7+.1*cos(t*.17+1.)),.6+.12*sin(t*.21+2.));",
+    "col=u_c4;col=mix(col,u_c1,.85*smoothstep(.62,0.,length(p-b1)));col=mix(col,u_c3,.8*smoothstep(.55,0.,length(p-b2)));",
+    "col=mix(col,u_c2,.35*smoothstep(.4,0.,length(p-(b1+b2)*.5)));"
+  ].join("\n")
+  };
+  var EKOR = [
+    "col*=1.-.18*length(uv-.5);col+=(h21(gl_FragCoord.xy+fract(u_t))-0.5)/128.;gl_FragColor=vec4(col,1.);}"
+  ].join("\n");
+  var cv = BLOCK.el("canvas", null, k.root);
+  var r = Math.max(0.1, Math.min(1, +P.resolution || 0.5));
+  cv.width = Math.round(k.w * r); cv.height = Math.round(k.h * r);
+  var sh = BLOCK.shader(cv, KEPALA + "\n" + (GAYA[P.style] || GAYA["mesh"]) + "\n" + EKOR, { u_c1: BLOCK.vec3(P.color1), u_c2: BLOCK.vec3(P.color2), u_c3: BLOCK.vec3(P.color3), u_c4: BLOCK.vec3(P.color4), u_kec: +P.speed });
+  if (!sh.ok) { cv.remove(); k.root.style.background = "linear-gradient(135deg," + P.color1 + "," + P.color2 + "," + P.color3 + "," + P.color4 + ")"; return; }
+  BLOCK.onTime(k.tl, function (t) { sh.draw(t); }, k.dur);
+});
+</script>
+</div>
+<script>
+  window.__duration = 8.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 8.5);
+</script>
+</body>
+</html>

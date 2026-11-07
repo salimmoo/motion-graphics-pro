@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP vectorKit · kit tokoh vektor</title>
+<style>html,body{margin:0;background:#0e1116}#stage{position:relative;width:1280px;height:720px;overflow:hidden;background:#efe6d2}
+#stage canvas{position:absolute;top:0}</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../vector-kit.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720"></div>
+<script>
+// Three kit instances side by side: turnaround + wave, 3/4 view with lip-sync + cup, front view exploding with landmarks + expression cycle.
+const C = MGP.core, VK = MGP.vectorKit, stage = document.getElementById("stage");
+const box = (i) => { const c = document.createElement("canvas"); c.style.left = (i * 427) + "px"; stage.appendChild(c); return c; };
+const D = 8;
+const a = VK.create(box(0), { width: 426, height: 720, duration: D, turn: true, gest: "dadah", expr: "senyum", margin: [130, 20] });
+const b = VK.create(box(1), { width: 426, height: 720, duration: D, view: 45, lipsync: true, gest: "cangkir" });
+const c = VK.create(box(2), { width: 426, height: 720, duration: D, view: 0, landmarks: true, landmarkLabels: false, gest: "jempol",
+  explode: [[0, 0], [2, 0], [3.2, 1], [5.2, 1], [6.4, 0]], exprCycle: ["netral", "senyum", "tawa", "kaget", "marah", "sedih", "ragu", "kedip"], exprHold: 1 });
+const all = [a, b, c];
+const comp = { duration: D, ready: Promise.all(all.map((x) => x.ready)), seek(t) { all.forEach((x) => x.seek(t)); return comp; }, timeline() { return C.timeline(this); } };
+C.expose(comp);
+</script>
+</body>
+</html>

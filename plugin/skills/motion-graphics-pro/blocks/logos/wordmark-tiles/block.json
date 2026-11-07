@@ -1,0 +1,114 @@
+{
+ "id": "logos/wordmark-tiles",
+ "name": "Wordmark Tiles",
+ "name_id": "Ubin Wordmark",
+ "category": "logos",
+ "description": {
+  "id": "Wordmark tersusun dari derau warna berkedip yang berubah menjadi ubin-ubin huruf yang terpotong tepat, lewat gelombang yang menyapu dari kiri dan berliuk sesuai posisi, lalu satu kilau tipis lewat saat bertahan.",
+  "en": "A wordmark resolves from flickering colour noise into correctly cropped glyph tiles through a spatially modulated wave, then a thin glint passes during the hold."
+ },
+ "tags": [
+  "logo",
+  "wordmark",
+  "ubin",
+  "mozaik",
+  "derau",
+  "gelombang",
+  "reveal",
+  "logos",
+  "tiles"
+ ],
+ "props": {
+  "brand_name": {
+   "default": "KILAU",
+   "type": "text",
+   "aliases": [
+    "nama_merek"
+   ]
+  },
+  "color": {
+   "default": "#f5f2ea",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "palette": {
+   "default": [
+    "#ff5a36",
+    "#ffc23d",
+    "#3ddc97",
+    "#4f7cff",
+    "#c44dff",
+    "#1b1d24"
+   ],
+   "type": "list",
+   "hint": "Warna derau",
+   "aliases": [
+    "palet"
+   ]
+  },
+  "bg": {
+   "default": "#0d0e12",
+   "type": "color",
+   "hint": "Kosong = transparan",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "cols": {
+   "default": 20,
+   "type": "number",
+   "hint": "Jumlah kolom ubin",
+   "aliases": [
+    "kolom"
+   ]
+  },
+  "rows": {
+   "default": 6,
+   "type": "number",
+   "hint": "Jumlah baris ubin",
+   "aliases": [
+    "baris"
+   ]
+  },
+  "wave_duration": {
+   "default": 1.6,
+   "type": "number",
+   "hint": "Lama gelombang menyapu (detik)",
+   "aliases": [
+    "durasi_gelombang"
+   ]
+  },
+  "font": {
+   "default": "Unbounded:wght@800;900",
+   "type": "font"
+  },
+  "size": {
+   "default": 230,
+   "type": "number",
+   "hint": "Ukuran wordmark (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "logo/ubin-wordmark",
+  "wordmark-tiles"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Unbounded:wght@800;900"
+  ]
+ }
+}

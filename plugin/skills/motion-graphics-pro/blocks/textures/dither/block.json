@@ -1,0 +1,132 @@
+{
+ "id": "textures/dither",
+ "name": "Dither",
+ "name_id": "Dither Berurutan",
+ "category": "textures",
+ "description": {
+  "id": "Dither Bayer 8x8 dua warna: gambar muncul dari noise dua nada murni sampai bersih, atau larut sebaliknya. Tiap frame berdiri sendiri (tanpa difusi galat), jadi aman di-seek. Karena piksel adegan DOM tidak bisa dibaca, sumbernya digambar blok sendiri dari props (bola bercahaya + teks) dan dirasterisasi sekali saat pasang.",
+  "en": "Two-tone 8x8 Bayer ordered dithering: the image emerges from pure 2-tone noise to clean, or dissolves the reverse. Stateless per frame, no error diffusion. The source (lit sphere + text from props) is drawn by the block and rasterized once at mount, since DOM pixels cannot be read."
+ },
+ "tags": [
+  "tekstur",
+  "texture",
+  "dither",
+  "bayer",
+  "retro",
+  "pixel",
+  "1-bit",
+  "transisi",
+  "textures"
+ ],
+ "props": {
+  "mode": {
+   "default": "appear",
+   "type": "enum",
+   "options": [
+    "appear",
+    "dissolve",
+    "hold"
+   ],
+   "hint": "muncul = noise ke bersih; larut = bersih ke noise di akhir; tahan = selalu bersih",
+   "option_aliases": {
+    "muncul": "appear",
+    "larut": "dissolve",
+    "tahan": "hold"
+   }
+  },
+  "start": {
+   "default": 0.3,
+   "type": "number",
+   "hint": "Jeda sebelum proses (detik); untuk larut dihitung dari akhir",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "process_duration": {
+   "default": 2.2,
+   "type": "number",
+   "aliases": [
+    "durasi_proses"
+   ]
+  },
+  "pixel": {
+   "default": 4,
+   "type": "number",
+   "hint": "Ukuran piksel dither (px pada 1080)",
+   "aliases": [
+    "piksel"
+   ]
+  },
+  "dark_color": {
+   "default": "#14121f",
+   "type": "color",
+   "aliases": [
+    "warna_gelap"
+   ]
+  },
+  "light_color": {
+   "default": "#f2e7c9",
+   "type": "color",
+   "aliases": [
+    "warna_terang"
+   ]
+  },
+  "text": {
+   "default": "Titik jadi gambar",
+   "type": "text",
+   "hint": "Teks sumber; kosong = tanpa teks",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@900",
+   "type": "font"
+  },
+  "ball": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Bola bercahaya di sumber",
+   "aliases": [
+    "bola"
+   ]
+  },
+  "contrast": {
+   "default": 1.15,
+   "type": "number",
+   "aliases": [
+    "kontras"
+   ]
+  },
+  "noise_fps": {
+   "default": 24,
+   "type": "number",
+   "hint": "Laju ganti noise selama proses",
+   "aliases": [
+    "fps_noise"
+   ]
+  },
+  "seed": {
+   "default": 2,
+   "type": "number"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "tekstur/dither",
+  "ordered-dither-pass"
+ ],
+ "example": {
+  "bg": "empty",
+  "font": [
+   "Inter:wght@900"
+  ]
+ }
+}

@@ -1,0 +1,125 @@
+{
+ "id": "data/oscilloscope",
+ "name": "Oscilloscope",
+ "name_id": "Osiloskop",
+ "category": "data",
+ "description": {
+  "id": "Layar osiloskop CRT: berkas cahaya menyapu bentuk gelombang di atas kisi 10 x 8, dengan jejak fosfor yang memudar secara eksponensial dan lebih terang di tempat berkas melambat. Gelombang sinus, kotak, gigi gergaji, atau detak jantung.",
+  "en": "CRT oscilloscope: a beam sweeps a waveform across a 10 x 8 graticule with closed-form phosphor persistence that decays exponentially and brightens where the beam slows. Sine, square, saw or heartbeat."
+ },
+ "tags": [
+  "data",
+  "osiloskop",
+  "gelombang",
+  "crt",
+  "sinyal",
+  "retro",
+  "kanvas",
+  "oscilloscope"
+ ],
+ "props": {
+  "wave": {
+   "default": "beat",
+   "type": "enum",
+   "options": [
+    "sine",
+    "box",
+    "sawtooth",
+    "beat"
+   ],
+   "aliases": [
+    "gelombang"
+   ],
+   "option_aliases": {
+    "sinus": "sine",
+    "kotak": "box",
+    "gigi": "sawtooth",
+    "detak": "beat"
+   }
+  },
+  "frequency": {
+   "default": 2,
+   "type": "number",
+   "hint": "Siklus per sapuan",
+   "aliases": [
+    "frekuensi"
+   ]
+  },
+  "sweep": {
+   "default": 1.6,
+   "type": "number",
+   "hint": "Lama satu sapuan layar (detik)",
+   "aliases": [
+    "sapuan"
+   ]
+  },
+  "decay": {
+   "default": 0.35,
+   "type": "number",
+   "hint": "Konstanta peluruhan fosfor tau (detik)",
+   "aliases": [
+    "peluruhan"
+   ]
+  },
+  "color": {
+   "default": "#5dff9b",
+   "type": "color",
+   "hint": "Warna fosfor",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "left_label": {
+   "default": "CH1  1 V/div",
+   "type": "text",
+   "aliases": [
+    "label_kiri"
+   ]
+  },
+  "right_label": {
+   "default": "200 ms/div",
+   "type": "text",
+   "aliases": [
+    "label_kanan"
+   ]
+  },
+  "font": {
+   "default": "JetBrains Mono:wght@500",
+   "type": "font"
+  },
+  "scale": {
+   "default": 0.74,
+   "type": "number",
+   "hint": "Tinggi layar terhadap bingkai",
+   "aliases": [
+    "skala"
+   ]
+  },
+  "resolution": {
+   "default": 1,
+   "type": "number",
+   "hint": "Skala resolusi kanvas",
+   "aliases": [
+    "resolusi"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "1:1",
+  "4:5",
+  "9:16"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "data/osiloskop",
+  "oscilloscope-trace"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "JetBrains Mono:wght@500"
+  ]
+ }
+}

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Comment · block example social/comment</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="7.5">
+<div id="adegan" class="adegan ad-foto"><div class="mth"></div><div class="bk1"></div><div class="bk2"></div><div class="tanah"></div><div class="sosok"></div></div>
+<!-- Block social/comment · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-comment" data-block="social/comment" data-start="0" data-duration="7" data-track-index="30" class="blk blk-social-comment">
+<script type="application/json" data-block-props>
+{"comments": [{"nama": "@rinaputri", "waktu": "2 jam lalu", "teks": "Akhirnya ada yang jelasin ini dengan sabar. Terima kasih!", "suka": 1240, "avatar": ""}, {"nama": "@bimo.kopi", "waktu": "45 menit lalu", "teks": "Menit 3:20 itu bikin aku langsung paham.", "suka": 386, "avatar": ""}], "platform": "youtube", "theme": "dark", "kps": 32, "pause": 0.5, "position": "bottom-left", "width": 820, "font": "Inter:wght@400;500;700"}
+</script>
+</div>
+<style>
+.blk-social-comment{position:absolute;inset:0;pointer-events:none}
+.blk-social-comment .blk-tumpuk{position:absolute;display:flex;flex-direction:column;gap:calc(var(--s)*20px)}
+.blk-social-comment .blk-kom{box-sizing:border-box;display:flex;gap:calc(var(--s)*22px);padding:calc(var(--s)*26px) calc(var(--s)*30px);border-radius:calc(var(--s)*24px);line-height:1.35;box-shadow:0 calc(var(--s)*16px) calc(var(--s)*44px) rgba(0,0,0,.3);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.blk-social-comment .blk-av{flex:none;width:calc(var(--s)*72px);height:calc(var(--s)*72px);border-radius:50%;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:calc(var(--s)*28px)}
+.blk-social-comment .blk-isi{flex:1;min-width:0}
+.blk-social-comment .blk-kep{font-size:calc(var(--s)*26px)}
+.blk-social-comment .blk-kep b{font-weight:700;margin-right:calc(var(--s)*10px)}
+.blk-social-comment .blk-kep span{opacity:.55}
+.blk-social-comment .blk-tx{font-size:calc(var(--s)*34px);margin-top:calc(var(--s)*6px);min-height:1.35em}
+.blk-social-comment .blk-krt{display:inline-block;width:calc(var(--s)*3px);height:1em;vertical-align:-.12em;margin-left:calc(var(--s)*2px);background:currentColor}
+.blk-social-comment .blk-baris{display:flex;align-items:center;gap:calc(var(--s)*26px);margin-top:calc(var(--s)*14px);font-size:calc(var(--s)*24px);opacity:.75}
+.blk-social-comment .blk-baris svg{width:calc(var(--s)*30px);height:calc(var(--s)*30px);vertical-align:middle;margin-right:calc(var(--s)*8px)}
+</style>
+<script>
+BLOCK.mount("blk-comment", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, D = k.dur, E = BLOCK.el, R = k.root;
+  var gelap = P.theme !== "light", bg = gelap ? "rgba(18,18,20,.86)" : "rgba(255,255,255,.94)", fg = gelap ? "#f1f1f1" : "#111";
+  var aks = { youtube: "#ff3d3d", tiktok: "#fe2c55", instagram: "#e1306c", x: "#1d9bf0" }[P.platform] || "#ff3d3d";
+  R.style.cssText += ";--s:" + s;
+  var tempat = { "bottom-left": "left:6%;bottom:9%", "bottom-right": "right:6%;bottom:9%", center: "left:50%;top:50%;transform:translate(-50%,-50%)", "top-left": "left:6%;top:9%" };
+  var tp = E("div", { class: "blk-tumpuk", style: (tempat[P.position] || tempat["bottom-left"]) + ";width:" + Math.min(P.width * s, k.w * 0.88) + "px;font-family:" + BLOCK.family(P.font) + ";color:" + fg }, R);
+  var warnaAv = ["#e0703a", "#3a8be0", "#43a35d", "#9b51e0", "#d6a520"];
+  var ic = { suka: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M7 11v9H4v-9zM7 11l4-7c1.5 0 2.5 1 2 3l-1 3h6a2 2 0 0 1 2 2.3l-1.2 6A2 2 0 0 1 16.8 20H7"/></svg>' };
+  function fmt(v) { v = Math.round(v); return v >= 1e4 ? (v / 1e3).toFixed(1).replace(".", ",") + " rb" : v.toLocaleString("id-ID"); }
+  var daftar = Array.isArray(P.comments) ? P.comments : [], t = 0.2, tulisan = [];
+  daftar.forEach(function (c, i) {
+    var kom = E("div", { class: "blk-kom", style: "background:" + bg }, tp);
+    var ini = String(c.nama || "?").replace(/^@/, "").slice(0, 1).toUpperCase();
+    var av = E("div", { class: "blk-av", style: c.avatar ? "background-image:url(" + c.avatar + ")" : "background:" + warnaAv[i % warnaAv.length] }, kom, c.avatar ? "" : BLOCK.esc(ini));
+    var isi = E("div", { class: "blk-isi" }, kom);
+    var kep = E("div", { class: "blk-kep" }, isi, "<b>" + BLOCK.esc(c.nama) + "</b><span>" + BLOCK.esc(c.waktu || "") + "</span>");
+    var tx = E("div", { class: "blk-tx", style: "position:relative" }, isi);
+    E("span", { style: "visibility:hidden" }, tx, BLOCK.esc(c.teks || ""));
+    var lap = E("div", { style: "position:absolute;left:0;top:0;right:0" }, tx), isiT = E("span", null, lap), krt = E("span", { class: "blk-krt" }, lap);
+    var baris = E("div", { class: "blk-baris" }, isi), sk = E("span", { style: "color:" + aks }, baris, ic.suka), skn = E("span", null, sk);
+    E("span", { style: "font-weight:700" }, baris, "Balas");
+    var teks = String(c.teks || ""), lama = teks.length / Math.max(1, P.kps);
+    tl.fromTo(kom, { y: 40 * s, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out" }, t);
+    tl.fromTo(av, { scale: 0 }, { scale: 1, duration: 0.5, ease: "back.out(2.4)" }, t + 0.1);
+    tl.fromTo(kep, { x: -14 * s, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.4, ease: "power2.out" }, t + 0.2);
+    var mulai = t + 0.45;
+    tulisan.push({ el: isiT, krt: krt, teks: teks, mulai: mulai, lama: lama });
+    tl.fromTo(baris, { autoAlpha: 0, y: 8 * s }, { autoAlpha: 0.75, y: 0, duration: 0.4 }, mulai + lama + 0.1);
+    var o = { v: 0 };
+    tl.fromTo(o, { v: 0 }, { v: +c.suka || 0, duration: 0.9, ease: "power2.out", onUpdate: function () { skn.textContent = fmt(o.v); } }, mulai + lama + 0.1);
+    skn.textContent = "0";
+    t = mulai + lama + P.pause + 0.4;
+  });
+  // mesin ketik per karakter + kursor berkedip, fungsi murni dari waktu
+  BLOCK.onTime(tl, function (tt) {
+    tulisan.forEach(function (w, i) {
+      var n = Math.floor(BLOCK.clamp((tt - w.mulai) / (w.lama || 1), 0, 1) * w.teks.length + 1e-6);
+      w.el.textContent = w.teks.slice(0, n);
+      var aktif = tt >= w.mulai - 0.2 && (i === tulisan.length - 1 || tt < tulisan[i + 1].mulai - 0.6);
+      w.krt.style.opacity = aktif && (n < w.teks.length || Math.floor(tt * 2.2) % 2 === 0) ? 1 : 0;
+    });
+  }, D);
+  tl.to(tp.children, { autoAlpha: 0, y: 20 * s, duration: 0.4, ease: "power2.in", stagger: 0.05 }, D - 0.5);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 7.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 7.5);
+</script>
+</body>
+</html>

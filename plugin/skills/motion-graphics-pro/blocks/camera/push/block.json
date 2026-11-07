@@ -1,0 +1,133 @@
+{
+ "id": "camera/push",
+ "name": "Push",
+ "name_id": "Dorong Kamera",
+ "category": "camera",
+ "description": {
+  "id": "Gerak kamera pada adegan apa pun: dorong masuk pelan yang terus-menerus, tarik mundur yang melambat untuk menyingkap konteks, hentakan zoom (punch-in), atau geser miring 3D. Dilengkapi denyut defokus di tepi layar saat kamera bergerak.",
+  "en": "Camera move on any scene: slow continuous push-in, decelerating pull-back reveal, punch-in zoom or 3D tilt-pan, with an edge-defocus pulse while the camera moves."
+ },
+ "tags": [
+  "kamera",
+  "camera",
+  "push-in",
+  "zoom",
+  "pull-back",
+  "punch-in",
+  "tilt",
+  "reveal",
+  "push"
+ ],
+ "props": {
+  "target": {
+   "default": "#adegan",
+   "type": "selector",
+   "hint": "Elemen host yang 'difilmkan'"
+  },
+  "mode": {
+   "default": "enter",
+   "type": "enum",
+   "options": [
+    "enter",
+    "pull",
+    "punch",
+    "skew"
+   ],
+   "hint": "masuk = dorong pelan; tarik = mundur menyingkap; punch = hentakan zoom; miring = geser + tilt 3D",
+   "option_aliases": {
+    "masuk": "enter",
+    "tarik": "pull",
+    "miring": "skew"
+   }
+  },
+  "strength": {
+   "default": 0.18,
+   "type": "number",
+   "hint": "Besar zoom (0.18 = 18%)",
+   "aliases": [
+    "kekuatan"
+   ]
+  },
+  "dot_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Titik pusat zoom horizontal (%)",
+   "aliases": [
+    "titik_x"
+   ]
+  },
+  "dot_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Titik pusat zoom vertikal (%)",
+   "aliases": [
+    "titik_y"
+   ]
+  },
+  "pause": {
+   "default": 0.8,
+   "type": "number",
+   "hint": "Waktu mulai gerak untuk mode tarik/punch (detik)",
+   "aliases": [
+    "jeda"
+   ]
+  },
+  "angle": {
+   "default": 9,
+   "type": "number",
+   "hint": "Sudut tilt mode miring (derajat)",
+   "aliases": [
+    "sudut"
+   ]
+  },
+  "ease": {
+   "default": "",
+   "type": "ease",
+   "hint": "Kosong = ease bawaan tiap mode"
+  },
+  "fade_end": {
+   "default": false,
+   "type": "boolean",
+   "hint": "Adegan memudar lembut di akhir",
+   "aliases": [
+    "pudar_akhir"
+   ]
+  },
+  "edge_focus": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Denyut blur di tepi layar saat bergerak",
+   "aliases": [
+    "fokus_tepi"
+   ]
+  },
+  "edge_blur": {
+   "default": 10,
+   "type": "number",
+   "hint": "Kekuatan blur tepi (px pada 1080)",
+   "aliases": [
+    "blur_tepi"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "kamera/dorong",
+  "push-in",
+  "yt-camera-move",
+  "pull-back-reveal"
+ ],
+ "example": {
+  "bg": "text",
+  "props": {
+   "fade_end": true
+  }
+ }
+}

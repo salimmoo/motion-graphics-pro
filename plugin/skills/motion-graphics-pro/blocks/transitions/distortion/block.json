@@ -1,0 +1,112 @@
+{
+ "id": "transitions/distortion",
+ "name": "Distortion",
+ "name_id": "Distorsi",
+ "category": "transitions",
+ "description": {
+  "id": "Keluarga transisi distorsi: riak air melingkar, pusaran, lensa gravitasi, fatamorgana panas, warp noise, dan tarikan magnet. Adegan lama terdistorsi memuncak, adegan baru muncul dari distorsi yang mereda.",
+  "en": "Distortion transitions: concentric ripple, swirl vortex, gravitational lens, heat haze, noise domain warp and magnetic pinch. A distorts to a peak and B resolves out of it."
+ },
+ "tags": [
+  "transisi",
+  "distorsi",
+  "warp",
+  "riak",
+  "pusaran",
+  "lensa",
+  "panas",
+  "magnet",
+  "displacement",
+  "transitions",
+  "distortion"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "mode": {
+   "default": "ripple",
+   "type": "enum",
+   "options": [
+    "ripple",
+    "swirl",
+    "lens",
+    "heat",
+    "warp",
+    "magnet"
+   ],
+   "hint": "riak | pusaran | lensa | panas | warp | magnet",
+   "option_aliases": {
+    "riak": "ripple",
+    "pusaran": "swirl",
+    "lensa": "lens",
+    "panas": "heat"
+   }
+  },
+  "strength": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali kekuatan distorsi",
+   "aliases": [
+    "kekuatan"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Pusat efek X (%) untuk riak, pusaran, lensa, magnet",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Pusat efek Y (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "ease": {
+   "default": "power2.inOut",
+   "type": "ease",
+   "hint": "Easing pergantian"
+  }
+ },
+ "duration": 1.3,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/distorsi",
+  "transitions-distortion",
+  "ripple-waves",
+  "swirl-vortex",
+  "gravitational-lens",
+  "thermal-distortion",
+  "domain-warp-dissolve",
+  "cross-warp-morph",
+  "vfx-magnetic"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.85,
+  "duration": 3
+ }
+}

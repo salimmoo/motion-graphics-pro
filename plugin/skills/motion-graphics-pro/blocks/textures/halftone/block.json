@@ -1,0 +1,155 @@
+{
+ "id": "textures/halftone",
+ "name": "Halftone",
+ "name_id": "Medan Halftone",
+ "category": "textures",
+ "description": {
+  "id": "Grid titik halftone yang ukuran dan warnanya mengikuti medan noise yang mengalir pelan, seperti dinding LED raksasa menampilkan plasma; sebagian besar gelap sehingga cocok di bawah tipografi. Karena tidak bisa membaca piksel adegan DOM, sumbernya digambar blok sendiri: medan noise, teks dari props (dirasterisasi sekali lalu disapu cahaya), atau gradien bergaris. Bisa dipasang sebagai overlay lewat mode campur.",
+  "en": "A halftone dot grid whose size and colour follow a slowly flowing noise field, like a giant LED wall showing plasma. Sources are drawn by the block itself (noise field, rasterized text from props, or banded gradient) since DOM pixels cannot be read; can overlay via blend mode."
+ },
+ "tags": [
+  "tekstur",
+  "texture",
+  "halftone",
+  "titik",
+  "dots",
+  "led",
+  "plasma",
+  "latar",
+  "noise",
+  "textures"
+ ],
+ "props": {
+  "mode": {
+   "default": "field",
+   "type": "enum",
+   "options": [
+    "field",
+    "text",
+    "gradient"
+   ],
+   "hint": "Sumber nilai titik",
+   "option_aliases": {
+    "medan": "field",
+    "teks": "text",
+    "gradien": "gradient"
+   }
+  },
+  "cell": {
+   "default": 18,
+   "type": "number",
+   "hint": "Ukuran sel grid (px pada 1080)",
+   "aliases": [
+    "sel"
+   ]
+  },
+  "shape": {
+   "default": "round",
+   "type": "enum",
+   "options": [
+    "round",
+    "box"
+   ],
+   "aliases": [
+    "bentuk"
+   ],
+   "option_aliases": {
+    "bulat": "round",
+    "kotak": "box"
+   }
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "noise_scale": {
+   "default": 1,
+   "type": "number",
+   "hint": "Kerapatan medan noise",
+   "aliases": [
+    "skala_noise"
+   ]
+  },
+  "color": {
+   "default": "#ff6a3d",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "color2": {
+   "default": "#ffd36b",
+   "type": "color",
+   "aliases": [
+    "warna2"
+   ]
+  },
+  "bg": {
+   "default": "#050507",
+   "type": "color",
+   "hint": "Warna latar bila campur = normal",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "text": {
+   "default": "CAHAYA",
+   "type": "text",
+   "hint": "Teks sumber (mode teks)",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@900",
+   "type": "font"
+  },
+  "angle": {
+   "default": 30,
+   "type": "number",
+   "hint": "Arah sapuan / gradien (derajat)",
+   "aliases": [
+    "sudut"
+   ]
+  },
+  "mix": {
+   "default": "normal",
+   "type": "enum",
+   "options": [
+    "normal",
+    "screen",
+    "overlay",
+    "multiply"
+   ],
+   "hint": "normal = latar sendiri; lainnya = overlay transparan",
+   "aliases": [
+    "campur"
+   ]
+  },
+  "seed": {
+   "default": 4,
+   "type": "number"
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "tekstur/halftone",
+  "halftone-field"
+ ],
+ "example": {
+  "bg": "empty",
+  "font": [
+   "Inter:wght@900"
+  ]
+ }
+}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP shadow3d · bayangan dari pose 3D</title>
+<style>html,body{margin:0;background:#0e1116}#stage{position:relative;width:1280px;height:720px;overflow:hidden}</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../figure3d.js"></script>
+<script src="../shadow3d.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720"></div>
+<script>
+// The figure walks east across a tiled plaza; the sun swings from 200 to 320 degrees and dips to 24 degrees,
+// so the shadow stretches and turns with every step. The compass (top right) shows sun, shadow and facing.
+const inst = MGP.shadow3d.create(document.getElementById("stage"), {
+  duration: 10,
+  sunAz: [[0, 200], [10, 320]],
+  sunEl: [[0, 55], [5, 24], [10, 55]],
+  view: [[0, 45], [10, 70]],
+});
+MGP.core.expose(inst);
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!-- Block gallery/vision-carousel · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="gallery/vision-carousel" data-start="0" data-duration="6" data-track-index="8" class="blk blk-gallery-vision-carousel">
+<script type="application/json" data-block-props>
+{"image": [], "label": [], "count": 12, "radius": 820, "card_size": 300, "card_aspect": 0.72, "start_tilt": 62, "tilt": 12, "turn": 30, "period": 1.6, "swing": 0.85, "steps": 1, "perspective": 1400, "position_y": 52, "seed": 2}
+</script>
+<div class="blk-kamera"><div class="blk-cincin"></div></div>
+</div>
+<style>
+.blk-gallery-vision-carousel{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-gallery-vision-carousel .blk-kamera{position:absolute;inset:0}
+.blk-gallery-vision-carousel .blk-cincin{position:absolute;left:50%;width:0;height:0;transform-style:preserve-3d}
+.blk-gallery-vision-carousel .blk-kartu{position:absolute;overflow:hidden}
+.blk-gallery-vision-carousel .blk-no{position:absolute;left:9%;bottom:7%;font:800 calc(var(--kw)*.22px)/1 "Inter",system-ui,sans-serif;color:rgba(255,255,255,.94)}
+.blk-gallery-vision-carousel .blk-lb{position:absolute;left:9%;top:8%;font:600 calc(var(--kw)*.075px)/1.1 "Inter",system-ui,sans-serif;color:rgba(255,255,255,.85);text-transform:uppercase;letter-spacing:.12em}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, cam = k.root.querySelector(".blk-kamera"), ring = k.root.querySelector(".blk-cincin");
+  var N = Math.max(4, Math.round(P.count)), kw = P.card_size * k.s, kh = kw / (P.card_aspect || 0.72), R = P.radius * k.s;
+  k.root.style.setProperty("--kw", kw);
+  cam.style.perspective = P.perspective * k.s + "px"; cam.style.perspectiveOrigin = "50% " + P.position_y + "%";
+  ring.style.top = P.position_y + "%";
+  var PAL = [["#ff9a62", "#d9465f"], ["#7ee0d6", "#2d6cdf"], ["#ffd36e", "#ef7b45"], ["#b69cff", "#5b3fd1"], ["#a8e48a", "#2f8f6a"], ["#ff9cc2", "#a23d8a"], ["#93d8ff", "#3150a8"], ["#f6c28b", "#8a4b2e"]];
+  var POLA = ["radial-gradient(circle at 72% 28%,rgba(255,255,255,.4) 0 14%,transparent 15%)", "repeating-linear-gradient(135deg,rgba(255,255,255,.14) 0 7%,transparent 7% 14%)",
+    "radial-gradient(rgba(255,255,255,.3) 14%,transparent 16%) 0 0/16% 12%", "linear-gradient(170deg,transparent 58%,rgba(0,0,0,.2) 58%)"];
+  var g = P.image || [], off = k.random.int(0, 7), kartu = [];
+  for (var i = 0; i < N; i++) {
+    var c = BLOCK.el("div", { class: "blk-kartu", style: "left:" + -kw / 2 + "px;top:" + -kh / 2 + "px;width:" + kw + "px;height:" + kh + "px;border-radius:" + 18 * k.s + "px" }, ring);
+    if (g.length) c.style.background = "center/cover no-repeat url('" + g[i % g.length] + "')";
+    else {
+      var p = PAL[(i + off) % PAL.length];
+      c.style.background = POLA[i % POLA.length] + ",linear-gradient(150deg," + p[0] + "," + p[1] + ")";
+      BLOCK.el("span", { class: "blk-no" }, c, ("0" + (i + 1)).slice(-2));
+      if (P.label && P.label[i]) BLOCK.el("span", { class: "blk-lb" }, c, BLOCK.esc(P.label[i]));
+    }
+    kartu.push(c);
+  }
+  function ayun(t) { var u = t / P.period, n = Math.floor(u), q = u - n; return n + q + P.swing * Math.sin(2 * Math.PI * q) / (2 * Math.PI); }
+  BLOCK.onTime(k.tl, function (t) {
+    // kamera turun dari pandangan atas ke barisan (tilt_awal -> tilt), lalu cincin berayun
+    var m = BLOCK.smooth(t / 1.6), keluar = 1 - BLOCK.smooth((t - (k.dur - 0.5)) / 0.5);
+    var tilt = BLOCK.lerp(P.start_tilt, P.tilt, 1 - Math.pow(1 - m, 2));
+    var spin = ayun(Math.max(0, t - 0.4)) * P.steps * 360 / N;
+    ring.style.transform = "translateZ(" + (-R * (1.05 + 0.5 * (1 - m))) + "px) rotateX(" + (-tilt) + "deg) rotateY(" + (-spin) + "deg)";
+    for (var i = 0; i < N; i++) {
+      var a = i * 360 / N, rel = ((a - spin) % 360 + 540) % 360 - 180, d = (Math.cos(rel * Math.PI / 180) + 1) / 2;
+      var bel = -Math.sin(rel * Math.PI / 180) * P.turn; // kartu samping menoleh ke tengah
+      kartu[i].style.transform = "rotateY(" + a + "deg) translateZ(" + R + "px) rotateY(" + bel.toFixed(2) + "deg)";
+      kartu[i].style.filter = "brightness(" + (0.35 + 0.65 * d).toFixed(3) + ")";
+      kartu[i].style.opacity = (BLOCK.smooth((t - 0.04 * i) / 0.6) * keluar).toFixed(3);
+    }
+  }, k.dur);
+});
+</script>

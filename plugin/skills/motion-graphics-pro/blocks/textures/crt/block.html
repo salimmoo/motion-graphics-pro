@@ -1,0 +1,56 @@
+<!-- Block textures/crt · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="textures/crt" data-start="0" data-duration="6" data-track-index="90" class="blk blk-textures-crt">
+<script type="application/json" data-block-props>
+{"target": "#adegan", "line": 4, "line_strength": 0.38, "aberration": 3, "curve": true, "blink": 0.07, "rolling_band": true, "phosphor": "#bfffd4", "phosphor_strength": 0.08, "power_on": true, "seed": 9}
+</script>
+</div>
+<style>
+.blk-textures-crt{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-textures-crt > div{position:absolute;inset:0}
+.blk-textures-crt .blk-pita{top:0;bottom:auto;height:18%}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, w = k.w, h = k.h, s = k.s, D = k.dur, R = k.root, T = BLOCK.find(P.target), N = BLOCK.noise, sd = +P.seed || 9;
+  var g = Math.max(2, Math.round((+P.line || 4) * s)), fid = "blk-crt-" + k.id;
+  // aberasi kromatik nyata pada adegan host: kanal R dan B digeser lewat filter SVG
+  var off = [];
+  if (T && P.aberration > 0) {
+    var sv = BLOCK.svg("svg", { width: 0, height: 0, style: "position:absolute" }, R);
+    var f = BLOCK.svg("filter", { id: fid, x: "0", y: "0", width: "100%", height: "100%", "color-interpolation-filters": "sRGB" }, BLOCK.svg("defs", null, sv));
+    var M = { r: "1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0", g: "0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0", b: "0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0" };
+    ["r", "g", "b"].forEach(function (c) {
+      BLOCK.svg("feColorMatrix", { in: "SourceGraphic", type: "matrix", values: M[c], result: c + "0" }, f);
+      off.push(BLOCK.svg("feOffset", { in: c + "0", dx: 0, dy: 0, result: c }, f));
+    });
+    BLOCK.svg("feBlend", { mode: "screen", in: "r", in2: "g", result: "rg" }, f);
+    BLOCK.svg("feBlend", { mode: "screen", in: "rg", in2: "b" }, f);
+  }
+  BLOCK.el("div", { style: "background:repeating-linear-gradient(0deg,rgba(0,0,0," + P.line_strength + ") 0 " + g / 2 + "px,transparent " + g / 2 + "px " + g + "px)" }, R);
+  BLOCK.el("div", { style: "mix-blend-mode:multiply;opacity:.35;background:repeating-linear-gradient(90deg,#ff6b6b 0 " + g / 3 + "px,#6bff8f " + g / 3 + "px " + 2 * g / 3 + "px,#6b8bff " + 2 * g / 3 + "px " + g + "px)" }, R);
+  var fos = BLOCK.el("div", { style: "mix-blend-mode:screen;background:" + BLOCK.rgba(P.phosphor, P.phosphor_strength) }, R);
+  var pita = P.rolling_band ? BLOCK.el("div", { class: "blk-pita", style: "background:linear-gradient(180deg,transparent," + BLOCK.rgba("#ffffff", 0.07) + ",transparent);mix-blend-mode:screen" }, R) : null;
+  if (P.curve) {
+    var rd = Math.round(Math.min(w, h) * 0.06);
+    BLOCK.el("div", { style: "background:radial-gradient(ellipse 75% 80% at 50% 50%,transparent 55%,rgba(0,0,0,.55) 100%)" }, R);
+    BLOCK.el("div", { style: "border-radius:" + rd + "px/" + Math.round(rd * 1.2) + "px;box-shadow:0 0 0 " + Math.round(200 * s) + "px #050505,inset 0 0 " + Math.round(90 * s) + "px rgba(0,0,0,.75)" }, R);
+  }
+  var nyala = P.power_on ? BLOCK.el("div", { style: "background:#e9fff1;opacity:0" }, R) : null;
+  if (T) T.style.transformOrigin = "50% 50%";
+  BLOCK.onTime(k.tl, function (t) {
+    var fr = Math.floor(t * 30), j = N(fr * 0.37, sd); // kedip & jitter berganti per frame, terkendali
+    var a = (+P.aberration || 0) * s * (0.8 + 0.4 * Math.abs(N(fr * 0.21, sd + 3)));
+    if (off.length) { off[0].setAttribute("dx", (-a).toFixed(2)); off[2].setAttribute("dx", a.toFixed(2)); off[2].setAttribute("dy", (a * 0.3).toFixed(2)); }
+    var br = 1 + (+P.blink || 0) * j;
+    // nyala tabung: garis terang tipis yang membuka ke layar penuh
+    var on = P.power_on ? BLOCK.progress(t, 0.05, 0.55) : 1, sy = P.power_on ? Math.max(0.004, gsap.parseEase("expo.out")(on)) : 1;
+    if (T) {
+      T.style.filter = (off.length ? "url(#" + fid + ") " : "") + "brightness(" + br.toFixed(3) + ") contrast(1.08) saturate(1.15)";
+      T.style.transform = P.power_on ? "scale(" + (1 + 0.02 * (1 - on)).toFixed(4) + "," + sy.toFixed(4) + ")" : "";
+    }
+    if (nyala) { nyala.style.opacity = (P.power_on ? (1 - BLOCK.progress(t, 0.1, 0.8)) * (t < 0.05 ? 0 : 1) : 0).toFixed(3); nyala.style.transform = "scale(1," + sy.toFixed(4) + ")"; }
+    fos.style.opacity = (0.85 + 0.15 * j).toFixed(3);
+    if (pita) pita.style.transform = "translate(0px," + (((t / 3.2) % 1) * 1.3 * h - 0.2 * h).toFixed(1) + "px)";
+  }, D);
+});
+</script>

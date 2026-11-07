@@ -1,0 +1,98 @@
+{
+ "id": "backgrounds/cells",
+ "name": "Cells",
+ "name_id": "Sel Voronoi",
+ "category": "backgrounds",
+ "description": {
+  "id": "Medan sel yang bergeser dan berubah bentuk: sel Voronoi berwarna dengan inti bercahaya, atau noise Worley yang terang di pusat dan gelap di tepi.",
+  "en": "A field of drifting, reshaping cells: coloured Voronoi cells with glowing centres, or Worley noise bright at the centres and dark at the edges."
+ },
+ "tags": [
+  "latar",
+  "background",
+  "voronoi",
+  "worley",
+  "sel",
+  "shader",
+  "webgl",
+  "organik",
+  "backgrounds",
+  "cells"
+ ],
+ "props": {
+  "style": {
+   "default": "voronoi",
+   "type": "enum",
+   "options": [
+    "voronoi",
+    "worley"
+   ],
+   "aliases": [
+    "gaya"
+   ]
+  },
+  "color1": {
+   "default": "#d1287f",
+   "type": "color",
+   "hint": "Warna sel",
+   "aliases": [
+    "warna1"
+   ]
+  },
+  "color2": {
+   "default": "#3fb4ff",
+   "type": "color",
+   "hint": "Warna pusat sel",
+   "aliases": [
+    "warna2"
+   ]
+  },
+  "bg": {
+   "default": "#12041a",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "scale": {
+   "default": 5,
+   "type": "number",
+   "hint": "Jumlah sel per tinggi layar",
+   "aliases": [
+    "skala"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali kecepatan gerak",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "resolution": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Skala resolusi shader (0.25-1); kecil = lebih cepat",
+   "aliases": [
+    "resolusi"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "latar/sel",
+  "voronoi",
+  "worley-noise"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

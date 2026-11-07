@@ -1,0 +1,128 @@
+{
+ "id": "subtitles/camera-follow",
+ "name": "Camera Follow",
+ "name_id": "Kamera Ikut Kalimat",
+ "category": "subtitles",
+ "description": {
+  "id": "Satu kalimat ditulis di dunia yang jauh lebih besar dari bingkai: tiap kata diukur terhadap semua yang sudah tertulis (setinggi atau selebar blok), sehingga blok tumbuh geometris dan kamera mundur dengan laju tetap.",
+  "en": "One sentence written across a world far larger than the frame: each word is sized against everything already written, so the block grows geometrically while the camera pulls back at a steady rate."
+ },
+ "tags": [
+  "subtitle",
+  "caption",
+  "kamera",
+  "zoom",
+  "kinetik",
+  "dunia",
+  "subtitles",
+  "camera",
+  "follow"
+ ],
+ "props": {
+  "text": {
+   "default": "Satu kalimat tumbuh makin besar setiap kata terucap hingga memenuhi dunia",
+   "type": "text",
+   "hint": "Teks subtitle; *kata* = kata kunci (bila didukung). Dipakai bila kata kosong",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "words": {
+   "default": [],
+   "type": "timed-words",
+   "hint": "[{teks, mulai, akhir}] dari transkrip; kosong = dihitung dari teks",
+   "aliases": [
+    "kata"
+   ]
+  },
+  "kps": {
+   "default": 2.0,
+   "type": "number",
+   "hint": "Kata per detik bila tanpa transkrip"
+  },
+  "max_words": {
+   "default": 14,
+   "type": "number",
+   "hint": "Kata per kalimat/dunia",
+   "aliases": [
+    "maks_kata"
+   ]
+  },
+  "font": {
+   "default": "Archivo Black:wght@400",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "size": {
+   "default": 120,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "bottom": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi pendaratan kamera (% dari bawah)",
+   "aliases": [
+    "bawah"
+   ]
+  },
+  "uppercase": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "huruf_besar"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffd23f",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "old_opacity": {
+   "default": 0.7,
+   "type": "number",
+   "hint": "Opasitas kata lama",
+   "aliases": [
+    "opasitas_lama"
+   ]
+  },
+  "screen_fill": {
+   "default": 0.84,
+   "type": "number",
+   "hint": "Porsi lebar layar yang diisi blok",
+   "aliases": [
+    "isi_layar"
+   ]
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "subtitle/kamera-ikut",
+  "caption-camera-follow"
+ ],
+ "example": {
+  "bg": "dark",
+  "aspect": "9:16",
+  "font": [
+   "Archivo Black:wght@400"
+  ]
+ }
+}

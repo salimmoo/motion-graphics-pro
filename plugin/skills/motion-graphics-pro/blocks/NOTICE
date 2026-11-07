@@ -1,0 +1,35 @@
+Blok siap pakai Motion Graphics Pro (folder blok/)
+Hak cipta (c) 2026 Salim Muhammad. Dilisensikan di bawah LICENSE.md di akar paket.
+
+Seluruh kode di folder ini (blok.html, blok.json, contoh.html, _inti/blok-inti.js, alat/*.py)
+ditulis sendiri. Tidak ada berkas kode, shader, tekstur, atau teks dokumentasi pihak ketiga
+yang disalin.
+
+Gagasan yang diikuti
+--------------------
+HyperFrames (https://github.com/heygen-com/hyperframes), HeyGen, Inc., Apache License 2.0.
+  - Gagasan registry blok dan komponen yang dipasang sebagai sumber yang bisa disunting,
+    perintah "add" dan "catalog" (di Rekam: "rekam tambah" dan "rekam katalog"),
+    pemasangan blok sebagai sub-komposisi dengan data-composition-id, data-start,
+    data-duration, data-track-index, data-variable-values, dan window.__timelines.
+  - Daftar efek (nama dan jenis item registry HyperFrames 0.9.5) dipakai sebagai daftar
+    periksa cakupan; setiap efek ditulis ulang dengan kode, gaya, dan nama props sendiri.
+    Nama item disimpan di alat/hyperframes-item.json dan dipetakan di INVENTARIS.md
+    supaya rujukan lama tetap bisa dipakai ("rekam tambah push-in").
+  - Item shader HyperFrames yang memakai pustaka Shaders (shaders.com, MIT) tidak disalin;
+    latar dan transisi bergaya serupa ditulis ulang sebagai shader WebGL1, filter SVG,
+    atau kanvas 2D.
+
+Dependensi saat dijalankan (tidak dibundel)
+-------------------------------------------
+Timeline blok berjalan di Gerak (motion-graphics/lib/gerak/, ditulis sendiri, API kompatibel
+GSAP). contoh.html memuat gerak.js lewat path relatif, dan "rekam tambah" menyalin gerak.js ke
+folder komposisi, jadi blok jalan dari file:// tanpa internet. Tag <script> GSAP dari CDN di
+komposisi lama dilayani Rekam dengan Gerak. GSAP asli (GreenSock / Webflow, GSAP Standard
+"No Charge" License) tidak dipakai; hanya opsional lewat --gsap-asli bila pengguna memasangnya sendiri.
+Google Fonts (umumnya SIL Open Font License 1.1): dimuat oleh blok yang memakai font.
+Playwright (Microsoft, Apache-2.0) dan Pillow (MIT-CMU): hanya untuk alat/uji.py.
+
+Merek dan layanan pihak ketiga yang disebut (HyperFrames dan lainnya) tetap milik
+pemiliknya masing-masing. Blok tiruan UI dan media sosial memakai tampilan generik tanpa
+logo atau merek asli.

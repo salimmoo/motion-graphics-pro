@@ -1,0 +1,131 @@
+{
+ "id": "titles/glass-shards",
+ "name": "Glass Shards",
+ "name_id": "Judul Pecahan Kaca",
+ "category": "titles",
+ "description": {
+  "id": "Pecahan kaca segitiga terbang dari kedalaman menembus kabut lalu menyusun diri menjadi judul, disusul kilap yang menyapu dan kamera yang mengorbit pelan. Judul bisa pecah lagi dan tersusun menjadi frasa kedua. Mode es: lambang kristal es pecah lalu menyusun ulang menjadi dua frasa teks. Versi 2.5D di kanvas dengan proyeksi perspektif manual.",
+  "en": "Triangular glass shards fly in from depth through fog and tile themselves into the headline, followed by a sweeping glint and a slow orbiting camera. The headline can shatter again and reform as a second phrase. Ice mode: a crystal ice emblem breaks apart and reforms into two text moments. 2.5D canvas version with manual perspective projection."
+ },
+ "tags": [
+  "judul",
+  "title-card",
+  "kaca",
+  "pecahan",
+  "shard",
+  "kabut",
+  "es",
+  "frost",
+  "orbit",
+  "dua-judul",
+  "2.5d",
+  "titles",
+  "glass",
+  "shards"
+ ],
+ "props": {
+  "mode": {
+   "default": "glass",
+   "type": "enum",
+   "options": [
+    "glass",
+    "ice"
+   ],
+   "hint": "es = diawali lambang kristal es yang pecah",
+   "option_aliases": {
+    "kaca": "glass",
+    "es": "ice"
+   }
+  },
+  "text": {
+   "default": "MENEMBUS KABUT",
+   "type": "text",
+   "hint": "\\n = baris baru",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "text2": {
+   "default": "TERSUSUN KEMBALI",
+   "type": "text",
+   "hint": "Frasa kedua (kosong = tanpa)",
+   "aliases": [
+    "teks2"
+   ]
+  },
+  "color": {
+   "default": "#f4f8ff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#9fd4ff",
+   "type": "color",
+   "hint": "Rona kaca / es",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "fog_color": {
+   "default": "#8ea3c2",
+   "type": "color",
+   "aliases": [
+    "warna_kabut"
+   ]
+  },
+  "fog": {
+   "default": 0.6,
+   "type": "number",
+   "hint": "Kepekatan kabut 0..1",
+   "aliases": [
+    "kabut"
+   ]
+  },
+  "orbit": {
+   "default": 10,
+   "type": "number",
+   "hint": "Ayunan orbit kamera (derajat)"
+  },
+  "shards": {
+   "default": 64,
+   "type": "number",
+   "hint": "Ukuran sel pecahan (px pada 1080)",
+   "aliases": [
+    "pecahan"
+   ]
+  },
+  "font": {
+   "default": "Archivo Black",
+   "type": "font"
+  },
+  "size": {
+   "default": 170,
+   "type": "number",
+   "hint": "Ukuran judul (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  }
+ },
+ "duration": 7,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "judul/pecahan-kaca",
+  "glass-shard-title",
+  "frost-sequence-camera-orbit"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Archivo Black"
+  ]
+ }
+}

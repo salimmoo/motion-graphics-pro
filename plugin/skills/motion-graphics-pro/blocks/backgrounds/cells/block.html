@@ -1,0 +1,44 @@
+<!-- Block backgrounds/cells · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="backgrounds/cells" data-start="0" data-duration="8" data-track-index="0" class="blk blk-backgrounds-cells">
+<script type="application/json" data-block-props>
+{"style": "voronoi", "color1": "#d1287f", "color2": "#3fb4ff", "bg": "#12041a", "scale": 5, "speed": 1, "resolution": 0.5}
+</script>
+</div>
+<style>
+.blk-backgrounds-cells{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-backgrounds-cells canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P;
+  var KEPALA = [
+    "vec2 jit(vec2 c,float t){vec2 o=fract(sin(vec2(dot(c,vec2(127.1,311.7)),dot(c,vec2(269.5,183.3))))*43758.5453);return .5+.4*sin(t+6.2831*o);}",
+    "void main(){vec2 p=gl_FragCoord.xy/u_res.y*u_sk;float t=u_t*u_kec*.7;vec2 i=floor(p),f=fract(p);float F1=8.;vec2 id=vec2(0.),mr=vec2(0.),mg=vec2(0.);",
+    "for(int y=-1;y<=1;y++)for(int x=-1;x<=1;x++){vec2 g=vec2(float(x),float(y));vec2 r=g+jit(i+g,t)-f;float d=dot(r,r);",
+    "if(d<F1){F1=d;id=i+g;mr=r;mg=g;}}",
+    "F1=sqrt(F1);float E=8.;",
+    "for(int y=-1;y<=1;y++)for(int x=-1;x<=1;x++){vec2 g=mg+vec2(float(x),float(y));vec2 r=g+jit(i+g,t)-f;vec2 dd=r-mr;",
+    "if(dot(dd,dd)>1e-5)E=min(E,dot(.5*(mr+r),normalize(dd)));}",
+    "vec3 col;"
+  ].join("\n");
+  var GAYA = {
+    "voronoi": [
+    "float hv=h21(id);col=mix(u_c1*.55,u_c1,hv)*(.75+.25*smoothstep(0.,.5,F1));col*=smoothstep(.0,.045,E);",
+    "col=mix(u_lat,col,.92);col+=u_c2*exp(-F1*F1*28.)*1.1;"
+  ].join("\n"),
+    "worley": [
+    "float v=clamp(1.-F1*1.15,0.,1.);col=mix(u_lat,u_c1,v*v);col+=u_c2*pow(v,6.)*.8;"
+  ].join("\n")
+  };
+  var EKOR = [
+    "col+=(h21(gl_FragCoord.xy+fract(u_t))-0.5)/128.;gl_FragColor=vec4(col,1.);}"
+  ].join("\n");
+  var cv = BLOCK.el("canvas", null, k.root);
+  var r = Math.max(0.1, Math.min(1, +P.resolution || 0.5));
+  cv.width = Math.round(k.w * r); cv.height = Math.round(k.h * r);
+  var sh = BLOCK.shader(cv, KEPALA + "\n" + (GAYA[P.style] || GAYA["voronoi"]) + "\n" + EKOR, { u_c1: BLOCK.vec3(P.color1), u_c2: BLOCK.vec3(P.color2), u_lat: BLOCK.vec3(P.bg), u_sk: +P.scale, u_kec: +P.speed });
+  if (!sh.ok) { cv.remove(); k.root.style.background = "radial-gradient(circle," + P.color1 + "," + P.bg + ")"; return; }
+  BLOCK.onTime(k.tl, function (t) { sh.draw(t); }, k.dur);
+});
+</script>

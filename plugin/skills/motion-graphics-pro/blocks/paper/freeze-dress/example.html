@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Freeze Dress · block example paper/freeze-dress</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="5">
+<div id="adegan" class="adegan ad-foto"><div class="mth"></div><div class="bk1"></div><div class="bk2"></div><div class="tanah"></div><div class="sosok"></div></div>
+<!-- Block paper/freeze-dress · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-freeze-dress" data-block="paper/freeze-dress" data-start="0.5" data-duration="4" data-track-index="12" class="blk blk-paper-freeze-dress">
+<script type="application/json" data-block-props>
+{"target": "#adegan .sosok", "scene": "#adegan", "label": "ITU DIA!", "paper_color": "#f6efe0", "scribble_color": "#ffd23f", "tape_color": "#e9dcb8", "label_color": "#e8443a", "loose": 0.35, "flash": true, "exit": false, "font": "Permanent Marker:wght@400", "seed": 9}
+</script>
+</div>
+<style>
+.blk-paper-freeze-dress{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-paper-freeze-dress svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.blk-paper-freeze-dress .blk-kilat{position:absolute;inset:0;background:#fff}
+.blk-paper-freeze-dress .blk-lab{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;padding:.25em .6em .2em;box-shadow:0 .2em .5em rgba(0,0,0,.3)}
+</style>
+<script>
+BLOCK.mount("blk-freeze-dress", function (k) {
+var P = k.P, s = k.s, tl = k.tl, W = k.w, H = k.h, R = BLOCK.random(+P.seed || 9), fam = BLOCK.family(P.font, "cursive");
+  var el = BLOCK.find(P.target), rr = k.root.getBoundingClientRect(), bx;
+  if (el) { var b = el.getBoundingClientRect(); bx = { x: b.left - rr.left, y: b.top - rr.top, w: b.width, h: b.height }; }
+  else bx = { x: W * 0.4, y: H * 0.3, w: W * 0.2, h: H * 0.45 };
+  var m = Math.max(bx.w, 120 * s) * +P.loose, x0 = bx.x - m, y0 = bx.y - m * 1.5, x1 = bx.x + bx.w + m, y1 = bx.y + bx.h + m * 0.5;
+  var cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+  var svg = BLOCK.svg("svg", { viewBox: "0 0 " + W + " " + H }, k.root);
+  // tepi sobek: titik bergerigi sepanjang persegi
+  function sobek(ax, ay, bx2, by2, amp, langkah) {
+    var p = [], ed = [[ax, ay, bx2, ay], [bx2, ay, bx2, by2], [bx2, by2, ax, by2], [ax, by2, ax, ay]];
+    ed.forEach(function (e) { var L = Math.hypot(e[2] - e[0], e[3] - e[1]), n = Math.max(4, Math.round(L / langkah)); for (var i = 0; i < n; i++) { var u = i / n, j = (R() - 0.5) * amp; var nx = -(e[3] - e[1]) / L, ny = (e[2] - e[0]) / L; p.push((e[0] + (e[2] - e[0]) * u + nx * j).toFixed(1) + "," + (e[1] + (e[3] - e[1]) * u + ny * j).toFixed(1)); } });
+    return "M" + p.join("L") + "Z";
+  }
+  var bw = 44 * s;
+  var bingkai = BLOCK.svg("g", {}, svg);
+  var dSobek = sobek(x0 - bw, y0 - bw, x1 + bw, y1 + bw, 16 * s, 14 * s) + sobek(x0, y0, x1, y1, 10 * s, 12 * s);
+  BLOCK.svg("path", { d: dSobek, "fill-rule": "evenodd", fill: "rgba(0,0,0,.28)", transform: "translate(" + 8 * s + "," + 12 * s + ")" }, bingkai);
+  BLOCK.svg("path", { d: dSobek, "fill-rule": "evenodd", fill: P.paper_color }, bingkai);
+  tl.fromTo(bingkai, { autoAlpha: 0, scale: 1.18, rotation: -5, svgOrigin: cx + " " + cy }, { autoAlpha: 1, scale: 1, rotation: -1.5, duration: 0.35, ease: "back.out(2.5)", immediateRender: true }, 0.08);
+  // selotip di dua-tiga sudut
+  [[x0, y0, -38], [x1, y0, 34], [x1, y1, -30]].forEach(function (c, i) {
+    var tw = 150 * s, th = 46 * s, g = BLOCK.svg("g", { transform: "translate(" + c[0] + "," + c[1] + ") rotate(" + c[2] + ")" }, svg), z = [];
+    for (var q = 0; q <= 6; q++) z.push((-tw / 2 + (q % 2) * 5 * s) + "," + (-th / 2 + th * q / 6));
+    var z2 = []; for (q = 6; q >= 0; q--) z2.push((tw / 2 - (q % 2) * 5 * s) + "," + (-th / 2 + th * q / 6));
+    var inner = BLOCK.svg("g", {}, g);
+    BLOCK.svg("path", { d: "M" + z.concat(z2).join("L") + "Z", fill: P.tape_color, opacity: 0.88 }, inner);
+    BLOCK.svg("rect", { x: -tw / 2, y: -th / 2, width: tw, height: th * 0.35, fill: "#fff", opacity: 0.25 }, inner);
+    tl.fromTo(inner, { autoAlpha: 0, scale: 1.6, svgOrigin: "0 0" }, { autoAlpha: 1, scale: 1, duration: 0.22, ease: "power4.out", immediateRender: true }, 0.3 + i * 0.09);
+  });
+  // garis kejut di luar bingkai + coretan tangan (bergetar 8 fps)
+  var cor = [];
+  for (var i = 0; i < 10; i++) {
+    var a = -Math.PI * 0.95 + i * Math.PI * 0.21 + (R() - 0.5) * 0.2, rx = (x1 - x0) / 2 + bw + 40 * s, ry = (y1 - y0) / 2 + bw + 40 * s, L = (50 + R() * 60) * s;
+    cor.push({ pts: [[cx + Math.cos(a) * rx, cy + Math.sin(a) * ry], [cx + Math.cos(a) * (rx + L), cy + Math.sin(a) * (ry + L)]], w: 7 * s, t: 0.42 + i * 0.03 });
+  }
+  var sx = x1 + bw + 70 * s, sy = y0 + 40 * s, st = [];
+  for (i = 0; i < 10; i++) { var aa = -Math.PI / 2 + i * Math.PI / 5, r2 = i % 2 ? 18 * s : 46 * s; st.push([sx + Math.cos(aa) * r2, sy + Math.sin(aa) * r2]); }
+  st.push(st[0]); cor.push({ pts: st, w: 6 * s, t: 0.75 });
+  var ul = []; for (i = 0; i <= 8; i++) ul.push([x0 + (x1 - x0) * (0.1 + 0.8 * i / 8), y1 + bw + 30 * s + Math.sin(i * 1.7) * 8 * s]);
+  cor.push({ pts: ul, w: 7 * s, t: 0.95 });
+  var pth = cor.map(function (c) { var p = BLOCK.svg("path", { fill: "none", stroke: P.scribble_color, "stroke-width": c.w, "stroke-linecap": "round", "stroke-linejoin": "round" }, svg); c.el = p; return c; });
+  function bentuk(c, f) { return "M" + c.pts.map(function (p, j) { return (p[0] + BLOCK.noise(f * 3.1 + j * 1.7, 11) * 3 * s).toFixed(1) + "," + (p[1] + BLOCK.noise(f * 2.3 + j * 2.9, 23) * 3 * s).toFixed(1); }).join("L"); }
+  pth.forEach(function (c) { c.el.setAttribute("d", bentuk(c, 0)); c.L = BLOCK.prepareStroke(c.el) * 1.05; tl.fromTo(c.el, { strokeDashoffset: c.L }, { strokeDashoffset: 0, duration: 0.3, ease: "power2.out", immediateRender: true }, c.t); });
+  BLOCK.onTime(tl, function (t) { var f = Math.floor(t * 8); pth.forEach(function (c) { c.el.setAttribute("d", bentuk(c, f)); }); }, k.dur);
+  // sobekan kertas berlabel
+  if (P.label) {
+    var lb = BLOCK.el("div", { class: "blk-lab", style: "left:" + (cx / W * 100) + "%;top:" + ((y1 + bw + 95 * s) / H * 100) + "%;font-family:" + fam + ";font-size:" + Math.round(64 * s) + "px;background:" + P.label_color + ";color:#fff;clip-path:polygon(0 6%,8% 0,30% 5%,55% 0,80% 4%,100% 0,98% 50%,100% 96%,70% 100%,45% 95%,20% 100%,0 94%,2% 50%)" }, k.root);
+    lb.textContent = P.label;
+    if ((y1 + bw + 140 * s) > H) lb.style.top = ((y0 - bw - 60 * s) / H * 100) + "%";
+    tl.fromTo(lb, { autoAlpha: 0, scale: 0.3, rotation: 10 }, { autoAlpha: 1, scale: 1, rotation: -4, duration: 0.5, ease: "blockSpringStrong", immediateRender: true }, 1.05);
+  }
+  // beku: kilat putih + warna adegan
+  var sc = P.scene ? BLOCK.find(P.scene) : null;
+  if (sc) tl.fromTo(sc, { filter: "saturate(1) contrast(1) brightness(1)" }, { filter: "saturate(0.55) contrast(1.18) brightness(0.92)", duration: 0.12, ease: "none", immediateRender: true }, 0.02);
+  if (P.flash) { var kl = BLOCK.el("div", { class: "blk-kilat" }, k.root); tl.fromTo(kl, { autoAlpha: 0 }, { keyframes: [{ autoAlpha: 0.95, duration: 0.04 }, { autoAlpha: 0, duration: 0.35, ease: "power2.out" }], immediateRender: true }, 0); }
+  if (P.exit) tl.to(svg.childNodes, { autoAlpha: 0, duration: 0.3, stagger: 0.02 }, k.dur - 0.45).to(k.root.querySelectorAll(".blk-lab"), { autoAlpha: 0, duration: 0.25 }, k.dur - 0.45);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5);
+</script>
+</body>
+</html>

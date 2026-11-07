@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Colorama · block example text/colorama</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@800;900&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="5">
+<div id="adegan" class="adegan ad-gelap"></div>
+<!-- Block text/colorama · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-colorama" data-block="text/colorama" data-start="0" data-duration="4.5" data-track-index="10" class="blk blk-text-colorama">
+<script type="application/json" data-block-props>
+{"text": "WARNA *BARU*", "font": "Archivo:wght@800;900", "size": 160, "weight": 900, "color": "#f7f4ee", "accent_color": "#ffcf4a", "position_y": 50, "width": 80, "align": "center", "map_color": ["#ff3d7f", "#ffb800", "#3dd6ff", "#7a5cff", "#ff3d7f"], "angle": 112, "soft": 14, "blur": 10, "start": 0.2, "sweep_duration": 1.3, "exit": true, "ease": "power2.inOut"}
+</script>
+<div class="blk-tk"><div class="blk-isi"><div class="blk-bersih"></div><div class="blk-warna"></div></div></div>
+</div>
+<style>
+.blk-text-colorama {position:absolute;inset:0;pointer-events:none}
+.blk-text-colorama .blk-tk{position:absolute;left:50%;transform:translate(-50%,-50%);line-height:1.08}
+.blk-text-colorama .blk-kunci{color:var(--aksen)}
+.blk-text-colorama .blk-isi{position:relative;display:inline-block}
+.blk-text-colorama .blk-warna{position:absolute;inset:0;color:transparent;-webkit-background-clip:text;background-clip:text;background-size:300% 100%}
+.blk-text-colorama .blk-warna .blk-kunci{color:transparent}
+</style>
+<script>
+BLOCK.mount("blk-colorama", function (k) {
+  var P = k.P, tl = k.tl;
+  var rata = { left: "left", right: "right" }[P.align] || "center";
+  function gayaTeks(el, px) {
+    el.style.cssText += ";top:" + P.position_y + "%;width:" + P.width + "%;color:" + P.color + ";--aksen:" + P.accent_color +
+      ";font-family:" + BLOCK.family(P.font) + ";font-weight:" + P.weight + ";font-size:" + Math.round((px || P.size) * k.s) + "px;text-align:" + rata;
+  }
+  // tunggu stylesheet Google Fonts + wajah font benar-benar termuat sebelum mengukur teks
+  function siapFont(spec) {
+    var ln = Array.prototype.slice.call(document.querySelectorAll('link[href*="fonts.googleapis"]'));
+    return Promise.all(ln.map(function (l) { return l.sheet ? 0 : new Promise(function (ok) { l.addEventListener("load", ok); l.addEventListener("error", ok); }); }))
+      .then(function () { return document.fonts && document.fonts.load ? document.fonts.load(spec || (P.weight + " 100px " + BLOCK.family(P.font))) : 0; })
+      .catch(function () {});
+  }
+  function markupKunci(s) { return BLOCK.esc(s).replace(/\*([^*]+)\*/g, '<span class="blk-kunci">$1</span>').replace(/\\n|\n/g, "<br>"); }
+  return siapFont().then(function () {
+  var el = k.root.querySelector(".blk-tk"), br = el.querySelector(".blk-bersih"), wr = el.querySelector(".blk-warna");
+  gayaTeks(el);
+  br.innerHTML = wr.innerHTML = markupKunci(P.text);
+  var pal = (P.map_color && P.map_color.length ? P.map_color : ["#ff3d7f", "#3dd6ff"]);
+  wr.style.backgroundImage = "linear-gradient(90deg," + pal.join(",") + ")";
+  wr.style.filter = "blur(" + Math.round(P.blur * k.s) + "px) saturate(1.3)";
+  var f = +P.soft, A = P.angle, E = gsap.parseEase(P.ease), D = +P.sweep_duration, tK = k.dur - D - 0.15;
+  function mk(e, s) { e.style.webkitMaskImage = e.style.maskImage = s; }
+  function lg(st) { return "linear-gradient(" + A + "deg," + st.map(function (x) { return x[0] + " " + x[1].toFixed(2) + "%"; }).join(",") + ")"; }
+  BLOCK.onTime(tl, function (t) {
+    var keluar = P.exit && t >= tK, u = E(BLOCK.clamp((t - (keluar ? tK : P.start)) / D, 0, 1)), F = -2 * f + (100 + 4 * f) * u;
+    var Z = "transparent", K = "#000";
+    if (!keluar) mk(br, lg([[K, F - f], [Z, F]]));
+    else mk(br, lg([[Z, F], [K, F + f]]));
+    mk(wr, lg([[Z, F - 2 * f], [K, F - f * 0.8], [K, F - f * 0.1], [Z, F + f * 0.7]]));
+    wr.style.opacity = u > 0 && u < 1 ? 1 : 0;
+    wr.style.backgroundPosition = (100 - F) + "% 0%";
+  }, k.dur);
+  });
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5);
+</script>
+</body>
+</html>

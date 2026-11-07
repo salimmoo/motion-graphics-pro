@@ -1,0 +1,26 @@
+<!-- Block packs/scene · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="packs/scene" data-start="0" data-duration="8" data-track-index="2" class="blk blk-packs-scene">
+<script type="application/json" data-block-props>
+{"pack": "EXP-02", "rows": [{"judul": "Masalahnya sederhana", "ket": "Data tersebar di banyak tempat"}, {"judul": "Begini cara kerjanya", "ket": "Semua masuk ke satu alur"}, {"judul": "Hasilnya terasa", "ket": "Keputusan lebih cepat"}, {"judul": "Mulai hari ini", "ket": "Langkah kecil, dampak besar"}], "scene": "", "variant": -1, "font_google": true}
+</script>
+</div>
+<style>
+.blk-packs-scene{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.blk-packs-scene .blk-wadah{position:absolute;inset:0}
+.blk-packs-scene canvas{position:absolute;inset:0;width:100% !important;height:100% !important}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+var P = k.P;
+  if (!window.MGP || !MGP.packs) { console.error("[blok] packs/scene needs lib:mgp.js"); return; }
+  var r = k.w / k.h, ar = r > 1.2 ? "16:9" : r < 0.7 ? "9:16" : r < 0.92 ? "4:5" : "1:1";
+  var lines = (P.rows || []).map(function (b) { return { j: b.judul != null ? b.judul : b.j || "", c: b.ket != null ? b.ket : b.c || "" }; });
+  var o = { width: Math.round(k.w), height: Math.round(k.h), dpr: 1, fit: true, ar: ar, duration: k.dur, lines: lines, fonts: !!P.font_google };
+  if (P.scene) o.scene = P.scene;
+  if (+P.variant >= 0) o.variant = +P.variant;
+  if (!MGP.packs.get(P.pack)) console.warn("[blok] unknown pack: " + P.pack);
+  var wadah = BLOCK.el("div", { class: "blk-wadah" }, k.root);
+  var inst = MGP.packs.create(wadah, P.pack, o);
+  return Promise.resolve(inst.ready).then(function () { BLOCK.onTime(k.tl, function (t) { inst.seek(t); }, k.dur); });
+});
+</script>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP chibiObject · benda berwajah</title>
+<style>html,body{margin:0;background:#120c14}#stage{position:relative;width:1280px;height:720px;overflow:hidden;background:#120c14}#stage canvas{position:absolute}</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../chibi-object.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720"></div>
+<script>
+const C = MGP.core, stage = document.getElementById("stage");
+const tile = (x, y, w, h) => { const c = document.createElement("canvas"); c.style.left = x + "px"; c.style.top = y + "px"; stage.appendChild(c); return [c, w, h]; };
+const make = ([c, w, h], o) => MGP.chibiObject.create(c, Object.assign({ width: w, height: h, duration: 14 }, o));
+
+// a procedurally drawn lemon (stands in for any user image: photo cut-out, sticker, product shot)
+const lemon = C.offscreen(260, 220), lg = lemon.getContext("2d");
+lg.translate(130, 116); lg.rotate(-0.12);
+const gr = lg.createRadialGradient(-30, -36, 8, 0, 0, 110); gr.addColorStop(0, "#fff6a8"); gr.addColorStop(0.5, "#ffd93a"); gr.addColorStop(1, "#e0a611");
+lg.beginPath(); lg.ellipse(0, 0, 104, 82, 0, 0, Math.PI * 2); lg.fillStyle = gr; lg.fill(); lg.lineWidth = 4; lg.strokeStyle = "#a87410"; lg.stroke();
+[[-100, -6, 14, 10], [100, 6, 12, 9]].forEach(([x, y, rx, ry]) => { lg.beginPath(); lg.ellipse(x, y, rx, ry, 0, 0, Math.PI * 2); lg.fillStyle = "#f0c020"; lg.fill(); lg.stroke(); });
+lg.beginPath(); lg.ellipse(0, 0, 100, 79, 0, 0, Math.PI * 2); lg.fillStyle = gr; lg.fill();
+lg.fillStyle = "#5f9a3c"; lg.beginPath(); lg.ellipse(40, -86, 30, 11, -0.5, 0, Math.PI * 2); lg.fill(); lg.strokeStyle = "#2f5a1e"; lg.lineWidth = 3; lg.stroke();
+
+const T = 14;
+const insts = [
+  // the demo cup in the cafe, cycling all moods, then a jump
+  make(tile(0, 0, 852, 360), { body: "cup", scene: "cafe", moods: [[0, "normal"], [2, "senang"], [4.5, "kaget"], [6.5, "marah"], [8.6, "sedih"], [10.8, "normal"]], jumps: [12.2], scale: 0.9 }),
+  make(tile(854, 0, 426, 360), { body: "box", scene: "plain", bg: ["#2f3a52", "#4d5f7c"], floor: "#7a5a3e", moods: [[0, "normal"], [3, "kaget"], [6, "senang"], [10, "normal"]], jumps: [7.6], scale: 1.05, y: 10 }),
+  make(tile(0, 362, 319, 358), { body: "phone", scene: "plain", bg: ["#1f2b3a", "#36506a"], floor: "#5a4a3e", moods: [[0, "senang"], [3.5, "sedih"], [7, "marah"], [10.5, "senang"]], scale: 1.0, y: 14, seed: 4 }),
+  make(tile(321, 362, 319, 358), { body: "pot", scene: "plain", bg: ["#2e3b2c", "#55704c"], floor: "#7d5636", moods: [[0, "sedih"], [3, "normal"], [5.5, "senang"], [9.5, "kaget"]], scale: 1.0, y: 14, seed: 5 }),
+  make(tile(642, 362, 319, 358), { body: "ball", scene: "plain", bg: ["#3d2a3e", "#6a4766"], floor: "#5e3f52", moods: [[0, "normal"], [2.5, "marah"], [5.5, "senang"], [9, "kaget"]], jumps: [1, 6.6, 11.5], scale: 1.0, y: 14, seed: 6 }),
+  // any image as the body: the face anchor is given in local units
+  make(tile(963, 362, 317, 358), { image: lemon, imageBox: [-78, -132, 156, 132], face: { x: 4, y: -62, scale: 0.78, tilt: -6 }, arms: [[-74, -62], [76, -58]], scene: "plain", bg: ["#3a3424", "#6c6040"], floor: "#6e5232", moods: [[0, "normal"], [3, "senang"], [6.5, "kaget"], [10, "sedih"]], scale: 1.0, y: 14, seed: 7 }),
+];
+const comp = { duration: T, ready: Promise.all(insts.map((i) => i.ready)), seek(t) { insts.forEach((i) => i.seek(t)); return comp; }, timeline() { return C.timeline(this); } };
+C.expose(comp);
+</script>
+</body>
+</html>

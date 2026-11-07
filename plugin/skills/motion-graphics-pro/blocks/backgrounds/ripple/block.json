@@ -1,0 +1,108 @@
+{
+ "id": "backgrounds/ripple",
+ "name": "Ripple",
+ "name_id": "Riak Konsentris",
+ "category": "backgrounds",
+ "description": {
+  "id": "Cincin-cincin konsentris beriak keluar dari pusat, putih di atas hitam. Titik pusat, kerapatan, dan ketebalan bisa diatur.",
+  "en": "Concentric rings ripple outward from the centre, white on black. Centre point, density and thickness are adjustable."
+ },
+ "tags": [
+  "latar",
+  "background",
+  "riak",
+  "ripple",
+  "cincin",
+  "shader",
+  "webgl",
+  "hipnotis",
+  "backgrounds"
+ ],
+ "props": {
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "bg": {
+   "default": "#000000",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "tight": {
+   "default": 36,
+   "type": "number",
+   "hint": "Jumlah cincin per tinggi layar",
+   "aliases": [
+    "rapat"
+   ]
+  },
+  "thickness": {
+   "default": 0.35,
+   "type": "number",
+   "hint": "Ketebalan cincin (0-1)",
+   "aliases": [
+    "tebal"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Pusat horizontal (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Pusat vertikal (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "fade": {
+   "default": 0.6,
+   "type": "number",
+   "hint": "Peredupan ke tepi (0-1)",
+   "aliases": [
+    "pudar"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali kecepatan gerak",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "resolution": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Skala resolusi shader (0.25-1); kecil = lebih cepat",
+   "aliases": [
+    "resolusi"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "latar/riak",
+  "ripples"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

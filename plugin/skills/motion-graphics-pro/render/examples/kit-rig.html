@@ -1,0 +1,128 @@
+<!doctype html>
+<!-- kit-rig: tokoh dari `rekam gambar kit` (kit.json + PNG bagian) dirakit jadi rig sendi lalu berjalan.
+     Pakai: salin ke folder yang berisi kit/ (dan plate.png bila ada), lalu
+       rekam kontak kit-rig.html --n 8 -o kontak.png     |   rekam render kit-rig.html -o jalan.mp4
+     Ganti lokasi kit lewat window.KIT_JSON / PLATE sebelum skrip ini, atau ubah konstanta di bawah.
+     Contoh siap jalan ikut di paket: examples/kit/ (8 bagian, diperkecil 40%, ±9 KB) + examples/plate.png (640x358).
+     Satu bagian per jenis: tungkai belakang memakai PNG yang sama, digelapkan, di belakang badan (trik cut-out). -->
+<html><head><meta charset="utf-8"><meta name="mgp:size" content="1280x720">
+<style>
+  html,body{margin:0;background:#20262e;overflow:hidden}
+  #stage{position:relative;width:1280px;height:720px;overflow:hidden;background:#cfd8d4}
+  #plate{position:absolute;left:0;top:0;height:720px;display:flex}
+  #plate img{height:720px;display:block}
+  #tanah{position:absolute;left:0;right:0;height:6px;background:rgba(0,0,0,.18);filter:blur(4px)}
+  .j{position:absolute;left:0;top:0;transform-origin:0 0}
+  .j>img{position:absolute;display:block}
+  .belakang{filter:brightness(.72) saturate(.9)}
+  #bayang{position:absolute;height:18px;border-radius:50%;background:rgba(0,0,0,.25);filter:blur(6px)}
+</style></head>
+<body><div id="stage"><div id="plate"></div><div id="tanah"></div><div id="bayang"></div><div id="tokoh" class="j"></div></div>
+<script>
+const KIT = window.KIT_JSON || "kit/kit.json";
+const PLATE = window.PLATE === undefined ? "plate.png" : window.PLATE;
+const W = 1280, H = 720, LANTAI = 640, PERIODE = 1.1;   // detik per siklus jalan
+window.__duration = 4.4; window.__fps = 24; window.__size = { width: W, height: H };
+const rad = (d) => d * Math.PI / 180;
+let R = null;
+
+// kit.json from `mgp image kit` (parts[{name, tip, ...}], English part names) or an old kit (bagian[{nama, ujung}], Indonesian names)
+const EN = { kepala: "head", badan: "torso", lengan_atas: "upper_arm", lengan_bawah: "lower_arm", tangan: "hand", paha: "thigh", betis: "shin", kaki: "foot" };
+function bagian(kit, nama) {
+  const list = kit.parts || kit.bagian || [];
+  const b = list.find((x) => (x.name || x.nama) === nama) || list.find((x) => (x.name || x.nama) === EN[nama]);
+  if (!b) throw new Error("kit.json has no part / tidak punya bagian " + nama + " (" + EN[nama] + ")");
+  if (!b.ujung && b.tip) b.ujung = b.tip;
+  return b;
+}
+function sendi(parent, b, s, belakang) {
+  // div berorigin di pivot bagian; anak ditempel di titik ujung
+  const d = document.createElement("div"); d.className = "j" + (belakang ? " belakang" : "");
+  const img = new Image(); img.src = KIT.replace(/[^/]*$/, "") + b.file;
+  img.style.cssText = `left:${-b.pivot[0] * s}px;top:${-b.pivot[1] * s}px;width:${b.w * s}px;height:${b.h * s}px`;
+  d.appendChild(img); parent.appendChild(d);
+  const ujung = { x: (b.ujung[0] - b.pivot[0]) * s, y: (b.ujung[1] - b.pivot[1]) * s };
+  return { d, ujung, b };
+}
+function anak(induk, b, s, belakang) {
+  const c = sendi(induk.d, b, s, belakang);
+  c.d.style.left = induk.ujung.x + "px"; c.d.style.top = induk.ujung.y + "px";
+  return c;
+}
+async function bangun() {
+  const kit = await (await fetch(KIT)).json();
+  const B = Object.fromEntries(["kepala", "badan", "lengan_atas", "lengan_bawah", "tangan", "paha", "betis", "kaki"].map((n) => [n, bagian(kit, n)]));
+  const len = (b) => Math.hypot(b.ujung[0] - b.pivot[0], b.ujung[1] - b.pivot[1]);
+  const tinggi = B.kepala.h * .9 + len(B.badan) + len(B.paha) + len(B.betis) + B.kaki.h * .6;
+  const s = (H * .62) / tinggi;
+  const tokoh = document.getElementById("tokoh");
+  // urutan tumpuk: tungkai belakang, badan + kepala, tungkai depan
+  const lapis = (belakang) => {
+    const paha = sendi(tokoh, B.paha, s, belakang), betis = anak(paha, B.betis, s, belakang), kaki = anak(betis, B.kaki, s, belakang);
+    return { paha, betis, kaki };
+  };
+  const bahu = { x: 0, y: 0 };
+  const lengan = (belakang) => {
+    const atas = sendi(tokoh, B.lengan_atas, s, belakang), bawah = anak(atas, B.lengan_bawah, s, belakang), tangan = anak(bawah, B.tangan, s, belakang);
+    return { atas, bawah, tangan };
+  };
+  const kakiB = lapis(true), lenganB = lengan(true);
+  const badan = sendi(tokoh, B.badan, s, false);          // pivot badan = leher (atas), ujung = pinggul (bawah)
+  const kepala = sendi(tokoh, B.kepala, s, false);         // pivot kepala = leher (bawah)
+  const kakiD = lapis(false), lenganD = lengan(false);
+  tokoh.appendChild(lenganD.atas.d);                       // lengan depan paling atas
+  R = { s, badan, kepala, kakiB, kakiD, lenganB, lenganD, B, len };
+  const tanah = document.getElementById("tanah"); tanah.style.top = LANTAI + "px";
+  if (PLATE) {
+    const p = document.getElementById("plate");
+    // ubin bergantian dicerminkan supaya sambungan plate yang tidak tileable tidak terlihat
+    for (let i = 0; i < 4; i++) { const im = new Image(); im.src = PLATE; if (i % 2) im.style.transform = "scaleX(-1)"; p.appendChild(im); }
+  }
+  await Promise.all([...document.images].map((im) => im.decode().catch(() => {})));
+}
+function pasang(c, sudut) { c.d.style.transform = `rotate(${sudut}deg)`; }
+function tungkai(k, f) {
+  // f: fase 0..1 satu langkah; paha +-24 deg, lutut menekuk saat ayun, telapak tetap mendatar
+  const p = f * 2 * Math.PI;
+  const paha = 24 * Math.sin(p);
+  const lutut = -(6 + 34 * Math.max(0, Math.sin(p + Math.PI * .35)) ** 1.5);
+  // sudut mutlak telapak = -paha - lutut + kaki; dibuat ~0 (mendatar) + sedikit jinjit saat tolakan
+  const kaki = paha + lutut - 10 * Math.max(0, -Math.cos(p)) * (Math.sin(p) < 0 ? 1 : 0);
+  pasang(k.paha, -paha); pasang(k.betis, -lutut); pasang(k.kaki, kaki);
+  return paha;
+}
+function lengan(l, f) {
+  const p = f * 2 * Math.PI;
+  pasang(l.atas, 18 * Math.sin(p)); pasang(l.bawah, -(12 + 14 * Math.max(0, Math.sin(p)))); pasang(l.tangan, -6);
+}
+window.__ready = bangun();
+window.__seek = async (t) => {
+  await window.__ready;
+  const { s, badan, kepala, kakiB, kakiD, lenganB, lenganD, B, len } = R;
+  const f = (t / PERIODE) % 1;
+  const bob = 6 * s * 10 * Math.abs(Math.cos(f * 2 * Math.PI)) / 10;   // naik di fase lewat (passing)
+  const hipX = W * .46, hipY = LANTAI - (len(B.paha) + len(B.betis) + B.kaki.h * .55) * s * .97 - bob;
+  const tokoh = document.getElementById("tokoh");
+  tokoh.style.transform = `translate(${hipX}px,${hipY}px)`;
+  // badan: ujung (pinggul) di titik 0,0 tokoh, condong 4 deg ke depan
+  const condong = 4 + 1.5 * Math.sin(f * 4 * Math.PI);
+  const bx = -(B.badan.ujung[0] - B.badan.pivot[0]) * s, by = -(B.badan.ujung[1] - B.badan.pivot[1]) * s;
+  const c = Math.cos(rad(condong)), sn = Math.sin(rad(condong));
+  const leher = { x: bx * c - by * sn, y: bx * sn + by * c };
+  badan.d.style.transform = `translate(${leher.x}px,${leher.y}px) rotate(${condong}deg)`;
+  kepala.d.style.transform = `translate(${leher.x}px,${leher.y + 4 * s}px) rotate(${condong * .5 - 2 * Math.sin(f * 4 * Math.PI - 1)}deg)`;
+  // bahu = 14% panjang badan di bawah leher, ikut condong
+  const bh = len(B.badan) * .14 * s, bahu = { x: leher.x - sn * bh, y: leher.y + c * bh };
+  for (const l of [lenganB, lenganD]) l.atas.d.style.left = bahu.x + "px", l.atas.d.style.top = bahu.y + "px";
+  for (const k of [kakiB, kakiD]) k.paha.d.style.left = "0px", k.paha.d.style.top = "0px";
+  tungkai(kakiD, f); tungkai(kakiB, f + .5);
+  lengan(lenganD, f + .5); lengan(lenganB, f);
+  // latar bergeser sejauh langkah (kaki menapak tidak meluncur, kira-kira)
+  const langkah = 2 * Math.sin(rad(24)) * len(B.paha) * s * 1.6;
+  const p = document.getElementById("plate");
+  const lebarPlate = p.firstChild ? p.firstChild.getBoundingClientRect().width : W;
+  p.style.transform = `translateX(${-((t / PERIODE) * langkah) % (2 * (lebarPlate || W))}px)`;
+  const by2 = document.getElementById("bayang");
+  by2.style.cssText = `left:${hipX - 70 * s * 10 / 10}px;top:${LANTAI - 9}px;width:${140}px`;
+};
+</script></body></html>

@@ -1,0 +1,90 @@
+{
+ "id": "backgrounds/dynamic-grid",
+ "name": "Dynamic Grid",
+ "name_id": "Kisi Dinamis",
+ "category": "backgrounds",
+ "description": {
+  "id": "Latar kisi bergerak untuk adegan SaaS, kode, dan data: garis kisi yang bergeser pelan, sel yang menyala bergantian, dan denyut cahaya yang berlari di sepanjang garis; atau lantai kisi berperspektif.",
+  "en": "An animated grid backdrop for SaaS, code and data scenes: slowly panning grid lines, cells lighting up in turn and light pulses running along the lines; or a perspective grid floor."
+ },
+ "tags": [
+  "latar",
+  "background",
+  "kisi",
+  "grid",
+  "teknologi",
+  "data",
+  "saas",
+  "kode",
+  "kanvas",
+  "backgrounds",
+  "dynamic"
+ ],
+ "props": {
+  "mode": {
+   "default": "flat",
+   "type": "enum",
+   "options": [
+    "flat",
+    "perspective"
+   ],
+   "option_aliases": {
+    "datar": "flat",
+    "perspektif": "perspective"
+   }
+  },
+  "color": {
+   "default": "#3b82f6",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "bg": {
+   "default": "#060a14",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "cell_size": {
+   "default": 72,
+   "type": "number",
+   "hint": "Ukuran sel (px pada 1080, mode datar)",
+   "aliases": [
+    "ukuran_sel"
+   ]
+  },
+  "highlight": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Sel menyala bergantian",
+   "aliases": [
+    "sorot"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali kecepatan gerak",
+   "aliases": [
+    "kecepatan"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "latar/kisi-dinamis",
+  "dynamic-grid"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

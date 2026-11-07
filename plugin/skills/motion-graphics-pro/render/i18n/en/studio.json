@@ -1,0 +1,10 @@
+{
+  "not found": "not found",
+  "unknown action: {}": "unknown action: {}",
+  "The file changed on disk since it was opened: {}": "The file changed on disk since it was opened: {}",
+  "no such job": "no such job",
+  "mgp studio: {}": "mgp studio: {}",
+  "composition: {}": "composition: {}",
+  "output: {}": "output: {}",
+  "Ctrl+C to stop.": "Ctrl+C to stop."
+}

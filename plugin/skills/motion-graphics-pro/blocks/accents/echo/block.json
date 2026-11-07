@@ -1,0 +1,230 @@
+{
+ "id": "accents/echo",
+ "name": "Echo",
+ "name_id": "Gema Gerak",
+ "category": "accents",
+ "description": {
+  "id": "Benda bergerak dengan salinan bayangan dirinya pada waktu t - i x delta. Mode jejak: gema berjenjang yang memudar lalu runtuh ke benda saat diam. Mode smear: coretan yang panjangnya mengikuti kecepatan, digabung dengan piksel paling terang. Mode blur-gerak: blur gerak ala After Effects dari sampel dalam jendela rana (sudut rana, fps, jumlah sampel) berbobot sama.",
+  "en": "A moving element with ghosted copies of itself at t - i x delta. Trail mode: stepped echoes collapsing into the element at rest. Smear mode: speed-proportional streak combined by brightest pixel. Motion-blur mode: After Effects-style shutter integration (shutter angle, fps, samples) with equal-weight copies."
+ },
+ "tags": [
+  "aksen",
+  "gema",
+  "echo",
+  "jejak",
+  "smear",
+  "motion-blur",
+  "blur",
+  "gerak",
+  "accents"
+ ],
+ "props": {
+  "mode": {
+   "default": "trail",
+   "type": "enum",
+   "options": [
+    "trail",
+    "smear",
+    "motion-blur"
+   ],
+   "option_aliases": {
+    "jejak": "trail",
+    "blur-gerak": "motion-blur"
+   }
+  },
+  "shape": {
+   "default": "card",
+   "type": "enum",
+   "options": [
+    "card",
+    "ball",
+    "text"
+   ],
+   "aliases": [
+    "bentuk"
+   ],
+   "option_aliases": {
+    "kartu": "card",
+    "bola": "ball",
+    "teks": "text"
+   }
+  },
+  "text": {
+   "default": "Cepat",
+   "type": "text",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "copy": {
+   "default": 6,
+   "type": "number",
+   "hint": "Jumlah gema (jejak/smear)",
+   "aliases": [
+    "salinan"
+   ]
+  },
+  "delta": {
+   "default": 0.05,
+   "type": "number",
+   "hint": "Selisih waktu antar gema (detik)"
+  },
+  "opacity": {
+   "default": 0.55,
+   "type": "number",
+   "hint": "Opasitas gema terdekat",
+   "aliases": [
+    "opasitas"
+   ]
+  },
+  "samples": {
+   "default": 12,
+   "type": "number",
+   "hint": "Sampel per frame (blur-gerak)",
+   "aliases": [
+    "sampel"
+   ]
+  },
+  "shutter_angle": {
+   "default": 180,
+   "type": "number",
+   "hint": "Derajat rana (blur-gerak)",
+   "aliases": [
+    "sudut_rana"
+   ]
+  },
+  "fps": {
+   "default": 30,
+   "type": "number",
+   "hint": "Frame per detik acuan rana"
+  },
+  "from_x": {
+   "default": -12,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "dari_x"
+   ]
+  },
+  "from_y": {
+   "default": 62,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "dari_y"
+   ]
+  },
+  "to_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "ke_x"
+   ]
+  },
+  "to_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "ke_y"
+   ]
+  },
+  "exit": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "keluar"
+   ]
+  },
+  "exit_x": {
+   "default": 115,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "keluar_x"
+   ]
+  },
+  "exit_y": {
+   "default": 40,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "keluar_y"
+   ]
+  },
+  "curve": {
+   "default": 160,
+   "type": "number",
+   "hint": "Tinggi lengkung lintasan (px pada 1080)",
+   "aliases": [
+    "lengkung"
+   ]
+  },
+  "rotate": {
+   "default": -24,
+   "type": "number",
+   "hint": "Rotasi awal (derajat)",
+   "aliases": [
+    "putar"
+   ]
+  },
+  "motion_duration": {
+   "default": 1.1,
+   "type": "number",
+   "aliases": [
+    "durasi_gerak"
+   ]
+  },
+  "ease": {
+   "default": "expo.out",
+   "type": "ease"
+  },
+  "color": {
+   "default": "#ff5c39",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "text_color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@800",
+   "type": "font"
+  },
+  "size": {
+   "default": 300,
+   "type": "number",
+   "hint": "Ukuran benda (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  }
+ },
+ "duration": 4,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "aksen/gema",
+  "echo-trail",
+  "echo-smear",
+  "motion-blur"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@800"
+  ]
+ }
+}

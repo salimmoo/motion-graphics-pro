@@ -1,0 +1,146 @@
+{
+ "id": "transitions/paper-fold",
+ "name": "Paper Fold",
+ "name_id": "Lipat Kertas",
+ "category": "transitions",
+ "description": {
+  "id": "Adegan lama menjadi selembar kertas yang dilipat dua kali seperti origami, rebah, lalu hilang; adegan baru datang sebagai lipatan yang berdiri dan membuka. Sisi belakang kertas kraft berserat, bayangan lembut di bawah lipatan. Membungkus modul paperFoldTransition (versi DOM).",
+  "en": "The old scene becomes a sheet folded twice like origami, lies down and vanishes; the new scene arrives as a packet that stands up and unfolds. Fibrous kraft back, soft shadow under the fold. Wraps the paperFoldTransition module (DOM variant)."
+ },
+ "tags": [
+  "transisi",
+  "kertas",
+  "lipat",
+  "origami",
+  "fold",
+  "3d",
+  "paper",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama (disalin lalu dilipat)",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru (disalin lalu dibuka)",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "direction": {
+   "default": "left",
+   "type": "enum",
+   "options": [
+    "left",
+    "right"
+   ],
+   "hint": "Belahan yang dilipat lebih dulu",
+   "aliases": [
+    "arah"
+   ],
+   "option_aliases": {
+    "kiri": "left",
+    "kanan": "right"
+   }
+  },
+  "vertical": {
+   "default": "bottom",
+   "type": "enum",
+   "options": [
+    "bottom",
+    "top"
+   ],
+   "hint": "bawah = sisi atas dilipat ke bawah; atas = sisi bawah dilipat ke atas",
+   "aliases": [
+    "vertikal"
+   ],
+   "option_aliases": {
+    "bawah": "bottom",
+    "atas": "top"
+   }
+  },
+  "start": {
+   "default": 0.2,
+   "type": "number",
+   "hint": "Jeda sebelum melipat (detik)",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "hold": {
+   "default": 0.3,
+   "type": "number",
+   "hint": "Tahan setelah terbuka (detik)",
+   "aliases": [
+    "tahan"
+   ]
+  },
+  "bg_color": {
+   "default": "#d9cdb4",
+   "type": "color",
+   "hint": "Warna meja di belakang lembar",
+   "aliases": [
+    "warna_latar"
+   ]
+  },
+  "flip_color": {
+   "default": [
+    "#c9a77a",
+    "#e8d3ad"
+   ],
+   "type": "list",
+   "hint": "Gradasi kertas kraft di sisi belakang",
+   "aliases": [
+    "warna_balik"
+   ]
+  },
+  "through": {
+   "default": 0.13,
+   "type": "number",
+   "hint": "Seberapa tembus cetakan ke sisi belakang (0 - 0.4)",
+   "aliases": [
+    "tembus"
+   ]
+  },
+  "shadow": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Bayangan lembut di bawah lipatan",
+   "aliases": [
+    "bayangan"
+   ]
+  },
+  "perspective": {
+   "default": 1700,
+   "type": "number",
+   "hint": "Perspektif CSS (px)",
+   "aliases": [
+    "perspektif"
+   ]
+  }
+ },
+ "duration": 3,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [
+  "lib:mgp.js"
+ ],
+ "aliases": [
+  "transisi/lipat-kertas"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.6,
+  "duration": 4
+ }
+}

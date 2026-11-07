@@ -1,0 +1,91 @@
+{
+ "id": "packs/scene",
+ "name": "Scene",
+ "name_id": "Adegan Paket Motion",
+ "category": "packs",
+ "description": {
+  "id": "Satu dari 104 paket motion (EXP-01 sampai TRN-04) langsung dari id-nya: palet, font, dan jenis adegan bawaan paket, diisi empat ketukan teks milikmu (judul + keterangan). Cocok sebagai adegan jadi untuk explainer, dokumenter, data, atau transisi.",
+  "en": "Any of the 104 motion packages (EXP-01 to TRN-04) straight from its id, with its own palette, fonts and scene type, filled with your four text beats (title + caption)."
+ },
+ "tags": [
+  "paket",
+  "adegan",
+  "template",
+  "explainer",
+  "dokumenter",
+  "scene",
+  "preset",
+  "packs"
+ ],
+ "props": {
+  "pack": {
+   "default": "EXP-02",
+   "type": "text",
+   "hint": "Id paket, mis. EXP-02, DOK-03, KIN-02",
+   "aliases": [
+    "paket"
+   ]
+  },
+  "rows": {
+   "default": [
+    {
+     "judul": "Masalahnya sederhana",
+     "ket": "Data tersebar di banyak tempat"
+    },
+    {
+     "judul": "Begini cara kerjanya",
+     "ket": "Semua masuk ke satu alur"
+    },
+    {
+     "judul": "Hasilnya terasa",
+     "ket": "Keputusan lebih cepat"
+    },
+    {
+     "judul": "Mulai hari ini",
+     "ket": "Langkah kecil, dampak besar"
+    }
+   ],
+   "type": "list",
+   "hint": "Empat ketukan [{judul, ket}]; kosong = contoh kategori",
+   "aliases": [
+    "baris"
+   ]
+  },
+  "scene": {
+   "default": "",
+   "type": "text",
+   "hint": "Jenis adegan lain (kosong = bawaan paket)",
+   "aliases": [
+    "adegan"
+   ]
+  },
+  "variant": {
+   "default": -1,
+   "type": "number",
+   "hint": "Varian adegan; -1 = bawaan",
+   "aliases": [
+    "varian"
+   ]
+  },
+  "font_google": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Muat font paket dari Google Fonts"
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [
+  "lib:mgp.js"
+ ],
+ "aliases": [
+  "paket/adegan"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

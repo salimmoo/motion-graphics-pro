@@ -1,0 +1,100 @@
+{
+ "id": "backgrounds/snow",
+ "name": "Snow",
+ "name_id": "Salju Turun",
+ "category": "backgrounds",
+ "description": {
+  "id": "Lapisan salju turun: kepingan jarang atau padat melayang ke bawah dengan ukuran, kecepatan, dan opasitas yang saling berkaitan sehingga terasa berkedalaman; tengah layar dibiarkan bersih.",
+  "en": "Falling-snow overlay: sparse or dense flakes drift down with correlated size, speed and opacity for depth, radially masked so the frame centre stays clear."
+ },
+ "tags": [
+  "latar",
+  "overlay",
+  "salju",
+  "musim-dingin",
+  "partikel",
+  "kedalaman",
+  "kanvas",
+  "backgrounds",
+  "snow"
+ ],
+ "props": {
+  "density": {
+   "default": "sparse",
+   "type": "enum",
+   "options": [
+    "sparse",
+    "dense"
+   ],
+   "aliases": [
+    "kerapatan"
+   ],
+   "option_aliases": {
+    "jarang": "sparse",
+    "padat": "dense"
+   }
+  },
+  "count": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali jumlah kepingan",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "bg": {
+   "default": "",
+   "type": "color",
+   "hint": "Kosong = transparan (overlay)",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "wind": {
+   "default": 30,
+   "type": "number",
+   "hint": "Hembusan ke samping (px/detik pada 1080)",
+   "aliases": [
+    "angin"
+   ]
+  },
+  "center_mask": {
+   "default": 0.3,
+   "type": "number",
+   "hint": "Besar area tengah yang dibersihkan (0 = mati)",
+   "aliases": [
+    "masker_tengah"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali kecepatan gerak",
+   "aliases": [
+    "kecepatan"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "latar/salju",
+  "snow"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

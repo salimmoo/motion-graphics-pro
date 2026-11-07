@@ -1,0 +1,122 @@
+{
+ "id": "logos/board-intro",
+ "name": "Board Intro",
+ "name_id": "Intro Papan Bergaris",
+ "category": "logos",
+ "description": {
+  "id": "Intro kanal bergaya papan tulis bergaris: stempel logo menghentak di atas garis tangan yang bergetar halus, baris kicker muncul lalu memberi jalan untuk judul, ditutup chip panah beraksen.",
+  "en": "Channel intro on a lined board: a logo stamp pops over gently boiling hand-drawn lines, a kicker line gives way to the title, finished with an accent arrow chip."
+ },
+ "tags": [
+  "logo",
+  "intro",
+  "papan",
+  "stempel",
+  "judul",
+  "kanal",
+  "kicker",
+  "goyang",
+  "logos",
+  "board"
+ ],
+ "props": {
+  "brand_name": {
+   "default": "KELAS SORE",
+   "type": "text",
+   "hint": "Teks melingkar di stempel",
+   "aliases": [
+    "nama_merek"
+   ]
+  },
+  "kicker": {
+   "default": "Episode 12 · Ekonomi rumah tangga",
+   "type": "text"
+  },
+  "title": {
+   "default": "Cara menabung tanpa merasa pelit",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "paper_color": {
+   "default": "#f6f1e4",
+   "type": "color",
+   "aliases": [
+    "warna_kertas"
+   ]
+  },
+  "line_color": {
+   "default": "#9fc3e6",
+   "type": "color",
+   "aliases": [
+    "warna_garis"
+   ]
+  },
+  "ink_color": {
+   "default": "#1c2230",
+   "type": "color",
+   "aliases": [
+    "warna_tinta"
+   ]
+  },
+  "accent_color": {
+   "default": "#ff6b4a",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "line_count": {
+   "default": 16,
+   "type": "number",
+   "aliases": [
+    "jumlah_garis"
+   ]
+  },
+  "wobble": {
+   "default": 1,
+   "type": "number",
+   "hint": "Kekuatan distorsi garis (0 = lurus)",
+   "aliases": [
+    "goyang"
+   ]
+  },
+  "font": {
+   "default": "Archivo:wght@600;800;900",
+   "type": "font"
+  },
+  "font2": {
+   "default": "JetBrains Mono:wght@500;700",
+   "type": "font",
+   "hint": "Font mono kicker"
+  },
+  "size": {
+   "default": 104,
+   "type": "number",
+   "hint": "Ukuran judul (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "logo/intro-papan",
+  "yt-logo-intro"
+ ],
+ "example": {
+  "bg": "empty",
+  "font": [
+   "Archivo:wght@600;800;900",
+   "JetBrains Mono:wght@500;700"
+  ]
+ }
+}

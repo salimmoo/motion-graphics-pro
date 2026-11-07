@@ -1,0 +1,41 @@
+<!-- Block subtitles/heavy · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="subtitles/heavy" data-start="0" data-duration="5" data-track-index="30" class="blk blk-subtitles-heavy">
+<script type="application/json" data-block-props>
+{"text": "Pelan-pelan saja, semua akan sampai pada waktunya", "words": [], "kps": 2.0, "max_words": 4, "font": "Inter:wght@100..900", "size": 70, "color": "#ffffff", "bottom": 16, "uppercase": false, "start_weight": 200, "end_weight": 800, "start_opacity": 0.5}
+</script>
+<div class="blk-cap"></div>
+</div>
+<style>
+.blk-subtitles-heavy{position:absolute;inset:0;pointer-events:none}
+.blk-subtitles-heavy .blk-cap{position:absolute;left:6%;right:6%;text-align:center;line-height:1.2;letter-spacing:-.01em}
+.blk-subtitles-heavy .blk-hal{position:absolute;left:0;right:0;bottom:0}
+.blk-subtitles-heavy .blk-w{display:inline-block;margin:0 .13em}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, cap = k.root.querySelector(".blk-cap");
+  cap.style.cssText += ";bottom:" + P.bottom + "%;color:" + P.color + ";font-family:" + BLOCK.family(P.font) + ";font-size:" +
+    Math.round(P.size * s) + "px;text-shadow:0 " + Math.round(3 * s) + "px " + Math.round(16 * s) + "px rgba(0,0,0,.35)" + (P.uppercase ? ";text-transform:uppercase" : "");
+  var pages = BLOCK.pages(BLOCK.words(P), P.max_words), semua = [];
+  pages.forEach(function (pg) {
+    var h = BLOCK.el("div", { class: "blk-hal" }, cap);
+    BLOCK.initial(tl, h, { autoAlpha: 0 }).set(h, { autoAlpha: 1 }, pg.mulai).set(h, { autoAlpha: 0 }, pg.akhir);
+    tl.fromTo(h, { y: 14 * s }, { y: 0, duration: 0.5, ease: "power3.out" }, pg.mulai);
+    pg.kata.forEach(function (w) {
+      var e = BLOCK.el("span", { class: "blk-w" }, h); e.textContent = String(w.teks).replace(/\*/g, "");
+      semua.push({ e: e, w: w, pg: pg });
+    });
+  });
+  var io = function (x) { return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+  // berat & opasitas tiap kata = fungsi murni dari t: menebal saat diucap, menipis saat baris berganti
+  BLOCK.onTime(tl, function (t) {
+    semua.forEach(function (o) {
+      var p = io(BLOCK.progress(t, o.w.mulai - 0.06, o.w.mulai + 0.34));
+      var q = io(BLOCK.progress(t, o.pg.akhir - 0.32, o.pg.akhir));
+      var b = BLOCK.lerp(P.start_weight, P.end_weight, p * (1 - q));
+      o.e.style.fontWeight = Math.round(b);
+      o.e.style.opacity = (BLOCK.lerp(P.start_opacity, 1, p) * (1 - 0.85 * q)).toFixed(3);
+    });
+  }, k.dur);
+}, { font: true });
+</script>

@@ -1,0 +1,98 @@
+{
+ "id": "backgrounds/beat-pulse",
+ "name": "Beat Pulse",
+ "name_id": "Detak Ketukan",
+ "category": "backgrounds",
+ "description": {
+  "id": "Latar yang berdenyut mengikuti ketukan: cahaya warna aksen membesar, makin pekat, dan memancarkan cincin di tiap ketukan, lalu meluruh. Ketukan dari bpm atau daftar detik, deterministik.",
+  "en": "A backdrop that pulses on the beat: an accent glow swells, saturates and emits a ring on every beat, then decays. Beats from a bpm or a list of seconds, fully deterministic."
+ },
+ "tags": [
+  "latar",
+  "background",
+  "ketukan",
+  "beat",
+  "musik",
+  "denyut",
+  "bpm",
+  "glow",
+  "backgrounds",
+  "pulse"
+ ],
+ "props": {
+  "bpm": {
+   "default": 120,
+   "type": "number",
+   "hint": "Tempo bila daftar ketukan kosong"
+  },
+  "beats": {
+   "default": [],
+   "type": "list",
+   "hint": "Daftar waktu ketukan (detik); menimpa bpm",
+   "aliases": [
+    "ketukan"
+   ]
+  },
+  "beat_start": {
+   "default": 0.25,
+   "type": "number",
+   "hint": "Waktu ketukan pertama (detik, mode bpm)",
+   "aliases": [
+    "mulai_ketukan"
+   ]
+  },
+  "accent_color": {
+   "default": "#ff3d7f",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg": {
+   "default": "#0b0710",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "strength": {
+   "default": 1,
+   "type": "number",
+   "hint": "Kekuatan denyut",
+   "aliases": [
+    "kekuatan"
+   ]
+  },
+  "decay": {
+   "default": 5,
+   "type": "number",
+   "hint": "Kecepatan meluruh setelah ketukan",
+   "aliases": [
+    "peluruhan"
+   ]
+  },
+  "ring": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Cincin memancar tiap ketukan",
+   "aliases": [
+    "cincin"
+   ]
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "latar/detak-ketukan",
+  "beat-pulse-background"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP medan · cloner + effector + falloff field</title>
+<style>html,body{margin:0;background:#12172a}#stage{position:relative;width:1280px;height:720px;overflow:hidden;background:#12172a}#stage canvas{position:absolute}
+.tag{position:absolute;font:600 20px/1 system-ui,"Segoe UI",Arial,sans-serif;color:#f4ecd8;opacity:.8}</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../field.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720" data-fps="24">
+  <canvas id="g" style="left:0;top:0"></canvas><canvas id="b" style="left:640px;top:0"></canvas><canvas id="t" style="left:0;top:360px"></canvas>
+  <div class="tag" style="left:14px;top:12px">grid · medan bola + pegas, noise acak</div>
+  <div class="tag" style="left:654px;top:12px">batang · medan linier menyapu, tinggi lewat pegas</div>
+  <div class="tag" style="left:14px;top:372px">teks · glif dari measureText, medan linier + gelombang rumus</div>
+</div>
+<script>
+const D = 6, base = { width: 640, height: 360, duration: D };
+const G = MGP.field.create("#g", Object.assign({ mode: "grid" }, base));
+const B = MGP.field.create("#b", Object.assign({ mode: "bars", data: [34, 58, 41, 77, 63, 92, 50, 70], label: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu"], color: "#7ee0d6", color2: "#2d6cdf" }, base));
+const T = MGP.field.create("#t", Object.assign({}, base, { mode: "text", text: "MEDAN GERAK", width: 1280, color: "#f4ecd8", color2: "#ffb347" }));
+const all = [G, B, T];
+window.__curves = () => ({ grid: G.state.kurva.klonTengah, batang0: B.state.kurva.tinggi0, teks0: T.state.kurva.klon0 });
+MGP.core.expose({ duration: D, ready: Promise.all(all.map((x) => x.ready)), seek(t) { all.forEach((x) => x.seek(t)); return this; }, timeline() { return MGP.core.timeline(this); } });
+</script>
+</body>
+</html>

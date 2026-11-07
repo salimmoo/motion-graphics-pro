@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP core · easing, Catmull-Rom, seeded rng</title>
+<style>html,body{margin:0;background:#0e1116}#stage{position:relative;width:1280px;height:720px;overflow:hidden}</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720"></div>
+<script>
+// A tiny module built with MGP.core.defineModule: shows the shared easing set, a Catmull-Rom path and seeded dots.
+const C = MGP.core;
+const demo = C.defineModule("coreDemo", {
+  size: [1280, 720], duration: 4, defaults: { seed: 7, bg: "#0e1116", ink: "#f4ecd8", accent: "#d6b06a" },
+  setup(S) { S.dots = Array.from({ length: 60 }, () => [S.rng() * S.W, 470 + S.rng() * 210, 2 + S.rng() * 4]); },
+  render(g, t, S) {
+    const { W, H, opts: o } = S; g.fillStyle = o.bg; g.fillRect(0, 0, W, H);
+    const names = ["lin", "in", "out", "inOut", "sine", "back", "elastic", "bounce"], p = C.seg(t, 0.3, 3.3);
+    names.forEach((n, i) => {
+      const x0 = 60 + i * 150, y0 = 60, w = 120, h = 120;
+      g.strokeStyle = C.rgba(o.ink, 0.25); g.strokeRect(x0, y0, w, h);
+      g.beginPath(); for (let k = 0; k <= 60; k++) { const u = k / 60, v = C.ease[n](u); g.lineTo(x0 + u * w, y0 + h - v * h); } g.strokeStyle = o.ink; g.lineWidth = 2; g.stroke();
+      const v = C.ease[n](p); g.beginPath(); g.arc(x0 + p * w, y0 + h - v * h, 5, 0, C.TAU); g.fillStyle = o.accent; g.fill();
+      g.fillStyle = o.ink; g.font = "14px monospace"; g.fillText(n, x0, y0 + h + 22);
+    });
+    const pts = [[80, 330], [300, 250], [520, 420], [760, 280], [980, 400], [1200, 300]];
+    g.beginPath(); C.catmullPath(g, pts); g.strokeStyle = C.rgba(o.accent, 0.8); g.lineWidth = 3; g.stroke();
+    const d = C.catmullPts(pts, 16), q = C.polyAt(d, C.ease.inOut(C.seg(t, 0, 4)));
+    g.save(); g.translate(q[0], q[1]); g.rotate(q[2]); g.fillStyle = o.ink; g.fillRect(-14, -8, 28, 16); g.restore();
+    S.dots.forEach(([x, y, r], i) => { g.beginPath(); g.arc(x + C.wob(i, t, 6, 1.5), y + C.wob(i + 50, t, 6, 1.5), r, 0, C.TAU); g.fillStyle = C.rgba(o.ink, 0.35 + 0.3 * C.hash(i)); g.fill(); });
+  },
+});
+const inst = demo.create(document.getElementById("stage"), {});
+C.expose(inst);
+</script>
+</body>
+</html>

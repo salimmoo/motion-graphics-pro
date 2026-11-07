@@ -1,0 +1,27 @@
+<!-- Block text/rising-words · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="text/rising-words" data-start="0" data-duration="4" data-track-index="10" class="blk blk-text-rising-words">
+<script type="application/json" data-block-props>
+{"text": "Gerak yang *jelas* membuat pesan mudah diingat", "unit": "words", "direction": "up", "distance": 60, "blur": 10, "pause": 0.08, "enter_duration": 0.7, "ease": "power3.out", "exit": "fade", "color": "#f5f3ee", "keyword_color": "#ffcf4a", "font": "Inter:wght@400;700;800", "size": 96, "weight": 800, "align": "center", "position_y": 50, "width": 80}
+</script>
+<div class="blk-tk"></div>
+</div>
+<style>
+.blk-text-rising-words{position:absolute;inset:0;pointer-events:none}
+.blk-text-rising-words .blk-tk{position:absolute;left:50%;transform:translate(-50%,-50%);line-height:1.08;letter-spacing:-.01em}
+.blk-text-rising-words .blk-kunci{color:var(--kunci)}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, el = k.root.querySelector(".blk-tk");
+  el.style.cssText += ";top:" + P.position_y + "%;width:" + P.width + "%;color:" + P.color + ";--kunci:" + P.keyword_color +
+    ";font-family:" + BLOCK.family(P.font) + ";font-weight:" + P.weight + ";font-size:" + Math.round(P.size * k.s) + "px;text-align:" +
+    ({ left: "left", right: "right" }[P.align] || "center");
+  // satuan: kata | huruf | baris ; arah: naik | turun | kiri | kanan | diam
+  var u = BLOCK.split(el, P.text, P.unit), d = P.distance * k.s;
+  var off = { up: { y: d }, down: { y: -d }, left: { x: d }, right: { x: -d }, still: {} }[P.direction] || { y: d };
+  var from = Object.assign({ opacity: 0, x: 0, y: 0, filter: "blur(" + P.blur + "px)" }, off);
+  tl.fromTo(u, from, { opacity: 1, x: 0, y: 0, filter: "blur(0px)", duration: P.enter_duration, ease: P.ease, stagger: P.pause }, 0.1);
+  if (P.exit === "fade") tl.to(u, { opacity: 0, duration: 0.4, ease: "power2.in", stagger: P.pause * 0.4 }, k.dur - 0.55);
+  if (P.exit === "up") tl.to(u, { opacity: 0, y: -d, filter: "blur(" + P.blur + "px)", duration: 0.45, ease: "power2.in", stagger: P.pause * 0.4 }, k.dur - 0.6);
+}, { font: true });
+</script>

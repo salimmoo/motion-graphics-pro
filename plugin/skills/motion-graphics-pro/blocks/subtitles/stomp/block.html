@@ -1,0 +1,51 @@
+<!-- Block subtitles/stomp · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="subtitles/stomp" data-start="0" data-duration="4" data-track-index="30" class="blk blk-subtitles-stomp">
+<script type="application/json" data-block-props>
+{"text": "Jangan pernah berhenti *mencoba* sampai berhasil", "words": [], "kps": 2.4, "max_words": 1, "font": "Anton:wght@400", "size": 230, "color": "#ffffff", "bottom": 44, "uppercase": true, "accent_color": "#ffd23f", "keywords": [], "direction": "alternate", "shake": 16, "max_width": 88}
+</script>
+<div class="blk-cap"></div>
+</div>
+<style>
+.blk-subtitles-stomp{position:absolute;inset:0;pointer-events:none}
+.blk-subtitles-stomp .blk-cap{position:absolute;left:0;right:0;text-align:center;line-height:.95}
+.blk-subtitles-stomp .blk-hal{position:absolute;left:0;right:0;bottom:0;text-align:center;white-space:nowrap}
+.blk-subtitles-stomp .blk-in{display:inline-block}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, cap = k.root.querySelector(".blk-cap");
+  var KL = (P.keywords || []).map(function (x) { return String(x).toLowerCase(); });
+  var polos = function (t) { return String(t).replace(/\*/g, ""); };
+  var kunci = function (t) { return /\*/.test(t) || KL.indexOf(polos(t).toLowerCase().replace(/[^\p{L}\p{N}]/gu, "")) >= 0; };
+  var fs = Math.round(P.size * s);
+  cap.style.cssText += ";bottom:" + P.bottom + "%;color:" + P.color + ";font-family:" + BLOCK.family(P.font, "Impact, sans-serif") +
+    ";font-size:" + fs + "px;text-shadow:0 " + Math.round(8 * s) + "px " + Math.round(26 * s) + "px rgba(0,0,0,.45)" + (P.uppercase ? ";text-transform:uppercase" : "");
+  var D = [{ x: -k.w * 0.7 }, { x: k.w * 0.7 }, { y: -k.h * 0.35 }, { y: k.h * 0.35 }, { scale: 3 }];
+  var peta = { left: 0, right: 1, top: 2, bottom: 3, zoom: 4 };
+  var pages = BLOCK.pages(BLOCK.words(P), P.max_words), hits = [];
+  pages.forEach(function (pg, i) {
+    var h = BLOCK.el("div", { class: "blk-hal" }, cap), inn = BLOCK.el("span", { class: "blk-in" }, h);
+    inn.textContent = pg.kata.map(function (w) { return polos(w.teks); }).join(" ");
+    if (pg.kata.some(function (w) { return kunci(w.teks); })) inn.style.color = P.accent_color;
+    // satu kata memenuhi layar: kecilkan bila melebihi lebar_maks
+    var lebar = inn.offsetWidth, maks = k.w * P.max_width / 100;
+    if (lebar > maks) inn.style.fontSize = Math.floor(fs * maks / lebar) + "px";
+    BLOCK.initial(tl, h, { autoAlpha: 0 }).set(h, { autoAlpha: 1 }, pg.mulai).set(h, { autoAlpha: 0 }, pg.akhir);
+    var d = P.direction === "alternate" ? D[i % 5] : D[peta[P.direction] != null ? peta[P.direction] : 4];
+    var dari = Object.assign({ x: 0, y: 0, scale: 1, filter: "blur(14px)" }, d);
+    tl.fromTo(inn, dari, { x: 0, y: 0, scale: 1, filter: "blur(0px)", duration: 0.22, ease: "expo.out" }, pg.mulai)
+      .fromTo(h, { scale: 1 }, { scale: 1.06, duration: Math.max(0.2, pg.akhir - pg.mulai), ease: "none" }, pg.mulai);
+    hits.push(pg.mulai + 0.12);
+  });
+  // guncangan saat mendarat: fungsi murni dari t (tanpa tween bertumpuk)
+  BLOCK.onTime(tl, function (t) {
+    var gx = 0, gy = 0;
+    hits.forEach(function (tb, i) {
+      var dt = t - tb; if (dt < 0 || dt > 0.4) return;
+      var a = Math.exp(-dt * 12) * P.shake * s;
+      gx += a * Math.sin(dt * 70 + i) ; gy += a * 0.6 * Math.cos(dt * 55 + i * 2);
+    });
+    cap.style.transform = "translate(" + gx.toFixed(2) + "px," + gy.toFixed(2) + "px)";
+  }, k.dur);
+}, { font: true });
+</script>

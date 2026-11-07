@@ -1,0 +1,55 @@
+<!-- Block accents/circle-pointer · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="accents/circle-pointer" data-start="0" data-duration="4" data-track-index="30" class="blk blk-accents-circle-pointer">
+<script type="application/json" data-block-props>
+{"target": "", "position_x": 50, "position_y": 50, "width": 24, "height": 12, "distance": 34, "text": "Klik di sini", "count": 3, "draw_duration": 0.8, "thickness": 7, "color": "#ff3b30", "text_color": "#ffffff", "font": "Inter:wght@700;800", "size": 30, "seed": 2}
+</script>
+<svg class="blk-svg"></svg>
+<div class="blk-chip"><span class="blk-tx"></span><b class="blk-n"></b></div>
+</div>
+<style>
+.blk-accents-circle-pointer{position:absolute;inset:0;pointer-events:none}
+.blk-accents-circle-pointer .blk-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.blk-accents-circle-pointer .blk-chip{position:absolute;display:flex;align-items:center;white-space:nowrap;font-weight:700;transform-origin:left center}
+.blk-accents-circle-pointer .blk-n{display:flex;align-items:center;justify-content:center;border-radius:50%;font-variant-numeric:tabular-nums}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, fs = function (v) { return (v * s).toFixed(1) + "px"; };
+  var sv = R.querySelector(".blk-svg"), chip = R.querySelector(".blk-chip"), nEl = R.querySelector(".blk-n");
+  sv.setAttribute("viewBox", "0 0 " + k.w + " " + k.h);
+  // sasaran: elemen host (selektor) atau kotak persen
+  var cx = k.w * P.position_x / 100, cy = k.h * P.position_y / 100, bw = k.w * P.width / 100, bh = k.h * P.height / 100, tg = P.target && BLOCK.find(P.target);
+  if (tg) {
+    var a = tg.getBoundingClientRect(), b = R.getBoundingClientRect(), sx = k.w / (b.width || k.w);
+    cx = (a.left - b.left + a.width / 2) * sx; cy = (a.top - b.top + a.height / 2) * sx; bw = a.width * sx; bh = a.height * sx;
+  }
+  var rx = bw / 2 + P.distance * s, ry = bh / 2 + P.distance * s, rng = k.random, rot = rng.range(-6, 6) * Math.PI / 180;
+  // elips tangan: sedikit tidak rata, berputar lebih dari satu kali supaya ujungnya bertumpuk
+  var pts = [], N = 90, a0 = -2.2, sap = Math.PI * 2 * 1.12;
+  for (var i = 0; i <= N; i++) {
+    var u = i / N, th = a0 + u * sap, wob = 1 + BLOCK.noise(u * 5, 4) * 0.035 + (u - 0.5) * 0.06;
+    var x = Math.cos(th) * rx * wob, y = Math.sin(th) * ry * wob;
+    pts.push([cx + x * Math.cos(rot) - y * Math.sin(rot), cy + x * Math.sin(rot) + y * Math.cos(rot)]);
+  }
+  var d = "M" + pts.map(function (p) { return p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" L");
+  var bay = BLOCK.svg("path", { d: d, fill: "none", stroke: "rgba(0,0,0,.25)", "stroke-width": P.thickness * s * 1.6, "stroke-linecap": "round", transform: "translate(" + 3 * s + " " + 4 * s + ")" }, sv);
+  var gr = BLOCK.svg("path", { d: d, fill: "none", stroke: P.color, "stroke-width": P.thickness * s, "stroke-linecap": "round", "stroke-linejoin": "round" }, sv);
+  var L = BLOCK.prepareStroke(gr); BLOCK.prepareStroke(bay);
+  var t0 = 0.25, dg = P.draw_duration;
+  tl.fromTo([gr, bay], { strokeDashoffset: L }, { strokeDashoffset: 0, duration: dg, ease: "power2.inOut" }, t0);
+  // chip hitung mundur di kanan atas elips
+  var fz = P.size * s;
+  chip.style.cssText += ";font-family:" + BLOCK.family(P.font) + ";font-size:" + fz + "px;color:" + P.text_color + ";background:" + P.color +
+    ";padding:" + fz * 0.35 + "px " + fz * 0.35 + "px " + fz * 0.35 + "px " + fz * 0.75 + "px;border-radius:" + fz * 2 + "px;box-shadow:0 " + fz * 0.3 + "px " + fz + "px rgba(0,0,0,.3)";
+  R.querySelector(".blk-tx").textContent = P.text;
+  nEl.style.cssText += ";width:" + fz * 1.5 + "px;height:" + fz * 1.5 + "px;margin-left:" + fz * 0.5 + "px;background:" + P.text_color + ";color:" + P.color;
+  var ax = cx + Math.cos(-0.75) * rx * 0.95, ay = cy + Math.sin(-0.75) * ry * 0.95 - fz * 2.2;
+  if (ax + chip.offsetWidth > k.w * 0.96) ax = k.w * 0.96 - chip.offsetWidth;
+  chip.style.left = ax + "px"; chip.style.top = Math.max(k.h * 0.03, ay) + "px";
+  var tc = t0 + dg * 0.7, H = Math.max(1, P.count | 0), iv = Math.min(1, (k.dur - tc - 0.6) / H);
+  tl.fromTo(chip, { opacity: 0, scale: 0.6, y: 10 * s }, { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: "back.out(2.2)" }, tc - 0.2);
+  for (var j = 0; j < H; j++) tl.fromTo(nEl, { scale: 1.35 }, { scale: 1, duration: 0.4, ease: "power3.out", immediateRender: false }, tc + j * iv);
+  BLOCK.onTime(tl, function (t) { nEl.textContent = BLOCK.clamp(H - Math.floor(Math.max(0, t - tc) / iv), 1, H); }, k.dur);
+  tl.to([chip, gr, bay], { opacity: 0, duration: 0.35, ease: "power2.in" }, k.dur - 0.4);
+}, { font: true });
+</script>

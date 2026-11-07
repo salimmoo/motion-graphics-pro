@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP paket-scenes · galeri 104 paket</title>
+<!-- All 104 packages in one canvas through MGP.paket.render(id, ctx, t, opts): a contact sheet that also shows
+     how to compose many paket frames in one renderer. ?t0=offset staggers nothing; every cell shows the same t. -->
+<style>html,body{margin:0;background:#15161a}#stage{position:relative;width:1920px;height:1300px;overflow:hidden}</style>
+<link rel="stylesheet" href="../fonts.css"><!-- font lokal (bundel Rekam), lihat lib/fonts.css -->
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../pack-scenes/engine.js"></script>
+<script src="../pack-scenes/data.js"></script>
+<script src="../pack-scenes/scenes-a1.js"></script>
+<script src="../pack-scenes/scenes-a2.js"></script>
+<script src="../pack-scenes/scenes-b.js"></script>
+<script src="../pack-scenes/scenes-c.js"></script>
+<script src="../pack-scenes/scenes-d.js"></script>
+<script src="../pack-scenes/scenes-e.js"></script>
+<script src="../pack-scenes/scenes-t.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1920" data-height="1300"></div>
+<script>
+const C = MGP.core, P = MGP.packs, ids = P.ids();
+const COLS = 13, CW = 144, CH = 144, GAP = 3, PADY = 14;
+const gal = C.defineModule("paketGallery", {
+  size: [1920, 1300], duration: 8, defaults: {},
+  setup(S) { S.cells = ids.map((id) => ({ id, o: { width: CW, height: CH } })); },
+  render(g, t, S) {
+    g.fillStyle = "#15161a"; g.fillRect(0, 0, S.W, S.H);
+    S.cells.forEach((cell, i) => {
+      const x = 6 + (i % COLS) * (CW + GAP), y = 6 + Math.floor(i / COLS) * (CH + PADY + GAP);
+      g.save(); g.translate(x, y + PADY); g.fillStyle = "#000"; g.fillRect(0, 0, CW, CH); P.render(cell.id, g, t, cell.o); g.restore();
+      g.fillStyle = "#cfc7b4"; g.font = "600 10px system-ui, sans-serif"; g.textBaseline = "top"; g.fillText(cell.id + " · " + P.get(cell.id).fx.s, x, y + 1);
+    });
+  },
+});
+const inst = gal.create(document.getElementById("stage"), { dpr: 1 });
+// fonts: wait for every package's Google Fonts, then redraw
+inst.ready = Promise.all(ids.map((id) => P.ready(id))).then(() => new Promise((r) => setTimeout(r, 50)));
+C.expose(inst);
+</script>
+</body>
+</html>

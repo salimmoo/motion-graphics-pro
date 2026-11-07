@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Micro · block example ui/micro</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="6.5">
+<div id="adegan" class="adegan ad-gelap"></div>
+<!-- Block ui/micro · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-micro" data-block="ui/micro" data-start="0" data-duration="6" data-track-index="30" class="blk blk-ui-micro">
+<script type="application/json" data-block-props>
+{"mode": "pack", "name": ["Rani", "Dimas", "Ayu", "Bima", "Sari", "Joko"], "title": "Rani Pratiwi", "text": "Desainer produk. Suka kopi, peta, dan tipografi yang rapi.", "accent_color": "#5b6cff", "surface": "#ffffff", "cell_bg": "#eef0f6", "ink": "#1b2030", "font": "Inter:wght@400;500;600;700;800"}
+</script>
+</div>
+<style>
+.blk-ui-micro{position:absolute;inset:0;pointer-events:none;overflow:hidden;font-family:"Inter",system-ui,sans-serif}
+.blk-ui-micro .grid{position:absolute;left:50%;top:50%;display:grid}
+.blk-ui-micro .sel{position:relative;overflow:hidden}
+.blk-ui-micro .sel>.lb{position:absolute;left:0;right:0;bottom:6%;text-align:center;font-family:"JetBrains Mono",ui-monospace,monospace;opacity:.55;letter-spacing:.06em}
+.blk-ui-micro .ab{position:absolute;left:50%;top:44%}
+.blk-ui-micro .ab>*{position:absolute}
+.blk-ui-micro .pl{border-radius:99px;font-weight:600;white-space:nowrap;display:flex;align-items:center;justify-content:center}
+.blk-ui-micro .av{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;box-sizing:border-box}
+.blk-ui-micro .sk{border-radius:99px}
+</style>
+<script>
+BLOCK.mount("blk-micro", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, E = BLOCK.el, s = k.s, mode = P.mode, ink = P.ink, ac = P.accent_color, sf = P.surface;
+  var pxs = function (v) { return v * s + "px"; };
+  var tone = ["#ff8a5b", "#4fb7ff", "#9b7bff", "#33d39a", "#ffc94d", "#ff6b8b"];
+  if (mode === "pack") {
+    // enam transisi mikro dalam satu kisi
+    var lebar = k.w > k.h, kol = lebar ? 3 : 2, bar = 6 / kol, cs = Math.min(k.w * 0.9 / kol, k.h * 0.86 / bar, 460 * s), g = 18 * s, u = cs / 400;
+    var px = function (v) { return v * u + "px"; };
+    var grid = E("div", { class: "grid", style: "grid-template-columns:repeat(" + kol + "," + cs + "px);gap:" + g + "px;margin:" + -(bar * cs + (bar - 1) * g) / 2 + "px 0 0 " + -(kol * cs + (kol - 1) * g) / 2 + "px" }, k.root);
+    var sel = ["lencana", "dropdown", "modal", "tab", "tooltip", "berhasil"].map(function (n, i) {
+      var c = E("div", { class: "sel", style: "width:" + cs + "px;height:" + cs + "px;border-radius:" + px(30) + ";background:" + P.cell_bg + ";color:" + ink }, grid);
+      E("div", { class: "lb", style: "font-size:" + px(17) }, c, n.toUpperCase());
+      tl.fromTo(c, { autoAlpha: 0, y: 30 * s }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.05 * i);
+      return E("div", { class: "ab" }, c);
+    });
+    var T = function (i) { return 0.7 + i * 0.35; }, ulang = D - 1.2;
+    // 1 lencana: lonceng + angka meletup pegas lalu berdetak naik
+    var lc = E("div", { style: "left:" + px(-50) + ";top:" + px(-50) + ";width:" + px(100) + ";height:" + px(100) + ";border-radius:" + px(28) + ";background:" + sf + ";box-shadow:0 " + px(8) + " " + px(24) + " rgba(20,30,60,.12)" }, sel[0]);
+    var bel = BLOCK.svg("svg", { viewBox: "0 0 24 24", width: 56 * u, height: 56 * u, style: "position:absolute;left:" + px(22) + ";top:" + px(22) }, lc);
+    BLOCK.svg("path", { d: "M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15zM10 20a2 2 0 0 0 4 0", fill: "none", stroke: ink, "stroke-width": 1.8, "stroke-linejoin": "round" }, bel);
+    var bd = E("div", { class: "pl", style: "left:" + px(64) + ";top:" + px(-14) + ";min-width:" + px(40) + ";height:" + px(40) + ";background:#ff4d5e;color:#fff;font-size:" + px(20) + ";overflow:hidden" }, lc);
+    var n1 = E("span", { style: "position:absolute" }, bd, "3"), n2 = E("span", { style: "position:absolute" }, bd, "4");
+    tl.fromTo(bd, { scale: 0 }, { scale: 1, duration: 0.7, ease: "blockSpringStrong" }, T(0))
+      .fromTo(bel, { rotation: 0 }, { rotation: 14, duration: 0.09, yoyo: true, repeat: 5, ease: "sine.inOut", transformOrigin: "50% 10%" }, T(0) + 1.3)
+      .fromTo(n1, { yPercent: 0 }, { yPercent: -120, duration: 0.3, ease: "power2.in" }, T(0) + 1.3)
+      .fromTo(n2, { yPercent: 120 }, { yPercent: 0, duration: 0.45, ease: "back.out(2.5)" }, T(0) + 1.45);
+    // 2 dropdown
+    var tb = E("div", { class: "pl", style: "left:" + px(-110) + ";top:" + px(-120) + ";width:" + px(220) + ";height:" + px(56) + ";border-radius:" + px(16) + ";background:" + sf + ";font-size:" + px(20) + ";box-shadow:0 " + px(4) + " " + px(14) + " rgba(20,30,60,.1)" }, sel[1], "Urutkan &#9662;");
+    var mn = E("div", { style: "left:" + px(-110) + ";top:" + px(-52) + ";width:" + px(220) + ";border-radius:" + px(16) + ";background:" + sf + ";padding:" + px(8) + ";box-sizing:border-box;box-shadow:0 " + px(14) + " " + px(30) + " rgba(20,30,60,.16);transform-origin:50% 0" }, sel[1]);
+    var it = ["Terbaru", "Terpopuler", "Harga"].map(function (t, i) { return E("div", { style: "padding:" + px(12) + " " + px(14) + ";border-radius:" + px(10) + ";font-size:" + px(19) + ";font-weight:500;" + (i === 1 ? "background:" + BLOCK.rgba(ac, 0.12) + ";color:" + ac : "") }, mn, t); });
+    tl.fromTo(tb, { scale: 1 }, { scale: 0.95, duration: 0.1, yoyo: true, repeat: 1 }, T(1))
+      .fromTo(mn, { autoAlpha: 0, scaleY: 0.6, y: -10 * u }, { autoAlpha: 1, scaleY: 1, y: 0, duration: 0.45, ease: "power3.out" }, T(1) + 0.1)
+      .fromTo(it, { autoAlpha: 0, y: -8 * u }, { autoAlpha: 1, y: 0, duration: 0.3, stagger: 0.05, ease: "power2.out" }, T(1) + 0.2)
+      .to(mn, { autoAlpha: 0, scaleY: 0.8, duration: 0.25, ease: "power2.in" }, ulang);
+    // 3 modal
+    var sc = E("div", { style: "left:" + px(-200) + ";top:" + px(-176) + ";width:" + px(400) + ";height:" + px(400) + ";background:rgba(15,18,30,.35)" }, sel[2]);
+    var md = E("div", { style: "left:" + px(-130) + ";top:" + px(-90) + ";width:" + px(260) + ";height:" + px(170) + ";border-radius:" + px(22) + ";background:" + sf + ";padding:" + px(22) + ";box-sizing:border-box;box-shadow:0 " + px(20) + " " + px(40) + " rgba(0,0,0,.25)" }, sel[2]);
+    E("div", { style: "font-weight:700;font-size:" + px(22) }, md, "Simpan perubahan?");
+    var mb = E("div", { class: "pl", style: "margin-top:" + px(30) + ";height:" + px(46) + ";background:" + ac + ";color:#fff;font-size:" + px(18) }, md, "Simpan");
+    tl.fromTo(sc, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3 }, T(2)).fromTo(md, { autoAlpha: 0, scale: 0.86, y: 20 * u }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.55, ease: "back.out(1.6)" }, T(2) + 0.05)
+      .fromTo(mb, { scale: 1 }, { scale: 0.94, duration: 0.1, yoyo: true, repeat: 1 }, ulang - 0.3).to([sc, md], { autoAlpha: 0, duration: 0.3 }, ulang);
+    // 4 tab dengan indikator meluncur
+    var tw = E("div", { style: "left:" + px(-160) + ";top:" + px(-30) + ";width:" + px(320) + ";height:" + px(60) + ";border-radius:" + px(18) + ";background:" + sf }, sel[3]);
+    var ind = E("div", { style: "position:absolute;left:" + px(5) + ";top:" + px(5) + ";width:" + px(100) + ";height:" + px(50) + ";border-radius:" + px(14) + ";background:" + BLOCK.rgba(ac, 0.16) + ";box-shadow:inset 0 0 0 " + px(2) + " " + ac }, tw);
+    ["Hari", "Minggu", "Bulan"].forEach(function (t, i) { E("div", { class: "pl", style: "position:absolute;left:" + px(5 + i * 105) + ";top:" + px(5) + ";width:" + px(100) + ";height:" + px(50) + ";font-size:" + px(18) + ";color:" + ink }, tw, t); });
+    tl.to(ind, { x: 105 * u, duration: 0.6, ease: "expo.out" }, T(3)).to(ind, { x: 210 * u, duration: 0.6, ease: "expo.out" }, T(3) + 1.1).to(ind, { x: 0, duration: 0.7, ease: "expo.out" }, T(3) + 2.2);
+    // 5 tooltip
+    var ch = E("div", { class: "pl", style: "left:" + px(-70) + ";top:" + px(10) + ";width:" + px(140) + ";height:" + px(52) + ";background:" + sf + ";font-size:" + px(18) }, sel[4], "&#9432; Info");
+    var tp = E("div", { class: "pl", style: "left:" + px(-115) + ";top:" + px(-70) + ";width:" + px(230) + ";height:" + px(54) + ";border-radius:" + px(14) + ";background:" + ink + ";color:#fff;font-size:" + px(17) }, sel[4], "Disimpan otomatis");
+    tl.fromTo(tp, { autoAlpha: 0, y: 12 * u, scale: 0.94 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.35, ease: "power3.out" }, T(4)).to(tp, { autoAlpha: 0, y: 6 * u, duration: 0.25 }, ulang);
+    // 6 centang berhasil
+    var sv = BLOCK.svg("svg", { viewBox: "0 0 100 100", width: 130 * u, height: 130 * u, style: "position:absolute;left:" + px(-65) + ";top:" + px(-65) }, sel[5]);
+    var lg = BLOCK.svg("circle", { cx: 50, cy: 50, r: 42, fill: "#22b07d" }, sv), cn = BLOCK.svg("path", { d: "M30 52 L44 65 L71 37", fill: "none", stroke: "#fff", "stroke-width": 8, "stroke-linecap": "round", "stroke-linejoin": "round" }, sv);
+    var Lc = BLOCK.prepareStroke(cn);
+    tl.fromTo(lg, { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.6, ease: "blockSpringStrong" }, T(5)).fromTo(cn, { strokeDashoffset: Lc }, { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, T(5) + 0.25);
+    return;
+  }
+  var pan = E("div", { style: "position:absolute;left:50%;top:50%" }, k.root);
+  if (mode === "menu") {
+    // hamburger <-> X, dan tombol plus yang membuka menu aksi
+    var u2 = s * 1.3, x0 = k.w > k.h ? -260 * s : 0, y0 = k.w > k.h ? 0 : -260 * s;
+    var hb = E("div", { style: "position:absolute;left:" + (x0 - 70 * u2) + "px;top:" + (y0 - 70 * u2) + "px;width:" + 140 * u2 + "px;height:" + 140 * u2 + "px;border-radius:" + 36 * u2 + "px;background:" + sf + ";box-shadow:0 " + 14 * u2 + "px " + 40 * u2 + "px rgba(0,0,0,.25)" }, pan);
+    var gs = [0, 1, 2].map(function (i) { return E("div", { style: "position:absolute;left:" + 38 * u2 + "px;top:" + (46 + i * 22) * u2 + "px;width:" + 64 * u2 + "px;height:" + 8 * u2 + "px;border-radius:99px;background:" + ink }, hb); });
+    var ta = 0.8, tb2 = D - 1.6;
+    tl.fromTo(gs[0], { y: 0, rotation: 0 }, { y: 22 * u2, rotation: 45, duration: 0.55, ease: "back.out(1.8)" }, ta).fromTo(gs[2], { y: 0, rotation: 0 }, { y: -22 * u2, rotation: -45, duration: 0.55, ease: "back.out(1.8)" }, ta)
+      .fromTo(gs[1], { scaleX: 1, autoAlpha: 1 }, { scaleX: 0, autoAlpha: 0, duration: 0.25 }, ta)
+      .to(gs[0], { y: 0, rotation: 0, duration: 0.5, ease: "back.out(1.6)" }, tb2).to(gs[2], { y: 0, rotation: 0, duration: 0.5, ease: "back.out(1.6)" }, tb2).to(gs[1], { scaleX: 1, autoAlpha: 1, duration: 0.3 }, tb2 + 0.1);
+    var xp = -x0, yp = -y0, pl = E("div", { class: "pl", style: "left:" + (xp - 60 * u2) + "px;top:" + (yp - 60 * u2) + "px;width:" + 120 * u2 + "px;height:" + 120 * u2 + "px;background:" + ac + ";color:#fff;font-size:" + 70 * u2 + "px;font-weight:300;z-index:2;position:absolute;box-shadow:0 " + 14 * u2 + "px " + 40 * u2 + "px " + BLOCK.rgba(ac, .45) }, pan, "+");
+    var ak = ["Catatan", "Foto", "Tugas"].map(function (t, i) { return E("div", { class: "pl", style: "position:absolute;left:" + (xp - 90 * u2) + "px;top:" + (yp - 30 * u2) + "px;width:" + 180 * u2 + "px;height:" + 60 * u2 + "px;background:" + sf + ";color:" + ink + ";font-size:" + 24 * u2 + "px;box-shadow:0 " + 8 * u2 + "px " + 24 * u2 + "px rgba(0,0,0,.2)" }, pan, t); });
+    tl.to(pl, { rotation: 45, duration: 0.5, ease: "back.out(2)" }, ta + 0.4).to(pl, { rotation: 0, duration: 0.45, ease: "back.out(2)" }, tb2 + 0.2);
+    ak.forEach(function (a, i) {
+      tl.fromTo(a, { y: 0, scale: 0.4, autoAlpha: 0 }, { y: -(110 + i * 80) * u2, scale: 1, autoAlpha: 1, duration: 0.55, ease: "back.out(1.7)" }, ta + 0.45 + i * 0.07)
+        .to(a, { y: 0, scale: 0.4, autoAlpha: 0, duration: 0.3, ease: "power2.in" }, tb2 + 0.2 - i * 0.04);
+    });
+    return;
+  }
+  if (mode === "avatar") {
+    // grup avatar terangkat sesuai jarak kursor, lalu kembali memantul
+    var N = P.name.length, r = 64 * s, step = r * 1.45, X = function (i) { return (i - (N - 1) / 2) * step; }, avs = [];
+    P.name.forEach(function (n, i) { avs.push(E("div", { class: "av", style: "left:" + (X(i) - r) + "px;top:" + -r + "px;width:" + 2 * r + "px;height:" + 2 * r + "px;font-size:" + r * 0.7 + "px;background:" + tone[i % 6] + ";border:" + 6 * s + "px solid " + sf + ";z-index:" + i }, pan, BLOCK.esc(n[0]))); });
+    var lbl = E("div", { class: "pl", style: "position:absolute;top:" + (r + 28 * s) + "px;height:" + 52 * s + "px;padding:0 " + 22 * s + "px;background:" + ink + ";color:#fff;font-size:" + 24 * s + "px;transform:translateX(-50%)" }, pan);
+    var kur = BLOCK.svg("svg", { viewBox: "0 0 24 24", width: 46 * s, height: 46 * s, style: "position:absolute;left:0;top:0;z-index:20" }, pan);
+    BLOCK.svg("path", { d: "M3 2 L3 19 L8 14.5 L11.5 22 L14.5 20.6 L11 13.3 L17.5 13 Z", fill: "#fff", stroke: "#111", "stroke-width": 1.4 }, kur);
+    var t1 = 0.9, t2 = D - 1.4, xa = X(0) - step, xb = X(N - 1) + step, R = step * 1.6, Lf = 44 * s;
+    var cx = function (t) { return xa + (xb - xa) * BLOCK.smooth((t - t1) / (t2 - t1)); };
+    var tps = avs.map(function (a, i) { var t = t1; while (t < D && cx(t) < X(i) + R * 0.85) t += 0.005; return t; });
+    BLOCK.onTime(tl, function (t) {
+      var c = cx(t), hv = -1, best = 1e9;
+      kur.style.transform = "translate(" + c + "px," + 10 * s + "px)";
+      avs.forEach(function (a, i) {
+        var dx = Math.abs(c - X(i)), f = Math.max(0, 1 - dx / R), y = -Lf * f * f;
+        // pantulan saat kursor menjauh: osilasi teredam setelah kursor lewat
+        var dt = t - tps[i];
+        if (dt > 0) y -= Lf * 0.35 * Math.exp(-dt * 4.5) * Math.sin(dt * 17);
+        a.style.transform = "translateY(" + y + "px) scale(" + (1 + 0.12 * f * f) + ")";
+        a.style.zIndex = f > 0.6 ? 10 : i;
+        if (dx < best) { best = dx; hv = i; }
+      });
+      var on = best < step * 0.5 && t > t1 && t < t2;
+      lbl.textContent = P.name[hv]; lbl.style.left = X(hv) + "px"; lbl.style.opacity = on ? 1 : 0;
+    }, D);
+    tl.fromTo(avs, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4, ease: "power2.out", stagger: 0.05 }, 0.05);
+    return;
+  }
+  // kerangka: skeleton berdenyut lalu silang-pudar ke isi
+  var w = Math.min(k.w * 0.8, 620 * s), u3 = w / 620, q = function (v) { return v * u3 + "px"; };
+  var kt = E("div", { style: "position:absolute;left:" + -w / 2 + "px;top:" + q(-230) + ";width:" + w + "px;height:" + q(460) + ";border-radius:" + q(30) + ";background:" + sf + ";box-shadow:0 " + q(20) + " " + q(60) + " rgba(0,0,0,.25)" }, pan);
+  function lapis(isi) {
+    var L = E("div", { style: "position:absolute;inset:0;padding:" + q(34) + ";box-sizing:border-box" }, kt), bg = P.cell_bg;
+    var hd = E("div", { style: "display:flex;align-items:center;gap:" + q(18) }, L);
+    E("div", { style: "flex:none;width:" + q(80) + ";height:" + q(80) + ";border-radius:50%;background:" + (isi ? "linear-gradient(140deg," + tone[0] + "," + tone[5] + ")" : bg) }, hd);
+    var nm = E("div", { style: "flex:1" }, hd);
+    if (isi) { E("div", { style: "font-weight:800;font-size:" + q(30) + ";color:" + ink }, nm, BLOCK.esc(P.title)); E("div", { style: "font-size:" + q(19) + ";color:" + ac + ";margin-top:" + q(4) }, nm, "@" + BLOCK.esc(P.title.split(" ")[0].toLowerCase())); }
+    else { E("div", { class: "sk", style: "height:" + q(24) + ";width:60%;background:" + bg }, nm); E("div", { class: "sk", style: "height:" + q(16) + ";width:35%;margin-top:" + q(12) + ";background:" + bg }, nm); }
+    var gb = E("div", { style: "margin-top:" + q(28) + ";height:" + q(180) + ";border-radius:" + q(20) + ";background:" + (isi ? "linear-gradient(160deg," + tone[1] + "," + ac + ")" : bg) }, L);
+    if (isi) E("div", { style: "margin-top:" + q(22) + ";font-size:" + q(22) + ";line-height:1.4;color:" + ink }, L, BLOCK.esc(P.text));
+    else [92, 70].forEach(function (p) { E("div", { class: "sk", style: "height:" + q(18) + ";width:" + p + "%;margin-top:" + q(16) + ";background:" + bg }, L); });
+    return L;
+  }
+  var sk = lapis(false), is = lapis(true), tx = D * 0.55;
+  tl.fromTo(kt, { autoAlpha: 0, y: 30 * s }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+  tl.fromTo(sk, { opacity: 1 }, { opacity: 0.45, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: Math.max(1, Math.floor((tx - 0.3) / 0.5) | 1) }, 0.3);
+  BLOCK.initial(tl, is, { autoAlpha: 0 });
+  tl.to(sk, { autoAlpha: 0, duration: 0.5, ease: "power2.inOut" }, tx).fromTo(is, { autoAlpha: 0, y: 8 * s }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "power2.out", immediateRender: false }, tx + 0.1);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 6.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 6.5);
+</script>
+</body>
+</html>

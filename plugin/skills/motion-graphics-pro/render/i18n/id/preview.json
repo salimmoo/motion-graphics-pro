@@ -1,0 +1,16 @@
+{
+  "Play": "Putar",
+  "Pause": "Jeda",
+  "driver": "penggerak",
+  "Cannot read the duration: set window.__duration or data-duration on the root.": "Durasi tidak terbaca: isi window.__duration atau data-duration pada root.",
+  "Space": "Spasi",
+  "Left arrow": "Panah kiri",
+  "Right arrow": "Panah kanan",
+  "Loop": "Ulang",
+  "Sound": "Suara",
+  "loading...": "memuat...",
+  "Space play · arrows per frame · Shift+arrows per second": "Spasi putar · panah per frame · Shift+panah per detik",
+  "mgp preview: {}": "mgp preview: {}",
+  "composition: {}": "komposisi: {}",
+  "Ctrl+C to stop.": "Ctrl+C untuk berhenti."
+}

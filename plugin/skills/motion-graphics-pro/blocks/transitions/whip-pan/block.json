@@ -1,0 +1,108 @@
+{
+ "id": "transitions/whip-pan",
+ "name": "Whip Pan",
+ "name_id": "Whip Pan",
+ "category": "transitions",
+ "description": {
+  "id": "Kamera seolah disentak cepat ke samping: adegan lama melesat keluar dengan blur gerak searah, adegan baru masuk di kecepatan yang sama lalu mengerem. Mode potong untuk hard cut yang kecepatannya menyambung.",
+  "en": "Fast camera whip: scene A whips off with capped directional motion blur while scene B enters at matched velocity and catches. Cut mode gives a velocity-matched hard cut."
+ },
+ "tags": [
+  "transisi",
+  "whip",
+  "pan",
+  "motion-blur",
+  "cut",
+  "cepat",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "direction": {
+   "default": "left",
+   "type": "enum",
+   "options": [
+    "left",
+    "right",
+    "top",
+    "bottom"
+   ],
+   "hint": "Arah gerak adegan lama",
+   "aliases": [
+    "arah"
+   ],
+   "option_aliases": {
+    "kiri": "left",
+    "kanan": "right",
+    "atas": "top",
+    "bawah": "bottom"
+   }
+  },
+  "mode": {
+   "default": "whip",
+   "type": "enum",
+   "options": [
+    "whip",
+    "cut"
+   ],
+   "hint": "whip = A dan B satu pita bergerak penuh; potong = A berakselerasi lalu dipotong ke B yang meneruskan arah",
+   "option_aliases": {
+    "potong": "cut"
+   }
+  },
+  "blur": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali blur gerak (0 = tanpa blur)"
+  },
+  "cut_distance": {
+   "default": 0.14,
+   "type": "number",
+   "hint": "Jarak tempuh mode potong (fraksi layar)",
+   "aliases": [
+    "jarak_potong"
+   ]
+  },
+  "line": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Garis kecepatan tipis di puncak laju",
+   "aliases": [
+    "garis"
+   ]
+  }
+ },
+ "duration": 0.9,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/whip-pan",
+  "whip-pan",
+  "whip-pan-cut",
+  "cut-the-curve"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 1.05,
+  "duration": 3
+ }
+}

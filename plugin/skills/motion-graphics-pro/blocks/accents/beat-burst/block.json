@@ -1,0 +1,124 @@
+{
+ "id": "accents/beat-burst",
+ "name": "Beat Burst",
+ "name_id": "Sengatan Ketukan",
+ "category": "accents",
+ "description": {
+  "id": "Sengatan untuk ketukan musik: kilat cahaya, cincin kejut, garis radial, dan denyut skala mikro plus guncang pada adegan target, lalu langsung meluruh. Bisa banyak ketukan.",
+  "en": "A music-hit sting: impact flash, shock ring, radial streaks and a micro scale pulse plus shake on the target scene, decaying immediately. Supports multiple beats."
+ },
+ "tags": [
+  "aksen",
+  "ketukan",
+  "beat",
+  "kilat",
+  "musik",
+  "denyut",
+  "accents",
+  "burst"
+ ],
+ "props": {
+  "target": {
+   "default": "#adegan",
+   "type": "selector"
+  },
+  "beats": {
+   "default": [
+    0.4,
+    1.35,
+    2.3
+   ],
+   "type": "list",
+   "hint": "Daftar waktu ketukan (detik lokal)",
+   "aliases": [
+    "ketukan"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi horizontal pusat (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi vertikal pusat (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "size": {
+   "default": 620,
+   "type": "number",
+   "hint": "Diameter cincin kejut (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "hint": "Warna kilat",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffd23f",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "flash": {
+   "default": 0.55,
+   "type": "number",
+   "hint": "Opasitas kilat",
+   "aliases": [
+    "kilat"
+   ]
+  },
+  "pulse": {
+   "default": 0.035,
+   "type": "number",
+   "hint": "Besar denyut skala target",
+   "aliases": [
+    "denyut"
+   ]
+  },
+  "shake": {
+   "default": 8,
+   "type": "number",
+   "aliases": [
+    "guncang"
+   ]
+  },
+  "line": {
+   "default": 10,
+   "type": "number",
+   "hint": "Jumlah garis radial",
+   "aliases": [
+    "garis"
+   ]
+  }
+ },
+ "duration": 3,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "aksen/ledak-ketukan",
+  "beat-accent"
+ ],
+ "example": {
+  "bg": "photo",
+  "aspect": "16:9"
+ }
+}

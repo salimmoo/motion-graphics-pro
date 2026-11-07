@@ -1,0 +1,121 @@
+{
+ "id": "textures/grain",
+ "name": "Grain",
+ "name_id": "Butir Film",
+ "category": "textures",
+ "description": {
+  "id": "Lapisan butir film di atas komposisi: pola noise berseed yang berganti setiap frame (tidak berulang seperti animasi CSS), dicampur overlay. Mode hangat menambah rona hangat analog; mode titik membuat bidang titik beraksen yang hanyut pelan di atas gradien dan berulang tepat per siklus.",
+  "en": "Film grain overlay: seeded noise that changes every frame, blended with overlay. Warm mode adds an analog tint; dot mode draws a drifting accent-tinted dot field over a luminance gradient, loop-exact."
+ },
+ "tags": [
+  "tekstur",
+  "texture",
+  "grain",
+  "film",
+  "noise",
+  "analog",
+  "overlay",
+  "hangat",
+  "textures"
+ ],
+ "props": {
+  "mode": {
+   "default": "film",
+   "type": "enum",
+   "options": [
+    "film",
+    "warm",
+    "dot"
+   ],
+   "hint": "film = butir monokrom; hangat = butir + rona hangat; titik = bidang titik hanyut",
+   "option_aliases": {
+    "hangat": "warm",
+    "titik": "dot"
+   }
+  },
+  "strength": {
+   "default": 0.32,
+   "type": "number",
+   "hint": "Opasitas lapisan (0-1)",
+   "aliases": [
+    "kekuatan"
+   ]
+  },
+  "grain_size": {
+   "default": 2,
+   "type": "number",
+   "hint": "Ukuran butir (px)",
+   "aliases": [
+    "ukuran_butir"
+   ]
+  },
+  "fps": {
+   "default": 24,
+   "type": "number",
+   "hint": "Laju ganti pola butir"
+  },
+  "mix": {
+   "default": "overlay",
+   "type": "enum",
+   "options": [
+    "overlay",
+    "soft-light",
+    "screen",
+    "multiply"
+   ],
+   "hint": "Mode campur CSS",
+   "aliases": [
+    "campur"
+   ]
+  },
+  "color": {
+   "default": "#ffb070",
+   "type": "color",
+   "hint": "Rona (mode hangat) atau warna titik",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "cycle": {
+   "default": 6,
+   "type": "number",
+   "hint": "Siklus hanyut mode titik (detik)",
+   "aliases": [
+    "siklus"
+   ]
+  },
+  "dot_spacing": {
+   "default": 22,
+   "type": "number",
+   "hint": "Jarak grid titik (px pada 1080)",
+   "aliases": [
+    "jarak_titik"
+   ]
+  },
+  "seed": {
+   "default": 11,
+   "type": "number"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "tekstur/grain",
+  "grain-overlay",
+  "grain-field",
+  "warm-grain"
+ ],
+ "example": {
+  "bg": "photo",
+  "props": {
+   "mode": "warm",
+   "strength": 0.45
+  }
+ }
+}

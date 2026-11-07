@@ -1,0 +1,101 @@
+{
+ "id": "transitions/shutter",
+ "name": "Shutter",
+ "name_id": "Rana Mekanis",
+ "category": "transitions",
+ "description": {
+  "id": "Transisi mekanis: bilah diafragma kamera berputar menutup lalu membuka ke adegan baru, pintu rana bertemu di tengah dengan hentakan kecil, atau kerai yang menutup dan membuka bergantian.",
+  "en": "Mechanical transitions: camera aperture blades twist shut then open on B, shutter doors meet with a small knock, or venetian blinds."
+ },
+ "tags": [
+  "transisi",
+  "shutter",
+  "aperture",
+  "iris",
+  "mekanis",
+  "kerai",
+  "rana",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "mode": {
+   "default": "blade",
+   "type": "enum",
+   "options": [
+    "blade",
+    "door",
+    "blinds"
+   ],
+   "hint": "bilah = diafragma kamera; pintu = dua daun rana; kerai = bilah horizontal",
+   "option_aliases": {
+    "bilah": "blade",
+    "pintu": "door",
+    "kerai": "blinds"
+   }
+  },
+  "count": {
+   "default": 7,
+   "type": "number",
+   "hint": "Jumlah bilah diafragma / bilah kerai",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "color": {
+   "default": "#20242c",
+   "type": "color",
+   "hint": "Warna logam bilah",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#d9b25a",
+   "type": "color",
+   "hint": "Warna garis tepi bilah",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "hold": {
+   "default": 0.1,
+   "type": "number",
+   "hint": "Lama tertutup (fraksi durasi)",
+   "aliases": [
+    "tahan"
+   ]
+  }
+ },
+ "duration": 1.3,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/rana",
+  "transitions-mechanical"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.85,
+  "duration": 3
+ }
+}

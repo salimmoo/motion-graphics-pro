@@ -1,0 +1,192 @@
+{
+ "id": "social/testimonial",
+ "name": "Testimonial",
+ "name_id": "Testimoni & Bukti Sosial",
+ "category": "social",
+ "description": {
+  "id": "Kartu testimoni pelanggan: kutipan yang muncul sesuai laju baca lalu avatar dan nama, kartu bukti dengan baris tersingkap lembut, nama mono, merek perusahaan, dan frasa sorotan bergaris aksen, atau adegan penutup toko aplikasi dengan lima bintang, baris bukti, tiga ikon fitur, dan kapsul ajakan.",
+  "en": "Customer testimonial cards: a quote revealed at reading pace then avatar and name; a proof card with soft per-line reveal, mono name, company mark and accent-underlined emphasis; or an app-store close with five stars, proof line, three feature icons and a CTA capsule."
+ },
+ "tags": [
+  "sosial",
+  "testimoni",
+  "kutipan",
+  "bukti-sosial",
+  "ulasan",
+  "bintang",
+  "cta",
+  "social",
+  "testimonial"
+ ],
+ "props": {
+  "style": {
+   "default": "quote",
+   "type": "enum",
+   "options": [
+    "quote",
+    "proof",
+    "store"
+   ],
+   "hint": "kutipan = kutipan + penulis; bukti = baris tersingkap + sorotan; toko = merek, bintang, fitur, tombol",
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "kutipan": "quote",
+    "bukti": "proof",
+    "toko": "store"
+   }
+  },
+  "text": {
+   "default": "Dulu laporan bulanan makan dua hari. Sekarang *selesai sebelum makan siang*, dan timku bisa fokus ke pelanggan.",
+   "type": "text",
+   "hint": "Kutipan; *beberapa kata* = sorotan bergaris (gaya bukti)",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "name": {
+   "default": "Laras Wibowo",
+   "type": "text",
+   "aliases": [
+    "nama"
+   ]
+  },
+  "role": {
+   "default": "Kepala Operasional",
+   "type": "text",
+   "hint": "Jabatan (gaya bukti)",
+   "aliases": [
+    "peran"
+   ]
+  },
+  "account": {
+   "default": "@laraswibowo",
+   "type": "text",
+   "hint": "Akun (gaya kutipan)",
+   "aliases": [
+    "akun"
+   ]
+  },
+  "company": {
+   "default": "Toko Rempah",
+   "type": "text",
+   "hint": "Merek perusahaan teks (gaya bukti)",
+   "aliases": [
+    "perusahaan"
+   ]
+  },
+  "avatar": {
+   "default": "",
+   "type": "text",
+   "hint": "URL gambar avatar opsional; kosong = inisial"
+  },
+  "brand": {
+   "default": "Catatku",
+   "type": "text",
+   "hint": "Nama aplikasi (gaya toko)",
+   "aliases": [
+    "merek"
+   ]
+  },
+  "star": {
+   "default": 5,
+   "type": "number",
+   "hint": "Jumlah bintang terisi 0..5",
+   "aliases": [
+    "bintang"
+   ]
+  },
+  "proof_line": {
+   "default": "Dipakai 2 juta orang di Indonesia",
+   "type": "text",
+   "aliases": [
+    "baris_bukti"
+   ]
+  },
+  "feature": {
+   "default": [
+    "Cepat",
+    "Aman",
+    "Gratis"
+   ],
+   "type": "list",
+   "hint": "Tiga label fitur",
+   "aliases": [
+    "fitur"
+   ]
+  },
+  "button": {
+   "default": "Coba Gratis",
+   "type": "text",
+   "aliases": [
+    "tombol"
+   ]
+  },
+  "accent_color": {
+   "default": "#ff6a3d",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "theme": {
+   "default": "light",
+   "type": "enum",
+   "options": [
+    "light",
+    "dark"
+   ],
+   "aliases": [
+    "tema"
+   ],
+   "option_aliases": {
+    "terang": "light",
+    "gelap": "dark"
+   }
+  },
+  "kps": {
+   "default": 3.2,
+   "type": "number",
+   "hint": "Laju baca (kata per detik, gaya kutipan)"
+  },
+  "font": {
+   "default": "Inter:wght@400;500;700;800",
+   "type": "font"
+  },
+  "font2": {
+   "default": "JetBrains Mono:wght@500",
+   "type": "font",
+   "hint": "Font mono (gaya bukti)"
+  },
+  "size": {
+   "default": 52,
+   "type": "number",
+   "hint": "Ukuran kutipan (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "sosial/testimoni",
+  "testimonial-card",
+  "testimonial-proof-card",
+  "social-proof-card"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@400;500;700;800",
+   "JetBrains Mono:wght@500"
+  ]
+ }
+}

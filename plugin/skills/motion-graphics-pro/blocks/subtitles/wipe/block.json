@@ -1,0 +1,132 @@
+{
+ "id": "subtitles/wipe",
+ "name": "Wipe",
+ "name_id": "Subtitle Usap",
+ "category": "subtitles",
+ "description": {
+  "id": "Setiap kata tersingkap dari kiri ke kanan oleh usapan clip-path, dipimpin garis cahaya tipis berwarna aksen.",
+  "en": "Each word is revealed left to right by a clip-path wipe, led by a thin accent-coloured light bar."
+ },
+ "tags": [
+  "subtitle",
+  "caption",
+  "wipe",
+  "clip-path",
+  "reveal",
+  "subtitles"
+ ],
+ "props": {
+  "text": {
+   "default": "Setiap langkah kecil tetap membawa kita maju",
+   "type": "text",
+   "hint": "Teks subtitle; *kata* = kata kunci (bila didukung). Dipakai bila kata kosong",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "words": {
+   "default": [],
+   "type": "timed-words",
+   "hint": "[{teks, mulai, akhir}] dari transkrip; kosong = dihitung dari teks",
+   "aliases": [
+    "kata"
+   ]
+  },
+  "kps": {
+   "default": 2.0,
+   "type": "number",
+   "hint": "Kata per detik bila tanpa transkrip"
+  },
+  "max_words": {
+   "default": 3,
+   "type": "number",
+   "hint": "Maksimum kata per halaman subtitle",
+   "aliases": [
+    "maks_kata"
+   ]
+  },
+  "font": {
+   "default": "Montserrat:wght@800;900",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "size": {
+   "default": 76,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "bottom": {
+   "default": 16,
+   "type": "number",
+   "hint": "Jarak dari bawah (%)",
+   "aliases": [
+    "bawah"
+   ]
+  },
+  "uppercase": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "huruf_besar"
+   ]
+  },
+  "accent_color": {
+   "default": "#36d6ff",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "line": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Garis cahaya pemimpin usapan",
+   "aliases": [
+    "garis"
+   ]
+  },
+  "wipe_duration": {
+   "default": 0.26,
+   "type": "number",
+   "aliases": [
+    "durasi_usap"
+   ]
+  },
+  "ease": {
+   "default": "power3.inOut",
+   "type": "ease"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "subtitle/usap",
+  "caption-clip-wipe"
+ ],
+ "example": {
+  "bg": "photo",
+  "aspect": "9:16",
+  "font": [
+   "Montserrat:wght@800;900"
+  ],
+  "props": {
+   "kps": 1.7
+  }
+ }
+}

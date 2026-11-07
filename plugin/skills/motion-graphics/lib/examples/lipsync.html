@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP lipsync · presenter dan wajah gambar</title>
+<style>html,body{margin:0;background:#140d16}#stage{position:relative;width:1280px;height:720px;overflow:hidden;background:#140d16}#stage canvas{position:absolute;top:50px;border-radius:18px}</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../lipsync.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720"></div>
+<script>
+const C = MGP.core, stage = document.getElementById("stage");
+const TEXT = "[excited] Halo, apa kabar semuanya? Hari ini kita mulai dari yang sederhana.";
+const cv = (x) => { const c = document.createElement("canvas"); c.style.left = x + "px"; stage.appendChild(c); return c; };
+
+// a procedurally painted portrait (stands in for any user image); its own mouth sits at (256, 352)
+const por = C.offscreen(512, 512), p = por.getContext("2d");
+(() => {
+  const bg = p.createLinearGradient(0, 0, 0, 512); bg.addColorStop(0, "#5d7f9a"); bg.addColorStop(1, "#24344a"); p.fillStyle = bg; p.fillRect(0, 0, 512, 512);
+  p.fillStyle = "rgba(255,240,220,.12)"; p.beginPath(); p.arc(256, 220, 210, 0, 7); p.fill();
+  p.fillStyle = "#b04a3a"; p.beginPath(); p.moveTo(40, 512); p.bezierCurveTo(50, 420, 120, 390, 200, 380); p.lineTo(312, 380); p.bezierCurveTo(392, 390, 462, 420, 472, 512); p.fill();
+  p.fillStyle = "#c78a66"; p.fillRect(222, 330, 68, 70);
+  // headscarf behind + face
+  p.fillStyle = "#e7d3b0"; p.beginPath(); p.ellipse(256, 240, 150, 170, 0, 0, 7); p.fill();
+  p.beginPath(); p.moveTo(110, 300); p.quadraticCurveTo(256, 500, 402, 300); p.lineTo(420, 420); p.quadraticCurveTo(256, 470, 92, 420); p.fill();
+  const sk = p.createRadialGradient(236, 230, 20, 256, 260, 140); sk.addColorStop(0, "#f0c39f"); sk.addColorStop(1, "#cf9371");
+  p.fillStyle = sk; p.beginPath(); p.moveTo(160, 230); p.bezierCurveTo(158, 140, 354, 140, 352, 230); p.bezierCurveTo(352, 320, 310, 392, 256, 398); p.bezierCurveTo(202, 392, 160, 320, 160, 230); p.fill();
+  p.strokeStyle = "#cdb48c"; p.lineWidth = 10; p.beginPath(); p.moveTo(150, 200); p.bezierCurveTo(170, 120, 342, 120, 362, 200); p.stroke();
+  // brows, eyes, nose, cheeks, mouth
+  p.strokeStyle = "#4a2c20"; p.lineWidth = 6; p.lineCap = "round"; p.beginPath(); p.moveTo(196, 226); p.quadraticCurveTo(216, 214, 236, 222); p.moveTo(276, 222); p.quadraticCurveTo(296, 214, 316, 226); p.stroke();
+  [[216, 254], [296, 254]].forEach(([x, y]) => { p.fillStyle = "#fbf7f0"; p.beginPath(); p.ellipse(x, y, 17, 11, 0, 0, 7); p.fill(); p.fillStyle = "#3a2418"; p.beginPath(); p.arc(x + 1, y + 1, 9, 0, 7); p.fill(); p.fillStyle = "#fff"; p.beginPath(); p.arc(x + 4, y - 3, 3, 0, 7); p.fill(); p.strokeStyle = "#2a1810"; p.lineWidth = 3; p.beginPath(); p.ellipse(x, y, 17, 11, 0, Math.PI * 1.05, Math.PI * 1.95); p.stroke(); });
+  p.strokeStyle = "#b37556"; p.lineWidth = 3.5; p.beginPath(); p.moveTo(258, 262); p.quadraticCurveTo(248, 300, 254, 312); p.quadraticCurveTo(262, 316, 270, 310); p.stroke();
+  p.fillStyle = "rgba(230,120,110,.25)"; [[200, 306], [312, 306]].forEach(([x, y]) => { p.beginPath(); p.ellipse(x, y, 22, 12, 0, 0, 7); p.fill(); });
+  p.strokeStyle = "#8a3f34"; p.lineWidth = 4; p.beginPath(); p.moveTo(232, 352); p.quadraticCurveTo(256, 362, 280, 352); p.stroke();
+})();
+
+const common = { text: TEXT, width: 600, height: 600, captions: true, lead: 0.4, tail: 1.4 };
+const a = MGP.lipsync.create(cv(26), Object.assign({ face: "presenter" }, common));
+const b = MGP.lipsync.create(cv(654), Object.assign({ face: "image", image: por, mouth: { x: 256, y: 353, width: 58, angle: 0 }, patch: { color: "auto", rx: 0.72, ry: 0.36 },
+  eyes: [{ x: 216, y: 254, rx: 17, ry: 11 }, { x: 296, y: 254, rx: 17, ry: 11 }], pivot: [256, 400], seed: 9, palette: { inner: "#4a1616", lip: "#8a3f34", lipClosed: "#8a3f34" } }, common));
+const comp = { duration: Math.max(a.duration, b.duration), ready: Promise.all([a.ready, b.ready]), seek(t) { a.seek(t); b.seek(t); return comp; }, timeline() { return C.timeline(this); } };
+C.expose(comp);
+</script>
+</body>
+</html>

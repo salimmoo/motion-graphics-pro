@@ -1,0 +1,20 @@
+NOTICE - credits for third-party algorithms in the skill scripts
+
+image_ops.py (old name atelier_citra.py) is a rewrite (numpy + Pillow) that mimics the behaviour of OpenCV functions so
+the results match:
+  - Suzuki-Abe border following (icvFetchContour), RETR_EXTERNAL, CHAIN_APPROX_NONE
+  - the 8-bit BGR -> HSV division tables, INTER_AREA weights, Keys cubic coefficients (a = -0.75) and 11-bit fixed point
+  - automatic Gaussian kernel size and the BORDER_REFLECT_101 border
+  - LINE_8 rasterisation: LineIterator, Line2, FillConvexPoly, Circle midpoint, ThickLine
+  - connectedComponents label order (2 x 2 block scan for 8-connectivity) and convexHull order
+  OpenCV - Open Source Computer Vision Library, https://opencv.org
+  Copyright (C) 2000-2024 Intel Corporation, Willow Garage, Itseez, OpenCV Foundation, and contributors.
+  Licensed under the Apache License 2.0: https://www.apache.org/licenses/LICENSE-2.0
+
+brush.py (old name kuas.py) uses skia-python when installed; its pure engine (numpy) is a rewrite that mimics Skia:
+  - Porter-Duff compositing formulas and blend modes (multiply, modulate, screen, ...) on premultiplied colour
+  - stroke behaviour (butt/round/square caps, miter joins with limit 4/round/bevel, hairlines)
+  - the 3 x 3 matrix convention (MakeAll, Concat, clockwise rotation on screen) and the nonzero/evenodd fill rules
+  Skia, https://skia.org - Copyright (C) 2011 Google Inc. BSD 3-Clause License.
+  skia-python, https://github.com/kyamagu/skia-python - Copyright (C) Kota Yamaguchi. BSD 3-Clause License.
+  SVG arcs follow the SVG 1.1 implementation notes (W3C) appendix F.6.

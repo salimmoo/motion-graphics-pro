@@ -1,0 +1,5 @@
+{
+  "ffmpeg failed ({}): {}": "ffmpeg failed ({}): {}",
+  "ffmpeg pipe broken: {}": "ffmpeg pipe broken: {}",
+  "ffmpeg failed: {}": "ffmpeg failed: {}"
+}

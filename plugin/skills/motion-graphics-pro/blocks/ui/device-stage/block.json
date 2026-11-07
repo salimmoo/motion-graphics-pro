@@ -1,0 +1,124 @@
+{
+ "id": "ui/device-stage",
+ "name": "Device Stage",
+ "name_id": "Panggung Perangkat",
+ "category": "ui",
+ "description": {
+  "id": "Tiruan perangkat generik sebagai panggung produk: peramban, jendela aplikasi, ponsel, atau tablet. Layarnya slot untuk gambar sendiri, atau kerangka aplikasi bertoken warna aksen bila kosong. Satu masuk yang mengendap (naik dan menegak), tahan yang terbaca dengan melayang halus, dan pergantian layar opsional.",
+  "en": "A generic device mockup as a product stage: browser, app window, phone or tablet. The screen is a slot for your image, or an accent-tokened app skeleton by default. One settling entrance, a readable hold with idle float, and an optional screen swap."
+ },
+ "tags": [
+  "ui",
+  "mockup",
+  "perangkat",
+  "browser",
+  "ponsel",
+  "tablet",
+  "demo produk",
+  "layar",
+  "device",
+  "stage"
+ ],
+ "props": {
+  "frame": {
+   "default": "browser",
+   "type": "enum",
+   "options": [
+    "browser",
+    "window",
+    "phone",
+    "tablet"
+   ],
+   "aliases": [
+    "bingkai"
+   ],
+   "option_aliases": {
+    "jendela": "window",
+    "ponsel": "phone"
+   }
+  },
+  "image": {
+   "default": "",
+   "type": "text",
+   "hint": "URL/jalur gambar layar; kosong = kerangka bawaan",
+   "aliases": [
+    "gambar"
+   ]
+  },
+  "image_2": {
+   "default": "",
+   "type": "text",
+   "hint": "Gambar layar kedua (ganti_layar)",
+   "aliases": [
+    "gambar_2"
+   ]
+  },
+  "replace_screen": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Geser ke layar kedua di tengah blok",
+   "aliases": [
+    "ganti_layar"
+   ]
+  },
+  "address": {
+   "default": "contoh.id/dasbor",
+   "type": "text",
+   "hint": "Teks bilah alamat (browser)",
+   "aliases": [
+    "alamat"
+   ]
+  },
+  "title": {
+   "default": "Catatan",
+   "type": "text",
+   "hint": "Judul jendela (jendela)",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "accent_color": {
+   "default": "#5b5bf0",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg": {
+   "default": "#e9ebf3",
+   "type": "color",
+   "hint": "Latar panggung; kosong = transparan",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "float": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Melayang halus saat diam",
+   "aliases": [
+    "melayang"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;600;700",
+   "type": "font"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/panggung-perangkat",
+  "browser-device-stage",
+  "device-frame-stage"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

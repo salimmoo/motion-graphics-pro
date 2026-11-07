@@ -1,0 +1,51 @@
+<!-- Block transitions/morph-swap · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/morph-swap" data-start="0" data-duration="2" data-track-index="20" class="blk blk-transitions-morph-swap">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "mode": "shape", "shape": "circle", "size": 0.42, "bg_color": "#14161f"}
+</script>
+</div>
+<style>
+.blk-transitions-morph-swap{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-transitions-morph-swap .blk-latar{position:absolute;inset:0}
+.blk-transitions-morph-swap .blk-slot{position:absolute;inset:0;transform-origin:50% 50%}
+.blk-transitions-morph-swap .blk-slot>*{position:absolute;inset:0}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, W = k.w, H = k.h, s = k.s, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to);
+  BLOCK.el("div", { class: "blk-latar", style: "background:radial-gradient(70% 70% at 50% 50%," + BLOCK.mix(P.bg_color, "#ffffff", 0.07) + "," + P.bg_color + ")" }, k.root);
+  // dua slot bertumpuk di satu pusat (salinan adegan host), asal transform bersama 50% 50%
+  var slot = [A, Bk].map(function (el) {
+    var d = BLOCK.el("div", { class: "blk-slot" }, k.root);
+    if (el) { var c = el.cloneNode(true); c.removeAttribute("id"); c.querySelectorAll("[id]").forEach(function (e) { e.removeAttribute("id"); }); c.style.cssText += ";visibility:inherit;opacity:1;transform:none"; d.appendChild(c); }
+    return d;
+  });
+  var sA = slot[0], sB = slot[1], tm = D * 0.5, uk = BLOCK.clamp(+P.size || 0.42, 0.1, 0.9);
+  var io = function (x) { return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+  if (P.mode === "dense") {
+    // A memadat (mengecil sambil pudar) tepat saat B membesar dari pusat yang sama
+    var rr = Math.round(40 * s) + "px";
+    tl.fromTo(sA, { scale: 1, autoAlpha: 1, borderRadius: "0px" }, { scale: 0.55, autoAlpha: 0, borderRadius: rr, duration: D * 0.62, ease: "power3.inOut" }, D * 0.12)
+      .fromTo(sB, { scale: 0.55, autoAlpha: 0, borderRadius: rr }, { scale: 1, autoAlpha: 1, borderRadius: "0px", duration: D * 0.62, ease: "power3.inOut" }, D * 0.26);
+    sA.style.overflow = sB.style.overflow = "hidden";
+  } else {
+    // bentuk: siluet bingkai berubah (lingkaran / pil / persegi membulat), isi ditukar di siluet terkecil
+    var m = Math.min(W, H) * uk, bw = P.shape === "pill" ? m * 1.8 : m, bh = m;
+    var rad = P.shape === "box" ? 0.16 * m : bh / 2;
+    function gambar(t) {
+      var a = io(BLOCK.progress(t, D * 0.08, tm)), b = io(BLOCK.progress(t, tm, D * 0.92)), q = t < tm ? a : 1 - b;
+      var ix = (W - bw) / 2 * q, iy = (H - bh) / 2 * q, r = rad * q;
+      // squash kecil di titik tukar: scaleX/scaleY saling melawan
+      var sq = Math.sin(Math.PI * BLOCK.progress(t, tm - D * 0.1, tm + D * 0.14)) * 0.08;
+      var klip = "inset(" + iy.toFixed(1) + "px " + ix.toFixed(1) + "px round " + r.toFixed(1) + "px)";
+      var tf = "scale(" + (1 + sq).toFixed(4) + "," + (1 - sq).toFixed(4) + ") rotate(" + (-5 * Math.sin(Math.PI * BLOCK.progress(t, D * 0.08, D * 0.92))).toFixed(2) + "deg)";
+      [sA, sB].forEach(function (e) { if (e.firstChild) e.firstChild.style.clipPath = klip; }); sA.style.transform = sB.style.transform = tf;
+      sA.style.visibility = t < tm ? "inherit" : "hidden"; sB.style.visibility = t < tm ? "hidden" : "inherit";
+      sA.style.filter = sB.style.filter = "drop-shadow(0 " + (20 * s * q).toFixed(1) + "px " + (40 * s * q).toFixed(1) + "px rgba(0,0,0," + (0.45 * q).toFixed(3) + "))";
+    }
+    BLOCK.onTime(tl, gambar, D);
+  }
+  if (A) BLOCK.initial(tl, A, { autoAlpha: 1 }).set(A, { autoAlpha: 0 }, 0.02);
+  if (Bk) BLOCK.initial(tl, Bk, { autoAlpha: 0 }).set(Bk, { autoAlpha: 1 }, D - 0.02);
+});
+</script>

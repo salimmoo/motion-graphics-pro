@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Stomp · block example text/stomp</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="4.7">
+<div id="adegan" class="adegan ad-gelap"></div>
+<!-- Block text/stomp · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-stomp" data-block="text/stomp" data-start="0" data-duration="4.2" data-track-index="10" class="blk blk-text-stomp">
+<script type="application/json" data-block-props>
+{"text": "TANPA *KOMPROMI*", "font": "Anton", "size": 170, "weight": 400, "color": "#f5f3ee", "accent_color": "#ff4b3e", "position_y": 50, "width": 80, "align": "center", "mode": "title", "start": 0.2, "shake": 16, "shutter": 1, "exit": "snap"}
+</script>
+<div class="blk-tk"><div class="blk-isi"></div></div><svg class="blk-svg" width="0" height="0" aria-hidden="true"><filter id="blk-stomp-rana" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="0 0"/></filter></svg>
+</div>
+<style>
+.blk-text-stomp {position:absolute;inset:0;pointer-events:none}
+.blk-text-stomp .blk-tk{position:absolute;left:50%;transform:translate(-50%,-50%);line-height:1.08}
+.blk-text-stomp .blk-kunci{color:var(--aksen)}
+.blk-text-stomp .blk-svg{position:absolute}
+.blk-text-stomp .blk-tk{line-height:.98;text-transform:none}
+.blk-text-stomp .blk-isi{will-change:transform}
+</style>
+<script>
+BLOCK.mount("blk-stomp", function (k) {
+  var P = k.P, tl = k.tl;
+  var rata = { left: "left", right: "right" }[P.align] || "center";
+  function gayaTeks(el, px) {
+    el.style.cssText += ";top:" + P.position_y + "%;width:" + P.width + "%;color:" + P.color + ";--aksen:" + P.accent_color +
+      ";font-family:" + BLOCK.family(P.font) + ";font-weight:" + P.weight + ";font-size:" + Math.round((px || P.size) * k.s) + "px;text-align:" + rata;
+  }
+  // tunggu stylesheet Google Fonts + wajah font benar-benar termuat sebelum mengukur teks
+  function siapFont(spec) {
+    var ln = Array.prototype.slice.call(document.querySelectorAll('link[href*="fonts.googleapis"]'));
+    return Promise.all(ln.map(function (l) { return l.sheet ? 0 : new Promise(function (ok) { l.addEventListener("load", ok); l.addEventListener("error", ok); }); }))
+      .then(function () { return document.fonts && document.fonts.load ? document.fonts.load(spec || (P.weight + " 100px " + BLOCK.family(P.font))) : 0; })
+      .catch(function () {});
+  }
+  function markupKunci(s) { return BLOCK.esc(s).replace(/\*([^*]+)\*/g, '<span class="blk-kunci">$1</span>').replace(/\\n|\n/g, "<br>"); }
+  return siapFont().then(function () {
+  var el = k.root.querySelector(".blk-tk"), isi = el.querySelector(".blk-isi"), fb = k.root.querySelector("feGaussianBlur");
+  gayaTeks(el);
+  el.style.perspective = Math.round(1600 * k.s) + "px";
+  isi.innerHTML = markupKunci(P.text);
+  isi.style.filter = "url(#" + k.id + "-rana)";
+  var t0 = +P.start, g = P.shake * k.s, W = k.w, H = k.h;
+  var e3i = function (u) { return u * u * u; }, eo = function (u) { return u >= 1 ? 1 : 1 - Math.pow(2, -10 * u); };
+  var io = gsap.parseEase("power3.inOut"), c = function (v) { return BLOCK.clamp(v, 0, 1); };
+  var GUN = [[1, -0.6], [-0.7, 0.5], [0.35, -0.25]];
+  var tE = k.dur - 0.5;
+  function keadaan(t) {
+    var s = { x: 0, y: 0, sc: 1, rx: 0, ry: 0, rz: 0, o: 1 };
+    if (P.mode === "shutter") {
+      var f = BLOCK.clamp((k.dur - 1.3) / 2.9, 0.5, 2), b = function (a) { return t0 + a * f; };
+      var u1 = c((t - t0) / 0.32);
+      s.x = -1.1 * W * (1 - eo(u1)); s.o = t < t0 ? 0 : 1;
+      var u2 = c((t - b(0.6)) / 0.32); s.sc = 1 + 0.45 * Math.sin(Math.PI * Math.pow(u2, 0.6));
+      s.rx = 360 * io(c((t - b(1.1)) / 0.45));
+      s.ry = 360 * io(c((t - b(1.8)) / 0.45));
+      s.rz = 360 * io(c((t - b(2.5)) / 0.42));
+    } else {
+      var tl0 = t0 + 0.36, u = c((t - t0) / 0.36);
+      s.sc = 2.6 - 1.6 * e3i(u); s.o = c((t - t0) / 0.1);
+      if (t >= tl0) {
+        var n = Math.floor((t - tl0) * 30);
+        if (n < 3) { s.x = GUN[n][0] * g; s.y = GUN[n][1] * g; s.sc = n === 0 ? 1.025 : 1; }
+        var hu = c((t - tl0) / Math.max(0.1, tE - tl0)); s.sc *= 1 + 0.035 * hu; s.y -= 8 * k.s * hu;
+      }
+    }
+    var v = c((t - tE) / 0.34);
+    if (P.exit === "snap") s.y -= e3i(v) * H * 1.05;
+    else if (P.exit === "fade") s.o *= 1 - v;
+    return s;
+  }
+  BLOCK.onTime(tl, function (t) {
+    var a = keadaan(t), p = keadaan(t - 1 / 40);
+    isi.style.transform = "translate(" + a.x + "px," + a.y + "px) scale(" + a.sc + ") rotateX(" + a.rx + "deg) rotateY(" + a.ry + "deg) rotateZ(" + a.rz + "deg)";
+    isi.style.opacity = a.o;
+    var rot = (Math.abs(a.rx - p.rx) + Math.abs(a.ry - p.ry) + Math.abs(a.rz - p.rz)) * 0.12, sk = Math.abs(a.sc - p.sc) * 60;
+    var bx = Math.min(80, Math.abs(a.x - p.x) * 0.35 + rot + sk) * P.shutter, by = Math.min(80, Math.abs(a.y - p.y) * 0.35 + rot + sk) * P.shutter;
+    fb.setAttribute("stdDeviation", (Math.round(bx * 10) / 10) + " " + (Math.round(by * 10) / 10));
+  }, k.dur);
+  });
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 4.7;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 4.7);
+</script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Tear · block example transitions/tear</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="3">
+<div id="adegan-a" class="adegan ad-a"><div class="ad-judul">ADEGAN A</div><div class="ad-sub">sebelum transisi</div></div>
+<div id="adegan-b" class="adegan ad-b"><div class="ad-judul">ADEGAN B</div><div class="ad-sub">sesudah transisi</div></div>
+<!-- Block transitions/tear · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-tear" data-block="transitions/tear" data-start="1" data-duration="1.8" data-track-index="20" class="blk blk-transitions-tear">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "direction": "horizontal", "mode": "split", "position": 50, "roughness": 1, "fiber_color": "#fbf7ee", "shadow": true, "seed": 7}
+</script>
+</div>
+<style>
+.blk-transitions-tear{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-transitions-tear .blk-lembar{position:absolute;left:-5%;top:-5%;width:110%;height:110%;will-change:transform}
+.blk-transitions-tear .blk-serat,.blk-transitions-tear .blk-isi{position:absolute;inset:0}
+.blk-transitions-tear .blk-serat{background:repeating-linear-gradient(83deg,rgba(150,130,100,.10) 0 1px,transparent 1px 5px),repeating-linear-gradient(-12deg,rgba(255,255,255,.6) 0 1px,transparent 1px 4px)}
+.blk-transitions-tear .blk-isi>*{position:absolute;left:4.5455%;top:4.5455%;width:90.909%;height:90.909%;right:auto;bottom:auto}
+</style>
+<script>
+BLOCK.mount("blk-tear", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, R = k.random, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to);
+  var hor = P.direction !== "vertical", pos = +P.position || 50, kas = P.roughness == null ? 1 : +P.roughness;
+  // garis sobek: gelombang besar (noise) + gigi kecil berseed; titik dalam persen sepanjang sumbu
+  var N = 90, sd = R() * 50, garis = [];
+  for (var i = 0; i <= N; i++) {
+    var u = i / N * 100;
+    var v = pos + BLOCK.noise(i * 0.09, sd) * 7 * kas + BLOCK.noise(i * 0.5, sd + 3) * 1.4 * kas + (R() - 0.5) * 0.9 * kas;
+    garis.push([u, v, 0.5 + R() * 1.5 * kas]); // [sepanjang, melintang, lebar serat]
+  }
+  var cv = function (p) { return ((p + 5) / 1.1).toFixed(3); };
+  var pt = function (u, v) { u = cv(u); v = cv(v); return (hor ? u + "% " + v + "%" : v + "% " + u + "%"); };
+  // potongan 0 = sisi atas/kiri, 1 = sisi bawah/kanan; serat putih menjulur melewati garis sobek
+  function poli(sisi, serat) {
+    var s = sisi ? 1 : -1, ujung = sisi ? 100 : 0, out = [pt(0, ujung), pt(100, ujung)];
+    for (var j = N; j >= 0; j--) { var g = garis[j]; out.push(pt(g[0], g[1] - s * (serat ? g[2] : 0))); }
+    if (!sisi) out.reverse();
+    return "polygon(" + out.join(",") + ")";
+  }
+  var sh = P.shadow ? "drop-shadow(0 " + Math.round(18 * k.s) + "px " + Math.round(26 * k.s) + "px rgba(25,15,5,.42))" : "none";
+  var isiList = [];
+  var lembar = [0, 1].map(function (sisi) {
+    var w = BLOCK.el("div", { class: "blk-lembar", style: "filter:" + sh }, k.root);
+    BLOCK.el("div", { class: "blk-serat", style: "background-color:" + P.fiber_color + ";clip-path:" + poli(sisi, true) }, w);
+    var isi = BLOCK.el("div", { class: "blk-isi", style: "clip-path:" + poli(sisi, false) }, w);
+    if (A) isiList.push(isi); else isi.style.background = "#2a2420";
+    return w;
+  });
+  // klon adegan yang segar tiap seek (id + gaya tetap, tanpa .clip/data-start aktif, kanvas ikut disalin)
+  if (A) BLOCK.mirror(k, A, isiList, "position:absolute;inset:auto;left:4.5455%;top:4.5455%;width:90.909%;height:90.909%;margin:0");
+  if (A) BLOCK.initial(tl, A, { autoAlpha: 1 }).set(A, { autoAlpha: 0 }, 0.02);
+  if (Bk) BLOCK.initial(tl, Bk, { autoAlpha: 0 }).set(Bk, { autoAlpha: 1 }, 0.02);
+  // engsel di ujung jauh garis: sobekan "berlari" dari ujung dekat ke ujung jauh
+  var org = hor ? "95.45% " + cv(pos) + "%" : cv(pos) + "% 95.45%";
+  var t1 = D * 0.42, jatuh = P.mode === "drop";
+  lembar.forEach(function (w, sisi) {
+    var s = sisi ? 1 : -1, ax = hor ? "y" : "x", vars0 = { transformOrigin: org, rotation: 0, x: 0, y: 0, scale: 1 };
+    var buka = { rotation: (hor ? -s : s) * (sisi ? 1.2 : 1.8), duration: t1, ease: "power2.in" };
+    buka[ax] = s * 1.6 + "%";
+    tl.fromTo(w, vars0, buka, 0.05);
+    var pergi = { duration: D - t1 - 0.05, ease: jatuh ? "power3.in" : "power2.in" };
+    if (jatuh) { pergi.y = "125%"; pergi.rotation = (sisi ? 9 : -14) * (hor ? 1 : -1); pergi.x = (sisi ? -4 : 6) + "%"; }
+    else { pergi[ax] = s * 118 + "%"; pergi.rotation = (hor ? -s : s) * (sisi ? 7 : 12); pergi[hor ? "x" : "y"] = (sisi ? -3 : 5) + "%"; pergi.scale = 1.04; }
+    tl.to(w, pergi, t1 + 0.05 + (sisi ? 0.06 : 0));
+  });
+});
+</script>
+</div>
+<script>
+  window.__duration = 3;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 3);
+</script>
+</body>
+</html>

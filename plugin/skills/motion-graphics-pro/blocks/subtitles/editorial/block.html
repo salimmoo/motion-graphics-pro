@@ -1,0 +1,44 @@
+<!-- Block subtitles/editorial · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="subtitles/editorial" data-start="0" data-duration="5" data-track-index="30" class="blk blk-subtitles-editorial">
+<script type="application/json" data-block-props>
+{"text": "Desain yang baik terasa *sederhana* padahal prosesnya *panjang*", "words": [], "kps": 2.0, "max_words": 4, "font": "Inter:wght@500;600;700", "font2": "Playfair Display:ital,wght@1,700;1,800", "size": 52, "contrast": 2.2, "color": "#ffffff", "accent_color": "#ffd9a0", "bottom": 15, "uppercase": true, "keywords": []}
+</script>
+<div class="blk-cap"></div>
+</div>
+<style>
+.blk-subtitles-editorial{position:absolute;inset:0;pointer-events:none}
+.blk-subtitles-editorial .blk-cap{position:absolute;left:6%;right:6%;text-align:center;line-height:1.02}
+.blk-subtitles-editorial .blk-hal{position:absolute;left:0;right:0;bottom:0}
+.blk-subtitles-editorial .blk-w{display:inline-block;margin:0 .16em;vertical-align:baseline}
+.blk-subtitles-editorial .blk-tekan{font-style:italic;text-transform:none;letter-spacing:-.02em;margin:0 .08em}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, cap = k.root.querySelector(".blk-cap");
+  var KL = (P.keywords || []).map(function (x) { return String(x).toLowerCase(); });
+  var polos = function (t) { return String(t).replace(/\*/g, ""); };
+  var bersih = function (t) { return polos(t).toLowerCase().replace(/[^\p{L}\p{N}]/gu, ""); };
+  var adaPenanda = /\*/.test(P.text || "") || KL.length > 0 || (P.words || []).some(function (w) { return /\*/.test(w.teks || w.text || ""); });
+  cap.style.cssText += ";bottom:" + P.bottom + "%;color:" + P.color + ";font-family:" + BLOCK.family(P.font) + ";font-weight:600;font-size:" +
+    Math.round(P.size * s) + "px;letter-spacing:.06em;text-shadow:0 " + Math.round(4 * s) + "px " + Math.round(18 * s) + "px rgba(0,0,0,.4)" +
+    (P.uppercase ? ";text-transform:uppercase" : "");
+  BLOCK.pages(BLOCK.words(P), P.max_words).forEach(function (pg) {
+    var h = BLOCK.el("div", { class: "blk-hal" }, cap);
+    BLOCK.initial(tl, h, { autoAlpha: 0 }).set(h, { autoAlpha: 1 }, pg.mulai).set(h, { autoAlpha: 0 }, pg.akhir);
+    // kata tekanan: penanda *kata* / daftar kunci; tanpa penanda sama sekali -> kata terpanjang tiap halaman
+    var terpanjang = -1;
+    if (!adaPenanda && pg.kata.length > 1) pg.kata.forEach(function (w, i) { if (terpanjang < 0 || bersih(w.teks).length > bersih(pg.kata[terpanjang].teks).length) terpanjang = i; });
+    pg.kata.forEach(function (w, i) {
+      var tekan = /\*/.test(w.teks) || KL.indexOf(bersih(w.teks)) >= 0 || i === terpanjang;
+      var e = BLOCK.el("span", { class: "blk-w" + (tekan ? " blk-tekan" : "") }, h);
+      e.textContent = polos(w.teks);
+      if (tekan) {
+        e.style.cssText += ";font-family:" + BLOCK.family(P.font2, "Georgia, serif") + ";font-weight:800;font-size:" + P.contrast + "em;color:" + P.accent_color;
+        tl.fromTo(e, { opacity: 0, y: 34 * s, scale: 0.88, filter: "blur(10px)" }, { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.65, ease: "expo.out" }, w.mulai - 0.04);
+      } else {
+        tl.fromTo(e, { opacity: 0, y: 18 * s }, { opacity: 1, y: 0, duration: 0.38, ease: "power3.out" }, w.mulai - 0.04);
+      }
+    });
+  });
+}, { font: true });
+</script>

@@ -1,0 +1,116 @@
+{
+ "id": "camera/station",
+ "name": "Station",
+ "name_id": "Geser Antar Stasiun",
+ "category": "camera",
+ "description": {
+  "id": "Kamera bergeser menyamping melewati deretan kartu berlabel yang tersambung rel, berhenti sejenak di setiap stasiun sebelum pindah ke berikutnya. Kartu yang tidak difokuskan mengecil dan meredup, isinya berparalaks. Bisa juga menggeser pita lebar milik host lewat props target.",
+  "en": "A lateral camera move along a row of labelled stations joined by a rail, dwelling at each stop. Off-focus cards shrink and dim with parallax content; can also pan a wide host strip via target."
+ },
+ "tags": [
+  "kamera",
+  "camera",
+  "pan",
+  "stasiun",
+  "langkah",
+  "fitur",
+  "timeline",
+  "rel",
+  "station"
+ ],
+ "props": {
+  "target": {
+   "default": "",
+   "type": "selector",
+   "hint": "Kosong = panggung kartu sendiri; isi = pita host yang digeser"
+  },
+  "station": {
+   "default": [
+    {
+     "judul": "Rencana",
+     "teks": "Susun langkah sejak hari pertama"
+    },
+    {
+     "judul": "Rancang",
+     "teks": "Ubah ide menjadi bentuk visual"
+    },
+    {
+     "judul": "Bangun",
+     "teks": "Gerakkan setiap elemen dengan tujuan"
+    },
+    {
+     "judul": "Rilis",
+     "teks": "Kirim, ukur, lalu perbaiki"
+    }
+   ],
+   "type": "list",
+   "hint": "Daftar {judul, teks}",
+   "aliases": [
+    "stasiun"
+   ]
+  },
+  "still": {
+   "default": 0.55,
+   "type": "number",
+   "hint": "Porsi durasi untuk berhenti di stasiun (0.1-0.9)",
+   "aliases": [
+    "diam"
+   ]
+  },
+  "ease": {
+   "default": "power3.inOut",
+   "type": "ease"
+  },
+  "bg": {
+   "default": "#0f1424",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "color": {
+   "default": "#f4f1ea",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffb547",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;600;800",
+   "type": "font"
+  },
+  "motion_blur": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Blur saat kamera bergeser",
+   "aliases": [
+    "blur_gerak"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "kamera/stasiun",
+  "pan-stations"
+ ],
+ "example": {
+  "bg": "empty",
+  "font": [
+   "Inter:wght@400;600;800"
+  ]
+ }
+}

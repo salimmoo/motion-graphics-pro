@@ -1,0 +1,171 @@
+{
+ "id": "camera/rack-focus",
+ "name": "Rack Focus",
+ "name_id": "Tarik Fokus",
+ "category": "camera",
+ "description": {
+  "id": "Fokus lensa berpindah dari subjek dekat ke subjek jauh: yang satu menajam, yang lain melebur lewat blur, peredupan, skala, dan paralaks. Titik cahaya di depan dan belakang mekar menjadi cakram bokeh bersegi yang terpotong mata kucing di sudut. Mode tukar untuk dua kartu bersebelahan. Bisa memakai dua elemen host lewat props dekat/jauh.",
+  "en": "A focus pull from a near subject to a far one with synchronized blur, dimming, scale and parallax, plus polygon bokeh discs with cat's-eye clipping. Swap mode for side-by-side cards; can drive two host elements."
+ },
+ "tags": [
+  "kamera",
+  "camera",
+  "rack-focus",
+  "fokus",
+  "bokeh",
+  "depth-of-field",
+  "blur",
+  "sinematik",
+  "rack",
+  "focus"
+ ],
+ "props": {
+  "mode": {
+   "default": "shelf",
+   "type": "enum",
+   "options": [
+    "shelf",
+    "swap"
+   ],
+   "hint": "rak = dua kedalaman bertumpuk; tukar = dua kartu bersebelahan",
+   "option_aliases": {
+    "rak": "shelf",
+    "tukar": "swap"
+   }
+  },
+  "near": {
+   "default": "",
+   "type": "selector",
+   "hint": "Elemen host bidang dekat (kosong = kartu bawaan)",
+   "aliases": [
+    "dekat"
+   ]
+  },
+  "far": {
+   "default": "",
+   "type": "selector",
+   "hint": "Elemen host bidang jauh (kosong = kartu bawaan)",
+   "aliases": [
+    "jauh"
+   ]
+  },
+  "card": {
+   "default": [
+    {
+     "judul": "Subjek dekat",
+     "teks": "Tajam lebih dulu, lalu melebur"
+    },
+    {
+     "judul": "Subjek jauh",
+     "teks": "Fokus berpindah ke belakang"
+    }
+   ],
+   "type": "list",
+   "hint": "Dua {judul, teks}: dekat lalu jauh",
+   "aliases": [
+    "kartu"
+   ]
+  },
+  "rack_time": {
+   "default": 1.6,
+   "type": "number",
+   "hint": "Mulai tarik fokus (detik)",
+   "aliases": [
+    "waktu_rak"
+   ]
+  },
+  "rack_duration": {
+   "default": 1.2,
+   "type": "number",
+   "aliases": [
+    "durasi_rak"
+   ]
+  },
+  "ease": {
+   "default": "power2.inOut",
+   "type": "ease"
+  },
+  "blur": {
+   "default": 14,
+   "type": "number",
+   "hint": "Blur maksimum (px pada 1080)"
+  },
+  "bokeh": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Titik cahaya bokeh depan dan belakang"
+  },
+  "bokeh_count": {
+   "default": 22,
+   "type": "number",
+   "aliases": [
+    "jumlah_bokeh"
+   ]
+  },
+  "bg": {
+   "default": "#0c1020",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "color1": {
+   "default": "#ff8a5b",
+   "type": "color",
+   "hint": "Aksen kartu dekat",
+   "aliases": [
+    "warna1"
+   ]
+  },
+  "color2": {
+   "default": "#5bc8ff",
+   "type": "color",
+   "hint": "Aksen kartu jauh",
+   "aliases": [
+    "warna2"
+   ]
+  },
+  "bokeh_color": {
+   "default": "#ffd9a0",
+   "type": "color",
+   "aliases": [
+    "warna_bokeh"
+   ]
+  },
+  "text_color": {
+   "default": "#f6f2ea",
+   "type": "color",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;700;800",
+   "type": "font"
+  },
+  "seed": {
+   "default": 5,
+   "type": "number"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "kamera/fokus-rak",
+  "focus-rack",
+  "rack-focus",
+  "focus-swap"
+ ],
+ "example": {
+  "bg": "empty",
+  "font": [
+   "Inter:wght@400;700;800"
+  ]
+ }
+}

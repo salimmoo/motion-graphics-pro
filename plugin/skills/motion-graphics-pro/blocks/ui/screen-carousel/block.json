@@ -1,0 +1,109 @@
+{
+ "id": "ui/screen-carousel",
+ "name": "Screen Carousel",
+ "name_id": "Korsel Layar Aplikasi",
+ "category": "ui",
+ "description": {
+  "id": "Dua sampai lima layar aplikasi tiruan. Mode rel: layar berjajar di rel horizontal, satu utama di tengah, tetangga mundur; maju per isyarat dengan lemparan cepat dan tangkapan ekor panjang, keterangan mono ikut berganti. Mode tukar: mock tetap di tempat, berganti keadaan bernuansa warna sementara keterangan naik, tahan, dan keluar di sampingnya.",
+  "en": "Two to five mock app screens. Rail mode advances a horizontal carousel with a velocity-matched throw and long-tail catch plus a swapping mono caption. Swap mode pins one mock and cross-fades accent-tinted states while captions rise, hold and exit beside it."
+ },
+ "tags": [
+  "ui",
+  "aplikasi",
+  "layar",
+  "carousel",
+  "showcase",
+  "fitur",
+  "mock",
+  "screen"
+ ],
+ "props": {
+  "mode": {
+   "default": "rail",
+   "type": "enum",
+   "options": [
+    "rail",
+    "swap"
+   ],
+   "option_aliases": {
+    "rel": "rail",
+    "tukar": "swap"
+   }
+  },
+  "screen": {
+   "default": [
+    {
+     "judul": "Beranda",
+     "ket": "Semua tugas hari ini di satu tempat",
+     "warna": "#5b7cfa",
+     "angka": "12"
+    },
+    {
+     "judul": "Fokus",
+     "ket": "Mode tenang tanpa gangguan",
+     "warna": "#ff7a59",
+     "angka": "25:00"
+    },
+    {
+     "judul": "Laporan",
+     "ket": "Kemajuan mingguan yang mudah dibaca",
+     "warna": "#22b07d",
+     "angka": "86%"
+    },
+    {
+     "judul": "Tim",
+     "ket": "Bagikan rencana dalam satu ketukan",
+     "warna": "#a466ff",
+     "angka": "8"
+    }
+   ],
+   "type": "list",
+   "hint": "[{judul, ket, warna, angka}] 2-5 layar; isyarat maju dibagi rata sepanjang durasi",
+   "aliases": [
+    "layar"
+   ]
+  },
+  "text_color": {
+   "default": "#f5f6fa",
+   "type": "color",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "base_screen": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "layar_dasar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700;800",
+   "type": "font"
+  },
+  "font2": {
+   "default": "JetBrains Mono:wght@400;500",
+   "type": "font",
+   "hint": "Font mono keterangan"
+  }
+ },
+ "duration": 7,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/korsel-layar",
+  "screen-flow-carousel",
+  "sticky-mock-swap"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@400;500;600;700;800",
+   "JetBrains Mono:wght@400;500"
+  ]
+ }
+}

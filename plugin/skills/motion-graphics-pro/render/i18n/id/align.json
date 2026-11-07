@@ -1,0 +1,15 @@
+{
+ "ffmpeg cannot be started ({}). Install ffmpeg or set env MGP_FFMPEG.": "ffmpeg tidak bisa dijalankan ({}). Pasang ffmpeg atau beri env MGP_FFMPEG.",
+ "ffmpeg failed: ": "ffmpeg gagal: ",
+ "audio not readable: {}": "audio tidak terbaca: {}",
+ "empty script": "naskah kosong",
+ "Name an audio file: mgp align voice.wav --script text.txt -o words.json": "Sebutkan berkas audio: mgp align suara.wav --script teks.txt -o words.json",
+ "file not found: {}": "berkas tidak ditemukan: {}",
+ "--script is required: a text file path or the text itself": "--script wajib: path berkas teks atau teks langsung",
+ "align: {} words, {} syllables; {} nuclei detected ({} used, {} syllables without a nucleus); {} pauses; speech {} of {} s": "selaras: {} kata, {} suku kata; {} inti terdeteksi ({} dipakai, {} suku tanpa inti); {} jeda; bicara {} dari {} s",
+ "{} words -> {}": "{} kata -> {}",
+ "{} letters -> {}": "{} huruf -> {}",
+ "mgp align <audio> [script.txt | --script text.txt] -o words.json [--language id|en] [--letters phones.json] [--json] [--quiet]\n\nAligns a script to audio without Whisper: syllable nucleus detection + dynamic programming.\n  --script, -n   path of a text file or the text itself (required; may also be the 2nd positional, the flag wins)\n  -o, --out      JSON output [{id,text,start,end,syllables}] (default: words.json)\n  --language     id (default) or en: syllable splitting rules and number spelling\n  --letters      also write per-letter timing [{start,end,phone}] for MGP.lipsync.visemes()\n  --param k=v    change an algorithm parameter (repeatable; see PARAM in src/align.mjs)\n  --json         print a JSON summary to stdout\n  --quiet        no messages on stderr\nOld names still work: mgp selaras, --naskah/--teks, --bahasa, --huruf, --diam.": "mgp align <audio> [naskah.txt | --script teks.txt] -o words.json [--language id|en] [--letters fonem.json] [--json] [--quiet]\n\nMenyelaraskan naskah ke audio tanpa Whisper: deteksi inti suku kata + pemrograman dinamis.\n  --script, -n   path berkas teks atau teks langsung (wajib; boleh juga posisi ke-2, flag menang)\n  -o, --out      keluaran JSON [{id,text,start,end,syllables}] (bawaan: words.json)\n  --language     id (bawaan) atau en: aturan pemenggalan suku kata dan ejaan angka\n  --letters      tulis juga waktu per huruf [{start,end,phone}] untuk MGP.lipsync.visemes()\n  --param k=v    ubah parameter algoritme (boleh berulang; lihat PARAM di src/align.mjs)\n  --json         cetak ringkasan JSON ke stdout\n  --quiet        tanpa pesan di stderr\nNama lama tetap jalan: rekam selaras, --naskah/--teks, --bahasa, --huruf, --diam.",
+ "unknown parameter: {}": "parameter tidak dikenal: {}",
+ "--language must be id or en": "--language harus id atau en"
+}

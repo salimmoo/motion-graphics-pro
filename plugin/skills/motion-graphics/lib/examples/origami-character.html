@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP tokoh origami · lipat kaku</title>
+<style>html,body{margin:0;background:#efe3c9}#stage{position:relative;width:1280px;height:720px;overflow:hidden}#stage canvas{position:absolute}</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../figure3d.js"></script>
+<script src="../origami-fold.js"></script>
+<script src="../character-styles.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720" data-fps="12">
+  <canvas id="a" style="left:0;top:0"></canvas><canvas id="b" style="left:640px;top:0"></canvas><canvas id="c" style="left:0;top:360px"></canvas><canvas id="d" style="left:640px;top:360px"></canvas>
+</div>
+<script>
+// Tokoh origami: kiri atas jalan (lipatan terbuka di awal), kanan atas jalan dekat, bawah idle dan dadah.
+// ?gaya=lama memakai gaya lama (strip runcing berengsel) untuk perbandingan.
+const gaya = /gaya=lama/.test(location.search) ? "lama" : (window.__gayaOrigami || undefined);
+const D = 6, base = { width: 640, height: 360, duration: D, style: "origami" };
+if (gaya) base.origamiGaya = gaya;
+const all = [
+  MGP.characterStyles.create("#a", Object.assign({ action: "walk", unfoldAt: 0.2 }, base)),
+  MGP.characterStyles.create("#b", Object.assign({ action: "walk", scale: 0.95, ground: 0.98, x: 0.5 }, base)),
+  MGP.characterStyles.create("#c", Object.assign({ action: "idle" }, base)),
+  MGP.characterStyles.create("#d", Object.assign({ action: "wave" }, base)),
+];
+MGP.core.expose({ duration: D, ready: Promise.all(all.map((x) => x.ready)), seek(t) { all.forEach((x) => x.seek(t)); return this; }, timeline() { return MGP.core.timeline(this); } });
+</script>
+</body>
+</html>

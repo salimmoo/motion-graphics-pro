@@ -1,0 +1,57 @@
+<!-- Block data/ring · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="data/ring" data-start="0" data-duration="4" data-track-index="10" class="blk blk-data-ring">
+<script type="application/json" data-block-props>
+{"mode": "conic", "value": 72, "max": 100, "suffix": "%", "decimals": 0, "label": "kuota bulan ini terpakai", "fill_duration": 2, "ease": "power3.inOut", "size": 560, "thickness": 0, "color": "#4ade80", "end_color": "#22d3ee", "track_color": "rgba(255,255,255,0.1)", "text_color": "#f5f3ee", "font": "Inter:wght@500;600;800", "position_x": 50, "position_y": 50}
+</script>
+<div class="blk-w"><div class="blk-ring"></div><div class="blk-pusat"><div class="blk-n"></div><div class="blk-l"></div></div></div>
+</div>
+<style>
+.blk-data-ring{position:absolute;inset:0;pointer-events:none}
+.blk-data-ring .blk-w{position:absolute;transform:translate(-50%,-50%)}
+.blk-data-ring .blk-ring{position:absolute;inset:0;border-radius:50%}
+.blk-data-ring .blk-ring svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.blk-data-ring .blk-pusat{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.blk-data-ring .blk-n{font-weight:800;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.blk-data-ring .blk-n small{font-size:.45em;font-weight:600;margin-left:.05em;vertical-align:.7em}
+.blk-data-ring .blk-l{margin-top:.7em;letter-spacing:.14em;text-transform:uppercase;opacity:.65;font-weight:500;max-width:70%}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root;
+  function fmt(v, d) { var a = Math.abs(v).toFixed(d).split("."); a[0] = a[0].replace(/\B(?=(\d{3})+(?!\d))/g, "."); return (v < 0 ? "−" : "") + a[0] + (a[1] ? "," + a[1] : ""); }
+  var Dm = P.size * s, w = R.querySelector(".blk-w"), ring = R.querySelector(".blk-ring"), num = R.querySelector(".blk-n"), lab = R.querySelector(".blk-l");
+  var busur = P.mode === "arc", tb = P.thickness > 0 ? P.thickness * s : Dm * (busur ? 0.022 : 0.1);
+  w.style.cssText += ";left:" + P.position_x + "%;top:" + P.position_y + "%;width:" + Dm + "px;height:" + Dm + "px;color:" + P.text_color + ";font-family:" + BLOCK.family(P.font);
+  num.style.fontSize = Math.round(Dm * 0.24) + "px"; lab.style.fontSize = Math.round(Dm * 0.042) + "px"; lab.textContent = P.label;
+  var frac = BLOCK.clamp(P.value / (P.max || 100), 0, 1), t0 = 0.35, di = Math.min(P.fill_duration, k.dur - 1.2), ez = gsap.parseEase(P.ease);
+  var arc, L, ujung;
+  if (busur) {
+    // pengukur tipis: trek + busur tergambar + titik ujung
+    var r = (Dm - tb) / 2 - tb, sv = BLOCK.svg("svg", { viewBox: "0 0 " + Dm + " " + Dm }, ring), c = Dm / 2;
+    BLOCK.svg("circle", { cx: c, cy: c, r: r, fill: "none", stroke: P.track_color, "stroke-width": tb }, sv);
+    arc = BLOCK.svg("circle", { cx: c, cy: c, r: r, fill: "none", stroke: P.color, "stroke-width": tb, "stroke-linecap": "round", transform: "rotate(-90 " + c + " " + c + ")" }, sv);
+    L = 2 * Math.PI * r; arc.style.strokeDasharray = L + " " + L;
+    ujung = BLOCK.svg("circle", { cx: c, cy: c - r, r: tb * 1.6, fill: P.color }, sv);
+  } else {
+    // cincin konik: isian sudut lewat conic-gradient, cincin lewat mask radial
+    var m = "radial-gradient(farthest-side,transparent calc(100% - " + tb + "px),#000 calc(100% - " + (tb - 1) + "px))";
+    ring.style.cssText += ";-webkit-mask:" + m + ";mask:" + m;
+  }
+  BLOCK.onTime(tl, function (t) {
+    var p = ez(BLOCK.progress(t, t0, t0 + di)), f = frac * p;
+    num.innerHTML = fmt(P.value * p, P.decimals) + (P.suffix ? "<small>" + BLOCK.esc(P.suffix) + "</small>" : "");
+    if (busur) {
+      arc.style.strokeDashoffset = L * (1 - f);
+      var a = -Math.PI / 2 + f * 2 * Math.PI, c = Dm / 2, r = (Dm - tb) / 2 - tb;
+      ujung.setAttribute("cx", c + Math.cos(a) * r); ujung.setAttribute("cy", c + Math.sin(a) * r);
+      ujung.setAttribute("opacity", f > 0.002 ? 1 : 0);
+    } else {
+      var dg = (f * 360).toFixed(2);
+      ring.style.background = "conic-gradient(from 0deg," + P.color + " 0deg," + P.end_color + " " + dg + "deg," + P.track_color + " " + dg + "deg)";
+    }
+  }, k.dur);
+  tl.fromTo(w, { opacity: 0, scale: 0.86, rotation: -8 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.7, ease: "power3.out" }, 0);
+  tl.fromTo(num, { scale: 1 }, { scale: 1.06, duration: 0.14, ease: "power2.out", yoyo: true, repeat: 1 }, t0 + di);
+  tl.to(w, { opacity: 0, scale: 0.94, duration: 0.4, ease: "power2.in" }, k.dur - 0.45);
+}, { font: true });
+</script>

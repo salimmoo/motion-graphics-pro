@@ -1,0 +1,104 @@
+{
+ "id": "transitions/paper-collage",
+ "name": "Paper Collage",
+ "name_id": "Kolase Kertas",
+ "category": "transitions",
+ "description": {
+  "id": "Tambalan sobekan kertas ala scrapbook, masing-masing dengan warna, tekstur, dan kemiringan sendiri, menempel menutup layar lalu beterbangan berurutan menyingkap adegan baru.",
+  "en": "A scrapbook patchwork of torn paper scraps, each with its own colour, texture and tilt, slaps down over the frame then flutters away in a staggered scatter to reveal the next scene."
+ },
+ "tags": [
+  "transisi",
+  "kertas",
+  "kolase",
+  "scrapbook",
+  "collage",
+  "sobek",
+  "paper",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "mode": {
+   "default": "close-open",
+   "type": "enum",
+   "options": [
+    "close-open",
+    "open"
+   ],
+   "hint": "tutup-buka = sobekan menempel lalu terbang; buka = sobekan sudah menutup sejak awal, hanya terbang",
+   "option_aliases": {
+    "tutup-buka": "close-open",
+    "buka": "open"
+   }
+  },
+  "palette": {
+   "default": [
+    "#efe4cc",
+    "#c9a77a",
+    "#a9b89a",
+    "#9db4c8",
+    "#d98c6a",
+    "#e2b65a",
+    "#e8e4da"
+   ],
+   "type": "list",
+   "hint": "Warna-warna kertas",
+   "aliases": [
+    "palet"
+   ]
+  },
+  "size": {
+   "default": 1,
+   "type": "number",
+   "hint": "Skala ukuran sobekan",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "pause": {
+   "default": 0.02,
+   "type": "number",
+   "hint": "Jeda antar sobekan (detik)",
+   "aliases": [
+    "jeda"
+   ]
+  },
+  "seed": {
+   "default": 5,
+   "type": "number",
+   "hint": "Seed susunan"
+  }
+ },
+ "duration": 2.6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/kolase-kertas",
+  "paper-collage-reveal"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 1,
+  "duration": 3.8
+ }
+}

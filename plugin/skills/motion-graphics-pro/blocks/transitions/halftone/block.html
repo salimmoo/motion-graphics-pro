@@ -1,0 +1,46 @@
+<!-- Block transitions/halftone · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/halftone" data-start="0" data-duration="2" data-track-index="20" class="blk blk-transitions-halftone">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "color": "#1d1b18", "tight": 18, "direction": "left", "random_order": 0.25, "seed": 3}
+</script>
+</div>
+<style>
+.blk-transitions-halftone{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, W = k.w, H = k.h, R = k.random, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to);
+  var cv = BLOCK.canvas(k.root, W, H), g = cv.ctx;
+  var c = Math.min(W, H) / Math.max(4, +P.tight || 18), kol = Math.ceil(W / c) + 1, bar = Math.ceil(H / c) + 1;
+  var ox = (W - (kol - 1) * c) / 2, oy = (H - (bar - 1) * c) / 2, ac = BLOCK.clamp(+P.random_order || 0, 0, 1), dots = [];
+  for (var j = 0; j < bar; j++) for (var i = 0; i < kol; i++) {
+    var x = ox + i * c + (j % 2 ? c * 0.5 : 0), y = oy + j * c, o;
+    if (P.direction === "center") o = Math.hypot(x - W / 2, y - H / 2) / Math.hypot(W / 2, H / 2);
+    else if (P.direction === "right") o = 1 - x / W;
+    else if (P.direction === "bottom") o = 1 - y / H;
+    else if (P.direction === "random") o = R();
+    else o = x / W;
+    dots.push({ x: x, y: y, o: BLOCK.clamp(o * (1 - ac) + R() * ac, 0, 1) });
+  }
+  var t0 = D * 0.04, t1 = D * 0.9, maks = c * 0.8, b = function (x) { return 1 - Math.pow(1 - x, 3); };
+  function gambar(t) {
+    var p = BLOCK.progress(t, t0, t1), path = "";
+    g.clearRect(0, 0, W, H);
+    if (p <= 0 || p >= 1) { if (Bk) Bk.style.clipPath = p >= 1 ? "none" : "circle(0 at 50% 50%)"; return; }
+    g.fillStyle = P.color;
+    dots.forEach(function (d) {
+      var l = BLOCK.clamp((p - d.o * 0.62) / 0.38, 0, 1); if (l <= 0) return;
+      // titik tinta meletup dulu (kecil ke besar), lalu membuka jadi jendela ke adegan baru
+      var ri = maks * b(Math.min(1, l * 1.5)) * (1 + 0.12 * Math.sin(Math.PI * Math.min(1, l * 1.5)));
+      var rw = maks * b(BLOCK.clamp((l - 0.22) / 0.78, 0, 1));
+      var ring = Math.max(0, ri - rw) * (1 - BLOCK.progress(l, 0.45, 0.8));
+      if (ring > 0.3) { g.beginPath(); g.arc(d.x, d.y, rw + ring, 0, 6.2832); if (rw > 0) g.arc(d.x, d.y, rw, 0, 6.2832, true); g.fill(); }
+      if (rw > 0.3) path += "M" + (d.x - rw).toFixed(1) + " " + d.y.toFixed(1) + "a" + rw.toFixed(1) + " " + rw.toFixed(1) + " 0 1 0 " + (2 * rw).toFixed(1) + " 0a" + rw.toFixed(1) + " " + rw.toFixed(1) + " 0 1 0 " + (-2 * rw).toFixed(1) + " 0Z";
+    });
+    if (Bk) Bk.style.clipPath = path ? "path('" + path + "')" : "circle(0 at 50% 50%)";
+  }
+  BLOCK.onTime(tl, gambar, D);
+  if (Bk) BLOCK.initial(tl, Bk, { autoAlpha: 1 });
+  if (A) BLOCK.initial(tl, A, { autoAlpha: 1 }).set(A, { autoAlpha: 0 }, t1);
+});
+</script>

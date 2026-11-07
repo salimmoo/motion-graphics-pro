@@ -1,0 +1,176 @@
+{
+ "id": "characters/walk",
+ "name": "Walk",
+ "name_id": "Tokoh Berjalan",
+ "category": "characters",
+ "description": {
+  "id": "Tokoh bersendi berjalan dengan telapak yang menapak sungguhan (data langkah manusia), lalu berhenti dan menunjuk kartu keterangan. Gaya vektor bergaris tinta, pixel art, origami, atau figur 3D; aksi jalan, lambai, atau diam.",
+  "en": "A jointed character walks on planted feet (real gait data), then a caption card pops beside it. Vector ink, pixel art, origami or 3D figure; walk, wave or idle."
+ },
+ "tags": [
+  "tokoh",
+  "karakter",
+  "jalan",
+  "walk cycle",
+  "pixel",
+  "origami",
+  "3d",
+  "lambai",
+  "characters",
+  "walk"
+ ],
+ "props": {
+  "style": {
+   "default": "vector",
+   "type": "enum",
+   "options": [
+    "vector",
+    "pixel",
+    "origami",
+    "3d"
+   ],
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "vektor": "vector"
+   }
+  },
+  "action": {
+   "default": "walk",
+   "type": "enum",
+   "options": [
+    "walk",
+    "wave",
+    "still"
+   ],
+   "aliases": [
+    "aksi"
+   ],
+   "option_aliases": {
+    "jalan": "walk",
+    "lambai": "wave",
+    "diam": "still"
+   }
+  },
+  "shirt_color": {
+   "default": "#d8693f",
+   "type": "color",
+   "aliases": [
+    "warna_baju"
+   ]
+  },
+  "pants_color": {
+   "default": "#2d4068",
+   "type": "color",
+   "aliases": [
+    "warna_celana"
+   ]
+  },
+  "skin_color": {
+   "default": "#f3b892",
+   "type": "color",
+   "aliases": [
+    "warna_kulit"
+   ]
+  },
+  "hair_color": {
+   "default": "#3b2620",
+   "type": "color",
+   "aliases": [
+    "warna_rambut"
+   ]
+  },
+  "bg": {
+   "default": "auto",
+   "type": "enum",
+   "options": [
+    "auto",
+    "color",
+    "transparent"
+   ],
+   "hint": "otomatis = latar bawaan gaya",
+   "aliases": [
+    "latar"
+   ],
+   "option_aliases": {
+    "otomatis": "auto",
+    "warna": "color",
+    "transparan": "transparent"
+   }
+  },
+  "bg_color": {
+   "default": "#f3ead8",
+   "type": "color",
+   "aliases": [
+    "warna_latar"
+   ]
+  },
+  "scale": {
+   "default": 0.66,
+   "type": "number",
+   "hint": "Tinggi tokoh relatif tinggi layar",
+   "aliases": [
+    "skala"
+   ]
+  },
+  "angle": {
+   "default": 45,
+   "type": "number",
+   "hint": "Sudut kamera (gaya 3d, derajat)",
+   "aliases": [
+    "sudut"
+   ]
+  },
+  "card": {
+   "default": "Langkah pertama selalu paling berat",
+   "type": "text",
+   "hint": "Teks kartu yang muncul; kosong = tanpa kartu",
+   "aliases": [
+    "kartu"
+   ]
+  },
+  "card_start": {
+   "default": 3.2,
+   "type": "number",
+   "hint": "Detik kartu muncul",
+   "aliases": [
+    "kartu_mulai"
+   ]
+  },
+  "card_color": {
+   "default": "#fbf6ea",
+   "type": "color",
+   "aliases": [
+    "warna_kartu"
+   ]
+  },
+  "text_color": {
+   "default": "#1c2b45",
+   "type": "color",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;700;800",
+   "type": "font"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [
+  "lib:mgp.js"
+ ],
+ "aliases": [
+  "tokoh/jalan",
+  "lottie-character-walk"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

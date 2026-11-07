@@ -1,0 +1,157 @@
+{
+ "id": "subtitles/stomp",
+ "name": "Stomp",
+ "name_id": "Hentak Kata",
+ "category": "subtitles",
+ "description": {
+  "id": "Satu kata memenuhi layar, menghentak masuk dari arah yang bergantian (kiri, kanan, atas, bawah, zoom) dengan blur gerak dan guncangan kecil saat mendarat.",
+  "en": "One word fills the screen, slamming in from alternating directions with motion blur and a small landing shake."
+ },
+ "tags": [
+  "subtitle",
+  "caption",
+  "kinetik",
+  "slam",
+  "satu-kata",
+  "subtitles",
+  "stomp"
+ ],
+ "props": {
+  "text": {
+   "default": "Jangan pernah berhenti *mencoba* sampai berhasil",
+   "type": "text",
+   "hint": "Teks subtitle; *kata* = kata kunci (bila didukung). Dipakai bila kata kosong",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "words": {
+   "default": [],
+   "type": "timed-words",
+   "hint": "[{teks, mulai, akhir}] dari transkrip; kosong = dihitung dari teks",
+   "aliases": [
+    "kata"
+   ]
+  },
+  "kps": {
+   "default": 2.4,
+   "type": "number",
+   "hint": "Kata per detik bila tanpa transkrip"
+  },
+  "max_words": {
+   "default": 1,
+   "type": "number",
+   "hint": "Maksimum kata per halaman subtitle",
+   "aliases": [
+    "maks_kata"
+   ]
+  },
+  "font": {
+   "default": "Anton:wght@400",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "size": {
+   "default": 230,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "bottom": {
+   "default": 44,
+   "type": "number",
+   "hint": "Jarak dari bawah (%)",
+   "aliases": [
+    "bawah"
+   ]
+  },
+  "uppercase": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "huruf_besar"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffd23f",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "keywords": {
+   "default": [],
+   "type": "list",
+   "hint": "Daftar kata kunci (tanpa tanda baca) selain penanda *kata*",
+   "aliases": [
+    "kunci"
+   ]
+  },
+  "direction": {
+   "default": "alternate",
+   "type": "enum",
+   "options": [
+    "alternate",
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "zoom"
+   ],
+   "aliases": [
+    "arah"
+   ],
+   "option_aliases": {
+    "bergantian": "alternate",
+    "kiri": "left",
+    "kanan": "right",
+    "atas": "top",
+    "bawah": "bottom"
+   }
+  },
+  "shake": {
+   "default": 16,
+   "type": "number",
+   "hint": "Kekuatan guncangan saat mendarat (px)",
+   "aliases": [
+    "guncang"
+   ]
+  },
+  "max_width": {
+   "default": 88,
+   "type": "number",
+   "hint": "Lebar maksimum kata (% layar); kata kepanjangan dikecilkan",
+   "aliases": [
+    "lebar_maks"
+   ]
+  }
+ },
+ "duration": 4,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "subtitle/hentak",
+  "caption-kinetic-slam"
+ ],
+ "example": {
+  "bg": "photo",
+  "aspect": "9:16",
+  "font": [
+   "Anton:wght@400"
+  ]
+ }
+}

@@ -1,0 +1,124 @@
+{
+ "id": "ui/note",
+ "name": "Note",
+ "name_id": "Catatan Diketik",
+ "category": "ui",
+ "description": {
+  "id": "Aplikasi catatan di ponsel: judul tebal lalu isi diketik huruf demi huruf dengan ritme jari manusia, caret menempel di setiap huruf dan lompat turun di tiap paragraf, halaman bergulir mengendap. Mode ungkap memotong ke kartu kertas bertulisan spidol.",
+  "en": "A notes-app confession typed character by character on a human keystroke rhythm, caret riding each letter, page scrolling on settle curves. Reveal mode cuts to a hand-lettered paper card."
+ },
+ "tags": [
+  "ui",
+  "ponsel",
+  "catatan",
+  "notes",
+  "mengetik",
+  "typing",
+  "caret",
+  "kartu",
+  "note"
+ ],
+ "props": {
+  "mode": {
+   "default": "reveal",
+   "type": "enum",
+   "options": [
+    "type",
+    "reveal"
+   ],
+   "hint": "ketik = adegan catatan saja; ungkap = ditutup kartu kertas",
+   "option_aliases": {
+    "ketik": "type",
+    "ungkap": "reveal"
+   }
+  },
+  "title": {
+   "default": "Untuk diriku tahun depan",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "text": {
+   "default": "Aku sempat ragu memulai. Tapi ternyata langkah kecil setiap pagi itu cukup.\nTerima kasih sudah tidak berhenti, walau pelan.\nTahun depan, jangan lupa bernapas dulu sebelum berlari.",
+   "type": "text",
+   "hint": "\n = paragraf baru",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "card_title": {
+   "default": "Jangan berhenti",
+   "type": "text",
+   "aliases": [
+    "judul_kartu"
+   ]
+  },
+  "card_sub": {
+   "default": "walau pelan",
+   "type": "text",
+   "aliases": [
+    "sub_kartu"
+   ]
+  },
+  "kps": {
+   "default": 16,
+   "type": "number",
+   "hint": "Karakter per detik (dipadatkan otomatis bila tidak muat)"
+  },
+  "accent_color": {
+   "default": "#e2a400",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "paper": {
+   "default": "#f4ecd8",
+   "type": "color",
+   "aliases": [
+    "kertas"
+   ]
+  },
+  "ink": {
+   "default": "#1f2a44",
+   "type": "color",
+   "aliases": [
+    "tinta"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;700;800",
+   "type": "font"
+  },
+  "font2": {
+   "default": "Permanent Marker:wght@400",
+   "type": "font",
+   "hint": "Font spidol kartu"
+  },
+  "seed": {
+   "default": 7,
+   "type": "number"
+  }
+ },
+ "duration": 9,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/catatan",
+  "notes-reveal",
+  "notes-typing"
+ ],
+ "example": {
+  "bg": "dark",
+  "aspect": "9:16",
+  "font": [
+   "Inter:wght@400;500;700;800",
+   "Permanent Marker:wght@400"
+  ]
+ }
+}

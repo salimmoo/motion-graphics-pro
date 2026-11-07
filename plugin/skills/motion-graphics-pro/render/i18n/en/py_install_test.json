@@ -1,0 +1,10 @@
+{
+ "mgp install smoke test": "mgp install smoke test",
+ "one sentence with the built-in Chatterbox voice": "one sentence with the built-in Chatterbox voice",
+ "text to speak (default: a short test sentence in --lang)": "text to speak (default: a short test sentence in --lang)",
+ "installed modules + torch version": "installed modules + torch version",
+ "the model did not load conds.pt (built-in voice); the chatterbox download is incomplete": "the model did not load conds.pt (built-in voice); the chatterbox download is incomplete",
+ "the {} model is not installed ({}); the test does not download silently: mgp install cutout": "the {} model is not installed ({}); the test does not download silently: mgp install cutout",
+ "cutout test: the subject was not separated (alpha inside {}, corner {})": "cutout test: the subject was not separated (alpha inside {}, corner {})",
+ "rembg U2-Net on a generated test picture": "rembg U2-Net on a generated test picture"
+}

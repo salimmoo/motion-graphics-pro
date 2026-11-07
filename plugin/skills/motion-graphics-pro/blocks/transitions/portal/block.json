@@ -1,0 +1,123 @@
+{
+ "id": "transitions/portal",
+ "name": "Portal",
+ "name_id": "Portal",
+ "category": "transitions",
+ "description": {
+  "id": "Lubang portal bercahaya terbuka di adegan lama dengan pegas, berdenyut sambil memercikkan butir cahaya, lalu kamera menembusnya: adegan lama membesar melewati kamera dan adegan baru di baliknya maju memenuhi layar. Bentuk lingkaran atau gapura lengkung.",
+  "en": "A glowing portal springs open in the old scene, pulses while spraying light motes, then the camera pushes through: the old scene rushes past while the scene behind comes forward to fill the frame. Circle or arch shape."
+ },
+ "tags": [
+  "transisi",
+  "portal",
+  "vfx",
+  "lubang",
+  "cahaya",
+  "partikel",
+  "push through",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru (terlihat di dalam portal)",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "shape": {
+   "default": "circle",
+   "type": "enum",
+   "options": [
+    "circle",
+    "curve"
+   ],
+   "hint": "Bentuk lubang",
+   "aliases": [
+    "bentuk"
+   ],
+   "option_aliases": {
+    "lingkaran": "circle",
+    "lengkung": "curve"
+   }
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Pusat portal (% lebar)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 52,
+   "type": "number",
+   "hint": "Pusat portal (% tinggi)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "size": {
+   "default": 0.17,
+   "type": "number",
+   "hint": "Jari-jari awal (bagian sisi pendek layar)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "color": {
+   "default": "#ffd98a",
+   "type": "color",
+   "hint": "Warna cincin",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "color_2": {
+   "default": "#ff7a45",
+   "type": "color",
+   "hint": "Warna pendar dan percik",
+   "aliases": [
+    "warna_2"
+   ]
+  },
+  "particles": {
+   "default": 140,
+   "type": "number",
+   "hint": "Jumlah percik cahaya",
+   "aliases": [
+    "partikel"
+   ]
+  },
+  "seed": {
+   "default": 9,
+   "type": "number",
+   "hint": "Seed percik"
+  }
+ },
+ "duration": 3,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/portal",
+  "vfx-portal"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.6,
+  "duration": 3.8
+ }
+}

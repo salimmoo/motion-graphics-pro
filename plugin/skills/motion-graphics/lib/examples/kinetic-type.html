@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP kineticType · presets</title>
+<style>
+html,body{margin:0;background:#0e1116}
+#stage{position:relative;width:1280px;height:720px;overflow:hidden;background:#0b0e14}
+#stage .lb{position:absolute;font:600 11px/1 system-ui,Segoe UI,sans-serif;letter-spacing:.06em;color:#f4ecd8;background:rgba(9,12,26,.7);padding:4px 7px;border-radius:3px;z-index:2}
+</style>
+<link rel="stylesheet" href="../fonts.css"><!-- font lokal (bundel Rekam), lihat lib/fonts.css -->
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../kinetic-type.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720"></div>
+<script>
+// Nine cells, one preset each (the last one is narration captions built from word timings).
+const C = MGP.core, KT = MGP.kineticType;
+const skyBg = (g, t, S) => { const gr = g.createLinearGradient(0, 0, 0, S.H); gr.addColorStop(0, "#2C67B0"); gr.addColorStop(.55, "#78ACDC"); gr.addColorStop(.78, "#D9E8F2"); gr.addColorStop(1, "#D9E8F2"); g.fillStyle = gr; g.fillRect(0, 0, S.W, S.H); };
+const paper = "#F3E8CF", ink = "#1C2B45";
+const VO = [["Kapal", .5, .9], ["berangkat", .95, 1.62], ["dari", 1.67, 1.88], ["pelabuhan", 1.93, 2.6], ["pagi", 2.66, 2.94], ["ini.", 2.98, 3.2],
+            ["Tiga", 4.0, 4.3], ["hari", 4.34, 4.64], ["kemudian,", 4.68, 5.32]];
+const CELLS = [
+  ["card", { bg: skyBg, googleFonts: ["Cormorant Garamond:wght@400;700", "Cinzel:wght@600"], serif: "'Cormorant Garamond', Georgia, serif", capsFont: "Cinzel, Georgia, serif",
+     size: 46, beats: [{ t: 0.2, preset: "card", kicker: "KISAH KECIL SEHARI-HARI", text: "Yang *dibagikan* justru tetap ada", x: .06, y: .14, align: "left", valign: "top", maxWidth: .84 }] }],
+  ["rise", { bg: paper, color: ink, keyColor: "#B23A32", marker: true, beats: [{ t: 0.3, text: "Setiap *kata* naik satu per satu", preset: "rise" }] }],
+  ["pop", { bg: "#E3B04B", color: "#1b1712", beats: [{ t: 0.3, text: "Tiga *juta* ton muatan", preset: "pop", wps: 3 }] }],
+  ["slide", { bg: "#1C2B45", color: "#FBF6EA", keyColor: "#F1C75B", beats: [{ t: 0.3, text: "Dari pelabuhan\nke *seluruh* nusantara", preset: "slide", from: "l", lineStagger: .18 }] }],
+  ["mask", { bg: "#B23A32", color: "#FBF6EA", keyItalic: false, beats: [{ t: 0.3, text: "Garis demi garis\nmuncul dari balik\n*tirai*", preset: "mask", lineStagger: .14, size: 46 }] }],
+  ["cascade", { bg: paper, color: ink, beats: [{ t: 0.3, text: "Huruf berjatuhan", preset: "cascade", stagger: .05, size: 60 }] }],
+  ["typewriter", { bg: "#141414", color: "#E8E2D0", font: "ui-monospace, Consolas, 'Courier New', monospace", weight: 500, keyColor: "#F1C75B", keyItalic: false, keyScale: 1,
+     beats: [{ t: 0.3, text: "catatan_kapal.txt: *berangkat* 06.00", preset: "typewriter", size: 34, cps: 14 }] }],
+  ["zoom", { bg: "#6B4483", color: "#F7D39A", beats: [{ t: 0.4, text: "Senja di *teluk*", preset: "zoom", size: 66 }] }],
+  ["karaoke", { bg: (g, t, S) => { const gr = g.createLinearGradient(0, 0, 0, S.H); gr.addColorStop(0, "#12204A"); gr.addColorStop(1, "#2C3D66"); g.fillStyle = gr; g.fillRect(0, 0, S.W, S.H); }, color: "#FBF6EA", dim: "rgba(251,246,234,.38)", highlight: "#E3B04B", size: 40, keyItalic: false,
+     beats: KT.captions(VO, { maxWords: 4, preset: "karaoke" }) }],
+];
+const stage = document.getElementById("stage"), CW = 420, CH = 232, D = 5;
+const cells = CELLS.map(([name, opts], i) => {
+  const box = document.createElement("div"), x = (i % 3) * (CW + 10), y = Math.floor(i / 3) * (CH + 12);
+  Object.assign(box.style, { position: "absolute", left: x + "px", top: y + "px", width: CW + "px", height: CH + "px" }); stage.appendChild(box);
+  const inst = KT.create(box, Object.assign({ width: CW, height: CH, ref: 640, hold: 2.6 }, opts));
+  const lb = document.createElement("div"); lb.className = "lb"; lb.textContent = name; Object.assign(lb.style, { left: x + 8 + "px", top: y + CH - 26 + "px" }); stage.appendChild(lb);
+  return inst;
+});
+const all = { duration: D, ready: Promise.all(cells.map((c) => c.ready)), seek(t) { cells.forEach((c) => c.seek(t)); return all; }, timeline() { return C.timeline(all); } };
+C.expose(all);
+</script>
+</body>
+</html>

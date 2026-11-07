@@ -1,0 +1,99 @@
+{
+ "id": "ui/slider-rail",
+ "name": "Slider Rail",
+ "name_id": "Rel Kartu Geser",
+ "category": "ui",
+ "description": {
+  "id": "Rel kartu horizontal dengan fisika sentuh. Mode rel: lingkaran sentuh menyeret rel dengan cepat, momentum membawanya, lalu menjepret rapi ke kartu berikutnya. Mode lempar: lima bidikan melesat lewat pada kurva yang cepat melambat, sedikit kebablasan, lalu bidikan pilihan menjepret tepat ke tengah dan diberi label.",
+  "en": "A horizontal card rail with touch physics. Rail mode: a contact circle leads a fast drag, momentum carries and the rail snaps to the next card. Throw mode: five shots whip past on a fast decaying curve, overshoot and snap the chosen hero exactly to centre with a label."
+ },
+ "tags": [
+  "ui",
+  "carousel",
+  "swipe",
+  "momentum",
+  "snap",
+  "rel",
+  "galeri",
+  "gestur",
+  "slider",
+  "rail"
+ ],
+ "props": {
+  "mode": {
+   "default": "rail",
+   "type": "enum",
+   "options": [
+    "rail",
+    "throw"
+   ],
+   "option_aliases": {
+    "rel": "rail",
+    "lempar": "throw"
+   }
+  },
+  "card": {
+   "default": [
+    "Pagi di pasar",
+    "Senja di dermaga",
+    "Kopi pertama",
+    "Hujan di kota",
+    "Jalan pulang"
+   ],
+   "type": "list",
+   "hint": "Judul kartu",
+   "aliases": [
+    "kartu"
+   ]
+  },
+  "select": {
+   "default": 3,
+   "type": "number",
+   "hint": "Indeks kartu pilihan (mode lempar)",
+   "aliases": [
+    "pilih"
+   ]
+  },
+  "select_label": {
+   "default": "Terpilih",
+   "type": "text",
+   "aliases": [
+    "label_pilih"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffcf4a",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg": {
+   "default": "#11131c",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;600;700;800",
+   "type": "font"
+  }
+ },
+ "duration": 4,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/geser-rel",
+  "swipe-rail",
+  "velocity-throw-snap"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

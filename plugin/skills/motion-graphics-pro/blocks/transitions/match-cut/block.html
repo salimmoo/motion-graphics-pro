@@ -1,0 +1,71 @@
+<!-- Block transitions/match-cut · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/match-cut" data-start="0" data-duration="2.4" data-track-index="20" class="blk blk-transitions-match-cut">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "mode": "shape", "style": "scale", "text_a": "Kemarin", "text_b": "Hari ini", "color_a": "#ffd27a", "color_b": "#7ee0d6", "text_color": "#ffffff", "font": "Inter:wght@800;900", "size": 170, "position_y": 50, "influence": 85}
+</script>
+</div>
+<style>
+.blk-transitions-match-cut{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-transitions-match-cut .blk-bulat{position:absolute;left:0;top:0;border-radius:50%}
+.blk-transitions-match-cut .blk-teks{position:absolute;left:0;right:0;top:50%;text-align:center;white-space:nowrap;line-height:1;font-weight:900;letter-spacing:-.02em}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, W = k.w, H = k.h, s = k.s, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to);
+  // kurva "easy ease" ala After Effects dengan pengaruh N% (bawaan 85%) = cubic-bezier(N, 0, 1-N, 1)
+  var inf = BLOCK.clamp((+P.influence || 85) / 100, 0.05, 0.98);
+  function bez(x) {
+    var u = x; // cari parameter u untuk x lewat Newton
+    for (var i = 0; i < 8; i++) { var bx = 3 * inf * u * (1 - u) * (1 - u) + 3 * (1 - inf) * u * u * (1 - u) + u * u * u - x;
+      var d = 3 * inf * (1 - u) * (1 - 3 * u) + 3 * (1 - inf) * u * (2 - 3 * u) + 3 * u * u; if (Math.abs(d) < 1e-6) break; u = BLOCK.clamp(u - bx / d, 0, 1); }
+    return 3 * u * u * (1 - u) + u * u * u;
+  }
+  var py = (P.position_y == null ? 50 : +P.position_y) + "%", t0 = D * 0.08, t1 = D * 0.84, tm = (t0 + t1) / 2, fam = BLOCK.family(P.font);
+  var pr = function (t) { return bez(BLOCK.progress(t, t0, t1)); };
+  var akhir = function (t) { return 1 - BLOCK.smooth(BLOCK.progress(t, t1 + D * 0.02, D)); };
+  if (P.mode === "split") {
+    // judul terbelah vertikal, panel adegan baru tumbuh dari celah dan merebut layar
+    var dua = [0, 1].map(function (i) {
+      var e = BLOCK.el("div", { class: "blk-teks", style: "top:" + py + ";font-family:" + fam + ";font-size:" + Math.round(P.size * s) + "px;color:" + P.text_color + ";transform:translateY(-50%);clip-path:inset(-20% " + (i ? "0 -20% 50%" : "50% -20% 0") + ")" }, k.root);
+      e.textContent = P.text_a; return e;
+    });
+    function belah(t) {
+      var p = pr(t), q = BLOCK.smooth(BLOCK.progress(t, t0 + D * 0.05, t1));
+      dua.forEach(function (e, i) { e.style.transform = "translate(" + ((i ? 1 : -1) * p * 62).toFixed(2) + "%,-50%)"; e.style.opacity = (1 - BLOCK.progress(p, 0.75, 1)).toFixed(3); });
+      if (Bk) Bk.style.clipPath = q >= 1 ? "none" : "inset(" + (8 * (1 - q)).toFixed(2) + "% " + (50 * (1 - q)).toFixed(2) + "% round " + (24 * s * (1 - q)).toFixed(1) + "px)";
+    }
+    BLOCK.onTime(tl, belah, D);
+    if (Bk) BLOCK.initial(tl, Bk, { autoAlpha: 1 });
+    if (A) BLOCK.initial(tl, A, { autoAlpha: 1 }).set(A, { autoAlpha: 0 }, t1);
+    return;
+  }
+  if (P.mode === "text") {
+    var el = BLOCK.el("div", { class: "blk-teks", style: "top:" + py + ";font-family:" + fam + ";font-size:" + Math.round(P.size * s) + "px;color:" + P.text_color }, k.root);
+    function teks(t) {
+      var p = pr(t), b = t >= tm, tf = "translateY(-50%)", a = akhir(t);
+      el.textContent = b ? P.text_b : P.text_a;
+      if (P.style === "tracking") { el.style.letterSpacing = (-0.02 + p * 0.5).toFixed(3) + "em"; tf += " scale(" + (1.08 - p * 0.16).toFixed(3) + ")"; }
+      else if (P.style === "slide") { tf = "translate(" + ((p - 0.5) * 70).toFixed(2) + "%,-50%) skewX(" + (-Math.sin(Math.PI * p) * 14).toFixed(2) + "deg)"; }
+      else tf += " scale(" + (0.55 + p * 0.9).toFixed(4) + ")";
+      el.style.transform = tf; el.style.opacity = a.toFixed(3);
+    }
+    BLOCK.onTime(tl, teks, D);
+  } else {
+    // bentuk: lingkaran melesat, potong keras satu frame di puncak kecepatan, lingkaran adegan baru meneruskan
+    var c = BLOCK.el("div", { class: "blk-bulat" }, k.root), R0 = 130 * s;
+    function bentuk(t) {
+      var p = pr(t), b = t >= tm, dx = BLOCK.lerp(0.28, 0.6, p) * W, dy = (0.58 - 0.1 * Math.sin(Math.PI * p)) * H;
+      var sk = BLOCK.lerp(1, 0.6, p) + 1.7 * Math.sin(Math.PI * p);
+      var v = (pr(t + 0.01) - pr(t - 0.01)) / 0.02, reg = 1 + Math.min(0.22, v * 0.07);
+      var sz = R0 * 2 * sk * akhir(t);
+      c.style.width = c.style.height = sz.toFixed(1) + "px";
+      c.style.transform = "translate(" + (dx - sz / 2).toFixed(1) + "px," + (dy - sz / 2).toFixed(1) + "px) scale(" + reg.toFixed(3) + "," + (1 / reg).toFixed(3) + ")";
+      c.style.background = "radial-gradient(circle at 35% 30%," + BLOCK.mix(b ? P.color_b : P.color_a, "#ffffff", 0.35) + "," + (b ? P.color_b : P.color_a) + " 60%," + BLOCK.mix(b ? P.color_b : P.color_a, "#000000", 0.25) + ")";
+      c.style.boxShadow = "0 " + (18 * s).toFixed(0) + "px " + (40 * s).toFixed(0) + "px rgba(0,0,0,.3)";
+    }
+    BLOCK.onTime(tl, bentuk, D);
+  }
+  if (A) BLOCK.initial(tl, A, { autoAlpha: 1 }).set(A, { autoAlpha: 0 }, tm);
+  if (Bk) BLOCK.initial(tl, Bk, { autoAlpha: 0 }).set(Bk, { autoAlpha: 1 }, tm);
+});
+</script>

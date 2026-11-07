@@ -1,0 +1,64 @@
+<!-- Block textures/halftone · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="textures/halftone" data-start="0" data-duration="8" data-track-index="5" class="blk blk-textures-halftone">
+<script type="application/json" data-block-props>
+{"mode": "field", "cell": 18, "shape": "round", "speed": 1, "noise_scale": 1, "color": "#ff6a3d", "color2": "#ffd36b", "bg": "#050507", "text": "CAHAYA", "font": "Inter:wght@900", "angle": 30, "mix": "normal", "seed": 4}
+</script>
+</div>
+<style>
+.blk-textures-halftone{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, w = k.w, h = k.h, s = k.s, R = k.root, mode = P.mode;
+  var g = Math.max(6, (+P.cell || 18) * s), C = Math.ceil(w / g) + 1, Rw = Math.ceil(h / g) + 1;
+  // kanvas tidak memicu unduhan font: muat wajah font dulu, baru rasterisasi sumber
+  var muat = document.fonts && document.fonts.load ? document.fonts.load("900 64px " + BLOCK.family(P.font)).catch(function () {}) : Promise.resolve();
+  return muat.then(function () {
+  var cv = BLOCK.canvas(R, w, h), c = cv.ctx, kec = +P.speed || 1, sk = (+P.noise_scale || 1) / s, sd = +P.seed || 4;
+  if (P.mix && P.mix !== "normal") cv.canvas.style.mixBlendMode = P.mix; else R.style.background = P.bg;
+  // noise nilai 2D berseed (lokal), cukup untuk medan plasma yang mengalir pelan
+  function hs(x, y) { var n = Math.sin(x * 127.1 + y * 311.7 + sd * 74.7) * 43758.5453; return n - Math.floor(n); }
+  function n2(x, y) {
+    var i = Math.floor(x), j = Math.floor(y), fx = x - i, fy = y - j, u = fx * fx * (3 - 2 * fx), v = fy * fy * (3 - 2 * fy);
+    return BLOCK.lerp(BLOCK.lerp(hs(i, j), hs(i + 1, j), u), BLOCK.lerp(hs(i, j + 1), hs(i + 1, j + 1), u), v);
+  }
+  // sumber teks dirasterisasi sekali saat pasang ke grid sel (tidak bisa membaca piksel DOM adegan)
+  var lum = null;
+  if (mode === "text") {
+    var oc = document.createElement("canvas"); oc.width = C; oc.height = Rw;
+    var ox = oc.getContext("2d"), fs = Rw * 0.42;
+    ox.fillStyle = "#000"; ox.fillRect(0, 0, C, Rw); ox.fillStyle = "#fff"; ox.textAlign = "center"; ox.textBaseline = "middle";
+    ox.font = "900 " + fs + "px " + BLOCK.family(P.font);
+    var mw = ox.measureText(P.text || "").width; if (mw > C * 0.9) { fs *= C * 0.9 / mw; ox.font = "900 " + fs + "px " + BLOCK.family(P.font); }
+    ox.fillText(P.text || "", C / 2, Rw / 2);
+    var d = ox.getImageData(0, 0, C, Rw).data; lum = new Float32Array(C * Rw);
+    for (var q = 0; q < lum.length; q++) lum[q] = d[q * 4] / 255;
+  }
+  var a = (+P.angle || 0) * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a), war = [P.color, P.color2];
+  var pal = []; for (var p = 0; p <= 16; p++) pal.push(BLOCK.mix(war[0], war[1], p / 16));
+  BLOCK.onTime(k.tl, function (t) {
+    c.clearRect(0, 0, w, h);
+    var tt = t * kec;
+    for (var j = 0; j < Rw; j++) for (var i = 0; i < C; i++) {
+      var x = i * g, y = j * g, v, hue;
+      if (mode === "text") {
+        var band = 0.5 + 0.5 * Math.sin((x * ca + y * sa) / w * 5 - tt * 1.6); // cahaya menyapu huruf
+        v = lum[j * C + i] * (0.35 + 0.65 * band) + 0.12 * n2(x * 0.01 * sk + tt * 0.3, y * 0.01 * sk) * band;
+        hue = band;
+      } else if (mode === "gradient") {
+        v = 0.5 + 0.5 * Math.sin((x * ca + y * sa) / Math.max(w, h) * Math.PI * 4 - tt * 1.2);
+        v *= 0.6 + 0.4 * n2(x * 0.004 * sk, y * 0.004 * sk + tt * 0.2); hue = v;
+      } else { // medan: plasma noise, sebagian besar gelap dengan pita cahaya lebar
+        var f = 0.6 * n2(x * 0.0035 * sk + tt * 0.12, y * 0.0035 * sk - tt * 0.07) + 0.4 * n2(x * 0.008 * sk - tt * 0.2, y * 0.008 * sk + tt * 0.15 + 9);
+        v = BLOCK.clamp((f - 0.42) / 0.38, 0, 1); hue = n2(x * 0.002 * sk + 5, y * 0.002 * sk - tt * 0.05);
+      }
+      if (v < 0.03) continue;
+      var r = g * 0.5 * Math.min(1, v) * 0.96;
+      c.fillStyle = pal[Math.round(BLOCK.clamp(hue, 0, 1) * 16)];
+      if (P.shape === "box") c.fillRect(x - r, y - r, r * 2, r * 2);
+      else { c.beginPath(); c.arc(x, y, r, 0, 6.2832); c.fill(); }
+    }
+  }, k.dur);
+  });
+}, { font: true });
+</script>

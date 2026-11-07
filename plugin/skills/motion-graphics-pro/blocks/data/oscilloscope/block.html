@@ -1,0 +1,75 @@
+<!-- Block data/oscilloscope · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="data/oscilloscope" data-start="0" data-duration="5" data-track-index="10" class="blk blk-data-oscilloscope">
+<script type="application/json" data-block-props>
+{"wave": "beat", "frequency": 2, "sweep": 1.6, "decay": 0.35, "color": "#5dff9b", "left_label": "CH1  1 V/div", "right_label": "200 ms/div", "font": "JetBrains Mono:wght@500", "scale": 0.74, "resolution": 1}
+</script>
+</div>
+<style>
+.blk-data-oscilloscope{position:absolute;inset:0;pointer-events:none}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, res = P.resolution || 1;
+  var cv = BLOCK.canvas(k.root, k.w * res, k.h * res), c = cv.ctx;
+  c.scale(res, res);
+  var bh = Math.min(k.h * P.scale, k.w * P.scale * 0.8), bw = bh * 1.25, bx = (k.w - bw) / 2, by = (k.h - bh) / 2;
+  var rgb = BLOCK.hexToRgb(P.color), col = function (a) { return "rgba(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + "," + a.toFixed(3) + ")"; };
+  var Ts = P.sweep, f = P.frequency / Ts, A = bh * 0.32, tau = P.decay, ekor = tau * 5, t0 = 0.4;
+  function gel(u) {
+    var ph = u * f;
+    if (P.wave === "box") return Math.tanh(6 * Math.sin(2 * Math.PI * ph));
+    if (P.wave === "sawtooth") return 2 * (ph - Math.floor(ph)) - 1;
+    if (P.wave === "beat") {
+      var q = ph - Math.floor(ph), g = function (m, w, a) { return a * Math.exp(-Math.pow((q - m) / w, 2)); };
+      return g(0.18, 0.035, 0.18) - g(0.36, 0.012, 0.25) + g(0.4, 0.014, 1.25) - g(0.44, 0.014, 0.45) + g(0.66, 0.06, 0.32);
+    }
+    return Math.sin(2 * Math.PI * ph) * (0.75 + 0.25 * Math.sin(2 * Math.PI * ph * 0.13));
+  }
+  function titik(u) { var q = u / Ts; return [bx + (q - Math.floor(q)) * bw, by + bh / 2 - gel(u) * A, q]; }
+  function layar(on) {
+    c.save();
+    c.fillStyle = "#05090a"; c.beginPath(); c.roundRect ? c.roundRect(bx - 18 * s, by - 18 * s, bw + 36 * s, bh + 36 * s, 34 * s) : c.rect(bx, by, bw, bh); c.fill();
+    var g = c.createRadialGradient(k.w / 2, k.h / 2, 0, k.w / 2, k.h / 2, bw * 0.7);
+    g.addColorStop(0, col(0.07 * on)); g.addColorStop(1, "rgba(0,0,0,0)");
+    c.fillStyle = g; c.fillRect(bx, by, bw, bh);
+    // graticule 10 x 8 dengan tik kecil di sumbu tengah
+    c.strokeStyle = col(0.16 * on); c.lineWidth = 1;
+    for (var i = 0; i <= 10; i++) { c.beginPath(); c.moveTo(bx + bw * i / 10, by); c.lineTo(bx + bw * i / 10, by + bh); c.stroke(); }
+    for (var j = 0; j <= 8; j++) { c.beginPath(); c.moveTo(bx, by + bh * j / 8); c.lineTo(bx + bw, by + bh * j / 8); c.stroke(); }
+    c.strokeStyle = col(0.3 * on);
+    for (var m = 0; m <= 50; m++) { var x = bx + bw * m / 50; c.beginPath(); c.moveTo(x, by + bh / 2 - 5 * s); c.lineTo(x, by + bh / 2 + 5 * s); c.stroke(); }
+    for (var n = 0; n <= 40; n++) { var y = by + bh * n / 40; c.beginPath(); c.moveTo(bx + bw / 2 - 5 * s, y); c.lineTo(bx + bw / 2 + 5 * s, y); c.stroke(); }
+    c.fillStyle = col(0.55 * on); c.font = "500 " + Math.round(22 * s) + "px " + BLOCK.family(P.font, "monospace");
+    c.fillText(P.left_label, bx + 14 * s, by + bh - 16 * s);
+    c.textAlign = "right"; c.fillText(P.right_label, bx + bw - 14 * s, by + bh - 16 * s);
+    c.restore();
+  }
+  function gambar(t) {
+    c.clearRect(0, 0, k.w, k.h);
+    var on = BLOCK.smooth(BLOCK.progress(t, 0, 0.4)) * (1 - BLOCK.smooth(BLOCK.progress(t, k.dur - 0.4, k.dur)));
+    layar(on);
+    if (t <= t0) return;
+    // jejak fosfor bentuk tertutup: kecerahan exp(-umur/tau), lebih terang di tempat berkas melambat
+    c.save(); c.beginPath(); c.rect(bx, by, bw, bh); c.clip();
+    c.globalCompositeOperation = "lighter"; c.lineCap = "round";
+    var N = 420, dA = ekor / N, prev = titik(t), vRef = bw / Ts;
+    for (var i = 1; i <= N; i++) {
+      var a = i * dA, u = t - a;
+      if (u < t0) break;
+      var p = titik(u);
+      if (Math.floor(p[2]) === Math.floor(prev[2])) {
+        var sp = Math.hypot(prev[0] - p[0], prev[1] - p[1]) / dA, lambat = BLOCK.clamp(vRef / Math.max(sp, 1), 0.35, 2.2);
+        var b = Math.exp(-a / tau) * lambat * on;
+        c.strokeStyle = col(Math.min(1, 0.16 * b)); c.lineWidth = 14 * s; c.beginPath(); c.moveTo(prev[0], prev[1]); c.lineTo(p[0], p[1]); c.stroke();
+        c.strokeStyle = col(Math.min(1, 0.85 * b)); c.lineWidth = 3 * s; c.beginPath(); c.moveTo(prev[0], prev[1]); c.lineTo(p[0], p[1]); c.stroke();
+      }
+      prev = p;
+    }
+    var h = titik(t), g = c.createRadialGradient(h[0], h[1], 0, h[0], h[1], 26 * s);
+    g.addColorStop(0, "rgba(255,255,255," + (0.95 * on).toFixed(3) + ")"); g.addColorStop(0.25, col(0.8 * on)); g.addColorStop(1, col(0));
+    c.fillStyle = g; c.beginPath(); c.arc(h[0], h[1], 26 * s, 0, 7); c.fill();
+    c.restore();
+  }
+  BLOCK.onTime(tl, gambar, k.dur);
+}, { font: true });
+</script>

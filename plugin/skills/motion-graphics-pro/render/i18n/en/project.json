@@ -1,0 +1,21 @@
+{
+  "project.json cannot be read: {}": "project.json cannot be read: {}",
+  "composition": "composition",
+  "script": "script",
+  "word timing": "word timing",
+  "letter timing": "letter timing",
+  "scene {}": "scene {}",
+  "asset": "asset",
+  "asset meta": "asset meta",
+  "{}: asset {} has no \"source\" (provenance is required for the T5 log)": "{}: asset {} has no \"source\" (provenance is required for the T5 log)",
+  "{}: block {} is an old id; new name: {}": "{}: block {} is an old id; new name: {}",
+  "block: {}": "block: {}",
+  "{} refers to files that do not exist: {}": "{} refers to files that do not exist: {}",
+  "{} fps {} != composition {}": "{} fps {} != composition {}",
+  "{} size {}x{} != composition {}x{}": "{} size {}x{} != composition {}x{}",
+  "{} duration {} s != composition {} s (update one of them)": "{} duration {} s != composition {} s (update one of them)",
+  "{} scene {} ends at {} s, past the composition duration": "{} scene {} ends at {} s, past the composition duration",
+  "{} scene {}: key pose {} s is outside the scene": "{} scene {}: key pose {} s is outside the scene",
+  "{}: voice source not chosen yet (decision point G2)": "{}: voice source not chosen yet (decision point G2)",
+  "{} ({}): {} scenes, {} VO, {} assets, every referenced file exists": "{} ({}): {} scenes, {} VO, {} assets, every referenced file exists"
+}

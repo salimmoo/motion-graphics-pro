@@ -1,0 +1,10 @@
+{
+  "not found": "tidak ada",
+  "unknown action: {}": "aksi tidak dikenal: {}",
+  "The file changed on disk since it was opened: {}": "Berkas berubah di disk sejak dibuka: {}",
+  "no such job": "tugas tidak ada",
+  "mgp studio: {}": "mgp studio: {}",
+  "composition: {}": "komposisi: {}",
+  "output: {}": "keluaran: {}",
+  "Ctrl+C to stop.": "Ctrl+C untuk berhenti."
+}

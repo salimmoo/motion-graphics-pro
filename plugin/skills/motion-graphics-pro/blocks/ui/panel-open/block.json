@@ -1,0 +1,121 @@
+{
+ "id": "ui/panel-open",
+ "name": "Panel Open",
+ "name_id": "Panel Terbuka",
+ "category": "ui",
+ "description": {
+  "id": "Kartu kecil membuka jadi panel detail. Mode morph: gaya elemen bersama, wadah berubah hanya lewat transform sementara gambar dan judul pindah ke posisi barunya tanpa gepeng. Mode panel: tinggi memanjang dan isi memudar masuk. Mode ubah-ukuran: kartu ringkas melebar menjadi panel detail.",
+  "en": "A small card opens into a detail panel. Morph mode is shared-element style: transform-only container with counter-scaled children. Panel mode expands height with a content fade; resize mode grows a compact card into a detail panel."
+ },
+ "tags": [
+  "ui",
+  "kartu",
+  "expand",
+  "modal",
+  "morph",
+  "accordion",
+  "shared-element",
+  "panel",
+  "open"
+ ],
+ "props": {
+  "mode": {
+   "default": "morph",
+   "type": "enum",
+   "options": [
+    "morph",
+    "panel",
+    "resize"
+   ],
+   "option_aliases": {
+    "ubah-ukuran": "resize"
+   }
+  },
+  "title": {
+   "default": "Kopi Gunung Halu",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "sub": {
+   "default": "Arabika · sangrai sedang",
+   "type": "text"
+  },
+  "rows": {
+   "default": [
+    "Asal: Bandung Selatan",
+    "Proses: natural, 21 hari",
+    "Catatan rasa: cokelat, jeruk, madu"
+   ],
+   "type": "list",
+   "aliases": [
+    "baris"
+   ]
+  },
+  "button": {
+   "default": "Tambah ke keranjang",
+   "type": "text",
+   "aliases": [
+    "tombol"
+   ]
+  },
+  "accent_color": {
+   "default": "#e0703a",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "surface": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "permukaan"
+   ]
+  },
+  "ink": {
+   "default": "#1c1f2a",
+   "type": "color",
+   "aliases": [
+    "tinta"
+   ]
+  },
+  "open": {
+   "default": 0.8,
+   "type": "number",
+   "hint": "Detik mulai membuka",
+   "aliases": [
+    "buka"
+   ]
+  },
+  "close": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Menutup lagi di akhir",
+   "aliases": [
+    "tutup"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700;800",
+   "type": "font"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/panel-buka",
+  "panel-reveal",
+  "card-resize",
+  "modal-morph"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

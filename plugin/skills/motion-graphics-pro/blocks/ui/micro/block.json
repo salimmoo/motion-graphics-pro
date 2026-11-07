@@ -1,0 +1,122 @@
+{
+ "id": "ui/micro",
+ "name": "Micro",
+ "name_id": "Transisi Mikro UI",
+ "category": "ui",
+ "description": {
+  "id": "Paket transisi mikro antarmuka: lencana notifikasi yang meletup, dropdown, modal, indikator tab yang meluncur, tooltip, dan centang berhasil. Mode menu (hamburger berubah jadi X, tombol plus membuka aksi), avatar (grup avatar terangkat mengikuti jarak kursor lalu memantul kembali), dan kerangka (skeleton berdenyut lalu silang-pudar ke isi).",
+  "en": "A pack of UI micro transitions: badge pop, dropdown, modal, sliding tab indicator, tooltip and success check. Plus menu morph (hamburger to X, plus-menu fan), avatar-group distance-falloff lift with bouncy return, and skeleton pulse that cross-fades into content."
+ },
+ "tags": [
+  "ui",
+  "micro-interaction",
+  "badge",
+  "dropdown",
+  "modal",
+  "tabs",
+  "tooltip",
+  "menu",
+  "avatar",
+  "skeleton",
+  "micro"
+ ],
+ "props": {
+  "mode": {
+   "default": "pack",
+   "type": "enum",
+   "options": [
+    "pack",
+    "menu",
+    "avatar",
+    "skeleton"
+   ],
+   "option_aliases": {
+    "paket": "pack",
+    "kerangka": "skeleton"
+   }
+  },
+  "name": {
+   "default": [
+    "Rani",
+    "Dimas",
+    "Ayu",
+    "Bima",
+    "Sari",
+    "Joko"
+   ],
+   "type": "list",
+   "hint": "Nama avatar (mode avatar)",
+   "aliases": [
+    "nama"
+   ]
+  },
+  "title": {
+   "default": "Rani Pratiwi",
+   "type": "text",
+   "hint": "Nama di kartu isi (mode kerangka)",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "text": {
+   "default": "Desainer produk. Suka kopi, peta, dan tipografi yang rapi.",
+   "type": "text",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "accent_color": {
+   "default": "#5b6cff",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "surface": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "permukaan"
+   ]
+  },
+  "cell_bg": {
+   "default": "#eef0f6",
+   "type": "color",
+   "aliases": [
+    "latar_sel"
+   ]
+  },
+  "ink": {
+   "default": "#1b2030",
+   "type": "color",
+   "aliases": [
+    "tinta"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700;800",
+   "type": "font"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/mikro",
+  "micro-transitions",
+  "menu-morph",
+  "avatar-group-hover",
+  "skeleton-reveal"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@400;500;600;700;800",
+   "JetBrains Mono:wght@400;500"
+  ]
+ }
+}

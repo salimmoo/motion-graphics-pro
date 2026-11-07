@@ -1,0 +1,12 @@
+# Default pronunciations of `mgp voice` (Motion Graphics Pro). Read automatically; the project pronunciations.txt (old lafal.txt) and --pronounce override it.
+# Format:  word = spoken spelling | ASR variants that count as right in `score`, comma separated
+#   - kiri: kata/frasa seperti tertulis di naskah (huruf besar/kecil bebas)
+#   - ejaan ucap: yang dikirim ke TTS (Chatterbox membaca bahasa Indonesia dengan kode Melayu "ms",
+#     jadi merek Inggris perlu dieja seperti bunyinya). Kosongkan bila hanya ingin menambah varian.
+#   - varian: ejaan lain yang ditulis ASR untuk kata yang SUDAH terdengar benar (cek dengar dulu!)
+# Diuji dengan klon suara (iklan 30 dtk, 06-11-2026):
+Claude = Klod
+Higgsfield = Higsfild | higgsfield, higsfield, higs field
+ElevenLabs = Elevenlebs | eleven labs, elevenlabs
+Motion Graphics = Mosyen Grafiks | motion graphics
+brief = brif | brief

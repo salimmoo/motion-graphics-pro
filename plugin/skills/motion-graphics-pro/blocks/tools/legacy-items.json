@@ -1,0 +1,4374 @@
+{
+ "source": "Nama item registry HyperFrames 0.9.5 (heygen-com/hyperframes, Apache-2.0), hanya nama dan jenis, untuk pemetaan ke blok sendiri.",
+ "items": [
+  {
+   "name": "decision-tree",
+   "kind": "example",
+   "tags": []
+  },
+  {
+   "name": "kinetic-type",
+   "kind": "example",
+   "tags": []
+  },
+  {
+   "name": "nyt-graph",
+   "kind": "example",
+   "tags": []
+  },
+  {
+   "name": "play-mode",
+   "kind": "example",
+   "tags": []
+  },
+  {
+   "name": "product-promo",
+   "kind": "example",
+   "tags": []
+  },
+  {
+   "name": "swiss-grid",
+   "kind": "example",
+   "tags": []
+  },
+  {
+   "name": "vignelli",
+   "kind": "example",
+   "tags": []
+  },
+  {
+   "name": "warm-grain",
+   "kind": "example",
+   "tags": []
+  },
+  {
+   "name": "ai-answer-rank",
+   "kind": "block",
+   "tags": [
+    "mock-ui",
+    "ai",
+    "chat",
+    "ranking"
+   ]
+  },
+  {
+   "name": "ai-chat-reveal",
+   "kind": "block",
+   "tags": [
+    "showcase",
+    "mock-ui",
+    "ai",
+    "chat"
+   ]
+  },
+  {
+   "name": "app-showcase",
+   "kind": "block",
+   "tags": [
+    "showcase",
+    "app",
+    "3d"
+   ]
+  },
+  {
+   "name": "apple-money-count",
+   "kind": "block",
+   "tags": [
+    "showcase",
+    "finance",
+    "kinetic",
+    "youtube"
+   ]
+  },
+  {
+   "name": "aurora",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "light"
+   ]
+  },
+  {
+   "name": "bar-chart-race",
+   "kind": "block",
+   "tags": [
+    "data",
+    "chart",
+    "statistics",
+    "ranking"
+   ]
+  },
+  {
+   "name": "beat-freeze-cut",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "music",
+    "beat-driven",
+    "freeze-frame"
+   ]
+  },
+  {
+   "name": "blob",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "abstract"
+   ]
+  },
+  {
+   "name": "blue-sweater-intro-video",
+   "kind": "block",
+   "tags": [
+    "showcase",
+    "ai",
+    "creator",
+    "sfx"
+   ]
+  },
+  {
+   "name": "camcorder-hud",
+   "kind": "block",
+   "tags": [
+    "camcorder",
+    "camera",
+    "recording",
+    "hud"
+   ]
+  },
+  {
+   "name": "camera-dolly-zoom",
+   "kind": "block",
+   "tags": [
+    "camera",
+    "depth",
+    "3d",
+    "cinematic"
+   ]
+  },
+  {
+   "name": "canopy-part-title",
+   "kind": "block",
+   "tags": [
+    "3d-motion",
+    "title-card",
+    "leaves",
+    "organic"
+   ]
+  },
+  {
+   "name": "carousel-circle-1",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "gallery",
+    "images",
+    "showcase"
+   ]
+  },
+  {
+   "name": "carousel-circle-2",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "gallery",
+    "images",
+    "showcase"
+   ]
+  },
+  {
+   "name": "carousel-circle-3",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "gallery",
+    "images",
+    "showcase"
+   ]
+  },
+  {
+   "name": "carousel-circle-4",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "gallery",
+    "images",
+    "showcase"
+   ]
+  },
+  {
+   "name": "carousel-circle-5",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "gallery",
+    "images",
+    "showcase"
+   ]
+  },
+  {
+   "name": "carousel-orbit-1",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "gallery",
+    "images",
+    "showcase"
+   ]
+  },
+  {
+   "name": "carousel-orbit-2",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "gallery",
+    "images",
+    "showcase"
+   ]
+  },
+  {
+   "name": "carousel-orbit-3",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "gallery",
+    "images",
+    "showcase"
+   ]
+  },
+  {
+   "name": "carousel-orbit-4",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "gallery",
+    "images",
+    "showcase"
+   ]
+  },
+  {
+   "name": "carousel-orbit-5",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "gallery",
+    "images",
+    "showcase"
+   ]
+  },
+  {
+   "name": "carousel-path-1",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "gallery",
+    "images",
+    "showcase"
+   ]
+  },
+  {
+   "name": "carousel-path-2",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "gallery",
+    "images",
+    "showcase"
+   ]
+  },
+  {
+   "name": "carousel-path-3",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "gallery",
+    "images",
+    "showcase"
+   ]
+  },
+  {
+   "name": "carousel-path-4",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "gallery",
+    "images",
+    "showcase"
+   ]
+  },
+  {
+   "name": "carousel-path-5",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "gallery",
+    "images",
+    "showcase"
+   ]
+  },
+  {
+   "name": "carousel-text-circle-1",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "title-card",
+    "kinetic-text",
+    "images"
+   ]
+  },
+  {
+   "name": "carousel-text-circle-2",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "title-card",
+    "kinetic-text",
+    "images"
+   ]
+  },
+  {
+   "name": "carousel-text-circle-3",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "title-card",
+    "kinetic-text",
+    "images"
+   ]
+  },
+  {
+   "name": "carousel-text-circle-4",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "title-card",
+    "kinetic-text",
+    "images"
+   ]
+  },
+  {
+   "name": "carousel-text-circle-5",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "title-card",
+    "kinetic-text",
+    "images"
+   ]
+  },
+  {
+   "name": "carousel-vision-1",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "gallery",
+    "images",
+    "showcase"
+   ]
+  },
+  {
+   "name": "carousel-vision-2",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "gallery",
+    "images",
+    "showcase"
+   ]
+  },
+  {
+   "name": "carousel-vision-3",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "gallery",
+    "images",
+    "showcase"
+   ]
+  },
+  {
+   "name": "carousel-vision-4",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "gallery",
+    "images",
+    "showcase"
+   ]
+  },
+  {
+   "name": "carousel-vision-5",
+   "kind": "block",
+   "tags": [
+    "carousel",
+    "gallery",
+    "images",
+    "showcase"
+   ]
+  },
+  {
+   "name": "chatgpt-exchange",
+   "kind": "block",
+   "tags": [
+    "showcase",
+    "mock-ui",
+    "ai",
+    "chat"
+   ]
+  },
+  {
+   "name": "chromatic-radial-split",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "shader"
+   ]
+  },
+  {
+   "name": "chrome-orb",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "object",
+    "chrome"
+   ]
+  },
+  {
+   "name": "cinemagraph",
+   "kind": "block",
+   "tags": [
+    "effect",
+    "cinemagraph",
+    "photo",
+    "loop"
+   ]
+  },
+  {
+   "name": "cinematic-zoom",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "shader"
+   ]
+  },
+  {
+   "name": "claude-exchange",
+   "kind": "block",
+   "tags": [
+    "showcase",
+    "mock-ui",
+    "ai",
+    "chat"
+   ]
+  },
+  {
+   "name": "code-3d-extrude",
+   "kind": "block",
+   "tags": [
+    "code",
+    "code-animation",
+    "3d",
+    "webgl"
+   ]
+  },
+  {
+   "name": "code-diff",
+   "kind": "block",
+   "tags": [
+    "code",
+    "code-animation",
+    "diff",
+    "developer"
+   ]
+  },
+  {
+   "name": "code-highlight",
+   "kind": "block",
+   "tags": [
+    "code",
+    "code-animation",
+    "highlight",
+    "developer"
+   ]
+  },
+  {
+   "name": "code-morph",
+   "kind": "block",
+   "tags": [
+    "code",
+    "code-animation",
+    "morph",
+    "refactor"
+   ]
+  },
+  {
+   "name": "code-particle-assemble",
+   "kind": "block",
+   "tags": [
+    "code",
+    "code-animation",
+    "particles",
+    "gpu"
+   ]
+  },
+  {
+   "name": "code-scroll",
+   "kind": "block",
+   "tags": [
+    "code",
+    "code-animation",
+    "scroll",
+    "developer"
+   ]
+  },
+  {
+   "name": "code-shader-dissolve",
+   "kind": "block",
+   "tags": [
+    "code",
+    "code-animation",
+    "shader",
+    "webgl"
+   ]
+  },
+  {
+   "name": "code-slice-hero",
+   "kind": "block",
+   "tags": [
+    "3d-motion",
+    "transition",
+    "typography",
+    "tiles"
+   ]
+  },
+  {
+   "name": "code-snippet-apple-terminal-pro",
+   "kind": "block",
+   "tags": [
+    "code",
+    "developer",
+    "showcase",
+    "terminal"
+   ]
+  },
+  {
+   "name": "code-snippet-dark-2026",
+   "kind": "block",
+   "tags": [
+    "code",
+    "developer",
+    "showcase",
+    "vscode"
+   ]
+  },
+  {
+   "name": "code-snippet-dark-modern",
+   "kind": "block",
+   "tags": [
+    "code",
+    "developer",
+    "showcase",
+    "vscode"
+   ]
+  },
+  {
+   "name": "code-typing",
+   "kind": "block",
+   "tags": [
+    "code",
+    "code-animation",
+    "typing",
+    "developer"
+   ]
+  },
+  {
+   "name": "color-wheel",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "gradient"
+   ]
+  },
+  {
+   "name": "cosmic-orb",
+   "kind": "block",
+   "tags": [
+    "webgl",
+    "shader",
+    "background",
+    "showcase"
+   ]
+  },
+  {
+   "name": "cross-warp-morph",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "shader"
+   ]
+  },
+  {
+   "name": "cuboid-carousel",
+   "kind": "block",
+   "tags": [
+    "3d-motion",
+    "carousel",
+    "cards",
+    "travelling-wave"
+   ]
+  },
+  {
+   "name": "data-chart",
+   "kind": "block",
+   "tags": [
+    "data",
+    "chart",
+    "statistics"
+   ]
+  },
+  {
+   "name": "domain-warp-dissolve",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "shader"
+   ]
+  },
+  {
+   "name": "editorial-flash-overlay",
+   "kind": "block",
+   "tags": [
+    "flash",
+    "editorial",
+    "social",
+    "light"
+   ]
+  },
+  {
+   "name": "exploded-stack",
+   "kind": "block",
+   "tags": [
+    "3d-object",
+    "three-js",
+    "webgl",
+    "isometric"
+   ]
+  },
+  {
+   "name": "extruded-logo",
+   "kind": "block",
+   "tags": [
+    "3d-object",
+    "three-js",
+    "webgl",
+    "logo"
+   ]
+  },
+  {
+   "name": "falling-lines",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "texture"
+   ]
+  },
+  {
+   "name": "flash-through-white",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "shader"
+   ]
+  },
+  {
+   "name": "flowchart",
+   "kind": "block",
+   "tags": [
+    "diagram",
+    "flowchart",
+    "interactive"
+   ]
+  },
+  {
+   "name": "flowchart-vertical",
+   "kind": "block",
+   "tags": [
+    "diagram",
+    "flowchart",
+    "interactive",
+    "portrait"
+   ]
+  },
+  {
+   "name": "flowing-gradient",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "gradient"
+   ]
+  },
+  {
+   "name": "fractal-noise",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "noise"
+   ]
+  },
+  {
+   "name": "freeze-frame-dressing",
+   "kind": "block",
+   "tags": [
+    "freeze-frame",
+    "cutout",
+    "scrapbook",
+    "paper"
+   ]
+  },
+  {
+   "name": "frost",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "orb",
+    "ice"
+   ]
+  },
+  {
+   "name": "frost-sequence-camera-orbit",
+   "kind": "block",
+   "tags": [
+    "3d-motion",
+    "ice",
+    "frost",
+    "camera-orbit"
+   ]
+  },
+  {
+   "name": "gabor-noise",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "texture"
+   ]
+  },
+  {
+   "name": "gallery-tunnel",
+   "kind": "block",
+   "tags": [
+    "webgl",
+    "3d",
+    "background",
+    "showcase"
+   ]
+  },
+  {
+   "name": "glass-hero",
+   "kind": "block",
+   "tags": [
+    "3d-object",
+    "three-js",
+    "webgl",
+    "glass"
+   ]
+  },
+  {
+   "name": "glass-shard-title",
+   "kind": "block",
+   "tags": [
+    "3d-motion",
+    "title-card",
+    "glass",
+    "voronoi"
+   ]
+  },
+  {
+   "name": "glitch",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "shader"
+   ]
+  },
+  {
+   "name": "godrays",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "light"
+   ]
+  },
+  {
+   "name": "goo",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "liquid",
+    "3d"
+   ]
+  },
+  {
+   "name": "gooey-split",
+   "kind": "block",
+   "tags": [
+    "effect",
+    "gooey",
+    "metaball",
+    "motion-blur"
+   ]
+  },
+  {
+   "name": "gravitational-lens",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "shader"
+   ]
+  },
+  {
+   "name": "halftone-field",
+   "kind": "block",
+   "tags": [
+    "webgl",
+    "shader",
+    "background",
+    "texture"
+   ]
+  },
+  {
+   "name": "heatmap",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "object",
+    "heat"
+   ]
+  },
+  {
+   "name": "heygen-avatar-promo-card",
+   "kind": "block",
+   "tags": [
+    "showcase",
+    "avatar",
+    "promotion",
+    "vertical"
+   ]
+  },
+  {
+   "name": "hologram",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "object",
+    "hologram"
+   ]
+  },
+  {
+   "name": "holographic",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "holographic",
+    "iridescent"
+   ]
+  },
+  {
+   "name": "hw-frame",
+   "kind": "block",
+   "tags": [
+    "handwritten",
+    "frame",
+    "media"
+   ]
+  },
+  {
+   "name": "hw-path-text",
+   "kind": "block",
+   "tags": [
+    "handwritten",
+    "typography",
+    "path",
+    "overlay"
+   ]
+  },
+  {
+   "name": "hw-pipeline",
+   "kind": "block",
+   "tags": [
+    "handwritten",
+    "diagram",
+    "data-viz",
+    "overlay"
+   ]
+  },
+  {
+   "name": "hw-scribble-transition",
+   "kind": "block",
+   "tags": [
+    "handwritten",
+    "transition",
+    "wipe"
+   ]
+  },
+  {
+   "name": "hw-text-cloud",
+   "kind": "block",
+   "tags": [
+    "handwritten",
+    "speech-bubble",
+    "overlay"
+   ]
+  },
+  {
+   "name": "hw-title",
+   "kind": "block",
+   "tags": [
+    "handwritten",
+    "typography",
+    "title-card",
+    "overlay"
+   ]
+  },
+  {
+   "name": "hw-write-title",
+   "kind": "block",
+   "tags": [
+    "handwritten",
+    "typography",
+    "title-card",
+    "write-on"
+   ]
+  },
+  {
+   "name": "instagram-follow",
+   "kind": "block",
+   "tags": [
+    "social",
+    "overlay",
+    "instagram"
+   ]
+  },
+  {
+   "name": "ios26-liquid-glass",
+   "kind": "block",
+   "tags": [
+    "liquid-glass-html-in-canvas",
+    "webgpu",
+    "3d",
+    "iphone"
+   ]
+  },
+  {
+   "name": "lens-flare",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "light"
+   ]
+  },
+  {
+   "name": "light-edge",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "object",
+    "light"
+   ]
+  },
+  {
+   "name": "light-leak",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "shader"
+   ]
+  },
+  {
+   "name": "liquid-glass-notification",
+   "kind": "block",
+   "tags": [
+    "html-in-canvas",
+    "liquid-glass-html-in-canvas",
+    "webgpu"
+   ]
+  },
+  {
+   "name": "liquid-glass-widgets",
+   "kind": "block",
+   "tags": [
+    "html-in-canvas",
+    "liquid-glass-html-in-canvas",
+    "webgpu"
+   ]
+  },
+  {
+   "name": "liquid-metal",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "object",
+    "metal"
+   ]
+  },
+  {
+   "name": "logo-outro",
+   "kind": "block",
+   "tags": [
+    "branding",
+    "outro",
+    "logo"
+   ]
+  },
+  {
+   "name": "lottie-character-walk",
+   "kind": "block",
+   "tags": [
+    "character",
+    "character-animation",
+    "mascot",
+    "walk-cycle"
+   ]
+  },
+  {
+   "name": "lower-third-bild",
+   "kind": "block",
+   "tags": [
+    "broadcast",
+    "lower-third",
+    "news",
+    "overlay"
+   ]
+  },
+  {
+   "name": "lt-accent-underline",
+   "kind": "block",
+   "tags": [
+    "lower-third",
+    "overlay",
+    "podcast",
+    "interview"
+   ]
+  },
+  {
+   "name": "lt-bold-block",
+   "kind": "block",
+   "tags": [
+    "lower-third",
+    "overlay",
+    "podcast",
+    "interview"
+   ]
+  },
+  {
+   "name": "lt-clean-bar",
+   "kind": "block",
+   "tags": [
+    "lower-third",
+    "overlay",
+    "podcast",
+    "interview"
+   ]
+  },
+  {
+   "name": "lt-color-block",
+   "kind": "block",
+   "tags": [
+    "lower-third",
+    "overlay",
+    "podcast",
+    "interview"
+   ]
+  },
+  {
+   "name": "lt-dark-card",
+   "kind": "block",
+   "tags": [
+    "lower-third",
+    "overlay",
+    "podcast",
+    "interview"
+   ]
+  },
+  {
+   "name": "lt-kicker-name",
+   "kind": "block",
+   "tags": [
+    "lower-third",
+    "overlay",
+    "podcast",
+    "interview"
+   ]
+  },
+  {
+   "name": "lt-mask-reveal",
+   "kind": "block",
+   "tags": [
+    "lower-third",
+    "overlay",
+    "podcast",
+    "interview"
+   ]
+  },
+  {
+   "name": "lt-neon-border",
+   "kind": "block",
+   "tags": [
+    "lower-third",
+    "glow",
+    "loop",
+    "video-primitive"
+   ]
+  },
+  {
+   "name": "lt-side-rule",
+   "kind": "block",
+   "tags": [
+    "lower-third",
+    "overlay",
+    "podcast",
+    "interview"
+   ]
+  },
+  {
+   "name": "lt-soft-pill",
+   "kind": "block",
+   "tags": [
+    "lower-third",
+    "overlay",
+    "podcast",
+    "interview"
+   ]
+  },
+  {
+   "name": "lt-stack-bars",
+   "kind": "block",
+   "tags": [
+    "lower-third",
+    "overlay",
+    "podcast",
+    "interview"
+   ]
+  },
+  {
+   "name": "macos-notification",
+   "kind": "block",
+   "tags": [
+    "social",
+    "overlay",
+    "notification"
+   ]
+  },
+  {
+   "name": "macos-tahoe-liquid-glass",
+   "kind": "block",
+   "tags": [
+    "html-in-canvas",
+    "3d",
+    "macos",
+    "tahoe"
+   ]
+  },
+  {
+   "name": "marble",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "marble"
+   ]
+  },
+  {
+   "name": "mesh-gradient",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "gradient"
+   ]
+  },
+  {
+   "name": "message-thread-reveal",
+   "kind": "block",
+   "tags": [
+    "showcase",
+    "mock-ui",
+    "chat",
+    "vertical"
+   ]
+  },
+  {
+   "name": "mk-background",
+   "kind": "block",
+   "tags": [
+    "background",
+    "gradient",
+    "minimal",
+    "professional"
+   ]
+  },
+  {
+   "name": "mk-callout-highlight",
+   "kind": "block",
+   "tags": [
+    "typography",
+    "karaoke",
+    "captions",
+    "minimal"
+   ]
+  },
+  {
+   "name": "mk-clone-wall-transition",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "typography",
+    "wipe"
+   ]
+  },
+  {
+   "name": "mk-line-graph",
+   "kind": "block",
+   "tags": [
+    "data-viz",
+    "chart",
+    "graph",
+    "minimal"
+   ]
+  },
+  {
+   "name": "mk-placeholder-grid",
+   "kind": "block",
+   "tags": [
+    "placeholder",
+    "media",
+    "grid",
+    "minimal"
+   ]
+  },
+  {
+   "name": "mk-progress-stat",
+   "kind": "block",
+   "tags": [
+    "data-viz",
+    "stat",
+    "minimal"
+   ]
+  },
+  {
+   "name": "mk-specs-list",
+   "kind": "block",
+   "tags": [
+    "data-viz",
+    "list",
+    "minimal",
+    "professional"
+   ]
+  },
+  {
+   "name": "nebula",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "object",
+    "space"
+   ]
+  },
+  {
+   "name": "news-ticker",
+   "kind": "block",
+   "tags": [
+    "lower-third",
+    "overlay",
+    "news",
+    "ticker"
+   ]
+  },
+  {
+   "name": "north-korea-locked-down",
+   "kind": "block",
+   "tags": [
+    "showcase",
+    "map",
+    "annotation",
+    "youtube"
+   ]
+  },
+  {
+   "name": "notes-reveal",
+   "kind": "block",
+   "tags": [
+    "showcase",
+    "mock-ui",
+    "notes",
+    "typing"
+   ]
+  },
+  {
+   "name": "notification-cascade",
+   "kind": "block",
+   "tags": [
+    "showcase",
+    "mock-ui",
+    "notification",
+    "vertical"
+   ]
+  },
+  {
+   "name": "nyc-paris-flight",
+   "kind": "block",
+   "tags": [
+    "showcase",
+    "travel",
+    "map",
+    "youtube"
+   ]
+  },
+  {
+   "name": "obsidian",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "object",
+    "glass"
+   ]
+  },
+  {
+   "name": "orbit-card",
+   "kind": "block",
+   "tags": [
+    "3d-motion",
+    "cards",
+    "feature-reveal",
+    "dots"
+   ]
+  },
+  {
+   "name": "organic-light-leak-overlay",
+   "kind": "block",
+   "tags": [
+    "light-leak",
+    "film",
+    "memory",
+    "transition"
+   ]
+  },
+  {
+   "name": "oscilloscope-trace",
+   "kind": "block",
+   "tags": [
+    "instrument",
+    "data",
+    "showcase",
+    "retro"
+   ]
+  },
+  {
+   "name": "plasma",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "texture"
+   ]
+  },
+  {
+   "name": "plastic",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "object",
+    "plastic"
+   ]
+  },
+  {
+   "name": "prism",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "light"
+   ]
+  },
+  {
+   "name": "product-turntable",
+   "kind": "block",
+   "tags": [
+    "3d-object",
+    "three-js",
+    "webgl",
+    "product"
+   ]
+  },
+  {
+   "name": "rack-focus",
+   "kind": "block",
+   "tags": [
+    "webgl",
+    "shader",
+    "camera",
+    "depth"
+   ]
+  },
+  {
+   "name": "reddit-post",
+   "kind": "block",
+   "tags": [
+    "social",
+    "overlay",
+    "reddit"
+   ]
+  },
+  {
+   "name": "ridged-burn",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "shader"
+   ]
+  },
+  {
+   "name": "ripple-waves",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "shader"
+   ]
+  },
+  {
+   "name": "ripples",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "texture"
+   ]
+  },
+  {
+   "name": "sdf-iris",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "shader"
+   ]
+  },
+  {
+   "name": "share-sheet-carousel",
+   "kind": "block",
+   "tags": [
+    "showcase",
+    "mock-ui",
+    "share-sheet",
+    "vertical"
+   ]
+  },
+  {
+   "name": "sine-wave",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "wave"
+   ]
+  },
+  {
+   "name": "slack-notification-ad",
+   "kind": "block",
+   "tags": [
+    "showcase",
+    "mock-ui",
+    "notification",
+    "vertical"
+   ]
+  },
+  {
+   "name": "snow",
+   "kind": "block",
+   "tags": [
+    "snow",
+    "snowfall",
+    "winter",
+    "weather"
+   ]
+  },
+  {
+   "name": "spain-map",
+   "kind": "block",
+   "tags": [
+    "data",
+    "map",
+    "geography",
+    "spain"
+   ]
+  },
+  {
+   "name": "spiral",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "pattern"
+   ]
+  },
+  {
+   "name": "spiral-galaxy",
+   "kind": "block",
+   "tags": [
+    "hero",
+    "space",
+    "particles",
+    "webgl"
+   ]
+  },
+  {
+   "name": "split-flap-board",
+   "kind": "block",
+   "tags": [
+    "text",
+    "kinetic",
+    "mechanical",
+    "split-flap"
+   ]
+  },
+  {
+   "name": "spotify-card",
+   "kind": "block",
+   "tags": [
+    "social",
+    "overlay",
+    "spotify"
+   ]
+  },
+  {
+   "name": "starfield",
+   "kind": "block",
+   "tags": [
+    "starfield",
+    "night-sky",
+    "stars",
+    "twinkle"
+   ]
+  },
+  {
+   "name": "strands",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "light"
+   ]
+  },
+  {
+   "name": "stripes",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "pattern"
+   ]
+  },
+  {
+   "name": "sun-burst",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "light"
+   ]
+  },
+  {
+   "name": "swirl",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "gradient"
+   ]
+  },
+  {
+   "name": "swirl-vortex",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "shader"
+   ]
+  },
+  {
+   "name": "thermal-distortion",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "shader"
+   ]
+  },
+  {
+   "name": "thin-film",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "object",
+    "iridescent"
+   ]
+  },
+  {
+   "name": "thread-message-stack",
+   "kind": "block",
+   "tags": [
+    "social",
+    "conversation",
+    "messages"
+   ]
+  },
+  {
+   "name": "tiktok-follow",
+   "kind": "block",
+   "tags": [
+    "social",
+    "overlay",
+    "tiktok"
+   ]
+  },
+  {
+   "name": "transitions-3d",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "showcase"
+   ]
+  },
+  {
+   "name": "transitions-blur",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "showcase"
+   ]
+  },
+  {
+   "name": "transitions-cover",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "showcase"
+   ]
+  },
+  {
+   "name": "transitions-destruction",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "showcase"
+   ]
+  },
+  {
+   "name": "transitions-dissolve",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "showcase",
+    "crossfade"
+   ]
+  },
+  {
+   "name": "transitions-distortion",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "showcase"
+   ]
+  },
+  {
+   "name": "transitions-grid",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "showcase"
+   ]
+  },
+  {
+   "name": "transitions-light",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "showcase"
+   ]
+  },
+  {
+   "name": "transitions-mechanical",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "showcase"
+   ]
+  },
+  {
+   "name": "transitions-other",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "showcase"
+   ]
+  },
+  {
+   "name": "transitions-push",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "showcase"
+   ]
+  },
+  {
+   "name": "transitions-radial",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "showcase"
+   ]
+  },
+  {
+   "name": "transitions-scale",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "showcase"
+   ]
+  },
+  {
+   "name": "ui-3d-reveal",
+   "kind": "block",
+   "tags": [
+    "showcase",
+    "3d",
+    "reveal"
+   ]
+  },
+  {
+   "name": "us-map",
+   "kind": "block",
+   "tags": [
+    "data",
+    "map",
+    "geography",
+    "usa"
+   ]
+  },
+  {
+   "name": "us-map-bubble",
+   "kind": "block",
+   "tags": [
+    "data",
+    "map",
+    "geography",
+    "usa"
+   ]
+  },
+  {
+   "name": "us-map-flow",
+   "kind": "block",
+   "tags": [
+    "data",
+    "map",
+    "geography",
+    "usa"
+   ]
+  },
+  {
+   "name": "us-map-hex",
+   "kind": "block",
+   "tags": [
+    "data",
+    "map",
+    "geography",
+    "usa"
+   ]
+  },
+  {
+   "name": "vfx-anamorphic-flare",
+   "kind": "block",
+   "tags": [
+    "vfx",
+    "background",
+    "showcase",
+    "optical"
+   ]
+  },
+  {
+   "name": "vfx-iphone-device",
+   "kind": "block",
+   "tags": [
+    "html-in-canvas",
+    "3d",
+    "device",
+    "iphone"
+   ]
+  },
+  {
+   "name": "vfx-liquid-background",
+   "kind": "block",
+   "tags": [
+    "html-in-canvas",
+    "liquid",
+    "webgl",
+    "displacement"
+   ]
+  },
+  {
+   "name": "vfx-liquid-glass",
+   "kind": "block",
+   "tags": [
+    "html-in-canvas",
+    "webgl"
+   ]
+  },
+  {
+   "name": "vfx-magnetic",
+   "kind": "block",
+   "tags": [
+    "html-in-canvas",
+    "webgl"
+   ]
+  },
+  {
+   "name": "vfx-portal",
+   "kind": "block",
+   "tags": [
+    "html-in-canvas",
+    "webgl"
+   ]
+  },
+  {
+   "name": "vfx-shatter",
+   "kind": "block",
+   "tags": [
+    "html-in-canvas",
+    "webgl"
+   ]
+  },
+  {
+   "name": "vfx-text-cursor",
+   "kind": "block",
+   "tags": [
+    "html-in-canvas",
+    "text",
+    "shader",
+    "cursor"
+   ]
+  },
+  {
+   "name": "voronoi",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "pattern"
+   ]
+  },
+  {
+   "name": "vpn-youtube-spot",
+   "kind": "block",
+   "tags": [
+    "app",
+    "showcase",
+    "youtube",
+    "sfx"
+   ]
+  },
+  {
+   "name": "water",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "orb",
+    "water"
+   ]
+  },
+  {
+   "name": "waveform",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "audio",
+    "music"
+   ]
+  },
+  {
+   "name": "week-in-merges",
+   "kind": "block",
+   "tags": [
+    "data",
+    "chart",
+    "ranking",
+    "leaderboard"
+   ]
+  },
+  {
+   "name": "weight-wave",
+   "kind": "block",
+   "tags": [
+    "typography",
+    "kinetic-type",
+    "title",
+    "variable-font"
+   ]
+  },
+  {
+   "name": "whip-pan",
+   "kind": "block",
+   "tags": [
+    "transition",
+    "shader"
+   ]
+  },
+  {
+   "name": "wireframe-portal-title",
+   "kind": "block",
+   "tags": [
+    "3d-motion",
+    "title-card",
+    "wireframe",
+    "portal"
+   ]
+  },
+  {
+   "name": "world-map",
+   "kind": "block",
+   "tags": [
+    "data",
+    "map",
+    "geography",
+    "world"
+   ]
+  },
+  {
+   "name": "worley-noise",
+   "kind": "block",
+   "tags": [
+    "webgpu",
+    "webgpu-shader",
+    "background",
+    "texture"
+   ]
+  },
+  {
+   "name": "x-post",
+   "kind": "block",
+   "tags": [
+    "social",
+    "overlay",
+    "twitter"
+   ]
+  },
+  {
+   "name": "yt-comment-card",
+   "kind": "block",
+   "tags": [
+    "social",
+    "comments",
+    "creator",
+    "overlay"
+   ]
+  },
+  {
+   "name": "yt-lcd-background",
+   "kind": "block",
+   "tags": [
+    "background",
+    "texture",
+    "creator"
+   ]
+  },
+  {
+   "name": "yt-logo-intro",
+   "kind": "block",
+   "tags": [
+    "logo",
+    "intro",
+    "creator"
+   ]
+  },
+  {
+   "name": "yt-lower-third",
+   "kind": "block",
+   "tags": [
+    "social",
+    "overlay",
+    "youtube"
+   ]
+  },
+  {
+   "name": "yt-prism-title",
+   "kind": "block",
+   "tags": [
+    "typography",
+    "title-card",
+    "creator"
+   ]
+  },
+  {
+   "name": "yt-vertical-fill",
+   "kind": "block",
+   "tags": [
+    "placeholder",
+    "vertical",
+    "media"
+   ]
+  },
+  {
+   "name": "agent-cursor",
+   "kind": "component",
+   "tags": [
+    "cursor",
+    "motion-primitive",
+    "agent",
+    "ai"
+   ]
+  },
+  {
+   "name": "animated-bar-chart",
+   "kind": "component",
+   "tags": [
+    "data"
+   ]
+  },
+  {
+   "name": "arc-motion-path",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "motionpath",
+    "gsap-plugin",
+    "hyperframes-native"
+   ]
+  },
+  {
+   "name": "ascii-render-pass",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "experiment",
+    "texture",
+    "ascii"
+   ]
+  },
+  {
+   "name": "ascii-trail-reveal",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "intro",
+    "reveal",
+    "ascii"
+   ]
+  },
+  {
+   "name": "aurora-drift",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "background",
+    "aurora",
+    "gradient"
+   ]
+  },
+  {
+   "name": "avatar-cloud",
+   "kind": "component",
+   "tags": [
+    "effects",
+    "avatars",
+    "community",
+    "network"
+   ]
+  },
+  {
+   "name": "avatar-group-hover",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "transition-primitive",
+    "transitions-dev-port",
+    "avatar"
+   ]
+  },
+  {
+   "name": "badge-pop",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "transition-primitive",
+    "transitions-dev-port",
+    "badge"
+   ]
+  },
+  {
+   "name": "beat-accent",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "effects",
+    "burst",
+    "sting"
+   ]
+  },
+  {
+   "name": "beat-pulse-background",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "background",
+    "beat",
+    "pulse"
+   ]
+  },
+  {
+   "name": "beat-timeline",
+   "kind": "component",
+   "tags": [
+    "orchestration",
+    "transitions",
+    "sequencing",
+    "bridge"
+   ]
+  },
+  {
+   "name": "before-after-wipe",
+   "kind": "component",
+   "tags": [
+    "prop",
+    "ui-props",
+    "compare",
+    "comparison"
+   ]
+  },
+  {
+   "name": "blur-in",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "blur-in",
+    "text-effect"
+   ]
+  },
+  {
+   "name": "blur-out-up",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "typography"
+   ]
+  },
+  {
+   "name": "bottom-up-letters",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "text",
+    "letters",
+    "reveal"
+   ]
+  },
+  {
+   "name": "browser-device-stage",
+   "kind": "component",
+   "tags": [
+    "stage",
+    "product-demo",
+    "device",
+    "browser"
+   ]
+  },
+  {
+   "name": "camera-rig-depth-stack",
+   "kind": "component",
+   "tags": [
+    "advanced-motion",
+    "hyperframes-native"
+   ]
+  },
+  {
+   "name": "camera-scan-gate",
+   "kind": "component",
+   "tags": [
+    "prop",
+    "ui-props",
+    "camera",
+    "qr"
+   ]
+  },
+  {
+   "name": "camera-shake",
+   "kind": "component",
+   "tags": [
+    "camera",
+    "shake",
+    "handheld",
+    "effect"
+   ]
+  },
+  {
+   "name": "caption-blend-difference",
+   "kind": "component",
+   "tags": [
+    "text",
+    "text-effect",
+    "effect",
+    "blend-mode"
+   ]
+  },
+  {
+   "name": "caption-camera-follow",
+   "kind": "component",
+   "tags": [
+    "captions",
+    "caption-style",
+    "camera",
+    "typography"
+   ]
+  },
+  {
+   "name": "caption-clip-wipe",
+   "kind": "component",
+   "tags": [
+    "captions",
+    "caption-style",
+    "wipe",
+    "clip-path"
+   ]
+  },
+  {
+   "name": "caption-editorial-emphasis",
+   "kind": "component",
+   "tags": [
+    "captions",
+    "caption-style",
+    "editorial",
+    "typography"
+   ]
+  },
+  {
+   "name": "caption-emoji-pop",
+   "kind": "component",
+   "tags": [
+    "captions",
+    "caption-style",
+    "emoji",
+    "social"
+   ]
+  },
+  {
+   "name": "caption-glitch-rgb",
+   "kind": "component",
+   "tags": [
+    "captions",
+    "caption-style",
+    "glitch",
+    "cyber"
+   ]
+  },
+  {
+   "name": "caption-gradient-fill",
+   "kind": "component",
+   "tags": [
+    "captions",
+    "caption-style",
+    "gradient",
+    "colorful"
+   ]
+  },
+  {
+   "name": "caption-highlight",
+   "kind": "component",
+   "tags": [
+    "captions",
+    "caption-style",
+    "highlight",
+    "social"
+   ]
+  },
+  {
+   "name": "caption-kinetic-slam",
+   "kind": "component",
+   "tags": [
+    "captions",
+    "caption-style",
+    "kinetic",
+    "typography"
+   ]
+  },
+  {
+   "name": "caption-matrix-decode",
+   "kind": "component",
+   "tags": [
+    "captions",
+    "caption-style",
+    "matrix",
+    "scramble"
+   ]
+  },
+  {
+   "name": "caption-neon-accent",
+   "kind": "component",
+   "tags": [
+    "captions",
+    "caption-style",
+    "neon",
+    "glow"
+   ]
+  },
+  {
+   "name": "caption-neon-glow",
+   "kind": "component",
+   "tags": [
+    "captions",
+    "caption-style",
+    "neon",
+    "glow"
+   ]
+  },
+  {
+   "name": "caption-parallax-layers",
+   "kind": "component",
+   "tags": [
+    "captions",
+    "caption-style",
+    "parallax",
+    "3d"
+   ]
+  },
+  {
+   "name": "caption-particle-burst",
+   "kind": "component",
+   "tags": [
+    "captions",
+    "caption-style",
+    "particles",
+    "burst"
+   ]
+  },
+  {
+   "name": "caption-pill-karaoke",
+   "kind": "component",
+   "tags": [
+    "captions",
+    "caption-style",
+    "karaoke",
+    "pill"
+   ]
+  },
+  {
+   "name": "caption-texture",
+   "kind": "component",
+   "tags": [
+    "captions",
+    "caption-style",
+    "texture",
+    "mask"
+   ]
+  },
+  {
+   "name": "caption-weight-shift",
+   "kind": "component",
+   "tags": [
+    "captions",
+    "caption-style",
+    "minimal",
+    "typography"
+   ]
+  },
+  {
+   "name": "card-resize",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "transition-primitive",
+    "transitions-dev-port",
+    "card"
+   ]
+  },
+  {
+   "name": "caret-swap",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "text-effects",
+    "typography",
+    "swap"
+   ]
+  },
+  {
+   "name": "char-slam-explode",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "typography",
+    "text-treatment",
+    "scatter"
+   ]
+  },
+  {
+   "name": "chart-story",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "proof",
+    "stats",
+    "chart"
+   ]
+  },
+  {
+   "name": "chat-message",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "chat",
+    "mock-ui",
+    "message"
+   ]
+  },
+  {
+   "name": "chat-thread",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "chat",
+    "mock-ui",
+    "conversation"
+   ]
+  },
+  {
+   "name": "chromatic-aberration-wipe",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "transition-primitive"
+   ]
+  },
+  {
+   "name": "code-terminal-run",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "product-demo",
+    "terminal",
+    "typing"
+   ]
+  },
+  {
+   "name": "colorama-wipe",
+   "kind": "component",
+   "tags": [
+    "text",
+    "reveal",
+    "wipe",
+    "colorama"
+   ]
+  },
+  {
+   "name": "comparison-split",
+   "kind": "component",
+   "tags": [
+    "prop",
+    "ui-props",
+    "compare",
+    "holdable"
+   ]
+  },
+  {
+   "name": "confetti",
+   "kind": "component",
+   "tags": [
+    "effect"
+   ]
+  },
+  {
+   "name": "conic-progress-ring",
+   "kind": "component",
+   "tags": [
+    "data",
+    "progress",
+    "ring",
+    "conic-gradient"
+   ]
+  },
+  {
+   "name": "constellation-hub",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "feature-tour",
+    "hub",
+    "nodes"
+   ]
+  },
+  {
+   "name": "count-up",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "proof",
+    "stats",
+    "counter"
+   ]
+  },
+  {
+   "name": "cta-close",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "ui-props",
+    "cta",
+    "end-card"
+   ]
+  },
+  {
+   "name": "cta-lockup",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "ui-props",
+    "cta",
+    "end-card"
+   ]
+  },
+  {
+   "name": "cursor-annotate",
+   "kind": "component",
+   "tags": [
+    "cursor",
+    "motion-primitive",
+    "pen",
+    "annotation"
+   ]
+  },
+  {
+   "name": "cursor-context-menu",
+   "kind": "component",
+   "tags": [
+    "cursor",
+    "motion-primitive",
+    "menu",
+    "right-click"
+   ]
+  },
+  {
+   "name": "cursor-drag-drop",
+   "kind": "component",
+   "tags": [
+    "cursor",
+    "motion-primitive",
+    "drag",
+    "drop"
+   ]
+  },
+  {
+   "name": "cursor-glyph-trail",
+   "kind": "component",
+   "tags": [
+    "cursor",
+    "motion-primitive",
+    "demonstrate",
+    "trail"
+   ]
+  },
+  {
+   "name": "cursor-marquee-select",
+   "kind": "component",
+   "tags": [
+    "cursor",
+    "motion-primitive",
+    "select",
+    "marquee"
+   ]
+  },
+  {
+   "name": "cursor-text-select",
+   "kind": "component",
+   "tags": [
+    "cursor",
+    "motion-primitive",
+    "text",
+    "selection"
+   ]
+  },
+  {
+   "name": "cursor-zoom-follow",
+   "kind": "component",
+   "tags": [
+    "cursor",
+    "camera",
+    "zoom",
+    "screen-recording"
+   ]
+  },
+  {
+   "name": "curtain-reveal",
+   "kind": "component",
+   "tags": [
+    "curtain",
+    "stage reveal",
+    "transition",
+    "motion-primitive"
+   ]
+  },
+  {
+   "name": "cut-the-curve",
+   "kind": "component",
+   "tags": [
+    "transition",
+    "directional-cut",
+    "velocity-match",
+    "whip"
+   ]
+  },
+  {
+   "name": "dart-cursor",
+   "kind": "component",
+   "tags": [
+    "cursor",
+    "motion-primitive",
+    "pointer",
+    "click"
+   ]
+  },
+  {
+   "name": "decline-chart",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "data",
+    "chart",
+    "decline"
+   ]
+  },
+  {
+   "name": "device-frame-stage",
+   "kind": "component",
+   "tags": [
+    "prop",
+    "device",
+    "mobile",
+    "tablet"
+   ]
+  },
+  {
+   "name": "directional-wipe",
+   "kind": "component",
+   "tags": [
+    "transition-primitive"
+   ]
+  },
+  {
+   "name": "drift-hold",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "camera",
+    "ambient",
+    "drift"
+   ]
+  },
+  {
+   "name": "dynamic-grid",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "motion-primitive",
+    "background",
+    "grid"
+   ]
+  },
+  {
+   "name": "echo-smear",
+   "kind": "component",
+   "tags": [
+    "effect",
+    "smear",
+    "echo",
+    "motion-blur"
+   ]
+  },
+  {
+   "name": "echo-trail",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "demonstrate",
+    "trail",
+    "onion-skin"
+   ]
+  },
+  {
+   "name": "extended-keyframe",
+   "kind": "component",
+   "tags": [
+    "motion",
+    "ease",
+    "arrival",
+    "kinetic-type"
+   ]
+  },
+  {
+   "name": "facet-morph",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "intro",
+    "morph",
+    "low-poly"
+   ]
+  },
+  {
+   "name": "fade-through",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "transition",
+    "fade",
+    "crossfade"
+   ]
+  },
+  {
+   "name": "filmed-screen",
+   "kind": "component",
+   "tags": [
+    "filmed",
+    "screen",
+    "monitor",
+    "led"
+   ]
+  },
+  {
+   "name": "focus-blur-resolve",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "typography"
+   ]
+  },
+  {
+   "name": "focus-rack",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "camera",
+    "focus",
+    "focus-rack"
+   ]
+  },
+  {
+   "name": "focus-swap",
+   "kind": "component",
+   "tags": [
+    "effect",
+    "ui-props",
+    "focus",
+    "blur"
+   ]
+  },
+  {
+   "name": "gesture-tap",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "gesture",
+    "tap",
+    "interaction"
+   ]
+  },
+  {
+   "name": "gloss-sweep",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "celebration",
+    "gloss",
+    "card"
+   ]
+  },
+  {
+   "name": "grade-split-reveal",
+   "kind": "component",
+   "tags": [
+    "color-grading",
+    "media",
+    "compare",
+    "reveal"
+   ]
+  },
+  {
+   "name": "grain-field",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "background",
+    "grain",
+    "dots"
+   ]
+  },
+  {
+   "name": "grain-overlay",
+   "kind": "component",
+   "tags": [
+    "texture",
+    "grain",
+    "overlay",
+    "film"
+   ]
+  },
+  {
+   "name": "grid-card-assemble",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "layout",
+    "grid",
+    "list"
+   ]
+  },
+  {
+   "name": "grid-pixelate-wipe",
+   "kind": "component",
+   "tags": [
+    "transition",
+    "wipe",
+    "grid",
+    "pixelate"
+   ]
+  },
+  {
+   "name": "halftone-dissolve",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "transition",
+    "texture",
+    "halftone"
+   ]
+  },
+  {
+   "name": "headline-slam",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "typography",
+    "headline",
+    "slam"
+   ]
+  },
+  {
+   "name": "hw-arrow",
+   "kind": "component",
+   "tags": [
+    "handwritten",
+    "annotation",
+    "arrow",
+    "overlay"
+   ]
+  },
+  {
+   "name": "hw-boil",
+   "kind": "component",
+   "tags": [
+    "handwritten",
+    "effect",
+    "annotation"
+   ]
+  },
+  {
+   "name": "hw-box-label",
+   "kind": "component",
+   "tags": [
+    "handwritten",
+    "annotation",
+    "overlay"
+   ]
+  },
+  {
+   "name": "hw-callout-circle",
+   "kind": "component",
+   "tags": [
+    "handwritten",
+    "annotation",
+    "callout",
+    "overlay"
+   ]
+  },
+  {
+   "name": "hw-underline",
+   "kind": "component",
+   "tags": [
+    "handwritten",
+    "annotation",
+    "text-treatment"
+   ]
+  },
+  {
+   "name": "icon-morph-beat",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "product-demo",
+    "icon",
+    "morph"
+   ]
+  },
+  {
+   "name": "icon-swap",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "transition-primitive",
+    "transitions-dev-port",
+    "icon"
+   ]
+  },
+  {
+   "name": "ink-bleed-reveal",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "texture",
+    "reveal",
+    "gooey"
+   ]
+  },
+  {
+   "name": "inline-highlight",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "text",
+    "highlight",
+    "caption"
+   ]
+  },
+  {
+   "name": "input-feedback",
+   "kind": "component",
+   "tags": [
+    "transition-primitive",
+    "transitions-dev-port",
+    "input",
+    "feedback"
+   ]
+  },
+  {
+   "name": "iris-reveal",
+   "kind": "component",
+   "tags": [
+    "transition",
+    "iris",
+    "circle-reveal",
+    "clip-path"
+   ]
+  },
+  {
+   "name": "keyframe-scrub-stack",
+   "kind": "component",
+   "tags": [
+    "advanced-motion",
+    "anime-inspired",
+    "hyperframes-native"
+   ]
+  },
+  {
+   "name": "kinetic-center-build",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "text-effects",
+    "kinetic-type",
+    "reveal"
+   ]
+  },
+  {
+   "name": "kinetic-type-swap",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "text-effects",
+    "kinetic-type",
+    "word-swap"
+   ]
+  },
+  {
+   "name": "light-sweep-pass",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "overlay",
+    "light",
+    "sweep"
+   ]
+  },
+  {
+   "name": "line-by-line-slide",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "typography"
+   ]
+  },
+  {
+   "name": "line-swap",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "text-effects",
+    "swap",
+    "beat"
+   ]
+  },
+  {
+   "name": "locked-nucleus-orbit",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "intro",
+    "reveal",
+    "orbit"
+   ]
+  },
+  {
+   "name": "logo-brand-close",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "typography",
+    "brand",
+    "logo"
+   ]
+  },
+  {
+   "name": "logo-sting",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "brand",
+    "logo",
+    "sting"
+   ]
+  },
+  {
+   "name": "logo-wall",
+   "kind": "component",
+   "tags": [
+    "data",
+    "logos",
+    "social-proof",
+    "stagger"
+   ]
+  },
+  {
+   "name": "magnetic-cursor",
+   "kind": "component",
+   "tags": [
+    "cursor",
+    "motion-primitive",
+    "pointer",
+    "hover"
+   ]
+  },
+  {
+   "name": "marker-checklist-card",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "handwritten",
+    "checklist",
+    "paper"
+   ]
+  },
+  {
+   "name": "marker-highlight",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "typography",
+    "emphasis",
+    "marker"
+   ]
+  },
+  {
+   "name": "match-cut",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "transition",
+    "match-cut",
+    "hard-cut"
+   ]
+  },
+  {
+   "name": "matrix-decode",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "typography"
+   ]
+  },
+  {
+   "name": "menu-morph",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "transition-primitive",
+    "transitions-dev-port",
+    "menu"
+   ]
+  },
+  {
+   "name": "mesh-gradient-bg",
+   "kind": "component",
+   "tags": [
+    "effect"
+   ]
+  },
+  {
+   "name": "micro-transitions",
+   "kind": "component",
+   "tags": [
+    "transition-primitive",
+    "motion-primitive",
+    "transitions-dev-port",
+    "ui"
+   ]
+  },
+  {
+   "name": "mk-emphasis-type",
+   "kind": "component",
+   "tags": [
+    "typography",
+    "text-treatment",
+    "minimal"
+   ]
+  },
+  {
+   "name": "mk-usage-arc",
+   "kind": "component",
+   "tags": [
+    "data-viz",
+    "gauge",
+    "minimal"
+   ]
+  },
+  {
+   "name": "modal-morph",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "structure",
+    "flip",
+    "shared-element"
+   ]
+  },
+  {
+   "name": "morph-swap",
+   "kind": "component",
+   "tags": [
+    "transition",
+    "morph",
+    "swap",
+    "condense"
+   ]
+  },
+  {
+   "name": "morph-text",
+   "kind": "component",
+   "tags": [
+    "text",
+    "text-effect",
+    "typography",
+    "morph"
+   ]
+  },
+  {
+   "name": "motion-blur",
+   "kind": "component",
+   "tags": [
+    "effect",
+    "motion-blur",
+    "shutter",
+    "after-effects"
+   ]
+  },
+  {
+   "name": "multi-device-splay",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "device",
+    "phone",
+    "tablet"
+   ]
+  },
+  {
+   "name": "multiplayer-cursors",
+   "kind": "component",
+   "tags": [
+    "cursor",
+    "pointer",
+    "multiplayer",
+    "collaboration"
+   ]
+  },
+  {
+   "name": "native-notification-pop",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "product-demo",
+    "overlay",
+    "notification"
+   ]
+  },
+  {
+   "name": "notes-typing",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "notes",
+    "typing",
+    "mock-ui"
+   ]
+  },
+  {
+   "name": "notification-pileup",
+   "kind": "component",
+   "tags": [
+    "notification",
+    "mobile",
+    "ui-props",
+    "overload"
+   ]
+  },
+  {
+   "name": "notification-stack",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "product-demo",
+    "notification",
+    "stack"
+   ]
+  },
+  {
+   "name": "number-pop-in",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "transition-primitive",
+    "transitions-dev-port",
+    "number"
+   ]
+  },
+  {
+   "name": "number-wheel",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "motion-primitive",
+    "number",
+    "counter"
+   ]
+  },
+  {
+   "name": "offset-path-traveler",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "product-demo",
+    "path",
+    "traveler"
+   ]
+  },
+  {
+   "name": "onboarding-stepper-flow",
+   "kind": "component",
+   "tags": [
+    "ui-flow",
+    "onboarding",
+    "stepper"
+   ]
+  },
+  {
+   "name": "ordered-dither-pass",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "experiment",
+    "texture",
+    "dither"
+   ]
+  },
+  {
+   "name": "outline-draw",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "effects",
+    "outline",
+    "border"
+   ]
+  },
+  {
+   "name": "oversized-cursor",
+   "kind": "component",
+   "tags": [
+    "cursor",
+    "motion-primitive",
+    "actor",
+    "pointer"
+   ]
+  },
+  {
+   "name": "overwhelm-surround",
+   "kind": "component",
+   "tags": [
+    "effects",
+    "agitate",
+    "overwhelm",
+    "pressure"
+   ]
+  },
+  {
+   "name": "page-slide",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "transition-primitive",
+    "transitions-dev-port",
+    "page"
+   ]
+  },
+  {
+   "name": "pan-stations",
+   "kind": "component",
+   "tags": [
+    "camera",
+    "pan",
+    "stations",
+    "features"
+   ]
+  },
+  {
+   "name": "panel-reveal",
+   "kind": "component",
+   "tags": [
+    "transition-primitive",
+    "transitions-dev-port",
+    "panel",
+    "reveal"
+   ]
+  },
+  {
+   "name": "paper-collage-reveal",
+   "kind": "component",
+   "tags": [
+    "collage",
+    "scrapbook",
+    "torn paper",
+    "reveal"
+   ]
+  },
+  {
+   "name": "parallax-device-dive",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "camera",
+    "device",
+    "phone"
+   ]
+  },
+  {
+   "name": "parallax-unzoom",
+   "kind": "component",
+   "tags": [
+    "transition",
+    "reveal",
+    "unzoom",
+    "parallax"
+   ]
+  },
+  {
+   "name": "parallax-zoom",
+   "kind": "component",
+   "tags": [
+    "transition",
+    "zoom",
+    "parallax",
+    "grid"
+   ]
+  },
+  {
+   "name": "particle-image-reveal",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "intros-reveals",
+    "particles",
+    "reveal"
+   ]
+  },
+  {
+   "name": "particle-text-dissolve",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "text-effects",
+    "particles",
+    "canvas"
+   ]
+  },
+  {
+   "name": "pendulum-swing",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "physics",
+    "swing",
+    "settle"
+   ]
+  },
+  {
+   "name": "per-word-crossfade",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "typography"
+   ]
+  },
+  {
+   "name": "per-word-rise",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "text-effects",
+    "typography",
+    "stagger"
+   ]
+  },
+  {
+   "name": "perspective-marquee",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "typography"
+   ]
+  },
+  {
+   "name": "physical-exit",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "exit",
+    "momentum",
+    "toss"
+   ]
+  },
+  {
+   "name": "press-ripple",
+   "kind": "component",
+   "tags": [
+    "cursor",
+    "motion-primitive",
+    "product-demo",
+    "press"
+   ]
+  },
+  {
+   "name": "pull-back-reveal",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "camera",
+    "pull-back",
+    "reveal"
+   ]
+  },
+  {
+   "name": "pull-to-refresh",
+   "kind": "component",
+   "tags": [
+    "pointer",
+    "pointers",
+    "mobile",
+    "gesture"
+   ]
+  },
+  {
+   "name": "push-in",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "camera",
+    "push-in",
+    "focus"
+   ]
+  },
+  {
+   "name": "radial-surround",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "problem-setup",
+    "radial",
+    "ring"
+   ]
+  },
+  {
+   "name": "rgb-glitch-text",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "typography"
+   ]
+  },
+  {
+   "name": "rubber-band-bumper",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "transition",
+    "rubber-band",
+    "resistance"
+   ]
+  },
+  {
+   "name": "scan-band",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "typography",
+    "scan",
+    "chromatic"
+   ]
+  },
+  {
+   "name": "scramble-reveal",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "text-effects",
+    "scramble",
+    "reveal"
+   ]
+  },
+  {
+   "name": "screen-flow-carousel",
+   "kind": "component",
+   "tags": [
+    "product-demo",
+    "feature-tour",
+    "carousel",
+    "rail"
+   ]
+  },
+  {
+   "name": "scroll-camera-story",
+   "kind": "component",
+   "tags": [
+    "camera",
+    "scroll",
+    "parallax",
+    "story"
+   ]
+  },
+  {
+   "name": "scroll-feed",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "effects",
+    "scroll",
+    "feed"
+   ]
+  },
+  {
+   "name": "segmentation-flood",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "product-demo",
+    "ai",
+    "hud"
+   ]
+  },
+  {
+   "name": "separator",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "separator",
+    "layout"
+   ]
+  },
+  {
+   "name": "settings-toggle-flow",
+   "kind": "component",
+   "tags": [
+    "ui-flow",
+    "settings",
+    "toggle"
+   ]
+  },
+  {
+   "name": "shared-axis-y",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "typography"
+   ]
+  },
+  {
+   "name": "shared-axis-z",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "typography"
+   ]
+  },
+  {
+   "name": "sheet-spring-up",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "sheet",
+    "spring",
+    "mock-ui"
+   ]
+  },
+  {
+   "name": "shimmer-sweep",
+   "kind": "component",
+   "tags": [
+    "text",
+    "shimmer",
+    "highlight",
+    "effect"
+   ]
+  },
+  {
+   "name": "shutter-slam",
+   "kind": "component",
+   "tags": [
+    "effect",
+    "motion-blur",
+    "shutter",
+    "after-effects"
+   ]
+  },
+  {
+   "name": "signup-flow",
+   "kind": "component",
+   "tags": [
+    "ui-flow",
+    "signup",
+    "form"
+   ]
+  },
+  {
+   "name": "skeleton-reveal",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "transition-primitive",
+    "transitions-dev-port",
+    "skeleton"
+   ]
+  },
+  {
+   "name": "slit-scan-reveal",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "time",
+    "slit-scan",
+    "canvas"
+   ]
+  },
+  {
+   "name": "slot-machine-roll",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "motion-primitive",
+    "typography"
+   ]
+  },
+  {
+   "name": "social-proof-card",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "social-proof",
+    "end-card",
+    "cta"
+   ]
+  },
+  {
+   "name": "soft-blob-touch",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "product-demo",
+    "material",
+    "blob"
+   ]
+  },
+  {
+   "name": "soft-blur-in",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "text",
+    "reveal",
+    "blur"
+   ]
+  },
+  {
+   "name": "split-tilt-cards",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "layout",
+    "compare",
+    "holdable"
+   ]
+  },
+  {
+   "name": "spotlight-card",
+   "kind": "component",
+   "tags": [
+    "effect"
+   ]
+  },
+  {
+   "name": "spring-pop",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "effects",
+    "spring",
+    "overshoot"
+   ]
+  },
+  {
+   "name": "spring-stack-shuffle",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "product-demo",
+    "physics",
+    "stack"
+   ]
+  },
+  {
+   "name": "stagger-cascade",
+   "kind": "component",
+   "tags": [
+    "effects",
+    "grid",
+    "stagger",
+    "entrance"
+   ]
+  },
+  {
+   "name": "stagger-lattice",
+   "kind": "component",
+   "tags": [
+    "advanced-motion",
+    "anime-inspired",
+    "hyperframes-native"
+   ]
+  },
+  {
+   "name": "staggered-fade-up",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "motion-primitive",
+    "typography"
+   ]
+  },
+  {
+   "name": "star-rating-fill",
+   "kind": "component",
+   "tags": [
+    "data",
+    "rating",
+    "stars",
+    "fractional"
+   ]
+  },
+  {
+   "name": "state-chip-rail",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "product-demo",
+    "state-machine",
+    "status"
+   ]
+  },
+  {
+   "name": "sticky-mock-swap",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "product-demo",
+    "sticky",
+    "mock"
+   ]
+  },
+  {
+   "name": "stitched-text-draw",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "experiment",
+    "type",
+    "craft"
+   ]
+  },
+  {
+   "name": "stop-motion-cadence",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "time-law",
+    "stop-motion",
+    "stepped"
+   ]
+  },
+  {
+   "name": "store-badge-lockup",
+   "kind": "component",
+   "tags": [
+    "prop",
+    "ui-props",
+    "mobile",
+    "store-badges"
+   ]
+  },
+  {
+   "name": "streaming-text",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "text-effect",
+    "ai",
+    "chat"
+   ]
+  },
+  {
+   "name": "strikethrough-replace",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "typography"
+   ]
+  },
+  {
+   "name": "success-check",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "transition-primitive",
+    "transitions-dev-port",
+    "success"
+   ]
+  },
+  {
+   "name": "svg-line-draw-loader",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "advanced-motion",
+    "anime-inspired",
+    "hyperframes-native"
+   ]
+  },
+  {
+   "name": "svg-mask-reveal",
+   "kind": "component",
+   "tags": [
+    "effect",
+    "svg",
+    "mask",
+    "wordmark"
+   ]
+  },
+  {
+   "name": "svg-stroke-trace",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "intro",
+    "reveal",
+    "svg"
+   ]
+  },
+  {
+   "name": "swipe-rail",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "interaction",
+    "gesture",
+    "swipe"
+   ]
+  },
+  {
+   "name": "tabs-slide-indicator",
+   "kind": "component",
+   "tags": [
+    "transition-primitive",
+    "transitions-dev-port",
+    "tabs",
+    "indicator"
+   ]
+  },
+  {
+   "name": "telemetry-hud",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "product-demo",
+    "hud",
+    "telemetry"
+   ]
+  },
+  {
+   "name": "terminal-simulator",
+   "kind": "component",
+   "tags": [
+    "code-animation"
+   ]
+  },
+  {
+   "name": "testimonial-card",
+   "kind": "component",
+   "tags": [
+    "prop",
+    "ui-props",
+    "testimonial",
+    "social-proof"
+   ]
+  },
+  {
+   "name": "testimonial-proof-card",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "proof",
+    "testimonial",
+    "quote"
+   ]
+  },
+  {
+   "name": "text-match-cut",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "transition",
+    "typography",
+    "match-cut"
+   ]
+  },
+  {
+   "name": "text-shimmer",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "text-effects",
+    "shimmer",
+    "specular"
+   ]
+  },
+  {
+   "name": "text-stagger",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "transition-primitive",
+    "transitions-dev-port",
+    "text"
+   ]
+  },
+  {
+   "name": "text-state-swap",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "transition-primitive",
+    "transitions-dev-port",
+    "text"
+   ]
+  },
+  {
+   "name": "texture-mask-text",
+   "kind": "component",
+   "tags": [
+    "text",
+    "text-effect",
+    "effect",
+    "texture"
+   ]
+  },
+  {
+   "name": "three-orbiting-cards",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "three-js",
+    "webgl",
+    "hyperframes-native"
+   ]
+  },
+  {
+   "name": "ticker-takeover",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "typography",
+    "ticker",
+    "slot-machine"
+   ]
+  },
+  {
+   "name": "tilt-card",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "transition-primitive",
+    "transitions-dev-port",
+    "card"
+   ]
+  },
+  {
+   "name": "titlecard-calm",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "typography",
+    "title-card",
+    "calm"
+   ]
+  },
+  {
+   "name": "titlecard-lockup",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "typography",
+    "title-card",
+    "lockup"
+   ]
+  },
+  {
+   "name": "toggle-flip",
+   "kind": "component",
+   "tags": [
+    "prop",
+    "ui-props",
+    "toggle",
+    "interaction"
+   ]
+  },
+  {
+   "name": "top-down-letters",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "motion-primitive",
+    "typography"
+   ]
+  },
+  {
+   "name": "torn-paper-rip",
+   "kind": "component",
+   "tags": [
+    "torn paper",
+    "paper rip",
+    "paper tear",
+    "transition"
+   ]
+  },
+  {
+   "name": "touch-indicator",
+   "kind": "component",
+   "tags": [
+    "cursor",
+    "motion-primitive",
+    "mobile",
+    "gesture"
+   ]
+  },
+  {
+   "name": "tracing-beam",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "product-demo",
+    "attention",
+    "beam"
+   ]
+  },
+  {
+   "name": "tracking-in",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "text",
+    "reveal",
+    "typography"
+   ]
+  },
+  {
+   "name": "trust-strip",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "proof",
+    "trust",
+    "logo-strip"
+   ]
+  },
+  {
+   "name": "type-match-cut",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "transition",
+    "typography",
+    "match-cut"
+   ]
+  },
+  {
+   "name": "typed-prompt",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "product-demo",
+    "typing",
+    "prompt"
+   ]
+  },
+  {
+   "name": "typewriter",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "motion-primitive",
+    "typography"
+   ]
+  },
+  {
+   "name": "typing-indicator",
+   "kind": "component",
+   "tags": [
+    "video-primitive",
+    "chat",
+    "mock-ui",
+    "overlay"
+   ]
+  },
+  {
+   "name": "ui-focus-zoom",
+   "kind": "component",
+   "tags": [
+    "camera",
+    "product-demo",
+    "zoom",
+    "focus"
+   ]
+  },
+  {
+   "name": "variable-axis-type",
+   "kind": "component",
+   "tags": [
+    "typography",
+    "variable-font",
+    "kinetic-type",
+    "axis"
+   ]
+  },
+  {
+   "name": "variable-font-flex",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "experiment",
+    "type",
+    "variable-font"
+   ]
+  },
+  {
+   "name": "vector-editor-rig",
+   "kind": "component",
+   "tags": [
+    "prop",
+    "ui-props",
+    "demonstrate",
+    "vector"
+   ]
+  },
+  {
+   "name": "velocity-throw-snap",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "feature-tour",
+    "rail",
+    "velocity"
+   ]
+  },
+  {
+   "name": "vignette",
+   "kind": "component",
+   "tags": [
+    "vignette",
+    "overlay",
+    "cinematic",
+    "effect"
+   ]
+  },
+  {
+   "name": "vox-annotate",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "typography",
+    "annotation",
+    "marker"
+   ]
+  },
+  {
+   "name": "whip-pan-cut",
+   "kind": "component",
+   "tags": [
+    "transition",
+    "whip-pan",
+    "motion-blur",
+    "velocity-match"
+   ]
+  },
+  {
+   "name": "whiteboard-ink",
+   "kind": "component",
+   "tags": [
+    "motion-primitive",
+    "intro",
+    "reveal",
+    "svg"
+   ]
+  },
+  {
+   "name": "wordmark-tiles",
+   "kind": "component",
+   "tags": [
+    "typography",
+    "wordmark",
+    "tiles",
+    "raster"
+   ]
+  },
+  {
+   "name": "x-follow-card",
+   "kind": "component",
+   "tags": [
+    "social-overlay"
+   ]
+  },
+  {
+   "name": "yt-camera-move",
+   "kind": "component",
+   "tags": [
+    "camera",
+    "zoom",
+    "effect",
+    "creator"
+   ]
+  },
+  {
+   "name": "yt-circle-pointer",
+   "kind": "component",
+   "tags": [
+    "annotation",
+    "countdown",
+    "overlay"
+   ]
+  },
+  {
+   "name": "yt-feather-highlight",
+   "kind": "component",
+   "tags": [
+    "highlight",
+    "spotlight",
+    "effect",
+    "overlay"
+   ]
+  },
+  {
+   "name": "yt-screen-warp",
+   "kind": "component",
+   "tags": [
+    "effect",
+    "overlay",
+    "texture"
+   ]
+  },
+  {
+   "name": "zoom-through-transition",
+   "kind": "component",
+   "tags": [
+    "transition-primitive"
+   ]
+  }
+ ]
+}

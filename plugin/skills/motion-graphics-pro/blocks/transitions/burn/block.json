@@ -1,0 +1,127 @@
+{
+ "id": "transitions/burn",
+ "name": "Burn",
+ "name_id": "Terbakar",
+ "category": "transitions",
+ "description": {
+  "id": "Adegan lama terbakar habis: tepi berpola noise berkerut menghangus, menyala jingga dan kuning, lalu berlubang menyingkap adegan baru di bawahnya.",
+  "en": "Scene A burns away along a ridged-noise front that chars, glows orange and yellow, then opens holes revealing B beneath."
+ },
+ "tags": [
+  "transisi",
+  "burn",
+  "bakar",
+  "api",
+  "noise",
+  "dissolve",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "direction": {
+   "default": "random",
+   "type": "enum",
+   "options": [
+    "random",
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "center"
+   ],
+   "hint": "Asal api: acak (noise saja), kiri, kanan, atas, bawah, tengah",
+   "aliases": [
+    "arah"
+   ],
+   "option_aliases": {
+    "acak": "random",
+    "kiri": "left",
+    "kanan": "right",
+    "atas": "top",
+    "bawah": "bottom",
+    "tengah": "center"
+   }
+  },
+  "scale": {
+   "default": 1,
+   "type": "number",
+   "hint": "Ukuran pola noise",
+   "aliases": [
+    "skala"
+   ]
+  },
+  "edge_width": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali lebar tepi menyala",
+   "aliases": [
+    "lebar_tepi"
+   ]
+  },
+  "ember_color": {
+   "default": "#fff1a8",
+   "type": "color",
+   "hint": "Warna tepi terpanas",
+   "aliases": [
+    "warna_bara"
+   ]
+  },
+  "fire_color": {
+   "default": "#ff7a1a",
+   "type": "color",
+   "hint": "Warna nyala",
+   "aliases": [
+    "warna_api"
+   ]
+  },
+  "charcoal_color": {
+   "default": "#1c0d05",
+   "type": "color",
+   "hint": "Warna hangus",
+   "aliases": [
+    "warna_arang"
+   ]
+  },
+  "seed": {
+   "default": 5,
+   "type": "number",
+   "hint": "Benih pola noise"
+  },
+  "ease": {
+   "default": "power1.inOut",
+   "type": "ease",
+   "hint": "Easing laju bakar"
+  }
+ },
+ "duration": 1.8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/bakar",
+  "ridged-burn"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.6,
+  "duration": 3
+ }
+}

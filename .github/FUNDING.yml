@@ -1,0 +1,11 @@
+# Tombol "Sponsor" di GitHub · GitHub "Sponsor" button
+# https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
+#
+# Isi akun di bawah bila sudah ada (hapus tanda #):
+# github: salimmoo          # butuh profil GitHub Sponsors yang sudah disetujui
+# ko_fi: namakamu
+# buy_me_a_coffee: namakamu
+# patreon: namakamu
+custom:
+  - "https://salimmoo.github.io/motion-graphics-pro/#donasi"   # QRIS (Indonesia) + opsi internasional
+  # - "https://paypal.me/namakamu"

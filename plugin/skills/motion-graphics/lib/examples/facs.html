@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP FACS · satu set AU untuk kit vektor, benda berwajah, presenter</title>
+<style>html,body{margin:0;background:#1c2236}#stage{position:relative;width:1280px;height:720px;overflow:hidden;background:#1c2236}#stage canvas{position:absolute}
+.tag{position:absolute;font:600 20px/1 system-ui,"Segoe UI",Arial,sans-serif;color:#fbf6ea}</style>
+<script src="../motion/motion.js"></script>
+<script src="../dist/mgp.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720" data-fps="24">
+  <canvas id="vk" style="left:0;top:0"></canvas><canvas id="cb" style="left:0;top:360px"></canvas><canvas id="ls" style="left:640px;top:0"></canvas>
+  <div class="tag" style="left:16px;top:14px">vectorKit · expr = MGP.wajah.keVectorKit(AU)</div>
+  <div class="tag" style="left:16px;top:690px">chibiObject · faces dari MGP.wajah.keChibi(AU)</div>
+  <div class="tag" style="left:656px;top:690px">lipsync · ekspresi AU + visem (rahang bersama)</div>
+</div>
+<script>
+const W = MGP.face, D = 9;
+// satu urutan emosi untuk ketiga modul
+const kunci = [[0, "netral"], [1.5, "senang"], [3, "kaget"], [4.5, "sedih"], [6, "marah"], [7.5, "senyum"]];
+const vk = MGP.vectorKit.create("#vk", { width: 640, height: 360, duration: D, view: 20, expr: (t) => W.keVectorKit(W.auPada(kunci, t)), grid: false, bg: "#e9dfc8" });
+const faces = Object.fromEntries(["netral", "senang", "kaget", "sedih", "marah", "senyum"].map((n) => [n + "Au", W.keChibi(n)]));
+const cb = MGP.chibiObject.create("#cb", { width: 640, height: 360, duration: D, body: "cup", scene: "plain", faces, moods: kunci.map(([t, n]) => [t, n + "Au"]) });
+const ls = MGP.lipsync.create("#ls", { width: 640, height: 720, duration: D, ekspresi: kunci, lead: 0.4,
+  text: "Satu set Action Unit, tiga modul. Rahang tetap milik visem saat bicara." });
+const all = [vk, cb, ls];
+MGP.core.expose({ duration: D, ready: Promise.all(all.map((x) => x.ready)), seek(t) { all.forEach((x) => x.seek(t)); return this; }, timeline() { return MGP.core.timeline(this); } });
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+{
+ "id": "transitions/shatter",
+ "name": "Shatter",
+ "name_id": "Hancur / Pecah Kaca",
+ "category": "transitions",
+ "description": {
+  "id": "Adegan lama retak dari titik benturan lalu pecah menjadi kepingan yang berputar dan jatuh, runtuh berguguran, atau meledak ke arah kamera, menyingkap adegan baru.",
+  "en": "Scene A cracks from an impact point and shatters into spinning shards that fall, crumbles away, or explodes toward camera, revealing B."
+ },
+ "tags": [
+  "transisi",
+  "shatter",
+  "pecah",
+  "kaca",
+  "ledak",
+  "runtuh",
+  "vfx",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "mode": {
+   "default": "shatter",
+   "type": "enum",
+   "options": [
+    "shatter",
+    "collapse",
+    "burst"
+   ],
+   "hint": "pecah = kaca pecah dari titik benturan; runtuh = berguguran ke bawah; ledak = terlempar ke kamera",
+   "option_aliases": {
+    "pecah": "shatter",
+    "runtuh": "collapse",
+    "ledak": "burst"
+   }
+  },
+  "chip": {
+   "default": 6,
+   "type": "number",
+   "hint": "Kepadatan kepingan di sisi terpanjang (total keping = kolom x baris x 2). Kepingan adalah salinan DOM adegan lama (id dibuang).",
+   "aliases": [
+    "keping"
+   ]
+  },
+  "position_x": {
+   "default": 55,
+   "type": "number",
+   "hint": "Titik benturan X (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 45,
+   "type": "number",
+   "hint": "Titik benturan Y (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "crack": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Garis retak sebelum pecah",
+   "aliases": [
+    "retak"
+   ]
+  },
+  "crack_color": {
+   "default": "#ffffff",
+   "type": "color",
+   "hint": "Warna garis retak",
+   "aliases": [
+    "warna_retak"
+   ]
+  },
+  "seed": {
+   "default": 7,
+   "type": "number",
+   "hint": "Benih acak bentuk kepingan"
+  }
+ },
+ "duration": 1.6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/hancur",
+  "transitions-destruction",
+  "vfx-shatter"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.7,
+  "duration": 3
+ }
+}

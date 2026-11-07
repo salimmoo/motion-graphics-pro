@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP lottie · pemutar + gabung dengan modul lain</title>
+<style>html,body{margin:0;background:#0e1116}#stage{position:relative;width:1280px;height:720px;overflow:hidden}#stage canvas{position:absolute;top:0;left:0}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="../../core/mgp-core.js"></script>
+<script src="../../kinetic-type.js"></script>
+<script src="../lottie.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720"></div>
+<script>
+// Kiri: file Lottie diputar langsung (MGP.lottie.create). Kanan: Lottie yang sama digambar ke kanvas modul lain
+// (drawTo) di bawah teks kinetik, jadi satu kanvas berisi dua sumber. Keduanya seek dari waktu yang sama.
+// Buka lewat server http (fetch JSON diblokir dari file://), mis. `rekam pratinjau lib/lottie/examples/putar.html`.
+const C = MGP.core, stage = document.getElementById("stage");
+const kiri = document.createElement("canvas"); stage.appendChild(kiri);
+const pemutar = MGP.lottie.create(kiri, { url: "bintang.json", width: 640, height: 720, loop: true, fit: "contain", background: "#1c2b45" });
+const kanan = document.createElement("canvas"); kanan.style.left = "640px"; stage.appendChild(kanan);
+const anim = MGP.lottie.create(null, { url: "bintang.json", loop: true });     // tanpa kanvas sendiri: hanya untuk drawTo
+const teks = { text: "Lottie di *bawah* teks", preset: "rise", t: 0.4 };
+const KT = MGP.kineticType.create(kanan, { width: 640, height: 720, bg: (g, t, S) => { g.fillStyle = "#F3E8CF"; g.fillRect(0, 0, S.W, S.H); anim.drawTo(g, t, { x: 40, y: 120, width: 560, height: 315 }); },
+  color: "#1C2B45", keyColor: "#B23A32", size: 44, beats: [Object.assign({ y: 0.78 }, teks)], duration: 6 });
+const comp = { duration: 6, ready: Promise.all([pemutar.ready, anim.ready, KT.ready]),
+  seek(t) { pemutar.seek(t); KT.seek(t); return comp; }, timeline() { return C.timeline(comp); } };
+C.expose(comp);
+</script>
+</body>
+</html>

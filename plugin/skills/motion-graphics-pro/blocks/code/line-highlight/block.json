@@ -1,0 +1,134 @@
+{
+ "id": "code/line-highlight",
+ "name": "Line Highlight",
+ "name_id": "Sorot Baris Kode",
+ "category": "code",
+ "description": {
+  "id": "Menarik mata ke satu baris kode: pita sorot menyapu baris target sementara konteks di sekitarnya meredup. Mode gulir: kamera menggulir berkas panjang sampai baris target di tengah lalu menyorotnya, cocok untuk menelusuri modul sungguhan. Beberapa target bergiliran.",
+  "en": "Draws the eye to one line: a highlight band sweeps across the target line while context dims. Scroll mode moves through a long file to centre each target line and spotlight it. Multiple targets in turn."
+ },
+ "tags": [
+  "kode",
+  "highlight",
+  "sorot",
+  "scroll",
+  "walkthrough",
+  "syntax-highlight",
+  "developer",
+  "code",
+  "line"
+ ],
+ "props": {
+  "mode": {
+   "default": "scroll",
+   "type": "enum",
+   "options": [
+    "highlight",
+    "scroll"
+   ],
+   "hint": "sorot = seluruh berkas tampak; gulir = jendela tetap, kamera menggulir",
+   "option_aliases": {
+    "sorot": "highlight",
+    "gulir": "scroll"
+   }
+  },
+  "code": {
+   "default": "import json\nfrom pathlib import Path\n\nBATAS = 100\n\n\ndef baca(jalur):\n    \"\"\"Baca berkas pesanan.\"\"\"\n    with open(jalur) as f:\n        return json.load(f)\n\n\ndef saring(pesanan, minimal=BATAS):\n    hasil = []\n    for p in pesanan:\n        if p[\"total\"] >= minimal:\n            hasil.append(p)\n    return hasil\n\n\ndef ringkas(pesanan):\n    total = sum(p[\"total\"] for p in pesanan)\n    rata = total / max(len(pesanan), 1)\n    return {\"jumlah\": len(pesanan), \"rata\": round(rata, 2)}\n\n\ndef utama():\n    data = baca(Path(\"pesanan.json\"))\n    besar = saring(data)\n    print(ringkas(besar))\n\n\nif __name__ == \"__main__\":\n    utama()",
+   "type": "text",
+   "aliases": [
+    "kode"
+   ]
+  },
+  "lang": {
+   "default": "py",
+   "type": "enum",
+   "options": [
+    "js",
+    "py",
+    "html",
+    "bash"
+   ],
+   "aliases": [
+    "bahasa"
+   ]
+  },
+  "target": {
+   "default": [
+    16,
+    23
+   ],
+   "type": "list",
+   "hint": "Nomor baris target (mulai 1), disorot bergiliran"
+  },
+  "theme": {
+   "default": "modern-dark",
+   "type": "enum",
+   "options": [
+    "dark-2026",
+    "modern-dark",
+    "light",
+    "terminal-pro"
+   ],
+   "aliases": [
+    "tema"
+   ],
+   "option_aliases": {
+    "gelap-2026": "dark-2026",
+    "gelap-modern": "modern-dark",
+    "terang": "light"
+   }
+  },
+  "file": {
+   "default": "laporan.py",
+   "type": "text",
+   "aliases": [
+    "berkas"
+   ]
+  },
+  "size": {
+   "default": 26,
+   "type": "number",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "dim": {
+   "default": 0.3,
+   "type": "number",
+   "hint": "Opasitas baris konteks saat disorot",
+   "aliases": [
+    "redup"
+   ]
+  },
+  "visible_lines": {
+   "default": 13,
+   "type": "number",
+   "hint": "Jumlah baris di jendela (mode gulir)",
+   "aliases": [
+    "baris_tampak"
+   ]
+  },
+  "font": {
+   "default": "JetBrains Mono:wght@400;500;700",
+   "type": "font"
+  }
+ },
+ "duration": 7,
+ "aspect": [
+  "16:9",
+  "1:1",
+  "9:16"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "kode/sorot-baris",
+  "code-highlight",
+  "code-scroll"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "JetBrains Mono:wght@400;500;700"
+  ]
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "id": "textures/vignette",
+ "name": "Vignette",
+ "name_id": "Vinyet",
+ "category": "textures",
+ "description": {
+  "id": "Vinyet sinematik yang menggelapkan tepi layar untuk menarik mata ke tengah. Bentuk elips atau bulat, pusat bisa digeser, warna bisa diganti, dengan napas radius yang sangat halus dan pudar masuk/keluar.",
+  "en": "Cinematic radial vignette that darkens the edges to pull focus inward. Ellipse or circle, movable centre, any colour, with a subtle breathing radius and fade in/out."
+ },
+ "tags": [
+  "tekstur",
+  "texture",
+  "vignette",
+  "vinyet",
+  "overlay",
+  "sinematik",
+  "fokus",
+  "textures"
+ ],
+ "props": {
+  "strength": {
+   "default": 0.7,
+   "type": "number",
+   "hint": "Kegelapan tepi (0-1)",
+   "aliases": [
+    "kekuatan"
+   ]
+  },
+  "color": {
+   "default": "#000000",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "shape": {
+   "default": "ellipse",
+   "type": "enum",
+   "options": [
+    "ellipse",
+    "round"
+   ],
+   "hint": "elips mengikuti rasio layar; bulat = lingkaran",
+   "aliases": [
+    "bentuk"
+   ],
+   "option_aliases": {
+    "elips": "ellipse",
+    "bulat": "round"
+   }
+  },
+  "size": {
+   "default": 52,
+   "type": "number",
+   "hint": "Radius area bersih (%)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "soft": {
+   "default": 48,
+   "type": "number",
+   "hint": "Lebar peralihan (%)",
+   "aliases": [
+    "lembut"
+   ]
+  },
+  "center_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Pusat horizontal (%)",
+   "aliases": [
+    "pusat_x"
+   ]
+  },
+  "center_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Pusat vertikal (%)",
+   "aliases": [
+    "pusat_y"
+   ]
+  },
+  "breath": {
+   "default": 4,
+   "type": "number",
+   "hint": "Amplitudo napas radius (%), 0 = diam",
+   "aliases": [
+    "napas"
+   ]
+  },
+  "cycle": {
+   "default": 6,
+   "type": "number",
+   "hint": "Siklus napas (detik)",
+   "aliases": [
+    "siklus"
+   ]
+  },
+  "enter": {
+   "default": 0.8,
+   "type": "number",
+   "hint": "Lama pudar masuk (detik)",
+   "aliases": [
+    "masuk"
+   ]
+  },
+  "exit": {
+   "default": 0,
+   "type": "number",
+   "hint": "Lama pudar keluar di akhir (detik), 0 = tidak",
+   "aliases": [
+    "keluar"
+   ]
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "tekstur/vignette",
+  "vignette"
+ ],
+ "example": {
+  "bg": "photo"
+ }
+}

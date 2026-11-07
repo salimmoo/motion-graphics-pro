@@ -1,0 +1,145 @@
+{
+ "id": "subtitles/gradient",
+ "name": "Gradient",
+ "name_id": "Subtitle Gradien",
+ "category": "subtitles",
+ "description": {
+  "id": "Kata berisi gradien warna yang mengalir, masuk satu per satu dengan pantulan elastis. Gradien menyambung sepanjang satu halaman.",
+  "en": "Words filled with a flowing colour gradient, entering one by one with an elastic bounce. The gradient runs continuously across each page."
+ },
+ "tags": [
+  "subtitle",
+  "caption",
+  "gradien",
+  "elastis",
+  "bounce",
+  "subtitles",
+  "gradient"
+ ],
+ "props": {
+  "text": {
+   "default": "Warna baru untuk cerita yang lebih berani",
+   "type": "text",
+   "hint": "Teks subtitle; *kata* = kata kunci (bila didukung). Dipakai bila kata kosong",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "words": {
+   "default": [],
+   "type": "timed-words",
+   "hint": "[{teks, mulai, akhir}] dari transkrip; kosong = dihitung dari teks",
+   "aliases": [
+    "kata"
+   ]
+  },
+  "kps": {
+   "default": 2.0,
+   "type": "number",
+   "hint": "Kata per detik bila tanpa transkrip"
+  },
+  "max_words": {
+   "default": 3,
+   "type": "number",
+   "hint": "Maksimum kata per halaman subtitle",
+   "aliases": [
+    "maks_kata"
+   ]
+  },
+  "font": {
+   "default": "Poppins:wght@800;900",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "size": {
+   "default": 94,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "hint": "Warna cadangan bila clip teks tak didukung",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "bottom": {
+   "default": 16,
+   "type": "number",
+   "hint": "Jarak dari bawah (%)",
+   "aliases": [
+    "bawah"
+   ]
+  },
+  "uppercase": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "huruf_besar"
+   ]
+  },
+  "color_1": {
+   "default": "#ff5f6d",
+   "type": "color",
+   "aliases": [
+    "warna_1"
+   ]
+  },
+  "color_2": {
+   "default": "#ffc371",
+   "type": "color",
+   "aliases": [
+    "warna_2"
+   ]
+  },
+  "color_3": {
+   "default": "#7b5cff",
+   "type": "color",
+   "aliases": [
+    "warna_3"
+   ]
+  },
+  "angle": {
+   "default": 100,
+   "type": "number",
+   "hint": "Sudut gradien (derajat)",
+   "aliases": [
+    "sudut"
+   ]
+  },
+  "flow": {
+   "default": 30,
+   "type": "number",
+   "hint": "Kecepatan aliran gradien",
+   "aliases": [
+    "alir"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "subtitle/gradien",
+  "caption-gradient-fill"
+ ],
+ "example": {
+  "bg": "photo",
+  "aspect": "9:16",
+  "font": [
+   "Poppins:wght@800;900"
+  ],
+  "props": {
+   "kps": 1.7
+  }
+ }
+}

@@ -1,0 +1,66 @@
+<!-- Block ui/hud-telemetry · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="ui/hud-telemetry" data-start="0" data-duration="6" data-track-index="40" class="blk blk-ui-hud-telemetry">
+<script type="application/json" data-block-props>
+{"box": [33, 36, 22, 54], "title": "SUBJEK 01 · TERKUNCI", "rows": [{"label": "JARAK", "nilai": [14.2, 12.8, 11.6], "satuan": "m", "desimal": 1}, {"label": "KECEPATAN", "nilai": [0.8, 1.4, 1.1], "satuan": "m/s", "desimal": 1}, {"label": "SUHU", "nilai": [27, 27, 28], "satuan": "°C", "desimal": 0}, {"label": "KEYAKINAN", "nilai": [86, 93, 98], "satuan": "%", "desimal": 0}], "highlight": 3, "gesture": [0.9, 2.6, 4.1], "color": "#e8f0ff", "accent_color": "#7dff9a", "size": 28, "font": "JetBrains Mono:wght@400;500;700"}
+</script>
+</div>
+<style>
+.blk-ui-hud-telemetry{position:absolute;inset:0;pointer-events:none;overflow:hidden;font-family:"JetBrains Mono",ui-monospace,monospace}
+.blk-ui-hud-telemetry svg{position:absolute;left:0;top:0;overflow:visible}
+.blk-ui-hud-telemetry .rd{position:absolute;white-space:nowrap;line-height:1.25;text-shadow:0 1px 6px rgba(0,0,0,.55)}
+.blk-ui-hud-telemetry .rd b{font-weight:700}
+.blk-ui-hud-telemetry .lb{opacity:.6;letter-spacing:.1em}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, E = BLOCK.el, s = k.s, W = k.w, H = k.h;
+  var kx = P.box[0] / 100 * W, ky = P.box[1] / 100 * H, kw = P.box[2] / 100 * W, kh = P.box[3] / 100 * H, c = Math.min(kw, kh) * 0.16;
+  var sv = BLOCK.svg("svg", { width: W, height: H, viewBox: "0 0 " + W + " " + H }, k.root);
+  var sw = Math.max(1.5, 3 * s), sudut = [
+    [kx, ky + c, kx, ky, kx + c, ky], [kx + kw - c, ky, kx + kw, ky, kx + kw, ky + c],
+    [kx + kw, ky + kh - c, kx + kw, ky + kh, kx + kw - c, ky + kh], [kx + c, ky + kh, kx, ky + kh, kx, ky + kh - c]];
+  var br = sudut.map(function (q) { return BLOCK.svg("path", { d: "M" + q[0] + " " + q[1] + " L" + q[2] + " " + q[3] + " L" + q[4] + " " + q[5], fill: "none", stroke: P.color, "stroke-width": sw, "stroke-linecap": "square" }, sv); });
+  // pembidik kecil di tengah subjek
+  var mx = kx + kw / 2, my = ky + kh / 2, r = 10 * s;
+  var ch = BLOCK.svg("path", { d: "M" + (mx - r * 2) + " " + my + " h" + r + " M" + (mx + r) + " " + my + " h" + r + " M" + mx + " " + (my - r * 2) + " v" + r + " M" + mx + " " + (my + r) + " v" + r, stroke: P.accent_color, "stroke-width": sw * 0.8, fill: "none" }, sv);
+  var fs = P.size * s;
+  var jd = E("div", { class: "rd", style: "left:" + kx + "px;top:" + (ky - fs * 1.9) + "px;font-size:" + fs * 0.85 + "px;color:" + P.accent_color + ";letter-spacing:.12em" }, k.root, BLOCK.esc(P.title));
+  // baris label:nilai, setengah di kiri kotak, setengah di kanan
+  var n = P.rows.length, kiri = Math.ceil(n / 2), rows = [];
+  P.rows.forEach(function (b, i) {
+    var L = i < kiri, j = L ? i : i - kiri, top = ky + kh * 0.12 + j * fs * 3.1;
+    var el = E("div", { class: "rd", style: (L ? "right:" + (W - kx + 26 * s) + "px;text-align:right" : "left:" + (kx + kw + 26 * s) + "px") + ";top:" + top + "px;font-size:" + fs + "px;color:" + (i === P.highlight ? P.accent_color : P.color) }, k.root);
+    var lb = E("div", { class: "lb", style: "font-size:" + fs * 0.7 + "px" }, el, BLOCK.esc(b.label));
+    var v = E("b", null, el);
+    rows.push({ el: el, v: v, b: b });
+  });
+  // garis ke tepi kotak
+  rows.forEach(function (R, i) {
+    var L = i < kiri, j = L ? i : i - kiri, y = ky + kh * 0.12 + j * fs * 3.1 + fs * 0.45;
+    R.ln = BLOCK.svg("path", { d: L ? "M" + (kx - 20 * s) + " " + y + " h" + 14 * s : "M" + (kx + kw + 6 * s) + " " + y + " h" + 14 * s, stroke: P.color, "stroke-width": sw * 0.6, opacity: 0.6 }, sv);
+  });
+  var Ls = br.map(BLOCK.prepareStroke);
+  br.forEach(function (p, i) { tl.fromTo(p, { strokeDashoffset: Ls[i] }, { strokeDashoffset: 0, duration: 0.45, ease: "power3.out" }, 0.1 + i * 0.07); });
+  tl.fromTo(ch, { autoAlpha: 0, scale: 1.6, transformOrigin: mx + "px " + my + "px" }, { autoAlpha: 1, scale: 1, duration: 0.35, ease: "power3.out" }, 0.45)
+    .fromTo(jd, { autoAlpha: 0, x: -10 * s }, { autoAlpha: 1, x: 0, duration: 0.3, ease: "steps(4)" }, 0.5)
+    .fromTo(rows.map(function (R) { return R.el; }).concat(rows.map(function (R) { return R.ln; })), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2, ease: "steps(3)", stagger: 0.06 }, 0.6);
+  // nilai berdetak pada isyarat: hitung cepat terkuantisasi (8 langkah) ke nilai berikutnya
+  var cue = P.gesture;
+  BLOCK.onTime(tl, function (t) {
+    rows.forEach(function (R, i) {
+      var vs = R.b.nilai, val = vs[0];
+      for (var j = 1; j < vs.length && j < cue.length; j++) {
+        var q = BLOCK.clamp((t - cue[j] - i * 0.05) / 0.4, 0, 1);
+        if (q > 0) val = BLOCK.lerp(vs[j - 1], vs[j], Math.floor(q * 8) / 8);
+      }
+      var tx = val.toFixed(R.b.desimal || 0) + " " + R.b.satuan;
+      if (R.v.textContent !== tx) R.v.textContent = tx;
+    });
+  }, D);
+  // kedip tanda pada baris sorotan setiap nilainya berubah (dua frame)
+  cue.slice(1).forEach(function (c) {
+    var R = rows[P.highlight]; if (!R) return;
+    tl.set(R.el, { opacity: 0.25 }, c + 0.42).set(R.el, { opacity: 1 }, c + 0.42 + 2 / 30);
+  });
+}, { font: true });
+</script>

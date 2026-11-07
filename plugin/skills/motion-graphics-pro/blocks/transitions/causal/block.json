@@ -1,0 +1,183 @@
+{
+ "id": "transitions/causal",
+ "name": "Causal",
+ "name_id": "Transisi Bersebab",
+ "category": "transitions",
+ "description": {
+  "id": "Transisi yang dipilih menurut alasannya, antara dua kartu adegan bertema kertas: robek (ganti lokasi), balik halaman (waktu berlalu), bilah penutup (ganti bab), iris (fokus), geser (kesinambungan), belah robek (makna terputus), atau potong langsung (hentakan). Membungkus modul causalTransitions.",
+  "en": "A transition chosen by its cause, between two paper-themed scene cards: torn wipe (new place), page turn (time passes), shutter bars (new chapter), iris (focus), slide (continuity), torn split (broken meaning) or hard cut (impact). Wraps the causalTransitions module."
+ },
+ "tags": [
+  "transisi",
+  "bersebab",
+  "robek",
+  "halaman",
+  "iris",
+  "shutter",
+  "kertas",
+  "motivated",
+  "transitions",
+  "causal"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Host adegan lama (disembunyikan saat kartu menutup)",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Host adegan baru (tampil saat kartu pudar keluar)",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "mode": {
+   "default": "wipe",
+   "type": "enum",
+   "options": [
+    "wipe",
+    "page",
+    "shut",
+    "iris",
+    "slide",
+    "split",
+    "cut"
+   ],
+   "hint": "wipe robek, page balik halaman, shut bilah, iris lingkaran, slide geser, split belah robek, cut potong"
+  },
+  "title_a": {
+   "default": "Di Desa",
+   "type": "text",
+   "hint": "Judul kartu adegan lama",
+   "aliases": [
+    "judul_a"
+   ]
+  },
+  "title_b": {
+   "default": "Di Kota",
+   "type": "text",
+   "hint": "Judul kartu adegan baru",
+   "aliases": [
+    "judul_b"
+   ]
+  },
+  "label_a": {
+   "default": "Bab satu",
+   "type": "text",
+   "hint": "Label kecil kartu lama"
+  },
+  "label_b": {
+   "default": "Bab dua",
+   "type": "text",
+   "hint": "Label kecil kartu baru"
+  },
+  "color_a": {
+   "default": "#2c67b0",
+   "type": "color",
+   "hint": "Warna kartu lama",
+   "aliases": [
+    "warna_a"
+   ]
+  },
+  "color_b": {
+   "default": "#f3e8cf",
+   "type": "color",
+   "hint": "Warna kartu baru",
+   "aliases": [
+    "warna_b"
+   ]
+  },
+  "text_color_a": {
+   "default": "#fbf6ea",
+   "type": "color",
+   "hint": "Warna teks kartu lama",
+   "aliases": [
+    "warna_teks_a"
+   ]
+  },
+  "text_color_b": {
+   "default": "#1d1b18",
+   "type": "color",
+   "hint": "Warna teks kartu baru",
+   "aliases": [
+    "warna_teks_b"
+   ]
+  },
+  "duration": {
+   "default": 0.8,
+   "type": "number",
+   "hint": "Lama transisi inti (detik)",
+   "aliases": [
+    "lama"
+   ]
+  },
+  "fade": {
+   "default": 0.25,
+   "type": "number",
+   "hint": "Pudar masuk/keluar kartu terhadap host (detik, 0 = tanpa)",
+   "aliases": [
+    "pudar"
+   ]
+  },
+  "focus_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Pusat iris (% lebar)",
+   "aliases": [
+    "fokus_x"
+   ]
+  },
+  "focus_y": {
+   "default": 55,
+   "type": "number",
+   "hint": "Pusat iris (% tinggi)",
+   "aliases": [
+    "fokus_y"
+   ]
+  },
+  "paper": {
+   "default": "#f1e6d0",
+   "type": "color",
+   "hint": "Warna pita kertas robekan dan cincin iris",
+   "aliases": [
+    "kertas"
+   ]
+  },
+  "font": {
+   "default": "Fraunces:wght@600;800",
+   "type": "font",
+   "hint": "Font kartu"
+  },
+  "seed": {
+   "default": 9,
+   "type": "number",
+   "hint": "Seed tepi robek dan butir"
+  }
+ },
+ "duration": 2.6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [
+  "lib:mgp.js"
+ ],
+ "aliases": [
+  "transisi/bersebab"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.6,
+  "duration": 3.6,
+  "font": [
+   "Inter:wght@400;500;600;700;800;900",
+   "Fraunces:wght@600;800"
+  ]
+ }
+}

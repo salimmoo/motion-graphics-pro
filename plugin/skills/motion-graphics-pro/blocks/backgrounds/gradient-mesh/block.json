@@ -1,0 +1,110 @@
+{
+ "id": "backgrounds/gradient-mesh",
+ "name": "Gradient Mesh",
+ "name_id": "Gradien Mesh Bergerak",
+ "category": "backgrounds",
+ "description": {
+  "id": "Bidang warna lembut saling melebur dan hanyut pelan: mesh empat titik, pita yang mengalir, roda warna pelangi, pusaran, atau dua gumpal lembut di atas warna dasar. Shader WebGL ringan.",
+  "en": "Soft colour fields blend and drift: four-point mesh, flowing bands, rainbow colour wheel, swirl, or two soft blobs over a base colour. Lightweight WebGL shader."
+ },
+ "tags": [
+  "latar",
+  "background",
+  "gradien",
+  "mesh",
+  "shader",
+  "webgl",
+  "lembut",
+  "pelangi",
+  "pusaran",
+  "backgrounds",
+  "gradient"
+ ],
+ "props": {
+  "style": {
+   "default": "mesh",
+   "type": "enum",
+   "options": [
+    "mesh",
+    "flow",
+    "color-wheel",
+    "swirl",
+    "soft"
+   ],
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "alir": "flow",
+    "roda-warna": "color-wheel",
+    "pusaran": "swirl",
+    "lembut": "soft"
+   }
+  },
+  "color1": {
+   "default": "#ff7a59",
+   "type": "color",
+   "aliases": [
+    "warna1"
+   ]
+  },
+  "color2": {
+   "default": "#ffb347",
+   "type": "color",
+   "aliases": [
+    "warna2"
+   ]
+  },
+  "color3": {
+   "default": "#7b5cff",
+   "type": "color",
+   "aliases": [
+    "warna3"
+   ]
+  },
+  "color4": {
+   "default": "#2a1b5e",
+   "type": "color",
+   "hint": "Warna keempat; pada gaya lembut = warna dasar",
+   "aliases": [
+    "warna4"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali kecepatan gerak",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "resolution": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Skala resolusi shader (0.25-1); kecil = lebih cepat",
+   "aliases": [
+    "resolusi"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "latar/gradien-mesh",
+  "mesh-gradient",
+  "mesh-gradient-bg",
+  "mk-background",
+  "flowing-gradient",
+  "color-wheel",
+  "swirl"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

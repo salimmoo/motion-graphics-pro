@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP routeMap · jalur rempah Maluku ke Venesia</title>
+<style>html,body{margin:0;background:#0e1116}#stage{position:relative;width:1280px;height:720px;overflow:hidden}#stage canvas{position:absolute;left:0;top:0}</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../map-data/world-50m.js"></script>
+<script src="../map-data/world-50m-countries.js"></script>
+<script src="../map-data/southeast-asia-10m.js"></script>
+<script src="../map-data/europe-mediterranean-10m.js"></script>
+<script src="../map.js"></script>
+<script src="../route-map.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720"></div>
+<script>
+// Jalur rempah lewat laut: Ternate -> Malaka -> Kalikut -> Aden -> Laut Merah -> Aleksandria -> Venesia.
+// Titik singgah memakai nama kota Natural Earth ({kota}), waypoint di laut ditulis tangan (bujur, lintang).
+const ROUTE = [[127.38,0.78],[126.9,-0.6],[126.3,-2.2],[124.5,-4.3],[122.0,-5.9],[119.5,-6.4],[116.5,-6.0],[113.0,-5.3],[110.0,-4.8],[108.9,-3.2],[108.4,-0.9],[105.6,0.6],[104.3,1.2],[102.25,2.15],
+  [100.5,3.4],[98.5,5.0],[96.5,6.2],[88.0,6.0],[81.5,5.6],[77.6,7.3],[75.7,11.2],[70.0,12.6],[60.0,13.5],[51.0,12.5],[45.0,12.7],[43.4,12.6],[41.5,14.6],[39.0,18.5],[36.5,23.0],[33.9,27.7],[33.2,28.7],
+  [32.57,29.9],[32.35,30.6],[32.3,31.35],[29.9,31.25],[26.5,33.6],[22.0,36.0],[19.5,38.5],[18.8,40.3],[16.5,42.0],[14.2,44.0],[12.35,45.43]];
+const STOPS = [{ i: 0, kota: "Ternate", sub: "Maluku Utara" }, { i: 13, kota: "Malacca", name: "Malaka" }, { i: 20, kota: "Kozhikode", name: "Kalikut", sub: "India" },
+  { i: 24, kota: "Aden" }, { i: 34, kota: "Alexandria", name: "Aleksandria", sub: "Mesir" }, { i: 41, kota: "Venesia", sub: "Italia", side: "se" }];
+const stage = document.getElementById("stage");
+const base = { width: 1280, height: 720, route: ROUTE, stops: STOPS, legDur: 2.6, stopHold: 0.7 };
+const maps = [
+  MGP.routeMap.create(stage, Object.assign({ style: "karton", kota: true, negara: ["IDN"] }, base)),
+  MGP.routeMap.create(stage, Object.assign({ style: "asli", proyeksi: "equalEarth", vehicle: "dot", kota: 14, batasNegara: true }, base)),
+  MGP.routeMap.create(stage, Object.assign({ style: "karton", proyeksi: "ortho", fit: "dunia", fitBox: [[300, 100], [1300, 900]], follow: false, zoom: 0.72, vehicle: "dot", graticule: true }, base)),
+];
+const D = maps[0].duration;
+const seq = {
+  duration: D * maps.length,
+  ready: Promise.all(maps.map((m) => m.ready)),
+  seek(t) {
+    const k = Math.min(maps.length - 1, Math.max(0, Math.floor(t / D)));
+    maps.forEach((m, i) => (m.canvas.style.display = i === k ? "block" : "none"));
+    maps[k].seek(t - k * D);
+    return seq;
+  },
+  timeline() { return MGP.core.timeline(seq); },
+};
+MGP.core.expose(seq);
+</script>
+</body>
+</html>

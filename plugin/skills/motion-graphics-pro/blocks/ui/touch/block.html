@@ -1,0 +1,71 @@
+<!-- Block ui/touch · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="ui/touch" data-start="0" data-duration="3.5" data-track-index="40" class="blk blk-ui-touch">
+<script type="application/json" data-block-props>
+{"mode": "tap", "target": "", "name": "Nadia Putri", "caption": "@nadia · Desainer produk", "label": "Ikuti", "active_label": "Mengikuti", "card": ["Pagi di pasar", "Senja di dermaga", "Kopi pertama", "Jalan pulang"], "touch_time": 1.1, "accent_color": "#2d6cdf", "bg": "#dfe5ef", "font": "Inter:wght@400;500;600;700"}
+</script>
+</div>
+<style>
+.blk-ui-touch{position:absolute;inset:0;pointer-events:none;overflow:hidden;color:#1b2333}
+.blk-ui-touch .blk-hp{position:absolute;background:#0d1117;box-sizing:border-box}
+.blk-ui-touch .blk-ly{position:absolute;overflow:hidden;background:#fff}
+.blk-ui-touch .blk-sb{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.blk-ui-touch .blk-av{border-radius:50%;margin:0 auto}
+.blk-ui-touch .blk-pil{position:absolute;left:50%;display:flex;align-items:center;justify-content:center;font-weight:700;white-space:nowrap;border-radius:999px}
+.blk-ui-touch .blk-rel{position:absolute;left:0;display:flex}
+.blk-ui-touch .blk-kr{flex:none;position:relative;overflow:hidden;color:#fff;font-weight:700;display:flex;align-items:flex-end;box-sizing:border-box}
+.blk-ui-touch .blk-tc{position:absolute;left:0;top:0;border-radius:50%;background:rgba(120,130,150,.38);box-sizing:border-box;border:2px solid rgba(255,255,255,.85);box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, R = k.root, A = P.accent_color, W = k.w, H = k.h, tS = P.touch_time;
+  R.style.fontFamily = BLOCK.family(P.font);
+  var host = P.target ? BLOCK.find(P.target) : null, u = k.s, px, py, tgt;
+  function lingkar(x, y, d) { return BLOCK.el("div", { class: "blk-tc", style: "width:" + d + "px;height:" + d + "px" }, R); }
+  if (host) {
+    // mode hamparan: lingkaran sentuh di atas elemen host
+    var rr = R.getBoundingClientRect(), r = host.getBoundingClientRect(), f = W / (rr.width || W);
+    px = (r.left - rr.left + r.width / 2) * f; py = (r.top - rr.top + r.height / 2) * f; tgt = host;
+  } else {
+    R.style.background = P.bg;
+    var ph = H * 0.88, pw = Math.min(ph * 0.48, W * 0.9); ph = pw / 0.48; u = pw / 400;
+    var hp = BLOCK.el("div", { class: "blk-hp", style: "width:" + pw + "px;height:" + ph + "px;left:" + (W - pw) / 2 + "px;top:" + (H - ph) / 2 + "px;border-radius:" + 58 * u + "px;box-shadow:0 " + 30 * u + "px " + 70 * u + "px rgba(20,30,60,.3)" }, R);
+    var ly = BLOCK.el("div", { class: "blk-ly", style: "inset:" + 10 * u + "px;border-radius:" + 48 * u + "px" }, hp);
+    BLOCK.el("div", { class: "blk-sb", style: "height:" + 46 * u + "px;padding:0 " + 34 * u + "px;font-size:" + 15 * u + "px" }, ly, '<span>9:41</span><span style="width:' + 100 * u + 'px;height:' + 28 * u + 'px;border-radius:99px;background:#0d1117"></span><span style="display:flex;gap:' + 4 * u + 'px;align-items:flex-end">' + [5, 8, 11, 14].map(function (h) { return '<i style="width:' + 3.5 * u + 'px;height:' + h * u + 'px;background:#1b2333;border-radius:1px"></i>'; }).join("") + "</span>");
+    var LX = (W - pw) / 2 + 10 * u, LY = (H - ph) / 2 + 10 * u, lw = pw - 20 * u;
+    if (P.mode === "slide") {
+      BLOCK.el("div", { style: "position:absolute;left:" + 26 * u + "px;top:" + 70 * u + "px;font-size:" + 30 * u + "px;font-weight:700" }, ly, "Sorotan");
+      var cw = lw * 0.72, gp = 14 * u, rel = BLOCK.el("div", { class: "blk-rel", style: "top:" + 130 * u + "px;gap:" + gp + "px;padding-left:" + (lw - cw) / 2 + "px" }, ly);
+      (P.card || []).forEach(function (n, i) { var hu = 200 + i * 45; BLOCK.el("div", { class: "blk-kr", style: "width:" + cw + "px;height:" + cw * 1.3 + "px;border-radius:" + 26 * u + "px;padding:" + 22 * u + "px;font-size:" + 24 * u + "px;background:linear-gradient(160deg,hsl(" + hu + ",70%,70%),hsl(" + (hu + 40) + ",60%,40%))" }, rel, BLOCK.esc(n)); });
+      var step = cw + gp, gy = LY + 130 * u + cw * 0.65, x0 = LX + lw * 0.78, x1 = LX + lw * 0.2, d = 64 * u, tc = lingkar(0, 0, d);
+      // sentuh, seret cepat, lepas: rel meluncur dengan momentum lalu jepret ke kartu berikutnya
+      tl.fromTo(tc, { x: x0 - d / 2, y: gy - d / 2, scale: 1.5, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.18, ease: "power2.out" }, tS - 0.18)
+        .to(tc, { x: x1 - d / 2, duration: 0.32, ease: "power1.in" }, tS + 0.05)
+        .to(tc, { scale: 1.3, autoAlpha: 0, duration: 0.25, ease: "power2.out" }, tS + 0.37)
+        .fromTo(rel, { x: 0 }, { x: -(x0 - x1) * 0.9, duration: 0.32, ease: "power1.in" }, tS + 0.05)
+        .to(rel, { x: -step, duration: 0.75, ease: "back.out(1.2)" }, tS + 0.37);
+      return;
+    }
+    // profil + tombol pil
+    var pr = BLOCK.el("div", { style: "position:absolute;left:0;right:0;top:" + 120 * u + "px;text-align:center" }, ly);
+    BLOCK.el("div", { class: "blk-av", style: "width:" + 130 * u + "px;height:" + 130 * u + "px;background:linear-gradient(140deg,#ffb37a,#e8553d)" }, pr);
+    BLOCK.el("div", { style: "font-size:" + 30 * u + "px;font-weight:700;margin-top:" + 22 * u + "px" }, pr, BLOCK.esc(P.name));
+    BLOCK.el("div", { style: "font-size:" + 18 * u + "px;color:#7a8396;margin-top:" + 6 * u + "px" }, pr, BLOCK.esc(P.caption));
+    BLOCK.el("div", { style: "display:flex;justify-content:center;gap:" + 40 * u + "px;margin-top:" + 30 * u + "px;font-size:" + 16 * u + "px;color:#7a8396" }, pr, ["<b style='display:block;color:#1b2333;font-size:" + 24 * u + "px'>128</b>Karya", "<b style='display:block;color:#1b2333;font-size:" + 24 * u + "px'>4,2 rb</b>Pengikut", "<b style='display:block;color:#1b2333;font-size:" + 24 * u + "px'>310</b>Mengikuti"].map(function (x) { return "<div>" + x + "</div>"; }).join(""));
+    for (var g = 0; g < 4; g++) BLOCK.el("div", { style: "position:absolute;left:" + (26 + (g % 2) * 178) * u + "px;top:" + (560 + Math.floor(g / 2) * 178) * u + "px;width:" + 166 * u + "px;height:" + 166 * u + "px;border-radius:" + 18 * u + "px;background:hsl(" + (210 + g * 30) + ",45%,88%)" }, ly);
+    var by = 120 + 130 + 22 + 36 + 30 + 60 + 34;
+    tgt = BLOCK.el("div", { class: "blk-pil", style: "top:" + by * u + "px;height:" + 60 * u + "px;font-size:" + 22 * u + "px;background:#1b2333;color:#fff;gap:" + 8 * u + "px" }, ly);
+    var lb1 = BLOCK.esc(P.label), lb2 = '<svg width="' + 20 * u + '" height="' + 20 * u + '" viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>' + BLOCK.esc(P.active_label);
+    tgt.innerHTML = lb1;
+    BLOCK.initial(tl, tgt, { xPercent: -50, width: 200 * u });
+    tl.to(tgt, { backgroundColor: A, width: 250 * u, duration: 0.45, ease: "back.out(2)" }, tS + 0.14);
+    var sw = false;
+    BLOCK.onTime(tl, function (t) { var on = t >= tS + 0.14; if (on !== sw) { tgt.innerHTML = on ? lb2 : lb1; sw = on; } }, k.dur);
+    px = W / 2; py = LY + (by + 30) * u;
+  }
+  var dd = 70 * u, c = lingkar(px, py, dd);
+  // jari menyentuh kaca tepat saat target merespons, lalu terangkat
+  tl.fromTo(c, { x: px - dd / 2 + 10 * u, y: py - dd / 2 + 14 * u, scale: 1.6, autoAlpha: 0 }, { x: px - dd / 2 + 10 * u, y: py - dd / 2 + 14 * u, scale: 1, autoAlpha: 1, duration: 0.2, ease: "power2.out" }, tS - 0.2)
+    .to(c, { scale: 0.88, duration: 0.1, ease: "power2.out" }, tS).to(c, { scale: 1.35, autoAlpha: 0, duration: 0.3, ease: "power2.out" }, tS + 0.16);
+  if (tgt) tl.to(tgt, { scale: 0.94, duration: 0.1, ease: "power2.out" }, tS).to(tgt, { scale: 1, duration: 0.45, ease: "back.out(3)" }, tS + 0.12);
+}, { font: true });
+</script>

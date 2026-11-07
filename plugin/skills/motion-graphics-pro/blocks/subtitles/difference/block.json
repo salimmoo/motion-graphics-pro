@@ -1,0 +1,119 @@
+{
+ "id": "subtitles/difference",
+ "name": "Difference",
+ "name_id": "Subtitle Beda Warna",
+ "category": "subtitles",
+ "description": {
+  "id": "Teks besar dengan mix-blend-mode difference: warnanya membalik per piksel terhadap latar, putih di atas gelap dan gelap di atas terang, sambil bergeser pelan melintasi batas.",
+  "en": "Large text using mix-blend-mode difference: it inverts per pixel against the background, light over dark and dark over light, drifting slowly across the boundary."
+ },
+ "tags": [
+  "subtitle",
+  "caption",
+  "blend",
+  "difference",
+  "inversi",
+  "subtitles"
+ ],
+ "props": {
+  "text": {
+   "default": "Terang atau gelap pesannya tetap terbaca",
+   "type": "text",
+   "hint": "Teks subtitle; *kata* = kata kunci (bila didukung). Dipakai bila kata kosong",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "words": {
+   "default": [],
+   "type": "timed-words",
+   "hint": "[{teks, mulai, akhir}] dari transkrip; kosong = dihitung dari teks",
+   "aliases": [
+    "kata"
+   ]
+  },
+  "kps": {
+   "default": 1.8,
+   "type": "number",
+   "hint": "Kata per detik bila tanpa transkrip"
+  },
+  "max_words": {
+   "default": 2,
+   "type": "number",
+   "hint": "Maksimum kata per halaman subtitle",
+   "aliases": [
+    "maks_kata"
+   ]
+  },
+  "font": {
+   "default": "Archivo Black:wght@400",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "size": {
+   "default": 150,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "bottom": {
+   "default": 37,
+   "type": "number",
+   "hint": "Jarak dari bawah (%)",
+   "aliases": [
+    "bawah"
+   ]
+  },
+  "uppercase": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "huruf_besar"
+   ]
+  },
+  "mode": {
+   "default": "difference",
+   "type": "enum",
+   "options": [
+    "difference",
+    "exclusion"
+   ]
+  },
+  "slide": {
+   "default": 6,
+   "type": "number",
+   "hint": "Geser horizontal selama halaman tampil (%)",
+   "aliases": [
+    "geser"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "subtitle/beda",
+  "caption-blend-difference"
+ ],
+ "example": {
+  "bg": "photo",
+  "aspect": "9:16",
+  "font": [
+   "Archivo Black:wght@400"
+  ]
+ }
+}

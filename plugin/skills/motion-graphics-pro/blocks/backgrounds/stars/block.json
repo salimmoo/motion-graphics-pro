@@ -1,0 +1,101 @@
+{
+ "id": "backgrounds/stars",
+ "name": "Stars",
+ "name_id": "Langit Berbintang",
+ "category": "backgrounds",
+ "description": {
+  "id": "Lapisan langit malam: bintang jarang atau padat dalam tiga ukuran yang berkelip dan hanyut dalam dua lapis paralaks, dengan masker radial supaya tengah layar tetap bersih.",
+  "en": "Night-sky overlay: sparse or dense stars in three size tiers that twinkle and drift in two parallax layers, radially masked to keep the frame centre clear."
+ },
+ "tags": [
+  "latar",
+  "overlay",
+  "bintang",
+  "malam",
+  "langit",
+  "paralaks",
+  "kelip",
+  "kanvas",
+  "backgrounds",
+  "stars"
+ ],
+ "props": {
+  "density": {
+   "default": "sparse",
+   "type": "enum",
+   "options": [
+    "sparse",
+    "dense"
+   ],
+   "aliases": [
+    "kerapatan"
+   ],
+   "option_aliases": {
+    "jarang": "sparse",
+    "padat": "dense"
+   }
+  },
+  "count": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali jumlah bintang",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "bg": {
+   "default": "",
+   "type": "color",
+   "hint": "Kosong = transparan (overlay)",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "direction": {
+   "default": 180,
+   "type": "number",
+   "hint": "Arah hanyut (derajat; 180 = ke kiri)",
+   "aliases": [
+    "arah"
+   ]
+  },
+  "center_mask": {
+   "default": 0.35,
+   "type": "number",
+   "hint": "Besar area tengah yang dibersihkan (0 = mati)",
+   "aliases": [
+    "masker_tengah"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali kecepatan gerak",
+   "aliases": [
+    "kecepatan"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "latar/bintang",
+  "starfield"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

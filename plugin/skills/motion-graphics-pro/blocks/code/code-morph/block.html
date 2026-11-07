@@ -1,0 +1,123 @@
+<!-- Block code/code-morph · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="code/code-morph" data-start="0" data-duration="7" data-track-index="30" class="blk blk-code-code-morph">
+<script type="application/json" data-block-props>
+{"steps": ["let total = 0;\nfor (const x of harga) {\n  total = total + x;\n}", "const total = harga.reduce((a, x) => a + x, 0);", "const total = harga\n  .filter((x) => x > 0)\n  .reduce((a, x) => a + x, 0);"], "lang": "js", "theme": "dark-2026", "file": "total.js", "size": 34, "morph_duration": 1.0, "font": "JetBrains Mono:wght@400;500;700"}
+</script>
+</div>
+<style>
+.blk-code-code-morph{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-code-code-morph .uk{position:absolute;left:0;top:0;visibility:hidden;white-space:pre;font-variant-ligatures:none}
+.blk-code-code-morph .tk{position:absolute;left:0;top:0;white-space:pre;font-variant-ligatures:none}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, E = BLOCK.el, s = k.s, W = k.w, H = k.h;
+  // --- penyorot sintaks kecil (token regex) + tema; ditulis sendiri, disalin per blok kode ---
+  var TEMA = {
+    "dark-2026": { bg: "#15161c", panel: "#1c1d25", garis: "#2a2c37", teks: "#d8dbe6", redup: "#5f6478", kw: "#c792ea", str: "#a6dc78", num: "#f7a26c", kom: "#6a7089", fn: "#80b4ff", tag: "#ff7d9e", atr: "#ffd27a", aksen: "#7c9cff", kursor: "#9fb4ff", hapus: "#ff5c6c", tambah: "#3fd07f" },
+    "modern-dark": { bg: "#1f1f1f", panel: "#181818", garis: "#2b2b2b", teks: "#cccccc", redup: "#6e7681", kw: "#569cd6", str: "#ce9178", num: "#b5cea8", kom: "#6a9955", fn: "#dcdcaa", tag: "#569cd6", atr: "#9cdcfe", aksen: "#0078d4", kursor: "#aeafad", hapus: "#f14c4c", tambah: "#2ea043" },
+    "light": { bg: "#ffffff", panel: "#f3f4f6", garis: "#e3e5e9", teks: "#1f2328", redup: "#8c959f", kw: "#cf222e", str: "#0a3069", num: "#0550ae", kom: "#6e7781", fn: "#8250df", tag: "#116329", atr: "#953800", aksen: "#0969da", kursor: "#0969da", hapus: "#cf222e", tambah: "#1a7f37" },
+    "terminal-pro": { bg: "#050505", panel: "#161616", garis: "#262626", teks: "#c8c8c8", redup: "#6c6c6c", kw: "#ececec", str: "#b8e86a", num: "#d8d8d8", kom: "#6c6c6c", fn: "#ffffff", tag: "#b8e86a", atr: "#c8c8c8", aksen: "#a6ff00", kursor: "#a6ff00", hapus: "#ff6b6b", tambah: "#a6ff00" }
+  };
+  var KW = {
+    js: "const|let|var|function|return|if|else|for|while|of|in|new|class|extends|import|from|export|default|async|await|try|catch|throw|true|false|null|undefined|this|typeof",
+    py: "def|class|return|if|elif|else|for|while|in|not|and|or|import|from|as|with|try|except|raise|lambda|True|False|None|yield|async|await|pass",
+    bash: "if|then|else|fi|for|do|done|in|case|esac|function|export|echo|cd|sudo|return|while|local"
+  };
+  function aturan(bhs) {
+    if (bhs === "html") return [[/<!--.*?(-->|$)/y, "kom"], [/"[^"]*"|'[^']*'/y, "str"], [/<\/?[\w-]+|\/?>/y, "tag"], [/[\w-]+(?==)/y, "atr"], [/\s+/y, "sp"], [/[^\s<>"'=]+|=/y, "teks"]];
+    var kw = new RegExp("(?:" + (KW[bhs] || KW.js) + ")(?![\\w$])", "y"), r = [];
+    r.push([bhs === "js" ? /\/\/.*/y : /#.*/y, "kom"]);
+    r.push([/"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`[^`]*`/y, "str"]);
+    if (bhs === "bash") r.push([/--?[A-Za-z][\w-]*/y, "num"], [/\$[\w{}]+/y, "atr"]);
+    r.push([/\d+(?:\.\d+)?(?![\w$])/y, "num"], [kw, "kw"], [/[A-Za-z_$][\w$]*(?=\s*\()/y, "fn"], [/\s+/y, "sp"], [bhs === "bash" ? /[A-Za-z_$~.][\w$.\/~-]*/y : /[A-Za-z_$][\w$]*/y, "teks"], [/[^\sA-Za-z_$\d]+?/y, "tanda"]);
+    return r;
+  }
+  /** sorot(kode, bahasa) -> [[{t, c}]] per baris */
+  function sorot(kode, bhs) {
+    var R = aturan(bhs);
+    return String(kode).split("\n").map(function (ln) {
+      var out = [], i = 0;
+      while (i < ln.length) {
+        var ok = false;
+        for (var j = 0; j < R.length; j++) {
+          R[j][0].lastIndex = i; var m = R[j][0].exec(ln);
+          if (m && m[0].length) { out.push({ t: m[0], c: R[j][1] }); i += m[0].length; ok = true; break; }
+        }
+        if (!ok) { out.push({ t: ln[i], c: "teks" }); i++; }
+      }
+      return out;
+    });
+  }
+  function warnaTok(T, c) { return T[c] || T.teks; }
+  /** tunggu berkas font termuat (fonts.ready saja belum cukup untuk mengukur) */
+  function muatFont(spec, berat) {
+    if (!document.fonts || !document.fonts.load) return Promise.resolve();
+    var fam = BLOCK.family(spec, "monospace");
+    return Promise.all((berat || [400]).map(function (b) { return document.fonts.load(b + " 20px " + fam, "Aa{}"); })).catch(function () {});
+  }
+  /** jendela generik: bilah judul + tiga titik, isi di bawahnya */
+  function jendela(par, T, w, h, judul, s, mono) {
+    var win = BLOCK.el("div", { style: "position:absolute;left:50%;top:50%;width:" + w + "px;height:" + h + "px;margin:" + (-h / 2) + "px 0 0 " + (-w / 2) + "px;border-radius:" + 14 * s + "px;background:" + T.bg + ";box-shadow:0 " + 30 * s + "px " + 80 * s + "px rgba(0,0,0,.5),0 0 0 1px " + T.garis + ";overflow:hidden" }, par);
+    var bar = BLOCK.el("div", { style: "position:absolute;left:0;right:0;top:0;height:" + 44 * s + "px;background:" + T.panel + ";border-bottom:1px solid " + T.garis + ";display:flex;align-items:center;justify-content:center;color:" + T.redup + ";font:500 " + 16 * s + "px " + mono }, win, BLOCK.esc(judul));
+    ["#ff5f57", "#febc2e", "#28c840"].forEach(function (c, i) { BLOCK.el("div", { style: "position:absolute;left:" + (18 + i * 22) * s + "px;top:50%;width:" + 12 * s + "px;height:" + 12 * s + "px;margin-top:" + (-6 * s) + "px;border-radius:50%;background:" + c }, bar); });
+    var isi = BLOCK.el("div", { style: "position:absolute;left:0;right:0;top:" + 44 * s + "px;bottom:0;overflow:hidden" }, win);
+    return { win: win, bar: bar, isi: isi };
+  }
+  // --- akhir penyorot ---
+  var T = TEMA[P.theme] || TEMA["dark-2026"], mono = BLOCK.family(P.font, "ui-monospace, monospace");
+  return muatFont(P.font, [400, 700]).then(function () {
+    var L = P.steps, fs = P.size * s, lh = fs * 1.6;
+    var maxBaris = Math.max.apply(null, L.map(function (c) { return String(c).split("\n").length; }));
+    var maxKol = Math.max.apply(null, L.map(function (c) { return Math.max.apply(null, String(c).split("\n").map(function (x) { return x.length; })); }));
+    var ww = Math.min(W * 0.92, Math.max(maxKol * fs * 0.62 + 120 * s, 700 * s)), wh = maxBaris * lh + 44 * s + 90 * s;
+    if (ww > W * 0.92) { fs *= W * 0.92 / ww; lh = fs * 1.6; ww = W * 0.92; }
+    var j = jendela(k.root, T, ww, wh, P.file, s, mono);
+    var area = E("div", { style: "position:absolute;left:" + 50 * s + "px;top:" + 40 * s + "px;font:" + fs + "px/" + lh + "px " + mono }, j.isi);
+    // ukur posisi token setiap langkah sekali
+    var lang = L.map(function (kode) {
+      var uk = E("div", { class: "uk" }, area), toks = [];
+      sorot(kode, P.lang).forEach(function (bar) {
+        var ln = E("div", { style: "height:" + lh + "px" }, uk);
+        bar.forEach(function (tk) { var sp = E("span", null, ln); sp.textContent = tk.t; if (tk.c !== "sp") toks.push({ t: tk.t, c: tk.c, el: sp }); });
+      });
+      toks.forEach(function (x) { x.x = x.el.offsetLeft; x.y = x.el.offsetTop; });
+      return toks;
+    });
+    // cocokkan token sama antar langkah (LCS urutan teks)
+    function lcs(a, b) {
+      var n = a.length, m = b.length, M = [], i, jj;
+      for (i = 0; i <= n; i++) { M.push(new Array(m + 1).fill(0)); }
+      for (i = n - 1; i >= 0; i--) for (jj = m - 1; jj >= 0; jj--) M[i][jj] = a[i].t === b[jj].t ? M[i + 1][jj + 1] + 1 : Math.max(M[i + 1][jj], M[i][jj + 1]);
+      var pas = []; i = 0; jj = 0;
+      while (i < n && jj < m) { if (a[i].t === b[jj].t) { pas.push([i, jj]); i++; jj++; } else if (M[i + 1][jj] >= M[i][jj + 1]) i++; else jj++; }
+      return pas;
+    }
+    var obj = [], cur = lang[0].map(function (x) { var o = { tk: x, a: 0, z: L.length, pos: {} }; o.pos[0] = x; obj.push(o); return o; });
+    for (var i = 1; i < L.length; i++) {
+      var pas = lcs(lang[i - 1], lang[i]), baru = [], dipakai = {};
+      pas.forEach(function (p) { var o = cur[p[0]]; o.pos[i] = lang[i][p[1]]; baru[p[1]] = o; dipakai[p[0]] = 1; });
+      cur.forEach(function (o, q) { if (!dipakai[q]) o.z = i; });
+      lang[i].forEach(function (x, q) { if (!baru[q]) { var o = { tk: x, a: i, z: L.length, pos: {} }; o.pos[i] = x; obj.push(o); baru[q] = o; } });
+      cur = baru;
+    }
+    var seg = (D - 0.6) / L.length, md = +P.morph_duration;
+    obj.forEach(function (o) {
+      var el = E("div", { class: "tk", style: "color:" + warnaTok(T, o.tk.c) }, area); el.textContent = o.tk.t;
+      var p0 = o.pos[o.a];
+      BLOCK.initial(tl, el, { x: p0.x, y: p0.y, autoAlpha: o.a === 0 ? 1 : 0 });
+      for (var i = o.a + 1; i < o.z && i < L.length; i++) {
+        var tc = 0.4 + i * seg, a = o.pos[i - 1], b = o.pos[i];
+        if (a.x !== b.x || a.y !== b.y) tl.to(el, { x: b.x, y: b.y, duration: md, ease: "power3.inOut" }, tc + (b.y > a.y ? 0.04 : 0));
+      }
+      if (o.a > 0) { var ta = 0.4 + o.a * seg; tl.fromTo(el, { autoAlpha: 0, y: p0.y + 10 * s }, { autoAlpha: 1, y: p0.y, duration: md * 0.5, ease: "power2.out", immediateRender: false }, ta + md * 0.55); }
+      if (o.z < L.length) { var tz = 0.4 + o.z * seg; tl.to(el, { autoAlpha: 0, duration: md * 0.35, ease: "power1.in" }, tz); }
+    });
+    tl.fromTo(j.win, { autoAlpha: 0, y: 30 * s }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+    // tinggi jendela mengikuti jumlah baris tiap langkah
+    L.forEach(function (c, i) { if (i) tl.to(j.win, { height: String(c).split("\n").length * lh + 44 * s + 90 * s, marginTop: -(String(c).split("\n").length * lh + 44 * s + 90 * s) / 2, duration: md, ease: "power3.inOut" }, 0.4 + i * seg); });
+    var h0 = String(L[0]).split("\n").length * lh + 44 * s + 90 * s;
+    BLOCK.initial(tl, j.win, { height: h0, marginTop: -h0 / 2 });
+  });
+}, { font: true });
+</script>

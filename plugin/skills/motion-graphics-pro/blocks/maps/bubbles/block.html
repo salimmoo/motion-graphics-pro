@@ -1,0 +1,103 @@
+<!-- Block maps/bubbles · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="maps/bubbles" data-start="0" data-duration="6" data-track-index="4" class="blk blk-maps-bubbles">
+<script type="application/json" data-block-props>
+{"preset": "indonesia", "shape": "square", "dot": [{"kode": "JK", "nilai": 10.6, "label": "Jakarta"}, {"kode": "JI", "nilai": 3.0, "label": "Surabaya"}, {"kode": "JB", "nilai": 2.5, "label": "Bandung"}, {"kode": "SU", "nilai": 2.4, "label": "Medan"}, {"kode": "SS", "nilai": 1.7, "label": "Palembang"}, {"kode": "JT", "nilai": 1.7, "label": "Semarang"}, {"kode": "SN", "nilai": 1.4, "label": "Makassar"}, {"kode": "KI", "nilai": 0.9, "label": "Balikpapan"}, {"kode": "BA", "nilai": 0.9, "label": "Denpasar"}, {"kode": "PA", "nilai": 0.4, "label": "Jayapura"}], "title": "Penduduk kota besar", "sub": "Juta jiwa, angka ilustratif", "unit": " jt", "line": true, "caption": 3, "map_color": "#e4ddcf", "map_line_color": "#b9ae98", "bubble_color": "#2d6cdf", "text_color": "#1d1b18", "max_size": 1.0, "font": "Inter:wght@500;600;700;800"}
+</script>
+</div>
+<style>
+.blk-maps-bubbles{position:absolute;inset:0;pointer-events:none}
+.blk-maps-bubbles svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.blk-maps-bubbles .blk-judul{position:absolute;left:6%;top:5%;right:6%;font-weight:800;line-height:1.05}
+.blk-maps-bubbles .blk-judul small{display:block;font-weight:500;opacity:.6;letter-spacing:.04em;margin-top:.35em}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+// ---- peta ubin bersama (geografi ilustratif: ubin sama besar, susunan kira-kira geografis) ----
+  var PETA = {
+    raw: { indonesia: "AC:Aceh:0:0|SU:Sumatera Utara:1:1|RI:Riau:2:1|KR:Kepulauan Riau:3:0|SB:Sumatera Barat:1:2|JA:Jambi:2:2|BE:Bengkulu:2:3|SS:Sumatera Selatan:3:2|BB:Bangka Belitung:4:2|LA:Lampung:3:3|BT:Banten:4:4|JK:DKI Jakarta:5:3|JB:Jawa Barat:5:4|JT:Jawa Tengah:6:4|YO:DI Yogyakarta:6:5|JI:Jawa Timur:7:4|BA:Bali:8:4|NB:Nusa Tenggara Barat:9:4|NT:Nusa Tenggara Timur:10:4|KB:Kalimantan Barat:5:1|KT:Kalimantan Tengah:6:1|KI:Kalimantan Timur:7:1|KU:Kalimantan Utara:7:0|KS:Kalimantan Selatan:7:2|GO:Gorontalo:9:1|SA:Sulawesi Utara:10:1|ST:Sulawesi Tengah:9:2|SR:Sulawesi Barat:8:3|SN:Sulawesi Selatan:9:3|SG:Sulawesi Tenggara:10:3|MU:Maluku Utara:11:1|MA:Maluku:11:2|PD:Papua Barat Daya:12:1|PB:Papua Barat:13:1|PA:Papua:15:1|PT:Papua Tengah:14:2|PP:Papua Pegunungan:15:2|PS:Papua Selatan:15:3", as: "AK:Alaska:0:0|ME:Maine:10:0|VT:Vermont:9:1|NH:New Hampshire:10:1|WA:Washington:0:2|ID:Idaho:1:2|MT:Montana:2:2|ND:North Dakota:3:2|MN:Minnesota:4:2|IL:Illinois:5:2|WI:Wisconsin:6:2|MI:Michigan:7:2|NY:New York:8:2|RI:Rhode Island:9:2|MA:Massachusetts:10:2|OR:Oregon:0:3|NV:Nevada:1:3|WY:Wyoming:2:3|SD:South Dakota:3:3|IA:Iowa:4:3|IN:Indiana:5:3|OH:Ohio:6:3|PA:Pennsylvania:7:3|NJ:New Jersey:8:3|CT:Connecticut:9:3|CA:California:0:4|UT:Utah:1:4|CO:Colorado:2:4|NE:Nebraska:3:4|MO:Missouri:4:4|KY:Kentucky:5:4|WV:West Virginia:6:4|VA:Virginia:7:4|MD:Maryland:8:4|DE:Delaware:9:4|AZ:Arizona:1:5|NM:New Mexico:2:5|KS:Kansas:3:5|AR:Arkansas:4:5|TN:Tennessee:5:5|NC:North Carolina:6:5|SC:South Carolina:7:5|OK:Oklahoma:3:6|LA:Louisiana:4:6|MS:Mississippi:5:6|AL:Alabama:6:6|GA:Georgia:7:6|HI:Hawaii:0:7|TX:Texas:3:7|FL:Florida:8:7" },
+    data: function (preset) {
+      return (this.raw[preset] || this.raw.indonesia).split("|").map(function (s) { var a = s.split(":"); return { k: a[0], n: a[1], c: +a[2], r: +a[3] }; });
+    },
+    // susun ubin di kotak {x,y,w,h}; bentuk "square" | "hex"
+    tata: function (D, bentuk, box) {
+      var hex = bentuk === "hex", cols = 0, rows = 0;
+      D.forEach(function (d) { cols = Math.max(cols, d.c + 1); rows = Math.max(rows, d.r + 1); });
+      var cw = cols + (hex ? 0.5 : 0), rh = hex ? 0.866 : 1, ch = (rows - 1) * rh + 1;
+      var s = Math.min(box.w / cw, box.h / ch), ox = box.x + (box.w - cw * s) / 2, oy = box.y + (box.h - ch * s) / 2;
+      D.forEach(function (d) { d.cx = ox + (d.c + 0.5 + (hex && d.r % 2 ? 0.5 : 0)) * s; d.cy = oy + (d.r * rh + 0.5) * s; d.s = s; });
+      return { s: s, hex: hex, x: ox, y: oy, w: cw * s, h: ch * s };
+    },
+    bentuk: function (hex, s, gap) {
+      var R = hex ? s / Math.sqrt(3) * (1 - gap) : 0, h = s * (1 - gap) / 2;
+      if (!hex) return "M" + (-h) + "," + (-h + h * 0.2) + "Q" + (-h) + "," + (-h) + " " + (-h + h * 0.2) + "," + (-h) + "H" + (h - h * 0.2) + "Q" + h + "," + (-h) + " " + h + "," + (-h + h * 0.2) +
+        "V" + (h - h * 0.2) + "Q" + h + "," + h + " " + (h - h * 0.2) + "," + h + "H" + (-h + h * 0.2) + "Q" + (-h) + "," + h + " " + (-h) + "," + (h - h * 0.2) + "Z";
+      var p = []; for (var i = 0; i < 6; i++) { var a = Math.PI / 3 * i - Math.PI / 2; p.push((R * Math.cos(a)).toFixed(2) + "," + (R * Math.sin(a)).toFixed(2)); }
+      return "M" + p.join("L") + "Z";
+    },
+    cari: function (D, kode) { for (var i = 0; i < D.length; i++) if (D[i].k === String(kode).toUpperCase()) return D[i]; return null; },
+    // lengkung busur kuadrat dari a ke b, naik ke atas sebesar fraksi jarak
+    busur: function (a, b, lengkung) {
+      var mx = (a.cx + b.cx) / 2, my = (a.cy + b.cy) / 2, dx = b.cx - a.cx, dy = b.cy - a.cy, L = Math.sqrt(dx * dx + dy * dy) || 1;
+      var nx = dy / L, ny = -dx / L; if (ny > 0) { nx = -nx; ny = -ny; }
+      return "M" + a.cx + "," + a.cy + "Q" + (mx + nx * L * lengkung) + "," + (my + ny * L * lengkung) + " " + b.cx + "," + b.cy;
+    }
+  };
+  function petaDasar(svg, D, T, warna, garis, label, ukLabel, font) {
+    var g = BLOCK.svg("g", { class: "blk-dasar" }, svg), d0 = PETA.bentuk(T.hex, T.s, 0.08), els = [];
+    D.forEach(function (d) {
+      var gg = BLOCK.svg("g", { transform: "translate(" + d.cx + "," + d.cy + ")" }, g);
+      var p = BLOCK.svg("path", { d: d0, fill: warna, stroke: garis, "stroke-width": Math.max(1, T.s * 0.02) }, gg);
+      if (label) { var tx = BLOCK.svg("text", { "text-anchor": "middle", "dominant-baseline": "central", "font-size": ukLabel, "font-weight": 600, fill: garis, "font-family": font }, gg); tx.textContent = d.k; }
+      d.g = gg; d.p = p; els.push(gg);
+    });
+    return { g: g, els: els };
+  }
+
+  var P = k.P, tl = k.tl, s = k.s, W = k.w, H = k.h, fam = BLOCK.family(P.font);
+  var D = PETA.data(P.preset);
+  if (P.title) {
+    var j = BLOCK.el("div", { class: "blk-judul", style: "font-family:" + fam + ";color:" + P.text_color + ";font-size:" + Math.round(60 * s) + "px" }, k.root, BLOCK.esc(P.title) + (P.sub ? "<small style='font-size:" + Math.round(26 * s) + "px'>" + BLOCK.esc(P.sub) + "</small>" : ""));
+    tl.fromTo(j, { autoAlpha: 0, y: 24 * s }, { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.out", immediateRender: true }, 0.05);
+  }
+  var top = P.title ? 0.05 * H + 160 * s : 80 * s, pad = 0.06 * W;
+  var T = PETA.tata(D, P.shape, { x: pad, y: top, w: W - 2 * pad, h: H - top - 70 * s });
+  var svg = BLOCK.svg("svg", { viewBox: "0 0 " + W + " " + H }, k.root);
+  var base = petaDasar(svg, D, T, P.map_color, P.map_line_color, false, 0, fam);
+  tl.fromTo(base.els, { autoAlpha: 0, scale: 0.7, transformOrigin: "50% 50%" }, { autoAlpha: 1, scale: 1, duration: 0.4, ease: "power2.out", stagger: 0.45 / D.length, immediateRender: true }, 0.1);
+  var X = (P.dot || []).map(function (p) { var d = PETA.cari(D, p.kode); return d ? { d: d, v: +p.nilai || 0, l: p.label || d.n } : null; }).filter(Boolean);
+  var vmax = Math.max.apply(null, X.map(function (x) { return x.v; }).concat([1e-9]));
+  var gL = BLOCK.svg("g", {}, svg), gB = BLOCK.svg("g", {}, svg), gT = BLOCK.svg("g", {}, svg), t0 = 0.8;
+  var rank = X.slice().sort(function (a, b) { return b.v - a.v; });
+  X.forEach(function (x, i) {
+    var r = T.s * +P.max_size * Math.sqrt(x.v / vmax), at = t0 + i * 0.16;
+    if (P.line && i > 0) {
+      var ln = BLOCK.svg("path", { d: PETA.busur(X[0].d, x.d, 0.12), fill: "none", stroke: P.bubble_color, "stroke-width": 2 * s, opacity: 0.45, "stroke-dasharray": "1 1" }, gL);
+      var Lq = BLOCK.prepareStroke(ln);
+      tl.fromTo(ln, { strokeDashoffset: Lq }, { strokeDashoffset: 0, duration: 0.8, ease: "power2.out", immediateRender: true }, at - 0.1);
+    }
+    var c = BLOCK.svg("circle", { cx: x.d.cx, cy: x.d.cy, r: Math.max(3 * s, r), fill: BLOCK.rgba(P.bubble_color, 0.55), stroke: P.bubble_color, "stroke-width": 2.5 * s }, gB);
+    tl.fromTo(c, { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.7, ease: "blockSpring", immediateRender: true }, at);
+    var dot = BLOCK.svg("circle", { cx: x.d.cx, cy: x.d.cy, r: 3.5 * s, fill: "#fff" }, gB);
+    tl.fromTo(dot, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2, immediateRender: true }, at + 0.1);
+    var rk = rank.indexOf(x);
+    if (rk < +P.caption) {
+      // keterangan menyebar ke arah berbeda supaya tidak bertumpuk: atas-kanan, bawah-kanan, bawah-kiri, atas-kiri
+      var ang = [-0.8, 0.75, 2.4, -2.35][rk % 4], right = Math.cos(ang) > 0, g = BLOCK.svg("g", {}, gT);
+      var ex = x.d.cx + Math.cos(ang) * r, ey = x.d.cy + Math.sin(ang) * r, kx = ex + Math.cos(ang) * 46 * s, ky = ey + Math.sin(ang) * 46 * s, hx = kx + (right ? 22 : -22) * s;
+      BLOCK.svg("path", { d: "M" + ex + "," + ey + "L" + kx + "," + ky + "H" + hx, fill: "none", stroke: P.text_color, "stroke-width": 2 * s }, g);
+      BLOCK.svg("circle", { cx: ex, cy: ey, r: 4 * s, fill: P.text_color }, g);
+      var tx = hx + (right ? 8 : -8) * s, an = right ? "start" : "end";
+      var t1 = BLOCK.svg("text", { x: tx, y: ky + 2 * s, "text-anchor": an, "font-size": 36 * s, "font-weight": 800, fill: P.text_color, "font-family": fam }, g);
+      t1.textContent = String(x.v).replace(".", ",") + (P.unit || "");
+      var t2 = BLOCK.svg("text", { x: tx, y: ky + 30 * s, "text-anchor": an, "font-size": 22 * s, "font-weight": 600, fill: P.text_color, opacity: 0.7, "font-family": fam }, g);
+      t2.textContent = x.l;
+      tl.fromTo(g, { autoAlpha: 0, x: (right ? -14 : 14) * s }, { autoAlpha: 1, x: 0, duration: 0.5, ease: "power3.out", immediateRender: true }, Math.min(at + 0.6 + rk * 0.15, k.dur - 0.6));
+    }
+  });
+  // denyut halus pusat
+  if (X.length) {
+    var ring = BLOCK.svg("circle", { cx: X[0].d.cx, cy: X[0].d.cy, r: T.s * +P.max_size, fill: "none", stroke: P.bubble_color, "stroke-width": 2 * s }, gB);
+    tl.fromTo(ring, { scale: 1, autoAlpha: 0, transformOrigin: "50% 50%" }, { keyframes: [{ autoAlpha: 0.7, duration: 0.15 }, { scale: 1.5, autoAlpha: 0, duration: 1.1 }], repeat: 2, repeatDelay: 0.3, immediateRender: true }, t0 + 0.8);
+  }
+}, { font: true });
+</script>

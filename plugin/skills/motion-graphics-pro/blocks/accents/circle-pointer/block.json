@@ -1,0 +1,149 @@
+{
+ "id": "accents/circle-pointer",
+ "name": "Circle Pointer",
+ "name_id": "Penunjuk Lingkar",
+ "category": "accents",
+ "description": {
+  "id": "Elips anotasi bergaya coretan tangan tergambar mengelilingi sasaran (elemen host lewat selektor, atau kotak persen), disertai chip hitung mundur yang berdenyut setiap ketukan. Cocok untuk tutorial dan video penjelasan.",
+  "en": "A hand-drawn annotation ellipse draws on around a target (host element by selector, or a percent box), with a countdown chip that pulses on each tick. Made for tutorials and explainers."
+ },
+ "tags": [
+  "aksen",
+  "anotasi",
+  "lingkar",
+  "penunjuk",
+  "tutorial",
+  "hitung-mundur",
+  "sorot",
+  "accents",
+  "circle",
+  "pointer"
+ ],
+ "props": {
+  "target": {
+   "default": "",
+   "type": "selector",
+   "hint": "Elemen sasaran; kosong = pakai posisi & ukuran persen"
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Pusat sasaran (%) bila tanpa target",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "width": {
+   "default": 24,
+   "type": "number",
+   "hint": "Lebar sasaran (%)",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "height": {
+   "default": 12,
+   "type": "number",
+   "hint": "Tinggi sasaran (%)",
+   "aliases": [
+    "tinggi"
+   ]
+  },
+  "distance": {
+   "default": 34,
+   "type": "number",
+   "hint": "Jarak elips dari sasaran (px pada 1080)",
+   "aliases": [
+    "jarak"
+   ]
+  },
+  "text": {
+   "default": "Klik di sini",
+   "type": "text",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "count": {
+   "default": 3,
+   "type": "number",
+   "hint": "Mulai hitung mundur",
+   "aliases": [
+    "hitung"
+   ]
+  },
+  "draw_duration": {
+   "default": 0.8,
+   "type": "number",
+   "aliases": [
+    "durasi_gambar"
+   ]
+  },
+  "thickness": {
+   "default": 7,
+   "type": "number",
+   "hint": "Tebal coretan (px pada 1080)",
+   "aliases": [
+    "tebal"
+   ]
+  },
+  "color": {
+   "default": "#ff3b30",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "text_color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@700;800",
+   "type": "font"
+  },
+  "size": {
+   "default": 30,
+   "type": "number",
+   "hint": "Ukuran teks chip",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "seed": {
+   "default": 2,
+   "type": "number"
+  }
+ },
+ "duration": 4,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "aksen/penunjuk-lingkar",
+  "yt-circle-pointer"
+ ],
+ "example": {
+  "bg": "ui",
+  "props": {
+   "target": "#tombol-contoh"
+  },
+  "font": [
+   "Inter:wght@700;800"
+  ]
+ }
+}

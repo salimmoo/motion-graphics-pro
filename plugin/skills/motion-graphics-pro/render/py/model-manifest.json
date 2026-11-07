@@ -1,0 +1,292 @@
+{
+ "_desc": "mgp model recipe: sources pinned per Hugging Face commit + sha256. Used by `mgp install` (src/install.mjs). Models are NOT in the ZIP. Download URL = https://huggingface.co/<repo>/resolve/<rev>/<path>. sha256 computed from files proven to work on the test laptop 05-11-2026 and matched with the Hugging Face LFS API oid.",
+ "version": 1,
+ "url": "https://huggingface.co/{repo}/resolve/{rev}/{path}",
+ "components": {
+  "chatterbox": {
+   "target": "voice",
+   "required": true,
+   "name": "Chatterbox Multilingual (Resemble AI)",
+   "license": "MIT",
+   "layout": "flat",
+   "folder": "chatterbox",
+   "env": "MGP_CHATTERBOX_DIR",
+   "files": [
+    {
+     "repo": "ResembleAI/chatterbox",
+     "rev": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+     "path": "ve.pt",
+     "size": 5698626,
+     "sha256": "4b16d836bc598509860f6fa068165a8bb5e9ac84f05582dfcf278a5a372879f1"
+    },
+    {
+     "repo": "ResembleAI/chatterbox",
+     "rev": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+     "path": "t3_mtl23ls_v2.safetensors",
+     "size": 2143989752,
+     "sha256": "b1237586127ce98e7800a68e49938eb5092846862aabcb6e17b2fda7889a6c75"
+    },
+    {
+     "repo": "ResembleAI/chatterbox",
+     "rev": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+     "path": "s3gen.pt",
+     "size": 1057165844,
+     "sha256": "9b9ff07e60b20c136e2b1b3d7563a24604e8d2c4c267888d1ee929dd0151d2a3"
+    },
+    {
+     "repo": "ResembleAI/chatterbox",
+     "rev": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+     "path": "grapheme_mtl_merged_expanded_v1.json",
+     "size": 69989,
+     "sha256": "69632f47220a788a52ce2661d096453c5655e9bf25289d89a8d832c46ee07dbf"
+    },
+    {
+     "repo": "ResembleAI/chatterbox",
+     "rev": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+     "path": "conds.pt",
+     "size": 107374,
+     "sha256": "6552d70568833628ba019c6b03459e77fe71ca197d5c560cef9411bee9d87f4e"
+    },
+    {
+     "repo": "ResembleAI/chatterbox",
+     "rev": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+     "path": "Cangjie5_TC.json",
+     "size": 1920163,
+     "sha256": "7073fd9de919443ae88e0bd2449917a65fe54898a4413ed1edcc4b67f28bce8c"
+    }
+   ],
+   "_desc": "Files read by ChatterboxMultilingualTTS.from_local (allow_patterns of from_pretrained, chatterbox-tts 0.1.7). conds.pt = built-in voice for the smoke test.",
+   "totalSize": 3208951748
+  },
+  "openvoice": {
+   "target": "voice",
+   "required": false,
+   "flag": "--openvoice",
+   "name": "OpenVoice V2 tone color converter (MyShell)",
+   "license": "MIT",
+   "layout": "flat",
+   "folder": "openvoice",
+   "env": "MGP_OPENVOICE_DIR",
+   "files": [
+    {
+     "repo": "myshell-ai/OpenVoiceV2",
+     "rev": "f36e7edfe1684461a8343844af60babc2efbb727",
+     "path": "converter/config.json",
+     "size": 838,
+     "sha256": "9dfff60350b8c63f2c664efd92a61b2516efb22671466960f0e5dfebd881fa47"
+    },
+    {
+     "repo": "myshell-ai/OpenVoiceV2",
+     "rev": "f36e7edfe1684461a8343844af60babc2efbb727",
+     "path": "converter/checkpoint.pth",
+     "size": 131320490,
+     "sha256": "9652c27e92b6b2a91632590ac9962ef7ae2b712e5c5b7f4c34ec55ee2b37ab9e"
+    }
+   ],
+   "totalSize": 131321328
+  },
+  "whisper-small": {
+   "target": "voice",
+   "required": true,
+   "name": "faster-whisper small (Systran, CTranslate2)",
+   "license": "MIT",
+   "layout": "hf",
+   "folder": "hf",
+   "env": "MGP_WHISPER_CACHE",
+   "files": [
+    {
+     "repo": "Systran/faster-whisper-small",
+     "rev": "536b0662742c02347bc0e980a01041f333bce120",
+     "path": "config.json",
+     "size": 2370,
+     "sha256": "b55496ac7940a7ae47d2c01eab40edfd8701feec1229d9cce3b40014383fb828"
+    },
+    {
+     "repo": "Systran/faster-whisper-small",
+     "rev": "536b0662742c02347bc0e980a01041f333bce120",
+     "path": "model.bin",
+     "size": 483546902,
+     "sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671"
+    },
+    {
+     "repo": "Systran/faster-whisper-small",
+     "rev": "536b0662742c02347bc0e980a01041f333bce120",
+     "path": "tokenizer.json",
+     "size": 2203239,
+     "sha256": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab"
+    },
+    {
+     "repo": "Systran/faster-whisper-small",
+     "rev": "536b0662742c02347bc0e980a01041f333bce120",
+     "path": "vocabulary.txt",
+     "size": 459861,
+     "sha256": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913"
+    }
+   ],
+   "_desc": "Used by mgp voice score and mgp transcribe --model small.",
+   "totalSize": 486212372
+  },
+  "resemblyzer": {
+   "target": "voice",
+   "required": true,
+   "name": "Resemblyzer VoiceEncoder",
+   "license": "Apache-2.0",
+   "layout": "package",
+   "files": [],
+   "_desc": "The pretrained.pt weights (17 MB) ship inside the Resemblyzer==0.1.4 pip package; no separate download.",
+   "totalSize": 0
+  },
+  "flux2-klein-4b": {
+   "target": "image",
+   "required": true,
+   "name": "FLUX.2 [klein] 4B GGUF Q4_K_M + Qwen3-4B GGUF Q4_K_M + VAE/config",
+   "license": "Apache-2.0",
+   "layout": "hf",
+   "folder": "hf",
+   "env": "MGP_IMAGE_MODEL",
+   "files": [
+    {
+     "repo": "black-forest-labs/FLUX.2-klein-4B",
+     "rev": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+     "path": "LICENSE.md",
+     "size": 9584,
+     "sha256": "ca02bc51900ab07789d1b70283329e7137f5af98f5161c23a1c81fc38a4af1fe"
+    },
+    {
+     "repo": "black-forest-labs/FLUX.2-klein-4B",
+     "rev": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+     "path": "model_index.json",
+     "size": 446,
+     "sha256": "51a76cb1cf3ed37423a1128c79c22faee8e6fbe7f5aaeb737f0a258930dbaac0"
+    },
+    {
+     "repo": "black-forest-labs/FLUX.2-klein-4B",
+     "rev": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+     "path": "scheduler/scheduler_config.json",
+     "size": 486,
+     "sha256": "067afb012cef64553a763447d1efd93daeffcc0123ca7e25b09f8de20b90762e"
+    },
+    {
+     "repo": "black-forest-labs/FLUX.2-klein-4B",
+     "rev": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+     "path": "text_encoder/config.json",
+     "size": 1536,
+     "sha256": "214b4c29a0d975e9fddf9994a5673f22cb2c4c5750352f9227c2c3251ebeab40"
+    },
+    {
+     "repo": "black-forest-labs/FLUX.2-klein-4B",
+     "rev": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+     "path": "text_encoder/generation_config.json",
+     "size": 214,
+     "sha256": "4347b1aeed2b2b78bc059920a0b7f5fec71482e1344952b76d7665d638d71f13"
+    },
+    {
+     "repo": "black-forest-labs/FLUX.2-klein-4B",
+     "rev": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+     "path": "tokenizer/added_tokens.json",
+     "size": 707,
+     "sha256": "c0284b582e14987fbd3d5a2cb2bd139084371ed9acbae488829a1c900833c680"
+    },
+    {
+     "repo": "black-forest-labs/FLUX.2-klein-4B",
+     "rev": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+     "path": "tokenizer/chat_template.jinja",
+     "size": 4168,
+     "sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8"
+    },
+    {
+     "repo": "black-forest-labs/FLUX.2-klein-4B",
+     "rev": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+     "path": "tokenizer/merges.txt",
+     "size": 1671853,
+     "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+    },
+    {
+     "repo": "black-forest-labs/FLUX.2-klein-4B",
+     "rev": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+     "path": "tokenizer/special_tokens_map.json",
+     "size": 613,
+     "sha256": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd"
+    },
+    {
+     "repo": "black-forest-labs/FLUX.2-klein-4B",
+     "rev": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+     "path": "tokenizer/tokenizer.json",
+     "size": 11422654,
+     "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+    },
+    {
+     "repo": "black-forest-labs/FLUX.2-klein-4B",
+     "rev": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+     "path": "tokenizer/tokenizer_config.json",
+     "size": 5404,
+     "sha256": "443bfa629eb16387a12edbf92a76f6a6f10b2af3b53d87ba1550adfcf45f7fa0"
+    },
+    {
+     "repo": "black-forest-labs/FLUX.2-klein-4B",
+     "rev": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+     "path": "tokenizer/vocab.json",
+     "size": 2776833,
+     "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    {
+     "repo": "black-forest-labs/FLUX.2-klein-4B",
+     "rev": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+     "path": "transformer/config.json",
+     "size": 541,
+     "sha256": "09733c74a3da6d17dd0a0472a091a8950c7c6935889c32c16cc800ede05029de"
+    },
+    {
+     "repo": "black-forest-labs/FLUX.2-klein-4B",
+     "rev": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+     "path": "vae/config.json",
+     "size": 821,
+     "sha256": "0d6dfb69ae95a5e2ac9836284bbb63d8b38ce67b25ba2dff380752b2a10ab948"
+    },
+    {
+     "repo": "black-forest-labs/FLUX.2-klein-4B",
+     "rev": "e7b7dc27f91deacad38e78976d1f2b499d76a294",
+     "path": "vae/diffusion_pytorch_model.safetensors",
+     "size": 168120878,
+     "sha256": "ca70d2202afe6415bdbcb8793ba8cd99fd159cfe6192381504d6c4d3036e0f04"
+    },
+    {
+     "repo": "unsloth/Qwen3-4B-GGUF",
+     "rev": "22c9fc8a8c7700b76a1789366280a6a5a1ad1120",
+     "path": "Qwen3-4B-Q4_K_M.gguf",
+     "size": 2497281312,
+     "sha256": "f6f851777709861056efcdad3af01da38b31223a3ba26e61a4f8bf3a2195813a"
+    },
+    {
+     "repo": "unsloth/FLUX.2-klein-4B-GGUF",
+     "rev": "a09d5bb51ac4000ccd9643d10e9db3ed14200508",
+     "path": "flux-2-klein-4b-Q4_K_M.gguf",
+     "size": 2604311104,
+     "sha256": "0b25d143c8469b342bc5af3bce92b783bf6b0636d285f7b2f75e38af63af9a15"
+    }
+   ],
+   "_desc": "Same as ENGINES['klein4b'] in py/image_engine.py (quant Q4_K_M). Hugging Face cache layout (refs/main + snapshots/<rev>/) so try_to_load_from_cache finds it.",
+   "totalSize": 5285609154
+  },
+  "u2net": {
+   "target": "cutout",
+   "required": true,
+   "name": "U2-Net (rembg background removal, ONNX)",
+   "license": "Apache-2.0",
+   "layout": "flat",
+   "folder": "rembg",
+   "env": "REMBG_HOME",
+   "files": [
+    {
+     "url": "https://github.com/danielgatis/rembg/releases/download/v0.0.0/u2net.onnx",
+     "path": "models/u2net/u2net.onnx",
+     "size": 175997641,
+     "sha256": "8d10d2f3bb75ae3b6d527c77944fc5e7dcd94b29809d47a739a7a728a912b491",
+     "md5": "60024c5c889badc19c04ad937298a77b"
+    }
+   ],
+   "_desc": "Used by mgp cutout (py/cutout.py, rembg 2.0.87). Release asset of danielgatis/rembg (the URL rembg itself downloads; md5 = the one pinned in rembg/sessions/u2net.py). Folder = REMBG_HOME, layout <home>/models/<model>/<model>.onnx as rembg reads it. sha256 computed 06-11-2026 from the file rembg downloaded and checked with its md5.",
+   "totalSize": 175997641
+  }
+ }
+}

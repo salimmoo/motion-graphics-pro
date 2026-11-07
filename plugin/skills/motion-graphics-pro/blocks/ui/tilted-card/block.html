@@ -1,0 +1,77 @@
+<!-- Block ui/tilted-card · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="ui/tilted-card" data-start="0" data-duration="6" data-track-index="30" class="blk blk-ui-tilted-card">
+<script type="application/json" data-block-props>
+{"mode": "skew", "title": "Paket Kreator", "sub": "Semua alat untuk mulai berkarya", "price": "Rp49 rb", "title2": "Paket Tim", "sub2": "Kerja bareng tanpa ribet", "price2": "Rp129 rb", "badge": ["Baru", "Populer"], "accent_color": "#7c5cff", "color2": "#ff6b8b", "card": "#151826", "cursor": true, "skew": 14, "font": "Inter:wght@400;500;600;700;800"}
+</script>
+</div>
+<style>
+.blk-ui-tilted-card{position:absolute;inset:0;pointer-events:none;overflow:hidden;font-family:"Inter",system-ui,sans-serif}
+.blk-ui-tilted-card .pan{position:absolute;inset:0;perspective:1600px}
+.blk-ui-tilted-card .kt{position:absolute;left:50%;top:50%;transform-style:preserve-3d;color:#f4f5fb}
+.blk-ui-tilted-card .kt>*{position:absolute}
+.blk-ui-tilted-card .lap{transform-style:preserve-3d}
+.blk-ui-tilted-card .pil{font-weight:700;white-space:nowrap;border-radius:99px;color:#fff}
+.blk-ui-tilted-card .kur{position:absolute;left:0;top:0;z-index:5}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, E = BLOCK.el, s = k.s, mode = P.mode;
+  var pan = E("div", { class: "pan" }, k.root);
+  var cw = Math.min(k.w * (mode === "split" ? 0.4 : 0.62), 520 * s), ch = cw * 1.25, px = function (v) { return v * cw / 520 + "px"; };
+  function kartu(judul, sub, harga, warna, x) {
+    var wr = E("div", { style: "position:absolute;inset:0;transform-style:preserve-3d" }, pan);
+    var kt = E("div", { class: "kt", style: "width:" + cw + "px;height:" + ch + "px;margin:" + (-ch / 2) + "px 0 0 " + (-cw / 2 + x) + "px" }, wr);
+    var tepi = E("div", { style: "inset:0;border-radius:" + px(34) + ";background:" + BLOCK.rgba("#ffffff", 0.12) }, kt);
+    var bg = E("div", { style: "inset:" + px(2) + ";border-radius:" + px(32) + ";background:linear-gradient(160deg," + BLOCK.mix(P.card, "#ffffff", .06) + "," + P.card + ");box-shadow:0 " + px(40) + " " + px(90) + " rgba(0,0,0,.5)" }, kt);
+    var gb = E("div", { style: "left:" + px(28) + ";right:" + px(28) + ";top:" + px(28) + ";height:" + px(330) + ";border-radius:" + px(22) + ";overflow:hidden;background:radial-gradient(70% 60% at 30% 25%," + BLOCK.mix(warna, "#ffffff", .4) + "," + warna + " 55%," + BLOCK.mix(warna, "#0b0d18", .55) + ")" }, kt);
+    E("div", { style: "position:absolute;right:12%;bottom:-18%;width:60%;height:60%;border-radius:50%;background:" + BLOCK.rgba("#ffffff", 0.18) }, gb);
+    var jd = E("div", { style: "left:" + px(32) + ";top:" + px(384) + ";font-size:" + px(40) + ";font-weight:800;letter-spacing:-.02em" }, kt, BLOCK.esc(judul));
+    var sb = E("div", { style: "left:" + px(32) + ";top:" + px(440) + ";font-size:" + px(21) + ";opacity:.65" }, kt, BLOCK.esc(sub));
+    var hr = E("div", { class: "pil", style: "left:" + px(32) + ";top:" + px(530) + ";padding:" + px(12) + " " + px(22) + ";font-size:" + px(22) + ";background:" + warna }, kt, BLOCK.esc(harga));
+    var sil = E("div", { style: "inset:0;border-radius:" + px(34) }, kt);
+    // lapisan kedalaman (parallax): gambar 30, judul 60, harga 90 px di depan dasar
+    // mode belah: translateZ sungguhan; mode miring: paralaks 2D per lapisan (preserve-3d bertingkat
+    // + overflow/border-radius tidak deterministik saat dirender ulang di SwiftShader)
+    var lap = [[gb, 30], [jd, 60], [sb, 50], [hr, 90], [sil, 100]];
+    if (mode === "split") lap.forEach(function (a) { a[0].style.transform = "translateZ(" + a[1] * cw / 520 + "px)"; });
+    else { wr.style.transformStyle = "flat"; kt.style.transformStyle = "flat"; }
+    return { wr: wr, kt: kt, tepi: tepi, sil: sil, hr: hr, lap: lap };
+  }
+  // kursor terskrip: berjalan halus di atas kartu (fungsi waktu)
+  function kursor(t) { var e = BLOCK.smooth((t - 0.6) / 1.2); return { x: 0.5 + e * (0.34 * Math.sin(t * 1.25 + 0.4) + 0.06 * BLOCK.noise(t * 0.8, 3)), y: 0.5 + e * (0.3 * Math.sin(t * 0.85 + 1.8) + 0.05 * BLOCK.noise(t * 0.7, 5)) }; }
+  var kur = P.cursor ? BLOCK.svg("svg", { class: "kur", viewBox: "0 0 24 24", width: 44 * s, height: 44 * s }, k.root) : null;
+  if (kur) BLOCK.svg("path", { d: "M3 2 L3 19 L8 14.5 L11.5 22 L14.5 20.6 L11 13.3 L17.5 13 Z", fill: "#fff", stroke: "#111", "stroke-width": 1.4, "stroke-linejoin": "round" }, kur);
+  var M = +P.skew;
+  if (mode === "split") {
+    var g = cw * 0.56, A = kartu(P.title, P.sub, P.price, P.accent_color, -g), Bk = kartu(P.title2, P.sub2, P.price2, P.color2, g);
+    [A, Bk].forEach(function (c, i) {
+      var sg = i ? 1 : -1, lb = E("div", { class: "pil", style: "top:" + px(-22) + ";" + (i ? "left:" : "right:") + px(-18) + ";padding:" + px(10) + " " + px(20) + ";font-size:" + px(20) + ";background:#fff;color:#151826;transform:translateZ(" + px(110) + ")" }, c.kt, BLOCK.esc(P.badge[i] || ""));
+      // datang dari sayap berlawanan, terbuka seperti buku (rotateY cermin)
+      tl.fromTo(c.kt, { x: sg * k.w * 0.6, rotationY: -sg * 70, autoAlpha: 0 }, { x: 0, rotationY: -sg * M, autoAlpha: 1, duration: 1.2, ease: "expo.out" }, 0.2 + i * 0.08);
+      tl.fromTo(lb, { scale: 0 }, { scale: 1, duration: 0.7, ease: "blockSpringStrong" }, 1.05 + i * 0.1);
+      tl.fromTo(c.kt, { y: 0 }, { y: sg * 8 * s, duration: (D - 1.4) / 2, ease: "sine.inOut", yoyo: true, repeat: 1, immediateRender: false }, 1.4);
+    });
+    if (kur) kur.style.display = "none";
+    return;
+  }
+  var C = kartu(P.title, P.sub, P.price, P.accent_color, 0);
+  tl.fromTo(pan, { autoAlpha: 0, y: 60 * s, scale: 0.92 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.9, ease: "power3.out" }, 0.1);
+  if (kur) tl.fromTo(kur, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3 }, 0.5);
+  var glare = null;
+  if (mode === "skew") { C.sil.style.overflow = "hidden"; glare = E("div", { style: "position:absolute;left:-50%;top:-50%;width:200%;height:200%;background:radial-gradient(30% 25% at 50% 50%,rgba(255,255,255,.22),transparent 70%)" }, C.sil); }
+  BLOCK.onTime(tl, function (t) {
+    var c = kursor(t), dx = c.x - 0.5, dy = c.y - 0.5;
+    if (kur) kur.style.transform = "translate(" + (k.w / 2 - cw / 2 + c.x * cw) + "px," + (k.h / 2 - ch / 2 + c.y * ch) + "px)";
+    if (mode === "skew") {
+      C.kt.style.transform = "rotateX(" + (Math.round(-dy * 2 * M * 100) / 100) + "deg) rotateY(" + (Math.round(dx * 2 * M * 100) / 100) + "deg)";
+      // kilap: elemen gradien statis yang digeser (gradien berubah di bidang 3D tidak deterministik di SwiftShader)
+      glare.style.transform = "translate(" + Math.round((c.x - 0.5) * cw) + "px," + Math.round((c.y - 0.5) * ch) + "px)";
+      C.lap.forEach(function (a) { if (a[0] !== C.sil) a[0].style.transform = "translate(" + Math.round(dx * a[1] * cw / 520 * 0.5 * 10) / 10 + "px," + Math.round(dy * a[1] * cw / 520 * 0.5 * 10) / 10 + "px)"; });
+    } else {
+      // sorotan kursor + tepi menyala di dekat kursor
+      C.sil.style.background = "radial-gradient(" + px(260) + " circle at " + c.x * 100 + "% " + c.y * 100 + "%," + BLOCK.rgba(P.accent_color, 0.28) + ",transparent 70%)";
+      C.tepi.style.background = "radial-gradient(" + px(300) + " circle at " + c.x * 100 + "% " + c.y * 100 + "%," + P.accent_color + ",rgba(255,255,255,.1) 70%)";
+    }
+  }, D);
+}, { font: true });
+</script>

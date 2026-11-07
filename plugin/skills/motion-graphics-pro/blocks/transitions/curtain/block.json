@@ -1,0 +1,99 @@
+{
+ "id": "transitions/curtain",
+ "name": "Curtain",
+ "name_id": "Tirai Panggung",
+ "category": "transitions",
+ "description": {
+  "id": "Dua tirai beludru berlipit menutup adegan lama, lalu terkumpul ke samping seperti kain sungguhan yang tertarik ke tali ikatan, menyingkap panggung baru di bawah valans dengan sorot lampu yang mekar.",
+  "en": "Two pleated velvet curtains close over the old scene, then gather outward the way real fabric bunches at the tieback, revealing the new stage under a pelmet as a soft spotlight blooms."
+ },
+ "tags": [
+  "transisi",
+  "tirai",
+  "curtain",
+  "panggung",
+  "stage",
+  "reveal",
+  "beludru",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "mode": {
+   "default": "close-open",
+   "type": "enum",
+   "options": [
+    "close-open",
+    "open"
+   ],
+   "hint": "tutup-buka = tirai menutup lalu membuka; buka = tirai tertutup sejak awal",
+   "option_aliases": {
+    "tutup-buka": "close-open",
+    "buka": "open"
+   }
+  },
+  "color": {
+   "default": "#8e1b2c",
+   "type": "color",
+   "hint": "Warna beludru",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "edge_color": {
+   "default": "#d8a84a",
+   "type": "color",
+   "hint": "Warna tali ikatan dan pita valans",
+   "aliases": [
+    "warna_tepi"
+   ]
+  },
+  "highlight": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Sorot lampu mekar saat tirai terbuka",
+   "aliases": [
+    "sorot"
+   ]
+  },
+  "exit": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Tirai dan valans keluar layar di akhir (false = tetap membingkai)",
+   "aliases": [
+    "keluar"
+   ]
+  }
+ },
+ "duration": 3.2,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/tirai",
+  "curtain-reveal"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.6,
+  "duration": 4
+ }
+}

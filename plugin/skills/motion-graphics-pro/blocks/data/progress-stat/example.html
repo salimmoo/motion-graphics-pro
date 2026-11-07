@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Progress Stat · block example data/progress-stat</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;800&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="4.5">
+<div id="adegan" class="adegan ad-foto"><div class="mth"></div><div class="bk1"></div><div class="bk2"></div><div class="tanah"></div><div class="sosok"></div></div>
+<!-- Block data/progress-stat · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-progress-stat" data-block="data/progress-stat" data-start="0" data-duration="4" data-track-index="10" class="blk blk-data-progress-stat">
+<script type="application/json" data-block-props>
+{"value": 86, "max": 100, "prefix": "", "suffix": "%", "decimals": 0, "label": "Kepuasan pelanggan", "caption": "Naik 12 poin dibanding tahun lalu", "scheme": "dark", "panel": true, "count_duration": 1.8, "ease": "power3.out", "accent_color": "#3dd6a3", "font": "Inter:wght@500;600;800", "size": 190, "thickness": 8, "position_x": 8, "position_y": 50, "width": 44}
+</script>
+<div class="blk-p"><div class="blk-l"></div><div class="blk-n"></div><div class="blk-trk"><div class="blk-isi"></div><div class="blk-tanda"></div></div><div class="blk-sk"><span class="blk-k"></span><span class="blk-mx"></span></div></div>
+</div>
+<style>
+.blk-data-progress-stat{position:absolute;inset:0;pointer-events:none}
+.blk-data-progress-stat .blk-p{position:absolute;transform:translateY(-50%);box-sizing:border-box}
+.blk-data-progress-stat .blk-l{font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+.blk-data-progress-stat .blk-n{font-weight:800;line-height:1;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+.blk-data-progress-stat .blk-n small{font-size:.42em;font-weight:600;margin-left:.06em;letter-spacing:0}
+.blk-data-progress-stat .blk-trk{position:relative;border-radius:99px;overflow:visible}
+.blk-data-progress-stat .blk-isi{position:absolute;left:0;top:0;bottom:0;border-radius:99px;transform-origin:left center}
+.blk-data-progress-stat .blk-tanda{position:absolute;top:50%;border-radius:50%;transform:translate(-50%,-50%)}
+.blk-data-progress-stat .blk-sk{display:flex;justify-content:space-between;gap:1em}
+.blk-data-progress-stat .blk-mx{opacity:.6;font-variant-numeric:tabular-nums;white-space:nowrap}
+</style>
+<script>
+BLOCK.mount("blk-progress-stat", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, fs = function (v) { return Math.round(v * s) + "px"; };
+  function fmt(v, d) { var a = Math.abs(v).toFixed(d).split("."); a[0] = a[0].replace(/\B(?=(\d{3})+(?!\d))/g, "."); return (v < 0 ? "−" : "") + a[0] + (a[1] ? "," + a[1] : ""); }
+  var terang = P.scheme === "light";
+  var C = terang ? { teks: "#16181d", redup: "rgba(22,24,29,.55)", trek: "rgba(22,24,29,.1)", panel: "rgba(255,255,255,.94)" }
+                 : { teks: "#f5f3ee", redup: "rgba(245,243,238,.6)", trek: "rgba(255,255,255,.14)", panel: "rgba(14,16,24,.72)" };
+  var p = R.querySelector(".blk-p"), lab = R.querySelector(".blk-l"), num = R.querySelector(".blk-n"), trk = R.querySelector(".blk-trk"),
+      isi = R.querySelector(".blk-isi"), tanda = R.querySelector(".blk-tanda"), ket = R.querySelector(".blk-k"), mx = R.querySelector(".blk-mx");
+  p.style.cssText += ";left:" + P.position_x + "%;top:" + P.position_y + "%;width:" + P.width + "%;color:" + C.teks + ";font-family:" + BLOCK.family(P.font) +
+    (P.panel ? ";background:" + C.panel + ";padding:" + fs(56) + " " + fs(64) + ";border-radius:" + fs(28) + ";box-shadow:0 " + fs(24) + " " + fs(70) + " rgba(0,0,0,.25)" : "");
+  lab.style.cssText += ";font-size:" + fs(26) + ";color:" + P.accent_color; lab.textContent = P.label;
+  num.style.cssText += ";font-size:" + fs(P.size) + ";margin:" + fs(18) + " 0 " + fs(34);
+  trk.style.cssText += ";height:" + fs(P.thickness) + ";background:" + C.trek;
+  isi.style.background = P.accent_color;
+  tanda.style.cssText += ";width:" + fs(P.thickness * 3) + ";height:" + fs(P.thickness * 3) + ";background:" + P.accent_color + ";box-shadow:0 0 0 " + fs(5) + " " + BLOCK.rgba(P.accent_color, 0.25);
+  ket.parentNode.style.cssText += ";margin-top:" + fs(22) + ";font-size:" + fs(26) + ";color:" + C.redup;
+  ket.textContent = P.caption; mx.textContent = "dari " + P.prefix + fmt(P.max, 0) + P.suffix;
+  var f = BLOCK.clamp(P.value / (P.max || 1), 0, 1), t0 = 0.45, dh = Math.min(P.count_duration, k.dur - 1.2), ez = gsap.parseEase(P.ease);
+  BLOCK.onTime(tl, function (t) {
+    var u = ez(BLOCK.progress(t, t0, t0 + dh));
+    num.innerHTML = (P.prefix ? "<small>" + BLOCK.esc(P.prefix) + "</small>" : "") + fmt(P.value * u, P.decimals) + (P.suffix ? "<small>" + BLOCK.esc(P.suffix) + "</small>" : "");
+    isi.style.width = (f * u * 100) + "%"; tanda.style.left = (f * u * 100) + "%"; tanda.style.opacity = u > 0.001 ? 1 : 0;
+  }, k.dur);
+  if (P.panel) tl.fromTo(p, { opacity: 0, x: -30 * s }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, 0);
+  tl.fromTo([lab, num, trk, ket.parentNode], { opacity: 0, y: 16 * s }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out", stagger: 0.08 }, 0.1);
+  tl.fromTo(num, { scale: 1 }, { scale: 1.04, duration: 0.14, ease: "power2.out", yoyo: true, repeat: 1, transformOrigin: "left center" }, t0 + dh);
+  tl.to(p, { opacity: 0, x: -20 * s, duration: 0.4, ease: "power2.in" }, k.dur - 0.45);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 4.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 4.5);
+</script>
+</body>
+</html>

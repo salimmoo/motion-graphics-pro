@@ -1,0 +1,34 @@
+<!-- Block subtitles/highlight · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="subtitles/highlight" data-start="0" data-duration="5" data-track-index="30" class="blk blk-subtitles-highlight">
+<script type="application/json" data-block-props>
+{"text": "Setiap proses tercatat dan bisa dilacak sampai ke sumbernya", "words": [], "kps": 2.6, "max_words": 4, "color": "#ffffff", "highlight": "#e8343a", "highlight_text": "#ffffff", "font": "Montserrat:wght@800;900", "size": 74, "bottom": 16, "uppercase": true}
+</script>
+<div class="blk-cap"></div>
+</div>
+<style>
+.blk-subtitles-highlight{position:absolute;inset:0;pointer-events:none}
+.blk-subtitles-highlight .blk-cap{position:absolute;left:6%;right:6%;text-align:center;line-height:1.25}
+.blk-subtitles-highlight .blk-hal{position:absolute;left:0;right:0;bottom:0}
+.blk-subtitles-highlight .blk-w{position:relative;display:inline-block;margin:0 .1em;padding:.02em .16em;z-index:0}
+.blk-subtitles-highlight .blk-bg{position:absolute;inset:0;border-radius:.16em;transform-origin:0 50%;z-index:-1}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, cap = k.root.querySelector(".blk-cap");
+  cap.style.cssText += ";bottom:" + P.bottom + "%;color:" + P.color + ";font-family:" + BLOCK.family(P.font) + ";font-weight:900;font-size:" +
+    Math.round(P.size * k.s) + "px;text-shadow:0 " + Math.round(4 * k.s) + "px " + Math.round(14 * k.s) + "px rgba(0,0,0,.45)" + (P.uppercase ? ";text-transform:uppercase" : "");
+  var pages = BLOCK.pages(BLOCK.words(P), P.max_words);
+  pages.forEach(function (pg) {
+    var h = BLOCK.el("div", { class: "blk-hal" }, cap);
+    BLOCK.initial(tl, h, { autoAlpha: 0 }).set(h, { autoAlpha: 1 }, pg.mulai).set(h, { autoAlpha: 0 }, pg.akhir);
+    tl.fromTo(h, { y: 18 * k.s, scale: 0.94 }, { y: 0, scale: 1, duration: 0.18, ease: "back.out(2)" }, pg.mulai);
+    pg.kata.forEach(function (w) {
+      var s = BLOCK.el("span", { class: "blk-w" }, h), bg = BLOCK.el("span", { class: "blk-bg", style: "background:" + P.highlight }, s);
+      s.appendChild(document.createTextNode(w.teks));
+      tl.fromTo(bg, { scaleX: 0, opacity: 1 }, { scaleX: 1, duration: 0.12, ease: "power2.out" }, w.mulai)
+        .set(s, { color: P.highlight_text }, w.mulai)
+        .to(bg, { opacity: 0, duration: 0.1 }, Math.max(w.mulai + 0.13, w.akhir - 0.02));
+    });
+  });
+}, { font: true });
+</script>

@@ -1,0 +1,59 @@
+<!-- Block 3d/orbit-cards · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="3d/orbit-cards" data-start="0" data-duration="7" data-track-index="6" class="blk blk-3d-orbit-cards">
+<script type="application/json" data-block-props>
+{"card": [{"judul": "Pengguna aktif", "angka": "12,4 rb", "ket": "naik 18% bulan ini", "warna": "#5b8cff"}, {"judul": "Konversi", "angka": "8,2%", "ket": "tertinggi tahun ini", "warna": "#3fc1a5"}, {"judul": "Pendapatan", "angka": "Rp 1,3 M", "ket": "kuartal ketiga", "warna": "#ffb547"}], "center": "Q3", "turns": 0.6, "radius": 430, "skew": 16, "card_color": "#f7f4ee", "text_color": "#1b1f2c", "core_color": "#8a7dff", "font": "Inter:wght@500;700;800"}
+</script>
+</div>
+<style>
+.blk-3d-orbit-cards{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-3d-orbit-cards .blk-pan{position:absolute;left:50%;top:50%;width:0;height:0}
+.blk-3d-orbit-cards .blk-pan > div{position:absolute}
+.blk-3d-orbit-cards .blk-kt{position:absolute;box-sizing:border-box;padding:1.1em 1.2em;border-radius:.7em;box-shadow:0 1.2em 2.4em rgba(0,0,0,.35)}
+.blk-3d-orbit-cards .blk-kt i{display:block;width:2.4em;height:.36em;border-radius:.2em;margin-bottom:.9em}
+.blk-3d-orbit-cards .blk-kt b{display:block;font-size:2.3em;font-weight:800;line-height:1;margin:.25em 0 .3em;letter-spacing:-.02em}
+.blk-3d-orbit-cards .blk-kt small{display:block;font-weight:500;opacity:.6}
+.blk-3d-orbit-cards .blk-kt span{display:block;font-weight:700;opacity:.8}
+.blk-3d-orbit-cards .blk-inti{border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+var P = k.P, s = k.s, W = k.w, H = k.h, fam = BLOCK.family(P.font), tl = k.tl;
+  // proyeksi perspektif dihitung sendiri (transform 2D + z-index): deterministik di renderer mana pun
+  var pan = BLOCK.el("div", { class: "blk-pan" }, k.root), FOC = 1800 * s;
+  var C = P.card || [], n = C.length, Rr = Math.min(+P.radius * s, W * 0.36), cw = 300 * s, chh = 210 * s;
+  var inti = null;
+  if (P.center) {
+    var ir = 120 * s;
+    inti = BLOCK.el("div", { class: "blk-inti", style: "left:" + (-ir) + "px;top:" + (-ir) + "px;width:" + 2 * ir + "px;height:" + 2 * ir + "px;font-family:" + fam + ";font-size:" + Math.round(74 * s) + "px;" +
+      "background:radial-gradient(circle at 35% 30%," + BLOCK.mix(P.core_color, "#fff", 0.5) + "," + P.core_color + " 55%," + BLOCK.mix(P.core_color, "#000", 0.45) + ");box-shadow:0 0 " + 90 * s + "px " + BLOCK.rgba(P.core_color, 0.65) }, pan);
+    inti.textContent = P.center;
+  }
+  var cards = C.map(function (c, i) {
+    var holder = BLOCK.el("div", {}, pan);
+    var e = BLOCK.el("div", { class: "blk-kt", style: "left:" + (-cw / 2) + "px;top:" + (-chh / 2) + "px;width:" + cw + "px;height:" + chh + "px;font-family:" + fam + ";font-size:" + Math.round(22 * s) + "px;background:" + P.card_color + ";color:" + P.text_color }, holder);
+    BLOCK.el("i", { style: "background:" + (c.warna || P.core_color) }, e);
+    BLOCK.el("small", {}, e).textContent = c.judul || "";
+    BLOCK.el("b", { style: "color:" + BLOCK.mix(c.warna || P.core_color, "#000", 0.25) }, e).textContent = c.angka || "";
+    BLOCK.el("span", {}, e).textContent = c.ket || "";
+    var gelap = BLOCK.el("div", { style: "position:absolute;inset:0;border-radius:inherit;background:#0b0e18;opacity:0" }, e);
+    return { h: holder, e: e, g: gelap };
+  });
+  var tilt = +P.skew;
+  BLOCK.onTime(tl, function (t) {
+    var into = BLOCK.smooth(BLOCK.progress(t, 0, 1.4)), base = -30 + 360 * +P.turns * (t / k.dur) + (1 - into) * -60;
+    var tr = tilt * Math.PI / 180;
+    cards.forEach(function (c, i) {
+      var li = BLOCK.clamp((t - 0.1 - i * 0.18) / 0.9, 0, 1), e1 = 1 - Math.pow(1 - li, 3), pop = BLOCK.spring(li * 1.2, 1.2, 0.5);
+      var a = base + i * 360 / n, ar = a * Math.PI / 180, r = Rr * e1;
+      var z = Math.cos(ar), bob = Math.sin(t * 1.4 + i * 2) * 10 * s;
+      // kartu menghadap kamera (billboard) dengan sedikit putar ikut orbit
+      var X = Math.sin(ar) * r, Z = z * r, Y = bob - Z * Math.sin(tr), Zc = Z * Math.cos(tr), pk = FOC / (FOC - Zc);
+      c.h.style.transform = "translate(" + (X * pk).toFixed(1) + "px," + (Y * pk).toFixed(1) + "px) rotate(" + (Math.sin(ar) * -3).toFixed(2) + "deg) scale(" + (pk * (0.3 + 0.7 * pop)).toFixed(4) + ")";
+      c.h.style.zIndex = Math.round(1000 + Zc);
+      c.g.style.opacity = (0.42 * (0.5 - z * 0.5)).toFixed(3);
+      c.e.style.opacity = BLOCK.clamp(li * 3, 0, 1).toFixed(3);
+    });
+    if (inti) { var ip = BLOCK.spring(BLOCK.clamp(t / 1.1, 0, 1) * 1.1, 1.1, 0.45); inti.style.zIndex = 1000; inti.style.transform = "scale(" + (ip * (1 + 0.03 * Math.sin(t * 2.2))).toFixed(3) + ")"; }
+  }, k.dur);
+}, { font: true });
+</script>

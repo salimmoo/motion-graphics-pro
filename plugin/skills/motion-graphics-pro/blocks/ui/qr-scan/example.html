@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1080x1920">
+<title>QR Scan · block example ui/qr-scan</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1080" data-height="1920" data-duration="5.5">
+
+<!-- Block ui/qr-scan · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-qr-scan" data-block="ui/qr-scan" data-start="0" data-duration="5" data-track-index="30" class="blk blk-ui-qr-scan">
+<script type="application/json" data-block-props>
+{"hint": "Arahkan kamera ke kode QR", "ok_title": "Terverifikasi", "ok_sub": "Tiket masuk · Gerbang B", "accent_color": "#36e08a", "bg": "#1a2230", "lock": 2.2, "font": "Inter:wght@400;500;600;700;800", "seed": 21}
+</script>
+</div>
+<style>
+.blk-ui-qr-scan{position:absolute;inset:0;pointer-events:none;overflow:hidden;font-family:"Inter",system-ui,sans-serif}
+.blk-ui-qr-scan .kam{position:absolute;inset:-4%}
+.blk-ui-qr-scan .qr{position:absolute;left:50%;top:50%;background:#f7f5ef;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.blk-ui-qr-scan svg{position:absolute;left:0;top:0;overflow:visible}
+.blk-ui-qr-scan .pt{position:absolute;left:0;right:0;text-align:center;color:#fff;font-weight:600}
+.blk-ui-qr-scan .ok{position:absolute;left:50%;display:flex;align-items:center;background:#fff;color:#111827}
+</style>
+<script>
+BLOCK.mount("blk-qr-scan", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, E = BLOCK.el, s = k.s, W = k.w, H = k.h, rng = k.random, ac = P.accent_color, tk = +P.lock;
+  // latar kamera: ruang buram buatan + sedikit goyang tangan
+  var kam = E("div", { class: "kam", style: "background:radial-gradient(60% 50% at 30% 30%," + BLOCK.mix(P.bg, "#c9b89a", .35) + ",transparent 70%),radial-gradient(50% 60% at 80% 70%," + BLOCK.mix(P.bg, "#5a7aa0", .4) + ",transparent 70%)," + P.bg + ";filter:blur(" + 6 * s + "px)" }, k.root);
+  var q = Math.min(W, H) * 0.42, qx = W / 2 - q / 2, qy = H / 2 - q / 2 - H * 0.03;
+  var qr = E("div", { class: "qr", style: "width:" + q + "px;height:" + q + "px;margin:" + (-q / 2 - H * 0.03) + "px 0 0 " + (-q / 2) + "px;border-radius:" + q * 0.06 + "px" }, k.root);
+  var n = 25, m = q * 0.1, c = (q - 2 * m) / n, sv = BLOCK.svg("svg", { width: q, height: q }, qr), d = "";
+  function finder(x, y) { return x < 8 && y < 8 || x >= n - 8 && y < 8 || x < 8 && y >= n - 8; }
+  for (var y = 0; y < n; y++) for (var x = 0; x < n; x++) if (!finder(x, y) && rng() < 0.5) d += "M" + (m + x * c) + " " + (m + y * c) + "h" + c + "v" + c + "h" + -c + "z";
+  [[0, 0], [n - 7, 0], [0, n - 7]].forEach(function (f) {
+    var X = m + f[0] * c, Y = m + f[1] * c;
+    d += "M" + X + " " + Y + "h" + 7 * c + "v" + 7 * c + "h" + -7 * c + "z M" + (X + c) + " " + (Y + c) + "v" + 5 * c + "h" + 5 * c + "v" + -5 * c + "z M" + (X + 2 * c) + " " + (Y + 2 * c) + "h" + 3 * c + "v" + 3 * c + "h" + -3 * c + "z";
+  });
+  BLOCK.svg("path", { d: d, fill: "#121620", "fill-rule": "evenodd" }, sv);
+  // gelap di luar jendela bidik
+  var ov = BLOCK.svg("svg", { width: W, height: H }, k.root), pad = q * 0.08;
+  var gelap = BLOCK.svg("path", { fill: "rgba(0,0,0,.45)", "fill-rule": "evenodd" }, ov);
+  var br = [0, 1, 2, 3].map(function () { return BLOCK.svg("path", { fill: "none", stroke: "#fff", "stroke-width": 6 * s, "stroke-linecap": "round", "stroke-linejoin": "round" }, ov); });
+  var sap = BLOCK.svg("rect", { height: 3 * s, fill: ac }, ov), sapG = BLOCK.svg("rect", { fill: ac, "fill-opacity": 0.14 }, ov);
+  var pulsa = BLOCK.svg("rect", { fill: "none", stroke: ac, "stroke-width": 4 * s }, ov);
+  var pt = E("div", { class: "pt", style: "top:" + (qy + q + pad + 40 * s) + "px;font-size:" + 30 * s + "px" }, k.root, BLOCK.esc(P.hint));
+  // kotak bidik: dari besar (lepas) menyempit dan mengunci ke batas kode
+  var A = { x: W * 0.18, y: H * 0.14, w: W * 0.64, h: H * 0.72 }, Bq = { x: qx - pad, y: qy - pad, w: q + 2 * pad, h: q + 2 * pad };
+  if (A.w / A.h > 1.4) { A.w = A.h * 1.2; A.x = W / 2 - A.w / 2; }
+  BLOCK.onTime(tl, function (t) {
+    var e = BLOCK.spring(BLOCK.clamp(t - (tk - 0.7), 0, 3), 1.4, 0.45), r = {};
+    ["x", "y", "w", "h"].forEach(function (k2) { r[k2] = BLOCK.lerp(A[k2], Bq[k2], e); });
+    var gx = BLOCK.noise(t * 1.3, 4) * 6 * s * (1 - BLOCK.clamp(e, 0, 1)), gy = BLOCK.noise(t * 1.1, 9) * 6 * s * (1 - BLOCK.clamp(e, 0, 1));
+    kam.style.transform = qr.style.transform = "translate(" + gx + "px," + gy + "px) rotate(" + (-3 + 3 * BLOCK.clamp(e, 0, 1)) + "deg)";
+    var L = Math.min(r.w, r.h) * 0.18, rr = 18 * s;
+    gelap.setAttribute("d", "M0 0H" + W + "V" + H + "H0Z M" + r.x + " " + r.y + "v" + r.h + "h" + r.w + "v" + -r.h + "z");
+    [[r.x, r.y, 1, 1], [r.x + r.w, r.y, -1, 1], [r.x + r.w, r.y + r.h, -1, -1], [r.x, r.y + r.h, 1, -1]].forEach(function (p, i) {
+      br[i].setAttribute("d", "M" + p[0] + " " + (p[1] + p[3] * L) + "V" + (p[1] + p[3] * rr) + "Q" + p[0] + " " + p[1] + " " + (p[0] + p[2] * rr) + " " + p[1] + "H" + (p[0] + p[2] * L));
+      br[i].setAttribute("stroke", t > tk ? ac : "#fff");
+    });
+    // garis sapu bolak-balik sebelum terkunci
+    var sw = t < tk ? 0.5 - 0.5 * Math.cos(t * Math.PI * 1.4) : -1, yy = r.y + sw * r.h;
+    sap.setAttribute("x", r.x + 10 * s); sap.setAttribute("width", Math.max(0, r.w - 20 * s)); sap.setAttribute("y", yy);
+    sapG.setAttribute("x", r.x); sapG.setAttribute("width", r.w); sapG.setAttribute("y", yy - 40 * s); sapG.setAttribute("height", 40 * s);
+    sap.style.opacity = sapG.style.opacity = sw < 0 ? 0 : 1;
+    var pq = BLOCK.clamp((t - tk) / 0.7, 0, 1), gr = pq * 40 * s;
+    pulsa.setAttribute("x", r.x - gr); pulsa.setAttribute("y", r.y - gr); pulsa.setAttribute("width", r.w + 2 * gr); pulsa.setAttribute("height", r.h + 2 * gr);
+    pulsa.setAttribute("rx", rr + gr); pulsa.style.opacity = pq > 0 && pq < 1 ? 1 - pq : 0;
+  }, D);
+  // langkah berikutnya: kartu terverifikasi naik
+  var ok = E("div", { class: "ok", style: "bottom:" + 8 * s + "%;gap:" + 20 * s + "px;padding:" + 22 * s + "px " + 34 * s + "px " + 22 * s + "px " + 22 * s + "px;border-radius:" + 28 * s + "px;box-shadow:0 20px 60px rgba(0,0,0,.4);transform:translateX(-50%)" }, k.root);
+  var ic = BLOCK.svg("svg", { viewBox: "0 0 60 60", width: 76 * s, height: 76 * s, style: "position:static" }, ok);
+  BLOCK.svg("circle", { cx: 30, cy: 30, r: 28, fill: ac }, ic);
+  var cn = BLOCK.svg("path", { d: "M17 31 L26 40 L44 21", fill: "none", stroke: "#fff", "stroke-width": 6, "stroke-linecap": "round", "stroke-linejoin": "round" }, ic);
+  var tx = E("div", null, ok);
+  E("div", { style: "font-weight:800;font-size:" + 34 * s + "px" }, tx, BLOCK.esc(P.ok_title));
+  E("div", { style: "font-size:" + 22 * s + "px;opacity:.6;margin-top:" + 4 * s + "px" }, tx, BLOCK.esc(P.ok_sub));
+  var Lc = BLOCK.prepareStroke(cn);
+  tl.fromTo(pt, { autoAlpha: 0, y: 10 * s }, { autoAlpha: 1, y: 0, duration: 0.4, ease: "power2.out" }, 0.2).to(pt, { autoAlpha: 0, duration: 0.25 }, tk + 0.1)
+    .fromTo(ok, { autoAlpha: 0, y: 80 * s }, { autoAlpha: 1, y: 0, duration: 0.7, ease: "blockSpring" }, tk + 0.55)
+    .fromTo(cn, { strokeDashoffset: Lc }, { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, tk + 0.8)
+    .fromTo(qr, { filter: "brightness(1)" }, { filter: "brightness(.8)", duration: 0.5 }, tk + 0.5);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 5.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5.5);
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+{
+ "id": "backgrounds/noise",
+ "name": "Noise",
+ "name_id": "Noise Bergerak",
+ "category": "backgrounds",
+ "description": {
+  "id": "Noise abu-abu yang hanyut pelan: noise fraktal seperti awan lambat, atau noise Gabor bergaris seperti sidik jari yang bergerak.",
+  "en": "Slowly drifting grey noise: fractal noise like slow clouds, or streaky Gabor noise like a moving fingerprint."
+ },
+ "tags": [
+  "latar",
+  "background",
+  "noise",
+  "fraktal",
+  "gabor",
+  "awan",
+  "shader",
+  "webgl",
+  "tekstur",
+  "backgrounds"
+ ],
+ "props": {
+  "style": {
+   "default": "fractal",
+   "type": "enum",
+   "options": [
+    "fractal",
+    "gabor"
+   ],
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "fraktal": "fractal"
+   }
+  },
+  "color1": {
+   "default": "#18181c",
+   "type": "color",
+   "hint": "Warna gelap",
+   "aliases": [
+    "warna1"
+   ]
+  },
+  "color2": {
+   "default": "#c8c8ce",
+   "type": "color",
+   "hint": "Warna terang",
+   "aliases": [
+    "warna2"
+   ]
+  },
+  "scale": {
+   "default": 3,
+   "type": "number",
+   "hint": "Ukuran pola",
+   "aliases": [
+    "skala"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali kecepatan gerak",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "resolution": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Skala resolusi shader (0.25-1); kecil = lebih cepat",
+   "aliases": [
+    "resolusi"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "latar/noise",
+  "fractal-noise",
+  "gabor-noise"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

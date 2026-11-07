@@ -1,0 +1,173 @@
+{
+ "id": "gallery/path-carousel",
+ "name": "Path Carousel",
+ "name_id": "Korsel Jalur",
+ "category": "gallery",
+ "description": {
+  "id": "Kartu gambar meluncur di jalur terbuka: busur, V, diagonal, gelombang, atau kurva S. Kartu membesar di titik terdalam dan miring mengikuti arah jalur, berayun cepat-lambat-cepat.",
+  "en": "Image cards ride an open path (arc, V, diagonal, wave, S-curve) with depth scaling and tangent rotation, in fast-slow-fast swings."
+ },
+ "tags": [
+  "galeri",
+  "korsel",
+  "carousel",
+  "jalur",
+  "path",
+  "gambar",
+  "kartu",
+  "gallery"
+ ],
+ "props": {
+  "image": {
+   "default": [],
+   "type": "list",
+   "hint": "Daftar url gambar (opsional). Kosong = kartu placeholder bergradien bernomor",
+   "aliases": [
+    "gambar"
+   ]
+  },
+  "label": {
+   "default": [],
+   "type": "list",
+   "hint": "Daftar label kecil per kartu placeholder (opsional)"
+  },
+  "count": {
+   "default": 12,
+   "type": "number",
+   "hint": "Jumlah kartu (12 atau 24)",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "shape": {
+   "default": "arc",
+   "type": "enum",
+   "options": [
+    "arc",
+    "V",
+    "diagonal",
+    "wave",
+    "S"
+   ],
+   "hint": "Bentuk jalur (Path style 1-5)",
+   "aliases": [
+    "bentuk"
+   ],
+   "option_aliases": {
+    "busur": "arc",
+    "gelombang": "wave"
+   }
+  },
+  "card_size": {
+   "default": 260,
+   "type": "number",
+   "hint": "Lebar kartu (px pada 1080)",
+   "aliases": [
+    "ukuran_kartu"
+   ]
+  },
+  "card_aspect": {
+   "default": 0.75,
+   "type": "number",
+   "hint": "Lebar/tinggi kartu",
+   "aliases": [
+    "rasio_kartu"
+   ]
+  },
+  "min_scale": {
+   "default": 0.45,
+   "type": "number",
+   "hint": "Skala kartu di tepi jalur",
+   "aliases": [
+    "skala_min"
+   ]
+  },
+  "tangent_tilt": {
+   "default": 0.6,
+   "type": "number",
+   "hint": "Seberapa jauh kartu ikut miring arah jalur (0-1)",
+   "aliases": [
+    "miring_tangen"
+   ]
+  },
+  "period": {
+   "default": 1.5,
+   "type": "number",
+   "hint": "Lama satu ayunan (detik)",
+   "aliases": [
+    "periode"
+   ]
+  },
+  "swing": {
+   "default": 0.85,
+   "type": "number",
+   "hint": "Kekuatan ayunan cepat-lambat-cepat (0 = rata, 0.95 = hampir berhenti di tengah)",
+   "aliases": [
+    "ayunan"
+   ]
+  },
+  "steps": {
+   "default": 1,
+   "type": "number",
+   "hint": "Kartu yang dilewati per ayunan",
+   "aliases": [
+    "langkah"
+   ]
+  },
+  "direction": {
+   "default": 1,
+   "type": "number",
+   "hint": "1 atau -1",
+   "aliases": [
+    "arah"
+   ]
+  },
+  "corner_radius": {
+   "default": 14,
+   "type": "number",
+   "hint": "Radius sudut kartu (px)",
+   "aliases": [
+    "sudut_radius"
+   ]
+  },
+  "show_path": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Garis putus-putus jalur",
+   "aliases": [
+    "tampil_jalur"
+   ]
+  },
+  "path_color": {
+   "default": "#ffffff",
+   "type": "color",
+   "hint": "Warna garis jalur",
+   "aliases": [
+    "warna_jalur"
+   ]
+  },
+  "seed": {
+   "default": 5,
+   "type": "number",
+   "hint": "Seed warna placeholder"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "galeri/korsel-jalur",
+  "carousel-path-1",
+  "carousel-path-2",
+  "carousel-path-3",
+  "carousel-path-4",
+  "carousel-path-5"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

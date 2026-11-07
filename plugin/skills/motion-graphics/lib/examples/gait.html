@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP gait · mesin langkah tampak samping</title>
+<style>html,body{margin:0;background:#0e1116}#stage{position:relative;width:1280px;height:720px;overflow:hidden}</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../figure3d.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720"></div>
+<script>
+// Side-view gait engine (defined in figure3d.js): heel rocker, foot flat, toe rocker, swing; ground ticks scroll at the
+// walking speed so the stance foot never slides; heel-strike prints and the stance / swing phase timeline.
+const inst = MGP.gait.create(document.getElementById("stage"), { duration: 6, bones: true });
+MGP.core.expose(inst);
+</script>
+</body>
+</html>

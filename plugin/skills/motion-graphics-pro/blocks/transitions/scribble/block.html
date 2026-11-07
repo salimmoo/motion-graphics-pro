@@ -1,0 +1,50 @@
+<!-- Block transitions/scribble · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/scribble" data-start="0" data-duration="2.4" data-track-index="20" class="blk blk-transitions-scribble">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "color": "#1e2b4a", "color_2": "#2b3d66", "ribbon": 5, "thickness": 120, "roughness": 1, "seed": 4}
+</script>
+</div>
+<style>
+.blk-transitions-scribble{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-transitions-scribble svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, W = k.w, H = k.h, s = k.s, R = k.random, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to);
+  var n = Math.max(1, Math.round(+P.ribbon || 5)), sw = (+P.thickness || 120) * s, kas = P.roughness == null ? 1 : +P.roughness, id = k.id + "-c";
+  var sv = BLOCK.svg("svg", { viewBox: "0 0 " + W + " " + H, preserveAspectRatio: "none" }, k.root);
+  var f = BLOCK.svg("filter", { id: id, x: "-5%", y: "-5%", width: "110%", height: "110%" }, BLOCK.svg("defs", null, sv));
+  // tepi spidol yang tidak rata: turbulensi kecil menggeser goresan
+  BLOCK.svg("feTurbulence", { type: "fractalNoise", baseFrequency: (0.04 / Math.max(0.3, s)).toFixed(4), numOctaves: 2, seed: Math.floor(R() * 99), result: "n" }, f);
+  BLOCK.svg("feDisplacementMap", { in: "SourceGraphic", in2: "n", scale: (10 * s * kas).toFixed(1), xChannelSelector: "R", yChannelSelector: "G" }, f);
+  var gr = BLOCK.svg("g", { filter: "url(#" + id + ")" }, sv);
+  var ganjal = BLOCK.svg("rect", { x: -10, y: -10, width: W + 20, height: H + 20, fill: P.color }, gr);
+  var tm = D * 0.47, tb = tm - D * 0.06, tc = tm + D * 0.06, pita = [];
+  var hb = H / n, dx = sw * 0.62, amp = hb / 2 + sw * 0.35;
+  for (var b = 0; b < n; b++) {
+    var y0 = (b + 0.5) * hb, ke = b % 2 ? -1 : 1, pts = [], m = Math.ceil((W + 2 * sw) / dx) + 1;
+    for (var i = 0; i <= m; i++) {
+      var x = -sw + i * dx * (1 + (R() - 0.5) * 0.25 * kas);
+      pts.push([ke > 0 ? x : W - x, y0 + (i % 2 ? amp : -amp) * (0.88 + R() * 0.24) + (R() - 0.5) * sw * 0.2 * kas]);
+    }
+    // goresan halus: kurva kuadrat melewati titik tengah antar titik zigzag
+    var d = "M" + pts[0][0].toFixed(1) + " " + pts[0][1].toFixed(1);
+    for (var j = 1; j < pts.length - 1; j++) d += "Q" + pts[j][0].toFixed(1) + " " + pts[j][1].toFixed(1) + " " + ((pts[j][0] + pts[j + 1][0]) / 2).toFixed(1) + " " + ((pts[j][1] + pts[j + 1][1]) / 2).toFixed(1);
+    var p = BLOCK.svg("path", { d: d, fill: "none", stroke: b % 2 ? P.color_2 : P.color, "stroke-width": (sw * (0.95 + R() * 0.15)).toFixed(1), "stroke-linecap": "round", "stroke-linejoin": "round" }, gr);
+    var L = Math.ceil(BLOCK.prepareStroke(p));
+    pita.push({ p: p, L: L });
+  }
+  BLOCK.initial(tl, ganjal, { autoAlpha: 0 });
+  pita.forEach(function (q, b) {
+    // menumpuk: pita digores bergiliran, lalu dihapus dari pangkalnya dengan urutan sama
+    var dIn = tb * 0.62, s0 = b * (tb - dIn) / Math.max(1, n - 1);
+    tl.fromTo(q.p, { strokeDashoffset: q.L }, { strokeDashoffset: 0, duration: dIn, ease: "power1.inOut" }, s0);
+    var dOut = (D - tc) * 0.62, s1 = tc + b * (D - tc - dOut - 0.02) / Math.max(1, n - 1);
+    tl.to(q.p, { strokeDashoffset: -q.L, duration: dOut, ease: "power1.inOut" }, s1);
+  });
+  // ganjal padat menjamin layar tertutup penuh saat potong
+  tl.set(ganjal, { autoAlpha: 1 }, tb).set(ganjal, { autoAlpha: 0 }, tc);
+  if (A) BLOCK.initial(tl, A, { autoAlpha: 1 }).set(A, { autoAlpha: 0 }, tm);
+  if (Bk) BLOCK.initial(tl, Bk, { autoAlpha: 0 }).set(Bk, { autoAlpha: 1 }, tm);
+});
+</script>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP spring · pegas + prinsip animasi</title>
+<style>html,body{margin:0;background:#070a14}#stage{position:relative;width:1280px;height:720px;overflow:hidden;background:#070a14}#stage canvas{position:absolute}</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../spring.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720">
+  <canvas id="top" style="left:0;top:0"></canvas>
+  <canvas id="bot" style="left:0;top:400px"></canvas>
+</div>
+<script>
+// Top: overshoot / bounce graph editor with preview. Bottom: animation principles in sequence, without (left) and with (right).
+const D = 24;
+const pegas = MGP.spring.create(document.getElementById("top"), { mode: "pegas", preset: "over", width: 1280, height: 400, duration: D });
+const prinsip = MGP.spring.create(document.getElementById("bot"), { mode: "prinsip", width: 1280, height: 320, layout: "side",
+  principle: ["squash", "antisipasi", "overlap", "sekunder", "arc", "smear"], segment: D / 6 });
+// pure helper check drawn nowhere: the closed-form spring and a follow-through chain are deterministic functions of t
+const f = MGP.spring.fn, chainF = f.chain((t) => Math.sin(t * 2), 4, { freq: 1.45, damping: 0.33 });
+window.__springProbe = (t) => ({ spring: f.spring(t, { freq: 2, damping: 0.3 }), chain: chainF(t) });
+const comp = { duration: D, ready: Promise.all([pegas.ready, prinsip.ready]),
+  seek(t) { pegas.seek(t); prinsip.seek(t); return this; }, timeline() { return MGP.core.timeline(this); } };
+MGP.core.expose(comp);
+</script>
+</body>
+</html>

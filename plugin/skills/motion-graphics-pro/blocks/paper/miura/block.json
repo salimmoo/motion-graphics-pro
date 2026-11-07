@@ -1,0 +1,151 @@
+{
+ "id": "paper/miura",
+ "name": "Miura",
+ "name_id": "Lipat Miura-ori",
+ "category": "paper",
+ "description": {
+  "id": "Lembar Miura-ori terbuka dari paket terlipat menjadi lembar datar yang memuat judul (lipat kaku, satu derajat kebebasan: semua panel tetap datar dan hanya berputar di engselnya). Cocok untuk reveal judul atau peta.",
+  "en": "A Miura-ori sheet unfolds from a folded packet into a flat sheet carrying a title (rigid folding, one degree of freedom: every panel stays flat and only rotates about its hinges). Good for title or map reveals."
+ },
+ "tags": [
+  "miura",
+  "miura-ori",
+  "lipat kaku",
+  "origami",
+  "reveal",
+  "buka",
+  "paper",
+  "fold",
+  "rigid"
+ ],
+ "props": {
+  "title": {
+   "default": "MIURA-ORI",
+   "type": "text",
+   "hint": "Teks besar yang dicetak di lembar",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "sub": {
+   "default": "lipat kaku · satu derajat kebebasan",
+   "type": "text",
+   "hint": "Teks kecil di bawah judul"
+  },
+  "motion": {
+   "default": "open",
+   "type": "enum",
+   "options": [
+    "open",
+    "close",
+    "pingpong"
+   ],
+   "hint": "buka = terlipat ke datar, tutup, bolak = buka lalu tutup",
+   "aliases": [
+    "gerak"
+   ],
+   "option_aliases": {
+    "buka": "open",
+    "tutup": "close",
+    "bolak": "pingpong"
+   }
+  },
+  "front_color": {
+   "default": "#e8553d",
+   "type": "color",
+   "hint": "Warna muka lembar (gradien ke warna_depan2)",
+   "aliases": [
+    "warna_depan"
+   ]
+  },
+  "front_color2": {
+   "default": "#ffb347",
+   "type": "color",
+   "hint": "Nada kedua muka",
+   "aliases": [
+    "warna_depan2"
+   ]
+  },
+  "back_color": {
+   "default": "#f4ecd8",
+   "type": "color",
+   "hint": "Warna punggung lembar",
+   "aliases": [
+    "warna_belakang"
+   ]
+  },
+  "cols": {
+   "default": 14,
+   "type": "number",
+   "hint": "Jumlah kolom panel",
+   "aliases": [
+    "kolom"
+   ]
+  },
+  "rows": {
+   "default": 5,
+   "type": "number",
+   "hint": "Jumlah baris panel",
+   "aliases": [
+    "baris"
+   ]
+  },
+  "bg": {
+   "default": "color",
+   "type": "enum",
+   "options": [
+    "color",
+    "transparent"
+   ],
+   "hint": "Latar di belakang lembar",
+   "aliases": [
+    "latar"
+   ],
+   "option_aliases": {
+    "warna": "color",
+    "transparan": "transparent"
+   }
+  },
+  "bg_color": {
+   "default": "#1c2236",
+   "type": "color",
+   "hint": "Dipakai bila latar = warna",
+   "aliases": [
+    "warna_latar"
+   ]
+  },
+  "size": {
+   "default": 0.8,
+   "type": "number",
+   "hint": "Ukuran model (bagian sisi pendek)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "ease": {
+   "default": "pegas.sigap",
+   "type": "text",
+   "hint": "Ease lipat: pegas.sigap, pegas.memantul, pegas.berat, inOut"
+  },
+  "label": {
+   "default": false,
+   "type": "boolean",
+   "hint": "Label validator (Maekawa/Kawasaki)"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [
+  "lib:mgp.js"
+ ],
+ "aliases": [
+  "kertas/miura"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

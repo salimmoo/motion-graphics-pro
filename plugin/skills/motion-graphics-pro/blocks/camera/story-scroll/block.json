@@ -1,0 +1,133 @@
+{
+ "id": "camera/story-scroll",
+ "name": "Story Scroll",
+ "name_id": "Gulir Cerita",
+ "category": "camera",
+ "description": {
+  "id": "Satu lintasan gulir sinematik: adegan tinggi berisi bab-bab cerita lewat di depan kamera dari atas ke bawah, lapisan latar dan depan berparalaks dengan laju berbeda, tiap bab naik saat kamera tiba, lalu gerak melambat dan menahan bab terakhir. Bisa juga menggulir elemen host yang tinggi.",
+  "en": "A compressed forced-scroll pass: a tall scene of story sections travels past the camera with parallax depth layers, each section rises as the camera arrives, and the pass decelerates into a held final section. Can also scroll a tall host element."
+ },
+ "tags": [
+  "kamera",
+  "camera",
+  "scroll",
+  "gulir",
+  "parallax",
+  "cerita",
+  "story",
+  "bagian"
+ ],
+ "props": {
+  "target": {
+   "default": "",
+   "type": "selector",
+   "hint": "Kosong = bab bawaan; isi = elemen host tinggi yang digulir"
+  },
+  "part": {
+   "default": [
+    {
+     "judul": "Awal mula",
+     "teks": "Semua berawal dari satu pertanyaan kecil"
+    },
+    {
+     "judul": "Perjalanan",
+     "teks": "Setiap langkah membuka jalan berikutnya"
+    },
+    {
+     "judul": "Titik balik",
+     "teks": "Data mengubah cara kita melihat"
+    },
+    {
+     "judul": "Hari ini",
+     "teks": "Cerita yang terus bergerak maju"
+    }
+   ],
+   "type": "list",
+   "hint": "Daftar {judul, teks}",
+   "aliases": [
+    "bagian"
+   ]
+  },
+  "start": {
+   "default": 0.4,
+   "type": "number",
+   "hint": "Tahan bab pertama sebelum gulir (detik)",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "hold": {
+   "default": 1.4,
+   "type": "number",
+   "hint": "Tahan bab terakhir di akhir (detik)",
+   "aliases": [
+    "tahan"
+   ]
+  },
+  "ease": {
+   "default": "power2.inOut",
+   "type": "ease"
+  },
+  "motion_blur": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "blur_gerak"
+   ]
+  },
+  "bg": {
+   "default": "#101320",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "color": {
+   "default": "#f6f2ea",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#7cf0c5",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "color2": {
+   "default": "#ff8a5b",
+   "type": "color",
+   "aliases": [
+    "warna2"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;700;800",
+   "type": "font"
+  },
+  "seed": {
+   "default": 3,
+   "type": "number"
+  }
+ },
+ "duration": 7,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "kamera/gulir-cerita",
+  "scroll-camera-story"
+ ],
+ "example": {
+  "bg": "empty",
+  "font": [
+   "Inter:wght@400;700;800"
+  ]
+ }
+}

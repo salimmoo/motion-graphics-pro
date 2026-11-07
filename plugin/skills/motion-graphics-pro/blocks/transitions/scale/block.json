@@ -1,0 +1,98 @@
+{
+ "id": "transitions/scale",
+ "name": "Scale",
+ "name_id": "Zoom Sinematik",
+ "category": "transitions",
+ "description": {
+  "id": "Transisi zoom: adegan lama melesat membesar dengan blur lalu adegan baru mendarat dari zoom, adegan lama menciut menjauh di atas adegan baru, atau zoom lembut yang tenang.",
+  "en": "Zoom transitions: A punches in with zoom blur and B lands from zoomed-in, A shrinks away over B, or a calm soft zoom."
+ },
+ "tags": [
+  "transisi",
+  "zoom",
+  "skala",
+  "scale",
+  "blur",
+  "punch",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "mode": {
+   "default": "enter",
+   "type": "enum",
+   "options": [
+    "enter",
+    "exit",
+    "soft"
+   ],
+   "hint": "masuk = zoom punch masuk; keluar = A menciut menjauh; lembut = zoom tipis tenang",
+   "option_aliases": {
+    "masuk": "enter",
+    "keluar": "exit",
+    "lembut": "soft"
+   }
+  },
+  "strength": {
+   "default": 1,
+   "type": "number",
+   "hint": "Besar zoom",
+   "aliases": [
+    "kekuatan"
+   ]
+  },
+  "blur": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali blur (0 = tanpa blur)"
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Titik pusat zoom X (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Titik pusat zoom Y (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  }
+ },
+ "duration": 1.0,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/skala",
+  "transitions-scale",
+  "cinematic-zoom"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 1.0,
+  "duration": 3
+ }
+}

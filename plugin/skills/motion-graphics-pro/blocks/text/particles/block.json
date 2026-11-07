@@ -1,0 +1,214 @@
+{
+ "id": "text/particles",
+ "name": "Particles",
+ "name_id": "Teks Partikel",
+ "category": "text",
+ "description": {
+  "id": "Teks tersusun dari awan partikel berseed yang terbang menuju bentuk huruf, atau terurai kembali menjadi debu. Titik tujuan diambil sekali dari bitmap teks; posisi setiap partikel dihitung tertutup dari waktu, jadi aman di-seek ke mana pun.",
+  "en": "Text assembles from a seeded particle cloud flying into the letterforms, or dissolves back into dust. Targets are sampled once from the rendered text bitmap; every particle position is a closed-form function of time, so seeking is exact."
+ },
+ "tags": [
+  "teks",
+  "partikel",
+  "particles",
+  "dissolve",
+  "assemble",
+  "kanvas",
+  "debu",
+  "text"
+ ],
+ "props": {
+  "text": {
+   "default": "BERSAMA",
+   "type": "text",
+   "hint": "Teks; *kata* = kata kunci berwarna aksen, \\n = baris baru",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@800;900",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "size": {
+   "default": 230,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "weight": {
+   "default": 900,
+   "type": "number",
+   "aliases": [
+    "berat"
+   ]
+  },
+  "color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffb547",
+   "type": "color",
+   "hint": "Warna kata kunci / aksen",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi vertikal (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "width": {
+   "default": 90,
+   "type": "number",
+   "hint": "Lebar kotak teks (%)",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "align": {
+   "default": "center",
+   "type": "enum",
+   "options": [
+    "left",
+    "center",
+    "right"
+   ],
+   "aliases": [
+    "rata"
+   ],
+   "option_aliases": {
+    "kiri": "left",
+    "tengah": "center",
+    "kanan": "right"
+   }
+  },
+  "mode": {
+   "default": "gather-scatter",
+   "type": "enum",
+   "options": [
+    "gather",
+    "scatter",
+    "gather-scatter"
+   ],
+   "hint": "kumpul = berkumpul lalu tetap; urai = mulai utuh lalu terurai; kumpul-urai = keduanya",
+   "option_aliases": {
+    "kumpul": "gather",
+    "urai": "scatter",
+    "kumpul-urai": "gather-scatter"
+   }
+  },
+  "spread": {
+   "default": "cloud",
+   "type": "enum",
+   "options": [
+    "cloud",
+    "screen",
+    "bottom"
+   ],
+   "hint": "Asal partikel",
+   "aliases": [
+    "sebar"
+   ],
+   "option_aliases": {
+    "awan": "cloud",
+    "layar": "screen",
+    "bawah": "bottom"
+   }
+  },
+  "density": {
+   "default": 4,
+   "type": "number",
+   "hint": "Jarak sampel piksel (px pada 1080); kecil = lebih banyak partikel",
+   "aliases": [
+    "kerapatan"
+   ]
+  },
+  "particle_size": {
+   "default": 3.4,
+   "type": "number",
+   "hint": "Sisi partikel (px pada 1080)",
+   "aliases": [
+    "ukuran_partikel"
+   ]
+  },
+  "max_count": {
+   "default": 6000,
+   "type": "number",
+   "aliases": [
+    "jumlah_maks"
+   ]
+  },
+  "start": {
+   "default": 0.2,
+   "type": "number",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "gather_duration": {
+   "default": 1.6,
+   "type": "number",
+   "aliases": [
+    "durasi_kumpul"
+   ]
+  },
+  "time_jitter": {
+   "default": 0.7,
+   "type": "number",
+   "hint": "Sebaran waktu berangkat antar partikel (detik)",
+   "aliases": [
+    "acak_waktu"
+   ]
+  },
+  "scatter_duration": {
+   "default": 1.3,
+   "type": "number",
+   "aliases": [
+    "durasi_urai"
+   ]
+  },
+  "accent_amount": {
+   "default": 0.18,
+   "type": "number",
+   "hint": "Porsi partikel berwarna aksen (0-1)",
+   "aliases": [
+    "porsi_aksen"
+   ]
+  },
+  "seed": {
+   "default": "partikel",
+   "type": "text"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "teks/partikel",
+  "particle-text-dissolve"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@800;900",
+   "Inter:wght@400;500;600;700;800;900"
+  ]
+ }
+}

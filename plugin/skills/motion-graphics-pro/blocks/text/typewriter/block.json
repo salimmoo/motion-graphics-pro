@@ -1,0 +1,217 @@
+{
+ "id": "text/typewriter",
+ "name": "Typewriter",
+ "name_id": "Mesin Ketik",
+ "category": "text",
+ "description": {
+  "id": "Teks diketik dengan kursor yang berkedip deterministik. Empat mode: ketik huruf demi huruf, prompt dengan irama manusia (bisa salah ketik lalu dihapus), stream ala jawaban AI yang datang bergelombang, dan tukar frasa dengan blok seleksi bergradien.",
+  "en": "Typed text with a deterministic blinking caret. Modes: character typewriter, human-cadence prompt with optional backspace correction, AI-style streaming words that ink from grey, and a gradient selection caret that swaps a phrase."
+ },
+ "tags": [
+  "teks",
+  "typewriter",
+  "ketik",
+  "kursor",
+  "prompt",
+  "stream",
+  "ai",
+  "caret",
+  "text"
+ ],
+ "props": {
+  "text": {
+   "default": "Ketik ide pertamamu, lalu *rapikan* pelan-pelan.",
+   "type": "text",
+   "hint": "Teks; *kata* = kata kunci berwarna aksen, \\n = baris baru",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "font": {
+   "default": "JetBrains Mono:wght@400;500;700",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "size": {
+   "default": 64,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "weight": {
+   "default": 500,
+   "type": "number",
+   "aliases": [
+    "berat"
+   ]
+  },
+  "color": {
+   "default": "#f2efe6",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#7cf0b5",
+   "type": "color",
+   "hint": "Warna kata kunci / aksen",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi vertikal (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "width": {
+   "default": 76,
+   "type": "number",
+   "hint": "Lebar kotak teks (%)",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "align": {
+   "default": "left",
+   "type": "enum",
+   "options": [
+    "left",
+    "center",
+    "right"
+   ],
+   "aliases": [
+    "rata"
+   ],
+   "option_aliases": {
+    "kiri": "left",
+    "tengah": "center",
+    "kanan": "right"
+   }
+  },
+  "mode": {
+   "default": "type",
+   "type": "enum",
+   "options": [
+    "type",
+    "prompt",
+    "stream",
+    "swap"
+   ],
+   "hint": "ketik | prompt (irama manusia, kotak input) | stream (kata bergelombang) | tukar (seleksi frasa lalu ketik pengganti)",
+   "option_aliases": {
+    "ketik": "type",
+    "tukar": "swap"
+   }
+  },
+  "speed": {
+   "default": 16,
+   "type": "number",
+   "hint": "Huruf per detik",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "start": {
+   "default": 0.4,
+   "type": "number",
+   "hint": "Mulai mengetik (detik)",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "cursor": {
+   "default": "line",
+   "type": "enum",
+   "options": [
+    "line",
+    "block",
+    "bottom"
+   ],
+   "aliases": [
+    "kursor"
+   ],
+   "option_aliases": {
+    "garis": "line",
+    "blok": "block",
+    "bawah": "bottom"
+   }
+  },
+  "blink": {
+   "default": 1.2,
+   "type": "number",
+   "hint": "Kedipan kursor per detik saat diam",
+   "aliases": [
+    "kedip"
+   ]
+  },
+  "fix": {
+   "default": "",
+   "type": "text",
+   "hint": "Mode prompt: kata salah yang diketik dulu di akhir lalu dihapus (kosong = tanpa)",
+   "aliases": [
+    "koreksi"
+   ]
+  },
+  "prefix": {
+   "default": "Kuncinya: ",
+   "type": "text",
+   "hint": "Mode tukar: teks tetap di depan frasa",
+   "aliases": [
+    "awalan"
+   ]
+  },
+  "old_text": {
+   "default": "kerja keras",
+   "type": "text",
+   "hint": "Mode tukar: frasa yang diseleksi lalu diganti oleh teks",
+   "aliases": [
+    "teks_lama"
+   ]
+  },
+  "dim_color": {
+   "default": "#6d727c",
+   "type": "color",
+   "hint": "Mode stream: warna awal kata sebelum menebal",
+   "aliases": [
+    "warna_redup"
+   ]
+  },
+  "selected_color": {
+   "default": "#5b7cff",
+   "type": "color",
+   "hint": "Mode tukar: ujung kedua gradien seleksi",
+   "aliases": [
+    "warna_pilih"
+   ]
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "teks/mesin-ketik",
+  "typewriter",
+  "typed-prompt",
+  "streaming-text",
+  "caret-swap"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "JetBrains Mono:wght@400;500;700",
+   "Inter:wght@400;500;600;700;800;900"
+  ]
+ }
+}

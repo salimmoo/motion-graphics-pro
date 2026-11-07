@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Prism · block example titles/prism</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="5.5">
+<div id="adegan" class="adegan ad-gelap"></div>
+<!-- Block titles/prism · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-prism" data-block="titles/prism" data-start="0" data-duration="5" data-track-index="20" class="blk blk-titles-prism">
+<script type="application/json" data-block-props>
+{"text": "SINYAL\\nDARI JAUH", "color": "#ffffff", "left_color": "#ff2d55", "right_color": "#2d7bff", "slide": 26, "margin": 6, "breath": 4, "arc": 22, "font": "Anton", "size": 210, "line_spacing": 0.92, "position_y": 50}
+</script>
+<div class="blk-st"><div class="blk-bw"></div></div>
+</div>
+<style>
+.blk-titles-prism{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-titles-prism .blk-st{position:absolute;left:0;right:0;transform:translateY(-50%);perspective:calc(var(--s)*900px)}
+.blk-titles-prism .blk-bw{position:relative;display:grid;place-items:center}
+.blk-titles-prism .blk-ly{grid-area:1/1;text-align:center;white-space:pre;text-transform:uppercase;letter-spacing:.01em}
+.blk-titles-prism .blk-fr{mix-blend-mode:screen}
+</style>
+<script>
+BLOCK.mount("blk-prism", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, D = k.dur, E = BLOCK.el, R = k.root;
+  var st = R.querySelector(".blk-st"), bw = R.querySelector(".blk-bw");
+  st.style.top = P.position_y + "%";
+  R.style.cssText += ";--s:" + s;
+  var teks = String(P.text).replace(/\\n/g, "\n");
+  var nBaris = teks.split("\n").length, maxLen = Math.max.apply(null, teks.split("\n").map(function (b) { return b.length; }));
+  var fs = Math.min(P.size * s, k.w * 0.9 / Math.max(3, maxLen * 0.5), k.h * 0.8 / (nBaris * P.line_spacing));
+  bw.style.cssText = "font-family:" + BLOCK.family(P.font) + ";font-size:" + Math.round(fs) + "px;line-height:" + P.line_spacing;
+  // tiga lapis: pinggiran merah & biru (screen) + inti
+  var kiri = E("div", { class: "blk-ly blk-fr", style: "color:" + P.left_color }, bw), kanan = E("div", { class: "blk-ly blk-fr", style: "color:" + P.right_color }, bw);
+  var inti = E("div", { class: "blk-ly", style: "color:" + P.color }, bw);
+  kiri.textContent = kanan.textContent = inti.textContent = teks;
+  var g = P.slide * s, o = { f: 1, b: 0 };
+  function pinggir() {
+    var d = g * o.f + (P.margin + o.b) * s;
+    kiri.style.transform = "translate(" + (-d).toFixed(2) + "px," + (d * 0.18).toFixed(2) + "px)";
+    kanan.style.transform = "translate(" + d.toFixed(2) + "px," + (-d * 0.18).toFixed(2) + "px)";
+    kiri.style.opacity = kanan.style.opacity = (0.75 + 0.25 * o.f).toFixed(3);
+  }
+  // masuk: fokus dari kabur, pinggiran lebar lalu mengendap
+  tl.fromTo(bw, { filter: "blur(" + Math.round(28 * s) + "px)", autoAlpha: 0, scale: 1.12 }, { filter: "blur(0px)", autoAlpha: 1, scale: 1, duration: 1.1, ease: "power3.out" }, 0.1);
+  tl.fromTo(o, { f: 1 }, { f: 0, duration: 1.4, ease: "power3.out", onUpdate: pinggir }, 0.3);
+  // napas pinggiran (terhitung, bukan tak terhingga)
+  var siklus = 1.3, n = Math.max(1, Math.floor((D - 2) / siklus));
+  tl.fromTo(o, { b: 0 }, { b: P.breath, duration: siklus / 2, ease: "sine.inOut", yoyo: true, repeat: n * 2 - 1, onUpdate: pinggir, immediateRender: false }, 1.6);
+  // busur perspektif dan hanyut skala pelan
+  tl.fromTo(bw, { rotationX: P.arc }, { rotationX: 0, duration: 1.6, ease: "power3.out" }, 0.1)
+    .fromTo(st, { scale: 1 }, { scale: 1.05, duration: D, ease: "none" }, 0)
+    .fromTo(bw, { rotationY: -3 }, { rotationY: 3, duration: D, ease: "sine.inOut", immediateRender: false }, 0);
+  tl.to(bw, { autoAlpha: 0, filter: "blur(" + Math.round(16 * s) + "px)", duration: 0.5, ease: "power2.in" }, D - 0.55);
+  pinggir();
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 5.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5.5);
+</script>
+</body>
+</html>

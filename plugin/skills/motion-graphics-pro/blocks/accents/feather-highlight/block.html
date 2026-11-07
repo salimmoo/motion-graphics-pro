@@ -1,0 +1,48 @@
+<!-- Block accents/feather-highlight · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="accents/feather-highlight" data-start="0" data-duration="5" data-track-index="30" class="blk blk-accents-feather-highlight">
+<script type="application/json" data-block-props>
+{"dot": [{"x": 40, "y": 31, "lebar": 36, "tinggi": 38, "teks": "Ringkasan minggu ini"}, {"x": 83, "y": 43.5, "lebar": 18, "tinggi": 7, "teks": "Simpan perubahan"}, {"x": 59, "y": 74, "lebar": 74, "tinggi": 40, "teks": "Riwayat transaksi"}], "dark": 0.72, "feather": 0.35, "loose": 1.25, "slide_duration": 0.8, "ease": "power3.inOut", "color": "#05060b", "label_color": "#ffffff", "text_color": "#141622", "font": "Inter:wght@600", "size": 30}
+</script>
+<div class="blk-tirai"></div>
+<div class="blk-kt"></div>
+</div>
+<style>
+.blk-accents-feather-highlight{position:absolute;inset:0;pointer-events:none;--x:50%;--y:50%;--rx:20%;--ry:20%}
+.blk-accents-feather-highlight .blk-tirai{position:absolute;inset:0}
+.blk-accents-feather-highlight .blk-kt{position:absolute;left:0;top:0;white-space:nowrap;font-weight:600}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, fs = function (v) { return (v * s).toFixed(1) + "px"; };
+  var tirai = R.querySelector(".blk-tirai"), kt = R.querySelector(".blk-kt"), rb = R.getBoundingClientRect(), sk = k.w / (rb.width || k.w);
+  // setiap titik: selektor elemen host, atau {x, y, lebar, tinggi, teks} dalam persen
+  var T = (P.dot || []).map(function (q) {
+    var o = typeof q === "string" ? { sel: q } : q, el = o.sel && BLOCK.find(o.sel);
+    if (el) { var a = el.getBoundingClientRect(); return { x: (a.left - rb.left + a.width / 2) * sk, y: (a.top - rb.top + a.height / 2) * sk, rx: a.width * sk * 0.5, ry: a.height * sk * 0.5, teks: o.teks || "" }; }
+    return { x: k.w * (+o.x || 50) / 100, y: k.h * (+o.y || 50) / 100, rx: k.w * (+o.lebar || 20) / 200, ry: k.h * (+o.tinggi || 20) / 200, teks: o.teks || "" };
+  });
+  if (!T.length) T = [{ x: k.w / 2, y: k.h / 2, rx: k.w * 0.15, ry: k.h * 0.15, teks: "" }];
+  var n = T.length, t0 = 0.5, tEnd = k.dur - 0.6, seg = (tEnd - t0) / n, gl = Math.min(P.slide_duration, seg * 0.6), ez = gsap.parseEase(P.ease);
+  var pad = P.loose, bulu = BLOCK.clamp(P.feather, 0.02, 0.95), warn = BLOCK.rgba(P.color, P.dark);
+  kt.style.cssText += ";font-family:" + BLOCK.family(P.font) + ";font-size:" + fs(P.size) + ";color:" + P.text_color + ";background:" + P.label_color + ";padding:" + fs(P.size * 0.45) + " " + fs(P.size * 0.8) + ";border-radius:" + fs(P.size) + ";box-shadow:0 " + fs(10) + " " + fs(30) + " rgba(0,0,0,.35)";
+  BLOCK.onTime(tl, function (t) {
+    // indeks titik aktif + geseran halus ke titik berikutnya
+    var j = BLOCK.clamp(Math.floor((t - t0) / seg), 0, n - 1), u = j < n - 1 ? ez(BLOCK.progress(t, t0 + (j + 1) * seg - gl, t0 + (j + 1) * seg)) : 0;
+    var A = T[j], B = T[Math.min(j + 1, n - 1)], L = function (a, b) { return a + (b - a) * u; };
+    var x = L(A.x, B.x), y = L(A.y, B.y), rx = L(A.rx, B.rx) * pad, ry = L(A.ry, B.ry) * pad;
+    var masuk = BLOCK.smooth(BLOCK.progress(t, 0, t0)), keluar = 1 - BLOCK.smooth(BLOCK.progress(t, tEnd, k.dur - 0.05)), on = masuk * keluar;
+    var grow = 1 + 1.8 * (1 - on);                                  // lubang membesar saat tirai belum/sudah turun
+    R.style.setProperty("--x", x.toFixed(1) + "px"); R.style.setProperty("--y", y.toFixed(1) + "px");
+    R.style.setProperty("--rx", (rx * grow).toFixed(1) + "px"); R.style.setProperty("--ry", (ry * grow).toFixed(1) + "px");
+    tirai.style.background = "radial-gradient(var(--rx) var(--ry) at var(--x) var(--y),rgba(0,0,0,0) " + ((1 - bulu) * 100).toFixed(1) + "%," + warn + " 100%)";
+    tirai.style.opacity = on.toFixed(3);
+    // label menempel di bawah lubang; berganti saat geseran berada di tengah
+    var Q = u > 0.5 ? B : A, mid = Math.abs(u - 0.5) * 2, op = on * (j < n - 1 ? BLOCK.smooth(mid) : 1);
+    kt.textContent = Q.teks; kt.style.display = Q.teks ? "block" : "none";
+    var kw = kt.offsetWidth, ly = y + ry * 1.05 + 18 * s;
+    if (ly + kt.offsetHeight > k.h * 0.96) ly = y - ry * 1.05 - kt.offsetHeight - 18 * s;
+    kt.style.transform = "translate(" + BLOCK.clamp(x - kw / 2, 12 * s, k.w - kw - 12 * s).toFixed(1) + "px," + ly.toFixed(1) + "px)";
+    kt.style.opacity = op.toFixed(3);
+  }, k.dur);
+}, { font: true });
+</script>

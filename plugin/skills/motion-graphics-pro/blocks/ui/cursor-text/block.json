@@ -1,0 +1,142 @@
+{
+ "id": "ui/cursor-text",
+ "name": "Cursor Text",
+ "name_id": "Kursor Teks & Menu",
+ "category": "ui",
+ "description": {
+  "id": "Kursor bekerja di dokumen dan berkas. Mode pilih-teks: panah berubah menjadi I-beam, menyeret seleksi huruf demi huruf, bilah format muncul, lalu kembali menjadi panah dan menebalkan frasa. Mode menu-konteks: klik kanan pada berkas, menu mekar dari ujung kursor, sorotan mengikuti item, lalu aksi terjadi (duplikat, ganti nama, salin tautan, atau pindah ke sampah dengan toast).",
+  "en": "A cursor at work in a document and a file view. Text-select mode turns the arrow into an I-beam, drags a selection letter by letter, raises a format bar and clicks Bold. Context-menu mode right-clicks a file, blooms a menu from the tip, tracks the hover and plays the action: duplicate, rename, copy link or trash with a toast."
+ },
+ "tags": [
+  "ui",
+  "kursor",
+  "seleksi teks",
+  "i-beam",
+  "menu konteks",
+  "klik kanan",
+  "toolbar",
+  "toast",
+  "cursor",
+  "text"
+ ],
+ "props": {
+  "mode": {
+   "default": "text-select",
+   "type": "enum",
+   "options": [
+    "text-select",
+    "context-menu"
+   ],
+   "option_aliases": {
+    "pilih-teks": "text-select",
+    "menu-konteks": "context-menu"
+   }
+  },
+  "title": {
+   "default": "Catatan Rapat",
+   "type": "text",
+   "hint": "Judul dokumen (pilih-teks)",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "text": {
+   "default": "Tim sepakat merilis fitur baru minggu depan setelah uji coba bersama pengguna selesai dan semua catatan dirapikan.",
+   "type": "text",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "phrase": {
+   "default": "merilis fitur baru minggu depan",
+   "type": "text",
+   "hint": "Bagian teks yang diseleksi lalu ditebalkan",
+   "aliases": [
+    "frasa"
+   ]
+  },
+  "file": {
+   "default": [
+    "Laporan Q3",
+    "Foto Tim",
+    "Anggaran",
+    "Presentasi",
+    "Catatan"
+   ],
+   "type": "list",
+   "hint": "Nama berkas (menu-konteks); indeks 1 tampil sebagai folder",
+   "aliases": [
+    "berkas"
+   ]
+  },
+  "file_index": {
+   "default": 1,
+   "type": "number",
+   "hint": "Berkas yang diklik kanan",
+   "aliases": [
+    "indeks_berkas"
+   ]
+  },
+  "action": {
+   "default": "duplicate",
+   "type": "enum",
+   "options": [
+    "duplicate",
+    "rename",
+    "link",
+    "delete"
+   ],
+   "aliases": [
+    "aksi"
+   ],
+   "option_aliases": {
+    "duplikat": "duplicate",
+    "ganti-nama": "rename",
+    "tautan": "link",
+    "hapus": "delete"
+   }
+  },
+  "new_name": {
+   "default": "Foto Tim Final",
+   "type": "text",
+   "hint": "Nama baru (aksi ganti-nama)",
+   "aliases": [
+    "nama_baru"
+   ]
+  },
+  "accent_color": {
+   "default": "#2d6cdf",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg": {
+   "default": "#eef1f6",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700",
+   "type": "font"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/kursor-teks",
+  "cursor-text-select",
+  "cursor-context-menu"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

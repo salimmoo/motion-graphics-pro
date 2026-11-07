@@ -1,0 +1,268 @@
+{
+ "id": "data/bar-chart",
+ "name": "Bar Chart",
+ "name_id": "Grafik Batang",
+ "category": "data",
+ "description": {
+  "id": "Grafik batang bergaya editorial yang tumbuh berurutan dari data props, label nilai ikut naik di ujung batang sambil menghitung. Mode vertikal, horizontal, atau kombinasi batang + garis; gaya editorial polos atau kartu ringkas, dengan satu batang yang disorot.",
+  "en": "Editorial-style bar chart that grows in reading order from props data, value labels riding the bar tips while counting. Vertical, horizontal or bar + line combo; plain editorial or compact card, with one highlighted bar."
+ },
+ "tags": [
+  "data",
+  "grafik",
+  "chart",
+  "batang",
+  "bar",
+  "editorial",
+  "infografik"
+ ],
+ "props": {
+  "mode": {
+   "default": "vertical",
+   "type": "enum",
+   "options": [
+    "vertical",
+    "horizontal",
+    "combo"
+   ],
+   "hint": "kombinasi = batang + garis dari field 'garis'",
+   "option_aliases": {
+    "vertikal": "vertical",
+    "kombinasi": "combo"
+   }
+  },
+  "style": {
+   "default": "editorial",
+   "type": "enum",
+   "options": [
+    "editorial",
+    "card"
+   ],
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "kartu": "card"
+   }
+  },
+  "title": {
+   "default": "Pengguna baru terus naik",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "subtitle": {
+   "default": "Pendaftaran per bulan, dalam ribuan orang",
+   "type": "text",
+   "aliases": [
+    "subjudul"
+   ]
+  },
+  "source": {
+   "default": "Sumber: data internal, Januari sampai Juli",
+   "type": "text",
+   "aliases": [
+    "sumber"
+   ]
+  },
+  "data": {
+   "default": [
+    {
+     "label": "Jan",
+     "nilai": 42.5,
+     "garis": 30
+    },
+    {
+     "label": "Feb",
+     "nilai": 48.2,
+     "garis": 33
+    },
+    {
+     "label": "Mar",
+     "nilai": 51,
+     "garis": 31
+    },
+    {
+     "label": "Apr",
+     "nilai": 63.4,
+     "garis": 40
+    },
+    {
+     "label": "Mei",
+     "nilai": 58.1,
+     "garis": 44
+    },
+    {
+     "label": "Jun",
+     "nilai": 74.9,
+     "garis": 52
+    },
+    {
+     "label": "Jul",
+     "nilai": 81.3,
+     "garis": 61
+    }
+   ],
+   "type": "list",
+   "hint": "[{label, nilai, garis?}]"
+  },
+  "highlight": {
+   "default": 6,
+   "type": "number",
+   "hint": "Indeks batang yang disorot (0 = pertama, -1 = tidak ada)",
+   "aliases": [
+    "sorot"
+   ]
+  },
+  "prefix": {
+   "default": "",
+   "type": "text",
+   "aliases": [
+    "awalan"
+   ]
+  },
+  "suffix": {
+   "default": "",
+   "type": "text",
+   "hint": "Mis. % atau rb",
+   "aliases": [
+    "akhiran"
+   ]
+  },
+  "decimals": {
+   "default": 1,
+   "type": "number",
+   "aliases": [
+    "desimal"
+   ]
+  },
+  "pause": {
+   "default": 0.12,
+   "type": "number",
+   "hint": "Jeda antar batang (detik)",
+   "aliases": [
+    "jeda"
+   ]
+  },
+  "bar_duration": {
+   "default": 0.9,
+   "type": "number",
+   "aliases": [
+    "durasi_batang"
+   ]
+  },
+  "ease": {
+   "default": "power3.out",
+   "type": "ease"
+  },
+  "text_color": {
+   "default": "#1d1b18",
+   "type": "color",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "bar_color": {
+   "default": "#b9b2a5",
+   "type": "color",
+   "aliases": [
+    "warna_batang"
+   ]
+  },
+  "accent_color": {
+   "default": "#d9480f",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "line_color": {
+   "default": "#1f4e79",
+   "type": "color",
+   "aliases": [
+    "warna_garis"
+   ]
+  },
+  "guide_color": {
+   "default": "rgba(0,0,0,0.13)",
+   "type": "color",
+   "aliases": [
+    "warna_bantu"
+   ]
+  },
+  "card_color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna_kartu"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700",
+   "type": "font"
+  },
+  "font2": {
+   "default": "Source Serif 4:wght@600;700",
+   "type": "font",
+   "hint": "Font judul"
+  },
+  "left": {
+   "default": 10,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "kiri"
+   ]
+  },
+  "top": {
+   "default": 9,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "atas"
+   ]
+  },
+  "width": {
+   "default": 80,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "height": {
+   "default": 80,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "tinggi"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "1:1",
+  "4:5",
+  "9:16"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "data/batang",
+  "animated-bar-chart",
+  "chart-story",
+  "data-chart",
+  "nyt-graph"
+ ],
+ "example": {
+  "bg": "light",
+  "props": {
+   "mode": "combo"
+  },
+  "font": [
+   "Inter:wght@400;500;600;700",
+   "Source Serif 4:wght@600;700"
+  ]
+ }
+}

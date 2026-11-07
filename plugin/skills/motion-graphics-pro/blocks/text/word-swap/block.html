@@ -1,0 +1,71 @@
+<!-- Block text/word-swap · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="text/word-swap" data-start="0" data-duration="5" data-track-index="10" class="blk blk-text-word-swap">
+<script type="application/json" data-block-props>
+{"prefix": "Kami membuat video yang", "options": ["cepat", "jelas", "berani", "berkesan"], "suffix": "", "font": "Inter:wght@500;800", "size": 92, "weight": 800, "color": "#f5f3ee", "accent_color": "#ffcf4a", "position_y": 50, "width": 90, "align": "center", "mode": "roll", "start": 0.4, "hold": 0.75, "swap_duration": 0.45}
+</script>
+<div class="blk-tk"></div><svg class="blk-svg" width="0" height="0" aria-hidden="true"><filter id="__ID__-leleh"><feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 255 -140"/></filter></svg>
+</div>
+<style>
+.blk-text-word-swap {position:absolute;inset:0;pointer-events:none}
+.blk-text-word-swap .blk-tk{position:absolute;left:50%;transform:translate(-50%,-50%);line-height:1.08}
+.blk-text-word-swap .blk-kunci{color:var(--aksen)}
+.blk-text-word-swap .blk-svg{position:absolute}
+.blk-text-word-swap .blk-tk{line-height:1.15}
+.blk-text-word-swap .blk-slot{display:inline-block;position:relative;vertical-align:bottom;height:1.15em;text-align:left;color:var(--aksen)}
+.blk-text-word-swap .blk-slot.blk-m{overflow:hidden}
+.blk-text-word-swap .blk-kol{position:absolute;left:0;top:0;width:100%}
+.blk-text-word-swap .blk-kol div{height:1.15em;white-space:nowrap}
+.blk-text-word-swap .blk-lw{position:absolute;left:0;top:0;white-space:nowrap}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl;
+  var rata = { left: "left", right: "right" }[P.align] || "center";
+  function gayaTeks(el, px) {
+    el.style.cssText += ";top:" + P.position_y + "%;width:" + P.width + "%;color:" + P.color + ";--aksen:" + P.accent_color +
+      ";font-family:" + BLOCK.family(P.font) + ";font-weight:" + P.weight + ";font-size:" + Math.round((px || P.size) * k.s) + "px;text-align:" + rata;
+  }
+  // tunggu stylesheet Google Fonts + wajah font benar-benar termuat sebelum mengukur teks
+  function siapFont(spec) {
+    var ln = Array.prototype.slice.call(document.querySelectorAll('link[href*="fonts.googleapis"]'));
+    return Promise.all(ln.map(function (l) { return l.sheet ? 0 : new Promise(function (ok) { l.addEventListener("load", ok); l.addEventListener("error", ok); }); }))
+      .then(function () { return document.fonts && document.fonts.load ? document.fonts.load(spec || (P.weight + " 100px " + BLOCK.family(P.font))) : 0; })
+      .catch(function () {});
+  }
+  function markupKunci(s) { return BLOCK.esc(s).replace(/\*([^*]+)\*/g, '<span class="blk-kunci">$1</span>').replace(/\\n|\n/g, "<br>"); }
+  return siapFont().then(function () {
+  var el = k.root.querySelector(".blk-tk");
+  gayaTeks(el);
+  var pil = (P.options || []).map(function (s) { return String(s).replace(/\*/g, ""); }), n = pil.length;
+  el.innerHTML = (P.prefix ? markupKunci(P.prefix) + " " : "") + '<span class="blk-slot' + (P.mode === "roll" ? " blk-m" : "") + '"></span>' + (P.suffix ? " " + markupKunci(P.suffix) : "");
+  var slot = el.querySelector(".blk-slot"), fs = P.size * k.s, lh = 1.15 * fs;
+  // lebar slot = kata terlebar (diukur setelah font siap)
+  var ukur = BLOCK.el("span", { style: "position:absolute;visibility:hidden;white-space:nowrap" }, slot), lw = 0;
+  pil.forEach(function (s) { ukur.textContent = s; lw = Math.max(lw, ukur.offsetWidth); });
+  ukur.remove();
+  slot.style.width = Math.ceil(lw + fs * 0.06) + "px";
+  var T = function (i) { return P.start + 0.35 + (i - 1) * P.hold; }, dt = +P.swap_duration;
+  tl.fromTo(el, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 0.05);
+  if (P.mode === "roll") {
+    var kol = BLOCK.el("div", { class: "blk-kol" }, slot);
+    pil.forEach(function (s) { BLOCK.el("div", null, kol).textContent = s; });
+    for (var i = 1; i < n; i++) {
+      var akhir = i === n - 1;
+      tl.to(kol, { y: -i * lh, duration: akhir ? dt * 1.5 : dt, ease: akhir ? "back.out(1.7)" : "power3.inOut" }, T(i));
+      tl.to(kol, { filter: "blur(" + Math.round(4 * k.s) + "px)", duration: dt * 0.45, ease: "power1.in", yoyo: true, repeat: 1 }, T(i));
+    }
+  } else {
+    slot.style.filter = "url(#" + k.id + "-leleh)";
+    var W = pil.map(function (s) { var w = BLOCK.el("span", { class: "blk-lw" }, slot); w.textContent = s; return w; });
+    W.forEach(function (w, i) { if (i) BLOCK.initial(tl, w, { opacity: 0 }); });
+    var b = Math.round(9 * k.s);
+    for (var j = 1; j < n; j++) {
+      var dd = dt * 1.6;
+      tl.fromTo(W[j - 1], { opacity: 1, filter: "blur(0px)" }, { opacity: 0, filter: "blur(" + b + "px)", duration: dd, ease: "power1.inOut" }, T(j));
+      tl.fromTo(W[j], { opacity: 0, filter: "blur(" + b + "px)" }, { opacity: 1, filter: "blur(0px)", duration: dd, ease: "power1.inOut" }, T(j));
+    }
+  }
+  tl.to(el, { opacity: 0, duration: 0.45, ease: "power2.in" }, k.dur - 0.5);
+  });
+}, { font: true });
+</script>

@@ -1,0 +1,20 @@
+{
+  "MGP lib (motion-graphics/lib/lottie) not found; set MGP_LIB=<lib folder>": "MGP lib (motion-graphics/lib/lottie) not found; set MGP_LIB=<lib folder>",
+  "mgp export lottie: {} {}x{}, {}-{} s @ {} fps, mode {}": "mgp export lottie: {} {}x{}, {}-{} s @ {} fps, mode {}",
+  "mode {}: {} frames, {} layers, {} keyframes, {} KB JSON": "mode {}: {} frames, {} layers, {} keyframes, {} KB JSON",
+  "(seeked through the runtime: every timeline/scene)": "(seeked through the runtime: every timeline/scene)",
+  "size savings: {}": "size savings: {}",
+  "not supported: {} ({}x)": "not supported: {} ({}x)",
+  "WARN": "WARN",
+  "static Lottie (0 keyframes) although the composition has a moving timeline. Motion on canvas/WebGL, CSS animation, or elements whose DOM does not change is not read by mode {}; try --mode {}, or export per scene.": "static Lottie (0 keyframes) although the composition has a moving timeline. Motion on canvas/WebGL, CSS animation, or elements whose DOM does not change is not read by mode {}; try --mode {}, or export per scene.",
+  "JSON {} MB ({} MB per second)": "JSON {} MB ({} MB per second)",
+  "save it as .lottie (-o {}.lottie, lossless, ~10x smaller)": "save it as .lottie (-o {}.lottie, lossless, ~10x smaller)",
+  "Make it smaller: --precision 1, --tolerance 0.3, --fps 24/15, a shorter --from/--to range, or render to MP4.": "Make it smaller: --precision 1, --tolerance 0.3, --fps 24/15, a shorter --from/--to range, or render to MP4.",
+  "Lottie file not found: {}": "Lottie file not found: {}",
+  "MGP.lottie does not support: ": "MGP.lottie does not support: ",
+  "{}: {}x{}, {} fps, {} frames ({} s), {} layers": "{}: {}x{}, {} fps, {} frames ({} s), {} layers",
+  "features: {}": "features: {}",
+  "not supported: {}": "not supported: {}",
+  "every feature is supported by the MGP.lottie player": "every feature is supported by the MGP.lottie player",
+  "mgp lottie: unknown subcommand \"{}\" (export, play, render, frame, check)": "mgp lottie: unknown subcommand \"{}\" (export, play, render, frame, check)"
+}

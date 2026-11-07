@@ -1,0 +1,92 @@
+<!-- Block ui/vector-editor · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="ui/vector-editor" data-start="0" data-duration="7" data-track-index="30" class="blk blk-ui-vector-editor">
+<script type="application/json" data-block-props>
+{"file_name": "Bentuk Organik — Draf 3", "dot": [[0.5, 0.12, 0.2, 0.0], [0.82, 0.5, 0.0, 0.24], [0.5, 0.9, -0.22, 0.02], [0.2, 0.52, 0.02, -0.26]], "closed": true, "fill": "#33c07a", "accent_color": "#2f80ff", "chrome": "#1e1f24", "canvas": "#2a2b31", "board": "#f4f4f2", "font": "Inter:wght@400;500;600;700"}
+</script>
+</div>
+<style>
+.blk-ui-vector-editor{position:absolute;inset:0;pointer-events:none;overflow:hidden;font-family:"Inter",system-ui,sans-serif;color:#d6d8de}
+.blk-ui-vector-editor .pn{position:absolute;box-sizing:border-box}
+.blk-ui-vector-editor .tool{border-radius:22%;margin:0 auto}
+.blk-ui-vector-editor .ly{display:flex;align-items:center;white-space:nowrap}
+.blk-ui-vector-editor .pr{display:grid;grid-template-columns:1fr 1fr}
+.blk-ui-vector-editor .fld{border-radius:6px;background:rgba(255,255,255,.06);white-space:nowrap}
+.blk-ui-vector-editor svg{position:absolute;overflow:visible}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, E = BLOCK.el, W = k.w, H = k.h, ac = P.accent_color, lebar = W > H;
+  var u = Math.min(W / 1920, H / 1080) * (lebar ? 1 : 1.6), px = function (v) { return v * u + "px"; }, f = function (v) { return "font-size:" + px(v); };
+  E("div", { class: "pn", style: "inset:0;background:" + P.canvas }, k.root);
+  var th = 56 * u, lw = lebar ? 64 * u : 56 * u, rw = lebar ? 300 * u : 0, lyw = lebar ? 260 * u : 0;
+  var top = E("div", { class: "pn", style: "left:0;right:0;top:0;height:" + th + "px;background:" + P.chrome + ";border-bottom:1px solid #2e3036;display:flex;align-items:center;justify-content:center;" + f(17) }, k.root, BLOCK.esc(P.file_name) + '<span style="opacity:.45;margin-left:' + px(14) + '">100%</span>');
+  var tb = E("div", { class: "pn", style: "left:0;top:" + th + "px;bottom:0;width:" + lw + "px;background:" + P.chrome + ";border-right:1px solid #2e3036;padding-top:" + px(16) }, k.root);
+  var tools = [0, 1, 2, 3, 4, 5].map(function (i) { return E("div", { class: "tool", style: "width:" + px(36) + ";height:" + px(36) + ";margin-bottom:" + px(14) + ";background:" + (i === 2 ? ac : "rgba(255,255,255,.08)") }, tb); });
+  if (lebar) {
+    var lyr = E("div", { class: "pn", style: "left:" + lw + "px;top:" + th + "px;bottom:0;width:" + lyw + "px;background:" + P.chrome + ";border-right:1px solid #2e3036;padding:" + px(18) + ";" + f(15) }, k.root);
+    E("div", { style: "opacity:.5;letter-spacing:.08em;margin-bottom:" + px(12) + ";" + f(12) }, lyr, "LAPISAN");
+    ["Papan 1", "Jalur daun", "Latar"].forEach(function (n, i) { E("div", { class: "ly", style: "height:" + px(34) + ";padding-left:" + px(i === 1 ? 22 : 6) + ";border-radius:6px;" + (i === 1 ? "background:" + BLOCK.rgba(ac, .25) : "") }, lyr, n); });
+    var pr = E("div", { class: "pn", style: "right:0;top:" + th + "px;bottom:0;width:" + rw + "px;background:" + P.chrome + ";border-left:1px solid #2e3036;padding:" + px(18) + ";" + f(14) }, k.root);
+    E("div", { style: "opacity:.5;letter-spacing:.08em;margin-bottom:" + px(12) + ";" + f(12) }, pr, "TATA LETAK");
+    var g = E("div", { class: "pr", style: "gap:" + px(10) }, pr), fl = {};
+    ["X", "Y", "L", "T"].forEach(function (n) { fl[n] = E("div", { class: "fld", style: "padding:" + px(9) + " " + px(10) }, g); });
+    E("div", { style: "opacity:.5;letter-spacing:.08em;margin:" + px(26) + " 0 " + px(12) + ";" + f(12) }, pr, "ISI");
+    var sw = E("div", { class: "fld", style: "display:flex;align-items:center;gap:" + px(10) + ";padding:" + px(9) + " " + px(10) }, pr);
+    var swc = E("div", { style: "width:" + px(18) + ";height:" + px(18) + ";border-radius:4px;background:" + P.fill }, sw); sw.appendChild(document.createTextNode(P.fill.toUpperCase()));
+  }
+  // papan gambar
+  var cx0 = lw + lyw, cw = W - cx0 - rw, chh = H - th, ab = Math.min(cw * 0.7, chh * 0.8), ax = cx0 + cw / 2 - ab / 2, ay = th + chh / 2 - ab / 2;
+  E("div", { class: "pn", style: "left:" + ax + "px;top:" + ay + "px;width:" + ab + "px;height:" + ab + "px;background:" + P.board + ";box-shadow:0 " + px(10) + " " + px(40) + " rgba(0,0,0,.4)" }, k.root);
+  var sv = BLOCK.svg("svg", { width: W, height: H, style: "left:0;top:0" }, k.root);
+  var T = P.dot.map(function (p) { return { x: ax + p[0] * ab, y: ay + p[1] * ab, hx: p[2] * ab, hy: p[3] * ab }; }), n = T.length, nseg = P.closed ? n : n - 1;
+  var seg = function (a, b) { return "M" + a.x + " " + a.y + " C" + (a.x + a.hx) + " " + (a.y + a.hy) + " " + (b.x - b.hx) + " " + (b.y - b.hy) + " " + b.x + " " + b.y; };
+  var full = "M" + T[0].x + " " + T[0].y; for (var i = 0; i < nseg; i++) full += seg(T[i], T[(i + 1) % n]).replace(/^M[^C]+/, " ");
+  var isi = BLOCK.svg("path", { d: full + (P.closed ? "Z" : ""), fill: P.fill, opacity: 0 }, sv);
+  var segs = [], hnd = [], anc = [], sw2 = 2.4 * u;
+  for (i = 0; i < nseg; i++) segs.push(BLOCK.svg("path", { d: seg(T[i], T[(i + 1) % n]), fill: "none", stroke: ac, "stroke-width": sw2 }, sv));
+  T.forEach(function (p) {
+    var gl = BLOCK.svg("g", null, sv), ln = BLOCK.svg("path", { d: "M" + (p.x - p.hx) + " " + (p.y - p.hy) + " L" + (p.x + p.hx) + " " + (p.y + p.hy), stroke: ac, "stroke-width": 1.4 * u }, gl);
+    [-1, 1].forEach(function (sg) { BLOCK.svg("circle", { cx: p.x + sg * p.hx, cy: p.y + sg * p.hy, r: 5 * u, fill: "#fff", stroke: ac, "stroke-width": 1.6 * u }, gl); });
+    hnd.push({ g: gl, ln: ln });
+    anc.push(BLOCK.svg("rect", { x: p.x - 6 * u, y: p.y - 6 * u, width: 12 * u, height: 12 * u, fill: "#fff", stroke: ac, "stroke-width": 2 * u }, sv));
+  });
+  // kotak seleksi akhir
+  var bb = isi.getBBox(), sel = BLOCK.svg("g", null, sv), m = 8 * u;
+  BLOCK.svg("rect", { x: bb.x - m, y: bb.y - m, width: bb.width + 2 * m, height: bb.height + 2 * m, fill: "none", stroke: ac, "stroke-width": 1.4 * u }, sel);
+  [[0, 0], [.5, 0], [1, 0], [1, .5], [1, 1], [.5, 1], [0, 1], [0, .5]].forEach(function (q) { BLOCK.svg("rect", { x: bb.x - m + q[0] * (bb.width + 2 * m) - 5 * u, y: bb.y - m + q[1] * (bb.height + 2 * m) - 5 * u, width: 10 * u, height: 10 * u, fill: "#fff", stroke: ac, "stroke-width": 1.4 * u }, sel); });
+  var pena = BLOCK.svg("path", { d: "M0 0 L" + 9 * u + " " + 22 * u + " L0 " + 30 * u + " L" + -9 * u + " " + 22 * u + " Z", fill: "#fff", stroke: "#111", "stroke-width": 1.2 * u }, sv);
+  // urutan: tiap titik diletakkan, pegangannya ditarik keluar, lalu segmen tergambar menuju titik berikutnya
+  var t0 = 0.8, dt = (D - 2.8 - t0) / n, pos = function (i) { return { x: T[i % n].x, y: T[i % n].y }; };
+  BLOCK.initial(tl, anc.concat(hnd.map(function (h) { return h.g; })), { autoAlpha: 0 });
+  BLOCK.initial(tl, sel, { autoAlpha: 0 });
+  tl.fromTo(pena, { x: ax + ab * 0.9, y: ay + ab * 1.05 }, { x: pos(0).x, y: pos(0).y, duration: t0, ease: "power2.inOut" }, 0);
+  T.forEach(function (p, i) {
+    var ta = t0 + i * dt;
+    tl.fromTo(anc[i], { autoAlpha: 0, scale: 0.3, transformOrigin: "50% 50%" }, { autoAlpha: 1, scale: 1, duration: 0.2, ease: "back.out(3)", immediateRender: false }, ta)
+      .fromTo(hnd[i].g, { autoAlpha: 0, scale: 0.05, transformOrigin: p.x + "px " + p.y + "px" }, { autoAlpha: 1, scale: 1, duration: 0.45, ease: "power3.out", immediateRender: false }, ta + 0.12);
+    if (i > 0) { var L = BLOCK.prepareStroke(segs[i - 1]); tl.fromTo(segs[i - 1], { strokeDashoffset: L }, { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, ta - 0.02); }
+    var nx = pos(i + 1);
+    if (i < n - 1 || P.closed) tl.to(pena, { x: nx.x, y: nx.y, duration: dt * 0.8, ease: "power2.inOut" }, ta + 0.2);
+    if (i > 0) tl.to(hnd[i - 1].g, { autoAlpha: 0.35, duration: 0.3 }, ta);
+  });
+  var tc = t0 + n * dt;
+  if (P.closed) { var Lz = BLOCK.prepareStroke(segs[n - 1]); tl.fromTo(segs[n - 1], { strokeDashoffset: Lz }, { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, tc - 0.02); }
+  tl.to(hnd.map(function (h) { return h.g; }), { autoAlpha: 0, duration: 0.3 }, tc + 0.4)
+    .to(isi, { opacity: 1, duration: 0.5, ease: "power2.out" }, tc + 0.5)
+    .to(segs, { opacity: 0, duration: 0.3 }, tc + 0.6).to(anc, { autoAlpha: 0, duration: 0.3 }, tc + 0.6)
+    .to(sel, { autoAlpha: 1, duration: 0.25, ease: "power2.out" }, tc + 0.8)
+    .to(pena, { x: ax + ab * 0.95, y: ay + ab * 0.98, autoAlpha: 0.0, duration: 0.6, ease: "power2.inOut" }, tc + 0.5);
+  if (fl) {
+    BLOCK.initial(tl, [fl.L, fl.T], { autoAlpha: 0.4 });
+    fl.L.textContent = "L  " + Math.round(bb.width / u); fl.T.textContent = "T  " + Math.round(bb.height / u);
+    tl.to([fl.L, fl.T], { autoAlpha: 1, duration: 0.2 }, tc + 0.8);
+    // panel properti mengikuti titik yang sedang diletakkan, lalu batas seleksi
+    BLOCK.onTime(tl, function (t) {
+      var i = Math.floor((t - t0) / dt), x = 0, y = 0;
+      if (t >= tc + 0.8) { x = bb.x - ax; y = bb.y - ay; } else if (i >= 0) { var p = T[Math.min(i, n - 1)]; x = p.x - ax; y = p.y - ay; }
+      fl.X.textContent = "X  " + Math.round(x / u); fl.Y.textContent = "Y  " + Math.round(y / u);
+    }, D);
+  }
+  tl.fromTo(tools[2], { scale: 1 }, { scale: 0.85, duration: 0.12, yoyo: true, repeat: 1 }, 0.3);
+}, { font: true });
+</script>

@@ -1,0 +1,666 @@
+/* Layer 1 · Gate. 2.5D parallax world (1920×1080, scaled to cover), wind-blown leaves,
+   wind ribbons and gusts, stars through the bars, the padlock → gate-open → push-through sequence,
+   its reverse (close), and the paper-fold theme morph. All gate geometry comes from js/layout.js.
+   Performance: canvases capped at DPR 1.25 (1 on phones), no per-frame layout reads (screen positions are
+   computed from the known transforms), transform/opacity-only animation, and an adaptive quality tier that
+   measures fps during the first second of every sequence and sheds particles/resolution when it is low. */
+window.Gate = (() => {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const small = matchMedia("(max-width: 760px)").matches;
+  const $ = (s) => document.querySelector(s);
+  const stage = $("#gate"), world = $("#gateWorld");
+  let cam, layers = [], running = false, opened = false, raf = 0;
+  let mx = 0, my = 0, tmx = 0, tmy = 0, fit = 1, fitDy = 0;
+  let wind = 1, gust = 0, nextGust = 3;
+
+  // camera wrapper: everything in the world, scaled around the arch opening when we push through
+  cam = document.createElement("div"); cam.className = "cam";
+  Object.assign(cam.style, { position: "absolute", inset: "0", transformOrigin: "959px 812px", willChange: "transform" });
+  while (world.firstChild) cam.appendChild(world.firstChild);
+  world.appendChild(cam);
+  // screen-space sky behind the world, so a hole can be cut exactly where the arch opening is
+  // the sky is drawn on a canvas (with the hole punched in the same draw), so the hole can never lag the
+  // arch or drop a frame the way a per-frame clip-path on a big layer does; the CSS sky is only the fallback
+  const back = document.createElement("div"); back.className = "gate-back"; back.innerHTML = "<i></i><canvas></canvas>";
+  stage.prepend(back); const backImg = back.firstChild, skyCv = back.lastChild, sky = skyCv.getContext("2d");
+  const skyImg = new Image(); let skyReady = false;
+  skyImg.onload = () => { skyReady = true; back.classList.add("cv"); drawSky(); };
+  skyImg.src = small ? "assets/img/m/sky.jpg" : "assets/img/sky.jpg";
+  cam.querySelector(".sky").remove();
+  layers = [...cam.querySelectorAll(".lyr")].map((el) => ({ el, k: +el.dataset.k, flip: el.classList.contains("cf") }));
+  // entry FX: a canvas for dust/petals/stars coming toward the camera + a light flash at the opening
+  const wcv = document.createElement("canvas"); wcv.className = "gate-warp"; wcv.setAttribute("aria-hidden", "true");
+  const flash = document.createElement("div"); flash.className = "gate-flash"; flash.setAttribute("aria-hidden", "true");
+  stage.insertBefore(wcv, stage.querySelector(".gate-ui"));
+  const wx = wcv.getContext("2d");
+
+  const lock = $("#lock"), leafL = $("#leafL"), leafR = $("#leafR"), rays = $("#rays"), peekImg = document.querySelector(".peek-img"), ui = document.querySelector(".gate-ui");
+  // portal: the arch opening becomes a real window onto the live constellation stage behind the gate
+  const archBox = $("#archBox"), peek = $("#peek"), glow = cam.querySelector(".glow");
+  rays.after(flash);     // light from the doorway: inside the arch box, clipped to the opening, under the doors
+  /* ---------------- adaptive quality ---------------- */
+  const DPRCAP = small ? 1 : 1.25;
+  const Q = { tier: 0, motes: 1, trail: 3, dpr: DPRCAP, leaves: 1, sky: .75 };
+  let resizePending = false;
+  let probe = null;     // {t0, n, label}: fps probe over the first second of a sequence
+  // particle counts drop at once; the canvas resolution change waits until the running sequence has ended
+  // (re-allocating canvases mid-move would cost a frame of its own)
+  function setTier(n) {
+    Q.tier = n; Q.motes = [1, .55, .3][n]; Q.trail = [3, 2, 1][n]; Q.dpr = n ? 1 : DPRCAP; Q.leaves = [1, .65, .4][n]; Q.sky = [.75, .6, .5][n];
+    stage.classList.toggle("gate-lite", n > 0);
+    resizePending = true;
+  }
+  const settle = () => { if (resizePending) { resizePending = false; sizeCanvas(); } };
+  if (small) { Q.tier = 1; Q.motes = .55; Q.trail = 2; Q.dpr = 1; Q.leaves = .65; Q.sky = .6; stage.classList.add("gate-lite"); }   // phones start one tier lighter
+  function probeStart(label) { probe = { t0: performance.now(), n: 0, label }; }
+  function probeTick(now) {
+    if (!probe) return;
+    probe.n++;
+    const el = now - probe.t0;
+    if (el < 1000) return;
+    const fps = probe.n * 1000 / el; Gate.lastFps = { label: probe.label, fps: Math.round(fps), tier: Q.tier }; probe = null;
+    if (fps < 50 && Q.tier < 2 && !Gate.noAdapt) setTier(Q.tier + 1);
+  }
+  const doFit = () => {
+    const portrait = innerWidth / innerHeight < .9;
+    fit = portrait ? innerWidth * 1.08 / Math.max(1150, G ? G.W : 0) : Math.max(innerWidth / 1920, innerHeight / 1080) * 1.04;
+    fitDy = portrait ? innerHeight * .1 : 0;      // portrait: arch spans the width, sits low, sky fills above
+    world.style.transform = `translate(-50%, calc(-50% + ${fitDy}px)) scale(${fit})`;
+    sizeCanvas();
+    if (G) placeTrees(G);
+  };
+  // part of the 1920×1080 world that is on screen (world px)
+  const visible = () => ({ x0: 960 - innerWidth / 2 / fit, x1: 960 + innerWidth / 2 / fit, y0: 540 + (-innerHeight / 2 - fitDy) / fit, y1: 540 + (innerHeight / 2 - fitDy) / fit });
+
+  /* ---------------- leaves ---------------- */
+  const cv = $("#leaves"), cx = cv.getContext("2d");
+  let W = 0, H = 0, dpr = 1;
+  function sizeCanvas() {
+    dpr = Math.min(devicePixelRatio || 1, Q.dpr); W = innerWidth; H = innerHeight;
+    // only re-allocate when the size really changes (start() runs this on every entry to the gate)
+    const fitC = (c, g, d) => { const w = Math.round(W * d), h = Math.round(H * d); if (c.width !== w || c.height !== h) { c.width = w; c.height = h; } g.setTransform(d, 0, 0, d, 0, 0); };
+    fitC(cv, cx, dpr); fitC(wcv, wx, dpr); fitC(skyCv, sky, Math.min(dpr, 1) * Q.sky);   // the painted sky is soft: drawn below screen resolution
+    drawSky();
+  }
+  let imgs = Object.keys(window.LAYOUT?.themes || {}).length ? [] : (window.LAYOUT?.leaves || []).map((_, i) => { const im = new Image(); im.src = `assets/img/leaf-${i}.webp`; return im; });
+  const N = reduce ? 0 : small ? 18 : 34;
+  const leaves = Array.from({ length: N }, (_, i) => newLeaf(true, i));
+  function newLeaf(init, i = 0) {
+    const z = .35 + Math.random() * .95;
+    return { x: init ? Math.random() * innerWidth : -100 - Math.random() * 200, y: Math.random() * innerHeight * .95, z, img: (i + Math.floor(Math.random() * 12)) % Math.max(1, imgs.length),
+      s: (24 + Math.random() * 40) * z, a: Math.random() * 6.28, va: (Math.random() - .5) * 2.2, f: Math.random() * 6.28, vf: 2 + Math.random() * 4, ph: Math.random() * 6.28, vx: 0, vy: 0 };
+  }
+  const dust = Array.from({ length: reduce ? 0 : 70 }, () => ({ x: Math.random(), y: Math.random(), z: .3 + Math.random(), ph: Math.random() * 6.28 }));
+  let px = -999, py = -999;
+  addEventListener("pointermove", (e) => {
+    tmx = (e.clientX / innerWidth - .5) * 2; tmy = (e.clientY / innerHeight - .5) * 2;
+    px = e.clientX; py = e.clientY;
+  }, { passive: true });
+
+  /* stars visible through the bars */
+  const ps = $("#peekStars"), pc = ps.getContext("2d");
+  const pst = Array.from({ length: 70 }, () => ({ x: Math.random(), y: Math.random(), r: Math.random() * 1.4 + .3, ph: Math.random() * 6.28 }));
+  ps.width = 300; ps.height = 520;
+
+  /* ---------------- entry warp: light, dust and petals blown toward the camera ---------------- */
+  const warp = { a: 0, v: 0, p: 0 };   // a: star/dust alpha · v: camera speed (z/s, negative = receding) · p: petal alpha
+  const orb = (core, mid) => {
+    const s = document.createElement("canvas"); s.width = s.height = 64; const g = s.getContext("2d");
+    const rg = g.createRadialGradient(32, 32, 0, 32, 32, 32);
+    rg.addColorStop(0, core); rg.addColorStop(.2, mid); rg.addColorStop(.55, mid.replace(/[\d.]+\)$/, ".12)")); rg.addColorStop(1, "rgba(0,0,0,0)");
+    g.fillStyle = rg; g.fillRect(0, 0, 64, 64); return s;
+  };
+  const ORB = [orb("rgba(255,252,240,1)", "rgba(255,240,205,.7)"), orb("rgba(255,232,178,1)", "rgba(230,186,110,.65)"), orb("rgba(230,240,255,1)", "rgba(170,200,255,.55)")];
+  const motes = Array.from({ length: reduce ? 0 : small ? 90 : 160 }, () => newMote(true));
+  function newMote(init, far) {
+    const a = Math.random() * 6.283, r = Math.sqrt(Math.random());
+    return { x: Math.cos(a) * r, y: Math.sin(a) * r, z: init ? .08 + Math.random() * .92 : far ? .9 + Math.random() * .1 : .05 + Math.random() * .15,
+      c: Math.random() < .45 ? 1 : Math.random() < .25 ? 2 : 0, s: .5 + Math.random(), ph: Math.random() * 6.28 };
+  }
+  let petals = [];
+  const holeCentre = () => {
+    const r = archRect(), g = G;
+    if (!g) return { x: innerWidth / 2, y: innerHeight / 2, hw: 100, hh: 160 };
+    return { x: r.left + (g.ox + g.ow / 2) / g.W * r.width, y: r.top + (g.oy + g.oh * .55) / g.H * r.height, hw: g.ow / 2 / g.W * r.width, hh: g.oh / 2 / g.H * r.height };
+  };
+  function puffPetals(n) {   // a one-off gust of the theme's leaves/petals out of the opening toward the camera
+    petals = Array.from({ length: n }, () => {
+      const a = Math.random() * 6.283, r = .2 + Math.sqrt(Math.random()) * .8;
+      return { x: Math.cos(a) * r, y: Math.sin(a) * r * .9 - .1, z: .85 + Math.random() * .3, v: .32 + Math.random() * .35, img: Math.floor(Math.random() * Math.max(1, imgs.length)),
+        rot: Math.random() * 6.28, vr: (Math.random() - .5) * 5, f: Math.random() * 6.28, vf: 3 + Math.random() * 4 };
+    });
+  }
+  function drawWarp(dt) {
+    wx.clearRect(0, 0, W, H);
+    if (warp.a < .005 && warp.p < .005) return false;
+    const c = holeCentre(), nm = Math.round(motes.length * Q.motes), tr = Q.trail;
+    wx.globalCompositeOperation = "lighter";
+    for (let i = 0; i < nm; i++) {
+      const m = motes[i];
+      const z0 = m.z; m.z -= warp.v * dt;
+      if (m.z < .045) { Object.assign(m, newMote(false, true)); continue; }
+      if (m.z > 1.05) { Object.assign(m, newMote(false, false)); continue; }
+      const sx = c.x + m.x * c.hw * .95 / m.z, sy = c.y + m.y * c.hh * .95 / m.z;
+      if (sx < -60 || sx > W + 60 || sy < -60 || sy > H + 60) { if (warp.v > 0) Object.assign(m, newMote(false, true)); continue; }
+      const sz = Math.min(small ? 40 : 58, m.s * 4.6 / Math.pow(m.z, .9));
+      const al = warp.a * Math.min(1, (1.06 - m.z) * 3) * (.7 + .3 * Math.sin(t * 6 + m.ph)) * (m.z < .25 ? .55 : 1);
+      if (al < .01) continue;
+      // soft comet: a few overlapping round sprites back toward where the mote was (never a stroke)
+      const bx = c.x + m.x * c.hw * .95 / Math.max(.045, z0 + warp.v * .05) - sx, by = c.y + m.y * c.hh * .95 / Math.max(.045, z0 + warp.v * .05) - sy;
+      for (let j = tr - 1; j >= 0; j--) {
+        const u = j / 3, q = sz * (1 - u * .35);
+        wx.globalAlpha = al * (1 - u * .6);
+        wx.drawImage(ORB[m.c], sx + bx * u - q, sy + by * u - q, q * 2, q * 2);
+      }
+    }
+    wx.globalCompositeOperation = "source-over";
+    if (warp.p > .005) for (const p of petals) {
+      p.z -= p.v * dt * (1 + Math.max(0, warp.v)); p.rot += p.vr * dt; p.f += p.vf * dt;
+      if (p.z < .07) continue;
+      const im = imgs[p.img]; if (!im || !im.complete || !im.naturalWidth) continue;
+      const sx = c.x + p.x * c.hw * 1.1 / p.z, sy = c.y + p.y * c.hh * 1.1 / p.z, s = Math.min(small ? 160 : 240, 16 / p.z);
+      wx.save(); wx.translate(sx, sy); wx.rotate(p.rot); wx.scale(Math.max(.1, Math.abs(Math.cos(p.f))), 1);
+      wx.globalAlpha = warp.p * Math.min(1, (1.2 - p.z) * 3) * Math.min(1, (p.z - .07) * 6);
+      wx.drawImage(im, -s / 2, -s / 2 * im.naturalHeight / im.naturalWidth, s, s * im.naturalHeight / im.naturalWidth);
+      wx.restore();
+    }
+    wx.globalAlpha = 1;
+    return true;
+  }
+
+  let t = 0, last = 0, holeOn = false, warpDirty = false, layersDirty = true, lmx = 9, lmy = 9, fr = 0;
+  const perf = { n: 0, sum: 0, max: 0, sky: 0 };
+  function loop(now) {
+    const p0 = performance.now();
+    loopBody(now);
+    const d = performance.now() - p0; perf.n++; perf.sum += d; if (d > perf.max) perf.max = d;
+  }
+  function loopBody(now) {
+    if (!window.gsap) raf = requestAnimationFrame(loop);
+    const dt = Math.min(.05, (now - (last || now)) / 1000); last = now; t += dt;
+    probeTick(now);
+    // smoothed pointer
+    mx += (tmx - mx) * .06; my += (tmy - my) * .06;
+    if (!skyReady) backImg.style.transform = `translate3d(${(-mx * 14).toFixed(2)}px, ${(-my * 8).toFixed(2)}px, 0)`;
+    // parallax: only write transforms when the smoothed pointer actually moved (no style work while it rests)
+    if (layersDirty || Math.abs(mx - lmx) > 2e-4 || Math.abs(my - lmy) > 2e-4) {
+      lmx = mx; lmy = my; layersDirty = false;
+      for (const L of layers) L.el.style.transform = `translate3d(${(-mx * L.k * 46).toFixed(2)}px, ${(-my * L.k * 26).toFixed(2)}px, 0)${L.flip ? " scaleX(-1)" : ""}`;
+    }
+    const q0 = performance.now();
+    drawSky();                    // sky + hole, after camera (GSAP) and parallax for this frame are both set
+    perf.sky += performance.now() - q0;
+    // wind & gusts
+    nextGust -= dt;
+    if (nextGust <= 0) { gust = 2.4 + Math.random() * 2.2; nextGust = 4 + Math.random() * 4; }
+    gust *= Math.pow(.35, dt);
+    wind = 1 + gust + Math.sin(t * .4) * .25 + mx * .6;    // the cursor side leans the wind
+    // leaves
+    cx.clearRect(0, 0, W, H);
+    cx.fillStyle = "#ffe8aa";
+    for (const d of dust) {
+      d.x += (wind * .00055 + Math.sin(t + d.ph) * .0002) * d.z; d.y += Math.sin(t * .8 + d.ph) * .0003;
+      if (d.x > 1.05) d.x = -.05;
+      cx.globalAlpha = .35 + .35 * Math.sin(t * 3 + d.ph); cx.fillRect(d.x * W, d.y * H, 1.6 * d.z, 1.6 * d.z);
+    }
+    cx.globalAlpha = 1;
+    const nl = Math.round(leaves.length * Q.leaves);
+    for (let i = 0; i < nl; i++) {
+      const l = leaves[i], im = imgs[l.img];
+      const tvx = (wind * 95 + Math.sin(t * .9 + l.ph) * 40) * l.z, tvy = (Math.sin(t * 1.4 + l.ph) * 34 + 22 - gust * 8 * Math.sin(l.ph)) * l.z;
+      l.vx += (tvx - l.vx) * Math.min(1, dt * 2.2); l.vy += (tvy - l.vy) * Math.min(1, dt * 2.2);
+      const ddx = l.x - px, ddy = l.y - py, dd = Math.hypot(ddx, ddy);   // the cursor pushes leaves aside
+      if (dd < 170) { const f = (1 - dd / 170) * 900 * dt; l.vx += ddx / (dd || 1) * f; l.vy += ddy / (dd || 1) * f; l.va += (Math.random() - .5) * .6; }
+      l.x += l.vx * dt; l.y += l.vy * dt;
+      l.a += l.va * dt * (1 + gust * .5); l.f += l.vf * dt * (1 + gust * .4);
+      if (l.x > W + 120 || l.y > H + 120 || l.y < -160) leaves[i] = newLeaf(false, i);
+      if (!im || !im.complete || !im.naturalWidth) continue;
+      const sx = Math.cos(l.f), w = l.s, h = l.s * im.naturalHeight / im.naturalWidth;
+      cx.save(); cx.translate(l.x, l.y); cx.rotate(l.a); cx.scale(Math.abs(sx) < .08 ? .08 : sx, 1);
+      cx.globalAlpha = .55 + .45 * Math.min(1, l.z);
+      cx.drawImage(im, -w / 2, -h / 2, w, h);
+      cx.restore();
+    }
+    if (warp.a > .005 || warp.p > .005 || warpDirty) warpDirty = drawWarp(dt);
+    // peek stars (behind the bars: every other frame is plenty)
+    if ((fr++ & 1) === 0) return;
+    pc.clearRect(0, 0, 300, 520);
+    for (const s of pst) { pc.globalAlpha = .4 + .6 * Math.abs(Math.sin(t * 1.7 + s.ph)); pc.fillStyle = "#fff6dc"; pc.beginPath(); pc.arc(s.x * 300, s.y * 520, s.r, 0, 6.28); pc.fill(); }
+  }
+
+  const tick = () => loop(performance.now());
+  function start() { if (running) return; running = true; doFit(); last = 0; if (window.gsap) gsap.ticker.add(tick); else raf = requestAnimationFrame(loop); }
+  function stop() { running = false; if (window.gsap) gsap.ticker.remove(tick); cancelAnimationFrame(raf); }
+  // sky: same framing as the CSS fallback (inset -4%, cover, slow 40 s drift 50% 30% <-> 46% 54%, pointer parallax)
+  function drawSky() {
+    if (!skyReady || !W) { if (holeOn && !skyReady) cssHole(); return; }
+    const ew = W * 1.08, eh = H * 1.08, s = Math.max(ew / skyImg.width, eh / skyImg.height), dw = skyImg.width * s, dh = skyImg.height * s;
+    const ph = (performance.now() / 40000) % 2, u = (1 - Math.cos(Math.PI * (ph > 1 ? 2 - ph : ph))) / 2;
+    const bx = .5 - .04 * u, by = .3 + .24 * u;
+    const ox = -W * .04 + (ew - dw) * bx - mx * 14, oy = -H * .04 + (eh - dh) * by - my * 8;
+    sky.globalCompositeOperation = "source-over"; sky.globalAlpha = 1;
+    sky.drawImage(skyImg, ox, oy, dw, dh);
+    if (holeOn) {
+      const { pts } = holePts();
+      sky.globalCompositeOperation = "destination-out"; sky.beginPath();
+      pts.forEach((p, i) => (i ? sky.lineTo(p[0], p[1]) : sky.moveTo(p[0], p[1])));
+      sky.closePath(); sky.fill(); sky.globalCompositeOperation = "source-over";
+    }
+  }
+  addEventListener("resize", () => running && doFit());
+
+  /* ---------------- themes: all gate geometry is derived from the measured layout ---------------- */
+  // world is 1920×1080; the arch foot sits on y = 1120 (just below the frame, hidden by the clouds)
+  const FOOT = 1120, AREA = 1.134e6, MAXH = 1040, MAXW = 1500;
+  let G = null, theme = null, base = "assets/img/", cur = null;   // current geometry, theme key, image folder, layout
+  const PX = (v) => v.toFixed(1) + "px", PC = (v) => (v * 100).toFixed(2) + "%";
+  function geometry(T) {
+    const A = T.arch, asp = A.w / A.h;
+    let H = Math.min(MAXH, Math.sqrt(AREA / asp)), W = H * asp;
+    if (W > MAXW) { W = MAXW; H = W / asp; }
+    const L = 960 - W / 2, Tp = FOOT - H, [o0, o1, o2] = A.open;
+    const ox = o0 * W, oy = o1 * H, ow = (o2 - o0) * W, oh = (1 - o1) * H;
+    const gw = ow * 1.107, gx = ox + ow / 2 - gw / 2;                       // doors: the opening slightly widened, edges hidden behind the jambs
+    const P = T.padlock || { w: 1, h: 1.6 };
+    // padlock: constant area (any aspect, e.g. a horizontal barrel lock), centred on the seam ~53% down
+    const lb = Math.min(84, Math.max(52, gw * .19)), la = lb * lb * 1.65, pr = P.w / P.h;
+    let lw = Math.sqrt(la * pr), lh = Math.sqrt(la / pr);
+    if (lw > gw * .5) { lw = gw * .5; lh = lw / pr; }
+    if (lh > oh * .3) { lh = oh * .3; lw = lh * pr; }
+    return { W, H, L, T: Tp, ox, oy, ow, oh, gw, gx, lw, lh, lx: gx + gw / 2 - lw / 2, ly: oy + oh * .53 - lh / 2, o: A.open, poly: A.poly,
+      origin: [L + ox + ow / 2, Tp + oy + oh * .62], tr: T.trees || { w: 1, h: 2 } };
+  }
+  // trees: as tall as the visible frame allows, hugging the visible left/right edge so the whole canopy is on screen
+  // (parallax and sway margins included), never reaching into the doorway
+  function treeBoxes(g) {
+    const v = visible(), portrait = innerWidth / innerHeight < .9, asp = g.tr.w / g.tr.h, M = 34;
+    // portrait: the arch spans the screen, so the trees stand in front of its outer jambs
+    const maxW = Math.max(120, g.L + g.ox * (portrait ? .8 : .55) - (v.x0 + M), portrait ? (v.x1 - v.x0) * .36 : 0);
+    const topMin = Math.max(v.y0 + 18, 0);
+    let th = Math.min(1060, 1150 - topMin), tw = th * asp;
+    if (tw > maxW) { tw = maxW; th = tw / asp; }
+    const bottom = 1150 - Math.max(0, 1060 - th) * .3;   // short (wide) trees stand a little higher, still rooted in the clouds
+    const top = Math.max(topMin, bottom - th);
+    return [{ l: v.x0 + M, t: top, w: tw, h: th }, { l: v.x1 - M - tw, t: top - 20 * (th / 1060), w: tw, h: th }];
+  }
+  function placeTrees(g) {
+    treeBoxes(g).forEach((b, i) => Object.assign(els.trees[i].style, { left: PX(b.l), right: "auto", top: PX(b.t), width: PX(b.w), height: PX(b.h) }));
+  }
+  const els = { arch: archBox.querySelector(".arch"), gates: $("#gates"), pstars: $("#peekStars"), trees: [...cam.querySelectorAll(".tree")] };
+  function applyTheme(key, T, b) {
+    if (!T || !T.arch) return;
+    const g = G = geometry(T); theme = key; base = b; cur = T;
+    const url = (n) => `url("${partUrl(b, n)}")`;
+    Object.assign(archBox.style, { left: PX(g.L), top: PX(g.T), width: PX(g.W), height: PX(g.H) });
+    els.arch.style.backgroundImage = url("arch");
+    Object.assign(els.gates.style, { left: PX(g.gx), top: PX(g.oy), width: PX(g.gw), height: PX(g.oh) });
+    leafL.style.backgroundImage = url("gate-l"); leafR.style.backgroundImage = url("gate-r");
+    Object.assign(lock.style, { left: PX(g.lx), top: PX(g.ly), width: PX(g.lw), height: PX(g.lh) });
+    lock.querySelector(".lock-img").style.backgroundImage = url("padlock");
+    const [o0, o1, o2] = g.o, box = { left: PC(o0), top: PC(o1), width: PC(o2 - o0), height: PC(1 - o1) };
+    Object.assign(rays.style, box); Object.assign(els.pstars.style, box); Object.assign(flash.style, box);
+    if (g.poly) {   // light stays inside the doorway: rays and flash clipped to the opening, in their own box's %
+      const loc = `polygon(${g.poly.map(([x, y]) => `${((x / 100 - o0) / (o2 - o0) * 100).toFixed(2)}% ${((y / 100 - o1) / (1 - o1) * 100).toFixed(2)}%`).join(", ")})`;
+      rays.style.clipPath = loc; flash.style.clipPath = loc;
+    }
+    Object.assign(peekImg.style, { left: PC(o0 - .035), top: PC(o1 - .035), width: PC(o2 - o0 + .07), height: PC(1 - o1 + .07) });
+    if (g.poly) peek.style.clipPath = `polygon(${g.poly.map(([x, y]) => `${x}% ${y}%`).join(", ")})`;
+    Object.assign(glow.style, { left: PX(g.origin[0] - 500), top: PX(g.T + g.oy + g.oh * .45 - 450) });
+    cam.style.transformOrigin = `${g.origin[0].toFixed(1)}px ${g.origin[1].toFixed(1)}px`;
+    els.trees.forEach((t) => (t.firstElementChild.style.backgroundImage = url("trees")));
+    predecode(["arch", "gate-l", "gate-r", "padlock", "trees"].map((n) => partUrl(b, n)));
+    placeTrees(g);
+    imgs = (T.leaves || []).map((_, i) => { const im = new Image(); im.src = `${b}leaf-${i}.webp`; return im; });
+    for (const l of leaves) l.img = Math.floor(Math.random() * Math.max(1, imgs.length));
+    stage.dataset.theme = key;
+    if (running) doFit();
+  }
+  // decode images ahead of time so the first frame that shows them does not stall
+  const IMG = new Map();     // url -> decoded Image (also used to bake the kraft backs of the paper fold)
+  const img = (u) => { let im = IMG.get(u); if (!im) { im = new Image(); im.src = u; im.ready = (im.decode ? im.decode() : Promise.resolve()).catch(() => {}); IMG.set(u, im); } return im; };
+  function predecode(urls) { for (const u of urls) img(u); }
+  // the five big gate parts: phones (<= 760 px) load the lighter copies in <theme>/m/ (tools/build_mobile_img.py)
+  function partUrl(b, n) { return b + (small && /\/gate\/[^/]+\/$/.test(b) && /^(arch|gate-l|gate-r|padlock|trees)$/.test(n) ? "m/" : "") + n + ".webp"; }
+  predecode([small ? "assets/img/m/cosmos.jpg" : "assets/img/cosmos.jpg"]);
+  // flat layout (before any theme is chosen): the geometry is still derived from it
+  if (window.LAYOUT?.arch && !Object.keys(window.LAYOUT.themes || {}).length) applyTheme("", window.LAYOUT, "assets/img/");
+  else if (window.LAYOUT?.arch) G = geometry(window.LAYOUT);   // geometry only; the theme picker applies the images
+
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  /* ---------------- rigid-origami theme morph (Miura-ori) ----------------
+     The whole set (arch with doors and lock, both trees) is printed on one sheet that carries a real Miura-ori
+     crease pattern: congruent parallelogram facets (sector angle GAM) hinged only on the creases, degree-4
+     vertices with three creases of one kind and one of the other (Maekawa |M - V| = 2) and alternating sector
+     angles that sum to 180 deg (Kawasaki). The folded state is the exact rigid-folding kinematics of the pattern:
+     a translational surface P(i,j) = A(i) + B(j), A a zig-zag in the x-z plane (profile angle al), B a zig-zag
+     in the x-y plane (sin(phi) = cos(GAM) / cos(al)), so every facet stays planar and every crease keeps its
+     length. The old sheet collapses into a pleated bundle and sinks into the clouds; the new one rises folded and
+     deploys flat. Facets are drawn on one canvas (orthographic view, so every facet is an exact affine copy of
+     the print), two-tone shaded from one light; a facet seen from behind shows the kraft back (tinted in place). */
+  const clamp01 = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+  const io = (u) => (u < .5 ? 2 * u * u : 1 - Math.pow(-2 * u + 2, 2) / 2);
+  const GAM = 62 * Math.PI / 180, CG = Math.cos(GAM), PHI0 = Math.asin(CG), AMAX = GAM * .965, TILT = 26 * Math.PI / 180;
+  const LV = (() => { const v = [-.42, -.62, .66], l = Math.hypot(...v); return v.map((x) => x / l); })();   // light, view space (y down)
+  // the printed set of geometry g / image folder b, in world px, onto a canvas (cs px per world px)
+  function setRect(g) {
+    const tb = treeBoxes(g), l = Math.min(g.L, tb[0].l), r = Math.max(g.L + g.W, tb[1].l + tb[1].w), t = Math.min(g.T, tb[0].t, tb[1].t);
+    return { l, t, w: r - l, h: Math.max(g.T + g.H, tb[0].t + tb[0].h, tb[1].t + tb[1].h) - t, tb };
+  }
+  function printSet(g, b, R, cs) {
+    const c = document.createElement("canvas"); c.width = Math.max(2, Math.round(R.w * cs)); c.height = Math.max(2, Math.round(R.h * cs));
+    const x = c.getContext("2d"); x.setTransform(cs, 0, 0, cs, -R.l * cs, -R.t * cs);
+    const draw = (n, dx, dy, dw, dh) => { const im = img(partUrl(b, n)); if (im.complete && im.naturalWidth) x.drawImage(im, dx, dy, dw, dh); };
+    const lyr = (k) => [-mx * k * 46, -my * k * 26];
+    R.tb.forEach((bx, i) => {
+      const [ox, oy] = lyr(i ? .62 : .55); x.save(); x.translate(bx.l + ox + (i ? bx.w : 0), bx.t + oy); if (i) x.scale(-1, 1);
+      draw("trees", 0, 0, bx.w, bx.h); x.restore();
+    });
+    const [ax, ay] = lyr(.32); x.save(); x.translate(g.L + ax, g.T + ay);
+    // night behind the bars (the live peek is not part of the print), then the doors, the arch over them, the lock
+    x.fillStyle = "#0d1430"; x.beginPath();
+    if (g.poly) g.poly.forEach(([px, py], i) => (i ? x.lineTo : x.moveTo).call(x, px / 100 * g.W, py / 100 * g.H)); else x.rect(g.ox, g.oy, g.ow, g.oh);
+    x.fill();
+    draw("gate-l", g.gx, g.oy, g.gw / 2, g.oh); draw("gate-r", g.gx + g.gw / 2, g.oy, g.gw / 2, g.oh);
+    draw("arch", 0, 0, g.W, g.H); draw("padlock", g.lx, g.ly, g.lw, g.lh);
+    x.restore();
+    return c;
+  }
+  // crease pattern over the set's rectangle: nx x ny parallelogram facets, flat vertex positions (world px)
+  function crease(R) {
+    const nx = small ? 6 : 8, ny = small ? 4 : 5, sp0 = Math.sin(PHI0), cp0 = Math.cos(PHI0);
+    const bb = R.h / (ny * cp0), aa = (R.w + bb * sp0) / nx;
+    const S = { nx, ny, a: aa, b: bb, cx: R.l + R.w / 2, ay: R.t + .8 * R.h, R };
+    S.U = vertices(S, 0).map(([x, y]) => [x, y]);
+    S.flatSign = 1;
+    return S;
+  }
+  // vertex positions in view space for fold f (0 flat .. 1 collapsed), tilt and vertical offset dy
+  function vertices(S, f, dy = 0) {
+    const al = AMAX * f, ca = Math.cos(al), sa = Math.sin(al), phi = Math.asin(Math.min(1, CG / ca)), sp = Math.sin(phi), cp = Math.cos(phi);
+    const tv = TILT * f, ct = Math.cos(tv), st = Math.sin(tv), a = S.a, b = S.b;
+    const xc = (S.nx * a * ca + b * sp) / 2, ya = .8 * S.ny * b * cp, zc = a * sa / 2, out = [];
+    for (let j = 0; j <= S.ny; j++) for (let i = 0; i <= S.nx; i++) {
+      const x = i * a * ca + (j & 1) * b * sp, y = j * b * cp, z = (i & 1) * a * sa;
+      const yy = y - ya, zz = z - zc;
+      out.push([S.cx + x - xc, S.ay + yy * ct - zz * st + dy, yy * st + zz * ct]);   // [X, Y, depth toward viewer]
+    }
+    return out;
+  }
+  // one sheet: facets back to front, each an affine copy of its print region, back face = kraft, shade from one light
+  function drawSheet(x, S, T, f, dy, alpha, cs, O) {
+    if (alpha <= .003) return;
+    const P = vertices(S, f, dy), U = S.U, n1 = S.nx + 1, F = [];
+    for (let j = 0; j < S.ny; j++) for (let i = 0; i < S.nx; i++) {
+      const k0 = j * n1 + i, k1 = k0 + 1, k3 = k0 + n1, k2 = k3 + 1;
+      F.push([k0, k1, k2, k3, (P[k0][2] + P[k1][2] + P[k2][2] + P[k3][2]) / 4]);
+    }
+    F.sort((p, q) => p[4] - q[4]);
+    const tw = T.front.width, th = T.front.height, ts = T.cs;
+    x.globalAlpha = alpha;
+    for (const [k0, k1, k2, k3] of F) {
+      const s0 = P[k0], s1 = P[k1], s3 = P[k3], s2 = P[k2], u0 = U[k0], u1 = U[k1], u3 = U[k3];
+      const e1 = [s1[0] - s0[0], s1[1] - s0[1], s1[2] - s0[2]], e3 = [s3[0] - s0[0], s3[1] - s0[1], s3[2] - s0[2]];
+      let nX = e1[1] * e3[2] - e1[2] * e3[1], nY = e1[2] * e3[0] - e1[0] * e3[2], nZ = e1[0] * e3[1] - e1[1] * e3[0];
+      const nl = Math.hypot(nX, nY, nZ) || 1; nX /= nl; nY /= nl; nZ /= nl;
+      // the flat print faces the viewer with screen cross > 0 (y down): a negative z here means we see the back
+      const back = nZ < 0; if (back) { nX = -nX; nY = -nY; nZ = -nZ; }
+      const lit = nX * LV[0] + nY * LV[1] + nZ * LV[2], dark = Math.min(.6, Math.max(0, (LV[2] - lit) * 1.7));
+      // affine flat -> folded (world px), then world -> canvas px
+      const du1x = u1[0] - u0[0], du1y = u1[1] - u0[1], du3x = u3[0] - u0[0], du3y = u3[1] - u0[1], det = du1x * du3y - du3x * du1y;
+      if (Math.abs(det) < 1e-6) continue;
+      const i11 = du3y / det, i12 = -du3x / det, i21 = -du1y / det, i22 = du1x / det;
+      const A = e1[0] * i11 + e3[0] * i21, C = e1[0] * i12 + e3[0] * i22, B = e1[1] * i11 + e3[1] * i21, D = e1[1] * i12 + e3[1] * i22;
+      const E = s0[0] - (A * u0[0] + C * u0[1]), Fy = s0[1] - (B * u0[0] + D * u0[1]);
+      // source sub-rectangle of the print covered by this facet (keeps every drawImage small)
+      const ux = [u0[0], u1[0], U[k2][0], u3[0]], uy = [u0[1], u1[1], U[k2][1], u3[1]];
+      const sx = Math.max(0, Math.floor((Math.min(...ux) - T.l) * ts) - 1), sy = Math.max(0, Math.floor((Math.min(...uy) - T.t) * ts) - 1);
+      const sw = Math.min(tw, Math.ceil((Math.max(...ux) - T.l) * ts) + 1) - sx, sh = Math.min(th, Math.ceil((Math.max(...uy) - T.t) * ts) + 1) - sy;
+      if (sw <= 0 || sh <= 0) continue;
+      // clip to the facet, grown by half a canvas pixel so neighbours meet without hairline seams
+      const cxm = (s0[0] + s1[0] + s2[0] + s3[0]) / 4, cym = (s0[1] + s1[1] + s2[1] + s3[1]) / 4, gw = .6 / cs;
+      const gp = (s) => { const dx = s[0] - cxm, dy2 = s[1] - cym, l = Math.hypot(dx, dy2) || 1; return [(s[0] + dx / l * gw - O.l) * cs, (s[1] + dy2 / l * gw - O.t) * cs]; };
+      x.save(); x.setTransform(1, 0, 0, 1, 0, 0); x.beginPath();
+      [s0, s1, s2, s3].forEach((s, q) => { const [px, py] = gp(s); q ? x.lineTo(px, py) : x.moveTo(px, py); });
+      x.closePath(); x.clip();
+      x.setTransform(cs * A, cs * B, cs * C, cs * D, cs * (E - O.l), cs * (Fy - O.t));
+      const dxw = T.l + sx / ts, dyw = T.t + sy / ts;
+      x.drawImage(T.front, sx, sy, sw, sh, dxw, dyw, sw / ts, sh / ts);
+      // kraft back and fold shading tint only the paper just drawn (source-atop inside the facet clip): no extra textures
+      if (back || dark > .01) {
+        x.setTransform(1, 0, 0, 1, 0, 0); x.globalCompositeOperation = "source-atop";
+        if (back) { x.globalAlpha = alpha * .88; x.fillStyle = "#d9bf95"; x.fillRect(0, 0, x.canvas.width, x.canvas.height); }
+        if (dark > .01) { x.globalAlpha = alpha * dark; x.fillStyle = "#1e1209"; x.fillRect(0, 0, x.canvas.width, x.canvas.height); }
+        x.globalCompositeOperation = "source-over"; x.globalAlpha = alpha;
+      }
+      x.restore();
+    }
+    x.globalAlpha = 1;
+  }
+  // crease-pattern check (for tests): Kawasaki on the flat pattern, Maekawa from the fold directions at f = .3
+  function origamiCheck(S = crease({ l: 0, t: 0, w: 1200, h: 800 })) {
+    const n1 = S.nx + 1, U = S.U, P = vertices(S, .3), ang = (o, p) => Math.atan2(p[1] - o[1], p[0] - o[0]);
+    let kaw = 0, mae = 0, nV = 0;
+    const cent = (k) => [0, 1, n1 + 1, n1].reduce((s, d) => [s[0] + P[k + d][0] / 4, s[1] + P[k + d][1] / 4, s[2] + P[k + d][2] / 4], [0, 0, 0]);
+    const normal = (k) => { const a = P[k], e1 = P[k + 1].map((v, q) => v - a[q]), e3 = P[k + n1].map((v, q) => v - a[q]); return [e1[1] * e3[2] - e1[2] * e3[1], e1[2] * e3[0] - e1[0] * e3[2], e1[0] * e3[1] - e1[1] * e3[0]]; };
+    // fold kind between facets k and m: valley if k's normal leans toward m's centre, else mountain
+    const kind = (k, m) => { const nk = normal(k), ck = cent(k), cm = cent(m); return Math.sign(nk[0] * (cm[0] - ck[0]) + nk[1] * (cm[1] - ck[1]) + nk[2] * (cm[2] - ck[2])); };
+    for (let j = 1; j < S.ny; j++) for (let i = 1; i < S.nx; i++) {
+      const v = j * n1 + i, o = U[v];
+      const a = [ang(o, U[v + 1]), ang(o, U[v + n1]), ang(o, U[v - 1]), ang(o, U[v - n1])].map((x) => (x + 2 * Math.PI) % (2 * Math.PI)).sort((p, q) => p - q);
+      const sec = a.map((x, q) => ((a[(q + 1) % 4] - x) + 2 * Math.PI) % (2 * Math.PI));
+      if (Math.abs(sec[0] + sec[2] - Math.PI) < 1e-6 && Math.abs(sec[1] + sec[3] - Math.PI) < 1e-6) kaw++;
+      // the four facets around v: (i-1,j-1) (i,j-1) (i,j) (i-1,j); creases between neighbours in turn
+      const f = [(j - 1) * n1 + i - 1, (j - 1) * n1 + i, j * n1 + i, j * n1 + i - 1];
+      const ks = [kind(f[0], f[1]), kind(f[1], f[2]), kind(f[2], f[3]), kind(f[3], f[0])];
+      const M = ks.filter((s) => s < 0).length, V = ks.filter((s) => s > 0).length;
+      if (Math.abs(M - V) === 2) mae++;
+      nV++;
+    }
+    return { vertices: nV, kawasaki: kaw, maekawa: mae, ok: kaw === nV && mae === nV };
+  }
+
+  let morphing = null, morphBusy = false;   // busy from the call (image decode included) to the hand-over
+  const MORPH = 2.25;
+  const frameP = () => new Promise((r) => requestAnimationFrame(() => r()));
+  function morph(key, T, b) {
+    return new Promise(async (done) => {
+      if (!window.gsap || reduce || !G || morphing || morphBusy || opened || closing) { applyTheme(key, T, b); done(); return; }
+      morphBusy = true;
+      const parts = ["arch", "gate-l", "gate-r", "padlock", "trees"];
+      await Promise.race([Promise.all([...parts.map((n) => img(partUrl(base, n)).ready), ...parts.map((n) => img(partUrl(b, n)).ready)]), new Promise((r) => setTimeout(r, 2500))]);
+      const bail = () => { morphBusy = false; applyTheme(key, T, b); done(); };
+      if (opened || closing) return bail();
+      const tb0 = performance.now();
+      const gOld = G, Rold = setRect(gOld), gNew = geometry(T), Rnew = setRect(gNew);
+      // one canvas inside the camera (so it follows fit and the camera), behind the wind ribbons and clouds
+      const l = Math.min(Rold.l, Rnew.l) - 40, t = Math.min(Rold.t, Rnew.t) - 60, r = Math.max(Rold.l + Rold.w, Rnew.l + Rnew.w) + 40, bt = Math.max(Rold.t + Rold.h, Rnew.t + Rnew.h) + 40;
+      const O = { l, t, w: r - l, h: bt - t };
+      const cs = Math.min(fit * Math.min(devicePixelRatio || 1, Q.dpr) * (small ? .62 : Q.tier ? .6 : .72), 1280 / O.w);
+      const cv = document.createElement("canvas"); cv.className = "ori-cv"; cv.setAttribute("aria-hidden", "true");
+      cv.width = Math.round(O.w * cs); cv.height = Math.round(O.h * cs);
+      Object.assign(cv.style, { left: PX(O.l), top: PX(O.t), width: PX(O.w), height: PX(O.h) });
+      els.trees[els.trees.length - 1].after(cv);
+      const x = cv.getContext("2d");
+      // prints, backs and shading silhouettes are built one per frame (no single long frame)
+      const ts = cs, texOf = (g, bb, R) => ({ l: R.l, t: R.t, cs: ts, front: printSet(g, bb, R, ts) });
+      const To = texOf(gOld, base, Rold); await frameP();
+      if (opened || closing) { cv.remove(); return bail(); }
+      const So = crease(Rold), Sn = crease(Rnew);
+      const hide = [archBox, ...els.trees];
+      // the old sheet now sits exactly over the old set: hide the set, switch the real gate to the new theme underneath
+      x.clearRect(0, 0, cv.width, cv.height); drawSheet(x, So, To, 0, 0, 1, cs, O);
+      hide.forEach((el) => (el.style.opacity = "0"));
+      applyTheme(key, T, b); hide.forEach((el) => (el.style.opacity = "0"));
+      await frameP();
+      const Tn = texOf(gNew, b, Rnew);
+      perf.build = performance.now() - tb0;
+      const st = { t: 0 }, seg = (u, a, d) => clamp01((u - a) / d);
+      const sinkO = Rold.h * .62, riseN = Rnew.h * .62;
+      const render = () => {
+        const u = st.t;
+        x.clearRect(0, 0, cv.width, cv.height);
+        const fo = io(seg(u, 0, .95)), so = io(seg(u, .82, .5));                  // old: collapse, then sink into the clouds
+        const rn = seg(u, 1.05, .45), fn = 1 - io(seg(u, 1.38, .87));             // new: rise folded, then deploy flat
+        if (so < 1) drawSheet(x, So, To, fo, so * sinkO, 1 - so * so, cs, O);
+        if (rn > 0) { const e = 1 - Math.pow(1 - rn, 3); drawSheet(x, Sn, Tn, fn, (1 - e) * riseN, Math.min(1, rn * 3), cs, O); }
+      };
+      morphing = gsap.to(st, { t: MORPH, duration: MORPH, ease: "none", paused: true, onUpdate: render,
+        onComplete: () => {
+          hide.forEach((el) => (el.style.opacity = ""));       // the new set has been painted underneath since the swap
+          requestAnimationFrame(() => cv.remove());            // one frame of overlap: no flash at the hand-over
+          morphing = null; morphBusy = false; settle(); done();
+        } });
+      gust = 3; probeStart("morph"); render(); morphing.play();
+    });
+  }
+
+  /* ---------------- open sequence ---------------- */
+  // world → screen: world is centred, scaled by `fit` (and shifted by fitDy in portrait); cam scales around its
+  // origin and may shake (x/y); the arch box itself carries its parallax offset (k = .32)
+  function archRect() {
+    const g = G; if (!g) return archBox.getBoundingClientRect();
+    const gp = window.gsap ? gsap.getProperty : null;
+    const s = gp ? +gp(cam, "scale") : 1, ccx = gp ? +gp(cam, "x") : 0, ccy = gp ? +gp(cam, "y") : 0;
+    const o = g.origin, tx = -mx * .32 * 46, ty = -my * .32 * 26;
+    const map = (x, y) => [innerWidth / 2 + (o[0] + s * (x + tx - o[0]) + ccx - 960) * fit, innerHeight / 2 + fitDy + (o[1] + s * (y + ty - o[1]) + ccy - 540) * fit];
+    const p0 = map(g.L, g.T), p1 = map(g.L + g.W, g.T + g.H);
+    return { left: p0[0], top: p0[1], width: p1[0] - p0[0], height: p1[1] - p0[1] };
+  }
+  const holePts = () => {
+    const r = archRect(), P = (G && G.poly) || [[33.8, 37], [66, 37], [66, 100], [33.8, 100]];
+    return { r, pts: P.map(([x, y]) => [r.left + x / 100 * r.width, r.top + y / 100 * r.height]) };
+  };
+  let holeStr = "";
+  function cssHole() {   // fallback only (sky image not loaded yet)
+    const { pts } = holePts(), W = innerWidth + 80, H = innerHeight + 80;
+    const s = `path(evenodd, "M-80 -80H${W}V${H}H-80Z M${pts.map((p) => p[0].toFixed(1) + " " + p[1].toFixed(1)).join(" L")}Z")`;
+    if (s !== holeStr) { holeStr = s; back.style.clipPath = s; }
+  }
+  // the hole is drawn by drawSky() once per frame; cutHole() just makes sure it is on and current
+  const cutHole = () => { holeOn = true; };
+  const holeOff = () => { holeOn = false; if (holeStr) { holeStr = ""; back.style.clipPath = ""; } drawSky(); };
+  // how far the camera must push so the opening covers the whole screen
+  const coverScale = () => {
+    const { r, pts } = holePts();
+    const xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1]);
+    const L = Math.min(...xs), R = Math.max(...xs), B = Math.max(...ys), T0 = Math.min(...ys), T = T0 + (B - T0) * .22;
+    const g = G || { L: 385, T: 134, W: 1150, H: 986, origin: [959, 812] };
+    const cx = r.left + (g.origin[0] - g.L) / g.W * r.width, cy = r.top + (g.origin[1] - g.T) / g.H * r.height;
+    const k = Math.max(cx / Math.max(1, cx - L), (innerWidth - cx) / Math.max(1, R - cx), cy / Math.max(1, cy - T), B > cy ? (innerHeight - cy) / Math.max(1, B - cy) : 1);
+    return Math.min(18, Math.max(2.5, k * 1.18));
+  };
+  // a short decaying hand-held shake on the camera (x/y only, the scale tween keeps running)
+  function shake(amp, dur) {
+    const s = { a: amp };
+    gsap.to(s, { a: 0, duration: dur, ease: "power2.out", onUpdate: () => gsap.set(cam, { x: rnd(-1, 1) * s.a, y: rnd(-1, 1) * s.a * .7 }), onComplete: () => gsap.set(cam, { x: 0, y: 0 }) });
+  }
+  const cosmosEl = document.getElementById("cosmos");
+  function open(cb = {}) {
+    if (opened || morphBusy) return; opened = true;
+    const r = lock.getBoundingClientRect(), lx = r.left + r.width / 2, ly = r.top + r.height * .6;
+    if (!window.gsap || reduce) { FX.burst(lx, ly, 60); cb.portal && cb.portal(); setTimeout(() => cb.through && cb.through(), 200); return; }
+    const ZOOM = 2.5;
+    // the constellation builds its scene when it starts (a long task): do that now, before anything moves,
+    // instead of in the middle of the doors opening (App's portal call to Cosmos.start is then a no-op)
+    if (window.Cosmos) Cosmos.start();
+    // the wind ribbons (a full-size SVG whose dash animation repaints every frame) rest during the move
+    stage.classList.add("gate-seq");
+    probeStart("open");
+    const tl = gsap.timeline();
+    tl.to(lock, { rotation: 10, duration: .07, repeat: 5, yoyo: true, ease: "sine.inOut" })
+      .add(() => { FX.burst(lx, ly, 90, 1.4); gust = 5; }, ">")
+      .to(lock, { y: 520, rotation: 38, opacity: 0, duration: .95, ease: "power2.in" }, ">-0.02")
+      .to(rays, { opacity: .45, duration: 1.1, ease: "power1.out" }, "<0.1")
+      .add(() => {
+        holeOn = true; cutHole(); cb.portal && cb.portal();
+        // the constellation behind starts further away and comes forward to meet the camera
+        gsap.fromTo(cosmosEl, { scale: .78, transformOrigin: "50% 52%" }, { scale: 1, duration: 1.6 + ZOOM, ease: "power2.out", force3D: true });
+      }, "<0.15")
+      .addLabel("doors", "<")
+      .to(peek, { opacity: 0, duration: 1.4, ease: "power1.inOut" }, "doors")
+      .to(glow, { opacity: 0, duration: 1.2 }, "doors")
+      .to(leafL, { rotationY: 104, duration: 1.8, ease: "power3.inOut" }, "doors")
+      .to(leafR, { rotationY: -104, duration: 1.8, ease: "power3.inOut" }, "doors")
+      .to(ui, { opacity: 0, duration: .5 }, "doors")
+      // light bursts out of the gap, dust and petals blow toward the camera, the camera takes the hit
+      .fromTo(flash, { opacity: 0 }, { opacity: .75, duration: .5, ease: "power2.out" }, "doors+=0.25")
+      .to(flash, { opacity: .35, duration: 1.1, ease: "power1.inOut" }, ">")
+      .add(() => { gust = 8; puffPetals(small ? 14 : 24); shake(small ? 4 : 7, .75); }, "doors+=0.3")
+      .to(warp, { a: 1, p: 1, duration: .6, ease: "power1.out" }, "doors+=0.25")
+      .fromTo(warp, { v: .05 }, { v: .32, duration: 1.2, ease: "power1.inOut" }, "doors+=0.25")
+      .add(() => {
+        const k = coverScale();
+        cb.zoom && cb.zoom(ZOOM);
+        gsap.to(cam, { scale: k, duration: ZOOM, ease: "power2.in", force3D: true });
+        gsap.to(rays, { opacity: 0, duration: ZOOM * .8, ease: "power1.in" });
+        gsap.to(warp, { v: 2.6, duration: ZOOM, ease: "power2.in" });
+        gsap.to(warp, { a: 0, p: 0, duration: .45, delay: ZOOM - .45, ease: "power1.in" });
+        gsap.to(flash, { opacity: .6, duration: ZOOM, ease: "power2.in" });     // stays inside the doorway (clipped)
+        gsap.delayedCall(ZOOM, () => {
+          holeOff(); warp.a = warp.p = 0; gsap.set(flash, { opacity: 0 }); gsap.set(cosmosEl, { clearProps: "transform" });
+          stage.classList.remove("gate-seq"); cb.through && cb.through(); settle();
+        });
+      }, "-=0.7");
+  }
+  /* ---------------- close: the opening played backwards, in one take ----------------
+     starts pushed through the arch with the live stage visible through the hole, pulls back out,
+     the doors swing shut, the light fades, the padlock drops back in and the UI returns.
+     No filters on big layers; the hole follows the active theme's opening every frame.
+     cb.portal(): put the live stage behind the gate · cb.closed(): doors shut, leave portal mode · cb.done() */
+  let closing = null;
+  function close(cb = {}) {
+    if (closing) return;
+    if (!window.gsap || reduce) { reset(); cb.closed && cb.closed(); cb.done && cb.done(); return; }
+    if (morphing) { morphing.progress(1); }
+    opened = false;
+    gsap.killTweensOf([cam, rays, lock, leafL, leafR, peek, glow, ui, flash, warp, cosmosEl]);
+    cb.portal && cb.portal();
+    start();
+    gsap.set(cam, { scale: 1, x: 0, y: 0, filter: "none" });
+    gsap.set(cosmosEl, { clearProps: "transform" });
+    const k = coverScale();
+    gsap.set(leafL, { rotationY: 104 }); gsap.set(leafR, { rotationY: -104 });
+    gsap.set([peek, glow, ui, rays, flash], { opacity: 0 });
+    gsap.set(lock, { y: -260, rotation: -14, opacity: 0 });
+    gsap.set(cam, { scale: k });
+    holeOn = true; drawSky();
+    const PULL = 2.1;
+    probeStart("close"); stage.classList.add("gate-seq");
+    closing = gsap.timeline({ onComplete: () => { closing = null; stage.classList.remove("gate-seq"); settle(); cb.done && cb.done(); } })
+      .to(cam, { scale: 1, duration: PULL, ease: "power2.out", force3D: true }, 0)
+      .fromTo(warp, { a: .75, v: -.9 }, { a: 0, v: -.15, duration: PULL * .8, ease: "power1.out" }, 0)   // stars recede into the opening
+      .to(rays, { opacity: .85, duration: PULL * .7, ease: "power1.out" }, .2)
+      .add(() => { gust = 6; }, .25)
+      .to(leafL, { rotationY: 0, duration: 1.6, ease: "power3.inOut" }, PULL - .7)
+      .to(leafR, { rotationY: 0, duration: 1.6, ease: "power3.inOut" }, PULL - .7)
+      .to(peek, { opacity: 1, duration: 1.1, ease: "power1.inOut" }, PULL - .3)
+      .to(glow, { opacity: 1, duration: 1.2 }, PULL - .3)
+      .add(() => { holeOff(); cb.closed && cb.closed(); }, PULL + .95)        // doors shut and peek opaque: leave portal mode once
+      .to(rays, { opacity: 0, duration: .9, ease: "power1.in" }, PULL + .6)
+      .to(lock, { y: 0, opacity: 1, duration: .62, ease: "bounce.out" }, PULL + .8)
+      .to(lock, { rotation: 0, duration: .9, ease: "elastic.out(1.1, .35)" }, PULL + 1.05)
+      .add(() => { const r = archRect(), g = G; FX.burst(r.left + (g.lx + g.lw / 2) / g.W * r.width, r.top + (g.ly + g.lh * .6) / g.H * r.height, 34, .8); gust = 3; }, PULL + 1.12)
+      .to(ui, { opacity: 1, duration: .7, ease: "power1.out" }, PULL + 1.2);
+  }
+  function reset() {
+    if (closing) { closing.kill(); closing = null; }
+    opened = false;
+    holeOff(); stage.classList.remove("gate-seq");
+    warp.a = warp.p = 0; warpDirty = true;
+    if (window.gsap) {
+      gsap.killTweensOf([cam, rays, lock, leafL, leafR, peek, glow, ui, flash, warp]);
+      gsap.set([lock], { y: 0, rotation: 0, opacity: 1 });
+      gsap.set([leafL, leafR], { rotationY: 0 });
+      gsap.set([rays, flash], { opacity: 0 });
+      gsap.set([peek, glow], { opacity: 1 });
+      gsap.set(peekImg, { scale: 1, filter: "" });
+      gsap.set(cam, { scale: 1, x: 0, y: 0, filter: "none" });
+      gsap.set([ui, stage], { opacity: 1 });
+      gsap.set(cosmosEl, { clearProps: "transform" });
+    }
+  }
+  lock.addEventListener("click", () => window.App && App.go("cosmos", { from: "gate" }));
+  return { start, stop, open, close, reset, applyTheme, morph, isClosing: () => !!closing, isMorphing: () => morphBusy, origamiCheck, partUrl,
+    debug: () => ({ closing, morphing, G, holeOn, Q, archRect: archRect(), perf: { ...perf, avg: perf.n ? perf.sum / perf.n : 0 } }), setTier,
+    perfReset: () => { perf.n = perf.sum = perf.max = perf.sky = 0; }, get theme() { return theme; } };
+})();

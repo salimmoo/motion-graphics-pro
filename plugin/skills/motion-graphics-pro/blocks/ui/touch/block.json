@@ -1,0 +1,121 @@
+{
+ "id": "ui/touch",
+ "name": "Touch",
+ "name_id": "Indikator Sentuh",
+ "category": "ui",
+ "description": {
+  "id": "Lingkaran sentuh tembus pandang untuk adegan aplikasi ponsel: menyentuh kaca tepat saat tombol merespons, lalu terangkat. Mode ketuk menekan tombol pil yang berubah ke keadaan aktif berlabel baru; mode geser menyeret rel kartu dengan momentum. Bisa juga dipakai di atas elemen host lewat props target.",
+  "en": "A translucent contact circle for mobile UI scenes: it touches the glass the frame the target responds, then lifts. Tap mode presses a pill button into a new labelled accent state; swipe mode drags a card rail with momentum. Can also overlay any host element via target."
+ },
+ "tags": [
+  "ui",
+  "sentuh",
+  "tap",
+  "gestur",
+  "ponsel",
+  "swipe",
+  "tombol",
+  "touch"
+ ],
+ "props": {
+  "mode": {
+   "default": "tap",
+   "type": "enum",
+   "options": [
+    "tap",
+    "slide"
+   ],
+   "option_aliases": {
+    "ketuk": "tap",
+    "geser": "slide"
+   }
+  },
+  "target": {
+   "default": "",
+   "type": "selector",
+   "hint": "Elemen host yang disentuh; kosong = ponsel tiruan bawaan"
+  },
+  "name": {
+   "default": "Nadia Putri",
+   "type": "text",
+   "aliases": [
+    "nama"
+   ]
+  },
+  "caption": {
+   "default": "@nadia · Desainer produk",
+   "type": "text",
+   "aliases": [
+    "keterangan"
+   ]
+  },
+  "label": {
+   "default": "Ikuti",
+   "type": "text",
+   "hint": "Label tombol sebelum diketuk"
+  },
+  "active_label": {
+   "default": "Mengikuti",
+   "type": "text",
+   "hint": "Label sesudah diketuk",
+   "aliases": [
+    "label_aktif"
+   ]
+  },
+  "card": {
+   "default": [
+    "Pagi di pasar",
+    "Senja di dermaga",
+    "Kopi pertama",
+    "Jalan pulang"
+   ],
+   "type": "list",
+   "hint": "Kartu rel (mode geser)",
+   "aliases": [
+    "kartu"
+   ]
+  },
+  "touch_time": {
+   "default": 1.1,
+   "type": "number",
+   "hint": "Detik saat jari menyentuh",
+   "aliases": [
+    "waktu_sentuh"
+   ]
+  },
+  "accent_color": {
+   "default": "#2d6cdf",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg": {
+   "default": "#dfe5ef",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700",
+   "type": "font"
+  }
+ },
+ "duration": 3.5,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/sentuh",
+  "touch-indicator",
+  "gesture-tap"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

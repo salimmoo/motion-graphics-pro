@@ -1,0 +1,167 @@
+{
+ "id": "data/progress-stat",
+ "name": "Progress Stat",
+ "name_id": "Statistik Progres",
+ "category": "data",
+ "description": {
+  "id": "Statistik angka besar yang menghitung naik, dengan label, trek progres tipis yang terisi sampai nilai/maks, dan keterangan di bawahnya. Skema terang dan gelap, bisa di atas panel atau langsung di atas video.",
+  "en": "Big-numeral statistic with count-up, label, a thin progress track filling to value/max and a caption. Light and dark schemes, on a panel or straight over footage."
+ },
+ "tags": [
+  "data",
+  "statistik",
+  "progres",
+  "angka",
+  "count-up",
+  "kpi",
+  "progress",
+  "stat"
+ ],
+ "props": {
+  "value": {
+   "default": 86,
+   "type": "number",
+   "aliases": [
+    "nilai"
+   ]
+  },
+  "max": {
+   "default": 100,
+   "type": "number",
+   "aliases": [
+    "maks"
+   ]
+  },
+  "prefix": {
+   "default": "",
+   "type": "text",
+   "aliases": [
+    "awalan"
+   ]
+  },
+  "suffix": {
+   "default": "%",
+   "type": "text",
+   "aliases": [
+    "akhiran"
+   ]
+  },
+  "decimals": {
+   "default": 0,
+   "type": "number",
+   "aliases": [
+    "desimal"
+   ]
+  },
+  "label": {
+   "default": "Kepuasan pelanggan",
+   "type": "text"
+  },
+  "caption": {
+   "default": "Naik 12 poin dibanding tahun lalu",
+   "type": "text",
+   "aliases": [
+    "keterangan"
+   ]
+  },
+  "scheme": {
+   "default": "dark",
+   "type": "enum",
+   "options": [
+    "dark",
+    "light"
+   ],
+   "aliases": [
+    "skema"
+   ],
+   "option_aliases": {
+    "gelap": "dark",
+    "terang": "light"
+   }
+  },
+  "panel": {
+   "default": true,
+   "type": "boolean"
+  },
+  "count_duration": {
+   "default": 1.8,
+   "type": "number",
+   "aliases": [
+    "durasi_hitung"
+   ]
+  },
+  "ease": {
+   "default": "power3.out",
+   "type": "ease"
+  },
+  "accent_color": {
+   "default": "#3dd6a3",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;600;800",
+   "type": "font"
+  },
+  "size": {
+   "default": 190,
+   "type": "number",
+   "hint": "Ukuran angka (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "thickness": {
+   "default": 8,
+   "type": "number",
+   "hint": "Tebal trek (px)",
+   "aliases": [
+    "ketebalan"
+   ]
+  },
+  "position_x": {
+   "default": 8,
+   "type": "number",
+   "hint": "Tepi kiri (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "width": {
+   "default": 44,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "lebar"
+   ]
+  }
+ },
+ "duration": 4,
+ "aspect": [
+  "16:9",
+  "1:1",
+  "4:5",
+  "9:16"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "data/stat-progres",
+  "mk-progress-stat"
+ ],
+ "example": {
+  "bg": "photo",
+  "font": [
+   "Inter:wght@500;600;800"
+  ]
+ }
+}

@@ -1,0 +1,149 @@
+{
+ "id": "gallery/shuffle-stack",
+ "name": "Shuffle Stack",
+ "name_id": "Tumpuk Kocok",
+ "category": "gallery",
+ "description": {
+  "id": "Tumpukan 3-5 kartu dikocok sesuai isyarat: kartu paling belakang dilempar melengkung ke atas dan mendarat di depan dengan bobot, kartu lain terdorong mundur, tertekan, lalu mengendap. Isyarat yang datang saat kartu masih melayang menyambung geraknya tanpa patah.",
+  "en": "A stack of 3-5 cards reshuffles on cues: the back card throws over the top and lands in front with weight, the rest compress and resettle; cues that land mid-flight blend smoothly."
+ },
+ "tags": [
+  "galeri",
+  "kartu",
+  "tumpuk",
+  "stack",
+  "shuffle",
+  "pegas",
+  "isyarat",
+  "gallery"
+ ],
+ "props": {
+  "image": {
+   "default": [],
+   "type": "list",
+   "hint": "Daftar url gambar (opsional). Kosong = kartu placeholder bergradien bernomor",
+   "aliases": [
+    "gambar"
+   ]
+  },
+  "label": {
+   "default": [
+    "Ide",
+    "Sketsa",
+    "Rancang",
+    "Rilis"
+   ],
+   "type": "list",
+   "hint": "Judul per kartu"
+  },
+  "count": {
+   "default": 4,
+   "type": "number",
+   "hint": "Jumlah kartu (3-5)",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "gesture": {
+   "default": [
+    0.8,
+    2.0,
+    2.45,
+    3.8
+   ],
+   "type": "list",
+   "hint": "Daftar detik isyarat kocok",
+   "aliases": [
+    "isyarat"
+   ]
+  },
+  "throw_duration": {
+   "default": 0.95,
+   "type": "number",
+   "hint": "Lama satu lemparan (detik)",
+   "aliases": [
+    "durasi_lempar"
+   ]
+  },
+  "width": {
+   "default": 360,
+   "type": "number",
+   "hint": "Lebar kartu (px pada 1080)",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "card_aspect": {
+   "default": 0.78,
+   "type": "number",
+   "hint": "Lebar/tinggi kartu",
+   "aliases": [
+    "rasio_kartu"
+   ]
+  },
+  "stack_gap": {
+   "default": 38,
+   "type": "number",
+   "hint": "Jarak antar lapis tumpukan (px)",
+   "aliases": [
+    "jarak_tumpuk"
+   ]
+  },
+  "throw_height": {
+   "default": 300,
+   "type": "number",
+   "hint": "Tinggi lengkung lemparan (px)",
+   "aliases": [
+    "tinggi_lempar"
+   ]
+  },
+  "side": {
+   "default": 1,
+   "type": "number",
+   "hint": "Arah lemparan: 1 kanan, -1 kiri",
+   "aliases": [
+    "sisi"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi X (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 80,
+   "type": "number",
+   "hint": "Posisi Y alas tumpukan (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@600;800",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "seed": {
+   "default": 11,
+   "type": "number",
+   "hint": "Seed warna"
+  }
+ },
+ "duration": 5.5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "galeri/tumpuk-kocok",
+  "spring-stack-shuffle"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

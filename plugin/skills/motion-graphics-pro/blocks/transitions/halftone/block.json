@@ -1,0 +1,105 @@
+{
+ "id": "transitions/halftone",
+ "name": "Halftone",
+ "name_id": "Larut Halftone",
+ "category": "transitions",
+ "description": {
+  "id": "Adegan lama larut lewat medan titik halftone: titik tinta meletup di kisi tetap dari yang terkecil, tiap titik membuka jadi jendela ke adegan baru, sampai jendela-jendela menyatu dan adegan baru utuh.",
+  "en": "Scene A dissolves through a growing halftone dot field: ink dots pop onto a fixed grid smallest-first, each opens into a window onto scene B until the windows merge."
+ },
+ "tags": [
+  "transisi",
+  "halftone",
+  "titik",
+  "dots",
+  "cetak",
+  "print",
+  "dissolve",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "color": {
+   "default": "#1d1b18",
+   "type": "color",
+   "hint": "Warna tinta titik",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "tight": {
+   "default": 18,
+   "type": "number",
+   "hint": "Jumlah titik pada sisi pendek layar",
+   "aliases": [
+    "rapat"
+   ]
+  },
+  "direction": {
+   "default": "left",
+   "type": "enum",
+   "options": [
+    "left",
+    "right",
+    "bottom",
+    "center",
+    "random"
+   ],
+   "hint": "Asal sapuan titik",
+   "aliases": [
+    "arah"
+   ],
+   "option_aliases": {
+    "kiri": "left",
+    "kanan": "right",
+    "bawah": "bottom",
+    "tengah": "center",
+    "acak": "random"
+   }
+  },
+  "random_order": {
+   "default": 0.25,
+   "type": "number",
+   "hint": "Campuran urutan acak (0 rapi - 1 acak)",
+   "aliases": [
+    "acak_urut"
+   ]
+  },
+  "seed": {
+   "default": 3,
+   "type": "number",
+   "hint": "Seed urutan"
+  }
+ },
+ "duration": 2,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/halftone",
+  "halftone-dissolve"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.8,
+  "duration": 3.2
+ }
+}

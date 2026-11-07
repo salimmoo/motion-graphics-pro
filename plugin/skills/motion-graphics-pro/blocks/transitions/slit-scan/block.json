@@ -1,0 +1,136 @@
+{
+ "id": "transitions/slit-scan",
+ "name": "Slit Scan",
+ "name_id": "Slit-Scan",
+ "category": "transitions",
+ "description": {
+  "id": "Panel judul tiba lewat slit-scan: tiap baris layar mengambil sampel satu fungsi posisi pada waktu yang bergeser, sehingga kedatangannya meleleh menembus waktu sampai semua baris menyatu, lalu pergi dengan cara sama menyingkap adegan baru.",
+  "en": "A title panel arrives via slit-scan: each row samples one position function at an offset time, smearing the arrival through time until the rows collapse into place, then leaves the same way to reveal the next scene."
+ },
+ "tags": [
+  "transisi",
+  "slit-scan",
+  "smear",
+  "waktu",
+  "panel",
+  "judul",
+  "kanvas",
+  "transitions",
+  "slit",
+  "scan"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "text": {
+   "default": "Babak Dua",
+   "type": "text",
+   "hint": "Judul di panel",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "sub": {
+   "default": "perjalanan berlanjut",
+   "type": "text",
+   "hint": "Subjudul di panel"
+  },
+  "color": {
+   "default": "#f1e6d0",
+   "type": "color",
+   "hint": "Warna panel",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "text_color": {
+   "default": "#1d1b18",
+   "type": "color",
+   "hint": "Warna teks panel",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "accent_color": {
+   "default": "#e8553d",
+   "type": "color",
+   "hint": "Warna garis aksen",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "shape": {
+   "default": "wave",
+   "type": "enum",
+   "options": [
+    "wave",
+    "skew",
+    "random"
+   ],
+   "hint": "Pola offset waktu per baris",
+   "aliases": [
+    "bentuk"
+   ],
+   "option_aliases": {
+    "gelombang": "wave",
+    "miring": "skew",
+    "acak": "random"
+   }
+  },
+  "line_pause": {
+   "default": 0.32,
+   "type": "number",
+   "hint": "Offset waktu terbesar antar baris (detik)",
+   "aliases": [
+    "jeda_baris"
+   ]
+  },
+  "rows": {
+   "default": 120,
+   "type": "number",
+   "hint": "Jumlah irisan baris",
+   "aliases": [
+    "baris"
+   ]
+  },
+  "font": {
+   "default": "Fraunces:wght@600;800",
+   "type": "font",
+   "hint": "Font judul"
+  }
+ },
+ "duration": 2.4,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/slit-scan",
+  "slit-scan-reveal"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 1,
+  "duration": 3.6,
+  "font": [
+   "Inter:wght@400;500;600;700;800;900",
+   "Fraunces:wght@600;800"
+  ]
+ }
+}

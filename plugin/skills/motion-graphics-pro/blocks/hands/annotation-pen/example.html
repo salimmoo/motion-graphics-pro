@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Annotation Pen · block example hands/annotation-pen</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="4.5">
+<div id="adegan" class="adegan ad-ui"><div class="bar"></div><div class="side"></div><div class="kartu" style="left:22%;top:12%;width:36%;height:38%"></div><div class="kartu" style="left:61%;top:12%;width:35%;height:38%"></div><div class="kartu" style="left:22%;top:54%;width:74%;height:40%"></div><div id="tombol-contoh" class="tombol" style="left:74%;top:40%;width:18%;height:7%">Simpan</div></div>
+<!-- Block hands/annotation-pen · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-annotation-pen" data-block="hands/annotation-pen" data-start="0" data-duration="4" data-track-index="14" class="blk blk-hands-annotation-pen">
+<script type="application/json" data-block-props>
+{"mode": "circle", "position_x": 83, "position_y": 43.5, "width": 18, "height": 7, "color": "#e4572e", "thickness": 9, "pen_color": "#26211d", "pen_size": 1, "enter": 0.8, "draw_duration": 1.3, "enter_direction": "bottom-right", "wobble": 1, "seed": 23}
+</script>
+<svg class="blk-svg"><path class="blk-tinta" fill="none"/><g class="blk-pena"></g></svg>
+</div>
+<style>
+.blk-hands-annotation-pen{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-hands-annotation-pen .blk-svg{position:absolute;inset:0;width:100%;height:100%}
+</style>
+<script>
+BLOCK.mount("blk-annotation-pen", function (k) {
+  var P = k.P, tl = k.tl, w = k.w, h = k.h, S = k.s, svg = k.root.querySelector(".blk-svg"), ink = svg.querySelector(".blk-tinta"), gp = svg.querySelector(".blk-pena");
+  // ---- helper tangan (lokal di blok ini): goresan bergoyang berseed, boil per 1/8 detik, tekstur goresan
+  function wob(pts, amp, seed) {
+    var q = pts.map(function (p, i) { return [p[0] + amp * BLOCK.noise(i * 0.83 + 0.3, seed), p[1] + amp * BLOCK.noise(i * 0.83 + 5.1, seed + 17)]; });
+    var d = "M" + q[0][0].toFixed(1) + " " + q[0][1].toFixed(1);
+    for (var i = 0; i < q.length - 1; i++) {
+      var a = q[i - 1] || q[i], b = q[i], c = q[i + 1], e = q[i + 2] || c;
+      d += "C" + (b[0] + (c[0] - a[0]) / 6).toFixed(1) + " " + (b[1] + (c[1] - a[1]) / 6).toFixed(1) + " " + (c[0] - (e[0] - b[0]) / 6).toFixed(1) + " " +
+        (c[1] - (e[1] - b[1]) / 6).toFixed(1) + " " + c[0].toFixed(1) + " " + c[1].toFixed(1);
+    }
+    return d;
+  }
+  function boil(t) { return Math.floor(t * 8 + 1e-6); } // bentuk berganti tiap 1/8 detik
+  function kotak(x, y, ww, hh, n, lebih) { // keliling kotak mulai kiri atas searah jarum jam, ujung melewati awal sedikit
+    var out = [], L = 2 * (ww + hh); n = n || 32; lebih = lebih == null ? 0.07 : lebih;
+    for (var i = 0; i <= n; i++) {
+      var u = ((i / n) * (1 + lebih) % 1) * L;
+      out.push(u < ww ? [x + u, y] : u < ww + hh ? [x + ww, y + u - ww] : u < 2 * ww + hh ? [x + ww - (u - ww - hh), y + hh] : [x, y + hh - (u - 2 * ww - hh)]);
+    }
+    return out;
+  }
+  function elips(cx, cy, rx, ry, n, a0, putar, spiral) {
+    var out = []; n = n || 36; putar = putar || 1.1; spiral = spiral == null ? 0.06 : spiral;
+    for (var i = 0; i <= n; i++) { var a = a0 + (i / n) * putar * 2 * Math.PI, f = 1 + spiral * (i / n - 0.5); out.push([cx + rx * f * Math.cos(a), cy + ry * f * Math.sin(a)]); }
+    return out;
+  }
+  function kurva(a, c, b, n) { var out = []; n = n || 20; for (var i = 0; i <= n; i++) { var u = i / n, v = 1 - u; out.push([v * v * a[0] + 2 * v * u * c[0] + u * u * b[0], v * v * a[1] + 2 * v * u * c[1] + u * u * b[1]]); } return out; }
+  function tekstur(svg, jenis, s, uid) { // polos | lembut | tajam | semprot -> {filter, lebar}
+    if (jenis === "lembut" || jenis === "semprot") {
+      var df = svg.querySelector("defs") || BLOCK.svg("defs", null, svg), id = "blkf-" + uid + "-" + jenis;
+      var f = BLOCK.svg("filter", { id: id, x: "-20%", y: "-20%", width: "140%", height: "140%" }, df);
+      if (jenis === "lembut") BLOCK.svg("feGaussianBlur", { stdDeviation: 1.3 * s }, f);
+      else {
+        BLOCK.svg("feTurbulence", { type: "fractalNoise", baseFrequency: 1.1 / Math.max(0.5, s), numOctaves: 1, seed: 4, result: "n" }, f);
+        BLOCK.svg("feDisplacementMap", { in: "SourceGraphic", in2: "n", scale: 7 * s, xChannelSelector: "R", yChannelSelector: "G", result: "d" }, f);
+        BLOCK.svg("feColorMatrix", { in: "n", type: "matrix", values: "0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 3.2 -1.1", result: "m" }, f);
+        BLOCK.svg("feComposite", { in: "d", in2: "m", operator: "in" }, f);
+      }
+      return { filter: "url(#" + id + ")", lebar: jenis === "semprot" ? 1.7 : 1.1 };
+    }
+    return { filter: null, lebar: jenis === "tajam" ? 0.6 : 1 };
+  }
+  function goresan(induk, warna, tebal, tx) { // path siap digambar (pathLength 1 -> dashoffset = 1 - kemajuan)
+    var p = BLOCK.svg("path", { fill: "none", stroke: warna, "stroke-width": tebal * tx.lebar, "stroke-linecap": "round", "stroke-linejoin": "round", pathLength: 1, "stroke-dasharray": "1 1.001", "stroke-dashoffset": 1 }, induk);
+    if (tx.filter) p.setAttribute("filter", tx.filter);
+    return p;
+  }
+  function gambar(p, d, prog) { p.setAttribute("d", d); p.setAttribute("stroke-dashoffset", (1 - BLOCK.clamp(prog, 0, 1)).toFixed(4)); p.style.visibility = prog > 0.001 ? "visible" : "hidden"; }
+  // ---- akhir helper
+  svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+  var cx = P.position_x / 100 * w, cy = P.position_y / 100 * h, rw = P.width / 100 * w / 2, rh = P.height / 100 * h / 2, pts;
+  // bentuk: lingkar longgar | garis bawah | panah (batang + kepala dalam satu goresan, pena tak terangkat)
+  if (P.mode === "underline") { pts = []; for (var i = 0; i <= 30; i++) { var u = i / 30; pts.push([cx - rw * 1.05 + 2.1 * rw * u, cy + rh * 1.25 + Math.sin(u * Math.PI * 5) * 8 * S + u * 10 * S]); } }
+  else if (P.mode === "arrow") {
+    var A = [cx - rw * 2.2, cy + rh * 2.6], B = [cx - rw * 0.95, cy + rh * 0.9], ang = Math.atan2(B[1] - A[1], B[0] - A[0]), hk = 42 * S;
+    pts = kurva(A, [cx - rw * 2.3, cy + rh * 1.1], B, 20);
+    pts.push([B[0] + Math.cos(ang + 2.55) * hk, B[1] + Math.sin(ang + 2.55) * hk], B, [B[0] + Math.cos(ang - 2.55) * hk, B[1] + Math.sin(ang - 2.55) * hk]);
+  } else pts = elips(cx, cy, rw * 1.18 + 14 * S, rh * 1.3 + 14 * S, 40, -2.3, 1.14, 0.1);
+  ink.setAttribute("d", wob(pts, 5 * S * P.wobble, P.seed));
+  ink.setAttribute("stroke", P.color); ink.setAttribute("stroke-width", P.thickness * S); ink.setAttribute("stroke-linecap", "round"); ink.setAttribute("stroke-linejoin", "round");
+  var L = ink.getTotalLength() || 1; ink.setAttribute("stroke-dasharray", L + " " + (L + 1));
+  // spidol: bayangan + badan miring, ujung di (0,0)
+  var z = P.pen_size * S, bay = BLOCK.svg("ellipse", { rx: 26 * z, ry: 8 * z, fill: "rgba(0,0,0,.18)" }, gp), pena = BLOCK.svg("g", null, gp);
+  BLOCK.svg("rect", { x: -13 * z, y: -210 * z, width: 40 * z, height: 165 * z, rx: 12 * z, fill: P.pen_color, transform: "rotate(30)" }, pena);
+  BLOCK.svg("rect", { x: -13 * z, y: -250 * z, width: 40 * z, height: 46 * z, rx: 12 * z, fill: P.color, transform: "rotate(30)" }, pena);
+  BLOCK.svg("path", { d: "M" + -13 * z + " " + -45 * z + " L " + 27 * z + " " + -45 * z + " L " + 9 * z + " 0 Z", fill: P.color, transform: "rotate(30)" }, pena);
+  var dir = { "bottom-right": [1, 1], "top-right": [1, -0.6], "bottom-left": [-1, 1], "bottom": [0.2, 1] }[P.enter_direction] || [1, 1];
+  var Tm = P.enter, Td = P.draw_duration, T1 = Tm + 0.12, T2 = T1 + Td, T3 = T2 + 0.25;
+  function luar(p0) { return [p0[0] + dir[0] * w * 0.6, p0[1] + dir[1] * h * 0.7]; }
+  BLOCK.onTime(tl, function (t) {
+    var q = BLOCK.smooth((t - T1) / Td), pt = ink.getPointAtLength(q * L), pos = [pt.x, pt.y], angkat;
+    ink.setAttribute("stroke-dashoffset", (L * (1 - q)).toFixed(2)); ink.style.visibility = q > 0 ? "visible" : "hidden";
+    if (t < Tm) { var a = 1 - Math.pow(1 - BLOCK.clamp(t / Tm, 0, 1), 3), o = luar(pos); pos = [BLOCK.lerp(o[0], pos[0], a), BLOCK.lerp(o[1], pos[1], a)]; angkat = 1 - a * 0.7; }
+    else if (t < T1) angkat = 0.3 * (1 - (t - Tm) / 0.12);                 // menyentuh kertas
+    else if (t < T2) angkat = 0;                                            // tinta tepat di bawah ujung pena
+    else if (t < T3) angkat = (t - T2) / 0.25 * 0.5;                        // terangkat
+    else { var b = BLOCK.smooth((t - T3) / 0.8), o2 = luar(pos); pos = [BLOCK.lerp(pos[0], o2[0], b), BLOCK.lerp(pos[1], o2[1], b)]; angkat = 0.5 + b * 0.5; }
+    var tg = angkat * 26 * S;
+    pena.setAttribute("transform", "translate(" + pos[0].toFixed(1) + " " + (pos[1] - tg).toFixed(1) + ") rotate(" + (angkat * 6).toFixed(2) + ")");
+    bay.setAttribute("transform", "translate(" + (pos[0] + tg * 0.6).toFixed(1) + " " + (pos[1] + 4 * S).toFixed(1) + ") scale(" + (1 + angkat * 0.6).toFixed(3) + ")");
+    bay.setAttribute("opacity", (0.9 - angkat * 0.6).toFixed(3));
+  }, k.dur);
+  tl.to(ink, { opacity: 0, duration: 0.35, ease: "power2.in" }, k.dur - 0.4);
+});
+</script>
+</div>
+<script>
+  window.__duration = 4.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 4.5);
+</script>
+</body>
+</html>

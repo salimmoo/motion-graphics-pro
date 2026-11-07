@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Hub · block example accents/hub</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;800&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="5.5">
+<div id="adegan" class="adegan ad-gelap"></div>
+<!-- Block accents/hub · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-hub" data-block="accents/hub" data-start="0" data-duration="5" data-track-index="30" class="blk blk-accents-hub">
+<script type="application/json" data-block-props>
+{"mode": "constellation", "center_label": "Satu Platform", "center_sub": "semua terhubung", "item": ["Pembayaran", "Laporan", "Inventaris", "Pengiriman", "Pelanggan", "Analitik"], "pause": 0.35, "radius": 330, "center_size": 260, "color": "#f5f3ee", "accent_color": "#58c4dd", "node_color": "#1f2233", "center_color": "#141622", "font": "Inter:wght@500;600;800", "position_x": 50, "position_y": 50, "seed": 7}
+</script>
+<svg class="blk-svg"></svg>
+<div class="blk-lapis"></div>
+</div>
+<style>
+.blk-accents-hub{position:absolute;inset:0;pointer-events:none}
+.blk-accents-hub .blk-svg{position:absolute;inset:0;width:100%;height:100%}
+.blk-accents-hub .blk-lapis{position:absolute;inset:0}
+.blk-accents-hub .blk-n{position:absolute;left:0;top:0;display:flex;align-items:center;justify-content:center;white-space:nowrap;font-weight:600;box-sizing:border-box}
+.blk-accents-hub .blk-n i{display:block;border-radius:50%;flex:none}
+.blk-accents-hub .blk-hub{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border-radius:50%;box-sizing:border-box}
+.blk-accents-hub .blk-hub b{font-weight:800;line-height:1.05;letter-spacing:-.01em}
+.blk-accents-hub .blk-hub span{opacity:.7;margin-top:.35em;letter-spacing:.08em;text-transform:uppercase}
+</style>
+<script>
+BLOCK.mount("blk-hub", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, rng = k.random, fs = function (v) { return (v * s).toFixed(1) + "px"; };
+  var sv = R.querySelector(".blk-svg"), lap = R.querySelector(".blk-lapis"), av = P.mode === "avatar";
+  sv.setAttribute("viewBox", "0 0 " + k.w + " " + k.h);
+  R.style.fontFamily = BLOCK.family(P.font); R.style.color = P.color;
+  var cx = k.w * P.position_x / 100, cy = k.h * P.position_y / 100, hr = P.center_size * s / 2;
+  var rx = Math.min(k.w * 0.44, P.radius * s * (k.w > k.h ? 1.55 : 1)), ry = Math.min(k.h * 0.4, P.radius * s * (k.w > k.h ? 0.95 : 1.4));
+  var hub = BLOCK.el("div", { class: "blk-hub", style: "left:" + (cx - hr) + "px;top:" + (cy - hr) + "px;width:" + 2 * hr + "px;height:" + 2 * hr + "px;background:" + P.center_color + ";border:" + fs(2) + " solid " + P.accent_color + ";box-shadow:0 0 " + fs(60) + " " + BLOCK.rgba(P.accent_color, 0.35) }, lap);
+  BLOCK.el("b", { style: "font-size:" + fs(P.center_size * 0.17) }, hub).textContent = P.center_label;
+  if (P.center_sub) BLOCK.el("span", { style: "font-size:" + fs(P.center_size * 0.075) }, hub).textContent = P.center_sub;
+  var items = P.item || [], n = items.length, t0 = 0.6, jd = P.pause, dl = 0.45, nodes = [], links = [];
+  items.forEach(function (it, i) {
+    var a, r;
+    if (av) { a = i / n * Math.PI * 2 + rng.range(-0.25, 0.25); r = rng.range(0.62, 1.05); }
+    else { a = -Math.PI / 2 + i / n * Math.PI * 2; r = 1; }
+    var o = { x: Math.cos(a) * rx * r, y: Math.sin(a) * ry * r, t: t0 + i * jd, seed: i * 7.3 };
+    if (av) {
+      var z = rng.range(0.8, 1.15) * 74 * s, hue = BLOCK.mix(P.accent_color, P.node_color, (i * 0.37) % 1);
+      o.el = BLOCK.el("div", { class: "blk-n", style: "width:" + z + "px;height:" + z + "px;border-radius:50%;font-size:" + (z * 0.36).toFixed(1) + "px;background:" + hue + ";color:#fff;border:" + fs(3) + " solid " + P.center_color }, lap);
+      o.el.textContent = String(it).split(/\s+/).map(function (w) { return w[0]; }).join("").slice(0, 2).toUpperCase();
+    } else {
+      o.el = BLOCK.el("div", { class: "blk-n", style: "font-size:" + fs(30) + ";padding:" + fs(16) + " " + fs(28) + ";border-radius:" + fs(40) + ";background:" + P.node_color + ";border:" + fs(2) + " solid " + BLOCK.rgba(P.color, 0.15) }, lap);
+      BLOCK.el("i", { style: "width:" + fs(12) + ";height:" + fs(12) + ";margin-right:" + fs(12) + ";background:" + P.accent_color }, o.el);
+      o.el.appendChild(document.createTextNode(it));
+    }
+    o.w = o.el.offsetWidth; o.h = o.el.offsetHeight;
+    nodes.push(o);
+    if (!av || i % 2 === 0) links.push({ a: -1, b: i, t: o.t - dl * 0.8 });
+  });
+  if (av) nodes.forEach(function (o, i) {       // tautan halus antar tetangga di awan
+    var j = (i + 1) % n; links.push({ a: i, b: j, t: Math.max(o.t, nodes[j].t) + 0.1, tipis: true });
+  });
+  links.forEach(function (l) { l.el = BLOCK.svg("line", { stroke: l.tipis ? BLOCK.rgba(P.color, 0.28) : P.accent_color, "stroke-width": (l.tipis ? 1.2 : 2) * s, "stroke-linecap": "round" }, sv); });
+  var eb = gsap.parseEase("back.out(2.2)"), tL = k.dur - 1.5;
+  BLOCK.onTime(tl, function (t) {
+    var f = 1 - 0.1 * BLOCK.smooth(BLOCK.progress(t, tL, tL + 0.8));         // mengunci: rapat ke pusat
+    var pos = function (i) {
+      if (i < 0) return [cx, cy];
+      var o = nodes[i], dx = av ? BLOCK.noise(t * 0.4 + o.seed, 3) * 10 * s : 0, dy = av ? BLOCK.noise(t * 0.4 + o.seed, 9) * 10 * s : 0;
+      return [cx + o.x * f + dx, cy + o.y * f + dy];
+    };
+    nodes.forEach(function (o, i) {
+      var p = pos(i), u = BLOCK.progress(t, o.t, o.t + 0.45), lit = BLOCK.smooth(BLOCK.progress(t, o.t, o.t + 0.3));
+      var sc = av ? eb(u) : 0.92 + 0.08 * eb(u), op = av ? Math.min(1, u * 3) : BLOCK.progress(t, 0.2, 0.6) * (0.3 + 0.7 * lit);
+      o.el.style.transform = "translate(" + (p[0] - o.w / 2).toFixed(1) + "px," + (p[1] - o.h / 2).toFixed(1) + "px) scale(" + sc.toFixed(3) + ")";
+      o.el.style.opacity = op.toFixed(3);
+      if (!av) o.el.style.borderColor = BLOCK.rgba(P.accent_color, 0.15 + 0.85 * lit), o.el.style.boxShadow = "0 0 " + (30 * s * lit).toFixed(1) + "px " + BLOCK.rgba(P.accent_color, 0.35 * lit);
+    });
+    links.forEach(function (l) {
+      var a = pos(l.a), b = pos(l.b), dx = b[0] - a[0], dy = b[1] - a[1], len = Math.hypot(dx, dy) || 1, ux = dx / len, uy = dy / len;
+      var off = l.a < 0 ? hr : 0, x1 = a[0] + ux * off, y1 = a[1] + uy * off, ln = len - off;
+      var p = BLOCK.smooth(BLOCK.progress(t, l.t, l.t + dl));
+      l.el.setAttribute("x1", x1.toFixed(1)); l.el.setAttribute("y1", y1.toFixed(1));
+      l.el.setAttribute("x2", (x1 + ux * ln).toFixed(1)); l.el.setAttribute("y2", (y1 + uy * ln).toFixed(1));
+      l.el.style.strokeDasharray = ln.toFixed(1) + " " + ln.toFixed(1); l.el.style.strokeDashoffset = (ln * (1 - p)).toFixed(1);
+    });
+  }, k.dur);
+  tl.fromTo(hub, { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.8)" }, 0);
+  tl.to(hub, { scale: 1.06, duration: 0.25, ease: "power2.out", yoyo: true, repeat: 1 }, tL + 0.5);
+  tl.to(R, { opacity: 0, duration: 0.4, ease: "power2.in" }, k.dur - 0.45);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 5.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5.5);
+</script>
+</body>
+</html>

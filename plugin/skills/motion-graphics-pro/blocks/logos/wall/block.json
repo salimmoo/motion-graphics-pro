@@ -1,0 +1,129 @@
+{
+ "id": "logos/wall",
+ "name": "Wall",
+ "name_id": "Dinding Logo",
+ "category": "logos",
+ "description": {
+  "id": "Bukti kepercayaan: dinding logo tiruan (tanda geometris + nama) yang memudar dan membesar ke tempatnya dengan stagger berseed per sel, atau baris monokrom wordmark mono berspasi lebar yang muncul dari kiri ke kanan lalu diam.",
+  "en": "Trust proof: a wall of placeholder lettermark logos that fade and scale into place with a seeded per-cell stagger, or a monochrome row of wide-tracked mono wordmarks fading in left to right, then holding."
+ },
+ "tags": [
+  "logo",
+  "dinding",
+  "klien",
+  "trusted-by",
+  "bukti-sosial",
+  "grid",
+  "strip",
+  "logos",
+  "wall"
+ ],
+ "props": {
+  "style": {
+   "default": "wall",
+   "type": "enum",
+   "options": [
+    "wall",
+    "strip"
+   ],
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "dinding": "wall"
+   }
+  },
+  "title": {
+   "default": "Dipercaya tim-tim terbaik",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "brand": {
+   "default": [
+    "Arunika",
+    "Batik Lab",
+    "Kopi Senja",
+    "Nusa Data",
+    "Sawah Pintar",
+    "Laut Biru",
+    "Rantai",
+    "Gerak",
+    "Pelita",
+    "Tenun",
+    "Rimba",
+    "Kirana"
+   ],
+   "type": "list",
+   "hint": "Nama merek tiruan (strip memakai 5 pertama, 6 pada rasio tegak)",
+   "aliases": [
+    "merek"
+   ]
+  },
+  "cols": {
+   "default": 4,
+   "type": "number",
+   "hint": "Kolom dinding (rasio tegak maks 2)",
+   "aliases": [
+    "kolom"
+   ]
+  },
+  "color": {
+   "default": "#f2efe8",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "card_color": {
+   "default": "#191b22",
+   "type": "color",
+   "aliases": [
+    "warna_kartu"
+   ]
+  },
+  "bg": {
+   "default": "#0e1016",
+   "type": "color",
+   "hint": "Kosong = transparan",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;700;800",
+   "type": "font"
+  },
+  "font2": {
+   "default": "JetBrains Mono:wght@500;700",
+   "type": "font",
+   "hint": "Font mono"
+  },
+  "seed": {
+   "default": 7,
+   "type": "number",
+   "hint": "Seed pilihan tanda/gaya dan stagger"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "logo/dinding",
+  "logo-wall",
+  "trust-strip"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@500;700;800",
+   "JetBrains Mono:wght@500;700"
+  ]
+ }
+}

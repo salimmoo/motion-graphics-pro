@@ -1,0 +1,42 @@
+<!-- Block transitions/fade · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/fade" data-start="0" data-duration="1.2" data-track-index="20" class="blk blk-transitions-fade">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "mode": "pass", "color": "#0e0f14", "hold": 0.12, "grain_scale": 1, "ease": "sine.inOut"}
+</script>
+</div>
+<style>
+.blk-transitions-fade{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-transitions-fade .blk-cuci{position:absolute;inset:0;opacity:0}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to), D = k.dur, W = k.w, H = k.h, s = k.s;
+  function gaya(el, o) { if (el) for (var n in o) el.style[n] = o[n]; }
+  function bersih(el, tampil) { gaya(el, { transform: "", filter: "", opacity: "", clipPath: "", webkitMaskImage: "", maskImage: "", transformOrigin: "", zIndex: "", borderRadius: "", boxShadow: "", backfaceVisibility: "", visibility: tampil ? "" : "hidden" }); }
+  function ez(n) { return gsap.parseEase(n || "none") || gsap.parseEase("none"); }
+  var E = ez(P.ease), cuci = BLOCK.el("div", { class: "blk-cuci", style: "background:" + P.color }, k.root);
+  var fid = "blkf-" + k.id, sv = BLOCK.svg("svg", { width: 0, height: 0, style: "position:absolute" }, k.root);
+  var fl = BLOCK.svg("filter", { id: fid, x: "0", y: "0", width: "100%", height: "100%", "color-interpolation-filters": "sRGB" }, sv);
+  BLOCK.svg("feTurbulence", { type: "fractalNoise", baseFrequency: (0.012 / (+P.grain_scale || 1) / s).toFixed(5), numOctaves: 3, seed: 7, result: "n" }, fl);
+  BLOCK.svg("feColorMatrix", { "in": "n", type: "matrix", values: "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.6 0 0 0 -0.3", result: "na" }, fl);
+  var ct = BLOCK.svg("feComponentTransfer", { "in": "na", result: "m" }, fl), fa = BLOCK.svg("feFuncA", { type: "linear", slope: 8, intercept: 0 }, ct);
+  BLOCK.svg("feComposite", { "in": "SourceGraphic", in2: "m", operator: "in" }, fl);
+  var th = +P.hold || 0;
+  BLOCK.onTime(tl, function (t) {
+    var u = t / D;
+    cuci.style.opacity = 0;
+    if (u <= 0 || u >= 1) { bersih(A, u <= 0); bersih(Bk, u >= 1); return; }
+    if (P.mode === "pass") {
+      var h = (1 - th) / 2, a = u < h ? E(u / h) : u < h + th ? 1 : 1 - E((u - h - th) / h);
+      cuci.style.opacity = a;
+      gaya(A, { visibility: u < 0.5 ? "" : "hidden", filter: "" }); gaya(Bk, { visibility: u >= 0.5 ? "" : "hidden", opacity: "" });
+    } else if (P.mode === "grain") {
+      var q = E(u), sl = 8, thr = BLOCK.lerp(1.0, -0.15, q);
+      fa.setAttribute("intercept", (-sl * thr).toFixed(4));
+      gaya(A, { visibility: "" }); gaya(Bk, { visibility: "", filter: "url(#" + fid + ")" });
+    } else {
+      gaya(A, { visibility: "" }); gaya(Bk, { visibility: "", opacity: E(u) });
+    }
+  }, D);
+});
+</script>

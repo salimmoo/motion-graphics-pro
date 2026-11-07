@@ -1,0 +1,102 @@
+<!-- Block ui/spring-sheet · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="ui/spring-sheet" data-start="0" data-duration="5" data-track-index="30" class="blk blk-ui-spring-sheet">
+<script type="application/json" data-block-props>
+{"mode": "share", "title": "Bagikan ke", "item": ["Salin tautan", "Simpan ke album", "Kirim lewat pesan", "Lainnya"], "preview": ["#ff8a5b", "#4fb7ff", "#9b7bff", "#33d39a"], "contacts": ["Rani", "Dimas", "Ayu", "Bima"], "button": "Kirim", "done_button": "Terkirim", "accent_color": "#2d6cdf", "screen": "#f2f4f8", "start": 0.35, "frequency": 1.6, "damping": 0.34, "rhythm": 0.4, "font": "Inter:wght@400;500;600;700;800"}
+</script>
+</div>
+<style>
+.blk-ui-spring-sheet{position:absolute;inset:0;pointer-events:none;overflow:hidden;font-family:"Inter",system-ui,sans-serif}
+.blk-ui-spring-sheet .hp{position:absolute;left:50%;top:50%;background:#0c0e13;box-shadow:0 30px 90px rgba(0,0,0,.5),inset 0 0 0 2px #2a2e38}
+.blk-ui-spring-sheet .ly,.blk-ui-spring-sheet .app,.blk-ui-spring-sheet .bg{position:absolute;overflow:hidden}
+.blk-ui-spring-sheet .app,.blk-ui-spring-sheet .bg{inset:0}
+.blk-ui-spring-sheet .bg{bottom:38%}
+.blk-ui-spring-sheet .bar{position:absolute;background:#d9dee8;border-radius:99px}
+.blk-ui-spring-sheet .lb{position:absolute;left:0;right:0;bottom:-14%;background:#fff;box-shadow:0 -10px 40px rgba(0,0,0,.18);color:#151a24;box-sizing:border-box}
+.blk-ui-spring-sheet .pg{margin:0 auto;background:#cfd4de;border-radius:99px}
+.blk-ui-spring-sheet .jd{font-weight:700;text-align:center}
+.blk-ui-spring-sheet .kt{position:relative;overflow:hidden}
+.blk-ui-spring-sheet .pv{position:absolute;inset:0}
+.blk-ui-spring-sheet .row{display:flex;align-items:center;font-weight:500;border-bottom:1px solid #eceff4}
+.blk-ui-spring-sheet .ik{flex:none;border-radius:28%}
+.blk-ui-spring-sheet .ktk{display:flex;justify-content:space-between}
+.blk-ui-spring-sheet .av{border-radius:50%;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center}
+.blk-ui-spring-sheet .tb{position:relative;color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.blk-ui-spring-sheet .tb span{position:absolute}
+.blk-ui-spring-sheet .tap{position:absolute;border-radius:50%;background:rgba(255,255,255,.55)}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, E = BLOCK.el, bagi = P.mode === "share";
+  var ph = Math.min(k.h * 0.88, k.w * 0.92 * 2.1), pw = ph / 2.1, u = pw / 400, bz = 13 * u, px = function (v) { return v * u + "px"; };
+  var hp = E("div", { class: "hp", style: "width:" + pw + "px;height:" + ph + "px;margin:" + (-ph / 2) + "px 0 0 " + (-pw / 2) + "px;border-radius:" + px(60) }, k.root);
+  var ly = E("div", { class: "ly", style: "inset:" + bz + "px;border-radius:" + px(48) + ";background:" + P.screen }, hp);
+  var app = E("div", { class: "app" }, ly);
+  var warna = bagi ? P.preview : [P.accent_color];
+  var grad = function (c) { return "background:radial-gradient(60% 40% at 70% 30%," + BLOCK.mix(c, "#ffffff", .45) + " 0," + c + " 45%," + BLOCK.mix(c, "#121624", .6) + " 100%)"; };
+  var bgs = warna.map(function (c) { return E("div", { class: "bg", style: grad(c) }, app); });
+  [[8, 66, 60, 5], [8, 74, 84, 3], [8, 79, 70, 3], [8, 87, 40, 3]].forEach(function (b) {
+    E("div", { class: "bar", style: "left:" + b[0] + "%;top:" + b[1] + "%;width:" + b[2] + "%;height:" + px(b[3] * 4) }, app);
+  });
+  // lembar bawah
+  var sh = E("div", { class: "lb", style: "height:" + (bagi ? 84 : 66) + "%;border-radius:" + px(34) + " " + px(34) + " 0 0;padding:" + px(14) + " " + px(24) }, ly);
+  E("div", { class: "pg", style: "width:" + px(56) + ";height:" + px(6) }, sh);
+  E("div", { class: "jd", style: "font-size:" + px(22) + ";margin:" + px(16) + " 0 " + px(18) }, sh, BLOCK.esc(P.title));
+  var anak = [], tb, lbl = [], tap;
+  if (bagi) {
+    var kt = E("div", { class: "kt", style: "height:" + px(250) + ";border-radius:" + px(22) }, sh);
+    var pvs = warna.map(function (c, i) {
+      var v = E("div", { class: "pv", style: grad(c) }, kt);
+      E("div", { style: "position:absolute;left:8%;bottom:8%;color:#fff;font-weight:700;font-size:" + px(18) + ";text-shadow:0 2px 8px rgba(0,0,0,.3)" }, v, "Foto " + (i + 1) + " / " + warna.length);
+      E("div", { style: "position:absolute;right:10%;top:14%;width:" + px(60) + ";height:" + px(60) + ";border-radius:50%;background:rgba(255,255,255,.75)" }, v);
+      return v;
+    });
+    var kk = E("div", { class: "ktk", style: "margin:" + px(22) + " 0" }, sh);
+    P.contacts.forEach(function (n, i) {
+      var c = E("div", { style: "text-align:center;font-size:" + px(14) + ";color:#4a5160" }, kk);
+      E("div", { class: "av", style: "width:" + px(64) + ";height:" + px(64) + ";margin:0 auto " + px(8) + ";font-size:" + px(22) + ";background:" + BLOCK.mix(warna[i % warna.length], "#1b2333", .25) + ";" + (i === 0 ? "box-shadow:0 0 0 " + px(4) + " #fff,0 0 0 " + px(7) + " " + P.accent_color : "") }, c, BLOCK.esc(n[0]));
+      c.appendChild(document.createTextNode(n)); anak.push(c);
+    });
+    tb = E("div", { class: "tb", style: "height:" + px(62) + ";border-radius:" + px(18) + ";font-size:" + px(20) + ";background:" + P.accent_color }, sh);
+    lbl = [E("span", null, tb, BLOCK.esc(P.button)), E("span", null, tb, "&#10003; " + BLOCK.esc(P.done_button))];
+    tap = E("div", { class: "tap", style: "width:" + px(70) + ";height:" + px(70) + ";left:50%;top:50%;margin:" + px(-35) + " 0 0 " + px(-35) }, tb);
+    anak.push(tb);
+  } else {
+    P.item.forEach(function (n, i) {
+      var r = E("div", { class: "row", style: "height:" + px(74) + ";font-size:" + px(19) + ";gap:" + px(18) }, sh);
+      E("div", { class: "ik", style: "width:" + px(44) + ";height:" + px(44) + ";background:" + BLOCK.mix(P.accent_color, "#ffffff", i * 0.18) }, r);
+      r.appendChild(document.createTextNode(n)); anak.push(r);
+    });
+  }
+  // pegas sungguhan: posisi = fungsi tertutup dari waktu, disampel tiap frame (bukan ease kira-kira)
+  var t0 = +P.start;
+  BLOCK.onTime(tl, function (t) {
+    var tt = t - t0, p = tt <= 0 ? 0 : BLOCK.spring(tt, +P.frequency, +P.damping), q = Math.min(p, 1);
+    sh.style.transform = "translateY(" + ((1 - p) * 104) + "%)";
+    app.style.filter = "blur(" + (q * 7 * u).toFixed(2) + "px) brightness(" + (1 - 0.3 * q).toFixed(3) + ")";
+    app.style.transform = "scale(" + (1 - 0.05 * q).toFixed(4) + ")";
+  }, D);
+  tl.fromTo(anak, { autoAlpha: 0, y: 18 * u }, { autoAlpha: 1, y: 0, duration: 0.45, ease: "power3.out", stagger: 0.06 }, t0 + 0.25);
+  tl.fromTo(hp, { y: 0 }, { y: -10 * u, duration: D, ease: "sine.inOut" }, 0);
+  if (bagi) {
+    // potongan cepat: pratinjau berganti mengikuti irama, latar buram ikut berganti
+    BLOCK.initial(tl, pvs.slice(1).concat(bgs.slice(1)), { autoAlpha: 0 });
+    var n = warna.length, ta = D - 1.3, j = 0;
+    for (var t = t0 + 0.7; t < ta - 0.05; t += +P.rhythm) {
+      var nx = (j + 1) % n;
+      tl.set([pvs[j], bgs[j]], { autoAlpha: 0 }, t).set([pvs[nx], bgs[nx]], { autoAlpha: 1 }, t)
+        .fromTo(kt, { scale: 1.04 }, { scale: 1, duration: 0.3, ease: "power2.out", immediateRender: false }, t);
+      j = nx;
+    }
+    BLOCK.initial(tl, lbl[1], { autoAlpha: 0 });
+    tl.fromTo(tap, { scale: 0.2, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.18, ease: "power2.out" }, ta)
+      .to(tap, { scale: 6, autoAlpha: 0, duration: 0.55, ease: "power2.out" }, ta + 0.18)
+      .fromTo(tb, { scale: 1 }, { scale: 0.94, duration: 0.12, ease: "power2.out", immediateRender: false }, ta)
+      .to(tb, { scale: 1, duration: 0.5, ease: "blockSpring" }, ta + 0.12)
+      .to(lbl[0], { autoAlpha: 0, y: -20 * u, duration: 0.25, ease: "power2.in" }, ta + 0.15)
+      .fromTo(lbl[1], { y: 20 * u }, { autoAlpha: 1, y: 0, duration: 0.35, ease: "back.out(2)", immediateRender: false }, ta + 0.3)
+      .to(tb, { backgroundColor: "#1fa463", duration: 0.3 }, ta + 0.25);
+  } else {
+    tl.fromTo(anak[0], { backgroundColor: "rgba(45,108,223,0)" }, { backgroundColor: BLOCK.rgba(P.accent_color, 0.12), duration: 0.2, yoyo: true, repeat: 1 }, D - 1.1);
+  }
+}, { font: true });
+</script>

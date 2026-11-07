@@ -1,0 +1,56 @@
+<!-- Block subtitles/camera-follow · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="subtitles/camera-follow" data-start="0" data-duration="6" data-track-index="30" class="blk blk-subtitles-camera-follow">
+<script type="application/json" data-block-props>
+{"text": "Satu kalimat tumbuh makin besar setiap kata terucap hingga memenuhi dunia", "words": [], "kps": 2.0, "max_words": 14, "font": "Archivo Black:wght@400", "size": 120, "color": "#ffffff", "bottom": 50, "uppercase": true, "accent_color": "#ffd23f", "old_opacity": 0.7, "screen_fill": 0.84}
+</script>
+</div>
+<style>
+.blk-subtitles-camera-follow{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-subtitles-camera-follow .blk-dunia{position:absolute;left:0;top:0;transform-origin:0 0;line-height:1}
+.blk-subtitles-camera-follow .blk-k{position:absolute;left:0;top:0;transform-origin:0 0;white-space:nowrap;font-size:100px}
+.blk-subtitles-camera-follow .blk-ki{display:inline-block;transform-origin:50% 60%}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, root = k.root;
+  var cy0 = k.h * (1 - P.bottom / 100), dunia = [];
+  BLOCK.pages(BLOCK.words(P), P.max_words).forEach(function (pg) {
+    var D = BLOCK.el("div", { class: "blk-dunia", style: "color:" + P.color + ";font-family:" + BLOCK.family(P.font, "Arial Black, sans-serif") + (P.uppercase ? ";text-transform:uppercase" : "") }, root);
+    BLOCK.initial(tl, D, { autoAlpha: 0 }).set(D, { autoAlpha: 1 }, pg.mulai).set(D, { autoAlpha: 0 }, pg.akhir);
+    var bb = null, kam = [];
+    pg.kata.forEach(function (w, i) {
+      var o = BLOCK.el("span", { class: "blk-k" }, D), ii = BLOCK.el("span", { class: "blk-ki" }, o);
+      ii.textContent = String(w.teks).replace(/\*/g, "");
+      var W0 = o.offsetWidth, H0 = o.offsetHeight * 0.86, sc, x, y;
+      // setiap kata diukur terhadap semua yang sudah tertulis: kanan = setinggi blok, bawah = selebar blok
+      if (!bb) { sc = 1; x = 0; y = 0; }
+      else if (i % 2) { sc = (bb.y1 - bb.y0) / H0; x = bb.x1 + 0.18 * H0 * sc; y = bb.y0; }
+      else { sc = (bb.x1 - bb.x0) / W0; x = bb.x0; y = bb.y1 + 0.06 * H0 * sc; }
+      o.style.transform = "translate(" + x + "px," + y + "px) scale(" + sc + ")";
+      var x1 = x + W0 * sc, y1 = y + H0 * sc;
+      bb = bb ? { x0: bb.x0, y0: bb.y0, x1: Math.max(bb.x1, x1), y1: Math.max(bb.y1, y1) } : { x0: 0, y0: 0, x1: x1, y1: y1 };
+      var bw = bb.x1 - bb.x0, bh = bb.y1 - bb.y0;
+      var z = Math.min(k.w * P.screen_fill / bw, k.h * 0.55 / bh, P.size * s * 1.4 / H0);
+      // pusat kamera: condong ke kata baru, tetap memuat blok
+      var cx = BLOCK.lerp((bb.x0 + bb.x1) / 2, x + W0 * sc / 2, 0.12), cy = BLOCK.lerp((bb.y0 + bb.y1) / 2, y + H0 * sc / 2, 0.12);
+      kam.push({ t: w.mulai, lz: Math.log(z), cx: cx, cy: cy });
+      tl.fromTo(ii, { opacity: 0, scale: 0.55, color: P.accent_color }, { opacity: 1, scale: 1, duration: 0.42, ease: "back.out(2.2)" }, w.mulai)
+        .to(ii, { color: P.color, opacity: P.old_opacity, duration: 0.5, ease: "power2.inOut" }, Math.max(w.akhir, w.mulai + 0.5));
+    });
+    dunia.push({ D: D, kam: kam, pg: pg });
+  });
+  // kamera: zoom log-linear (laju tetap) antar kata, pusat bergeser halus; murni dari t
+  BLOCK.onTime(tl, function (t) {
+    dunia.forEach(function (d) {
+      var K = d.kam; if (!K.length) return;
+      var a = K[0], b = K[0], f = 0;
+      for (var i = 0; i < K.length; i++) {
+        if (t >= K[i].t) { a = K[i]; b = K[i + 1] || K[i]; f = b === a ? 0 : BLOCK.clamp((t - a.t) / (b.t - a.t), 0, 1); }
+      }
+      var g = BLOCK.smooth(f), lz = BLOCK.lerp(a.lz, b.lz, BLOCK.lerp(f, g, 0.5));
+      var z = Math.exp(lz), cx = BLOCK.lerp(a.cx, b.cx, g), cy = BLOCK.lerp(a.cy, b.cy, g);
+      d.D.style.transform = "translate(" + (k.w / 2 - cx * z).toFixed(2) + "px," + (cy0 - cy * z).toFixed(2) + "px) scale(" + z.toFixed(6) + ")";
+    });
+  }, k.dur);
+}, { font: true });
+</script>

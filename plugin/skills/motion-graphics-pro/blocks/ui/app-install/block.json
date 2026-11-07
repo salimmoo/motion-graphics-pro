@@ -1,0 +1,119 @@
+{
+ "id": "ui/app-install",
+ "name": "App Install",
+ "name_id": "Cari & Pasang Aplikasi",
+ "category": "ui",
+ "description": {
+  "id": "Sisipan iklan aplikasi yang cekatan: di toko aplikasi tiruan, kata kunci diketik, hasil muncul bertahap, jari mengetuk Pasang, lingkar unduhan terisi, tombol berubah jadi Buka, lalu aplikasi terbuka dengan layar pembuka. Efek suara tidak disertakan (tambahkan di trek audio).",
+  "en": "A snappy app-install insert in a generic store: query typed, results stagger in, a tap on Install, download ring fills, button turns to Open, then the app launches with a splash. Sound effects not included."
+ },
+ "tags": [
+  "ui",
+  "ponsel",
+  "app-store",
+  "install",
+  "iklan",
+  "unduh",
+  "aplikasi",
+  "app"
+ ],
+ "props": {
+  "query": {
+   "default": "vpn aman",
+   "type": "text",
+   "aliases": [
+    "kueri"
+   ]
+  },
+  "app_name": {
+   "default": "Teduh VPN",
+   "type": "text",
+   "aliases": [
+    "nama_app"
+   ]
+  },
+  "developer": {
+   "default": "Studio Teduh",
+   "type": "text",
+   "aliases": [
+    "pengembang"
+   ]
+  },
+  "rating": {
+   "default": "4,8",
+   "type": "text"
+  },
+  "other": {
+   "default": [
+    [
+     "Jaring Lindung",
+     "#ff8a5b"
+    ],
+    [
+     "Kunci Sinyal",
+     "#9b7bff"
+    ],
+    [
+     "Rute Privat",
+     "#ffc94d"
+    ]
+   ],
+   "type": "list",
+   "hint": "[[nama, warna]] hasil lain",
+   "aliases": [
+    "lain"
+   ]
+  },
+  "button": {
+   "default": "Pasang",
+   "type": "text",
+   "aliases": [
+    "tombol"
+   ]
+  },
+  "open_button": {
+   "default": "Buka",
+   "type": "text",
+   "aliases": [
+    "tombol_buka"
+   ]
+  },
+  "slogan": {
+   "default": "Internetan tenang, di mana saja",
+   "type": "text"
+  },
+  "accent_color": {
+   "default": "#2f7bff",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "icon_color": {
+   "default": "#22c58b",
+   "type": "color",
+   "aliases": [
+    "warna_ikon"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700;800",
+   "type": "font"
+  }
+ },
+ "duration": 7,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/pasang-aplikasi",
+  "vpn-youtube-spot"
+ ],
+ "example": {
+  "bg": "dark",
+  "aspect": "9:16"
+ }
+}

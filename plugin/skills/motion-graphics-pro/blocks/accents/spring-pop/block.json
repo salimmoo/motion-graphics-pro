@@ -1,0 +1,149 @@
+{
+ "id": "accents/spring-pop",
+ "name": "Spring Pop",
+ "name_id": "Lencana Pegas",
+ "category": "accents",
+ "description": {
+  "id": "Lencana meletup dari skala dekat-diam, melewati ukuran penuh sekali lalu diam rapi, dengan riak ping. Mode lencana teks, notifikasi (angka bergulir naik), atau pil berdetak.",
+  "en": "A badge pops in from a near-rest scale, overshoots full size once and settles cleanly, with a ping ripple. Text badge, notification (rolling count) or pulsing pill modes."
+ },
+ "tags": [
+  "aksen",
+  "lencana",
+  "badge",
+  "pop",
+  "notifikasi",
+  "pegas",
+  "accents",
+  "spring"
+ ],
+ "props": {
+  "mode": {
+   "default": "badge",
+   "type": "enum",
+   "options": [
+    "badge",
+    "notification",
+    "pill"
+   ],
+   "option_aliases": {
+    "lencana": "badge",
+    "notifikasi": "notification",
+    "pil": "pill"
+   }
+  },
+  "text": {
+   "default": "Baru!",
+   "type": "text",
+   "hint": "Teks lencana (mode lencana dan pil)",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "number": {
+   "default": 12,
+   "type": "number",
+   "hint": "Angka (mode notifikasi)",
+   "aliases": [
+    "angka"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi horizontal pusat (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 45,
+   "type": "number",
+   "hint": "Posisi vertikal pusat (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "size": {
+   "default": 120,
+   "type": "number",
+   "hint": "Tinggi lencana (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "color": {
+   "default": "#ff3b5c",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "font": {
+   "default": "Poppins:wght@700;800",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "start_scale": {
+   "default": 0.55,
+   "type": "number",
+   "hint": "Skala awal sebelum meletup",
+   "aliases": [
+    "skala_awal"
+   ]
+  },
+  "ease": {
+   "default": "back.out(2.4)",
+   "type": "ease"
+  },
+  "start": {
+   "default": 0.3,
+   "type": "number",
+   "hint": "Waktu mulai lokal (detik)",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "exit": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Keluar di akhir blok",
+   "aliases": [
+    "keluar"
+   ]
+  }
+ },
+ "duration": 3,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "aksen/pegas-pop",
+  "spring-pop",
+  "badge-pop"
+ ],
+ "example": {
+  "bg": "ui",
+  "aspect": "16:9",
+  "props": {
+   "mode": "notification",
+   "position_x": 92,
+   "position_y": 38,
+   "size": 90
+  },
+  "font": [
+   "Poppins:wght@700;800"
+  ]
+ }
+}

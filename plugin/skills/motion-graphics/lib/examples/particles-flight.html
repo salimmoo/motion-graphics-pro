@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP particlesFlight · ledakan, aliran, terbang ke rasi</title>
+<style>html,body{margin:0;background:#050816}#stage{position:relative;width:1280px;height:720px;overflow:hidden}</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../particles-flight.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720"></div>
+<script>
+const C = MGP.core;
+// a few target stars (procedural), so the stream and the flight have somewhere to go
+const R = C.rng(3), dots = Array.from({ length: 160 }, () => [R() * 1280, R() * 720, 0.4 + R() * 1.2, R() * 6.28]);
+const target = [900, 250];
+function sky(g, t, W, H) {
+  const gr = g.createRadialGradient(W * 0.6, H * 0.4, 0, W * 0.6, H * 0.4, W * 0.8);
+  gr.addColorStop(0, "#14204a"); gr.addColorStop(1, "#050816"); g.fillStyle = gr; g.fillRect(0, 0, W, H);
+  g.fillStyle = "#fff6e0";
+  for (const [x, y, r, ph] of dots) { g.globalAlpha = 0.3 + 0.6 * Math.abs(Math.sin(t * 1.3 + ph)); g.fillRect(x, y, r, r); }
+  g.globalAlpha = 1;
+  // the target constellation: a small smooth line with star dots
+  const pts = [[800, 280], [850, 210], [910, 250], [965, 195], [1010, 245]];
+  g.strokeStyle = "rgba(255,226,160,.75)"; g.lineWidth = 1.4; g.beginPath(); C.catmullPath(g, pts); g.stroke();
+  g.fillStyle = "#fff6dc"; pts.forEach(([x, y], i) => { g.beginPath(); g.arc(x, y, i % 2 ? 1.6 : 2.6, 0, C.TAU); g.fill(); });
+}
+const fx = MGP.particlesFlight.create(document.getElementById("stage"), {
+  seed: 5, duration: 6, background: sky,
+  trail: { path: [[120, 560], [300, 470], [420, 520], [560, 420], [700, 470]], t0: 0.15, t1: 1.4 },
+  bursts: [{ t: 0.55, x: 320, y: 480, n: 40, power: 0.8 }, { t: 2.65, x: target[0], y: target[1], n: 60, power: 1.1 }],
+  streams: [{ t: 2.2, x: 220, y: 600, tx: target[0], ty: target[1], n: 70 }],
+  flights: [{ t: 3.4, x: target[0], y: target[1], arrive: 1.15, settle: 1.0 }],
+});
+C.expose(fx);
+</script>
+</body>
+</html>

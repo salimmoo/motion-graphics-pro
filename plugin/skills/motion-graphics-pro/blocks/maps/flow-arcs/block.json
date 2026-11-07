@@ -1,0 +1,176 @@
+{
+ "id": "maps/flow-arcs",
+ "name": "Flow Arcs",
+ "name_id": "Peta Busur Alir",
+ "category": "maps",
+ "description": {
+  "id": "Busur penghubung asal-tujuan tergambar satu per satu di atas peta ubin, tebalnya mengikuti nilai, dengan butir cahaya yang mengalir dan denyut di titik tujuan. Peta dasar memakai preset ubin Indonesia atau AS (geografi ilustratif); data alur dari props.",
+  "en": "Origin-destination arcs draw one by one over a tile-grid base map, width by value, with flowing light dots and a pulse at each destination. Indonesia or US tile presets (illustrative geography); flows from props."
+ },
+ "tags": [
+  "peta",
+  "map",
+  "flow",
+  "busur",
+  "arc",
+  "asal-tujuan",
+  "jaringan",
+  "data",
+  "maps",
+  "arcs"
+ ],
+ "props": {
+  "preset": {
+   "default": "indonesia",
+   "type": "enum",
+   "options": [
+    "indonesia",
+    "as"
+   ]
+  },
+  "shape": {
+   "default": "hex",
+   "type": "enum",
+   "options": [
+    "hex",
+    "square"
+   ],
+   "aliases": [
+    "bentuk"
+   ],
+   "option_aliases": {
+    "heksa": "hex",
+    "persegi": "square"
+   }
+  },
+  "flow": {
+   "default": [
+    {
+     "dari": "JK",
+     "ke": "SU",
+     "nilai": 40
+    },
+    {
+     "dari": "JK",
+     "ke": "KI",
+     "nilai": 34
+    },
+    {
+     "dari": "JK",
+     "ke": "SN",
+     "nilai": 55
+    },
+    {
+     "dari": "JI",
+     "ke": "BA",
+     "nilai": 22
+    },
+    {
+     "dari": "SN",
+     "ke": "MA",
+     "nilai": 16
+    },
+    {
+     "dari": "JK",
+     "ke": "PA",
+     "nilai": 28
+    }
+   ],
+   "type": "list",
+   "hint": "[{dari: kode, ke: kode, nilai}]",
+   "aliases": [
+    "alur"
+   ]
+  },
+  "title": {
+   "default": "Arus pengiriman barang",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "sub": {
+   "default": "Data contoh, ilustratif",
+   "type": "text"
+  },
+  "map_color": {
+   "default": "#263049",
+   "type": "color",
+   "aliases": [
+    "warna_peta"
+   ]
+  },
+  "map_line_color": {
+   "default": "#4a5878",
+   "type": "color",
+   "aliases": [
+    "warna_garis_peta"
+   ]
+  },
+  "arc_color": {
+   "default": "#ffb547",
+   "type": "color",
+   "aliases": [
+    "warna_busur"
+   ]
+  },
+  "arc_color2": {
+   "default": "#ff6b4a",
+   "type": "color",
+   "hint": "Warna ujung busur",
+   "aliases": [
+    "warna_busur2"
+   ]
+  },
+  "text_color": {
+   "default": "#f2efe6",
+   "type": "color",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "curve": {
+   "default": 0.32,
+   "type": "number",
+   "hint": "Tinggi lengkung (fraksi jarak)",
+   "aliases": [
+    "lengkung"
+   ]
+  },
+  "pause": {
+   "default": 0.35,
+   "type": "number",
+   "hint": "Jeda antar busur",
+   "aliases": [
+    "jeda"
+   ]
+  },
+  "tile_label": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Kode wilayah di ubin",
+   "aliases": [
+    "label_ubin"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;600;700;800",
+   "type": "font"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "peta/busur-alir",
+  "us-map-flow"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

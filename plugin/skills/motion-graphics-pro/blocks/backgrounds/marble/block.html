@@ -1,0 +1,30 @@
+<!-- Block backgrounds/marble · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="backgrounds/marble" data-start="0" data-duration="8" data-track-index="0" class="blk blk-backgrounds-marble">
+<script type="application/json" data-block-props>
+{"base_color": "#f4f1ec", "vein_color": "#16161c", "scale": 2, "speed": 1, "resolution": 0.5}
+</script>
+</div>
+<style>
+.blk-backgrounds-marble{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-backgrounds-marble canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P;
+  var cv = BLOCK.el("canvas", null, k.root);
+  var r = Math.max(0.1, Math.min(1, +P.resolution || 0.5));
+  cv.width = Math.round(k.w * r); cv.height = Math.round(k.h * r);
+  var sh = BLOCK.shader(cv, [
+    "void main(){vec2 p=(gl_FragCoord.xy-.5*u_res)/u_res.y*u_sk;float t=u_t*u_kec;",
+    "vec2 q=vec2(fbm(p+vec2(t*.03,0.)),fbm(p+vec2(5.2,1.3-t*.025)));float r=fbm(p+3.*q+vec2(0.,t*.02));",
+    "float v=abs(sin((p.x+p.y*.5)*3.4+7.5*r));float urat=1.-smoothstep(0.,.05+.09*q.x,v);",
+    "float v2=abs(sin((p.y-p.x*.3)*5.+8.*fbm(p*1.6+q*2.)));float halus=1.-smoothstep(0.,.04,v2);",
+    "vec3 col=u_dasar*(.93+.07*r);col=mix(col,u_urat,clamp(urat*.92+halus*.45*smoothstep(.35,.65,q.y),0.,1.));",
+    "col=mix(col,u_urat,.07*smoothstep(.35,.8,r));",
+    "col+=(h21(gl_FragCoord.xy+fract(u_t))-0.5)/128.;gl_FragColor=vec4(col,1.);}"
+  ].join("\n"), { u_dasar: BLOCK.vec3(P.base_color), u_urat: BLOCK.vec3(P.vein_color), u_sk: +P.scale, u_kec: +P.speed });
+  if (!sh.ok) { cv.remove(); k.root.style.background = P.base_color; return; }
+  BLOCK.onTime(k.tl, function (t) { sh.draw(t); }, k.dur);
+});
+</script>

@@ -1,0 +1,149 @@
+{
+ "id": "gallery/vision-carousel",
+ "name": "Vision Carousel",
+ "name_id": "Korsel Visi 3D",
+ "category": "gallery",
+ "description": {
+  "id": "Cincin kartu gambar besar dilihat kamera 3D yang turun dari atas hingga cincin tampak seperti barisan; kartu samping menoleh ke tengah, berputar cepat-lambat-cepat.",
+  "en": "A ring of large image cards under a 3D camera that tilts down into a row; side cards turn toward the centre while the ring swings fast-slow-fast."
+ },
+ "tags": [
+  "galeri",
+  "korsel",
+  "3d",
+  "cincin",
+  "kamera",
+  "kartu",
+  "carousel",
+  "gallery",
+  "vision"
+ ],
+ "props": {
+  "image": {
+   "default": [],
+   "type": "list",
+   "hint": "Daftar url gambar (opsional). Kosong = kartu placeholder bergradien bernomor",
+   "aliases": [
+    "gambar"
+   ]
+  },
+  "label": {
+   "default": [],
+   "type": "list",
+   "hint": "Daftar label kecil per kartu placeholder (opsional)"
+  },
+  "count": {
+   "default": 12,
+   "type": "number",
+   "hint": "Jumlah kartu",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "radius": {
+   "default": 820,
+   "type": "number",
+   "hint": "Radius cincin (px pada 1080)"
+  },
+  "card_size": {
+   "default": 300,
+   "type": "number",
+   "hint": "Lebar kartu (px pada 1080)",
+   "aliases": [
+    "ukuran_kartu"
+   ]
+  },
+  "card_aspect": {
+   "default": 0.72,
+   "type": "number",
+   "hint": "Lebar/tinggi kartu",
+   "aliases": [
+    "rasio_kartu"
+   ]
+  },
+  "start_tilt": {
+   "default": 62,
+   "type": "number",
+   "hint": "Kemiringan kamera awal (derajat)",
+   "aliases": [
+    "tilt_awal"
+   ]
+  },
+  "tilt": {
+   "default": 12,
+   "type": "number",
+   "hint": "Kemiringan kamera akhir (derajat)"
+  },
+  "turn": {
+   "default": 30,
+   "type": "number",
+   "hint": "Sudut kartu samping menoleh ke tengah",
+   "aliases": [
+    "belok"
+   ]
+  },
+  "period": {
+   "default": 1.6,
+   "type": "number",
+   "hint": "Lama satu ayunan (detik)",
+   "aliases": [
+    "periode"
+   ]
+  },
+  "swing": {
+   "default": 0.85,
+   "type": "number",
+   "hint": "Kekuatan ayunan cepat-lambat-cepat (0 = rata, 0.95 = hampir berhenti di tengah)",
+   "aliases": [
+    "ayunan"
+   ]
+  },
+  "steps": {
+   "default": 1,
+   "type": "number",
+   "hint": "Kartu per ayunan",
+   "aliases": [
+    "langkah"
+   ]
+  },
+  "perspective": {
+   "default": 1400,
+   "type": "number",
+   "hint": "Perspektif CSS (px)",
+   "aliases": [
+    "perspektif"
+   ]
+  },
+  "position_y": {
+   "default": 52,
+   "type": "number",
+   "hint": "Pusat vertikal (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "seed": {
+   "default": 2,
+   "type": "number",
+   "hint": "Seed warna placeholder"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "galeri/korsel-visi",
+  "carousel-vision-1",
+  "carousel-vision-2",
+  "carousel-vision-3",
+  "carousel-vision-4",
+  "carousel-vision-5"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

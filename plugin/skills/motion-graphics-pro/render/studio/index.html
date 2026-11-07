@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>mgp Studio</title>
+<link rel="stylesheet" href="/__studio/app/studio.css">
+<script src="/__mgp/gsap/gsap.min.js"></script>
+<script src="/__studio/app/loader.js"></script>
+</head>
+<body>
+<div id="app">
+  <header id="atas" class="kaca">
+    <div class="merek"><span class="logo">Studio</span><span class="sub">mgp</span></div>
+    <div id="namaBerkas" class="mut"></div>
+    <span id="kotor" class="lencana" hidden data-i18n="belum disimpan">belum disimpan</span>
+    <div class="grup">
+      <button id="bUndo" title="Ctrl+Z" data-i18n-title="Urungkan (Ctrl+Z)">↶</button>
+      <button id="bRedo" title="Ctrl+Shift+Z" data-i18n-title="Ulangi (Ctrl+Shift+Z)">↷</button>
+      <button id="bSimpan" class="utama" data-i18n="Simpan">Simpan</button>
+    </div>
+    <div class="grup">
+      <label class="mut" data-i18n="fps">fps</label><select id="selFps"></select>
+      <label class="mut" data-i18n="Resolusi">Resolusi</label><select id="selRes"></select>
+    </div>
+    <div class="grup">
+      <button id="bCek" data-i18n="Cek">Cek</button>
+      <button id="bFrame" data-i18n="Render frame">Render frame</button>
+      <button id="bRender" data-i18n="Render video">Render video</button>
+      <button id="bKontak" data-i18n="Lembar kontak">Lembar kontak</button>
+    </div>
+    <button id="bBahasa" class="kecil" title="Bahasa / Language">EN</button>
+  </header>
+
+  <aside id="kiri" class="kaca">
+    <div class="judulPanel"><span data-i18n="Lapisan">Lapisan</span>
+      <span class="aksiKecil"><button id="bNaik" title="Maju" data-i18n-title="Bawa maju">▲</button><button id="bTurun" data-i18n-title="Bawa mundur" title="Mundur">▼</button><button id="bGanda" data-i18n-title="Gandakan (Ctrl+D)" title="Ctrl+D">⧉</button><button id="bHapus" data-i18n-title="Hapus (Del)" title="Del">✕</button></span></div>
+    <div id="lapisan" class="gulir"></div>
+    <div class="judulPanel"><span data-i18n="Variabel">Variabel</span></div>
+    <div id="variabel" class="gulir kecilTinggi"></div>
+  </aside>
+
+  <main id="tengah">
+    <div id="alatKanvas" class="kaca">
+      <div class="grup">
+        <button id="bPutar" class="ikon" data-i18n-title="Putar/Jeda (Spasi)">▶</button>
+        <button id="bMundur" class="ikon" data-i18n-title="Frame sebelumnya (,)">⏮</button>
+        <button id="bMaju" class="ikon" data-i18n-title="Frame berikutnya (.)">⏭</button>
+        <span id="waktu" class="waktu">0.000 s</span>
+      </div>
+      <div class="grup" id="grupMode">
+        <span class="mut" data-i18n="Saat mengubah:">Saat mengubah:</span>
+        <button id="mGeser" class="on" data-i18n="Geser seluruh animasi">Geser seluruh animasi</button>
+        <button id="mKunci" data-i18n="Kunci di waktu ini">Kunci di waktu ini</button>
+      </div>
+      <div class="grup">
+        <button id="bAman" data-i18n="Area aman">Area aman</button>
+        <button id="bGrid" data-i18n="Grid">Grid</button>
+        <button id="bSnap" class="on" data-i18n="Magnet">Magnet</button>
+        <button id="bZoomOut" class="ikon">−</button><span id="zoomLbl" class="waktu">100%</span><button id="bZoomIn" class="ikon">+</button>
+        <button id="bPas" data-i18n="Pas">Pas</button>
+      </div>
+    </div>
+    <div id="panggung">
+      <div id="bingkai">
+        <div id="iframes"></div>
+        <canvas id="lapisAman"></canvas>
+        <div id="hamparan"></div>
+      </div>
+    </div>
+    <div id="galat" hidden></div>
+  </main>
+
+  <aside id="kanan" class="kaca">
+    <div class="judulPanel"><span data-i18n="Properti">Properti</span></div>
+    <div id="inspektur" class="gulir"></div>
+  </aside>
+
+  <section id="bawah" class="kaca">
+    <div id="alatLini">
+      <div class="grup">
+        <span class="mut" data-i18n="Linimasa">Linimasa</span>
+        <button id="bMarker" data-i18n-title="Tambah marker di playhead (M)" data-i18n="+ Marker">+ Marker</button>
+        <label class="mut">BPM</label><input id="inBpm" type="number" min="0" max="400" step="1" style="width:64px">
+        <button id="bKetuk" data-i18n="Ketukan">Ketukan</button>
+      </div>
+      <div class="grup"><span class="mut" data-i18n="Zoom">Zoom</span><input id="zoomLini" type="range" min="20" max="600" value="120"></div>
+    </div>
+    <div id="lini">
+      <div id="liniLabel"></div>
+      <div id="liniArea"><div id="liniIsi"></div></div>
+    </div>
+  </section>
+</div>
+
+<div id="modal" hidden><div class="kaca isiModal"><div class="judulModal"><b id="modalJudul"></b><button id="modalTutup">✕</button></div><div id="modalIsi"></div></div></div>
+<div id="toast" hidden></div>
+<script type="module" src="/__studio/app/app.js"></script>
+</body>
+</html>

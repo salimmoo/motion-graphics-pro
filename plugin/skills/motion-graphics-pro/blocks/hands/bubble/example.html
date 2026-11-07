@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Bubble · block example hands/bubble</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="5">
+<div id="adegan" class="adegan ad-kertas"></div>
+<!-- Block hands/bubble · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-bubble" data-block="hands/bubble" data-start="0" data-duration="4.5" data-track-index="12" class="blk blk-hands-bubble">
+<script type="application/json" data-block-props>
+{"text": "Eh, ternyata begini caranya!", "shape": "cloud", "position_x": 50, "position_y": 42, "width": 760, "height": 400, "tail_x": 36, "tail_y": 77, "texture": "plain", "color": "#26211d", "fill_color": "#fffdf6", "text_color": "#26211d", "thickness": 8, "font": "Caveat:wght@700", "size": 84, "start": 0.2, "kps": 22, "wobble": 1, "seed": 19}
+</script>
+<svg class="blk-svg"><path class="blk-isi"/></svg>
+<div class="blk-tk"></div>
+</div>
+<style>
+.blk-hands-bubble{position:absolute;inset:0;pointer-events:none}
+.blk-hands-bubble .blk-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.blk-hands-bubble .blk-tk{position:absolute;transform:translate(-50%,-50%);text-align:center;line-height:1.08}
+</style>
+<script>
+BLOCK.mount("blk-bubble", function (k) {
+  var P = k.P, tl = k.tl, w = k.w, h = k.h, svg = k.root.querySelector(".blk-svg"), isi = svg.querySelector(".blk-isi"), el = k.root.querySelector(".blk-tk");
+  // ---- helper tangan (lokal di blok ini): goresan bergoyang berseed, boil per 1/8 detik, tekstur goresan
+  function wob(pts, amp, seed) {
+    var q = pts.map(function (p, i) { return [p[0] + amp * BLOCK.noise(i * 0.83 + 0.3, seed), p[1] + amp * BLOCK.noise(i * 0.83 + 5.1, seed + 17)]; });
+    var d = "M" + q[0][0].toFixed(1) + " " + q[0][1].toFixed(1);
+    for (var i = 0; i < q.length - 1; i++) {
+      var a = q[i - 1] || q[i], b = q[i], c = q[i + 1], e = q[i + 2] || c;
+      d += "C" + (b[0] + (c[0] - a[0]) / 6).toFixed(1) + " " + (b[1] + (c[1] - a[1]) / 6).toFixed(1) + " " + (c[0] - (e[0] - b[0]) / 6).toFixed(1) + " " +
+        (c[1] - (e[1] - b[1]) / 6).toFixed(1) + " " + c[0].toFixed(1) + " " + c[1].toFixed(1);
+    }
+    return d;
+  }
+  function boil(t) { return Math.floor(t * 8 + 1e-6); } // bentuk berganti tiap 1/8 detik
+  function kotak(x, y, ww, hh, n, lebih) { // keliling kotak mulai kiri atas searah jarum jam, ujung melewati awal sedikit
+    var out = [], L = 2 * (ww + hh); n = n || 32; lebih = lebih == null ? 0.07 : lebih;
+    for (var i = 0; i <= n; i++) {
+      var u = ((i / n) * (1 + lebih) % 1) * L;
+      out.push(u < ww ? [x + u, y] : u < ww + hh ? [x + ww, y + u - ww] : u < 2 * ww + hh ? [x + ww - (u - ww - hh), y + hh] : [x, y + hh - (u - 2 * ww - hh)]);
+    }
+    return out;
+  }
+  function elips(cx, cy, rx, ry, n, a0, putar, spiral) {
+    var out = []; n = n || 36; putar = putar || 1.1; spiral = spiral == null ? 0.06 : spiral;
+    for (var i = 0; i <= n; i++) { var a = a0 + (i / n) * putar * 2 * Math.PI, f = 1 + spiral * (i / n - 0.5); out.push([cx + rx * f * Math.cos(a), cy + ry * f * Math.sin(a)]); }
+    return out;
+  }
+  function kurva(a, c, b, n) { var out = []; n = n || 20; for (var i = 0; i <= n; i++) { var u = i / n, v = 1 - u; out.push([v * v * a[0] + 2 * v * u * c[0] + u * u * b[0], v * v * a[1] + 2 * v * u * c[1] + u * u * b[1]]); } return out; }
+  function tekstur(svg, jenis, s, uid) { // polos | lembut | tajam | semprot -> {filter, lebar}
+    if (jenis === "soft" || jenis === "spray") {
+      var df = svg.querySelector("defs") || BLOCK.svg("defs", null, svg), id = "blkf-" + uid + "-" + jenis;
+      var f = BLOCK.svg("filter", { id: id, x: "-20%", y: "-20%", width: "140%", height: "140%" }, df);
+      if (jenis === "soft") BLOCK.svg("feGaussianBlur", { stdDeviation: 1.3 * s }, f);
+      else {
+        BLOCK.svg("feTurbulence", { type: "fractalNoise", baseFrequency: 1.1 / Math.max(0.5, s), numOctaves: 1, seed: 4, result: "n" }, f);
+        BLOCK.svg("feDisplacementMap", { in: "SourceGraphic", in2: "n", scale: 7 * s, xChannelSelector: "R", yChannelSelector: "G", result: "d" }, f);
+        BLOCK.svg("feColorMatrix", { in: "n", type: "matrix", values: "0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 3.2 -1.1", result: "m" }, f);
+        BLOCK.svg("feComposite", { in: "d", in2: "m", operator: "in" }, f);
+      }
+      return { filter: "url(#" + id + ")", lebar: jenis === "spray" ? 1.7 : 1.1 };
+    }
+    return { filter: null, lebar: jenis === "sharp" ? 0.6 : 1 };
+  }
+  function goresan(induk, warna, tebal, tx) { // path siap digambar (pathLength 1 -> dashoffset = 1 - kemajuan)
+    var p = BLOCK.svg("path", { fill: "none", stroke: warna, "stroke-width": tebal * tx.lebar, "stroke-linecap": "round", "stroke-linejoin": "round", pathLength: 1, "stroke-dasharray": "1 1.001", "stroke-dashoffset": 1 }, induk);
+    if (tx.filter) p.setAttribute("filter", tx.filter);
+    return p;
+  }
+  function gambar(p, d, prog) { p.setAttribute("d", d); p.setAttribute("stroke-dashoffset", (1 - BLOCK.clamp(prog, 0, 1)).toFixed(4)); p.style.visibility = prog > 0.001 ? "visible" : "hidden"; }
+  // ---- akhir helper
+  svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+  var S = k.s, cx = P.position_x / 100 * w, cy = P.position_y / 100 * h, rx = P.width * S / 2, ry = P.height * S / 2, tip = [P.tail_x / 100 * w, P.tail_y / 100 * h];
+  // titik keliling gelembung pada sudut a
+  function tepi(a) {
+    if (P.shape === "box") { var c = Math.cos(a), s = Math.sin(a), p = 6; var f = Math.pow(Math.pow(Math.abs(c) / rx, p) + Math.pow(Math.abs(s) / ry, p), -1 / p); return [cx + c * f, cy + s * f]; }
+    var b = P.shape === "cloud" ? 1 + 0.09 * Math.abs(Math.sin(a * 5.5)) - 0.03 : 1;
+    return [cx + Math.cos(a) * rx * b, cy + Math.sin(a) * ry * b];
+  }
+  var ae = Math.atan2((tip[1] - cy) / ry, (tip[0] - cx) / rx), out = [];
+  for (var i = 0; i <= 64; i++) out.push(tepi(ae + 0.28 + i / 64 * (2 * Math.PI - 0.56))); // keliling, celah di pangkal ekor
+  var b1 = tepi(ae - 0.28), b2 = tepi(ae + 0.28), mid = [(b1[0] + b2[0]) / 2, (b1[1] + b2[1]) / 2];
+  var ek = kurva(b1, [mid[0] * 0.55 + tip[0] * 0.45 - (tip[1] - mid[1]) * 0.12, mid[1] * 0.55 + tip[1] * 0.45 + (tip[0] - mid[0]) * 0.12], tip, 8)
+    .concat(kurva(tip, [mid[0] * 0.6 + tip[0] * 0.4, mid[1] * 0.6 + tip[1] * 0.4], b2, 8).slice(1));
+  var tx = tekstur(svg, P.texture, S, k.id), tb = P.thickness * S, amp = 4 * S * P.wobble;
+  var pg = goresan(svg, P.color, tb, tx), pe = goresan(svg, P.color, tb, tx);
+  isi.setAttribute("fill", P.fill_color);
+  el.style.cssText += ";left:" + cx + "px;top:" + cy + "px;width:" + rx * 1.55 + "px;color:" + P.text_color + ";font-family:" + BLOCK.family(P.font, "cursive") + ";font-size:" + P.size * S + "px";
+  var hr = BLOCK.split(el, P.text, "letters");
+  var T0 = P.start, Tg = 0.9, Te = T0 + Tg, Tt = Te + 0.35;
+  tl.fromTo(isi, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power1.out" }, T0 + 0.5);
+  BLOCK.onTime(tl, function (t) {
+    var b = boil(t), s = P.seed + b * 7;
+    gambar(pg, wob(out, amp, s), BLOCK.smooth((t - T0) / Tg));
+    gambar(pe, wob(ek, amp * 0.6, s + 3), BLOCK.smooth((t - Te + 0.05) / 0.3));
+    isi.setAttribute("d", wob(out.concat(ek.slice(1, -1)), amp, s) + "Z");
+    var n = Math.floor((t - Tt) * P.kps); // ketik per huruf
+    for (var i = 0; i < hr.length; i++) hr[i].style.visibility = i < n ? "visible" : "hidden";
+    el.style.translate = (BLOCK.boil(t, P.seed + 1) * S * P.wobble).toFixed(2) + "px " + (BLOCK.boil(t, P.seed + 2) * S * P.wobble).toFixed(2) + "px";
+  }, k.dur);
+  tl.to([svg, el], { autoAlpha: 0, duration: 0.35, ease: "power2.in" }, k.dur - 0.4);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5);
+</script>
+</body>
+</html>

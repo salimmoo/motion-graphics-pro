@@ -1,0 +1,5 @@
+# Required: these two packages are enough to run every script (pure numpy drawing engine).
+numpy>=1.24
+Pillow>=10.0
+# Optional, faster: brush uses skia automatically when installed (MGP_BRUSH_ENGINE=pure to turn it off).
+# skia-python>=87.5

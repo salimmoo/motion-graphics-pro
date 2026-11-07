@@ -1,0 +1,50 @@
+<!-- Block ui/device-fan · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="ui/device-fan" data-start="0" data-duration="5" data-track-index="30" class="blk blk-ui-device-fan">
+<script type="application/json" data-block-props>
+{"desktop_image": "", "tablet_image": "", "phone_image": "", "accent_color": "#ff6a3d", "bg": "#f1ece6", "spread": 1, "float": true}
+</script>
+</div>
+<style>
+.blk-ui-device-fan{position:absolute;inset:0;pointer-events:none;overflow:hidden;perspective:1800px}
+.blk-ui-device-fan .blk-o{position:absolute;left:50%;top:50%;width:0;height:0}
+.blk-ui-device-fan .blk-i{position:absolute}
+.blk-ui-device-fan .blk-bd{position:absolute;box-sizing:border-box;background:#14161d;box-shadow:0 40px 80px rgba(40,25,10,.28)}
+.blk-ui-device-fan .blk-ly{position:absolute;overflow:hidden;background:#fbfaf8}
+.blk-ui-device-fan .blk-ly img{width:100%;height:100%;object-fit:cover;display:block}
+.blk-ui-device-fan .blk-sk{position:absolute}
+.blk-ui-device-fan .blk-kk{position:absolute;background:linear-gradient(#cfd2da,#a9adb8)}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, R = k.root, W = k.w, H = k.h, A = P.accent_color, sp = P.spread;
+  if (P.bg) R.style.background = P.bg;
+  var tegak = W < H, U = tegak ? W / 1250 : Math.min(W / 1920, H / 1080); // satuan: desktop 1000 lebar pada 16:9
+  function kerangka(ly, w, h, jenis) {
+    var add = function (x, y, ww, hh, c, r) { BLOCK.el("div", { class: "blk-sk", style: "left:" + x * w + "px;top:" + y * h + "px;width:" + ww * w + "px;height:" + hh * h + "px;background:" + c + ";border-radius:" + (r || 8) * U + "px" }, ly); };
+    if (jenis === "desktop") { add(0.04, 0.06, 0.18, 0.06, A); add(0.6, 0.06, 0.36, 0.06, "#e7e3dd"); add(0.04, 0.2, 0.55, 0.12, "#2b2d36"); add(0.04, 0.36, 0.4, 0.05, "#d8d3cc"); add(0.04, 0.48, 0.16, 0.08, A, 30); add(0.62, 0.2, 0.34, 0.66, "linear-gradient(150deg," + BLOCK.rgba(A, 0.9) + "," + BLOCK.rgba(A, 0.35) + ")", 14); add(0.04, 0.66, 0.17, 0.2, "#efe9e2"); add(0.23, 0.66, 0.17, 0.2, "#efe9e2"); add(0.42, 0.66, 0.17, 0.2, "#efe9e2"); }
+    else if (jenis === "tablet") { add(0.06, 0.05, 0.4, 0.04, "#2b2d36"); add(0.06, 0.12, 0.88, 0.32, "linear-gradient(150deg," + BLOCK.rgba(A, 0.85) + "," + BLOCK.rgba(A, 0.3) + ")", 14); for (var i = 0; i < 4; i++) add(0.06 + (i % 2) * 0.45, 0.5 + Math.floor(i / 2) * 0.24, 0.43, 0.2, "#efe9e2", 12); }
+    else { add(0.08, 0.08, 0.5, 0.035, "#2b2d36"); add(0.08, 0.15, 0.84, 0.3, "linear-gradient(150deg," + BLOCK.rgba(A, 0.9) + "," + BLOCK.rgba(A, 0.35) + ")", 16); for (var j = 0; j < 3; j++) { add(0.08, 0.5 + j * 0.13, 0.18, 0.09, j ? "#efe9e2" : A, 10); add(0.3, 0.52 + j * 0.13, 0.55, 0.03, "#ddd7cf"); } add(0.08, 0.9, 0.84, 0.06, A, 30); }
+  }
+  function perangkat(jenis, w, h, bez, rad, url) {
+    var o = BLOCK.el("div", { class: "blk-o" }, R), i = BLOCK.el("div", { class: "blk-i", style: "left:" + -w / 2 + "px;top:" + -h / 2 + "px;width:" + w + "px;height:" + h + "px" }, o);
+    var bd = BLOCK.el("div", { class: "blk-bd", style: "inset:0;border-radius:" + rad + "px" }, i), ly = BLOCK.el("div", { class: "blk-ly", style: "inset:" + bez + "px;border-radius:" + Math.max(2, rad - bez) + "px" }, bd);
+    if (url) BLOCK.el("img", { src: url, alt: "" }, ly); else kerangka(ly, w - 2 * bez, h - 2 * bez, jenis);
+    if (jenis === "desktop") { BLOCK.el("div", { class: "blk-kk", style: "left:" + (w / 2 - 60 * U) + "px;top:" + h + "px;width:" + 120 * U + "px;height:" + 90 * U + "px;clip-path:polygon(25% 0,75% 0,90% 100%,10% 100%)" }, i); BLOCK.el("div", { class: "blk-kk", style: "left:" + (w / 2 - 150 * U) + "px;top:" + (h + 88 * U) + "px;width:" + 300 * U + "px;height:" + 14 * U + "px;border-radius:" + 8 * U + "px" }, i); }
+    return { o: o, i: i };
+  }
+  var D = perangkat("desktop", 1000 * U, 600 * U, 16 * U, 22 * U, P.desktop_image);
+  var T = perangkat("tablet", 420 * U, 560 * U, 16 * U, 34 * U, P.tablet_image);
+  var F = perangkat("ponsel", 220 * U, 450 * U, 9 * U, 34 * U, P.phone_image);
+  // dari tumpukan di tengah, mekar menjadi susunan kipas
+  var akhir = tegak ? [{ d: D, x: 0, y: -330 * U * sp, r: 0, ry: 0, s: 1, z: 1 }, { d: T, x: -230 * U * sp, y: 330 * U * sp, r: -4 * sp, ry: 12 * sp, s: 1, z: 2 }, { d: F, x: 300 * U * sp, y: 380 * U * sp, r: 5 * sp, ry: -14 * sp, s: 1, z: 3 }]
+    : [{ d: D, x: 0, y: -60 * U, r: 0, ry: 0, s: 1, z: 1 }, { d: T, x: -560 * U * sp, y: 70 * U, r: -4 * sp, ry: 14 * sp, s: 1, z: 2 }, { d: F, x: 590 * U * sp, y: 110 * U, r: 5 * sp, ry: -16 * sp, s: 1, z: 3 }];
+  akhir.forEach(function (a, i) {
+    tl.fromTo(a.d.o, { x: 0, y: 40 * U, rotation: 0, rotationY: 0, scale: 0.55, autoAlpha: 0, zIndex: a.z }, { x: 0, y: 40 * U, scale: 0.62, autoAlpha: 1, zIndex: a.z, duration: 0.45, ease: "power2.out" }, 0.1 + i * 0.08)
+      .to(a.d.o, { x: a.x, y: a.y, rotation: a.r, rotationY: a.ry, scale: a.s, duration: 1.2, ease: "blockSpringSoft" }, 0.75 + i * 0.1);
+  });
+  if (P.float) BLOCK.onTime(tl, function (t) {
+    var a = BLOCK.progress(t, 1.6, 2.4);
+    [D, T, F].forEach(function (d, i) { d.i.style.transform = "translateY(" + (Math.sin(t * 1.4 + i * 2.1) * 9 * U * a).toFixed(2) + "px)"; });
+  }, k.dur);
+});
+</script>

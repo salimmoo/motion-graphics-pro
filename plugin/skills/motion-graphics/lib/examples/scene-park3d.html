@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP scenePark3d · taman 3D, orbit satu take</title>
+<style>html,body{margin:0;background:#0e1116}#stage{position:relative;width:1280px;height:720px;overflow:hidden}</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../figure3d.js"></script>
+<script src="../scene-park3d.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720"></div>
+<script>
+// One take: the figure walks east along the plank path while the camera orbits it at 15 deg/s, low warm sun,
+// far / mid / near depth-of-field layers, distance haze, light beams, vignette and grain.
+// action: "stand" reproduces the website orbit (hero standing at the origin, looking around).
+const inst = MGP.scenePark3d.create(document.getElementById("stage"), { action: "walk", duration: 12, cadence: 104, step: 1.8 });
+MGP.core.expose(inst);
+</script>
+</body>
+</html>

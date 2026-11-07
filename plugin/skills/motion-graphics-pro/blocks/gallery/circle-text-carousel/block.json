@@ -1,0 +1,195 @@
+{
+ "id": "gallery/circle-text-carousel",
+ "name": "Circle Text Carousel",
+ "name_id": "Korsel Teks Lingkar",
+ "category": "gallery",
+ "description": {
+  "id": "Judul tersingkap kata demi kata dari balik topeng, sementara korsel kartu datang dari luar bingkai dan melingkari baris teks (depan dan belakang), runtuh ke pusat, lalu potong keras ke baris kedua yang tampil 1,4 kali lebih besar.",
+  "en": "A headline mask-reveals word by word while a circle carousel converges from off-frame and threads the line, collapses to centre, then hard-cuts to a second line at 1.4x."
+ },
+ "tags": [
+  "galeri",
+  "korsel",
+  "teks",
+  "judul",
+  "lingkar",
+  "mask",
+  "reveal",
+  "gallery",
+  "circle",
+  "text",
+  "carousel"
+ ],
+ "props": {
+  "text": {
+   "default": "Semua cerita dimulai dari satu gambar",
+   "type": "text",
+   "hint": "Baris pertama; *kata* = kata kunci",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "text2": {
+   "default": "Ceritamu berikutnya",
+   "type": "text",
+   "hint": "Baris kedua sesudah potongan keras",
+   "aliases": [
+    "teks2"
+   ]
+  },
+  "style": {
+   "default": "ring",
+   "type": "enum",
+   "options": [
+    "ring",
+    "wheel",
+    "flat",
+    "skew",
+    "fan"
+   ],
+   "hint": "Gaya lintasan (Circle style 1-5)",
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "cincin": "ring",
+    "roda": "wheel",
+    "datar": "flat",
+    "miring": "skew",
+    "kipas": "fan"
+   }
+  },
+  "image": {
+   "default": [],
+   "type": "list",
+   "hint": "Daftar url gambar (opsional). Kosong = kartu placeholder bergradien bernomor",
+   "aliases": [
+    "gambar"
+   ]
+  },
+  "count": {
+   "default": 12,
+   "type": "number",
+   "hint": "Jumlah kartu",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "card_size": {
+   "default": 170,
+   "type": "number",
+   "hint": "Lebar kartu (px pada 1080)",
+   "aliases": [
+    "ukuran_kartu"
+   ]
+  },
+  "card_aspect": {
+   "default": 0.75,
+   "type": "number",
+   "hint": "Lebar/tinggi kartu",
+   "aliases": [
+    "rasio_kartu"
+   ]
+  },
+  "period": {
+   "default": 1.4,
+   "type": "number",
+   "hint": "Lama satu ayunan (detik)",
+   "aliases": [
+    "periode"
+   ]
+  },
+  "swing": {
+   "default": 0.85,
+   "type": "number",
+   "hint": "Kekuatan ayunan cepat-lambat-cepat (0 = rata, 0.95 = hampir berhenti di tengah)",
+   "aliases": [
+    "ayunan"
+   ]
+  },
+  "gather_time": {
+   "default": 3.4,
+   "type": "number",
+   "hint": "Detik mulai runtuh ke pusat",
+   "aliases": [
+    "waktu_kumpul"
+   ]
+  },
+  "cut_time": {
+   "default": 4.1,
+   "type": "number",
+   "hint": "Detik potongan keras ke baris kedua",
+   "aliases": [
+    "waktu_potong"
+   ]
+  },
+  "second_scale": {
+   "default": 1.4,
+   "type": "number",
+   "hint": "Skala baris kedua",
+   "aliases": [
+    "skala_kedua"
+   ]
+  },
+  "color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "hint": "Warna teks",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "keyword_color": {
+   "default": "#ffcf4a",
+   "type": "color",
+   "hint": "Warna kata kunci",
+   "aliases": [
+    "warna_kunci"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@700;800;900",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "size": {
+   "default": 84,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "weight": {
+   "default": 800,
+   "type": "number",
+   "hint": "Ketebalan huruf",
+   "aliases": [
+    "berat"
+   ]
+  },
+  "seed": {
+   "default": 4,
+   "type": "number",
+   "hint": "Seed warna placeholder"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "galeri/korsel-teks-lingkar",
+  "carousel-text-circle-1",
+  "carousel-text-circle-2",
+  "carousel-text-circle-3",
+  "carousel-text-circle-4",
+  "carousel-text-circle-5"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

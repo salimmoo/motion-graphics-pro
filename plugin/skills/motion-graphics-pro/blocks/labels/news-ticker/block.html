@@ -1,0 +1,64 @@
+<!-- Block labels/news-ticker · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="labels/news-ticker" data-start="0" data-duration="8" data-track-index="30" class="blk blk-labels-news-ticker">
+<script type="application/json" data-block-props>
+{"label": "Langsung", "title": "Panen raya padi dimulai serentak di lima provinsi", "news": ["Harga cabai turun 12 persen pekan ini", "Kereta cepat tambah jadwal akhir pekan", "Hujan lebat diprakirakan di Jawa bagian barat", "Tim nasional lolos ke babak final"], "clock": "19.45 WIB", "accent_color": "#e3262f", "dark_color": "#0e1424", "speed": 160, "position": "bottom", "enter": "sweep", "exit": "down", "font": "Inter:wght@500;700;800", "size": 40}
+</script>
+<div class="blk-wrap"><div class="blk-atas"><div class="blk-live"><span class="blk-dot"></span><span class="blk-lv"></span></div><div class="blk-pita"><div class="blk-jd"></div></div></div><div class="blk-bawah"><div class="blk-jam"></div><div class="blk-crawl"><div class="blk-isi"></div></div></div></div>
+</div>
+<style>
+.blk-labels-news-ticker{position:absolute;inset:0;pointer-events:none}
+.blk-labels-news-ticker .blk-wrap{position:absolute;left:4%;right:4%;line-height:1;white-space:nowrap}
+.blk-labels-news-ticker .blk-atas{display:flex;align-items:stretch;height:calc(var(--s)*86px);box-shadow:0 calc(var(--s)*12px) calc(var(--s)*30px) rgba(0,0,0,.3)}
+.blk-labels-news-ticker .blk-live{display:flex;align-items:center;gap:calc(var(--s)*14px);padding:0 calc(var(--s)*28px);background:var(--a);color:#fff;font-weight:800;text-transform:uppercase;letter-spacing:.1em;font-size:.72em}
+.blk-labels-news-ticker .blk-dot{width:calc(var(--s)*16px);height:calc(var(--s)*16px);border-radius:50%;background:#fff}
+.blk-labels-news-ticker .blk-pita{flex:1;display:flex;align-items:center;background:linear-gradient(180deg,#ffffff,#eef0f4);color:#10131c;padding:0 calc(var(--s)*30px);overflow:hidden}
+.blk-labels-news-ticker .blk-jd{font-weight:800;letter-spacing:-.01em}
+.blk-labels-news-ticker .blk-bawah{display:flex;height:calc(var(--s)*56px);background:var(--g);color:#e9edf5;font-size:.7em}
+.blk-labels-news-ticker .blk-jam{display:flex;align-items:center;padding:0 calc(var(--s)*24px);background:rgba(255,255,255,.1);font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.blk-labels-news-ticker .blk-crawl{position:relative;flex:1;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}
+.blk-labels-news-ticker .blk-isi{position:absolute;left:0;top:0;bottom:0;display:flex;align-items:center;font-weight:500}
+.blk-labels-news-ticker .blk-sep{display:inline-block;width:calc(var(--s)*10px);height:calc(var(--s)*10px);background:var(--a);transform:rotate(45deg);margin:0 calc(var(--s)*30px)}
+</style>
+<script>
+(function () {
+// tunggu font benar-benar termuat sebelum mengukur teks (stylesheet Google Fonts + FontFace)
+function blkTungguFont(spek, berat) {
+  var fam = String(spek || "").split(":")[0];
+  if (!fam || !document.fonts || !document.fonts.load) return Promise.resolve();
+  var ls = Array.prototype.filter.call(document.querySelectorAll('link[href*="fonts.googleapis"]'), function (l) { return l.href.indexOf(fam.replace(/ /g, "+")) >= 0; });
+  return Promise.all(ls.map(function (l) { return l.sheet ? 0 : new Promise(function (r) { l.addEventListener("load", r); l.addEventListener("error", r); }); }))
+    .then(function () { return document.fonts.load((berat || 700) + ' 64px "' + fam + '"'); }).catch(function () {});
+}
+BLOCK.mount("__ID__", function (k) {
+  return blkTungguFont(k.P.font, 800).then(function () { bangun(k); });
+}, { font: true });
+function bangun(k) {
+  var P = k.P, tl = k.tl, s = k.s, D = k.dur, E = BLOCK.el, R = k.root;
+  var wrap = R.querySelector(".blk-wrap"), atas = R.querySelector(".blk-atas"), bawah = R.querySelector(".blk-bawah");
+  var live = R.querySelector(".blk-live"), dot = R.querySelector(".blk-dot"), pita = R.querySelector(".blk-pita"), jd = R.querySelector(".blk-jd");
+  var crawl = R.querySelector(".blk-crawl"), isi = R.querySelector(".blk-isi");
+  R.style.cssText += ";--s:" + s + ";--a:" + P.accent_color + ";--g:" + P.dark_color;
+  wrap.style.cssText = (P.position === "top" ? "top:6%" : "bottom:7%") + ";font-family:" + BLOCK.family(P.font) + ";font-size:" + Math.round(P.size * s) + "px";
+  R.querySelector(".blk-lv").textContent = P.label; jd.textContent = P.title; R.querySelector(".blk-jam").textContent = P.clock;
+  var item = (Array.isArray(P.news) ? P.news : String(P.news).split("|")).filter(Boolean);
+  function isiSekali() { item.forEach(function (t) { E("span", null, isi, BLOCK.esc(t)); E("span", { class: "blk-sep" }, isi); }); }
+  isiSekali();
+  var cw = crawl.offsetWidth || k.w * 0.8, v = P.speed * s, jalan = v * D, n = 0;
+  while (isi.scrollWidth < cw * 0.6 + jalan && n++ < 40) isiSekali();
+  // crawl: gerak linear, fungsi murni dari waktu
+  tl.fromTo(isi, { x: cw * 0.4 }, { x: cw * 0.4 - jalan, duration: D, ease: "none" }, 0);
+  var t0 = 0.15;
+  if (P.enter === "sweep") {
+    tl.fromTo(live, { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.4, ease: "power3.out" }, t0)
+      .fromTo(pita, { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.7, ease: "power4.inOut" }, t0 + 0.2)
+      .fromTo(bawah, { clipPath: "inset(0% 0% 0% 100%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.7, ease: "power4.inOut" }, t0 + 0.35);
+  } else if (P.enter === "up") tl.fromTo([atas, bawah], { y: 160 * s, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.7, ease: "power3.out", stagger: 0.1 }, t0);
+  else tl.fromTo(wrap, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 }, t0);
+  tl.fromTo(jd, { yPercent: 120 }, { yPercent: 0, duration: 0.6, ease: "power3.out" }, t0 + 0.6);
+  tl.fromTo(dot, { opacity: 1 }, { opacity: 0.2, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: Math.max(1, Math.floor((D - 1) / 0.5)) }, 0.4);
+  var tk = D - 0.6;
+  if (P.exit === "down") tl.to([atas, bawah], { y: 160 * s, autoAlpha: 0, duration: 0.5, ease: "power3.in", stagger: 0.06 }, tk);
+  else if (P.exit === "fade") tl.to(wrap, { autoAlpha: 0, duration: 0.45 }, tk);
+}
+})();
+</script>

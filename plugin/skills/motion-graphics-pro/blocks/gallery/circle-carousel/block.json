@@ -1,0 +1,174 @@
+{
+ "id": "gallery/circle-carousel",
+ "name": "Circle Carousel",
+ "name_id": "Korsel Lingkar",
+ "category": "gallery",
+ "description": {
+  "id": "Kartu gambar berputar mengelilingi lingkaran; yang di depan besar dan terang, yang di belakang mengecil. Berayun cepat-lambat-cepat dengan lima gaya: cincin, roda, datar, miring, kipas.",
+  "en": "Image cards ride a circle with depth-based size and brightness, sweeping in fast-slow-fast swings. Five styles: ring, wheel, flat, tilted, fan."
+ },
+ "tags": [
+  "galeri",
+  "korsel",
+  "carousel",
+  "lingkar",
+  "gambar",
+  "kartu",
+  "3d",
+  "gallery",
+  "circle"
+ ],
+ "props": {
+  "image": {
+   "default": [],
+   "type": "list",
+   "hint": "Daftar url gambar (opsional). Kosong = kartu placeholder bergradien bernomor",
+   "aliases": [
+    "gambar"
+   ]
+  },
+  "label": {
+   "default": [],
+   "type": "list",
+   "hint": "Daftar label kecil per kartu placeholder (opsional)"
+  },
+  "count": {
+   "default": 12,
+   "type": "number",
+   "hint": "Jumlah kartu",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "style": {
+   "default": "ring",
+   "type": "enum",
+   "options": [
+    "ring",
+    "wheel",
+    "flat",
+    "skew",
+    "fan"
+   ],
+   "hint": "Gaya lintasan (Circle style 1-5)",
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "cincin": "ring",
+    "roda": "wheel",
+    "datar": "flat",
+    "miring": "skew",
+    "kipas": "fan"
+   }
+  },
+  "radius": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali radius lintasan"
+  },
+  "card_size": {
+   "default": 300,
+   "type": "number",
+   "hint": "Lebar kartu (px pada 1080)",
+   "aliases": [
+    "ukuran_kartu"
+   ]
+  },
+  "card_aspect": {
+   "default": 0.75,
+   "type": "number",
+   "hint": "Lebar/tinggi kartu",
+   "aliases": [
+    "rasio_kartu"
+   ]
+  },
+  "back_scale": {
+   "default": 0.42,
+   "type": "number",
+   "hint": "Skala kartu paling belakang",
+   "aliases": [
+    "skala_belakang"
+   ]
+  },
+  "period": {
+   "default": 1.5,
+   "type": "number",
+   "hint": "Lama satu ayunan (detik)",
+   "aliases": [
+    "periode"
+   ]
+  },
+  "swing": {
+   "default": 0.85,
+   "type": "number",
+   "hint": "Kekuatan ayunan cepat-lambat-cepat (0 = rata, 0.95 = hampir berhenti di tengah)",
+   "aliases": [
+    "ayunan"
+   ]
+  },
+  "steps": {
+   "default": 1,
+   "type": "number",
+   "hint": "Kartu yang dilewati per ayunan",
+   "aliases": [
+    "langkah"
+   ]
+  },
+  "direction": {
+   "default": 1,
+   "type": "number",
+   "hint": "1 atau -1",
+   "aliases": [
+    "arah"
+   ]
+  },
+  "corner_radius": {
+   "default": 16,
+   "type": "number",
+   "hint": "Radius sudut kartu (px)",
+   "aliases": [
+    "sudut_radius"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Pusat vertikal (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "shadow": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Bayangan kartu",
+   "aliases": [
+    "bayangan"
+   ]
+  },
+  "seed": {
+   "default": 3,
+   "type": "number",
+   "hint": "Seed warna placeholder"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "galeri/korsel-lingkar",
+  "carousel-circle-1",
+  "carousel-circle-2",
+  "carousel-circle-3",
+  "carousel-circle-4",
+  "carousel-circle-5"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

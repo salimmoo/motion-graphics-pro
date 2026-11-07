@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Spec List · block example data/spec-list</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="5.5">
+<div id="adegan" class="adegan ad-foto"><div class="mth"></div><div class="bk1"></div><div class="bk2"></div><div class="tanah"></div><div class="sosok"></div></div>
+<!-- Block data/spec-list · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-spec-list" data-block="data/spec-list" data-start="0" data-duration="5" data-track-index="10" class="blk blk-data-spec-list">
+<script type="application/json" data-block-props>
+{"title": "Spesifikasi utama", "item": ["Baterai: 5.000 mAh", "Layar: 6,7 inci", "Berat: 189 g", "Pengisian cepat: 45 W", "Tahan air: IP68"], "scheme": "dark", "panel": true, "pause": 0.22, "accent_color": "#ffb547", "font": "Inter:wght@400;600;700", "size": 38, "position_x": 8, "position_y": 50, "width": 42}
+</script>
+<div class="blk-p"><div class="blk-j"></div><div class="blk-list"></div></div>
+</div>
+<style>
+.blk-data-spec-list{position:absolute;inset:0;pointer-events:none}
+.blk-data-spec-list .blk-p{position:absolute;transform:translateY(-50%);box-sizing:border-box}
+.blk-data-spec-list .blk-j{font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.blk-data-spec-list .blk-r{position:relative;display:flex;align-items:center}
+.blk-data-spec-list .blk-r svg{flex:none}
+.blk-data-spec-list .blk-kunci{font-weight:700;white-space:nowrap}
+.blk-data-spec-list .blk-nilai{margin-left:auto;padding-left:1em;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
+.blk-data-spec-list .blk-gs{position:absolute;left:0;right:0;bottom:0;height:0}
+.blk-data-spec-list .blk-gs i{position:absolute;left:0;top:0;height:100%;width:100%;transform-origin:left center}
+</style>
+<script>
+BLOCK.mount("blk-spec-list", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, fs = function (v) { return Math.round(v * s) + "px"; };
+  var terang = P.scheme === "light";
+  var C = terang ? { teks: "#16181d", redup: "rgba(22,24,29,.6)", garis: "rgba(22,24,29,.12)", panel: "rgba(255,255,255,.94)" }
+                 : { teks: "#f5f3ee", redup: "rgba(245,243,238,.62)", garis: "rgba(255,255,255,.16)", panel: "rgba(14,16,24,.7)" };
+  var p = R.querySelector(".blk-p"), J = R.querySelector(".blk-j"), list = R.querySelector(".blk-list");
+  p.style.cssText += ";left:" + P.position_x + "%;top:" + P.position_y + "%;width:" + P.width + "%;color:" + C.teks + ";font-family:" + BLOCK.family(P.font) + ";font-size:" + fs(P.size) +
+    (P.panel ? ";background:" + C.panel + ";padding:" + fs(50) + " " + fs(56) + ";border-radius:" + fs(26) : "");
+  J.style.cssText += ";font-size:" + fs(P.size * 0.62) + ";color:" + P.accent_color + ";margin-bottom:" + fs(20); J.textContent = P.title;
+  var t0 = 0.35, jd = P.pause;
+  tl.fromTo(J, { opacity: 0, x: -24 * s }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 0.1);
+  if (P.panel) tl.fromTo(p, { opacity: 0 }, { opacity: 1, duration: 0.45 }, 0);
+  (P.item || []).forEach(function (it, i) {
+    var a = String(it).split(/:\s*/), kunci = a[0], nilai = a.slice(1).join(": ");
+    var r = BLOCK.el("div", { class: "blk-r", style: "padding:" + fs(P.size * 0.62) + " 0" }, list);
+    var ic = P.size * 1.05 * s, sv = BLOCK.svg("svg", { width: ic, height: ic, viewBox: "0 0 24 24", style: "margin-right:" + fs(P.size * 0.6) }, r);
+    var cir = BLOCK.svg("circle", { cx: 12, cy: 12, r: 10.5, fill: "none", stroke: P.accent_color, "stroke-width": 1.6 }, sv);
+    var cek = BLOCK.svg("path", { d: "M7.4 12.4 L10.6 15.4 L16.8 8.8", fill: "none", stroke: P.accent_color, "stroke-width": 2.2, "stroke-linecap": "round", "stroke-linejoin": "round" }, sv);
+    var Lc = BLOCK.prepareStroke(cir), Lk = BLOCK.prepareStroke(cek);
+    BLOCK.el("span", { class: "blk-kunci" }, r).textContent = kunci;
+    if (nilai) BLOCK.el("span", { class: "blk-nilai", style: "color:" + C.redup }, r).textContent = nilai;
+    var gs = BLOCK.el("div", { class: "blk-gs", style: "border-bottom:1px solid " + C.garis }, r);
+    var sw = BLOCK.el("i", { style: "height:" + fs(3) + ";top:" + fs(-1) + ";background:" + P.accent_color }, gs);
+    var t = t0 + i * jd;
+    tl.fromTo(r, { opacity: 0, x: -40 * s }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, t);
+    tl.fromTo(cir, { strokeDashoffset: Lc }, { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" }, t + 0.05);
+    tl.fromTo(cek, { strokeDashoffset: Lk }, { strokeDashoffset: 0, duration: 0.3, ease: "power2.out" }, t + 0.3);
+    // sapuan garis aksen: masuk dari kiri, lalu surut ke kanan meninggalkan garis tipis
+    tl.fromTo(sw, { scaleX: 0, transformOrigin: "left center" }, { scaleX: 1, duration: 0.5, ease: "power3.inOut" }, t + 0.1)
+      .to(sw, { scaleX: 0, transformOrigin: "right center", duration: 0.5, ease: "power3.inOut" }, t + 0.65);
+  });
+  tl.to(p, { opacity: 0, x: -20 * s, duration: 0.4, ease: "power2.in" }, k.dur - 0.45);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 5.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5.5);
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!-- Block text/letter-shatter · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="text/letter-shatter" data-start="0" data-duration="4" data-track-index="10" class="blk blk-text-letter-shatter">
+<script type="application/json" data-block-props>
+{"text": "SATU *TUJUAN*", "font": "Archivo:wght@800;900", "size": 150, "weight": 900, "color": "#f5f3ee", "accent_color": "#ffb02e", "position_y": 50, "width": 80, "align": "center", "spread": 1, "gather_start": 1.0, "gather_duration": 0.7, "pause": 0.03, "shake": 12, "exit": "burst", "seed": "pecah"}
+</script>
+<div class="blk-tk"><div class="blk-isi"></div></div>
+</div>
+<style>
+.blk-text-letter-shatter {position:absolute;inset:0;pointer-events:none}
+.blk-text-letter-shatter .blk-tk{position:absolute;left:50%;transform:translate(-50%,-50%);line-height:1.08}
+.blk-text-letter-shatter .blk-kunci{color:var(--aksen)}
+
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl;
+  var rata = { left: "left", right: "right" }[P.align] || "center";
+  function gayaTeks(el, px) {
+    el.style.cssText += ";top:" + P.position_y + "%;width:" + P.width + "%;color:" + P.color + ";--aksen:" + P.accent_color +
+      ";font-family:" + BLOCK.family(P.font) + ";font-weight:" + P.weight + ";font-size:" + Math.round((px || P.size) * k.s) + "px;text-align:" + rata;
+  }
+  // tunggu stylesheet Google Fonts + wajah font benar-benar termuat sebelum mengukur teks
+  function siapFont(spec) {
+    var ln = Array.prototype.slice.call(document.querySelectorAll('link[href*="fonts.googleapis"]'));
+    return Promise.all(ln.map(function (l) { return l.sheet ? 0 : new Promise(function (ok) { l.addEventListener("load", ok); l.addEventListener("error", ok); }); }))
+      .then(function () { return document.fonts && document.fonts.load ? document.fonts.load(spec || (P.weight + " 100px " + BLOCK.family(P.font))) : 0; })
+      .catch(function () {});
+  }
+  function markupKunci(s) { return BLOCK.esc(s).replace(/\*([^*]+)\*/g, '<span class="blk-kunci">$1</span>').replace(/\\n|\n/g, "<br>"); }
+  return siapFont().then(function () {
+  var el = k.root.querySelector(".blk-tk"), isi = el.querySelector(".blk-isi");
+  gayaTeks(el);
+  var u = BLOCK.split(isi, P.text, "letters"), n = u.length, r = BLOCK.random(P.seed), c = function (v) { return BLOCK.clamp(v, 0, 1); };
+  var bo = function (x) { var s = 1.4, q = x - 1; return 1 + (s + 1) * q * q * q + s * q * q; };
+  var ch = u.map(function (e, i) {
+    var a = r() * Math.PI * 2;
+    return { el: e, dx: (r() - 0.5) * k.w * 0.75 * P.spread, dy: (r() - 0.5) * k.h * 0.6 * P.spread, rot: (r() - 0.5) * 170, sc: 0.55 + r() * 1.3,
+      op: 0.45 + r() * 0.45, ex: Math.cos(a), ey: Math.sin(a), ev: 0.6 + r() * 0.8, sd: r() * 50 };
+  });
+  var mk = +P.gather_start, dk = +P.gather_duration, tLand = mk + (n - 1) * P.pause + dk * 0.42, tE = k.dur - 0.8, g = P.shake * k.s;
+  var GUN = [[1, -0.5], [-0.65, 0.45], [0.3, -0.2]];
+  BLOCK.onTime(tl, function (t) {
+    ch.forEach(function (c0, i) {
+      var uu = c((t - mk - i * P.pause) / dk), e = uu <= 0 ? 0 : bo(uu), m = 1 - e;
+      var hold = Math.max(0, 1 - uu * 2);
+      var x = c0.dx * m + BLOCK.noise(t * 0.6, c0.sd) * 26 * k.s * hold, y = c0.dy * m + BLOCK.noise(t * 0.6 + 9, c0.sd) * 26 * k.s * hold;
+      var rot = c0.rot * m, sc = c0.sc + (1 - c0.sc) * e, op = c((t - 0.05) / 0.4) * (c0.op + (1 - c0.op) * c(uu * 2));
+      if (P.exit === "burst") {
+        var v = c((t - tE - i * 0.012) / 0.6), v2 = v * v;
+        x += c0.ex * k.w * 0.6 * c0.ev * v2; y += c0.ey * k.h * 0.6 * c0.ev * v2; rot += c0.rot * 1.5 * v2; op *= 1 - v;
+      } else if (P.exit === "fade") op *= 1 - c((t - tE - 0.2) / 0.45);
+      c0.el.style.transform = "translate(" + x + "px," + y + "px) rotate(" + rot + "deg) scale(" + sc + ")";
+      c0.el.style.opacity = op;
+    });
+    var sx = 0, sy = 0;
+    if (t >= tLand) { var f = Math.floor((t - tLand) * 30); if (f < 3) { sx = GUN[f][0] * g; sy = GUN[f][1] * g; } }
+    isi.style.transform = "translate(" + sx + "px," + sy + "px)";
+  }, k.dur);
+  });
+}, { font: true });
+</script>

@@ -1,0 +1,54 @@
+<!-- Block ui/multi-cursor · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="ui/multi-cursor" data-start="0" data-duration="5" data-track-index="40" class="blk blk-ui-multi-cursor">
+<script type="application/json" data-block-props>
+{"collaborators": [{"nama": "Rina", "warna": "#ff4f7b"}, {"nama": "Bima", "warna": "#2f9bff"}, {"nama": "Sari", "warna": "#16b364"}, {"nama": "Dodi", "warna": "#f59e0b"}], "center_x": 58, "center_y": 62, "zone_radius": 12, "zone": true, "presence_text": "sedang mengedit", "light": true, "font": "Inter:wght@500;600;700"}
+</script>
+</div>
+<style>
+.blk-ui-multi-cursor{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-ui-multi-cursor .blk-c{position:absolute;left:0;top:0;width:0;height:0}
+.blk-ui-multi-cursor .blk-c svg{position:absolute;left:0;top:0;overflow:visible}
+.blk-ui-multi-cursor .blk-nm{position:absolute;white-space:nowrap;color:#fff;font-weight:600;border-radius:.5em .9em .9em .9em}
+.blk-ui-multi-cursor .blk-zona{position:absolute;transform:translate(-50%,-50%);border-style:dashed;border-color:rgba(60,80,130,.35)}
+.blk-ui-multi-cursor .blk-hadir{position:absolute;right:3%;top:1.2%;display:flex;align-items:center;background:#fff;border-radius:999px;color:#1b2333;font-weight:600;box-shadow:0 4px 18px rgba(20,30,60,.12)}
+.blk-ui-multi-cursor .blk-av{border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;border:2px solid #fff}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, K = P.collaborators || [], n = K.length || 1;
+  R.style.fontFamily = BLOCK.family(P.font);
+  var cx = P.center_x / 100 * k.w, cy = P.center_y / 100 * k.h, rz = P.zone_radius / 100 * Math.min(k.w, k.h);
+  if (P.zone) {
+    var z = BLOCK.el("div", { class: "blk-zona", style: "left:" + cx + "px;top:" + cy + "px;width:" + rz * 3 + "px;height:" + rz * 2 + "px;border-width:" + 3 * s + "px;border-radius:" + 22 * s + "px;background:rgba(109,74,255,.05)" }, R);
+    tl.fromTo(z, { autoAlpha: 0, scale: 0.92 }, { autoAlpha: 1, scale: 1, duration: 0.6, ease: "power2.out" }, 1.4);
+  }
+  // pil kehadiran: tumpukan avatar inisial
+  var hd = BLOCK.el("div", { class: "blk-hadir", style: "font-size:" + 22 * s + "px;padding:" + 6 * s + "px " + 18 * s + "px " + 6 * s + "px " + 8 * s + "px;gap:" + 12 * s + "px" }, R);
+  var avs = BLOCK.el("div", { style: "display:flex" }, hd);
+  K.forEach(function (c, i) {
+    var a = BLOCK.el("div", { class: "blk-av", style: "width:" + 38 * s + "px;height:" + 38 * s + "px;background:" + c.warna + ";font-size:" + 17 * s + "px;margin-left:" + (i ? -10 * s : 0) + "px" }, avs, BLOCK.esc(String(c.nama || "?").charAt(0)));
+    tl.fromTo(a, { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(2.5)" }, 0.3 + i * 0.12);
+  });
+  BLOCK.el("span", null, hd, n + " " + BLOCK.esc(P.presence_text));
+  tl.fromTo(hd, { autoAlpha: 0, y: -20 * s }, { autoAlpha: 1, y: 0, duration: 0.5, ease: "back.out(1.6)" }, 0.15);
+  var ez = gsap.parseEase("power3.inOut"), C = [];
+  K.forEach(function (c, i) {
+    var el = BLOCK.el("div", { class: "blk-c" }, R), inn = BLOCK.el("div", { style: "position:absolute;left:0;top:0;transform-origin:0 0" }, el);
+    inn.innerHTML = '<svg width="' + 30 * s + '" height="' + 44 * s + '" viewBox="0 0 30 44" style="filter:' + (P.light ? "drop-shadow(0 0 " + 12 * s + "px " + BLOCK.rgba(c.warna, 0.75) + ")" : "none") + '"><path d="M1 1 L1 33 L9 25.5 L14.5 38.5 L20 36 L14.6 23.4 L25.5 23.4 Z" fill="' + c.warna + '" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/></svg>';
+    BLOCK.el("div", { class: "blk-nm", style: "left:" + 24 * s + "px;top:" + 34 * s + "px;background:" + c.warna + ";font-size:" + 21 * s + "px;padding:" + 5 * s + "px " + 13 * s + "px;box-shadow:0 0 " + (P.light ? 18 * s : 0) + "px " + BLOCK.rgba(c.warna, 0.55) }, inn, BLOCK.esc(c.nama));
+    // posisi awal menyebar di sekeliling layar, tujuan tersebar di dalam zona
+    var a = -2.4 + i * (2 * Math.PI / n) + k.random.range(-0.3, 0.3);
+    var sx = k.w / 2 + Math.cos(a) * k.w * 0.42, sy = k.h / 2 + Math.sin(a) * k.h * 0.4;
+    var b = a + Math.PI + k.random.range(-0.4, 0.4), ex = cx + Math.cos(b) * rz * 0.9, ey = cy + Math.sin(b) * rz * 0.6;
+    C.push({ el: el, sx: sx, sy: sy, ex: ex, ey: ey, t0: 0.2 + i * 0.18, sd: i + 1 });
+    tl.fromTo(inn, { autoAlpha: 0, scale: 0.6 }, { autoAlpha: 1, scale: 1, duration: 0.45, ease: "back.out(2)" }, 0.2 + i * 0.18);
+  });
+  BLOCK.onTime(tl, function (t) {
+    C.forEach(function (c) {
+      var p = ez(BLOCK.progress(t, c.t0, c.t0 + 2.4)), amp = (1 - p) * 40 * s + 9 * s;
+      var x = BLOCK.lerp(c.sx, c.ex, p) + BLOCK.noise(t * 0.9, c.sd) * amp, y = BLOCK.lerp(c.sy, c.ey, p) + BLOCK.noise(t * 0.8 + 7, c.sd) * amp;
+      c.el.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px)";
+    });
+  }, k.dur);
+}, { font: true });
+</script>

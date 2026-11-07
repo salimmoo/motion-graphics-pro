@@ -1,0 +1,63 @@
+<!-- Block labels/cardless · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="labels/cardless" data-start="0" data-duration="5" data-track-index="30" class="blk blk-labels-cardless">
+<script type="application/json" data-block-props>
+{"style": "line", "name": "Sekar Ayu Lestari", "role": "Peneliti Iklim, BRIN", "kicker": "Narasumber", "accent_color": "#ffc53d", "color": "#ffffff", "position": "bottom-left", "enter": "style", "exit": "fade", "font": "Inter:wght@500;700;900", "font2": "JetBrains Mono:wght@500;700", "size": 62, "bottom": 11, "edge": 6}
+</script>
+<div class="blk-pos"><div class="blk-kol"></div></div>
+</div>
+<style>
+.blk-labels-cardless{position:absolute;inset:0;pointer-events:none}
+.blk-labels-cardless .blk-pos{position:absolute;left:0;right:0;display:flex}
+.blk-labels-cardless .blk-kol{position:relative;display:flex;flex-direction:column;white-space:nowrap;line-height:1.02;text-shadow:0 calc(var(--s)*2px) calc(var(--s)*14px) rgba(0,0,0,.55),0 0 calc(var(--s)*2px) rgba(0,0,0,.35)}
+.blk-labels-cardless .blk-nm{font-weight:900;letter-spacing:-.015em;display:inline-block}
+.blk-labels-cardless .blk-pr{font-weight:500;font-size:.46em;margin-top:calc(var(--s)*14px);opacity:.92}
+.blk-labels-cardless .blk-mono{font-family:var(--f2);text-transform:uppercase;letter-spacing:.1em;font-size:.4em}
+.blk-labels-cardless .blk-gar{height:calc(var(--s)*6px);width:calc(var(--s)*140px);background:var(--a);margin-top:calc(var(--s)*14px);box-shadow:0 calc(var(--s)*2px) calc(var(--s)*10px) rgba(0,0,0,.35)}
+.blk-labels-cardless .blk-dasar{height:calc(var(--s)*2px);width:100%;background:currentColor;opacity:.85;margin-top:calc(var(--s)*12px)}
+.blk-labels-cardless .blk-kick{align-self:flex-start;background:var(--a);color:#111;text-shadow:none;font-family:var(--f2);font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:.36em;padding:calc(var(--s)*8px) calc(var(--s)*14px);margin-bottom:calc(var(--s)*14px)}
+.blk-labels-cardless .blk-samping{flex-direction:row;align-items:stretch;gap:calc(var(--s)*24px)}
+.blk-labels-cardless .blk-vbar{width:calc(var(--s)*8px);background:var(--a);flex:none}
+.blk-labels-cardless .blk-isi{display:flex;flex-direction:column;justify-content:center}
+.blk-labels-cardless .blk-mwrap{position:relative;display:inline-block;align-self:flex-start}
+.blk-labels-cardless .blk-sapu{position:absolute;top:-6%;bottom:-6%;left:0;width:100%;background:var(--a)}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, D = k.dur, E = BLOCK.el;
+  var kanan = P.position === "bottom-right", tengah = P.position === "bottom-center", sisi = kanan ? "flex-end" : tengah ? "center" : "flex-start";
+  var pos = k.root.querySelector(".blk-pos"), kol = pos.firstChild;
+  pos.style.cssText = "bottom:" + P.bottom + "%;padding:0 " + P.edge + "%;justify-content:" + sisi;
+  k.root.style.cssText += ";--s:" + s + ";--a:" + P.accent_color + ";--f2:" + BLOCK.family(P.font2, "monospace");
+  var g = { line: 1, kicker: 1, "side-rule": 1, mask: 1 }[P.style] ? P.style : "line";
+  kol.style.cssText = "color:" + P.color + ";font-family:" + BLOCK.family(P.font) + ";font-size:" + Math.round(P.size * s) + "px;align-items:" + sisi + ";text-align:" + (kanan ? "right" : tengah ? "center" : "left");
+  var isi = kol, vbar, kick, gar, dasar, sapu;
+  if (g === "side-rule") { kol.classList.add("blk-samping"); kol.style.alignItems = "stretch"; if (kanan) kol.style.flexDirection = "row-reverse"; vbar = E("div", { class: "blk-vbar" }, kol); isi = E("div", { class: "blk-isi", style: "align-items:" + sisi }, kol); }
+  if (g === "kicker") { kick = E("div", { class: "blk-kick", style: "align-self:" + sisi }, isi); kick.textContent = P.kicker; }
+  var mw = E("div", { class: "blk-mwrap", style: "align-self:" + sisi }, isi), nm = E("div", { class: "blk-nm" }, mw); nm.textContent = P.name;
+  if (g === "mask") sapu = E("div", { class: "blk-sapu" }, mw);
+  if (g === "line") gar = E("div", { class: "blk-gar", style: "align-self:" + sisi }, isi);
+  if (g === "kicker") dasar = E("div", { class: "blk-dasar" }, isi);
+  var pr = E("div", { class: "blk-pr" + (g === "side-rule" || g === "kicker" ? " blk-mono" : "") }, isi); pr.textContent = P.role;
+  var t0 = 0.2, org = kanan ? "100% 50%" : tengah ? "50% 50%" : "0% 50%";
+  var masuk = P.enter === "style" ? { line: "up", kicker: "up", "side-rule": "slide", mask: "mask" }[g] : P.enter;
+  if (vbar) tl.fromTo(vbar, { scaleY: 0, transformOrigin: "50% 100%" }, { scaleY: 1, duration: 0.55, ease: "power4.out" }, t0);
+  if (kick) tl.fromTo(kick, { clipPath: "inset(0% 100% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.45, ease: "power3.inOut" }, t0);
+  var tn = t0 + (vbar || kick ? 0.25 : 0);
+  if (masuk === "mask" && sapu) {
+    tl.fromTo(sapu, { scaleX: 0, transformOrigin: kanan ? "100% 50%" : "0% 50%" }, { scaleX: 1, duration: 0.4, ease: "power3.in" }, tn)
+      .set(sapu, { transformOrigin: kanan ? "0% 50%" : "100% 50%" }, tn + 0.4)
+      .to(sapu, { scaleX: 0, duration: 0.5, ease: "power3.out" }, tn + 0.42)
+      .fromTo(nm, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.01 }, tn + 0.4);
+  } else if (masuk === "slide") tl.fromTo(nm, { x: (kanan ? 40 : -40) * s, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.65, ease: "power3.out" }, tn);
+  else if (masuk === "up" || masuk === "mask") tl.fromTo(nm, { y: 50 * s, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.7, ease: "power3.out" }, tn);
+  else tl.fromTo(nm, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, tn);
+  if (gar) tl.fromTo(gar, { scaleX: 0, transformOrigin: org }, { scaleX: 1, duration: 0.6, ease: "power3.inOut" }, tn + 0.3);
+  if (dasar) tl.fromTo(dasar, { scaleX: 0, transformOrigin: org }, { scaleX: 1, duration: 0.7, ease: "power3.inOut" }, tn + 0.25);
+  tl.fromTo(pr, { y: 14 * s, autoAlpha: 0 }, { y: 0, autoAlpha: 0.92, duration: 0.55, ease: "power2.out" }, tn + 0.5);
+  tl.fromTo(isi === kol ? mw : isi, { x: 0 }, { x: (kanan ? -1 : 1) * 6 * s, duration: Math.max(0.5, D - 2.2), ease: "sine.inOut" }, 1.2);
+  var tk = D - 0.6;
+  if (P.exit === "fade") tl.to(kol, { autoAlpha: 0, duration: 0.45, ease: "power2.in" }, tk);
+  else if (P.exit === "down") tl.to(kol, { y: 40 * s, autoAlpha: 0, duration: 0.5, ease: "power3.in" }, tk);
+  else if (P.exit === "sweep") tl.fromTo(kol, { clipPath: "inset(-20% -5% -20% -5%)" }, { clipPath: kanan ? "inset(-20% 105% -20% -5%)" : "inset(-20% -5% -20% 105%)", duration: 0.5, ease: "power3.in", immediateRender: false }, tk);
+}, { font: true });
+</script>

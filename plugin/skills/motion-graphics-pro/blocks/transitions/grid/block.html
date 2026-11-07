@@ -1,0 +1,43 @@
+<!-- Block transitions/grid · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/grid" data-start="0" data-duration="1.2" data-track-index="20" class="blk blk-transitions-grid">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "mode": "sweep", "cols": 12, "accent": true, "accent_color": "#ffd166", "ease": "power2.out"}
+</script>
+</div>
+<style>
+.blk-transitions-grid{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-transitions-grid .blk-aksen{position:absolute;inset:0;visibility:hidden}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to), D = k.dur, W = k.w, H = k.h, s = k.s;
+  function gaya(el, o) { if (el) for (var n in o) el.style[n] = o[n]; }
+  function bersih(el, tampil) { gaya(el, { transform: "", filter: "", opacity: "", clipPath: "", webkitMaskImage: "", maskImage: "", transformOrigin: "", zIndex: "", borderRadius: "", boxShadow: "", backfaceVisibility: "", visibility: tampil ? "" : "hidden" }); }
+  function ez(n) { return gsap.parseEase(n || "none") || gsap.parseEase("none"); }
+  var E = ez(P.ease), C = Math.max(2, Math.round(+P.cols || 12)), R = Math.max(1, Math.round(C * H / W)), cw = W / C, ch = H / R, r = k.random;
+  var sel = [];
+  for (var y = 0; y < R; y++) for (var x = 0; x < C; x++) {
+    var d = P.mode === "pixel" ? r() : P.mode === "center" ? Math.hypot((x + 0.5) / C - 0.5, (y + 0.5) / R - 0.5) / 0.7072 * 0.85 + r() * 0.15 : ((x + 0.5) / C + (y + 0.5) / R) / 2 * 0.85 + r() * 0.15;
+    sel.push({ x: x * cw, y: y * ch, d: d });
+  }
+  var span = P.mode === "pixel" ? 0.22 : 0.4, lag = 1 - span;
+  var aks = P.accent ? BLOCK.el("div", { class: "blk-aksen", style: "background:" + P.accent_color }, k.root) : null;
+  function kotak(c, f, g) { var w = cw * f + g, h = ch * f + g; return "M" + (c.x + (cw - w) / 2).toFixed(1) + " " + (c.y + (ch - h) / 2).toFixed(1) + "h" + w.toFixed(1) + "v" + h.toFixed(1) + "h" + (-w).toFixed(1) + "z"; }
+  BLOCK.onTime(tl, function (t) {
+    var u = t / D;
+    if (aks) aks.style.visibility = "hidden";
+    if (u <= 0 || u >= 1) { bersih(A, u <= 0); bersih(Bk, u >= 1); return; }
+    var pb = "", pa = "", penuh = true;
+    sel.forEach(function (c) {
+      var q = BLOCK.clamp((u - c.d * lag) / span, 0, 1), e = E(q);
+      if (q < 1) penuh = false;
+      if (e > 0.001) pb += kotak(c, Math.min(1, e), q >= 1 ? 0.8 : 0);
+      var bl = Math.sin(Math.PI * Math.min(1, q * 1.5)) * 0.5;
+      if (aks && bl > 0.02) pa += kotak(c, bl, 0);
+    });
+    gaya(A, { visibility: penuh ? "hidden" : "" });
+    gaya(Bk, { visibility: pb ? "" : "hidden", clipPath: penuh ? "" : pb ? "path('" + pb + "')" : "" });
+    if (aks && pa) gaya(aks, { visibility: "visible", clipPath: "path('" + pa + "')" });
+  }, D);
+});
+</script>

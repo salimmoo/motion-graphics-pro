@@ -1,0 +1,60 @@
+<!-- Block camera/filmed-screen · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="camera/filmed-screen" data-start="0" data-duration="7" data-track-index="30" class="blk blk-camera-filmed-screen">
+<script type="application/json" data-block-props>
+{"target": "#adegan", "mode": "film", "shot": [{"ry": -20, "rx": 7, "skala": 0.7, "x": -3, "y": 1, "warna": "#3d6bff"}, {"ry": 14, "rx": -5, "skala": 0.78, "x": 4, "y": -1, "warna": "#ff9a3c"}, {"ry": -7, "rx": 10, "skala": 0.9, "x": 0, "y": 2, "warna": "#7cf0c5"}], "transition": 1.1, "ease": "power2.inOut", "color_strength": 0.16, "subpixel": true, "scanlines": true, "shine": true, "frame": true, "edge_focus": 9, "space": "#07080c", "perspective": 1500}
+</script>
+</div>
+<style>
+.blk-camera-filmed-screen{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-camera-filmed-screen .blk-kaca{position:absolute;overflow:hidden;transform-origin:50% 50%}
+.blk-camera-filmed-screen .blk-kaca > div{position:absolute;inset:0}
+.blk-camera-filmed-screen .blk-dof{position:absolute;inset:0;
+  -webkit-mask-image:radial-gradient(ellipse 60% 62% at 50% 50%,transparent 50%,#000 100%);
+  mask-image:radial-gradient(ellipse 60% 62% at 50% 50%,transparent 50%,#000 100%)}
+.blk-camera-filmed-screen .blk-vin{position:absolute;inset:0;background:radial-gradient(ellipse 75% 75% at 50% 50%,transparent 55%,rgba(0,0,0,.55))}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, w = k.w, h = k.h, s = k.s, D = k.dur, R = k.root, T = BLOCK.find(P.target);
+  if (!T) { console.warn("[camera/filmed-screen] target not found: " + P.target); return; }
+  var rr = R.getBoundingClientRect(), rt = T.getBoundingClientRect(), sk = w / (rr.width || w);
+  var L = (rt.left - rr.left) * sk, Tp = (rt.top - rr.top) * sk, tw = rt.width * sk || w, th = rt.height * sk || h;
+  // ruang gelap di belakang layar (disisipkan tepat sebelum target, gaya inline)
+  var ruang = document.createElement("div");
+  ruang.style.cssText = "position:absolute;inset:0;pointer-events:none;background:radial-gradient(90% 70% at 50% 60%," + BLOCK.mix(P.space, "#2a3350", 0.45) + "," + P.space + " 75%)";
+  T.parentNode.insertBefore(ruang, T);
+  // kaca: lapisan seukuran target yang ikut transform yang sama (sub-piksel, garis pindai, kilau, warna)
+  var kaca = BLOCK.el("div", { class: "blk-kaca", style: "left:" + L + "px;top:" + Tp + "px;width:" + tw + "px;height:" + th + "px" }, R);
+  var px = Math.max(2, Math.round(3 * s));
+  if (P.subpixel) BLOCK.el("div", { style: "mix-blend-mode:multiply;opacity:.28;background:repeating-linear-gradient(90deg,#ff8080 0 " + px / 3 + "px,#80ff80 " + px / 3 + "px " + 2 * px / 3 + "px,#8080ff " + 2 * px / 3 + "px " + px + "px)" }, kaca);
+  if (P.scanlines) BLOCK.el("div", { style: "background:repeating-linear-gradient(0deg,rgba(0,0,0,.14) 0 " + px / 2 + "px,transparent " + px / 2 + "px " + px + "px)" }, kaca);
+  var warna = BLOCK.el("div", { style: "mix-blend-mode:soft-light" }, kaca);
+  var kilau = P.shine ? BLOCK.el("div", { style: "mix-blend-mode:screen" }, kaca) : null;
+  BLOCK.el("div", { style: "background:radial-gradient(ellipse 80% 80% at 50% 50%,transparent 62%,rgba(0,0,0,.32))" }, kaca);
+  if (P.frame) kaca.style.boxShadow = "0 0 0 " + Math.round(16 * s) + "px #0b0c10,0 0 0 " + Math.round(18 * s) + "px #2a2d36," + "0 " + Math.round(40 * s) + "px " + Math.round(120 * s) + "px rgba(0,0,0,.7)";
+  kaca.style.borderRadius = Math.round(6 * s) + "px";
+  // bidang fokus dangkal: tepi layar kamera kabur (di ruang layar, bukan di layar yang difilmkan)
+  if (P.edge_focus > 0) { var b = "blur(" + Math.round(P.edge_focus * s) + "px)"; BLOCK.el("div", { class: "blk-dof", style: "backdrop-filter:" + b + ";-webkit-backdrop-filter:" + b }, R); }
+  BLOCK.el("div", { class: "blk-vin" }, R);
+  var shot = Array.isArray(P.shot) && P.shot.length ? P.shot : [{ ry: -12, rx: 6, skala: 0.8, x: 0, y: 0 }];
+  var N = shot.length, ez = gsap.parseEase(P.ease || "power2.inOut"), tr = Math.min(+P.transition || 1, D / N * 0.8);
+  if (P.mode === "warp") { N = 1; shot = [shot[0]]; }
+  function pose(t) {
+    var seg = D / N, i = Math.min(N - 1, Math.floor(t / seg)), r = t - i * seg, a = shot[i], b = a, u = 0;
+    if (i < N - 1 && r > seg - tr) { b = shot[i + 1]; u = ez((r - (seg - tr)) / tr); }
+    var drift = Math.sin(t * 0.8) * (P.mode === "warp" ? 2.2 : 0.9), o = {};
+    ["ry", "rx", "skala", "x", "y"].forEach(function (k2) { o[k2] = BLOCK.lerp(+a[k2] || 0, +b[k2] || 0, u); });
+    o.ry += drift; o.rx += drift * 0.35; o.dol = (r / seg) * 0.03; // dorongan pelan selama bidikan
+    o.warna = BLOCK.mix(a.warna || "#808080", b.warna || "#808080", u);
+    return o;
+  }
+  var pp = Math.round((+P.perspective || 1500) * s);
+  [T, kaca].forEach(function (e) { e.style.transformOrigin = "50% 50%"; });
+  BLOCK.onTime(k.tl, function (t) {
+    var o = pose(t), tf = "perspective(" + pp + "px) translate(" + (o.x * w / 100).toFixed(2) + "px," + (o.y * h / 100).toFixed(2) + "px) rotateX(" + o.rx.toFixed(3) + "deg) rotateY(" + o.ry.toFixed(3) + "deg) scale(" + (o.skala + o.dol).toFixed(4) + ")";
+    T.style.transform = tf; kaca.style.transform = tf;
+    warna.style.background = BLOCK.rgba(o.warna, +P.color_strength || 0);
+    if (kilau) kilau.style.background = "linear-gradient(" + (115 + o.ry * 1.5).toFixed(1) + "deg,transparent 30%,rgba(255,255,255," + (0.06 + Math.abs(o.ry) * 0.004).toFixed(3) + ") " + (48 - o.ry).toFixed(1) + "%,transparent 70%)";
+  }, D);
+});
+</script>

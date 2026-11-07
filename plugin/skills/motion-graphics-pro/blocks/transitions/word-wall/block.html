@@ -1,0 +1,41 @@
+<!-- Block transitions/word-wall · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/word-wall" data-start="0" data-duration="2.2" data-track-index="20" class="blk blk-transitions-word-wall">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "text": "GERAK", "rows": 7, "color": "#111111", "text_color": "#f4ead5", "flip": true, "font": "Inter:wght@900", "pause": 0.05}
+</script>
+</div>
+<style>
+.blk-transitions-word-wall{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-transitions-word-wall .blk-baris{position:absolute;left:0;width:100%;overflow:hidden;display:flex;align-items:center}
+.blk-transitions-word-wall .blk-jalur{white-space:nowrap;font-weight:900;line-height:1;letter-spacing:-.02em}
+.blk-transitions-word-wall .blk-balik{position:absolute;inset:0;background:#fff;mix-blend-mode:difference}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, W = k.w, H = k.h, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to);
+  var n = Math.max(2, Math.round(+P.rows || 7)), bh = H / n, fam = BLOCK.family(P.font), jd = +P.pause || 0.05;
+  var tIn = D * 0.32, tm = D * 0.5, tOut = D * 0.6, rows = [];
+  var kata = String(P.text || "GERAK"), ulang = Math.ceil(W / (bh * 0.62 * Math.max(3, kata.length))) * 2 + 4;
+  for (var i = 0; i < n; i++) {
+    var r = BLOCK.el("div", { class: "blk-baris", style: "top:" + (i * bh - 0.5).toFixed(1) + "px;height:" + (bh + 1).toFixed(1) + "px;background:" + P.color }, k.root);
+    var j = BLOCK.el("div", { class: "blk-jalur", style: "font-family:" + fam + ";font-size:" + (bh * 0.86).toFixed(1) + "px;color:" + P.text_color }, r);
+    var isi = []; for (var u = 0; u < ulang; u++) isi.push(u % 2 ? "<span style='-webkit-text-stroke:" + Math.max(1, bh * 0.018).toFixed(1) + "px " + P.text_color + ";color:transparent'>" + BLOCK.esc(kata) + "</span>" : BLOCK.esc(kata));
+    j.innerHTML = isi.join(" ");
+    rows.push({ r: r, j: j, s: i % 2 ? 1 : -1 });
+  }
+  rows.forEach(function (q, i) {
+    // baris masuk bergantian dari kiri/kanan, teksnya terus mengalir, lalu keluar ke sisi seberang
+    tl.fromTo(q.r, { xPercent: -q.s * 101 }, { xPercent: 0, duration: tIn, ease: "power3.out" }, i * jd)
+      .to(q.r, { xPercent: q.s * 101, duration: D - tOut - n * jd, ease: "power3.in" }, tOut + i * jd);
+    tl.fromTo(q.j, { x: -q.s * bh * 1.5 - (q.s > 0 ? bh * 3 : 0) }, { x: q.s * bh * 1.5 - (q.s > 0 ? bh * 3 : 0), duration: D, ease: "none" }, 0);
+  });
+  if (P.flip) {
+    // dinding membalik warna lewat blend difference saat menutup penuh
+    var bl = BLOCK.el("div", { class: "blk-balik" }, k.root);
+    BLOCK.initial(tl, bl, { autoAlpha: 0 });
+    tl.set(bl, { autoAlpha: 1 }, tIn + n * jd * 0.6).set(bl, { autoAlpha: 0 }, tm + 0.06).set(bl, { autoAlpha: 1 }, tm + 0.12).set(bl, { autoAlpha: 0 }, tOut);
+  }
+  if (A) BLOCK.initial(tl, A, { autoAlpha: 1 }).set(A, { autoAlpha: 0 }, tm);
+  if (Bk) BLOCK.initial(tl, Bk, { autoAlpha: 0 }).set(Bk, { autoAlpha: 1 }, tm);
+}, { font: true });
+</script>

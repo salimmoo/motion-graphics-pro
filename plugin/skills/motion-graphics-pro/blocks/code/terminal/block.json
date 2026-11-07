@@ -1,0 +1,150 @@
+{
+ "id": "code/terminal",
+ "name": "Terminal",
+ "name_id": "Terminal Berjalan",
+ "category": "code",
+ "description": {
+  "id": "Jendela terminal generik menjalankan sesi perintah: prompt muncul, perintah diketik huruf demi huruf dengan kursor berkedip siklus bulat, dieksekusi setelah jeda, keluaran tercetak satu baris per isyarat (baris sukses hijau, peringatan kuning, galat merah), lalu prompt baru. Bergulir sendiri bila penuh. Tema terminal-pro, gelap-2026, gelap-modern, terang.",
+  "en": "A generic terminal runs a command session: prompt, per-character typing behind an integer-cycle caret, a beat, then output lines printed one per cue (success/warn/error coloured) and a fresh prompt. Auto-scrolls. Four themes."
+ },
+ "tags": [
+  "kode",
+  "terminal",
+  "shell",
+  "cli",
+  "log",
+  "typing",
+  "developer",
+  "code"
+ ],
+ "props": {
+  "session": {
+   "default": [
+    {
+     "perintah": "npm install --save peta-kecil",
+     "keluaran": [
+      "added 42 packages in 2.1s",
+      "✓ 0 vulnerabilities"
+     ]
+    },
+    {
+     "perintah": "npm run build",
+     "keluaran": [
+      "> toko-kecil@1.4.0 build",
+      "vite v6 building for production...",
+      "✓ 128 modules transformed.",
+      "dist/index.html   0.46 kB",
+      "dist/assets/app.js  84.20 kB",
+      "✓ built in 1.84s"
+     ]
+    }
+   ],
+   "type": "list",
+   "hint": "[{perintah, keluaran:[baris]}]; awalan ✓ hijau, ! kuning, ✗/error merah, > redup",
+   "aliases": [
+    "sesi"
+   ]
+  },
+  "prompt": {
+   "default": "rani@laptop ~/toko-kecil %",
+   "type": "text"
+  },
+  "title": {
+   "default": "rani — zsh — 80×24",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "theme": {
+   "default": "terminal-pro",
+   "type": "enum",
+   "options": [
+    "terminal-pro",
+    "dark-2026",
+    "modern-dark",
+    "light"
+   ],
+   "aliases": [
+    "tema"
+   ],
+   "option_aliases": {
+    "gelap-2026": "dark-2026",
+    "gelap-modern": "modern-dark",
+    "terang": "light"
+   }
+  },
+  "cursor": {
+   "default": "block",
+   "type": "enum",
+   "options": [
+    "block",
+    "line"
+   ],
+   "aliases": [
+    "kursor"
+   ],
+   "option_aliases": {
+    "blok": "block",
+    "garis": "line"
+   }
+  },
+  "size": {
+   "default": 26,
+   "type": "number",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "run_pause": {
+   "default": 0.45,
+   "type": "number",
+   "hint": "Detik antara Enter dan keluaran pertama",
+   "aliases": [
+    "jeda_eksekusi"
+   ]
+  },
+  "line_pause": {
+   "default": 0.16,
+   "type": "number",
+   "hint": "Detik antar baris keluaran",
+   "aliases": [
+    "jeda_baris"
+   ]
+  },
+  "start": {
+   "default": 0.5,
+   "type": "number",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "font": {
+   "default": "JetBrains Mono:wght@400;500;700",
+   "type": "font"
+  },
+  "seed": {
+   "default": 8,
+   "type": "number"
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "1:1",
+  "9:16"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "kode/terminal",
+  "terminal-simulator",
+  "code-terminal-run",
+  "code-snippet-apple-terminal-pro"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "JetBrains Mono:wght@400;500;700"
+  ]
+ }
+}

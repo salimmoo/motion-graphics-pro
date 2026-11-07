@@ -1,0 +1,125 @@
+{
+ "id": "titles/calm",
+ "name": "Calm",
+ "name_id": "Kartu Judul Tenang",
+ "category": "titles",
+ "description": {
+  "id": "Kartu judul yang menahan diri: kicker mono dan judul grotesk lapang naik pelan lalu nyaris tak bergerak; lockup dengan satu gerak tertahan, garis rambut, dan label mono; tata kisi gaya Swiss dengan nomor besar dan kotak aksen; atau komposisi gaya Vignelli dengan pita tebal dan huruf kecil tebal.",
+  "en": "Restrained title cards: mono kicker and generous grotesque headline fading up with an imperceptible drift; a still lockup with one restrained move, hairline rule and mono label; a Swiss grid with big index number and accent square; or a Vignelli-style layout with heavy band and bold lowercase type."
+ },
+ "tags": [
+  "judul",
+  "title-card",
+  "tenang",
+  "minimal",
+  "lockup",
+  "swiss",
+  "vignelli",
+  "tipografi",
+  "titles",
+  "calm"
+ ],
+ "props": {
+  "style": {
+   "default": "calm",
+   "type": "enum",
+   "options": [
+    "calm",
+    "lockup",
+    "swiss",
+    "vignelli"
+   ],
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "tenang": "calm"
+   }
+  },
+  "kicker": {
+   "default": "Bab 02",
+   "type": "text"
+  },
+  "title": {
+   "default": "Ruang yang memberi napas",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "label": {
+   "default": "Arsip Kota · 2026",
+   "type": "text",
+   "hint": "Label mono (lockup, swiss, vignelli)"
+  },
+  "number": {
+   "default": "02",
+   "type": "text",
+   "hint": "Nomor besar (swiss)",
+   "aliases": [
+    "nomor"
+   ]
+  },
+  "color": {
+   "default": "#f2efe8",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#e63b2e",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg": {
+   "default": "#121315",
+   "type": "color",
+   "hint": "Kosong = transparan; vignelli memakai kertas terang bila bawaan",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "font": {
+   "default": "Inter Tight:wght@500;600;700;800",
+   "type": "font"
+  },
+  "font2": {
+   "default": "JetBrains Mono:wght@400;500",
+   "type": "font",
+   "hint": "Font mono"
+  },
+  "size": {
+   "default": 132,
+   "type": "number",
+   "hint": "Ukuran judul (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "judul/tenang",
+  "titlecard-calm",
+  "titlecard-lockup",
+  "swiss-grid",
+  "vignelli"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter Tight:wght@500;600;700;800",
+   "JetBrains Mono:wght@400;500"
+  ]
+ }
+}

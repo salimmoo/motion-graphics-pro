@@ -1,0 +1,104 @@
+{
+ "id": "camera/float",
+ "name": "Float",
+ "name_id": "Melayang Hidup",
+ "category": "camera",
+ "description": {
+  "id": "Adegan yang sedang ditahan tetap terasa hidup: rotasi halus, skala yang bernapas, geser kecil, dan sapuan cahaya pelan. Semua gerak berulang tepat per siklus, cocok untuk kartu atau judul yang perlu bertahan lama di layar.",
+  "en": "Keeps a held scene alive with subtle rotation, breathing scale, small drift and a slow light sweep, all loop-exact per cycle."
+ },
+ "tags": [
+  "kamera",
+  "camera",
+  "drift",
+  "hold",
+  "loop",
+  "napas",
+  "breathing",
+  "light-sweep",
+  "float"
+ ],
+ "props": {
+  "target": {
+   "default": "#adegan",
+   "type": "selector",
+   "hint": "Elemen host yang digerakkan"
+  },
+  "cycle": {
+   "default": 4,
+   "type": "number",
+   "hint": "Panjang satu siklus (detik)",
+   "aliases": [
+    "siklus"
+   ]
+  },
+  "rotation": {
+   "default": 0.8,
+   "type": "number",
+   "hint": "Amplitudo rotasi (derajat)",
+   "aliases": [
+    "rotasi"
+   ]
+  },
+  "breath": {
+   "default": 0.025,
+   "type": "number",
+   "hint": "Amplitudo skala (0.025 = 2.5%)",
+   "aliases": [
+    "napas"
+   ]
+  },
+  "slide": {
+   "default": 10,
+   "type": "number",
+   "hint": "Amplitudo geser (px pada 1080)",
+   "aliases": [
+    "geser"
+   ]
+  },
+  "sweep": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Sapuan cahaya diagonal",
+   "aliases": [
+    "sapuan"
+   ]
+  },
+  "sweep_color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna_sapuan"
+   ]
+  },
+  "sweep_strength": {
+   "default": 0.16,
+   "type": "number",
+   "hint": "Opasitas cahaya sapuan (0-1)",
+   "aliases": [
+    "kekuatan_sapuan"
+   ]
+  },
+  "overscan": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Perbesar sedikit agar tepi adegan layar penuh tak terbuka; matikan untuk kartu"
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "kamera/melayang",
+  "drift-hold"
+ ],
+ "example": {
+  "bg": "text",
+  "block_duration": 8
+ }
+}

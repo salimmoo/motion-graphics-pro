@@ -1,0 +1,76 @@
+<!-- Block text/marquee-3d · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="text/marquee-3d" data-start="0" data-duration="6" data-track-index="10" class="blk blk-text-marquee-3d">
+<script type="application/json" data-block-props>
+{"list": ["DESAIN", "*GERAK*", "CERITA", "SUARA", "*RITME*", "WARNA"], "mode": "horizon", "font": "Anton", "size": 210, "weight": 400, "color": "#f5f3ee", "accent_color": "#ff5a4e", "speed": 1, "angle": 58, "fog": true, "separator": "✦"}
+</script>
+<div class="blk-vp"></div>
+</div>
+<style>
+.blk-text-marquee-3d {position:absolute;inset:0;pointer-events:none}
+.blk-text-marquee-3d .blk-vp{position:absolute;inset:0;overflow:hidden}
+.blk-text-marquee-3d .blk-bidang{position:absolute;left:-10%;right:-10%;bottom:-5%;height:240%;transform-origin:50% 100%}
+.blk-text-marquee-3d .blk-kol{position:absolute;left:0;right:0;top:0;text-align:center;line-height:1}
+.blk-text-marquee-3d .blk-kol div{white-space:nowrap}
+.blk-text-marquee-3d .blk-a{color:var(--aksen)}
+.blk-text-marquee-3d .blk-pita{position:absolute;left:50%;top:50%;white-space:nowrap;line-height:1.15}
+.blk-text-marquee-3d .blk-pita span.blk-set{display:inline-block}
+.blk-text-marquee-3d .blk-garis{color:transparent;-webkit-text-stroke:var(--gs) currentColor}
+.blk-text-marquee-3d .blk-garis .blk-a{color:transparent;-webkit-text-stroke-color:var(--aksen)}
+.blk-text-marquee-3d .blk-sep{margin:0 .35em;opacity:.8;font-size:.5em;vertical-align:.45em}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl;
+  var rata = { kiri: "left", kanan: "right" }[P.rata] || "center";
+  function gayaTeks(el, px) {
+    el.style.cssText += ";top:" + P.posisi_y + "%;width:" + P.lebar + "%;color:" + P.color + ";--aksen:" + P.accent_color +
+      ";font-family:" + BLOCK.family(P.font) + ";font-weight:" + P.weight + ";font-size:" + Math.round((px || P.size) * k.s) + "px;text-align:" + rata;
+  }
+  // tunggu stylesheet Google Fonts + wajah font benar-benar termuat sebelum mengukur teks
+  function siapFont(spec) {
+    var ln = Array.prototype.slice.call(document.querySelectorAll('link[href*="fonts.googleapis"]'));
+    return Promise.all(ln.map(function (l) { return l.sheet ? 0 : new Promise(function (ok) { l.addEventListener("load", ok); l.addEventListener("error", ok); }); }))
+      .then(function () { return document.fonts && document.fonts.load ? document.fonts.load(spec || (P.weight + " 100px " + BLOCK.family(P.font))) : 0; })
+      .catch(function () {});
+  }
+  function markupKunci(s) { return BLOCK.esc(s).replace(/\*([^*]+)\*/g, '<span class="blk-kunci">$1</span>').replace(/\\n|\n/g, "<br>"); }
+  return siapFont().then(function () {
+  var vp = k.root.querySelector(".blk-vp"), fs = P.size * k.s, items = (P.list || []).map(String), n = items.length;
+  vp.style.cssText = "font-family:" + BLOCK.family(P.font) + ";font-weight:" + P.weight + ";font-size:" + fs + "px;color:" + P.color + ";--aksen:" + P.accent_color + ";--gs:" + Math.max(1, 2 * k.s) + "px";
+  function isiItem(e, s) { var a = /^\*.*\*$/.test(s); e.textContent = s.replace(/\*/g, ""); if (a) e.className = "blk-a"; return e; }
+  if (P.mode === "ribbon") {
+    var pita = [], per = [];
+    [0, 1].forEach(function (b) {
+      var w = BLOCK.el("div", { class: "blk-pita" + (b ? " blk-garis" : "") }, vp), set0 = null;
+      for (var s = 0; s < 4; s++) {
+        var st = BLOCK.el("span", { class: "blk-set" }, w);
+        items.forEach(function (it) { isiItem(BLOCK.el("span", null, st), it); BLOCK.el("span", { class: "blk-sep" }, st).textContent = P.separator; });
+        if (!s) set0 = st;
+      }
+      pita.push(w); per.push(set0.offsetWidth);
+    });
+    vp.style.perspective = Math.round(1100 * k.s) + "px";
+    BLOCK.onTime(tl, function (t) {
+      pita.forEach(function (w, b) {
+        var v = (t * 220 * k.s * P.speed) % per[b], sg = b ? 1 : -1, x = b ? -per[b] * 2 + v : -per[b] - v;
+        w.style.transform = "translate(" + x + "px," + (b ? fs * 0.62 : -fs * 0.62) + "px) translateY(-50%) rotateY(" + (sg * P.angle * 0.35) + "deg) rotateZ(" + (-7) + "deg)";
+      });
+    }, k.dur);
+  } else {
+    vp.style.perspective = Math.round(900 * k.s) + "px";
+    vp.style.perspectiveOrigin = "50% 0%";
+    if (P.fog) vp.style.webkitMaskImage = vp.style.maskImage = "linear-gradient(to top, #000 35%, transparent 88%)";
+    var bd = BLOCK.el("div", { class: "blk-bidang" }, vp), kol = BLOCK.el("div", { class: "blk-kol" }, bd);
+    bd.style.transform = "rotateX(" + P.angle + "deg)";
+    var rh = fs * 1.08, tinggi = k.h * 2.4, ulang = Math.ceil(tinggi / (rh * n)) + 2, per2 = rh * n;
+    for (var u = 0; u < ulang; u++) items.forEach(function (it) { var d = isiItem(BLOCK.el("div", null, kol), it); d.style.height = rh + "px"; });
+    BLOCK.onTime(tl, function (t) {
+      var off = (t * P.speed * rh) % per2;
+      kol.style.transform = "translateY(" + (-off) + "px)";
+    }, k.dur);
+  }
+  tl.fromTo(vp, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power1.out" }, 0);
+  tl.to(vp, { opacity: 0, duration: 0.5, ease: "power2.in" }, k.dur - 0.55);
+  });
+}, { font: true });
+</script>

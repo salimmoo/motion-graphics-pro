@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP SLERP · kamera orbit Euler vs kuaternion</title>
+<style>html,body{margin:0;background:#000}#stage{position:relative;width:1280px;height:720px;overflow:hidden;background:#000}#stage canvas{position:absolute}
+.tag{position:absolute;font:600 20px/1 system-ui,"Segoe UI",Arial,sans-serif;color:#fbf6ea;background:rgba(10,14,30,.6);padding:6px 10px;border-radius:6px}</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../scene-tanker.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720" data-fps="24">
+  <canvas id="a" style="left:0;top:0"></canvas><canvas id="b" style="left:640px;top:0"></canvas><canvas id="peta" style="left:0;top:360px"></canvas>
+  <div class="tag" style="left:12px;top:12px">cameraInterp: "euler" (bawaan)</div><div class="tag" style="left:652px;top:12px">cameraInterp: "slerp"</div>
+</div>
+<script>
+// Kamera pindah dari tampak atas sisi selatan ke tampak atas sisi utara (az 200 -> 50, el 55).
+// Euler: azimut berputar 180 derajat mengelilingi kapal pada elevasi tetap (orbit panjang).
+// SLERP: arah kamera menempuh lingkaran besar, lewat hampir tegak di atas kapal (jarak sudut terpendek, kecepatan sudut tetap).
+const D = 6, keys = [[0.5, { az: 200, el: 55, d: 300 }], [5.5, { az: 50, el: 55, d: 300 }]];
+const base = { width: 640, height: 360, duration: D, hold: 0, beats: { approach: 1, turn: 2, push: 3, moor: 4, arms: 5 }, cameraKeys: keys };
+const A = MGP.sceneTanker.create("#a", Object.assign({ cameraInterp: "euler" }, base));
+const B = MGP.sceneTanker.create("#b", Object.assign({ cameraInterp: "slerp" }, base));
+// bawah: lintasan arah kamera di bola satuan (proyeksi dari atas) + elevasi terhadap waktu
+const cv = document.getElementById("peta"), g = cv.getContext("2d"); cv.width = 1280; cv.height = 360;
+const camOf = (mode, t) => { const k = MGP.core.smooth01((t - 0.5) / 5); if (mode === "slerp") return MGP.core.slerpDirection(200, 55, 50, 55, k); const daz = ((((50 - 200) % 360) + 540) % 360) - 180; return { az: 200 + daz * k, el: 55 }; };
+function peta(t) {
+  g.fillStyle = "#0b1020"; g.fillRect(0, 0, 1280, 360);
+  const cx = 320, cy = 180, R = 150; g.strokeStyle = "rgba(255,255,255,.25)"; g.beginPath(); g.arc(cx, cy, R, 0, Math.PI * 2); g.stroke();
+  g.fillStyle = "#cfd6e6"; g.font = "600 18px system-ui"; g.fillText("arah kamera dilihat dari atas (pusat = tegak di atas kapal)", 520, 40);
+  for (const [mode, col] of [["euler", "#ffb347"], ["slerp", "#7ee0d6"]]) {
+    g.strokeStyle = col; g.lineWidth = 3; g.beginPath();
+    for (let i = 0; i <= 100; i++) { const q = camOf(mode, 0.5 + 5 * i / 100), r = R * Math.cos(q.el * Math.PI / 180), x = cx + r * Math.sin(q.az * Math.PI / 180), y = cy - r * Math.cos(q.az * Math.PI / 180); i ? g.lineTo(x, y) : g.moveTo(x, y); }
+    g.stroke(); const q = camOf(mode, t), r = R * Math.cos(q.el * Math.PI / 180); g.fillStyle = col; g.beginPath(); g.arc(cx + r * Math.sin(q.az * Math.PI / 180), cy - r * Math.cos(q.az * Math.PI / 180), 8, 0, Math.PI * 2); g.fill();
+    g.fillText(`${mode}: az ${q.az.toFixed(0)}°, el ${q.el.toFixed(0)}°`, 520, mode === "euler" ? 100 : 140);
+  }
+}
+const all = [A, B];
+MGP.core.expose({ duration: D, ready: Promise.all(all.map((x) => x.ready)), seek(t) { all.forEach((x) => x.seek(t)); peta(t); return this; }, timeline() { return MGP.core.timeline(this); } });
+</script>
+</body>
+</html>

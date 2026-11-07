@@ -1,0 +1,97 @@
+{
+ "id": "ui/device-dive",
+ "name": "Device Dive",
+ "name_id": "Selam ke Layar Ponsel",
+ "category": "ui",
+ "description": {
+  "id": "Ponsel generik naik ke bingkai, lalu kamera menembus layarnya: ponsel membesar dengan percepatan dan antarmuka aplikasi berlapis mengembang dari kotak layar sampai memenuhi bingkai, tiap lapisan dengan paralaks dan waktu sendiri.",
+  "en": "A generic phone rises into view, then the camera pushes through its screen while the layered app UI expands from the screen rect to fill the frame with per-layer parallax."
+ },
+ "tags": [
+  "ui",
+  "ponsel",
+  "device",
+  "push-in",
+  "parallax",
+  "aplikasi",
+  "transisi",
+  "dive"
+ ],
+ "props": {
+  "title": {
+   "default": "Ruang Kerja",
+   "type": "text",
+   "hint": "Judul di layar ponsel",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "greeting": {
+   "default": "Selamat pagi, Rani",
+   "type": "text",
+   "hint": "Judul UI layar penuh",
+   "aliases": [
+    "sapaan"
+   ]
+  },
+  "card": {
+   "default": [
+    "Rapat 09.30",
+    "Laporan Q3",
+    "Desain beranda",
+    "Ulasan kode"
+   ],
+   "type": "list",
+   "aliases": [
+    "kartu"
+   ]
+  },
+  "accent_color": {
+   "default": "#6a5cff",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "color2": {
+   "default": "#ff7a59",
+   "type": "color",
+   "aliases": [
+    "warna2"
+   ]
+  },
+  "screen": {
+   "default": "#f3f4f8",
+   "type": "color",
+   "aliases": [
+    "layar"
+   ]
+  },
+  "dive": {
+   "default": 1.9,
+   "type": "number",
+   "hint": "Detik kamera mulai menembus layar",
+   "aliases": [
+    "selam"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700;800",
+   "type": "font"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/selam-perangkat",
+  "parallax-device-dive"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

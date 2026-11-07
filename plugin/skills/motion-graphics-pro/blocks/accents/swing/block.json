@@ -1,0 +1,162 @@
+{
+ "id": "accents/swing",
+ "name": "Swing",
+ "name_id": "Papan Berayun",
+ "category": "accents",
+ "description": {
+  "id": "Papan tergantung pada paku tetap, jatuh masuk lalu berayun dan berhenti dengan osilasi teredam gravitasi (rumus tertutup), seperti papan nama yang menetap di kaitnya. Tali V atau satu tali, papan sedikit tertinggal dari tali.",
+  "en": "A sign hangs from a fixed pivot, drops in and swings to rest with closed-form gravity-damped oscillation, like a hanging sign settling on its hook. V-strings or a single string, with a slight lag between string and board."
+ },
+ "tags": [
+  "aksen",
+  "ayun",
+  "pendulum",
+  "papan",
+  "fisika",
+  "gantung",
+  "tanda",
+  "accents",
+  "swing"
+ ],
+ "props": {
+  "text": {
+   "default": "BUKA",
+   "type": "text",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "sub": {
+   "default": "setiap hari 08.00-21.00",
+   "type": "text"
+  },
+  "strap": {
+   "default": "two",
+   "type": "enum",
+   "options": [
+    "two",
+    "one"
+   ],
+   "aliases": [
+    "tali"
+   ],
+   "option_aliases": {
+    "dua": "two",
+    "satu": "one"
+   }
+  },
+  "start_angle": {
+   "default": 22,
+   "type": "number",
+   "hint": "Sudut awal ayunan (derajat)",
+   "aliases": [
+    "sudut_awal"
+   ]
+  },
+  "frequency": {
+   "default": 0.9,
+   "type": "number",
+   "hint": "Ayunan per detik",
+   "aliases": [
+    "frekuensi"
+   ]
+  },
+  "damping": {
+   "default": 0.14,
+   "type": "number",
+   "hint": "Rasio redaman (0..1)",
+   "aliases": [
+    "redaman"
+   ]
+  },
+  "strap_length": {
+   "default": 170,
+   "type": "number",
+   "hint": "px pada 1080",
+   "aliases": [
+    "panjang_tali"
+   ]
+  },
+  "width": {
+   "default": 600,
+   "type": "number",
+   "hint": "Lebar papan (px pada 1080)",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "height": {
+   "default": 260,
+   "type": "number",
+   "aliases": [
+    "tinggi"
+   ]
+  },
+  "board_color": {
+   "default": "#f2c14e",
+   "type": "color",
+   "aliases": [
+    "warna_papan"
+   ]
+  },
+  "text_color": {
+   "default": "#2a1f14",
+   "type": "color",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "strap_color": {
+   "default": "#d9d4c7",
+   "type": "color",
+   "aliases": [
+    "warna_tali"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@600;800",
+   "type": "font"
+  },
+  "size": {
+   "default": 110,
+   "type": "number",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Paku (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "top": {
+   "default": 14,
+   "type": "number",
+   "hint": "Paku dari atas (%)",
+   "aliases": [
+    "atas"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "aksen/ayun",
+  "pendulum-swing"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@600;800"
+  ]
+ }
+}

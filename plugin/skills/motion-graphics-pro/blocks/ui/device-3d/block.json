@@ -1,0 +1,132 @@
+{
+ "id": "ui/device-3d",
+ "name": "Device 3D",
+ "name_id": "Perangkat 3D",
+ "category": "ui",
+ "description": {
+  "id": "Ponsel dan laptop generik yang dibangun dengan CSS 3D (bingkai bertebal, layar berisi UI tiruan dari props). Mode ponsel: berputar di meja putar lalu melayang, layar beranda dengan ikon kaca, dok, dan notifikasi kaca yang jatuh dari area status. Mode laptop: tutup membuka, desktop dengan bilah menu kaca, jendela, dan dok, plus gerak kamera sinematik. Mode trio: tiga ponsel aplikasi kebugaran melayang.",
+  "en": "Generic CSS-3D phone and laptop with thick frames and mock UI from props. Phone mode: turntable spin and float with glass home screen icons, dock and dropping glass notifications. Laptop mode: lid opens onto a glass desktop with a cinematic camera move. Trio mode: three floating fitness-app phones."
+ },
+ "tags": [
+  "ui",
+  "3d",
+  "device",
+  "ponsel",
+  "laptop",
+  "mockup",
+  "showcase",
+  "liquid-glass"
+ ],
+ "props": {
+  "mode": {
+   "default": "phone",
+   "type": "enum",
+   "options": [
+    "phone",
+    "laptop",
+    "trio"
+   ],
+   "option_aliases": {
+    "ponsel": "phone"
+   }
+  },
+  "clock": {
+   "default": "09.41",
+   "type": "text",
+   "aliases": [
+    "jam"
+   ]
+  },
+  "wallpaper": {
+   "default": [
+    "#1d2b6b",
+    "#6a4cff",
+    "#ff7aa8",
+    "#ffb35c"
+   ],
+   "type": "list",
+   "hint": "Warna dasar + tiga warna gradien wallpaper"
+  },
+  "notification": {
+   "default": [
+    [
+     "Pesan",
+     "Dimas: Fotonya bagus banget!"
+    ],
+    [
+     "Pengingat",
+     "Minum air putih sekarang"
+    ]
+   ],
+   "type": "list",
+   "hint": "[[aplikasi, pesan]] (mode ponsel)",
+   "aliases": [
+    "notifikasi"
+   ]
+  },
+  "app_title": {
+   "default": "Aktivitas",
+   "type": "text",
+   "hint": "Judul aplikasi (mode trio)",
+   "aliases": [
+    "judul_app"
+   ]
+  },
+  "number": {
+   "default": [
+    "8.420",
+    "512",
+    "46"
+   ],
+   "type": "list",
+   "hint": "Langkah, kalori, menit (mode trio)",
+   "aliases": [
+    "angka"
+   ]
+  },
+  "accent_color": {
+   "default": "#3ee08f",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "wireframe": {
+   "default": "#2b2e36",
+   "type": "color",
+   "hint": "Warna bodi perangkat",
+   "aliases": [
+    "rangka"
+   ]
+  },
+  "rotate": {
+   "default": 1,
+   "type": "number",
+   "hint": "Jumlah putaran meja putar (mode ponsel)",
+   "aliases": [
+    "putar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700;800",
+   "type": "font"
+  }
+ },
+ "duration": 7,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/perangkat-3d",
+  "vfx-iphone-device",
+  "app-showcase",
+  "ios26-liquid-glass",
+  "macos-tahoe-liquid-glass"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

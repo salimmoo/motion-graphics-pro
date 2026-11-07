@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Stars · block example backgrounds/stars</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="8.5">
+<div id="adegan" class="adegan ad-gelap"></div>
+<!-- Block backgrounds/stars · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-stars" data-block="backgrounds/stars" data-start="0" data-duration="8" data-track-index="0" class="blk blk-backgrounds-stars">
+<script type="application/json" data-block-props>
+{"density": "sparse", "count": 1, "color": "#ffffff", "bg": "", "direction": 180, "center_mask": 0.35, "speed": 1}
+</script>
+</div>
+<style>
+.blk-backgrounds-stars{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-backgrounds-stars canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+</style>
+<script>
+BLOCK.mount("blk-stars", function (k) {
+  var P = k.P, A = k.random;
+  var K = BLOCK.canvas(k.root, k.w, k.h), x = K.ctx;
+  var luas = k.w * k.h / (1920 * 1080), N = Math.round((P.density === "dense" ? 900 : 380) * luas * (+P.count || 1));
+  var cx = k.w / 2, cy = k.h / 2, rad = Math.hypot(cx, cy), mk = +P.center_mask;
+  var bintang = [];
+  for (var i = 0; i < N; i++) {
+    var u = A(), tier = u < 0.62 ? 0 : u < 0.92 ? 1 : 2;                  // tiga ukuran
+    bintang.push({ x: A() * k.w, y: A() * k.h, lapis: A() < 0.6 ? 0 : 1, tier: tier,
+      r: [1.1, 1.8, 2.8][tier] * (0.8 + A() * 0.4) * k.s, a: [0.6, 0.85, 1][tier] * (0.7 + A() * 0.3),
+      f: 0.6 + A() * 2.2, ph: A() * 6.283, kel: A() * 0.6 });
+  }
+  var ar = (+P.direction || 0) * Math.PI / 180, vx = Math.cos(ar), vy = Math.sin(ar);
+  function wrap(v, m) { return ((v % m) + m) % m; }
+  function gambar(t) {
+    x.clearRect(0, 0, k.w, k.h);
+    if (P.bg) { x.fillStyle = P.bg; x.fillRect(0, 0, k.w, k.h); }
+    var tt = t * (+P.speed || 1);
+    for (var i = 0; i < N; i++) {
+      var b = bintang[i], v = (b.lapis ? 26 : 10) * k.s * tt;                 // dua lapis paralaks
+      var px = wrap(b.x + vx * v, k.w), py = wrap(b.y + vy * v, k.h);
+      var kel = 1 - b.kel * (0.5 + 0.5 * Math.sin(t * b.f * 2 + b.ph));         // kelip
+      var d = Math.hypot(px - cx, py - cy) / rad, m = mk > 0 ? BLOCK.smooth((d - mk * 0.55) / (mk * 0.6 + 0.01)) : 1;
+      var al = b.a * kel * m; if (al < 0.02) continue;
+      x.globalAlpha = al; x.fillStyle = P.color;
+      x.beginPath(); x.arc(px, py, b.r, 0, 6.283); x.fill();
+      if (b.tier === 2) {
+        x.globalAlpha = al * 0.18; x.beginPath(); x.arc(px, py, b.r * 3.2, 0, 6.283); x.fill();
+        x.globalAlpha = al * 0.5; x.fillRect(px - b.r * 4, py - 0.5 * k.s, b.r * 8, 1 * k.s); x.fillRect(px - 0.5 * k.s, py - b.r * 4, 1 * k.s, b.r * 8);
+      }
+    }
+    x.globalAlpha = 1;
+  }
+  BLOCK.onTime(k.tl, gambar, k.dur);
+});
+</script>
+</div>
+<script>
+  window.__duration = 8.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 8.5);
+</script>
+</body>
+</html>

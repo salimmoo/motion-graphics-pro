@@ -1,0 +1,139 @@
+{
+ "id": "textures/ascii",
+ "name": "Ascii",
+ "name_id": "Render ASCII",
+ "category": "textures",
+ "description": {
+  "id": "Adegan tampil sebagai ASCII hidup: kanvas mengambil grid luminans dari sumber dan menggambar glyph dari tangga kerapatan karakter. Resolusi melangkah dari kasar ke halus lalu bertahan terbaca, dengan pita kilau dan denyut glyph kecil. Sumbernya digambar blok sendiri dari props (teks + bola bercahaya), dirasterisasi sekali saat pasang, karena piksel adegan DOM tidak bisa dibaca.",
+  "en": "Live ASCII rendering: a canvas samples a luminance grid and draws glyphs from a density ramp; resolution steps coarse to fine then holds legible, with a sheen band and subtle glyph shimmer. The source (text + lit sphere from props) is drawn by the block and rasterized once at mount."
+ },
+ "tags": [
+  "tekstur",
+  "texture",
+  "ascii",
+  "teks",
+  "glyph",
+  "retro",
+  "terminal",
+  "quantize",
+  "textures"
+ ],
+ "props": {
+  "text": {
+   "default": "GERAK",
+   "type": "text",
+   "hint": "Teks sumber",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "font": {
+   "default": "JetBrains Mono:wght@700",
+   "type": "font",
+   "hint": "Font glyph (monospace)"
+  },
+  "font2": {
+   "default": "Inter:wght@900",
+   "type": "font",
+   "hint": "Font teks sumber"
+  },
+  "character": {
+   "default": " .:-=+*#%@",
+   "type": "text",
+   "hint": "Tangga kerapatan, gelap ke terang",
+   "aliases": [
+    "karakter"
+   ]
+  },
+  "level": {
+   "default": [
+    72,
+    48,
+    32,
+    22,
+    16
+   ],
+   "type": "list",
+   "hint": "Ukuran sel tiap tingkat resolusi (px pada 1080), kasar ke halus",
+   "aliases": [
+    "tingkat"
+   ]
+  },
+  "start": {
+   "default": 0.2,
+   "type": "number",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "resolve_duration": {
+   "default": 2.4,
+   "type": "number",
+   "hint": "Lama melangkah ke resolusi terhalus (detik)",
+   "aliases": [
+    "durasi_resolusi"
+   ]
+  },
+  "color": {
+   "default": "#9dffb5",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffffff",
+   "type": "color",
+   "hint": "Warna glyph paling terang",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg": {
+   "default": "#060a08",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "ball": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Bola bercahaya di sumber",
+   "aliases": [
+    "bola"
+   ]
+  },
+  "shine": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Pita kilau yang menyapu",
+   "aliases": [
+    "kilau"
+   ]
+  },
+  "seed": {
+   "default": 6,
+   "type": "number"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "tekstur/ascii",
+  "ascii-render-pass"
+ ],
+ "example": {
+  "bg": "empty",
+  "font": [
+   "JetBrains Mono:wght@700",
+   "Inter:wght@900"
+  ]
+ }
+}

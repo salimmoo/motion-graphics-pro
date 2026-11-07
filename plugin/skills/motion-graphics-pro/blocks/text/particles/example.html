@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Particles · block example text/particles</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@800;900&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="5.5">
+<div id="adegan" class="adegan ad-gelap"></div>
+<!-- Block text/particles · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-particles" data-block="text/particles" data-start="0" data-duration="5" data-track-index="10" class="blk blk-text-particles">
+<script type="application/json" data-block-props>
+{"text": "BERSAMA", "font": "Inter:wght@800;900", "size": 230, "weight": 900, "color": "#f5f3ee", "accent_color": "#ffb547", "position_y": 50, "width": 90, "align": "center", "mode": "gather-scatter", "spread": "cloud", "density": 4, "particle_size": 3.4, "max_count": 6000, "start": 0.2, "gather_duration": 1.6, "time_jitter": 0.7, "scatter_duration": 1.3, "accent_amount": 0.18, "seed": "partikel"}
+</script>
+
+</div>
+<style>
+.blk-text-particles {position:absolute;inset:0;pointer-events:none}
+.blk-text-particles .blk-tk{position:absolute;left:50%;transform:translate(-50%,-50%);line-height:1.08}
+.blk-text-particles .blk-kunci{color:var(--aksen)}
+
+</style>
+<script>
+BLOCK.mount("blk-particles", function (k) {
+  var P = k.P, tl = k.tl;
+  var rata = { left: "left", right: "right" }[P.align] || "center";
+  function gayaTeks(el, px) {
+    el.style.cssText += ";top:" + P.position_y + "%;width:" + P.width + "%;color:" + P.color + ";--aksen:" + P.accent_color +
+      ";font-family:" + BLOCK.family(P.font) + ";font-weight:" + P.weight + ";font-size:" + Math.round((px || P.size) * k.s) + "px;text-align:" + rata;
+  }
+  // tunggu stylesheet Google Fonts + wajah font benar-benar termuat sebelum mengukur teks
+  function siapFont(spec) {
+    var ln = Array.prototype.slice.call(document.querySelectorAll('link[href*="fonts.googleapis"]'));
+    return Promise.all(ln.map(function (l) { return l.sheet ? 0 : new Promise(function (ok) { l.addEventListener("load", ok); l.addEventListener("error", ok); }); }))
+      .then(function () { return document.fonts && document.fonts.load ? document.fonts.load(spec || (P.weight + " 100px " + BLOCK.family(P.font))) : 0; })
+      .catch(function () {});
+  }
+  function markupKunci(s) { return BLOCK.esc(s).replace(/\*([^*]+)\*/g, '<span class="blk-kunci">$1</span>').replace(/\\n|\n/g, "<br>"); }
+  return siapFont().then(function () {
+  var W = k.w, H = k.h, kv = BLOCK.canvas(k.root, W, H, 1), g = kv.ctx, r = BLOCK.random(P.seed);
+  // sampel bitmap teks sekali di kanvas luring
+  var off = document.createElement("canvas"); off.width = W; off.height = H;
+  var o = off.getContext("2d"), fs = P.size * k.s, fam = BLOCK.family(P.font), baris = String(P.text).replace(/\*/g, "").replace(/\\n/g, "\n").split("\n");
+  o.font = P.weight + " " + fs + "px " + fam;
+  var mw = Math.max.apply(null, baris.map(function (b) { return o.measureText(b).width; }));
+  if (mw > W * P.width / 100) { fs *= W * P.width / 100 / mw; o.font = P.weight + " " + fs + "px " + fam; }
+  o.fillStyle = "#fff"; o.textAlign = "center"; o.textBaseline = "middle";
+  var cy = H * P.position_y / 100, lh = fs * 1.02;
+  baris.forEach(function (b, i) { o.fillText(b, W / 2, cy + (i - (baris.length - 1) / 2) * lh); });
+  var data = o.getImageData(0, 0, W, H).data, st = Math.max(2, Math.round(P.density * k.s)), tg = [];
+  for (var y = 0; y < H; y += st) for (var x = 0; x < W; x += st) if (data[(y * W + x) * 4 + 3] > 128) tg.push([x, y]);
+  for (var i = tg.length - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)), tmp = tg[i]; tg[i] = tg[j]; tg[j] = tmp; }
+  tg = tg.slice(0, Math.max(1, Math.round(P.max_count)));
+  var R = Math.min(W, H), cx = W / 2;
+  var pt = tg.map(function (q) {
+    var sx, sy;
+    if (P.spread === "screen") { sx = (r() * 1.3 - 0.15) * W; sy = (r() * 1.3 - 0.15) * H; }
+    else if (P.spread === "bottom") { sx = q[0] + (r() - 0.5) * W * 0.5; sy = H * (1.05 + r() * 0.35); }
+    else { var a = r() * Math.PI * 2, rr = Math.sqrt(r()) * R * 0.55; sx = cx + Math.cos(a) * rr * 1.5; sy = cy + Math.sin(a) * rr; }
+    var ua = r() * Math.PI * 2;
+    return { tx: q[0], ty: q[1], sx: sx, sy: sy, d: r() * P.time_jitter, ku: r() * 0.25 - 0.125, ak: r() < P.accent_amount, sd: r() * 100,
+      ux: Math.cos(ua), uy: Math.sin(ua) - 0.6, uv: 0.4 + r() * 0.8, ud: (q[0] / W) * 0.55 + r() * 0.2 };
+  });
+  var m = P.mode, adaK = m !== "scatter", adaU = m !== "gather", Dk = +P.gather_duration, Du = +P.scatter_duration;
+  var tU = m === "scatter" ? Math.max(P.start + 0.6, k.dur * 0.3) : k.dur - Du - 0.75, sz = Math.max(1, P.particle_size * k.s);
+  BLOCK.onTime(tl, function (t) {
+    g.clearRect(0, 0, W, H);
+    for (var pass = 0; pass < 2; pass++) {
+      g.fillStyle = pass ? P.accent_color : P.color;
+      for (var i = 0; i < pt.length; i++) {
+        var q = pt[i]; if (q.ak !== !!pass) continue;
+        var x = q.tx, y = q.ty, a = 1;
+        if (adaK) {
+          var u = BLOCK.clamp((t - P.start - q.d) / Dk, 0, 1), e = 1 - Math.pow(1 - u, 3), mm = 1 - e;
+          var px = -(q.ty - q.sy), py = q.tx - q.sx;
+          x = q.sx + (q.tx - q.sx) * e + px * q.ku * Math.sin(Math.PI * e);
+          y = q.sy + (q.ty - q.sy) * e + py * q.ku * Math.sin(Math.PI * e);
+          x += BLOCK.noise(t * 0.8, q.sd) * 14 * k.s * mm; y += BLOCK.noise(t * 0.8 + 5, q.sd) * 14 * k.s * mm;
+          a = BLOCK.clamp(t / 0.5, 0, 1) * (0.35 + 0.65 * e);
+        }
+        if (adaU) {
+          var v = BLOCK.clamp((t - tU - q.ud) / Du, 0, 1), v2 = v * v;
+          x += q.ux * R * 0.35 * q.uv * v2 + BLOCK.noise(t * 1.3, q.sd + 3) * 20 * k.s * v; y += q.uy * R * 0.35 * q.uv * v2;
+          a *= 1 - v;
+        }
+        if (a <= 0.01) continue;
+        g.globalAlpha = a;
+        g.fillRect(x - sz / 2, y - sz / 2, sz, sz);
+      }
+    }
+    g.globalAlpha = 1;
+  }, k.dur);
+  });
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 5.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5.5);
+</script>
+</body>
+</html>

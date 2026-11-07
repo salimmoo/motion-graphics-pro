@@ -1,0 +1,46 @@
+<!-- Block backgrounds/pattern · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="backgrounds/pattern" data-start="0" data-duration="8" data-track-index="0" class="blk blk-backgrounds-pattern">
+<script type="application/json" data-block-props>
+{"style": "line", "color1": "#0a0a0a", "color2": "#f5f5f0", "count": 9, "angle": 35, "speed": 1, "resolution": 0.5}
+</script>
+</div>
+<style>
+.blk-backgrounds-pattern{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-backgrounds-pattern canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P;
+  var KEPALA = [
+    "void main(){vec2 p=(gl_FragCoord.xy-.5*u_res)/u_res.y;float t=u_t*u_kec;vec3 col;float pi=3.14159;"
+  ].join("\n");
+  var GAYA = {
+    "line": [
+    "vec2 dir=vec2(cos(u_sd),sin(u_sd));float v=dot(p,dir)*u_n-t*.6;float s=sin(v*2.*pi);float m=clamp(.5+.5*s/(2.*pi*u_n/u_res.y*1.2),0.,1.);",
+    "col=mix(u_c1,u_c2,m);"
+  ].join("\n"),
+    "spiral": [
+    "float r=length(p);float a=atan(p.y,p.x);float v=a/(2.*pi)*floor(max(u_n*.25,1.))+r*u_n*.6-t*.35;float s=sin(v*2.*pi);",
+    "float w=2.*pi*(u_n*.6+.5/max(r,.02))/u_res.y*1.2;float m=clamp(.5+.5*s/w,0.,1.);col=mix(u_c1,u_c2,m);"
+  ].join("\n"),
+    "prism": [
+    "float rot=.18*sin(t*.35);mat2 R=mat2(cos(rot),-sin(rot),sin(rot),cos(rot));vec2 q=R*p;col=u_c1;",
+    "float d=abs(q.y);if(q.x<0.){col+=u_c2*(smoothstep(.006,.0,d)+.35*exp(-d*28.))*smoothstep(-1.2,-.4,q.x);}",
+    "if(q.x>0.){float an=atan(q.y,q.x);float rel=an/.36;float L=length(q);",
+    "if(abs(rel)<1.15){float h=(rel*.5+.5)*.78+.02*sin(t*.4);float k=smoothstep(1.15,.85,abs(rel))*(.55+.45*exp(-L*1.2));col+=hsv2rgb(vec3(h,.85,1.))*k*.9;}}",
+    "vec2 tq=q/.16;float tri=max(abs(tq.x)*.866+tq.y*.5,-tq.y)-.5;col=mix(col,u_c1*.6+u_c2*.12,smoothstep(.02,0.,tri)*.85);",
+    "col+=u_c2*smoothstep(.035,0.,abs(tri))*.9;"
+  ].join("\n")
+  };
+  var EKOR = [
+    "col+=(h21(gl_FragCoord.xy+fract(u_t))-0.5)/128.;gl_FragColor=vec4(col,1.);}"
+  ].join("\n");
+  var cv = BLOCK.el("canvas", null, k.root);
+  var r = Math.max(0.1, Math.min(1, +P.resolution || 0.5));
+  cv.width = Math.round(k.w * r); cv.height = Math.round(k.h * r);
+  var sh = BLOCK.shader(cv, KEPALA + "\n" + (GAYA[P.style] || GAYA["line"]) + "\n" + EKOR, { u_c1: BLOCK.vec3(P.color1), u_c2: BLOCK.vec3(P.color2), u_n: Math.max(1, +P.count), u_sd: (+P.angle || 0) * Math.PI / 180, u_kec: +P.speed });
+  if (!sh.ok) { cv.remove(); k.root.style.background = "repeating-linear-gradient(" + (90 - P.angle) + "deg," + P.color1 + " 0 40px," + P.color2 + " 40px 80px)"; return; }
+  BLOCK.onTime(k.tl, function (t) { sh.draw(t); }, k.dur);
+});
+</script>

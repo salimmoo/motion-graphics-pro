@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Follow · block example social/follow</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="5.5">
+<div id="adegan" class="adegan ad-foto"><div class="mth"></div><div class="bk1"></div><div class="bk2"></div><div class="tanah"></div><div class="sosok"></div></div>
+<!-- Block social/follow · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-follow" data-block="social/follow" data-start="0" data-duration="5" data-track-index="30" class="blk blk-social-follow">
+<script type="application/json" data-block-props>
+{"platform": "instagram", "layout": "auto", "name": "Dapur Nusantara", "account": "@dapurnusantara", "followers": 128400, "caption": "Resep rumahan tiap Jumat", "button_text": "Ikuti", "after_text": "Mengikuti", "cursor": true, "theme": "light", "position": "center", "font": "Inter:wght@400;500;700;800"}
+</script>
+</div>
+<style>
+.blk-social-follow{position:absolute;inset:0;pointer-events:none}
+.blk-social-follow .blk-pos{position:absolute;width:max-content;transform:translate(-50%,-50%)}
+.blk-social-follow .blk-kar{position:relative;box-sizing:border-box;display:flex;align-items:center;gap:calc(var(--s)*28px);padding:calc(var(--s)*30px) calc(var(--s)*34px);border-radius:calc(var(--s)*30px);box-shadow:0 calc(var(--s)*24px) calc(var(--s)*70px) rgba(0,0,0,.3);white-space:nowrap;line-height:1.2}
+.blk-social-follow .blk-kartu{flex-direction:column;text-align:center;width:calc(var(--s)*560px);padding:calc(var(--s)*48px) calc(var(--s)*40px)}
+.blk-social-follow .blk-av{position:relative;flex:none;width:calc(var(--s)*120px);height:calc(var(--s)*120px);border-radius:50%;padding:calc(var(--s)*6px);box-sizing:border-box}
+.blk-social-follow .blk-kartu .blk-av{width:calc(var(--s)*180px);height:calc(var(--s)*180px);padding:calc(var(--s)*8px)}
+.blk-social-follow .blk-avi{width:100%;height:100%;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:calc(var(--s)*44px);box-shadow:0 0 0 calc(var(--s)*5px) var(--bg)}
+.blk-social-follow .blk-nm{font-weight:800;font-size:calc(var(--s)*40px)}
+.blk-social-follow .blk-ak{font-size:calc(var(--s)*28px);opacity:.62;margin-top:calc(var(--s)*4px)}
+.blk-social-follow .blk-ket{font-size:calc(var(--s)*28px);opacity:.8;margin-top:calc(var(--s)*12px)}
+.blk-social-follow .blk-png{font-size:calc(var(--s)*28px);margin-top:calc(var(--s)*8px);font-variant-numeric:tabular-nums}
+.blk-social-follow .blk-png b{font-weight:800}
+.blk-social-follow .blk-tb{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:calc(var(--s)*12px);font-weight:700;font-size:calc(var(--s)*32px);padding:calc(var(--s)*18px) calc(var(--s)*44px);border-radius:var(--rt);min-width:calc(var(--s)*220px)}
+.blk-social-follow .blk-kartu .blk-tb{margin-top:calc(var(--s)*30px);width:100%;box-sizing:border-box}
+.blk-social-follow .blk-tb>span{display:block}
+.blk-social-follow .blk-t2{position:absolute}
+.blk-social-follow .blk-krs{position:absolute;left:0;top:0;width:calc(var(--s)*54px);height:calc(var(--s)*54px);filter:drop-shadow(0 calc(var(--s)*4px) calc(var(--s)*6px) rgba(0,0,0,.4))}
+.blk-social-follow .blk-lonceng{width:calc(var(--s)*44px);height:calc(var(--s)*44px)}
+</style>
+<script>
+(function () {
+// tunggu font benar-benar termuat sebelum mengukur teks (stylesheet Google Fonts + FontFace)
+function blkTungguFont(spek, berat) {
+  var fam = String(spek || "").split(":")[0];
+  if (!fam || !document.fonts || !document.fonts.load) return Promise.resolve();
+  var ls = Array.prototype.filter.call(document.querySelectorAll('link[href*="fonts.googleapis"]'), function (l) { return l.href.indexOf(fam.replace(/ /g, "+")) >= 0; });
+  return Promise.all(ls.map(function (l) { return l.sheet ? 0 : new Promise(function (r) { l.addEventListener("load", r); l.addEventListener("error", r); }); }))
+    .then(function () { return document.fonts.load((berat || 700) + ' 64px "' + fam + '"'); }).catch(function () {});
+}
+BLOCK.mount("blk-follow", function (k) {
+  return blkTungguFont(k.P.font, 700).then(function () { bangun(k); });
+}, { font: true });
+function bangun(k) {
+  var P = k.P, tl = k.tl, s = k.s, D = k.dur, E = BLOCK.el, R = k.root, pf = P.platform;
+  var skema = {
+    instagram: { bg: "#ffffff", fg: "#111", tb: "#0095f6", tf: "#fff", rt: "12px", cin: "conic-gradient(from 200deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5,#feda75)", av: "#d62976" },
+    tiktok: { bg: "#121212", fg: "#fff", tb: "#fe2c55", tf: "#fff", rt: "8px", cin: "linear-gradient(135deg,#25f4ee,#fe2c55)", av: "#2a2a2a" },
+    x: { bg: "#000000", fg: "#e7e9ea", tb: "#eff3f4", tf: "#0f1419", rt: "999px", cin: "#2f3336", av: "#1d9bf0" },
+    youtube: { bg: "#ffffff", fg: "#0f0f0f", tb: "#e62117", tf: "#fff", rt: "999px", cin: "transparent", av: "#cc2d2d" }
+  }[pf] || {};
+  if (P.theme === "dark" && (pf === "instagram" || pf === "youtube")) { skema.bg = "#181818"; skema.fg = "#f1f1f1";  }
+  if (pf === "youtube" && P.button_text === "Ikuti") { P.button_text = "Langganan"; P.after_text = "Berlangganan"; }
+  var tata = P.layout === "auto" ? (pf === "youtube" ? "label" : "card") : P.layout;
+  R.style.cssText += ";--s:" + s + ";--bg:" + skema.bg + ";--rt:" + (skema.rt === "999px" ? "999px" : Math.round(parseFloat(skema.rt) * s * 1.4) + "px");
+  var px = { center: "50%;top:50%", "bottom-left": "30%;top:80%", "bottom-right": "70%;top:80%" }[P.position] || "50%;top:50%";
+  if (tata === "label" && P.position === "center") px = "50%;top:80%";
+  var pos = E("div", { class: "blk-pos", style: "left:" + px }, R);
+  var kar = E("div", { class: "blk-kar" + (tata === "card" ? " blk-kartu" : ""), style: "background:" + skema.bg + ";color:" + skema.fg + ";font-family:" + BLOCK.family(P.font) }, pos);
+  var ini = String(P.name).split(/\s+/).map(function (w) { return w[0]; }).join("").slice(0, 2).toUpperCase();
+  var av = E("div", { class: "blk-av", style: "background:" + skema.cin }, kar);
+  E("div", { class: "blk-avi", style: "background:radial-gradient(circle at 35% 30%," + BLOCK.mix(skema.av, "#ffffff", 0.35) + "," + skema.av + ")" }, av, ini);
+  var info = E("div", { style: tata === "card" ? "margin-top:" + Math.round(22 * s) + "px" : "flex:1" }, kar);
+  E("div", { class: "blk-nm" }, info, BLOCK.esc(P.name));
+  E("div", { class: "blk-ak" }, info, BLOCK.esc(P.account));
+  var png = E("div", { class: "blk-png" }, info), angka = E("b", null, png);
+  E("span", null, png, " " + (pf === "youtube" ? "pelanggan" : "pengikut"));
+  if (tata === "card" && P.caption) E("div", { class: "blk-ket" }, info, BLOCK.esc(P.caption));
+  var tb = E("div", { class: "blk-tb", style: "background:" + skema.tb + ";color:" + skema.tf }, kar);
+  var lon = pf === "youtube" ? '<svg class="blk-lonceng" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>' : "";
+  var t1 = E("span", null, tb, BLOCK.esc(P.button_text)), t2 = E("span", { class: "blk-t2" }, tb, BLOCK.esc(P.after_text));
+  var bel = null;
+  if (lon) { t2.style.cssText = "display:flex;align-items:center;gap:" + Math.round(10 * s) + "px"; t2.insertAdjacentHTML("afterbegin", lon); bel = t2.firstChild; }
+  // masuk
+  tl.fromTo(kar, { y: 60 * s, scale: 0.85, autoAlpha: 0 }, { y: 0, scale: 1, autoAlpha: 1, duration: 0.7, ease: "back.out(1.6)" }, 0.1);
+  tl.fromTo(av, { scale: 0, rotation: -40 }, { scale: 1, rotation: 0, duration: 0.6, ease: "back.out(2)" }, 0.3);
+  tl.fromTo(info.children, { y: 16 * s, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.45, ease: "power3.out", stagger: 0.07 }, 0.45);
+  tl.fromTo(tb, { scale: 0.7, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.5, ease: "back.out(2.2)" }, 0.7);
+  BLOCK.initial(tl, t2, { autoAlpha: 0, yPercent: 100 });
+  var o = { v: P.followers * 0.97 };
+  function fmt(v) { v = Math.round(v); return v >= 1e6 ? (v / 1e6).toFixed(1).replace(".", ",") + " jt" : v >= 1e4 ? (v / 1e3).toFixed(1).replace(".", ",") + " rb" : v.toLocaleString("id-ID"); }
+  function tulis() { angka.textContent = fmt(o.v); }
+  tl.fromTo(o, { v: P.followers * 0.97 }, { v: P.followers, duration: 1.4, ease: "power2.out", onUpdate: tulis }, 0.6);
+  tulis();
+  // klik: kursor datang, tombol tertekan, status berganti
+  var tk = Math.min(2.1, D * 0.42);
+  if (P.cursor) {
+    var krs = E("div", { class: "blk-krs" }, pos, '<svg viewBox="0 0 24 24"><path d="M5 3l14 8-6 1.6L10 19z" fill="#fff" stroke="#111" stroke-width="1.4" stroke-linejoin="round"/></svg>');
+    var bx = tb.offsetLeft + kar.offsetLeft + tb.offsetWidth * 0.62, by = tb.offsetTop + kar.offsetTop + tb.offsetHeight * 0.55;
+    tl.fromTo(krs, { x: bx + 260 * s, y: by + 220 * s, autoAlpha: 0 }, { x: bx, y: by, autoAlpha: 1, duration: 0.8, ease: "power3.inOut" }, tk - 0.8)
+      .to(krs, { scale: 0.85, duration: 0.08, yoyo: true, repeat: 1 }, tk)
+      .to(krs, { x: bx + 180 * s, y: by + 160 * s, autoAlpha: 0, duration: 0.6, ease: "power2.in" }, tk + 0.6);
+  }
+  tl.to(tb, { scale: 0.92, duration: 0.08, ease: "power1.out" }, tk).to(tb, { scale: 1, duration: 0.45, ease: "back.out(3)" }, tk + 0.08);
+  tl.to(t1, { autoAlpha: 0, yPercent: -100, duration: 0.25, ease: "power2.in" }, tk + 0.04).to(t2, { autoAlpha: 1, yPercent: 0, duration: 0.3, ease: "power2.out" }, tk + 0.12);
+  var abu = P.theme === "dark" || skema.bg === "#000000" || skema.bg === "#121212" ? "#2f3336" : "#efefef", abuF = abu === "#efefef" ? "#111" : "#fff";
+  tl.to(tb, { backgroundColor: abu, color: abuF, duration: 0.3 }, tk + 0.08);
+  if (bel) {
+    tl.fromTo(bel, { rotation: 0, transformOrigin: "50% 10%" }, { rotation: 18, duration: 0.09, yoyo: true, repeat: 5, ease: "sine.inOut" }, tk + 0.3);
+  }
+  tl.to(o, { v: P.followers + 1, duration: 0.01, onUpdate: tulis }, tk + 0.2);
+  tl.fromTo(png, { scale: 1 }, { scale: 1.08, duration: 0.15, yoyo: true, repeat: 1, immediateRender: false }, tk + 0.2);
+  tl.fromTo(av, { scale: 1 }, { scale: 1.04, duration: Math.max(0.5, D - tk - 1.2), ease: "sine.inOut", immediateRender: false }, tk + 0.4);
+  tl.to(kar, { y: 40 * s, autoAlpha: 0, duration: 0.45, ease: "power2.in" }, D - 0.5);
+}
+})();
+</script>
+</div>
+<script>
+  window.__duration = 5.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5.5);
+</script>
+</body>
+</html>

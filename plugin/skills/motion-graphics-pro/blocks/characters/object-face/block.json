@@ -1,0 +1,136 @@
+{
+ "id": "characters/object-face",
+ "name": "Object Face",
+ "name_id": "Benda Berwajah",
+ "category": "characters",
+ "description": {
+  "id": "Benda sehari-hari hidup dengan wajah chibi: cangkir kopi, kardus, ponsel, pot, atau bola. Suasana hati berganti pada detik yang ditentukan (mata bergerak dulu, badan memampat lalu memantul), lengkap dengan kedip, lompatan, uap, dan emote.",
+  "en": "Everyday objects come alive with a chibi face: cup, box, phone, pot or ball. Moods change on cue (eyes lead, body squashes and bounces) with blinks, jumps, steam and emotes."
+ },
+ "tags": [
+  "tokoh",
+  "personifikasi",
+  "chibi",
+  "maskot",
+  "wajah",
+  "benda",
+  "ekspresi",
+  "characters",
+  "object",
+  "face"
+ ],
+ "props": {
+  "object": {
+   "default": "cup",
+   "type": "enum",
+   "options": [
+    "cup",
+    "box",
+    "phone",
+    "pot",
+    "ball"
+   ],
+   "aliases": [
+    "benda"
+   ],
+   "option_aliases": {
+    "cangkir": "cup",
+    "kardus": "box",
+    "ponsel": "phone",
+    "bola": "ball"
+   }
+  },
+  "mood": {
+   "default": [
+    [
+     0,
+     "normal"
+    ],
+    [
+     2,
+     "senang"
+    ],
+    [
+     4.4,
+     "kaget"
+    ]
+   ],
+   "type": "list",
+   "hint": "[[detik, normal|senang|sedih|kaget|marah], ...]",
+   "aliases": [
+    "suasana"
+   ]
+  },
+  "jump": {
+   "default": [
+    4.4
+   ],
+   "type": "list",
+   "hint": "Detik lompatan",
+   "aliases": [
+    "lompat"
+   ]
+  },
+  "scene": {
+   "default": "cafe",
+   "type": "enum",
+   "options": [
+    "cafe",
+    "plain",
+    "none"
+   ],
+   "hint": "Latar bawaan modul",
+   "aliases": [
+    "adegan"
+   ],
+   "option_aliases": {
+    "kafe": "cafe",
+    "polos": "plain",
+    "tanpa": "none"
+   }
+  },
+  "steam": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Uap di atas benda (cangkir)",
+   "aliases": [
+    "uap"
+   ]
+  },
+  "emote": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Emote kecil saat suasana berganti"
+  },
+  "scale": {
+   "default": 0.86,
+   "type": "number",
+   "aliases": [
+    "skala"
+   ]
+  },
+  "position_x": {
+   "default": 0,
+   "type": "number",
+   "hint": "Geser horizontal (px logis)",
+   "aliases": [
+    "posisi_x"
+   ]
+  }
+ },
+ "duration": 7,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [
+  "lib:mgp.js"
+ ],
+ "aliases": [
+  "tokoh/benda-berwajah"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

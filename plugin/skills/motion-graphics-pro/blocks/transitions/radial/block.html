@@ -1,0 +1,46 @@
+<!-- Block transitions/radial · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/radial" data-start="0" data-duration="1.1" data-track-index="20" class="blk blk-transitions-radial">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "mode": "clock", "segment": 6, "position_x": 50, "position_y": 50, "start_angle": 0, "opposite": false, "line": true, "accent_color": "#ffffff", "ease": "power2.inOut"}
+</script>
+</div>
+<style>
+.blk-transitions-radial{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-transitions-radial .blk-jarum{position:absolute;transform-origin:50% 100%;opacity:0}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to), D = k.dur, W = k.w, H = k.h, s = k.s;
+  function gaya(el, o) { if (el) for (var n in o) el.style[n] = o[n]; }
+  function bersih(el, tampil) { gaya(el, { transform: "", filter: "", opacity: "", clipPath: "", webkitMaskImage: "", maskImage: "", transformOrigin: "", zIndex: "", borderRadius: "", boxShadow: "", backfaceVisibility: "", visibility: tampil ? "" : "hidden" }); }
+  function ez(n) { return gsap.parseEase(n || "none") || gsap.parseEase("none"); }
+  var E = ez(P.ease), pos = P.position_x + "% " + P.position_y + "%", a0 = +P.start_angle || 0, dir = P.opposite ? -1 : 1;
+  var cx = W * P.position_x / 100, cy = H * P.position_y / 100, L = Math.hypot(Math.max(cx, W - cx), Math.max(cy, H - cy)) + 4;
+  var N = Math.max(2, Math.round(+P.segment || 6)), seg = 360 / N, tb = 4 * s;
+  var jr = [];
+  for (var i = 0; P.line && i < (P.mode === "fan" ? 2 : P.mode === "rays" ? N : 1); i++)
+    jr.push(BLOCK.el("div", { class: "blk-jarum", style: "left:" + (cx - tb / 2) + "px;top:" + (cy - L) + "px;width:" + tb + "px;height:" + L + "px;background:linear-gradient(0deg," + BLOCK.rgba(P.accent_color, 0) + "," + P.accent_color + " 30%);box-shadow:0 0 " + 18 * s + "px " + BLOCK.rgba(P.accent_color, 0.7) }, k.root));
+  function mask(el, m) { gaya(el, { webkitMaskImage: m, maskImage: m }); }
+  BLOCK.onTime(tl, function (t) {
+    var u = t / D;
+    jr.forEach(function (j) { j.style.opacity = 0; });
+    if (u <= 0 || u >= 1) { bersih(A, u <= 0); bersih(Bk, u >= 1); return; }
+    var q = E(u), f = 0.6, m, ang, op = 1 - BLOCK.progress(u, 0.85, 1);
+    gaya(A, { visibility: "" }); gaya(Bk, { visibility: "" });
+    if (P.mode === "rays") {
+      ang = q * seg;
+      m = "repeating-conic-gradient(from " + (dir > 0 ? a0 : a0 - ang) + "deg at " + pos + ", #000 0deg " + ang + "deg, transparent " + (ang + f) + "deg " + seg + "deg)";
+      jr.forEach(function (j, i) { gaya(j, { opacity: op, transform: "rotate(" + (a0 + i * seg + dir * ang) + "deg)" }); });
+    } else if (P.mode === "fan") {
+      ang = q * (360 + f);
+      m = "conic-gradient(from " + (a0 + 180 - ang / 2) + "deg at " + pos + ", #000 0deg " + ang + "deg, transparent " + (ang + f) + "deg)";
+      jr.forEach(function (j, i) { gaya(j, { opacity: op, transform: "rotate(" + (a0 + 180 + (i ? 1 : -1) * ang / 2) + "deg)" }); });
+    } else {
+      ang = q * (360 + f);
+      m = "conic-gradient(from " + (dir > 0 ? a0 : a0 - ang) + "deg at " + pos + ", #000 0deg " + ang + "deg, transparent " + (ang + f) + "deg)";
+      if (jr[0]) gaya(jr[0], { opacity: op, transform: "rotate(" + (a0 + dir * ang) + "deg)" });
+    }
+    mask(Bk, m);
+  }, D);
+});
+</script>

@@ -1,0 +1,123 @@
+{
+ "id": "logos/extrusion",
+ "name": "Extrusion",
+ "name_id": "Logo Ekstrusi 3D",
+ "category": "logos",
+ "description": {
+  "id": "Wordmark 3D dari lapisan CSS bertumpuk (tanpa pustaka 3D): huruf berbevel terbalik naik satu per satu, kata berayun sehingga cahaya menyapu permukaan, lalu tenang dan terbaca. Material krom, emas, atau matte, dengan tanda kotak atau lingkaran ikut terekstrusi.",
+  "en": "3D wordmark built from stacked CSS layers (no 3D library): bevelled letters flip up one by one, the word swings so light runs across the faces, then settles for a readable hold. Chrome, gold or matte, with an optional extruded square or circle mark."
+ },
+ "tags": [
+  "logo",
+  "3d",
+  "ekstrusi",
+  "wordmark",
+  "krom",
+  "emas",
+  "css-3d",
+  "logos",
+  "extrusion"
+ ],
+ "props": {
+  "brand_name": {
+   "default": "BAJA",
+   "type": "text",
+   "aliases": [
+    "nama_merek"
+   ]
+  },
+  "shape": {
+   "default": "box",
+   "type": "enum",
+   "options": [
+    "box",
+    "circle",
+    "none"
+   ],
+   "hint": "Tanda terekstrusi di depan wordmark",
+   "aliases": [
+    "bentuk"
+   ],
+   "option_aliases": {
+    "kotak": "box",
+    "lingkaran": "circle",
+    "tanpa": "none"
+   }
+  },
+  "material": {
+   "default": "chrome",
+   "type": "enum",
+   "options": [
+    "chrome",
+    "gold",
+    "matte"
+   ],
+   "option_aliases": {
+    "krom": "chrome",
+    "emas": "gold"
+   }
+  },
+  "color": {
+   "default": "#ff5a36",
+   "type": "color",
+   "hint": "Warna material matte",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "bg": {
+   "default": "#0b0c10",
+   "type": "color",
+   "hint": "Kosong = transparan",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "depth": {
+   "default": 16,
+   "type": "number",
+   "hint": "Jumlah lapisan ekstrusi",
+   "aliases": [
+    "kedalaman"
+   ]
+  },
+  "font": {
+   "default": "Archivo Black",
+   "type": "font"
+  },
+  "size": {
+   "default": 260,
+   "type": "number",
+   "hint": "Ukuran wordmark (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "highlight": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Sapuan cahaya di permukaan",
+   "aliases": [
+    "sorot"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "logo/ekstrusi",
+  "extruded-logo"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Archivo Black"
+  ]
+ }
+}

@@ -1,0 +1,25 @@
+<!-- Block paper/kresling · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="paper/kresling" data-start="0" data-duration="6" data-track-index="4" class="blk blk-paper-kresling">
+<script type="application/json" data-block-props>
+{"motion": "pingpong", "front_color": "#f2d796", "back_color": "#9c7a3c", "side": 6, "level": 3, "rotate": -10, "bg": "color", "bg_color": "#1c2236", "size": 0.8, "ease": "pegas.sigap", "label": false}
+</script>
+</div>
+<style>
+.blk-paper-kresling{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.blk-paper-kresling .blk-wadah{position:absolute;inset:0}
+.blk-paper-kresling canvas{position:absolute;inset:0;width:100% !important;height:100% !important}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P;
+  if (!window.MGP || !MGP.foldPattern) { console.error("[blok] paper/kresling needs lib:mgp.js"); return; }
+  // ukuran logis: sisi pendek 720, piksel kanvas = resolusi penuh lewat dpr
+  var f = Math.min(k.w, k.h) / 720, W = Math.round(k.w / f), H = Math.round(k.h / f);
+  var wadah = BLOCK.el("div", { class: "blk-wadah" }, k.root);
+  var inst = MGP.foldPattern.create(wadah, { width: W, height: H, dpr: f, fit: true, duration: k.dur, pattern: "kresling", N: +P.side || 6, levels: +P.level || 3, rotate: +P.rotate || 0,
+    motion: P.motion, start: Math.min(0.5, k.dur * 0.08), foldDuration: Math.max(0.6, k.dur * (P.motion === "pingpong" ? 0.36 : 0.5)), ease: P.ease,
+    front: P.front_color, back: P.back_color, size: +P.size || 0.8, label: !!P.label,
+    bg: P.bg === "color" ? P.bg_color : null, shadow: P.bg === "color" });
+  return Promise.resolve(inst.ready).then(function () { BLOCK.onTime(k.tl, function (t) { inst.seek(t); }, k.dur); });
+}, { font: true });
+</script>

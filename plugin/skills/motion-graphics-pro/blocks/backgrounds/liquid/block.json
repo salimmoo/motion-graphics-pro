@@ -1,0 +1,87 @@
+{
+ "id": "backgrounds/liquid",
+ "name": "Liquid",
+ "name_id": "Permukaan Cairan",
+ "category": "backgrounds",
+ "description": {
+  "id": "Permukaan cairan organik beriak dalam perspektif: gelombang bertumpuk, kilau spekular, dan pantulan fresnel. Konten bisa diletakkan mengambang di atasnya.",
+  "en": "An organic liquid surface ripples in perspective: layered waves, specular glints and fresnel sheen. Content can float above it."
+ },
+ "tags": [
+  "latar",
+  "background",
+  "cairan",
+  "liquid",
+  "air",
+  "gelombang",
+  "shader",
+  "webgl",
+  "organik",
+  "backgrounds"
+ ],
+ "props": {
+  "color": {
+   "default": "#0b5c7a",
+   "type": "color",
+   "hint": "Warna cairan",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "inner_color": {
+   "default": "#071a33",
+   "type": "color",
+   "hint": "Warna jauh / dalam",
+   "aliases": [
+    "warna_dalam"
+   ]
+  },
+  "highlight_color": {
+   "default": "#c9f6ff",
+   "type": "color",
+   "hint": "Warna kilau",
+   "aliases": [
+    "warna_sorot"
+   ]
+  },
+  "wave": {
+   "default": 1,
+   "type": "number",
+   "hint": "Tinggi gelombang",
+   "aliases": [
+    "gelombang"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali kecepatan gerak",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "resolution": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Skala resolusi shader (0.25-1); kecil = lebih cepat",
+   "aliases": [
+    "resolusi"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "latar/cairan",
+  "vfx-liquid-background"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

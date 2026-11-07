@@ -1,0 +1,120 @@
+{
+ "id": "paper/freeze-dress",
+ "name": "Freeze Dress",
+ "name_id": "Dandan Beku Bingkai",
+ "category": "paper",
+ "description": {
+  "id": "Hiasan freeze-frame ala kolase kertas: kilat putih membekukan adegan, bingkai kertas sobek menempel di sekitar sosok, selotip ditampar ke sudutnya, garis kejut dan coretan tangan tergambar (bergetar 8 fps), lalu sobekan kertas berlabel meletup. Mengikuti kotak elemen sasaran.",
+  "en": "Paper-collage freeze-frame dressing: a white flash freezes the shot, a torn paper frame sticks around the subject, tape slaps onto its corners, burst lines and hand scribbles draw on (boiling at 8 fps), then a labelled paper scrap pops. Follows the target element's box."
+ },
+ "tags": [
+  "kertas",
+  "freeze frame",
+  "kolase",
+  "selotip",
+  "coretan",
+  "kilat",
+  "paper",
+  "scrapbook",
+  "freeze",
+  "dress"
+ ],
+ "props": {
+  "target": {
+   "default": "#adegan .sosok",
+   "type": "selector",
+   "hint": "Elemen yang dihias (kotaknya dipakai)"
+  },
+  "scene": {
+   "default": "#adegan",
+   "type": "selector",
+   "hint": "Adegan yang dibekukan (diberi warna beku); kosong = tidak",
+   "aliases": [
+    "adegan"
+   ]
+  },
+  "label": {
+   "default": "ITU DIA!",
+   "type": "text"
+  },
+  "paper_color": {
+   "default": "#f6efe0",
+   "type": "color",
+   "aliases": [
+    "warna_kertas"
+   ]
+  },
+  "scribble_color": {
+   "default": "#ffd23f",
+   "type": "color",
+   "aliases": [
+    "warna_coretan"
+   ]
+  },
+  "tape_color": {
+   "default": "#e9dcb8",
+   "type": "color",
+   "aliases": [
+    "warna_selotip"
+   ]
+  },
+  "label_color": {
+   "default": "#e8443a",
+   "type": "color",
+   "aliases": [
+    "warna_label"
+   ]
+  },
+  "loose": {
+   "default": 0.35,
+   "type": "number",
+   "hint": "Ruang bingkai di sekitar sasaran (x lebar sasaran)",
+   "aliases": [
+    "longgar"
+   ]
+  },
+  "flash": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "kilat"
+   ]
+  },
+  "exit": {
+   "default": false,
+   "type": "boolean",
+   "hint": "Semua hiasan lepas di akhir",
+   "aliases": [
+    "keluar"
+   ]
+  },
+  "font": {
+   "default": "Permanent Marker:wght@400",
+   "type": "font"
+  },
+  "seed": {
+   "default": 9,
+   "type": "number"
+  }
+ },
+ "duration": 4,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "kertas/dandan-beku",
+  "freeze-frame-dressing"
+ ],
+ "example": {
+  "bg": "photo",
+  "start": 0.5,
+  "font": [
+   "Permanent Marker",
+   "Inter:wght@400;500;600;700;800;900"
+  ]
+ }
+}

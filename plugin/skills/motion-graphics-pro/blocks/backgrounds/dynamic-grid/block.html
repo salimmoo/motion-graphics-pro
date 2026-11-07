@@ -1,0 +1,61 @@
+<!-- Block backgrounds/dynamic-grid · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="backgrounds/dynamic-grid" data-start="0" data-duration="8" data-track-index="0" class="blk blk-backgrounds-dynamic-grid">
+<script type="application/json" data-block-props>
+{"mode": "flat", "color": "#3b82f6", "bg": "#060a14", "cell_size": 72, "highlight": true, "speed": 1}
+</script>
+</div>
+<style>
+.blk-backgrounds-dynamic-grid{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-backgrounds-dynamic-grid canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P;
+  var K = BLOCK.canvas(k.root, k.w, k.h), x = K.ctx;
+  var S = Math.max(16, +P.cell_size || 72) * k.s, C = P.color, persp = P.mode === "perspective";
+  function hs(a, b, c) { var s = Math.sin(a * 127.1 + b * 311.7 + c * 74.7) * 43758.5453; return s - Math.floor(s); }
+  function gambar(t) {
+    var tt = t * (+P.speed || 1);
+    x.globalAlpha = 1; x.fillStyle = P.bg; x.fillRect(0, 0, k.w, k.h);
+    x.strokeStyle = C; x.fillStyle = C;
+    if (!persp) {
+      var ox = (tt * 18 * k.s) % S, oy = (tt * 10 * k.s) % S, i0 = Math.floor(tt * 18 * k.s / S), j0 = Math.floor(tt * 10 * k.s / S);
+      var nx = Math.ceil(k.w / S) + 2, ny = Math.ceil(k.h / S) + 2, i, j;
+      // sel menyala: tiap sel punya siklus sendiri, nyala-padam halus
+      if (P.highlight) for (i = -1; i < nx; i++) for (j = -1; j < ny; j++) {
+        var ci = i + i0, cj = j + j0, h = hs(ci, cj, 1), per = 2.5 + h * 3, fz = (tt / per + hs(ci, cj, 2)) % 1, sik = Math.floor(tt / per + hs(ci, cj, 2));
+        if (hs(ci, cj, sik) < 0.965) continue;
+        x.globalAlpha = 0.3 * Math.sin(Math.PI * fz); x.fillRect(i * S - ox + 1, j * S - oy + 1, S - 2, S - 2);
+      }
+      x.lineWidth = Math.max(1, k.s);
+      for (i = -1; i < nx; i++) { x.globalAlpha = (i + i0) % 4 === 0 ? 0.45 : 0.2; x.beginPath(); x.moveTo(i * S - ox, 0); x.lineTo(i * S - ox, k.h); x.stroke(); }
+      for (j = -1; j < ny; j++) { x.globalAlpha = (j + j0) % 4 === 0 ? 0.45 : 0.2; x.beginPath(); x.moveTo(0, j * S - oy); x.lineTo(k.w, j * S - oy); x.stroke(); }
+      // denyut cahaya berjalan di sepanjang garis
+      for (j = -1; j < ny; j++) {
+        var hj = hs(j + j0, 5, 0); if (hj < 0.7) continue;
+        var L = k.w * 0.25, px = ((tt * (0.25 + hj * 0.35) * k.w + hj * 9e3) % (k.w + L)) - L, y = j * S - oy;
+        var g = x.createLinearGradient(px, 0, px + L, 0); g.addColorStop(0, BLOCK.rgba(C, 0)); g.addColorStop(1, BLOCK.rgba(C, 1));
+        x.globalAlpha = 0.9; x.strokeStyle = g; x.lineWidth = 2 * k.s; x.beginPath(); x.moveTo(px, y); x.lineTo(px + L, y); x.stroke();
+        x.fillStyle = C; x.beginPath(); x.arc(px + L, y, 3 * k.s, 0, 6.283); x.fill();
+      }
+    } else {
+      var hz = k.h * 0.42, cx = k.w / 2, F = k.h * 0.58, cam = tt * 1.2, n, z;
+      x.lineWidth = Math.max(1, 1.4 * k.s); x.strokeStyle = C;
+      for (n = -24; n <= 24; n++) { x.globalAlpha = n % 4 === 0 ? 0.5 : 0.22; x.beginPath(); x.moveTo(cx + n * 0.004 * k.w, hz); x.lineTo(cx + n * 0.12 * k.w * 2.2, k.h * 1.6); x.stroke(); }
+      for (n = 0; n < 40; n++) {
+        z = n + 1 - (cam % 1); var y = hz + F / z * 0.6; if (y > k.h + 4) continue;
+        x.globalAlpha = Math.min(1, 1.6 / Math.sqrt(z)) * ((n + Math.floor(cam)) % 4 === 0 ? 0.6 : 0.3);
+        x.beginPath(); x.moveTo(0, y); x.lineTo(k.w, y); x.stroke();
+      }
+      var g3 = x.createLinearGradient(0, hz - k.h * 0.12, 0, hz + k.h * 0.1);
+      g3.addColorStop(0, BLOCK.rgba(P.bg, 1)); g3.addColorStop(0.55, BLOCK.rgba(C, 0.25)); g3.addColorStop(1, BLOCK.rgba(P.bg, 0));
+      x.globalAlpha = 1; x.fillStyle = g3; x.fillRect(0, 0, k.w, hz + k.h * 0.1);
+    }
+    var v = x.createRadialGradient(k.w / 2, k.h / 2, Math.min(k.w, k.h) * 0.3, k.w / 2, k.h / 2, Math.hypot(k.w, k.h) * 0.6);
+    v.addColorStop(0, BLOCK.rgba(P.bg, 0)); v.addColorStop(1, BLOCK.rgba(P.bg, 0.85));
+    x.globalAlpha = 1; x.fillStyle = v; x.fillRect(0, 0, k.w, k.h);
+  }
+  BLOCK.onTime(k.tl, gambar, k.dur);
+});
+</script>

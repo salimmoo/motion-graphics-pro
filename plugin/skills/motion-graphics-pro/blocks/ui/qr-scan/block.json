@@ -1,0 +1,89 @@
+{
+ "id": "ui/qr-scan",
+ "name": "QR Scan",
+ "name_id": "Pindai Kode QR",
+ "category": "ui",
+ "description": {
+  "id": "Momen kamera mengenali kode QR: jendela bidik bergoyang tangan, garis sapu bolak-balik, braket menyempit dan mengunci ke kode dengan pegas, denyut konfirmasi, lalu kartu Terverifikasi naik sebagai langkah berikutnya.",
+  "en": "A camera QR recognition moment: handheld viewfinder, sweeping scan line, brackets spring-lock onto the code, confirmation pulse, then a verified card rises as the next beat."
+ },
+ "tags": [
+  "ui",
+  "kamera",
+  "qr",
+  "scan",
+  "verifikasi",
+  "tiket",
+  "ponsel"
+ ],
+ "props": {
+  "hint": {
+   "default": "Arahkan kamera ke kode QR",
+   "type": "text",
+   "aliases": [
+    "petunjuk"
+   ]
+  },
+  "ok_title": {
+   "default": "Terverifikasi",
+   "type": "text",
+   "aliases": [
+    "judul_ok"
+   ]
+  },
+  "ok_sub": {
+   "default": "Tiket masuk · Gerbang B",
+   "type": "text",
+   "aliases": [
+    "sub_ok"
+   ]
+  },
+  "accent_color": {
+   "default": "#36e08a",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg": {
+   "default": "#1a2230",
+   "type": "color",
+   "hint": "Warna dasar latar kamera",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "lock": {
+   "default": 2.2,
+   "type": "number",
+   "hint": "Detik braket terkunci",
+   "aliases": [
+    "kunci"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700;800",
+   "type": "font"
+  },
+  "seed": {
+   "default": 21,
+   "type": "number",
+   "hint": "Pola kode QR"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/pindai-qr",
+  "camera-scan-gate"
+ ],
+ "example": {
+  "bg": "empty",
+  "aspect": "9:16"
+ }
+}

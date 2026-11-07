@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Cursor · block example ui/cursor</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="6.2">
+<div id="adegan" class="adegan ad-ui"><div class="bar"></div><div class="side"></div><div class="kartu" style="left:22%;top:12%;width:36%;height:38%"></div><div class="kartu" style="left:61%;top:12%;width:35%;height:38%"></div><div class="kartu" style="left:22%;top:54%;width:74%;height:40%"></div><div id="tombol-contoh" class="tombol" style="left:74%;top:40%;width:18%;height:7%">Simpan</div></div>
+<!-- Block ui/cursor · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-cursor" data-block="ui/cursor" data-start="0.3" data-duration="5.5" data-track-index="40" class="blk blk-ui-cursor">
+<script type="application/json" data-block-props>
+{"style": "labeled-agent", "dot": [{"x": 40, "y": 31, "klik": true, "label": "Membuka laporan bulanan"}, {"x": 58, "y": 72, "klik": false, "label": "Membaca ringkasan"}, {"sel": "#tombol-contoh", "x": 83, "y": 43.5, "klik": true, "label": "Menyimpan perubahan"}], "step_duration": 1.15, "name": "Asisten", "done_text": "Selesai", "target_label": "Tersimpan", "color": "#111827", "accent_color": "#6d4aff", "size": 1, "press_target": true, "font": "Inter:wght@500;600;700"}
+</script>
+<div class="blk-lap"></div>
+<div class="blk-c"><div class="blk-dot"></div><div class="blk-i"></div><div class="blk-lb"></div></div>
+</div>
+<style>
+.blk-ui-cursor{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-ui-cursor .blk-lap{position:absolute;inset:0}
+.blk-ui-cursor .blk-c{position:absolute;left:0;top:0;width:0;height:0}
+.blk-ui-cursor .blk-i{position:absolute;left:0;top:0;transform-origin:0 0}
+.blk-ui-cursor .blk-i svg{display:block;overflow:visible}
+.blk-ui-cursor .blk-dot{position:absolute;left:0;top:0;border-radius:999px;display:none}
+.blk-ui-cursor .blk-lb{position:absolute;white-space:nowrap;color:#fff;border-radius:999px;display:none;align-items:center;gap:.45em;transform-origin:0 0}
+.blk-ui-cursor .blk-lb b{font-weight:700}
+.blk-ui-cursor .blk-lb .blk-tx{opacity:.92;font-weight:500}
+.blk-ui-cursor .blk-ok{display:inline-flex;width:1.25em;height:1.25em;border-radius:50%;background:#fff;align-items:center;justify-content:center}
+.blk-ui-cursor .blk-ring{position:absolute;border-radius:50%}
+</style>
+<script>
+BLOCK.mount("blk-cursor", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, g = P.style, A = P.accent_color, R = k.root;
+  var rr = R.getBoundingClientRect(), fx = k.w / (rr.width || k.w), fy = k.h / (rr.height || k.h);
+  var T = (P.dot || []).map(function (p) {
+    var el = p.sel && BLOCK.find(p.sel), o = { x: (p.x == null ? 50 : p.x) / 100 * k.w, y: (p.y == null ? 50 : p.y) / 100 * k.h, p: p, w: 120 * s, h: 80 * s };
+    if (el) { var r = el.getBoundingClientRect(); o = { x: (r.left - rr.left + r.width / 2) * fx, y: (r.top - rr.top + r.height / 2) * fy, w: r.width * fx, h: r.height * fy, el: el, p: p }; }
+    return o;
+  });
+  if (!T.length) T = [{ x: k.w / 2, y: k.h / 2, p: { klik: true }, w: 120 * s, h: 80 * s }];
+  var c = R.querySelector(".blk-c"), ic = R.querySelector(".blk-i"), dot = R.querySelector(".blk-dot"), lb = R.querySelector(".blk-lb"), lap = R.querySelector(".blk-lap");
+  var u = s * P.size * (g === "large" ? 3.5 : 1), DL = P.step_duration;
+  // ikon: panah klasik, mata panah tebal (dart), atau titik lembut (magnet)
+  if (g === "dart-arrow") ic.innerHTML = '<svg width="' + 52 * u + '" height="' + 52 * u + '" viewBox="0 0 40 40"><path d="M2 2 L36 16 L19 20 L15 37 Z" fill="#fff" stroke="' + A + '" stroke-width="4" stroke-linejoin="round"/></svg>';
+  else if (g !== "magnet") ic.innerHTML = '<svg width="' + 30 * u + '" height="' + 44 * u + '" viewBox="0 0 30 44" style="filter:drop-shadow(0 ' + 3 * u + 'px ' + 5 * u + 'px rgba(0,0,0,.3))"><path d="M1 1 L1 33 L9 25.5 L14.5 38.5 L20 36 L14.6 23.4 L25.5 23.4 Z" fill="' + (g === "labeled-agent" ? A : P.color) + '" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/></svg>';
+  if (g === "magnet") { BLOCK.initial(tl, dot, { xPercent: -50, yPercent: -50 }); dot.style.cssText += ";display:block;width:" + 30 * s + "px;height:" + 30 * s + "px;border-radius:" + 16 * s + "px;background:" + BLOCK.rgba(A, 0.35) + ";box-shadow:0 0 0 " + 2 * s + "px " + BLOCK.rgba(A, 0.6) + " inset"; }
+  if (g === "labeled-agent") {
+    lb.style.cssText += ";display:flex;left:" + 26 * s + "px;top:" + 40 * s + "px;background:" + A + ";font-family:" + BLOCK.family(P.font) + ";font-size:" + 24 * s + "px;padding:" + 9 * s + "px " + 18 * s + "px;box-shadow:0 " + 8 * s + "px " + 22 * s + "px " + BLOCK.rgba(A, 0.35);
+    lb.innerHTML = "<b>" + BLOCK.esc(P.name) + '</b><span class="blk-tx"></span><span class="blk-ok" style="display:none"><svg width="70%" height="70%" viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9" fill="none" stroke="' + A + '" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>';
+  }
+  var tx = lb.querySelector(".blk-tx"), ok = lb.querySelector(".blk-ok"), langkah = [], swap = [];
+  function cincin(x, y, t, besar) {
+    var d = (g === "large" ? 130 : 64) * s * (besar || 1), r = BLOCK.el("div", { class: "blk-ring", style: "left:" + x + "px;top:" + y + "px;width:" + d + "px;height:" + d + "px;border:" + 3 * s * (g === "large" ? 2 : 1) + "px solid " + A }, lap);
+    tl.fromTo(r, { xPercent: -50, yPercent: -50, scale: 0.2, autoAlpha: 0 }, { xPercent: -50, yPercent: -50, scale: 0.2, autoAlpha: 0.95, duration: 0.01 }, t).to(r, { scale: 1.5, autoAlpha: 0, duration: 0.55, ease: "power2.out" }, t + 0.01);
+  }
+  // masuk
+  var x0 = k.w * 1.08, y0 = k.h * 0.95, t = 0.15;
+  if (g === "dart-arrow") { x0 = T[0].x - k.w * 0.18; y0 = T[0].y + k.h * 0.12; tl.fromTo(ic, { scale: 6, autoAlpha: 0, filter: "blur(14px)" }, { scale: 1, autoAlpha: 1, filter: "blur(0px)", duration: 0.55, ease: "power3.out" }, t); t += 0.45; }
+  BLOCK.initial(tl, c, { x: x0, y: y0 });
+  if (g === "labeled-agent") tl.fromTo(lb, { scale: 0.6, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.45, ease: "back.out(2)" }, t + 0.1);
+  var px = x0, py = y0;
+  T.forEach(function (pt, i) {
+    var off = g === "press-ripple" ? 0.16 : g === "large" ? 0.05 : 0;
+    var tx2 = pt.x + pt.w * off, ty2 = pt.y + pt.h * off * 1.2, m = DL * (i === 0 ? 0.85 : 0.65);
+    var ez = g === "press-ripple" ? "power4.out" : g === "magnet" ? "power3.inOut" : "power2.inOut";
+    tl.to(c, { x: tx2, y: ty2, duration: m, ease: ez }, t);
+    if (g === "dart-arrow") {
+      var ang = Math.atan2(ty2 - py, tx2 - px) * 180 / Math.PI + 135; ang = ((ang + 540) % 360) - 180;
+      tl.to(ic, { rotation: ang, filter: "blur(3px)", duration: m * 0.3, ease: "power2.out" }, t).to(ic, { rotation: 0, filter: "blur(0px)", duration: m * 0.35, ease: "back.out(2)" }, t + m * 0.65);
+    }
+    if (g === "magnet" && pt.el)
+      tl.to(pt.el, { x: (px - pt.x) * 0.03, y: (py - pt.y) * 0.03, duration: m * 0.5, ease: "sine.out" }, t + m * 0.4)
+        .to(pt.el, { x: 0, y: 0, duration: 0.5, ease: "elastic.out(1,0.5)" }, t + m);
+    if (g === "magnet" && pt.p.klik) {
+      tl.to(dot, { width: pt.w + 18 * s, height: pt.h + 14 * s, background: BLOCK.rgba(A, 0.18), duration: 0.24, ease: "back.out(1.6)" }, t + m - 0.08)
+        .to(dot, { width: 30 * s, height: 30 * s, background: BLOCK.rgba(A, 0.35), duration: 0.25, ease: "power2.in" }, t + DL + 0.04);
+    }
+    if (pt.p.label) langkah.push({ a: t, b: t + m * 0.8, teks: " " + pt.p.label });
+    var tc = t + m + 0.08;
+    if (pt.p.klik) {
+      var tgt = g === "magnet" ? dot : ic;
+      if (g === "dart-arrow") tl.to(ic, { scaleX: 1.25, scaleY: 0.7, duration: 0.07, ease: "power2.out" }, tc).to(ic, { scaleX: 1, scaleY: 1, duration: 0.4, ease: "elastic.out(1,0.45)" }, tc + 0.07);
+      else tl.to(tgt, { scale: 0.84, duration: 0.07, ease: "power2.out" }, tc).to(tgt, { scale: 1, duration: 0.35, ease: "back.out(3)" }, tc + 0.09);
+      cincin(tx2, ty2, tc + 0.06);
+      if (g === "press-ripple") cincin(tx2, ty2, tc + 0.2, 1.5);
+      if (pt.el && P.press_target) tl.to(pt.el, { scale: 0.94, duration: 0.07, ease: "power2.out" }, tc).to(pt.el, { scale: 1, duration: 0.45, ease: "back.out(3)" }, tc + 0.09);
+      if (pt.el && g === "press-ripple" && P.target_label) swap.push({ el: pt.el, t: tc + 0.12, asli: pt.el.innerHTML });
+    }
+    px = tx2; py = ty2; t += DL;
+  });
+  // keluar
+  var te = t - DL * 0.2;
+  if (g === "large") { var L = T[T.length - 1]; tl.to(c, { x: L.x + 30 * s, y: L.y + L.h * 0.5 + 70 * s, duration: 0.6, ease: "power3.inOut" }, te).to(c, { x: k.w * 0.75, y: k.h * 1.3, duration: 0.55, ease: "power3.in" }, te + 1.1); }
+  else if (g === "dart-arrow") tl.to(ic, { rotation: -60, filter: "blur(6px)", duration: 0.4, ease: "power3.in" }, te).to(c, { x: k.w * 1.2, y: -k.h * 0.25, duration: 0.45, ease: "power4.in" }, te);
+  else if (g === "press-ripple" || g === "magnet") tl.to(c, { x: k.w * 1.1, y: k.h * 1.05, duration: 0.7, ease: "power3.in" }, te + 0.4);
+  var tSel = te + 0.1;
+  if (g === "labeled-agent") tl.fromTo(ok, { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(3)" }, tSel);
+  // teks label (ketik per langkah) dan pertukaran label target: fungsi murni dari t
+  var sel0 = "", tgt0 = [];
+  BLOCK.onTime(tl, function (tt) {
+    if (tx) {
+      var str = "";
+      langkah.forEach(function (L) { if (tt >= L.a) str = L.teks.slice(0, Math.round(BLOCK.progress(tt, L.a, L.b) * L.teks.length)); });
+      if (tt >= tSel) str = " " + P.done_text;
+      if (str !== sel0) { tx.textContent = str; sel0 = str; }
+      ok.style.display = tt >= tSel ? "inline-flex" : "none";
+    }
+    swap.forEach(function (S, i) {
+      var on = tt >= S.t;
+      if (tgt0[i] !== on) { S.el.innerHTML = on ? '<svg width="1em" height="1em" viewBox="0 0 20 20" style="margin-right:.35em"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>' + BLOCK.esc(P.target_label) : S.asli; tgt0[i] = on; }
+    });
+  }, k.dur);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 6.2;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 6.2);
+</script>
+</body>
+</html>

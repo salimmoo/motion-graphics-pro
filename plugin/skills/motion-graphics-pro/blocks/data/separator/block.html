@@ -1,0 +1,45 @@
+<!-- Block data/separator · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="data/separator" data-start="0" data-duration="3" data-track-index="10" class="blk blk-data-separator">
+<script type="application/json" data-block-props>
+{"orientation": "horizontal", "origin": "start", "position_x": 50, "position_y": 64, "length": 60, "thickness": 1, "end": true, "label": "Bagian 02", "label_size": 22, "enter_duration": 0.9, "ease": "power3.inOut", "exit": true, "color": "#f5f3ee", "font": "JetBrains Mono:wght@500"}
+</script>
+<div class="blk-w"><i class="blk-g"></i><i class="blk-u blk-u1"></i><i class="blk-u blk-u2"></i><span class="blk-lb"></span></div>
+</div>
+<style>
+.blk-data-separator{position:absolute;inset:0;pointer-events:none}
+.blk-data-separator .blk-w{position:absolute}
+.blk-data-separator .blk-g{position:absolute;inset:0}
+.blk-data-separator .blk-u{position:absolute}
+.blk-data-separator .blk-lb{position:absolute;white-space:nowrap;letter-spacing:.14em;text-transform:uppercase}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, ver = P.orientation === "vertical";
+  var w = R.querySelector(".blk-w"), g = R.querySelector(".blk-g"), u1 = R.querySelector(".blk-u1"), u2 = R.querySelector(".blk-u2"), lb = R.querySelector(".blk-lb");
+  var tb = Math.max(1, P.thickness * s), panjang = (ver ? k.h : k.w) * P.length / 100, tik = 14 * s;
+  // garis 1 px (ikut skala) yang tersingkap dari asal; tanpa animasi CSS, aman di-seek
+  w.style.cssText += ver
+    ? ";left:" + P.position_x + "%;top:" + P.position_y + "%;width:" + tb + "px;height:" + panjang + "px;transform:translate(-50%,-50%)"
+    : ";left:" + P.position_x + "%;top:" + P.position_y + "%;width:" + panjang + "px;height:" + tb + "px;transform:translate(-50%,-50%)";
+  g.style.background = P.color;
+  [u1, u2].forEach(function (u, i) {
+    u.style.cssText += ";background:" + P.color + ";display:" + (P.end ? "block" : "none") + (ver
+      ? ";left:" + (tb / 2 - tik / 2) + "px;width:" + tik + "px;height:" + tb + "px;" + (i ? "bottom:0" : "top:0")
+      : ";top:" + (tb / 2 - tik / 2) + "px;height:" + tik + "px;width:" + tb + "px;" + (i ? "right:0" : "left:0"));
+  });
+  lb.textContent = P.label;
+  lb.style.cssText += ";color:" + P.color + ";font-family:" + BLOCK.family(P.font, "monospace") + ";font-size:" + Math.round(P.label_size * s) + "px" +
+    (ver ? ";left:" + (16 * s) + "px;top:0" : ";left:0;bottom:" + (14 * s) + "px");
+  var asal = { start: ver ? "center top" : "left center", center: "center center", end: ver ? "center bottom" : "right center" }[P.origin] || "left center";
+  var sk = ver ? "scaleY" : "scaleX", dari = {}, ke = { duration: P.enter_duration, ease: P.ease };
+  dari[sk] = 0; dari.transformOrigin = asal; ke[sk] = 1;
+  tl.fromTo(g, dari, ke, 0.15);
+  tl.fromTo([u1, u2], { opacity: 0 }, { opacity: 1, duration: 0.2, stagger: P.enter_duration * 0.6 }, 0.15);
+  tl.fromTo(lb, { opacity: 0, x: ver ? -8 * s : 0, y: ver ? 0 : 8 * s }, { opacity: 0.8, x: 0, y: 0, duration: 0.5, ease: "power3.out" }, 0.15 + P.enter_duration * 0.4);
+  if (P.exit) {
+    var kl = {}; kl[sk] = 0; kl.transformOrigin = { start: ver ? "center bottom" : "right center", center: "center center", end: ver ? "center top" : "left center" }[P.origin] || "right center";
+    kl.duration = 0.5; kl.ease = "power3.in";
+    tl.to(g, kl, k.dur - 0.6).to([u1, u2, lb], { opacity: 0, duration: 0.3 }, k.dur - 0.5);
+  }
+}, { font: true });
+</script>

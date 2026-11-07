@@ -1,0 +1,64 @@
+<!-- Block accents/echo · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="accents/echo" data-start="0" data-duration="4" data-track-index="30" class="blk blk-accents-echo">
+<script type="application/json" data-block-props>
+{"mode": "trail", "shape": "card", "text": "Cepat", "copy": 6, "delta": 0.05, "opacity": 0.55, "samples": 12, "shutter_angle": 180, "fps": 30, "from_x": -12, "from_y": 62, "to_x": 50, "to_y": 50, "exit": true, "exit_x": 115, "exit_y": 40, "curve": 160, "rotate": -24, "motion_duration": 1.1, "ease": "expo.out", "color": "#ff5c39", "text_color": "#ffffff", "font": "Inter:wght@800", "size": 300}
+</script>
+<div class="blk-lapis"></div>
+</div>
+<style>
+.blk-accents-echo{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-accents-echo .blk-lapis{position:absolute;inset:0;isolation:isolate}
+.blk-accents-echo .blk-b{position:absolute;left:0;top:0;display:flex;align-items:center;justify-content:center;white-space:nowrap;font-weight:800;will-change:transform,opacity}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, lap = R.querySelector(".blk-lapis"), fs = function (v) { return (v * s).toFixed(1) + "px"; };
+  var mode = P.mode, z = P.size * s;
+  // benda: kartu | bola | teks
+  var proto = BLOCK.el("div", { class: "blk-b" });
+  proto.style.fontFamily = BLOCK.family(P.font);
+  if (P.shape === "ball") proto.style.cssText += ";width:" + z + "px;height:" + z + "px;border-radius:50%;background:radial-gradient(circle at 35% 30%," + BLOCK.mix(P.color, "#fff", 0.45) + "," + P.color + " 55%," + BLOCK.mix(P.color, "#000", 0.35) + ")";
+  else if (P.shape === "text") { proto.style.cssText += ";font-size:" + z * 0.6 + "px;color:" + P.color + ";letter-spacing:-.02em"; proto.textContent = P.text; }
+  else { proto.style.cssText += ";padding:" + z * 0.18 + "px " + z * 0.34 + "px;border-radius:" + z * 0.16 + "px;font-size:" + z * 0.26 + "px;background:" + P.color + ";color:" + P.text_color; proto.textContent = P.text; }
+  var N = mode === "trail" ? P.copy : mode === "smear" ? P.copy * 2 : P.samples;
+  var copies = [];
+  for (var i = N; i >= 1; i--) { var c = proto.cloneNode(true); lap.appendChild(c); copies[i] = c; if (mode === "smear") c.style.mixBlendMode = "lighten"; }
+  var utama = proto; lap.appendChild(utama);
+  var bw = utama.offsetWidth, bh = utama.offsetHeight;
+  var ax = k.w * P.from_x / 100, ay = k.h * P.from_y / 100, bx = k.w * P.to_x / 100, by = k.h * P.to_y / 100, cx = k.w * P.exit_x / 100, cy = k.h * P.exit_y / 100;
+  var t0 = 0.25, tA = t0 + P.motion_duration, tK = k.dur - 0.25 - P.motion_duration * 0.7, ei = gsap.parseEase(P.ease), eo = gsap.parseEase("power3.in");
+  // pose(t) bentuk tertutup: dipakai juga untuk salinan pada t - i*delta
+  function pose(t) {
+    var x, y, r, e;
+    if (t < tA) { e = ei(BLOCK.progress(t, t0, tA)); x = BLOCK.lerp(ax, bx, e); y = BLOCK.lerp(ay, by, e) - Math.sin(Math.PI * e) * P.curve * s; r = P.rotate * (1 - e); }
+    else if (!P.exit || t < tK) { x = bx; y = by; r = 0; }
+    else { e = eo(BLOCK.progress(t, tK, k.dur - 0.25)); x = BLOCK.lerp(bx, cx, e); y = BLOCK.lerp(by, cy, e) - Math.sin(Math.PI * e) * P.curve * s * 0.5; r = -P.rotate * 0.5 * e; }
+    return [x, y, r];
+  }
+  function taruh(el, p, op) {
+    el.style.transform = "translate(" + (p[0] - bw / 2).toFixed(1) + "px," + (p[1] - bh / 2).toFixed(1) + "px) rotate(" + p[2].toFixed(2) + "deg)";
+    el.style.opacity = Math.max(0, op).toFixed(3);
+  }
+  var vRef = Math.hypot(bx - ax, by - ay) / P.motion_duration;
+  BLOCK.onTime(tl, function (t) {
+    var p = pose(t), hadir = BLOCK.progress(t, t0 - 0.05, t0 + 0.05) * (P.exit ? 1 : 1 - BLOCK.progress(t, k.dur - 0.45, k.dur - 0.1));
+    if (mode === "motion-blur") {
+      // integrasi rana: sampel dalam jendela rana, bobot sama (lapisan ke-j beropasitas 1/(j+1))
+      var sh = (P.shutter_angle / 360) / P.fps;
+      taruh(utama, p, 0);
+      for (var j = 0; j < N; j++) taruh(copies[N - j], pose(t - sh * j / Math.max(N - 1, 1)), hadir / (j + 1));
+      // urutan tumpukan: salinan N (j=0) di bawah ... salinan 1 di atas
+      return;
+    }
+    taruh(utama, p, hadir);
+    var cepat = Math.hypot(p[0] - pose(t - 1 / 60)[0], p[1] - pose(t - 1 / 60)[1]) * 60 / vRef;
+    for (var i = 1; i <= N; i++) {
+      var q, op;
+      if (mode === "trail") { q = pose(t - i * P.delta); op = P.opacity * (1 - i / (N + 1)); }
+      else { q = pose(t - i * P.delta * 0.35); op = BLOCK.clamp(cepat * 1.5, 0, 1) * P.opacity * (1 - i / (N + 1)); }
+      var jauh = Math.hypot(q[0] - p[0], q[1] - p[1]) > 1;
+      taruh(copies[i], q, jauh ? op * hadir : 0);
+    }
+  }, k.dur);
+}, { font: true });
+</script>

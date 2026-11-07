@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Highlighter · block example text/highlighter</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;800&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="5">
+<div id="adegan" class="adegan ad-terang"></div>
+<!-- Block text/highlighter · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-highlighter" data-block="text/highlighter" data-start="0" data-duration="4.5" data-track-index="10" class="blk blk-text-highlighter">
+<script type="application/json" data-block-props>
+{"text": "Yang penting itu *konsisten*, bukan *sempurna*", "font": "Inter:wght@500;800", "size": 92, "weight": 800, "color": "#1d1b18", "accent_color": "#ffd23f", "position_y": 50, "width": 80, "align": "center", "style": "highlighter", "highlight_time": 1.1, "highlight_duration": 0.6, "pause": 0.4, "thickness": 1, "dim_color": "#a39d92", "highlight_start": 0.5, "highlight_end": 3.4, "seed": "stabilo"}
+</script>
+<div class="blk-tk"></div>
+</div>
+<style>
+.blk-text-highlighter {position:absolute;inset:0;pointer-events:none}
+.blk-text-highlighter .blk-tk{position:absolute;left:50%;transform:translate(-50%,-50%);line-height:1.08}
+.blk-text-highlighter .blk-kunci{color:var(--aksen)}
+.blk-text-highlighter .blk-kunci{color:inherit;position:relative;isolation:isolate}
+.blk-text-highlighter .blk-sb{position:absolute;left:-.1em;right:-.1em;top:.16em;bottom:.02em;z-index:-1;background:var(--aksen);border-radius:.14em .3em .2em .35em;transform-origin:left center}
+.blk-text-highlighter .blk-gr{position:absolute;overflow:visible;pointer-events:none}
+.blk-text-highlighter .blk-gr path{fill:none;stroke:var(--aksen);stroke-linecap:round;stroke-linejoin:round}
+</style>
+<script>
+BLOCK.mount("blk-highlighter", function (k) {
+  var P = k.P, tl = k.tl;
+  var rata = { left: "left", right: "right" }[P.align] || "center";
+  function gayaTeks(el, px) {
+    el.style.cssText += ";top:" + P.position_y + "%;width:" + P.width + "%;color:" + P.color + ";--aksen:" + P.accent_color +
+      ";font-family:" + BLOCK.family(P.font) + ";font-weight:" + P.weight + ";font-size:" + Math.round((px || P.size) * k.s) + "px;text-align:" + rata;
+  }
+  // tunggu stylesheet Google Fonts + wajah font benar-benar termuat sebelum mengukur teks
+  function siapFont(spec) {
+    var ln = Array.prototype.slice.call(document.querySelectorAll('link[href*="fonts.googleapis"]'));
+    return Promise.all(ln.map(function (l) { return l.sheet ? 0 : new Promise(function (ok) { l.addEventListener("load", ok); l.addEventListener("error", ok); }); }))
+      .then(function () { return document.fonts && document.fonts.load ? document.fonts.load(spec || (P.weight + " 100px " + BLOCK.family(P.font))) : 0; })
+      .catch(function () {});
+  }
+  function markupKunci(s) { return BLOCK.esc(s).replace(/\*([^*]+)\*/g, '<span class="blk-kunci">$1</span>').replace(/\\n|\n/g, "<br>"); }
+  return siapFont().then(function () {
+  var el = k.root.querySelector(".blk-tk");
+  gayaTeks(el);
+  var u = BLOCK.split(el, P.text, "words"), n = u.length, r = BLOCK.random(P.seed), fs = P.size * k.s, g = P.style;
+  var kunci = u.filter(function (w) { return w.classList.contains("blk-kunci"); });
+  tl.fromTo(u, { opacity: 0, y: fs * 0.3 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out", stagger: 0.05 }, 0.1);
+  function stabilo(w) { var s = BLOCK.el("span", { class: "blk-sb" }, w); s.style.transform = "rotate(" + ((r() - 0.5) * 2.4) + "deg)"; return s; }
+  if (g === "sequential") {
+    var sb = kunci.map(stabilo), E = gsap.parseEase("sine.inOut"), a = +P.highlight_start, b = +P.highlight_end;
+    BLOCK.onTime(tl, function (t) {
+      var v = n * E(BLOCK.clamp((t - a) / (b - a || 1), 0, 1));
+      u.forEach(function (w, i) { var e = BLOCK.clamp(v - i, 0, 1); w.style.color = BLOCK.mix(P.dim_color, P.color, e); });
+      kunci.forEach(function (w, j) { var e = BLOCK.clamp((v - u.indexOf(w)) * 1.4, 0, 1); sb[j].style.transform = "scaleX(" + e + ") rotate(-1deg)"; });
+    }, k.dur);
+  } else {
+    kunci.forEach(function (w, j) {
+      var T = P.highlight_time + j * P.pause, D = +P.highlight_duration;
+      if (g === "highlighter") { var s = stabilo(w); tl.fromTo(s, { scaleX: 0 }, { scaleX: 1, duration: D, ease: "power2.out" }, T); return; }
+      var ww = w.offsetWidth, hh = w.offsetHeight, px = ww * 0.16, py = hh * 0.3, W = ww + px * 2, H = hh + py * 2;
+      var sv = BLOCK.svg("svg", { class: "blk-gr", width: W, height: H, viewBox: "0 0 " + W + " " + H }, w);
+      sv.style.left = -px + "px"; sv.style.top = -py + "px";
+      var cx = W / 2, cy = H / 2, d = "", i, q = [];
+      if (g === "circle") {
+        var a0 = -2.2 + r() * 0.4, m = 40, rx = ww / 2 + px * 0.75, ry = hh / 2 + py * 0.55;
+        for (i = 0; i <= m; i++) {
+          var aa = a0 + (Math.PI * 2 + 0.55) * i / m, f = 1 + 0.05 * Math.sin(i * 0.7 + r()) + (i / m) * 0.06;
+          q.push([cx + Math.cos(aa) * rx * f, cy + Math.sin(aa) * ry * f]);
+        }
+      } else if (g === "underline") {
+        for (i = 0; i <= 10; i++) q.push([px * 0.6 + (W - px * 1.2) * i / 10, py + hh * 0.98 + Math.sin(i * 1.3 + r() * 2) * hh * 0.035 + (i / 10) * hh * 0.04]);
+      } else {
+        var zz = 7;
+        for (i = 0; i <= zz; i++) q.push([px + (W - px * 2) * i / zz + (r() - 0.5) * px * 0.3, cy + (i % 2 ? -1 : 1) * hh * 0.28 + (r() - 0.5) * hh * 0.08]);
+      }
+      d = "M" + q[0][0].toFixed(1) + " " + q[0][1].toFixed(1);
+      for (i = 1; i < q.length; i++) { var A = q[i - 1], Bq = q[i]; d += " Q" + A[0].toFixed(1) + " " + A[1].toFixed(1) + " " + ((A[0] + Bq[0]) / 2).toFixed(1) + " " + ((A[1] + Bq[1]) / 2).toFixed(1); }
+      var pth = BLOCK.svg("path", { d: d }, sv);
+      pth.style.strokeWidth = fs * (g === "strike" ? 0.075 : 0.07) * P.thickness;
+      var L = BLOCK.prepareStroke(pth);
+      BLOCK.initial(tl, pth, { strokeDashoffset: L, opacity: 0 });
+      tl.set(pth, { opacity: g === "strike" ? 0.85 : 1 }, T);
+      tl.to(pth, { strokeDashoffset: 0, duration: D, ease: g === "circle" ? "power1.inOut" : "power2.out" }, T);
+    });
+  }
+  tl.to(el, { opacity: 0, duration: 0.45, ease: "power2.in" }, k.dur - 0.5);
+  });
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5);
+</script>
+</body>
+</html>

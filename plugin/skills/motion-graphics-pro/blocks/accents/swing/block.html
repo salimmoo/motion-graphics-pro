@@ -1,0 +1,48 @@
+<!-- Block accents/swing · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="accents/swing" data-start="0" data-duration="5" data-track-index="30" class="blk blk-accents-swing">
+<script type="application/json" data-block-props>
+{"text": "BUKA", "sub": "setiap hari 08.00-21.00", "strap": "two", "start_angle": 22, "frequency": 0.9, "damping": 0.14, "strap_length": 170, "width": 600, "height": 260, "board_color": "#f2c14e", "text_color": "#2a1f14", "strap_color": "#d9d4c7", "font": "Inter:wght@600;800", "size": 110, "position_x": 50, "top": 14}
+</script>
+<i class="blk-paku"></i>
+<div class="blk-ayun"><svg class="blk-tali"></svg><div class="blk-papan"><b class="blk-j"></b><span class="blk-s"></span></div></div>
+</div>
+<style>
+.blk-accents-swing{position:absolute;inset:0;pointer-events:none}
+.blk-accents-swing .blk-paku{position:absolute;border-radius:50%;transform:translate(-50%,-50%);z-index:3}
+.blk-accents-swing .blk-ayun{position:absolute;width:0;height:0}
+.blk-accents-swing .blk-tali{position:absolute;left:0;top:0;overflow:visible}
+.blk-accents-swing .blk-papan{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-sizing:border-box}
+.blk-accents-swing .blk-j{font-weight:800;line-height:1;letter-spacing:-.01em}
+.blk-accents-swing .blk-s{opacity:.7;margin-top:.5em;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, fs = function (v) { return (v * s).toFixed(1) + "px"; };
+  var paku = R.querySelector(".blk-paku"), ay = R.querySelector(".blk-ayun"), tali = R.querySelector(".blk-tali"), pp = R.querySelector(".blk-papan");
+  var px = k.w * P.position_x / 100, py = k.h * P.top / 100, W = P.width * s, H = P.height * s, Lt = P.strap_length * s;
+  paku.style.cssText += ";left:" + px + "px;top:" + py + "px;width:" + fs(18) + ";height:" + fs(18) + ";background:radial-gradient(circle at 35% 35%,#eee,#777);box-shadow:0 " + fs(2) + " " + fs(4) + " rgba(0,0,0,.4)";
+  ay.style.cssText += ";left:" + px + "px;top:" + py + "px";
+  pp.style.cssText += ";left:" + (-W / 2) + "px;top:" + Lt + "px;width:" + W + "px;height:" + H + "px;background:" + P.board_color + ";color:" + P.text_color + ";border-radius:" + fs(18) +
+    ";font-family:" + BLOCK.family(P.font) + ";box-shadow:0 " + fs(24) + " " + fs(50) + " rgba(0,0,0,.35),inset 0 0 0 " + fs(6) + " " + BLOCK.rgba(P.text_color, 0.12) + ";transform-origin:50% 0";
+  var J = pp.querySelector(".blk-j"), S = pp.querySelector(".blk-s");
+  J.textContent = P.text; J.style.fontSize = fs(P.size); S.textContent = P.sub; S.style.fontSize = fs(P.size * 0.22);
+  // tali: dua (huruf V ke dua kait) atau satu (lurus ke tengah)
+  var kait = P.strap === "one" ? [[0, Lt]] : [[-W * 0.32, Lt + 14 * s], [W * 0.32, Lt + 14 * s]];
+  kait.forEach(function (q) {
+    BLOCK.svg("line", { x1: 0, y1: 0, x2: q[0], y2: q[1], stroke: P.strap_color, "stroke-width": 3 * s, "stroke-linecap": "round" }, tali);
+    BLOCK.svg("circle", { cx: q[0], cy: q[1], r: 6 * s, fill: "none", stroke: P.strap_color, "stroke-width": 3 * s }, tali);
+  });
+  // ayunan teredam bentuk tertutup: theta = A e^(-z w u) cos(wd u)
+  var A = P.start_angle, w = 2 * Math.PI * P.frequency, zt = BLOCK.clamp(P.damping, 0.01, 0.95), wd = w * Math.sqrt(1 - zt * zt), tJ = 0.15, dJ = 0.55, tR = tJ + dJ;
+  function sudut(t) { if (t < tR) return A; var u = t - tR; return A * Math.exp(-zt * w * u) * Math.cos(wd * u); }
+  var eb = gsap.parseEase("back.out(1.6)");
+  BLOCK.onTime(tl, function (t) {
+    var th = sudut(t), turun = eb(BLOCK.progress(t, tJ, tR)), dy = (1 - turun) * -(py + Lt + H + 40 * s);
+    var lag = (sudut(t - 0.07) - th) * 0.35;                         // papan sedikit tertinggal dari tali
+    ay.style.transform = "translateY(" + dy.toFixed(1) + "px) rotate(" + th.toFixed(3) + "deg)";
+    pp.style.transform = "rotate(" + lag.toFixed(3) + "deg)";
+    var keluar = 1 - BLOCK.progress(t, k.dur - 0.4, k.dur - 0.05);
+    ay.style.opacity = paku.style.opacity = (BLOCK.progress(t, 0, 0.15) * keluar).toFixed(3);
+  }, k.dur);
+}, { font: true });
+</script>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP figure3d · tokoh 3D jalan dan berdiri</title>
+<style>html,body{margin:0;background:#0e1116}#stage{position:relative;width:1280px;height:720px;overflow:hidden}
+#stage>div{position:absolute;width:640px;height:360px}</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../figure3d.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720">
+  <div id="a" style="left:0;top:0"></div><div id="b" style="left:640px;top:0"></div>
+  <div id="c" style="left:0;top:360px"></div><div id="d" style="left:640px;top:360px"></div>
+</div>
+<script>
+// Four views of the same figure: walking 3/4 front, walking side, standing turntable, walking with a custom palette seen from behind.
+const F = MGP.figure3d, D = 8, base = { width: 640, height: 360, duration: D };
+const insts = [
+  F.create("#a", Object.assign({}, base, { action: "walk", view: 40 })),
+  F.create("#b", Object.assign({}, base, { action: "walk", view: 90, dist: 11 })),
+  F.create("#c", Object.assign({}, base, { action: "stand", view: 0, spin: 45, sunAz: 210, sunEl: 40, bg: "#f4efe4", tiles: false })),
+  F.create("#d", Object.assign({}, base, { action: "walk", view: [[0, 150], [D, 230]], cadence: 110, pal: { shirt: "#3f7d6e", trousers: "#5a4636", shoes: "#2b2a33", hair: "#141018" }, sunAz: 300, sunEl: 30, shadowSoft: 1.5 })),
+];
+const all = { duration: D, ready: Promise.all(insts.map((i) => i.ready)), seek(t) { insts.forEach((i) => i.seek(t)); return all; }, timeline() { return MGP.core.timeline(all); } };
+MGP.core.expose(all);
+</script>
+</body>
+</html>

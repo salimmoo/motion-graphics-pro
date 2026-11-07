@@ -1,0 +1,64 @@
+<!-- Block textures/ascii · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="textures/ascii" data-start="0" data-duration="6" data-track-index="20" class="blk blk-textures-ascii">
+<script type="application/json" data-block-props>
+{"text": "GERAK", "font": "JetBrains Mono:wght@700", "font2": "Inter:wght@900", "character": " .:-=+*#%@", "level": [72, 48, 32, 22, 16], "start": 0.2, "resolve_duration": 2.4, "color": "#9dffb5", "accent_color": "#ffffff", "bg": "#060a08", "ball": true, "shine": true, "seed": 6}
+</script>
+</div>
+<style>
+.blk-textures-ascii{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, w = k.w, h = k.h, s = k.s, D = k.dur, R = k.root, tegak = h > w;
+  var fs = document.fonts && document.fonts.load ? Promise.all([document.fonts.load("700 20px " + BLOCK.family(P.font, "monospace")), document.fonts.load("900 64px " + BLOCK.family(P.font2))]).catch(function () {}) : Promise.resolve();
+  return fs.then(function () {
+    R.style.background = P.bg;
+    // sumber digambar sendiri lalu dirasterisasi sekali (DOM adegan tidak bisa dibaca piksel per piksel)
+    var SW = Math.round(w / 4), SH = Math.round(h / 4), oc = document.createElement("canvas"); oc.width = SW; oc.height = SH;
+    var o = oc.getContext("2d"), gr = o.createRadialGradient(SW * 0.5, SH * 0.5, 0, SW * 0.5, SH * 0.5, Math.max(SW, SH) * 0.7);
+    gr.addColorStop(0, "#202020"); gr.addColorStop(1, "#000"); o.fillStyle = gr; o.fillRect(0, 0, SW, SH);
+    if (P.ball) {
+      var br = Math.min(SW, SH) * 0.42, bx = SW * 0.5, by = SH * (tegak ? 0.4 : 0.5);
+      var gb = o.createRadialGradient(bx - br * 0.3, by - br * 0.35, br * 0.05, bx, by, br);
+      gb.addColorStop(0, "#a8a8a8"); gb.addColorStop(1, "#0c0c0c"); o.fillStyle = gb; o.beginPath(); o.arc(bx, by, br, 0, 7); o.fill();
+    }
+    if (P.text) {
+      var tf = SH * (tegak ? 0.16 : 0.34); o.font = "900 " + tf + "px " + BLOCK.family(P.font2);
+      var mw = o.measureText(P.text).width; if (mw > SW * 0.9) { tf *= SW * 0.9 / mw; o.font = "900 " + tf + "px " + BLOCK.family(P.font2); }
+      o.fillStyle = "#fff"; o.textAlign = "center"; o.textBaseline = "middle"; o.fillText(P.text, SW / 2, SH * (tegak ? 0.4 : 0.52));
+    }
+    var sd = o.getImageData(0, 0, SW, SH).data;
+    // grid luminans untuk setiap tingkat resolusi, dihitung sekali (rata-rata blok piksel)
+    var lv = (Array.isArray(P.level) && P.level.length ? P.level : [40, 20, 12]).map(function (cz) {
+      var c = Math.max(4, cz * s), cw = c * 0.6, C = Math.ceil(w / cw), Rw = Math.ceil(h / c), L = new Float32Array(C * Rw);
+      for (var j = 0; j < Rw; j++) for (var i = 0; i < C; i++) {
+        var x0 = Math.floor(i * cw / 4), y0 = Math.floor(j * c / 4), x1 = Math.min(SW, Math.ceil((i + 1) * cw / 4)), y1 = Math.min(SH, Math.ceil((j + 1) * c / 4)), sum = 0, n = 0;
+        for (var y = y0; y < y1; y += 1) for (var x = x0; x < x1; x += 1) { sum += sd[(y * SW + x) * 4]; n++; }
+        L[j * C + i] = n ? sum / n / 255 : 0;
+      }
+      return { c: c, cw: cw, C: C, Rw: Rw, L: L };
+    });
+    var cv = BLOCK.canvas(R, w, h), ctx = cv.ctx, ramp = String(P.character || " .:-=+*#%@"), nr = ramp.length - 1;
+    var mul = +P.start || 0, dr = Math.max(0.1, +P.resolve_duration || 2), sdd = +P.seed || 6;
+    BLOCK.onTime(k.tl, function (t) {
+      // resolusi melangkah dari kasar ke halus, lalu bertahan di yang paling halus
+      var li = Math.min(lv.length - 1, Math.floor(BLOCK.progress(t, mul, mul + dr) * lv.length)), G = lv[li], fr = Math.floor(t * 12);
+      var sapu = P.shine ? ((t * 0.35) % 1.4 - 0.2) : -9;
+      ctx.clearRect(0, 0, w, h);
+      ctx.font = "700 " + Math.round(G.c * 0.9) + "px " + BLOCK.family(P.font, "monospace"); ctx.textBaseline = "top";
+      ctx.fillStyle = P.color;
+      var terang = [];
+      for (var j = 0; j < G.Rw; j++) for (var i = 0; i < G.C; i++) {
+        var v = G.L[j * G.C + i], px = i * G.cw, py = j * G.c;
+        var d = Math.abs(px / w - sapu); if (d < 0.08) v = Math.min(1, v + 0.25 * (1 - d / 0.08)); // pita kilau
+        v += 0.035 * BLOCK.noise(i * 0.7 + fr * 1.3 + j * 3.1, sdd); // denyut glyph kecil per frame
+        var gi = Math.round(BLOCK.clamp(v, 0, 1) * nr); if (!gi) continue;
+        if (v > 0.8) { terang.push(i, j, gi); continue; }
+        ctx.fillText(ramp[gi], px, py);
+      }
+      ctx.fillStyle = P.accent_color;
+      for (var q = 0; q < terang.length; q += 3) ctx.fillText(ramp[terang[q + 2]], terang[q] * G.cw, terang[q + 1] * G.c);
+    }, D);
+  });
+}, { font: true });
+</script>

@@ -1,0 +1,108 @@
+{
+ "id": "backgrounds/pattern",
+ "name": "Pattern",
+ "name_id": "Pola Grafis",
+ "category": "backgrounds",
+ "description": {
+  "id": "Pola grafis tegas yang bergerak: garis diagonal hitam-putih bergeser, spiral yang berputar, atau berkas cahaya putih yang terpecah menjadi pelangi lewat prisma.",
+  "en": "Bold moving graphic patterns: sliding black-and-white diagonal stripes, a turning spiral, or a white beam splitting into a rainbow through a prism."
+ },
+ "tags": [
+  "latar",
+  "background",
+  "pola",
+  "garis",
+  "stripes",
+  "spiral",
+  "prisma",
+  "pelangi",
+  "shader",
+  "webgl",
+  "op-art",
+  "backgrounds",
+  "pattern"
+ ],
+ "props": {
+  "style": {
+   "default": "line",
+   "type": "enum",
+   "options": [
+    "line",
+    "spiral",
+    "prism"
+   ],
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "garis": "line",
+    "prisma": "prism"
+   }
+  },
+  "color1": {
+   "default": "#0a0a0a",
+   "type": "color",
+   "hint": "Warna gelap / latar",
+   "aliases": [
+    "warna1"
+   ]
+  },
+  "color2": {
+   "default": "#f5f5f0",
+   "type": "color",
+   "hint": "Warna terang / berkas",
+   "aliases": [
+    "warna2"
+   ]
+  },
+  "count": {
+   "default": 9,
+   "type": "number",
+   "hint": "Kerapatan garis atau lengan spiral",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "angle": {
+   "default": 35,
+   "type": "number",
+   "hint": "Sudut garis (derajat, gaya garis)",
+   "aliases": [
+    "sudut"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali kecepatan gerak",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "resolution": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Skala resolusi shader (0.25-1); kecil = lebih cepat",
+   "aliases": [
+    "resolusi"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "latar/pola",
+  "stripes",
+  "spiral",
+  "prism"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

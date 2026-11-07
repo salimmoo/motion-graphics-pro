@@ -1,0 +1,46 @@
+<!-- Block accents/physics-exit · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="accents/physics-exit" data-start="0" data-duration="3" data-track-index="30" class="blk blk-accents-physics-exit">
+<script type="application/json" data-block-props>
+{"mode": "throw", "direction": "right", "text": "Tugas selesai", "sub": "Laporan bulanan sudah terkirim ke tim.", "exit_time": 0.45, "speed": 1500, "gravity": 4200, "width": 620, "height": 300, "card_color": "#ffffff", "text_color": "#16181d", "font": "Inter:wght@400;800", "size": 60, "position_x": 50, "position_y": 50}
+</script>
+<div class="blk-kt"><b class="blk-j"></b><span class="blk-s"></span></div>
+</div>
+<style>
+.blk-accents-physics-exit{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-accents-physics-exit .blk-kt{position:absolute;left:0;top:0;display:flex;flex-direction:column;justify-content:center;box-sizing:border-box;will-change:transform}
+.blk-accents-physics-exit .blk-j{font-weight:800;line-height:1.05;letter-spacing:-.01em}
+.blk-accents-physics-exit .blk-s{opacity:.65;margin-top:.5em;line-height:1.35}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, fs = function (v) { return (v * s).toFixed(1) + "px"; };
+  var kt = R.querySelector(".blk-kt"), W = P.width * s, H = P.height * s;
+  kt.style.cssText += ";width:" + W + "px;height:" + H + "px;padding:" + fs(48) + ";background:" + P.card_color + ";color:" + P.text_color + ";border-radius:" + fs(28) +
+    ";font-family:" + BLOCK.family(P.font) + ";box-shadow:0 " + fs(28) + " " + fs(60) + " rgba(0,0,0,.35)";
+  var J = kt.querySelector(".blk-j"), S = kt.querySelector(".blk-s");
+  J.textContent = P.text; J.style.fontSize = fs(P.size); S.textContent = P.sub; S.style.fontSize = fs(P.size * 0.42);
+  var cx = k.w * P.position_x / 100 - W / 2, cy = k.h * P.position_y / 100 - H / 2, dir = P.direction === "left" ? -1 : 1;
+  var tE = Math.max(0.6, k.dur * P.exit_time), ant = 0.16, g = P.gravity * s, eIn = gsap.parseEase("back.out(1.7)");
+  // pose bentuk tertutup per mode; tanpa memudar, terus sampai di luar bingkai
+  function pose(t) {
+    var x = 0, y = 0, r = 0, sc = 1;
+    if (t < 0.45) { var e = eIn(BLOCK.progress(t, 0.05, 0.45)); sc = 0.85 + 0.15 * e; y = (1 - e) * 40 * s; }
+    var a = BLOCK.smooth(BLOCK.progress(t, tE - ant, tE)) * (1 - BLOCK.progress(t, tE, tE + 0.06));   // antisipasi kecil
+    var u = Math.max(0, t - tE);
+    if (P.mode === "throw") {
+      x = -dir * 24 * s * a + dir * P.speed * s * u; y += -26 * s * a - 0.55 * P.speed * s * u + 0.5 * g * u * u; r = -dir * 4 * a + dir * 320 * u;
+    } else if (P.mode === "drop") {
+      y += -18 * s * a + 0.5 * g * u * u; x = dir * 60 * s * u; r = dir * (-2 * a + 90 * u * u + 20 * u);
+    } else {
+      var acc = P.speed * 2.4 * s; x = -dir * 30 * s * a + dir * 0.5 * acc * u * u + dir * P.speed * 0.25 * s * u;
+      r = dir * BLOCK.clamp(u * 20, 0, 6) - dir * 2 * a;
+    }
+    return { x: x, y: y, r: r, sc: sc, sk: P.mode === "slide" ? -dir * BLOCK.clamp(u * 25, 0, 8) : 0 };
+  }
+  BLOCK.onTime(tl, function (t) {
+    var p = pose(t);
+    kt.style.transform = "translate(" + (cx + p.x).toFixed(1) + "px," + (cy + p.y).toFixed(1) + "px) rotate(" + p.r.toFixed(2) + "deg) skewX(" + p.sk.toFixed(2) + "deg) scale(" + p.sc.toFixed(3) + ")";
+    kt.style.opacity = BLOCK.progress(t, 0.05, 0.2).toFixed(3);
+  }, k.dur);
+}, { font: true });
+</script>

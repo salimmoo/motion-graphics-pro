@@ -1,0 +1,183 @@
+{
+ "id": "social/post-card",
+ "name": "Post Card",
+ "name_id": "Kartu Postingan Sosial",
+ "category": "social",
+ "description": {
+  "id": "Tiruan kartu postingan media sosial generik: avatar inisial, nama, akun, tanda terverifikasi, teks yang muncul per kata, dan angka balasan, bagikan, suka yang menghitung naik. Tata letak gaya utas mikro atau forum komunitas dengan kolom suara.",
+  "en": "Generic social post card mock-up: initials avatar, name, handle, verified badge, word-by-word text and counting engagement metrics. Microblog layout or community-forum layout with vote column."
+ },
+ "tags": [
+  "sosial",
+  "postingan",
+  "kartu",
+  "ui",
+  "metrik",
+  "forum",
+  "tiruan",
+  "social",
+  "post",
+  "card"
+ ],
+ "props": {
+  "platform": {
+   "default": "x",
+   "type": "enum",
+   "options": [
+    "x",
+    "reddit"
+   ],
+   "hint": "Hanya skema warna dan tata letak generik (tanpa logo): x = utas mikro, reddit = forum dengan kolom suara"
+  },
+  "theme": {
+   "default": "dark",
+   "type": "enum",
+   "options": [
+    "dark",
+    "light"
+   ],
+   "aliases": [
+    "tema"
+   ],
+   "option_aliases": {
+    "gelap": "dark",
+    "terang": "light"
+   }
+  },
+  "name": {
+   "default": "Nadia Kirana",
+   "type": "text",
+   "aliases": [
+    "nama"
+   ]
+  },
+  "account": {
+   "default": "@nadiakirana",
+   "type": "text",
+   "aliases": [
+    "akun"
+   ]
+  },
+  "community": {
+   "default": "s/BerkebunKota",
+   "type": "text",
+   "hint": "Nama komunitas (tata letak forum)",
+   "aliases": [
+    "komunitas"
+   ]
+  },
+  "time": {
+   "default": "2 jam",
+   "type": "text",
+   "aliases": [
+    "waktu"
+   ]
+  },
+  "title": {
+   "default": "Tomat ceri pertama dari balkon lantai 12!",
+   "type": "text",
+   "hint": "Judul postingan (tata letak forum)",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "text": {
+   "default": "Tiga bulan nyiram tiap pagi, akhirnya panen juga. Ternyata kuncinya cuma sinar matahari dan sabar.",
+   "type": "text",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "verified": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "terverifikasi"
+   ]
+  },
+  "reply": {
+   "default": 248,
+   "type": "number",
+   "aliases": [
+    "balas"
+   ]
+  },
+  "share": {
+   "default": 1320,
+   "type": "number",
+   "aliases": [
+    "bagikan"
+   ]
+  },
+  "like": {
+   "default": 9840,
+   "type": "number",
+   "hint": "Suka / skor suara",
+   "aliases": [
+    "suka"
+   ]
+  },
+  "views": {
+   "default": 182000,
+   "type": "number",
+   "aliases": [
+    "tayang"
+   ]
+  },
+  "accent_color": {
+   "default": "",
+   "type": "color",
+   "hint": "Kosong = warna bawaan skema",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Pusat kartu (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Pusat kartu (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "width": {
+   "default": 900,
+   "type": "number",
+   "hint": "Lebar kartu (px pada 1080)",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;700;800",
+   "type": "font"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "sosial/kartu-post",
+  "x-post",
+  "reddit-post"
+ ],
+ "example": {
+  "bg": "photo",
+  "font": [
+   "Inter:wght@400;500;700;800"
+  ]
+ }
+}

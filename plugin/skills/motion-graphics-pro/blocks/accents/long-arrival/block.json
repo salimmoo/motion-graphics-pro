@@ -1,0 +1,152 @@
+{
+ "id": "accents/long-arrival",
+ "name": "Long Arrival",
+ "name_id": "Tiba Panjang",
+ "category": "accents",
+ "description": {
+  "id": "Kedatangan yang tidak pernah benar-benar mendarat: elemen menempuh sebagian besar jarak di seperlima awal durasi lalu merayap sisanya sampai frame terakhir, keluar meneruskan vektor kedatangannya, dan membawa blur rana. Dari sisi mana pun atau lewat skala.",
+  "en": "The never-fully-lands arrival: covers most of its move in the first fifth, creeps the rest to the last frame, exits along its arrival vector, and carries shutter motion blur. From any side or by scale."
+ },
+ "tags": [
+  "aksen",
+  "tiba",
+  "keyframe",
+  "merayap",
+  "motion-blur",
+  "judul",
+  "masuk",
+  "accents",
+  "long",
+  "arrival"
+ ],
+ "props": {
+  "text": {
+   "default": "Musim Baru",
+   "type": "text",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "sub": {
+   "default": "tayang mulai Jumat",
+   "type": "text"
+  },
+  "direction": {
+   "default": "left",
+   "type": "enum",
+   "options": [
+    "left",
+    "right",
+    "top",
+    "bottom",
+    "scale"
+   ],
+   "hint": "Sisi datang",
+   "aliases": [
+    "arah"
+   ],
+   "option_aliases": {
+    "kiri": "left",
+    "kanan": "right",
+    "atas": "top",
+    "bawah": "bottom",
+    "skala": "scale"
+   }
+  },
+  "distance": {
+   "default": 700,
+   "type": "number",
+   "hint": "Jarak tempuh (px pada 1080)",
+   "aliases": [
+    "jarak"
+   ]
+  },
+  "steepness": {
+   "default": 8,
+   "type": "number",
+   "hint": "Makin besar makin cepat di awal (8 = ~80% di seperlima awal)",
+   "aliases": [
+    "kecuraman"
+   ]
+  },
+  "exit_time": {
+   "default": 0.8,
+   "type": "number",
+   "hint": "Mulai keluar (fraksi durasi)",
+   "aliases": [
+    "waktu_keluar"
+   ]
+  },
+  "samples": {
+   "default": 8,
+   "type": "number",
+   "hint": "Sampel blur rana",
+   "aliases": [
+    "sampel"
+   ]
+  },
+  "shutter_angle": {
+   "default": 180,
+   "type": "number",
+   "aliases": [
+    "sudut_rana"
+   ]
+  },
+  "fps": {
+   "default": 30,
+   "type": "number"
+  },
+  "color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@600;800",
+   "type": "font"
+  },
+  "size": {
+   "default": 170,
+   "type": "number",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 48,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_y"
+   ]
+  }
+ },
+ "duration": 4,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "aksen/tiba-panjang",
+  "extended-keyframe"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@600;800"
+  ]
+ }
+}

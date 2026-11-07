@@ -1,0 +1,171 @@
+{
+ "id": "accents/chip-ring",
+ "name": "Chip Ring",
+ "name_id": "Lingkar Chip",
+ "category": "accents",
+ "description": {
+  "id": "Chip berlabel mengepung subjek di tengah. Mode kepung: chip garis rambut berkumpul di cincin elips lalu opsional merapat dengan tepi bingkai meredup, subjek tetap diam. Mode desak: tugas, tab, dan notifikasi berdatangan makin cepat dari luar bingkai dan menumpuk, mengubah beban berlebih menjadi tekanan ruang yang terlihat.",
+  "en": "Labelled chips surround a centred subject. Surround mode: hairline chips assemble on an elliptical ring then optionally converge with an edge dim; the centre never moves. Overwhelm mode: tasks, tabs and pings accelerate inward and pile up, turning overload into visible spatial pressure."
+ },
+ "tags": [
+  "aksen",
+  "chip",
+  "kepung",
+  "lingkar",
+  "notifikasi",
+  "beban",
+  "tekanan",
+  "radial",
+  "accents",
+  "ring"
+ ],
+ "props": {
+  "mode": {
+   "default": "surround",
+   "type": "enum",
+   "options": [
+    "surround",
+    "push"
+   ],
+   "option_aliases": {
+    "kepung": "surround",
+    "desak": "push"
+   }
+  },
+  "subject": {
+   "default": "Kamu",
+   "type": "text",
+   "aliases": [
+    "subjek"
+   ]
+  },
+  "item": {
+   "default": [
+    "Rapat pagi",
+    "Tenggat laporan",
+    "Email klien",
+    "Revisi desain",
+    "Tagihan",
+    "Pesan grup",
+    "Jadwal ulang",
+    "Presentasi"
+   ],
+   "type": "list"
+  },
+  "count": {
+   "default": 26,
+   "type": "number",
+   "hint": "Jumlah gelembung (mode desak)",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "converge": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Chip merapat + tepi meredup (mode kepung)",
+   "aliases": [
+    "konvergen"
+   ]
+  },
+  "pause": {
+   "default": 0.12,
+   "type": "number",
+   "hint": "Jeda antar chip (mode kepung)",
+   "aliases": [
+    "jeda"
+   ]
+  },
+  "radius": {
+   "default": 300,
+   "type": "number",
+   "hint": "Jari-jari cincin (px pada 1080)"
+  },
+  "subject_size": {
+   "default": 240,
+   "type": "number",
+   "aliases": [
+    "ukuran_subjek"
+   ]
+  },
+  "color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#7cc4ff",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "subject_color": {
+   "default": "#3b5bdb",
+   "type": "color",
+   "aliases": [
+    "warna_subjek"
+   ]
+  },
+  "card_color": {
+   "default": "#252838",
+   "type": "color",
+   "hint": "Latar gelembung (mode desak)",
+   "aliases": [
+    "warna_kartu"
+   ]
+  },
+  "ping_color": {
+   "default": "#ff4d4f",
+   "type": "color",
+   "aliases": [
+    "warna_ping"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;600;800",
+   "type": "font"
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "seed": {
+   "default": 3,
+   "type": "number"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "aksen/lingkar-chip",
+  "radial-surround",
+  "overwhelm-surround"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@500;600;800"
+  ]
+ }
+}

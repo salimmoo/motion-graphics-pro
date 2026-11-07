@@ -1,0 +1,115 @@
+{
+ "id": "ui/cursor-trail",
+ "name": "Cursor Trail",
+ "name_id": "Jejak Kursor Tutorial",
+ "category": "ui",
+ "description": {
+  "id": "Lintasan tutorial di layar pengaturan: panah mengklik beberapa langkah, meninggalkan jejak titik berjarak sama sepanjang lintasan melengkung dan penanda bernomor di setiap klik. Jejak langkah sebelumnya memudar saat langkah berikutnya dimulai, sakelar yang diklik menyala.",
+  "en": "A tutorial cursor path on a settings screen: the arrow clicks through steps, leaving an evenly spaced dotted trail along a curved path and a numbered marker at each click; each trail fades as the next move begins and clicked toggles switch on."
+ },
+ "tags": [
+  "ui",
+  "kursor",
+  "tutorial",
+  "jejak",
+  "langkah",
+  "pengaturan",
+  "onboarding",
+  "cursor",
+  "trail"
+ ],
+ "props": {
+  "title": {
+   "default": "Pengaturan",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "rows": {
+   "default": [
+    [
+     "Mode gelap",
+     "Tampilan lebih nyaman di malam hari"
+    ],
+    [
+     "Notifikasi",
+     "Kabari saya saat ada pesan baru"
+    ],
+    [
+     "Cadangan otomatis",
+     "Simpan salinan setiap hari"
+    ],
+    [
+     "Lokasi",
+     "Izinkan akses lokasi perangkat"
+    ]
+   ],
+   "type": "list",
+   "hint": "[[judul, keterangan]] baris pengaturan",
+   "aliases": [
+    "baris"
+   ]
+  },
+  "click": {
+   "default": [
+    0,
+    2,
+    3
+   ],
+   "type": "list",
+   "hint": "Indeks baris yang diklik berurutan",
+   "aliases": [
+    "klik"
+   ]
+  },
+  "step_duration": {
+   "default": 1.4,
+   "type": "number",
+   "aliases": [
+    "durasi_langkah"
+   ]
+  },
+  "dot_spacing": {
+   "default": 22,
+   "type": "number",
+   "hint": "Jarak antar titik jejak (px pada 1080)",
+   "aliases": [
+    "jarak_titik"
+   ]
+  },
+  "accent_color": {
+   "default": "#2d6cdf",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg": {
+   "default": "#eef1f6",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700",
+   "type": "font"
+  }
+ },
+ "duration": 5.5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/jejak-kursor",
+  "cursor-glyph-trail"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

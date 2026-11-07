@@ -1,0 +1,76 @@
+<!-- Block accents/path-arc · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="accents/path-arc" data-start="0" data-duration="4" data-track-index="30" class="blk blk-accents-path-arc">
+<script type="application/json" data-block-props>
+{"mode": "arc", "text": "Fitur baru", "from_x": 8, "from_y": 86, "to_x": 50, "to_y": 46, "exit": true, "exit_x": 108, "exit_y": 30, "arc_height": 26, "path": "M -6 70 C 18 96, 32 30, 50 50 S 82 6, 108 26", "stop": 0.5, "rotation": true, "show_path": true, "enter_duration": 1.1, "exit_duration": 0.9, "ease": "power3.out", "color": "#ffffff", "text_color": "#15161d", "accent_color": "#ff6a3d", "path_color": "#ffffff", "font": "Inter:wght@700", "size": 44}
+</script>
+<svg class="blk-svg"></svg>
+<div class="blk-chip"><i class="blk-dot"></i><span class="blk-tx"></span></div>
+</div>
+<style>
+.blk-accents-path-arc{position:absolute;inset:0;pointer-events:none}
+.blk-accents-path-arc .blk-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.blk-accents-path-arc .blk-chip{position:absolute;left:0;top:0;display:flex;align-items:center;white-space:nowrap;font-weight:700;will-change:transform}
+.blk-accents-path-arc .blk-dot{display:block;border-radius:50%;flex:none}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, W = k.w, H = k.h;
+  var sv = R.querySelector(".blk-svg"), chip = R.querySelector(".blk-chip"), dot = R.querySelector(".blk-dot");
+  sv.setAttribute("viewBox", "0 0 " + W + " " + H);
+  // jalur dalam koordinat persen (0..100) -> piksel; mendukung perintah absolut M L C Q S T
+  function skala(d) {
+    var i = 0;
+    return String(d).replace(/[a-zA-Z]|-?\d*\.?\d+(?:e-?\d+)?/g, function (tok) {
+      if (/[a-zA-Z]/.test(tok)) { i = 0; return " " + tok + " "; }
+      var v = +tok * (i++ % 2 ? H : W) / 100; return v.toFixed(2);
+    });
+  }
+  var d, henti;
+  if (P.mode === "path") { d = skala(P.path); henti = BLOCK.clamp(P.stop, 0.05, 1); }
+  else {
+    // busur: dari -> ke (melengkung setinggi tinggi_busur), lalu opsional busur keluar ke titik keluar
+    var a = [P.from_x, P.from_y], b = [P.to_x, P.to_y], c = [P.exit_x, P.exit_y], h = P.arc_height;
+    var c1 = [(a[0] + b[0]) / 2, Math.min(a[1], b[1]) - h];
+    d = "M" + a + " Q" + c1 + " " + b;
+    // busur keluar: kontrol dicerminkan terhadap titik henti supaya garis singgung menyambung mulus
+    if (P.exit) d += " Q" + [b[0] + (b[0] - c1[0]) * 0.6, b[1] + (b[1] - c1[1]) * 0.6] + " " + c;
+    d = skala(d.replace(/,/g, " "));
+  }
+  var pemandu = BLOCK.svg("path", { d: d, fill: "none", stroke: P.path_color, "stroke-width": 2 * s, "stroke-dasharray": (2 * s) + " " + (12 * s), "stroke-linecap": "round", opacity: P.show_path ? 0.5 : 0 }, sv);
+  var jejak = BLOCK.svg("path", { d: d, fill: "none", stroke: P.accent_color, "stroke-width": 3 * s, "stroke-linecap": "round", opacity: P.show_path ? 0.9 : 0 }, sv);
+  var L = BLOCK.prepareStroke(jejak), L1 = L;
+  if (P.mode !== "path") {
+    var tmp = BLOCK.svg("path", { d: d.split(/(?= Q )/).slice(0, 2).join("") }, sv); L1 = tmp.getTotalLength(); sv.removeChild(tmp);
+    henti = P.exit ? L1 / L : 1;
+  }
+  var fz = P.size * s;
+  chip.style.cssText += ";font-family:" + BLOCK.family(P.font) + ";font-size:" + fz + "px;color:" + P.text_color + ";background:" + P.color +
+    ";padding:" + fz * 0.5 + "px " + fz * 0.85 + "px " + fz * 0.5 + "px " + fz * 0.6 + "px;border-radius:" + fz * 2 + "px;box-shadow:0 " + fz * 0.4 + "px " + fz * 1.2 + "px rgba(0,0,0,.28)";
+  dot.style.cssText += ";width:" + fz * 0.6 + "px;height:" + fz * 0.6 + "px;margin-right:" + fz * 0.45 + "px;background:" + P.accent_color;
+  R.querySelector(".blk-tx").textContent = P.text;
+  var cw = chip.offsetWidth, ch = chip.offsetHeight;
+  var tA = 0.2 + P.enter_duration, dk = P.exit_duration, tK = k.dur - dk - 0.1, ei = gsap.parseEase(P.ease), eo = gsap.parseEase("power2.in");
+  var adaKeluar = henti < 0.999;
+  function prog(t) {
+    if (t < tA) return henti * ei(BLOCK.progress(t, 0.2, tA));
+    if (!adaKeluar || t < tK) return henti;
+    return henti + (1 - henti) * eo(BLOCK.progress(t, tK, tK + dk));
+  }
+  BLOCK.onTime(tl, function (t) {
+    var p = prog(t), l = p * L, q = jejak.getPointAtLength(l);
+    var q0 = jejak.getPointAtLength(Math.max(0, l - 2)), q1 = jejak.getPointAtLength(Math.min(L, l + 2));
+    var ang = Math.atan2(q1.y - q0.y, q1.x - q0.x) * 180 / Math.PI;
+    if (ang > 90) ang -= 180; else if (ang < -90) ang += 180;       // teks tidak pernah terbalik
+    // rotasi tangen saat terbang, luruh ke 0 saat diam supaya terbaca
+    var diam = BLOCK.smooth(BLOCK.progress(t, tA - 0.1, tA + 0.35)) * (adaKeluar ? 1 - BLOCK.smooth(BLOCK.progress(t, tK, tK + 0.25)) : 1);
+    var rot = P.rotation ? ang * (1 - diam) : 0, sc = 0.7 + 0.3 * BLOCK.smooth(BLOCK.progress(t, 0.2, tA * 0.9));
+    var op = BLOCK.progress(t, 0.15, 0.35) * (adaKeluar ? 1 - BLOCK.progress(t, tK + dk * 0.75, tK + dk) : 1 - BLOCK.progress(t, k.dur - 0.4, k.dur - 0.05));
+    chip.style.transform = "translate(" + (q.x - cw / 2).toFixed(1) + "px," + (q.y - ch / 2).toFixed(1) + "px) rotate(" + rot.toFixed(2) + "deg) scale(" + sc.toFixed(3) + ")";
+    chip.style.opacity = op.toFixed(3);
+    jejak.style.strokeDashoffset = (L - l).toFixed(1);
+    jejak.style.opacity = P.show_path ? (0.9 * (1 - BLOCK.progress(t, tA + 0.2, tA + 1.0) * 0.6) * (adaKeluar ? 1 : 1 - BLOCK.progress(t, k.dur - 0.5, k.dur - 0.1))) : 0;
+  }, k.dur);
+  tl.fromTo(pemandu, { opacity: 0 }, { opacity: P.show_path ? 0.5 : 0, duration: 0.3 }, 0)
+    .to(pemandu, { opacity: 0, duration: 0.5 }, tA + 0.3);
+}, { font: true });
+</script>

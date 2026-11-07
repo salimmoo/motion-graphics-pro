@@ -1,0 +1,30 @@
+<!-- Block backgrounds/equalizer · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="backgrounds/equalizer" data-start="0" data-duration="8" data-track-index="0" class="blk blk-backgrounds-equalizer">
+<script type="application/json" data-block-props>
+{"color1": "#3d7bff", "color2": "#ff4fb8", "bg": "#05060d", "count": 48, "height": 0.55, "speed": 1, "resolution": 0.5}
+</script>
+</div>
+<style>
+.blk-backgrounds-equalizer{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-backgrounds-equalizer canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P;
+  var cv = BLOCK.el("canvas", null, k.root);
+  var r = Math.max(0.1, Math.min(1, +P.resolution || 0.5));
+  cv.width = Math.round(k.w * r); cv.height = Math.round(k.h * r);
+  var sh = BLOCK.shader(cv, [
+    "void main(){vec2 uv=gl_FragCoord.xy/u_res;float t=u_t*u_kec;float x=uv.x*u_n;float i=floor(x);float fx=fract(x);",
+    "float env=pow(sin(3.14159*(i+.5)/u_n),.6);float n=vnoise(vec2(i*.37,t*2.3))*.7+vnoise(vec2(i*.11+5.,t*4.1))*.3;",
+    "float h=u_tg*env*(.12+.88*pow(n,1.6))*(.75+.25*sin(t*6.2832*1.+i*.4));float d=abs(uv.y-.5);",
+    "float aa=u_n/u_res.x*1.5;float inX=smoothstep(.32+aa,.32,abs(fx-.5));float inY=smoothstep(h*.5+.003,h*.5,d);",
+    "vec3 c=mix(u_c1,u_c2,uv.x);vec3 col=u_lat;col+=c*inX*inY*(.75+.45*d/(h*.5+.001));",
+    "col+=c*inX*exp(-max(d-h*.5,0.)*40.)*.18;col+=c*.06*exp(-d*6.);",
+    "col+=(h21(gl_FragCoord.xy+fract(u_t))-0.5)/128.;gl_FragColor=vec4(col,1.);}"
+  ].join("\n"), { u_c1: BLOCK.vec3(P.color1), u_c2: BLOCK.vec3(P.color2), u_lat: BLOCK.vec3(P.bg), u_n: Math.max(4, Math.round(P.count)), u_tg: +P.height, u_kec: +P.speed });
+  if (!sh.ok) { cv.remove(); k.root.style.background = P.bg; return; }
+  BLOCK.onTime(k.tl, function (t) { sh.draw(t); }, k.dur);
+});
+</script>

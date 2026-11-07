@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP paket-scenes · satu paket dari id</title>
+<!-- Usage: paket-scenes.html?id=KIN-02&dur=8  (default EXP-02). Frame capture: window.__seek(t), window.__duration. -->
+<style>html,body{margin:0;background:#000}#stage{position:relative;overflow:hidden}</style>
+<link rel="stylesheet" href="../fonts.css"><!-- font lokal (bundel Rekam), lihat lib/fonts.css -->
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../pack-scenes/engine.js"></script>
+<script src="../pack-scenes/data.js"></script>
+<script src="../pack-scenes/scenes-a1.js"></script>
+<script src="../pack-scenes/scenes-a2.js"></script>
+<script src="../pack-scenes/scenes-b.js"></script>
+<script src="../pack-scenes/scenes-c.js"></script>
+<script src="../pack-scenes/scenes-d.js"></script>
+<script src="../pack-scenes/scenes-e.js"></script>
+<script src="../pack-scenes/scenes-t.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0"></div>
+<script>
+const q = new URLSearchParams(location.search);
+const id = q.get("id") || "EXP-02";
+const stage = document.getElementById("stage");
+const p = MGP.packs.create(stage, id, { scale: 2, duration: +(q.get("dur") || 8) });
+stage.style.width = p.W + "px"; stage.style.height = p.H + "px";
+stage.dataset.width = p.W; stage.dataset.height = p.H;
+MGP.core.expose(p);
+</script>
+</body>
+</html>

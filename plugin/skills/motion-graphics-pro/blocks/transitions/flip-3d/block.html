@@ -1,0 +1,42 @@
+<!-- Block transitions/flip-3d · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/flip-3d" data-start="0" data-duration="1.2" data-track-index="20" class="blk blk-transitions-flip-3d">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "mode": "cube", "direction": "left", "perspective": 1800, "ease": "power3.inOut"}
+</script>
+</div>
+<style>
+.blk-transitions-flip-3d{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to), D = k.dur, W = k.w, H = k.h, s = k.s;
+  function gaya(el, o) { if (el) for (var n in o) el.style[n] = o[n]; }
+  function bersih(el, tampil) { gaya(el, { transform: "", filter: "", opacity: "", clipPath: "", webkitMaskImage: "", maskImage: "", transformOrigin: "", zIndex: "", borderRadius: "", boxShadow: "", backfaceVisibility: "", visibility: tampil ? "" : "hidden" }); }
+  function ez(n) { return gsap.parseEase(n || "none") || gsap.parseEase("none"); }
+  var E = ez(P.ease), mode = P.mode;
+  var ar = { left: [-1, 0], right: [1, 0], top: [0, -1], bottom: [0, 1] }[P.direction] || [-1, 0], hor = ar[0] !== 0, sg = hor ? ar[0] : ar[1];
+  var L = hor ? W : H, rs = hor ? sg : -sg, rot = hor ? "rotateY" : "rotateX", per = "perspective(" + (+P.perspective || 1800) * s + "px) ";
+  BLOCK.onTime(tl, function (t) {
+    var u = t / D;
+    if (u <= 0 || u >= 1) { bersih(A, u <= 0); bersih(Bk, u >= 1); return; }
+    var p = E(u);
+    gaya(A, { backfaceVisibility: "hidden" }); gaya(Bk, { backfaceVisibility: "hidden" });
+    if (mode === "cube") {
+      var aa = rs * 90 * p, ab = rs * 90 * (p - 1), z = "translateZ(" + (-L / 2) + "px) ";
+      gaya(A, { visibility: "", transform: per + z + rot + "(" + aa + "deg) translateZ(" + L / 2 + "px)", filter: "brightness(" + (1 - 0.6 * p) + ")" });
+      gaya(Bk, { visibility: "", transform: per + z + rot + "(" + ab + "deg) translateZ(" + L / 2 + "px)", filter: "brightness(" + (0.4 + 0.6 * p) + ")" });
+    } else if (mode === "door") {
+      var org = hor ? (sg < 0 ? "0% 50%" : "100% 50%") : (sg < 0 ? "50% 0%" : "50% 100%");
+      var sgn = hor ? (sg < 0 ? 1 : -1) : (sg < 0 ? -1 : 1), q = ez("power2.in")(u);
+      gaya(A, { visibility: q < 0.98 ? "" : "hidden", zIndex: 2, transformOrigin: org, transform: per + rot + "(" + sgn * 100 * q + "deg)", filter: "brightness(" + (1 - 0.55 * q) + ")" });
+      gaya(Bk, { visibility: "", zIndex: 1, transform: "scale(" + (0.9 + 0.1 * p) + ")", filter: "brightness(" + (0.5 + 0.5 * p) + ")" });
+    } else {
+      var ang = 180 * p, sc = 1 - 0.14 * Math.sin(Math.PI * p), dep = per + "scale(" + sc + ") ";
+      var sh = "brightness(" + (1 - 0.45 * Math.abs(Math.sin(Math.PI * p))) + ")";
+      gaya(A, { visibility: p < 0.5 ? "" : "hidden", transform: dep + rot + "(" + rs * ang + "deg)", filter: sh });
+      gaya(Bk, { visibility: p >= 0.5 ? "" : "hidden", transform: dep + rot + "(" + rs * (ang - 180) + "deg)", filter: sh });
+    }
+  }, D);
+});
+</script>

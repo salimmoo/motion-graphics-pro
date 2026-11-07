@@ -1,0 +1,20 @@
+{
+  "MGP lib (motion-graphics/lib/lottie) not found; set MGP_LIB=<lib folder>": "lib MGP (motion-graphics/lib/lottie) tidak ditemukan; isi MGP_LIB=<folder lib>",
+  "mgp export lottie: {} {}x{}, {}-{} s @ {} fps, mode {}": "mgp export lottie: {} {}x{}, {}-{} s @ {} fps, mode {}",
+  "mode {}: {} frames, {} layers, {} keyframes, {} KB JSON": "mode {}: {} frame, {} lapisan, {} keyframe, {} KB JSON",
+  "(seeked through the runtime: every timeline/scene)": "(di-seek lewat runtime: semua timeline/scene)",
+  "size savings: {}": "hemat ukuran: {}",
+  "not supported: {} ({}x)": "tidak didukung: {} ({}x)",
+  "WARN": "AWAS",
+  "static Lottie (0 keyframes) although the composition has a moving timeline. Motion on canvas/WebGL, CSS animation, or elements whose DOM does not change is not read by mode {}; try --mode {}, or export per scene.": "Lottie statis (0 keyframe) padahal komposisi punya timeline bergerak. Gerak di kanvas/WebGL, CSS animation, atau elemen yang tidak diubah DOM-nya tidak terbaca mode {}; coba --mode {}, atau ekspor per scene.",
+  "JSON {} MB ({} MB per second)": "JSON {} MB ({} MB per detik)",
+  "save it as .lottie (-o {}.lottie, lossless, ~10x smaller)": "simpan sebagai .lottie (-o {}.lottie, lossless, ~10x lebih kecil)",
+  "Make it smaller: --precision 1, --tolerance 0.3, --fps 24/15, a shorter --from/--to range, or render to MP4.": "Kecilkan lagi: --precision 1, --tolerance 0.3, --fps 24/15, rentang --from/--to lebih pendek, atau render ke MP4.",
+  "Lottie file not found: {}": "File Lottie tidak ditemukan: {}",
+  "MGP.lottie does not support: ": "MGP.lottie tidak didukung: ",
+  "{}: {}x{}, {} fps, {} frames ({} s), {} layers": "{}: {}x{}, {} fps, {} frame ({} s), {} lapisan",
+  "features: {}": "fitur: {}",
+  "not supported: {}": "tidak didukung: {}",
+  "every feature is supported by the MGP.lottie player": "semua fitur didukung pemutar MGP.lottie",
+  "mgp lottie: unknown subcommand \"{}\" (export, play, render, frame, check)": "mgp lottie: sub-perintah tidak dikenal \"{}\" (export, play, render, frame, check)"
+}

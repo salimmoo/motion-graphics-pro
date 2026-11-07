@@ -1,0 +1,28 @@
+<!-- Block backgrounds/ripple · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="backgrounds/ripple" data-start="0" data-duration="8" data-track-index="0" class="blk blk-backgrounds-ripple">
+<script type="application/json" data-block-props>
+{"color": "#ffffff", "bg": "#000000", "tight": 36, "thickness": 0.35, "position_x": 50, "position_y": 50, "fade": 0.6, "speed": 1, "resolution": 0.5}
+</script>
+</div>
+<style>
+.blk-backgrounds-ripple{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-backgrounds-ripple canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P;
+  var cv = BLOCK.el("canvas", null, k.root);
+  var r = Math.max(0.1, Math.min(1, +P.resolution || 0.5));
+  cv.width = Math.round(k.w * r); cv.height = Math.round(k.h * r);
+  var sh = BLOCK.shader(cv, [
+    "void main(){vec2 p=(gl_FragCoord.xy-u_res*vec2(u_px,u_py))/u_res.y;float r=length(p);float t=u_t*u_kec;",
+    "float ph=r*u_rp-t*3.;float s=sin(ph*3.14159);float aa=3.14159*u_rp/u_res.y*1.5;",
+    "float m=clamp(.5+(s-(1.-2.*u_tb))/(2.*aa),0.,1.);float f=1.-u_pd*smoothstep(0.,.9,r);",
+    "vec3 col=mix(u_lat,u_w,m*f);",
+    "col+=(h21(gl_FragCoord.xy+fract(u_t))-0.5)/128.;gl_FragColor=vec4(col,1.);}"
+  ].join("\n"), { u_w: BLOCK.vec3(P.color), u_lat: BLOCK.vec3(P.bg), u_rp: +P.tight, u_tb: +P.thickness, u_px: P.position_x / 100, u_py: 1 - P.position_y / 100, u_pd: +P.fade, u_kec: +P.speed });
+  if (!sh.ok) { cv.remove(); k.root.style.background = "repeating-radial-gradient(circle at " + P.position_x + "% " + P.position_y + "%," + P.color + " 0 6px," + P.bg + " 6px 24px)"; return; }
+  BLOCK.onTime(k.tl, function (t) { sh.draw(t); }, k.dur);
+});
+</script>

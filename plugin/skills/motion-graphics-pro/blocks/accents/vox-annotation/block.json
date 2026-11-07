@@ -1,0 +1,201 @@
+{
+ "id": "accents/vox-annotation",
+ "name": "Vox Annotation",
+ "name_id": "Anotasi Vox",
+ "category": "accents",
+ "description": {
+  "id": "Gestur anotasi ala video penjelasan editorial: kalimat ditahan di layar, lalu tepat pada isyarat kata kunci (*kata*) diberi penanda coretan tangan (garis bawah, lingkaran, atau stabilo) sementara garis penghubung tipis naik ke label mono, semuanya sebagai satu ketukan.",
+  "en": "The editorial explainer annotate gesture: a held sentence, then on the cue the keyword (*word*) gets a hand-drawn marker (underline, loop or highlighter) while a thin connector draws up to a mono callout label, all as one beat."
+ },
+ "tags": [
+  "aksen",
+  "anotasi",
+  "editorial",
+  "penanda",
+  "stabilo",
+  "callout",
+  "explainer",
+  "accents",
+  "vox",
+  "annotation"
+ ],
+ "props": {
+  "text": {
+   "default": "Harga beras naik *dua kali lipat* dalam lima tahun terakhir",
+   "type": "text",
+   "hint": "*kata* = kata yang dianotasi",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "label": {
+   "default": "Data BPS 2019-2024",
+   "type": "text"
+  },
+  "marker": {
+   "default": "line",
+   "type": "enum",
+   "options": [
+    "line",
+    "circle",
+    "highlighter"
+   ],
+   "aliases": [
+    "penanda"
+   ],
+   "option_aliases": {
+    "garis": "line",
+    "lingkar": "circle",
+    "stabilo": "highlighter"
+   }
+  },
+  "gesture": {
+   "default": 1.3,
+   "type": "number",
+   "hint": "Waktu anotasi (detik)",
+   "aliases": [
+    "isyarat"
+   ]
+  },
+  "side": {
+   "default": "right",
+   "type": "enum",
+   "options": [
+    "right",
+    "left"
+   ],
+   "hint": "Arah label",
+   "aliases": [
+    "sisi"
+   ],
+   "option_aliases": {
+    "kanan": "right",
+    "kiri": "left"
+   }
+  },
+  "label_height": {
+   "default": 120,
+   "type": "number",
+   "hint": "Tinggi penghubung (px pada 1080)",
+   "aliases": [
+    "tinggi_label"
+   ]
+  },
+  "thickness": {
+   "default": 6,
+   "type": "number",
+   "aliases": [
+    "tebal"
+   ]
+  },
+  "color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffd23f",
+   "type": "color",
+   "hint": "Warna penanda",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "keyword_color": {
+   "default": "#14151f",
+   "type": "color",
+   "hint": "Warna kata kunci (stabilo)",
+   "aliases": [
+    "warna_kunci"
+   ]
+  },
+  "line_color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "hint": "Penghubung & label",
+   "aliases": [
+    "warna_garis"
+   ]
+  },
+  "font": {
+   "default": "Source Serif 4:wght@600;700",
+   "type": "font"
+  },
+  "font2": {
+   "default": "JetBrains Mono:wght@500",
+   "type": "font"
+  },
+  "size": {
+   "default": 84,
+   "type": "number",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "weight": {
+   "default": 600,
+   "type": "number",
+   "aliases": [
+    "berat"
+   ]
+  },
+  "align": {
+   "default": "center",
+   "type": "enum",
+   "options": [
+    "left",
+    "center",
+    "right"
+   ],
+   "aliases": [
+    "rata"
+   ],
+   "option_aliases": {
+    "kiri": "left",
+    "tengah": "center",
+    "kanan": "right"
+   }
+  },
+  "width": {
+   "default": 78,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "position_y": {
+   "default": 56,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "seed": {
+   "default": 4,
+   "type": "number"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "aksen/anotasi-vox",
+  "vox-annotate"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Source Serif 4:wght@600;700",
+   "JetBrains Mono:wght@500"
+  ]
+ }
+}

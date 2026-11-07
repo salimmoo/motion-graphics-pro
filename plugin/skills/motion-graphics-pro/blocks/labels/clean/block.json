@@ -1,0 +1,167 @@
+{
+ "id": "labels/clean",
+ "name": "Clean",
+ "name_id": "Label Nama Bersih",
+ "category": "labels",
+ "description": {
+  "id": "Lower third rapi untuk podcast dan wawancara: kartu putih dengan tab aksen yang tersapu masuk, pil putih dengan titik status yang meletup, atau kartu arang dengan garis aksen tergambar.",
+  "en": "Clean lower third for podcasts and interviews: white card with accent tab and clip wipe, soft pill with status dot and scale pop, or charcoal card with drawn accent underline."
+ },
+ "tags": [
+  "label",
+  "lower-third",
+  "nama",
+  "wawancara",
+  "podcast",
+  "kartu",
+  "pil",
+  "labels",
+  "clean"
+ ],
+ "props": {
+  "style": {
+   "default": "card",
+   "type": "enum",
+   "options": [
+    "card",
+    "pill",
+    "dark"
+   ],
+   "hint": "kartu = kartu putih + tab aksen; pil = pil putih + titik status; gelap = kartu arang + garis aksen",
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "kartu": "card",
+    "pil": "pill",
+    "gelap": "dark"
+   }
+  },
+  "name": {
+   "default": "Rara Pramesti",
+   "type": "text",
+   "aliases": [
+    "nama"
+   ]
+  },
+  "role": {
+   "default": "Pendiri Kebun Kota",
+   "type": "text",
+   "aliases": [
+    "peran"
+   ]
+  },
+  "accent_color": {
+   "default": "#2f6bff",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "position": {
+   "default": "bottom-left",
+   "type": "enum",
+   "options": [
+    "bottom-left",
+    "bottom-right",
+    "bottom-center"
+   ],
+   "aliases": [
+    "posisi"
+   ],
+   "option_aliases": {
+    "kiri-bawah": "bottom-left",
+    "kanan-bawah": "bottom-right",
+    "tengah-bawah": "bottom-center"
+   }
+  },
+  "enter": {
+   "default": "style",
+   "type": "enum",
+   "options": [
+    "style",
+    "sweep",
+    "pop",
+    "up",
+    "fade"
+   ],
+   "hint": "gaya = animasi masuk khas tiap gaya",
+   "aliases": [
+    "masuk"
+   ],
+   "option_aliases": {
+    "gaya": "style",
+    "sapu": "sweep",
+    "naik": "up",
+    "pudar": "fade"
+   }
+  },
+  "exit": {
+   "default": "fade",
+   "type": "enum",
+   "options": [
+    "fade",
+    "sweep",
+    "down",
+    "no"
+   ],
+   "aliases": [
+    "keluar"
+   ],
+   "option_aliases": {
+    "pudar": "fade",
+    "sapu": "sweep",
+    "turun": "down",
+    "tidak": "no"
+   }
+  },
+  "font": {
+   "default": "Inter:wght@400;500;700;800",
+   "type": "font"
+  },
+  "size": {
+   "default": 44,
+   "type": "number",
+   "hint": "Ukuran nama (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "bottom": {
+   "default": 11,
+   "type": "number",
+   "hint": "Jarak dari bawah (%)",
+   "aliases": [
+    "bawah"
+   ]
+  },
+  "edge": {
+   "default": 6,
+   "type": "number",
+   "hint": "Jarak dari tepi samping (%)",
+   "aliases": [
+    "tepi"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "label/bersih",
+  "lt-clean-bar",
+  "lt-soft-pill",
+  "lt-dark-card"
+ ],
+ "example": {
+  "bg": "photo",
+  "font": [
+   "Inter:wght@400;500;700;800"
+  ]
+ }
+}

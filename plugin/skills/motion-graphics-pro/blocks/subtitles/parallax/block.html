@@ -1,0 +1,65 @@
+<!-- Block subtitles/parallax · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="subtitles/parallax" data-start="0" data-duration="5" data-track-index="30" class="blk blk-subtitles-parallax">
+<script type="application/json" data-block-props>
+{"text": "Mimpi besar dimulai dari sini", "words": [], "kps": 1.6, "max_words": 2, "font": "Anton:wght@400", "size": 250, "color": "#ffffff", "bottom": 24, "uppercase": true, "figure": "#adegan .sosok", "layer_color": "#ffd23f", "stretch": 2.4, "depth": 1}
+</script>
+<div class="blk-cap"></div>
+<div class="blk-topeng"></div>
+</div>
+<style>
+.blk-subtitles-parallax{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-subtitles-parallax .blk-cap{position:absolute;left:0;right:0;text-align:center;line-height:.9;z-index:1}
+.blk-subtitles-parallax .blk-hal{position:absolute;left:0;right:0;bottom:0}
+.blk-subtitles-parallax .blk-lapis{position:absolute;left:0;right:0;bottom:0;color:transparent}
+.blk-subtitles-parallax .blk-w{display:inline-block;margin:0 .05em;transform-origin:50% 100%}
+.blk-subtitles-parallax .blk-topeng{position:absolute;z-index:2;left:0;top:0}
+.blk-subtitles-parallax .blk-topeng div{position:absolute}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, root = k.root, cap = root.querySelector(".blk-cap"), mask = root.querySelector(".blk-topeng");
+  cap.style.cssText += ";bottom:" + P.bottom + "%;color:" + P.color + ";font-family:" + BLOCK.family(P.font, "Impact, sans-serif") + ";font-size:" +
+    Math.round(P.size * s) + "px" + (P.uppercase ? ";text-transform:uppercase" : "");
+  BLOCK.pages(BLOCK.words(P), P.max_words).forEach(function (pg) {
+    var grup = BLOCK.el("div", { class: "blk-hal" }, cap);
+    // lapis belakang: garis luar lebih besar, bergerak lebih lambat (kedalaman)
+    var lap = BLOCK.el("div", { class: "blk-lapis", style: "-webkit-text-stroke:" + (3 * s).toFixed(1) + "px " + P.layer_color + ";opacity:.85" }, grup);
+    var dep = BLOCK.el("div", { style: "position:relative;text-shadow:0 " + Math.round(18 * s) + "px " + Math.round(40 * s) + "px rgba(0,0,0,.35)" }, grup);
+    BLOCK.initial(tl, grup, { autoAlpha: 0 }).set(grup, { autoAlpha: 1 }, pg.mulai).set(grup, { autoAlpha: 0 }, pg.akhir);
+    var lama = Math.max(0.4, pg.akhir - pg.mulai);
+    tl.fromTo(lap, { y: -0.1 * P.size * s, scale: 1.12 }, { y: -0.22 * P.size * s * P.depth, scale: 1.16, duration: lama, ease: "none" }, pg.mulai)
+      .fromTo(dep, { y: 0 }, { y: -0.06 * P.size * s * P.depth, duration: lama, ease: "none" }, pg.mulai);
+    pg.kata.forEach(function (w) {
+      var t = String(w.teks).replace(/\*/g, "");
+      [lap, dep].forEach(function (ly, li) {
+        var e = BLOCK.el("span", { class: "blk-w" }, ly); e.textContent = t;
+        // regangan vertikal: tinggi berlipat lalu mendarat ke bentuk normal
+        tl.fromTo(e, { opacity: 0, scaleY: P.stretch, scaleX: 0.85, y: 30 * s }, { opacity: 1, scaleY: 1, scaleX: 1, y: 0, duration: 0.6, ease: "expo.out" }, w.mulai - 0.04 + li * 0.05);
+      });
+    });
+  });
+  // topeng: salinan siluet sosok di atas teks (z-index di dalam blok), mengikuti posisi sosok tiap frame
+  var tg = BLOCK.find(P.figure);
+  if (tg) {
+    var badan = BLOCK.el("div", null, mask), parts = [[tg, badan, null]];
+    ["::before", "::after"].forEach(function (ps) {
+      var cs = getComputedStyle(tg, ps);
+      if (cs.content && cs.content !== "none") parts.push([tg, BLOCK.el("div", null, badan), ps]);
+    });
+    var salin = function (src, dst, ps) {
+      var cs = getComputedStyle(src, ps);
+      ["backgroundColor", "backgroundImage", "borderTopLeftRadius", "borderTopRightRadius", "borderBottomLeftRadius", "borderBottomRightRadius", "transform", "opacity"].forEach(function (p) { dst.style[p] = cs[p]; });
+      if (ps) ["left", "top", "width", "height"].forEach(function (p) { dst.style[p] = cs[p]; });
+    };
+    BLOCK.onTime(tl, function () {
+      var rr = root.getBoundingClientRect(), r = tg.getBoundingClientRect(), sk = rr.width / (root.offsetWidth || rr.width) || 1;
+      badan.style.left = ((r.left - rr.left) / sk).toFixed(1) + "px"; badan.style.top = ((r.top - rr.top) / sk).toFixed(1) + "px";
+      badan.style.width = (r.width / sk).toFixed(1) + "px"; badan.style.height = (r.height / sk).toFixed(1) + "px";
+      parts.forEach(function (p) { salin(p[0], p[1], p[2]); });
+      badan.style.transform = "none";
+      var vis = getComputedStyle(tg).visibility !== "hidden";
+      mask.style.visibility = vis ? "inherit" : "hidden";
+    }, k.dur);
+  }
+}, { font: true });
+</script>

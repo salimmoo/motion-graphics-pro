@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Wordmark Tiles · block example logos/wordmark-tiles</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="5.5">
+<div id="adegan" class="adegan ad-gelap"></div>
+<!-- Block logos/wordmark-tiles · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-wordmark-tiles" data-block="logos/wordmark-tiles" data-start="0" data-duration="5" data-track-index="20" class="blk blk-logos-wordmark-tiles">
+<script type="application/json" data-block-props>
+{"brand_name": "KILAU", "color": "#f5f2ea", "palette": ["#ff5a36", "#ffc23d", "#3ddc97", "#4f7cff", "#c44dff", "#1b1d24"], "bg": "#0d0e12", "cols": 20, "rows": 6, "wave_duration": 1.6, "font": "Unbounded:wght@800;900", "size": 230}
+</script>
+<div class="blk-tengah"><div class="blk-wm"></div></div>
+</div>
+<style>
+.blk-logos-wordmark-tiles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-logos-wordmark-tiles .blk-tengah{position:absolute;left:50%;top:50%;width:max-content;transform:translate(-50%,-50%)}
+.blk-logos-wordmark-tiles .blk-wm{position:relative;line-height:1;white-space:nowrap;font-weight:900;letter-spacing:-.02em;padding:.12em .1em;color:transparent}
+.blk-logos-wordmark-tiles .blk-ub{position:absolute;overflow:hidden}
+.blk-logos-wordmark-tiles .blk-ub>span{position:absolute;left:0;top:0;white-space:nowrap;padding:.12em .1em}
+.blk-logos-wordmark-tiles .blk-ub>i{position:absolute;inset:0}
+</style>
+<script>
+(function () {
+// tunggu font benar-benar termuat sebelum mengukur teks (stylesheet Google Fonts + FontFace)
+function blkTungguFont(spek, berat) {
+  var fam = String(spek || "").split(":")[0];
+  if (!fam || !document.fonts || !document.fonts.load) return Promise.resolve();
+  var ls = Array.prototype.filter.call(document.querySelectorAll('link[href*="fonts.googleapis"]'), function (l) { return l.href.indexOf(fam.replace(/ /g, "+")) >= 0; });
+  return Promise.all(ls.map(function (l) { return l.sheet ? 0 : new Promise(function (r) { l.addEventListener("load", r); l.addEventListener("error", r); }); }))
+    .then(function () { return document.fonts.load((berat || 700) + ' 64px "' + fam + '"'); }).catch(function () {});
+}
+BLOCK.mount("blk-wordmark-tiles", function (k) {
+  return blkTungguFont(k.P.font, 900).then(function () { bangun(k); });
+}, { font: true });
+function bangun(k) {
+  var P = k.P, tl = k.tl, s = k.s, D = k.dur, E = BLOCK.el, R = k.root, ac = k.random;
+  if (P.bg) R.style.background = P.bg;
+  var wm = R.querySelector(".blk-wm");
+  var fs = Math.min(P.size * s, k.w * 0.86 / Math.max(2, String(P.brand_name).length * 0.95));
+  wm.style.cssText = "font-family:" + BLOCK.family(P.font) + ";font-size:" + Math.round(fs) + "px";
+  wm.textContent = P.brand_name;
+  var W = wm.offsetWidth, H = wm.offsetHeight, C = Math.max(4, Math.round(P.cols)), Rr = Math.max(2, Math.round(P.rows));
+  var tw = W / C, th = H / Rr, pal = Array.isArray(P.palette) && P.palette.length ? P.palette : ["#888"], ubin = [];
+  for (var r = 0; r < Rr; r++) for (var c = 0; c < C; c++) {
+    // tiap ubin memuat salinan wordmark yang dipotong tepat pada posisinya
+    var u = E("div", { class: "blk-ub", style: "left:" + (c * tw).toFixed(2) + "px;top:" + (r * th).toFixed(2) + "px;width:" + (tw + 0.6).toFixed(2) + "px;height:" + (th + 0.6).toFixed(2) + "px" }, wm);
+    var sp = E("span", { style: "left:" + (-c * tw).toFixed(2) + "px;top:" + (-r * th).toFixed(2) + "px;color:" + P.color }, u); sp.textContent = P.brand_name;
+    var nz = E("i", null, u);
+    var x = (c + 0.5) / C, y = (r + 0.5) / Rr;
+    ubin.push({ el: u, nz: nz, isi: sp, x: x, y: y, seed: ac() * 1000, tunda: x * 0.85 + 0.12 * Math.sin(y * 5.5 + x * 7) + ac() * 0.08 });
+  }
+  var t0 = 0.4, G = +P.wave_duration;
+  // derau warna berkedip (12 fps, berseed) sampai gelombang lewat; fungsi murni dari waktu
+  BLOCK.onTime(tl, function (t) {
+    var f = Math.floor(t * 12 + 1e-6);
+    ubin.forEach(function (u) {
+      var p = BLOCK.clamp((t - t0 - u.tunda * G) / 0.45, 0, 1);
+      var idx = Math.floor((BLOCK.noise(f * 0.91 + u.seed, 3) * 0.5 + 0.5) * pal.length * 1.999) % pal.length;
+      u.nz.style.background = pal[idx];
+      u.nz.style.opacity = (1 - p).toFixed(3);
+      var e = 1 - Math.pow(1 - p, 3);
+      u.isi.style.opacity = (0.35 + 0.65 * e).toFixed(3);
+      u.el.style.transform = "scale(" + (0.55 + 0.45 * (p < 1 ? BLOCK.spring(p * 0.9, 1.6, 0.5) : 1)).toFixed(4) + ") rotate(" + ((1 - e) * (u.seed % 2 > 1 ? 1 : -1) * 25).toFixed(2) + "deg)";
+      // kilau tipis yang lewat saat bertahan
+      var g = Math.exp(-Math.pow((t - (t0 + G + 1.2) - u.x * 0.6) * 6, 2));
+      u.isi.style.filter = g > 0.01 ? "brightness(" + (1 + g * 0.6).toFixed(3) + ")" : "none";
+    });
+  }, D);
+  tl.fromTo(wm, { scale: 1.08 }, { scale: 1, duration: D, ease: "power2.out" }, 0);
+}
+})();
+</script>
+</div>
+<script>
+  window.__duration = 5.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5.5);
+</script>
+</body>
+</html>

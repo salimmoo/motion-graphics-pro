@@ -1,0 +1,56 @@
+<!-- Block data/beat-timeline · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="data/beat-timeline" data-start="0" data-duration="6" data-track-index="10" class="blk blk-data-beat-timeline">
+<script type="application/json" data-block-props>
+{"beats": [{"label": "Minggu 1", "judul": "Riset dan wawancara pengguna"}, {"label": "Minggu 2", "judul": "Rancangan alur dan prototipe"}, {"label": "Minggu 3", "judul": "Uji coba dengan 40 peserta"}, {"label": "Minggu 4", "judul": "Rilis bertahap ke semua kota"}], "color": "#f5f3ee", "accent_color": "#7cc4ff", "bg_color": "#14151f", "font": "Inter:wght@500;700", "font2": "JetBrains Mono:wght@500", "size": 54, "position_x": 14, "position_y": 52, "width": 70}
+</script>
+<div class="blk-p"><div class="blk-tulang"><i class="blk-isi"></i></div><div class="blk-kepala"></div><div class="blk-rows"></div></div>
+</div>
+<style>
+.blk-data-beat-timeline{position:absolute;inset:0;pointer-events:none}
+.blk-data-beat-timeline .blk-p{position:absolute;transform:translateY(-50%)}
+.blk-data-beat-timeline .blk-tulang{position:absolute;left:0;top:0;bottom:0;width:2px;transform-origin:top center}
+.blk-data-beat-timeline .blk-isi{position:absolute;left:0;top:0;width:100%;height:100%;transform-origin:top center}
+.blk-data-beat-timeline .blk-kepala{position:absolute;left:1px;border-radius:50%;transform:translate(-50%,-50%)}
+.blk-data-beat-timeline .blk-r{position:relative}
+.blk-data-beat-timeline .blk-tik{position:absolute;top:.55em;border-radius:50%;transform:translate(-50%,-50%)}
+.blk-data-beat-timeline .blk-lb{letter-spacing:.12em;text-transform:uppercase;font-variant-numeric:tabular-nums}
+.blk-data-beat-timeline .blk-jd{font-weight:700;line-height:1.15;letter-spacing:-.01em}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, fs = function (v) { return Math.round(v * s) + "px"; }, B = P.beats || [];
+  var p = R.querySelector(".blk-p"), tul = R.querySelector(".blk-tulang"), isi = R.querySelector(".blk-isi"), kep = R.querySelector(".blk-kepala"), rows = R.querySelector(".blk-rows");
+  p.style.cssText += ";left:" + P.position_x + "%;top:" + P.position_y + "%;width:" + P.width + "%;color:" + P.color + ";font-family:" + BLOCK.family(P.font);
+  tul.style.background = BLOCK.rgba(P.color, 0.18); isi.style.background = P.accent_color;
+  kep.style.cssText += ";width:" + fs(22) + ";height:" + fs(22) + ";background:" + P.accent_color + ";box-shadow:0 0 0 " + fs(8) + " " + BLOCK.rgba(P.accent_color, 0.22);
+  var n = B.length, t0 = 0.5, tEnd = k.dur - 0.9, step = (tEnd - t0) / Math.max(n, 1);
+  // label bernama berjarak sama di sepanjang timeline: baris i masuk pada labelnya
+  var el = B.map(function (b, i) {
+    tl.addLabel("ketukan" + i, t0 + i * step);
+    var r = BLOCK.el("div", { class: "blk-r", style: "padding:0 0 " + fs(P.size * 0.85) + " " + fs(56) }, rows);
+    var tik = BLOCK.el("i", { class: "blk-tik", style: "left:1px;width:" + fs(14) + ";height:" + fs(14) + ";border:" + fs(2) + " solid " + BLOCK.rgba(P.color, 0.5) + ";background:" + P.bg_color }, r);
+    var lb = BLOCK.el("div", { class: "blk-lb", style: "font-family:" + BLOCK.family(P.font2, "monospace") + ";font-size:" + fs(P.size * 0.42) + ";color:" + P.accent_color + ";margin-bottom:" + fs(8) }, r);
+    lb.textContent = b.label;
+    var jd = BLOCK.el("div", { class: "blk-jd", style: "font-size:" + fs(P.size) }, r); jd.textContent = b.judul;
+    return { r: r, tik: tik, lb: lb, jd: jd };
+  });
+  var tops = el.map(function (o) { return o.r.offsetTop + 0.55 * P.size * 0.42 * s; });
+  tl.fromTo(tul, { scaleY: 0 }, { scaleY: 1, duration: 0.7, ease: "power3.inOut" }, 0);
+  BLOCK.initial(tl, kep, { top: tops[0] || 0, opacity: 0 });
+  tl.to(kep, { opacity: 1, duration: 0.2 }, t0);
+  el.forEach(function (o, i) {
+    var t = "ketukan" + i;
+    tl.fromTo([o.lb, o.jd], { opacity: 0, x: -26 * s }, { opacity: 1, x: 0, duration: 0.55, ease: "power3.out", stagger: 0.06 }, t);
+    tl.fromTo(o.tik, { scale: 0, background: P.bg_color }, { scale: 1, background: P.accent_color, duration: 0.35, ease: "back.out(3)" }, t);
+    if (i > 0) {
+      tl.to(kep, { top: tops[i], duration: 0.5, ease: "power3.inOut" }, t + "-=0.1");
+      tl.to(el[i - 1].jd, { opacity: 0.45, duration: 0.4 }, t);
+    }
+    var tot = p.offsetHeight || 1;
+    tl.fromTo(isi, { scaleY: i ? tops[i - 1] / tot : 0 }, { scaleY: tops[i] / tot, duration: 0.5, ease: "power3.inOut", immediateRender: false }, i ? t + "-=0.1" : t);
+  });
+  // keluar bersama grup
+  tl.to(el.map(function (o) { return o.r; }).concat([kep]), { opacity: 0, y: -14 * s, duration: 0.4, ease: "power2.in", stagger: 0.04 }, k.dur - 0.7);
+  tl.to(tul, { scaleY: 0, transformOrigin: "bottom center", duration: 0.5, ease: "power3.in" }, k.dur - 0.6);
+}, { font: true });
+</script>

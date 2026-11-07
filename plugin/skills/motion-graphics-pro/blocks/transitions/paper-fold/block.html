@@ -1,0 +1,38 @@
+<!-- Blok transisi/lipat-kertas · Motion Graphics Pro. Membungkus MGP.paperFoldTransition.createDOM (lib:mgp.js). Props: lihat blok.json. -->
+<div data-composition-id="__ID__" data-block="transitions/paper-fold" data-start="0" data-duration="3" data-track-index="20" class="blk blk-transitions-paper-fold">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "direction": "left", "vertical": "bottom", "start": 0.2, "hold": 0.3, "bg_color": "#d9cdb4", "flip_color": ["#c9a77a", "#e8d3ad"], "through": 0.13, "shadow": true, "perspective": 1700}
+</script>
+</div>
+<style>
+.blk-transitions-paper-fold{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-transitions-paper-fold .blk-meja,.blk-transitions-paper-fold .blk-wadah{position:absolute;inset:0}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to), PF = window.MGP && MGP.paperFoldTransition;
+  if (!PF) { console.error("[blok] transitions/paper-fold needs lib:mgp.js"); return; }
+  // meja kertas di belakang lembar yang dilipat
+  BLOCK.el("div", { class: "blk-meja", style: "background:repeating-linear-gradient(97deg,rgba(90,60,30,.06) 0 2px,transparent 2px 9px),radial-gradient(90% 90% at 50% 45%," + BLOCK.mix(P.bg_color, "#ffffff", 0.25) + "," + BLOCK.mix(P.bg_color, "#000000", 0.18) + ")" }, k.root);
+  var wadah = BLOCK.el("div", { class: "blk-wadah" }, k.root);
+  function klon(el) {
+    if (!el) return null;
+    var c = el.cloneNode(true); c.removeAttribute("id"); c.querySelectorAll("[id]").forEach(function (e) { e.removeAttribute("id"); });
+    c.style.cssText += ";visibility:inherit;opacity:1;transform:none;filter:none;clip-path:none"; return c;
+  }
+  var mulai = +P.start || 0.2, tahan = P.hold == null ? 0.3 : +P.hold;
+  var akhir = PF.lib && PF.lib.phases ? PF.lib.phases(0, "origami", null).end : 1.82;
+  var fd = Math.max(0.6, (D - mulai - tahan)) * 1.82 / akhir;
+  var inst = PF.createDOM(wadah, {
+    width: k.w, height: k.h, from: klon(A), to: klon(Bk), start: mulai, foldDuration: fd, hold: tahan,
+    direction: P.direction === "right" ? "right" : "left", vertical: P.vertical === "top" ? "up" : "down",
+    paperBack: P.flip_color, showThrough: +P.through || 0, shadow: !!P.shadow, perspective: +P.perspective || 1700,
+  });
+  var jalan = function () {
+    BLOCK.onTime(tl, function (t) { inst.seek(t); }, D);
+    if (A) BLOCK.initial(tl, A, { autoAlpha: 1 }).set(A, { autoAlpha: 0 }, 0.02);
+    if (Bk) BLOCK.initial(tl, Bk, { autoAlpha: 0 }).set(Bk, { autoAlpha: 1 }, D - 0.02);
+  };
+  return inst.ready && inst.ready.then ? inst.ready.then(jalan) : jalan();
+});
+</script>

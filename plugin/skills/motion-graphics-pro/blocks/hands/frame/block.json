@@ -1,0 +1,172 @@
+{
+ "id": "hands/frame",
+ "name": "Frame",
+ "name_id": "Bingkai Tangan",
+ "category": "hands",
+ "description": {
+  "id": "Media dalam bingkai coretan tangan dua lintasan, dihiasi doodle di sudut (bintang, spiral, kilau, hati) dan keterangan tulisan tangan. Seluruh unit sedikit miring dan bergoyang. Gambar opsional; bawaan pemandangan placeholder.",
+  "en": "Media inside a hand-drawn double-pass border with corner doodles (star, spiral, sparkle, heart) and a handwritten caption; the unit tilts slightly and boils. Image optional, placeholder scene by default."
+ },
+ "tags": [
+  "tangan",
+  "bingkai",
+  "frame",
+  "doodle",
+  "foto",
+  "keterangan",
+  "hands"
+ ],
+ "props": {
+  "image": {
+   "default": "",
+   "type": "text",
+   "hint": "Url gambar (opsional). Kosong = pemandangan placeholder",
+   "aliases": [
+    "gambar"
+   ]
+  },
+  "caption": {
+   "default": "liburan pertama kami",
+   "type": "text",
+   "hint": "Keterangan tulisan tangan",
+   "aliases": [
+    "keterangan"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Pusat X (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 47,
+   "type": "number",
+   "hint": "Pusat Y (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "width": {
+   "default": 760,
+   "type": "number",
+   "hint": "Lebar bingkai (px pada 1080)",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "height": {
+   "default": 500,
+   "type": "number",
+   "hint": "Tinggi bingkai",
+   "aliases": [
+    "tinggi"
+   ]
+  },
+  "skew": {
+   "default": -2.5,
+   "type": "number",
+   "hint": "Kemiringan unit (derajat)",
+   "aliases": [
+    "miring"
+   ]
+  },
+  "texture": {
+   "default": "plain",
+   "type": "enum",
+   "options": [
+    "plain",
+    "soft",
+    "sharp",
+    "spray"
+   ],
+   "hint": "Tekstur goresan: polos, lembut (kabur halus), tajam (tipis), semprot (cat semprot berbintik)",
+   "aliases": [
+    "tekstur"
+   ],
+   "option_aliases": {
+    "polos": "plain",
+    "lembut": "soft",
+    "tajam": "sharp",
+    "semprot": "spray"
+   }
+  },
+  "color": {
+   "default": "#26211d",
+   "type": "color",
+   "hint": "Warna garis & keterangan",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "decor_color": {
+   "default": "#e4572e",
+   "type": "color",
+   "hint": "Warna doodle",
+   "aliases": [
+    "warna_hias"
+   ]
+  },
+  "thickness": {
+   "default": 8,
+   "type": "number",
+   "hint": "Tebal goresan",
+   "aliases": [
+    "tebal"
+   ]
+  },
+  "font": {
+   "default": "Caveat:wght@700",
+   "type": "font",
+   "hint": "Google Font tulisan tangan: Caveat, Kalam, Patrick Hand, Permanent Marker"
+  },
+  "size": {
+   "default": 84,
+   "type": "number",
+   "hint": "Ukuran keterangan",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "start": {
+   "default": 0.2,
+   "type": "number",
+   "hint": "Detik mulai",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "wobble": {
+   "default": 1,
+   "type": "number",
+   "hint": "Kekuatan goyang/boil tangan (0 = diam)",
+   "aliases": [
+    "goyang"
+   ]
+  },
+  "seed": {
+   "default": 17,
+   "type": "number",
+   "hint": "Seed"
+  }
+ },
+ "duration": 4.5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "tangan/bingkai",
+  "hw-frame"
+ ],
+ "example": {
+  "bg": "paper",
+  "font": [
+   "Caveat:wght@700"
+  ]
+ }
+}

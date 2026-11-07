@@ -1,0 +1,162 @@
+{
+ "id": "camera/zoom-ui",
+ "name": "Zoom UI",
+ "name_id": "Zoom UI",
+ "category": "camera",
+ "description": {
+  "id": "Kamera untuk demo produk: layar aplikasi mapan dengan satu hentakan halus, lalu zoom dan geser ke elemen jangkar pada waktunya dan menahan di sana dengan halo fokus. Mode kursor meniru rekaman layar dengan auto-zoom: kamera mendekat ke tiap klik, mengekor kursor dengan halus, menandai klik dengan tekan dan cincin, lalu kembali ke layar penuh.",
+  "en": "Product-demo camera: the app surface settles, then zooms and pans to an anchor element and holds with a focus halo. Cursor mode mimics screen-recording auto-zoom: pushes in toward each click, trails the cursor, marks clicks with a press and ring, then eases back out."
+ },
+ "tags": [
+  "kamera",
+  "camera",
+  "zoom",
+  "ui",
+  "product-demo",
+  "kursor",
+  "cursor",
+  "klik",
+  "screen-recording"
+ ],
+ "props": {
+  "target": {
+   "default": "#adegan",
+   "type": "selector",
+   "hint": "Layar aplikasi host"
+  },
+  "mode": {
+   "default": "focus",
+   "type": "enum",
+   "options": [
+    "focus",
+    "cursor"
+   ],
+   "hint": "fokus = zoom ke jangkar; kursor = auto-zoom mengikuti klik",
+   "option_aliases": {
+    "fokus": "focus",
+    "kursor": "cursor"
+   }
+  },
+  "anchor": {
+   "default": "#tombol-contoh",
+   "type": "selector",
+   "hint": "Elemen tujuan zoom (mode fokus)",
+   "aliases": [
+    "jangkar"
+   ]
+  },
+  "zoom": {
+   "default": 2.2,
+   "type": "number",
+   "hint": "Skala zoom mode fokus"
+  },
+  "zoom_time": {
+   "default": 1.4,
+   "type": "number",
+   "hint": "Isyarat mulai zoom (detik)",
+   "aliases": [
+    "waktu_zoom"
+   ]
+  },
+  "zoom_duration": {
+   "default": 1.2,
+   "type": "number",
+   "aliases": [
+    "durasi_zoom"
+   ]
+  },
+  "ease": {
+   "default": "power3.inOut",
+   "type": "ease"
+  },
+  "settled": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Layar muncul dengan satu hentakan mapan di awal",
+   "aliases": [
+    "mapan"
+   ]
+  },
+  "halo": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Halo lembut di jangkar"
+  },
+  "halo_color": {
+   "default": "#2d6cdf",
+   "type": "color",
+   "hint": "Warna halo dan cincin klik",
+   "aliases": [
+    "warna_halo"
+   ]
+  },
+  "click": {
+   "default": [
+    [
+     40,
+     30
+    ],
+    [
+     52,
+     72
+    ],
+    "#tombol-contoh"
+   ],
+   "type": "list",
+   "hint": "Titik klik: [x%, y%] dari target atau selektor",
+   "aliases": [
+    "klik"
+   ]
+  },
+  "click_start": {
+   "default": 1.2,
+   "type": "number",
+   "hint": "Waktu klik pertama (detik)",
+   "aliases": [
+    "mulai_klik"
+   ]
+  },
+  "click_pause": {
+   "default": 1.3,
+   "type": "number",
+   "hint": "Jarak antar klik (detik)",
+   "aliases": [
+    "jeda_klik"
+   ]
+  },
+  "cursor_zoom": {
+   "default": 1.8,
+   "type": "number",
+   "hint": "Skala zoom mode kursor",
+   "aliases": [
+    "zoom_kursor"
+   ]
+  },
+  "cursor_color": {
+   "default": "#121826",
+   "type": "color",
+   "aliases": [
+    "warna_kursor"
+   ]
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "kamera/zoom-ui",
+  "ui-focus-zoom",
+  "cursor-zoom-follow"
+ ],
+ "example": {
+  "bg": "ui",
+  "props": {
+   "mode": "cursor"
+  }
+ }
+}

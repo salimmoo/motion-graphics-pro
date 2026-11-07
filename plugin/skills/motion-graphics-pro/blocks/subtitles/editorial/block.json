@@ -1,0 +1,132 @@
+{
+ "id": "subtitles/editorial",
+ "name": "Editorial",
+ "name_id": "Subtitle Editorial",
+ "category": "subtitles",
+ "description": {
+  "id": "Dua keluarga huruf ala majalah: kata biasa sans kecil berspasi lebar, kata tekanan serif miring berukuran jauh lebih besar dan berwarna aksen. Tanpa penanda, kata terpanjang tiap halaman jadi tekanan.",
+  "en": "Magazine-style dual-font captions: small tracked sans for regular words, large italic serif in an accent colour for emphasis words. Without markers the longest word on each page is emphasised."
+ },
+ "tags": [
+  "subtitle",
+  "caption",
+  "editorial",
+  "serif",
+  "kontras",
+  "subtitles"
+ ],
+ "props": {
+  "text": {
+   "default": "Desain yang baik terasa *sederhana* padahal prosesnya *panjang*",
+   "type": "text",
+   "hint": "Teks subtitle; *kata* = kata kunci (bila didukung). Dipakai bila kata kosong",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "words": {
+   "default": [],
+   "type": "timed-words",
+   "hint": "[{teks, mulai, akhir}] dari transkrip; kosong = dihitung dari teks",
+   "aliases": [
+    "kata"
+   ]
+  },
+  "kps": {
+   "default": 2.0,
+   "type": "number",
+   "hint": "Kata per detik bila tanpa transkrip"
+  },
+  "max_words": {
+   "default": 4,
+   "type": "number",
+   "hint": "Maksimum kata per halaman subtitle",
+   "aliases": [
+    "maks_kata"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;600;700",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "font2": {
+   "default": "Playfair Display:ital,wght@1,700;1,800",
+   "type": "font",
+   "hint": "Font kata tekanan (Google Font, serif miring)"
+  },
+  "size": {
+   "default": 52,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "contrast": {
+   "default": 2.2,
+   "type": "number",
+   "hint": "Rasio ukuran kata tekanan terhadap kata biasa",
+   "aliases": [
+    "kontras"
+   ]
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffd9a0",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bottom": {
+   "default": 15,
+   "type": "number",
+   "hint": "Jarak dari bawah (%)",
+   "aliases": [
+    "bawah"
+   ]
+  },
+  "uppercase": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "huruf_besar"
+   ]
+  },
+  "keywords": {
+   "default": [],
+   "type": "list",
+   "hint": "Daftar kata kunci (tanpa tanda baca) selain penanda *kata*",
+   "aliases": [
+    "kunci"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "subtitle/editorial",
+  "caption-editorial-emphasis"
+ ],
+ "example": {
+  "bg": "photo",
+  "aspect": "9:16",
+  "font": [
+   "Inter:wght@500;600;700",
+   "Playfair Display:ital,wght@1,700;1,800"
+  ]
+ }
+}

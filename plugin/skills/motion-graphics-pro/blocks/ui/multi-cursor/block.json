@@ -1,0 +1,113 @@
+{
+ "id": "ui/multi-cursor",
+ "name": "Multi Cursor",
+ "name_id": "Kursor Kolaborator",
+ "category": "ui",
+ "description": {
+  "id": "Beberapa kursor rekan kerja berlabel nama dan berpendar warnanya masing-masing, melayang dari sudut-sudut layar lalu berkumpul di satu zona bersama. Pil kehadiran dengan tumpukan avatar menegaskan kolaborasi langsung.",
+  "en": "Labelled collaborator cursors with coloured glows drift in from spread positions and gather in a shared zone, with a presence pill of stacked avatars for live multiplayer."
+ },
+ "tags": [
+  "ui",
+  "kursor",
+  "kolaborasi",
+  "multiplayer",
+  "presence",
+  "realtime",
+  "multi",
+  "cursor"
+ ],
+ "props": {
+  "collaborators": {
+   "default": [
+    {
+     "nama": "Rina",
+     "warna": "#ff4f7b"
+    },
+    {
+     "nama": "Bima",
+     "warna": "#2f9bff"
+    },
+    {
+     "nama": "Sari",
+     "warna": "#16b364"
+    },
+    {
+     "nama": "Dodi",
+     "warna": "#f59e0b"
+    }
+   ],
+   "type": "list",
+   "hint": "[{nama, warna}]",
+   "aliases": [
+    "kolaborator"
+   ]
+  },
+  "center_x": {
+   "default": 58,
+   "type": "number",
+   "hint": "Pusat zona bersama (%)",
+   "aliases": [
+    "pusat_x"
+   ]
+  },
+  "center_y": {
+   "default": 62,
+   "type": "number",
+   "hint": "Pusat zona bersama (%)",
+   "aliases": [
+    "pusat_y"
+   ]
+  },
+  "zone_radius": {
+   "default": 12,
+   "type": "number",
+   "hint": "Radius zona (% sisi pendek)",
+   "aliases": [
+    "radius_zona"
+   ]
+  },
+  "zone": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Tampilkan bingkai zona putus-putus",
+   "aliases": [
+    "zona"
+   ]
+  },
+  "presence_text": {
+   "default": "sedang mengedit",
+   "type": "text",
+   "aliases": [
+    "teks_kehadiran"
+   ]
+  },
+  "light": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Pendar warna di kursor dan label",
+   "aliases": [
+    "cahaya"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;600;700",
+   "type": "font"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/kursor-banyak",
+  "multiplayer-cursors"
+ ],
+ "example": {
+  "bg": "ui"
+ }
+}

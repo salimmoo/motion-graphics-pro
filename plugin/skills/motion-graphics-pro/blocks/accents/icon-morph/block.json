@@ -1,0 +1,137 @@
+{
+ "id": "accents/icon-morph",
+ "name": "Icon Morph",
+ "name_id": "Morph Ikon",
+ "category": "accents",
+ "description": {
+  "id": "Ikon berubah bentuk antar keadaan (putar, jeda, centang, plus, silang, minus, unduh) titik demi titik, bergeser ke warna aksen dan ditutup satu denyut. Mode tukar: skala dan blur.",
+  "en": "An icon morphs point by point between states (play, pause, check, plus, cross, minus, download), shifts to the accent colour and ends with one pulse. Swap mode: scale and blur."
+ },
+ "tags": [
+  "aksen",
+  "ikon",
+  "morph",
+  "swap",
+  "tombol",
+  "status",
+  "accents",
+  "icon"
+ ],
+ "props": {
+  "mode": {
+   "default": "morph",
+   "type": "enum",
+   "options": [
+    "morph",
+    "swap"
+   ],
+   "option_aliases": {
+    "tukar": "swap"
+   }
+  },
+  "icon": {
+   "default": [
+    "putar",
+    "jeda",
+    "centang"
+   ],
+   "type": "list",
+   "hint": "Urutan keadaan: putar, jeda, centang, plus, silang, minus, unduh",
+   "aliases": [
+    "ikon"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi horizontal pusat (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 45,
+   "type": "number",
+   "hint": "Posisi vertikal pusat (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "size": {
+   "default": 220,
+   "type": "number",
+   "hint": "Diameter tombol (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#22d3a6",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg_color": {
+   "default": "#1f2433",
+   "type": "color",
+   "aliases": [
+    "warna_latar"
+   ]
+  },
+  "bg": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "start": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Waktu mulai lokal (detik)",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "pause": {
+   "default": 0.9,
+   "type": "number",
+   "hint": "Jarak antar perubahan (detik)",
+   "aliases": [
+    "jeda"
+   ]
+  },
+  "morph_duration": {
+   "default": 0.45,
+   "type": "number",
+   "aliases": [
+    "durasi_morph"
+   ]
+  }
+ },
+ "duration": 3.5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "aksen/morph-ikon",
+  "icon-morph-beat",
+  "icon-swap"
+ ],
+ "example": {
+  "bg": "dark",
+  "aspect": "16:9"
+ }
+}

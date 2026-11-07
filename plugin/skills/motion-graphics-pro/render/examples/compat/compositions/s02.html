@@ -1,0 +1,21 @@
+<template>
+<style>
+  #root{position:absolute;inset:0;overflow:hidden}
+  #s02-tirai{position:absolute;inset:0;background:#d9534f}
+  #s02-judul{position:absolute;left:0;right:0;top:420px;text-align:center;color:#fff;font:900 130px/1 system-ui,"Segoe UI",Arial,sans-serif}
+  #s02-putar{position:absolute;left:490px;top:700px;width:100px;height:100px;border:12px solid #fff;border-right-color:transparent;
+    border-radius:50%;box-sizing:border-box;animation:s02-spin 1s linear 3 both}
+  @keyframes s02-spin{to{transform:rotate(360deg)}}
+</style>
+<div id="root" data-composition-id="s02" data-width="1080" data-height="1080">
+  <div id="s02-tirai"></div>
+  <div id="s02-judul">REKAM</div>
+  <div id="s02-putar" class="clip" data-start="0.5" data-duration="1.5"></div>
+</div>
+<script>
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#s02-tirai", { clipPath: "circle(0% at 50% 50%)" }, { clipPath: "circle(75% at 50% 50%)", duration: 0.6, ease: "power2.inOut" }, 0);
+  tl.fromTo("#s02-judul", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.4);
+  window.__timelines["s02"] = tl;
+</script>
+</template>

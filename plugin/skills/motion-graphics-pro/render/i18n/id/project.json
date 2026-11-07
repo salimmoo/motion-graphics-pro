@@ -1,0 +1,21 @@
+{
+ "project.json cannot be read: {}": "project.json tidak bisa dibaca: {}",
+ "composition": "komposisi",
+ "script": "naskah",
+ "word timing": "waktu kata",
+ "letter timing": "waktu huruf",
+ "scene {}": "adegan {}",
+ "asset": "aset",
+ "asset meta": "meta aset",
+ "{}: asset {} has no \"source\" (provenance is required for the T5 log)": "{}: aset {} tanpa \"source\" (asal-usul wajib untuk log T5)",
+ "{}: block {} is an old id; new name: {}": "{}: blok {} memakai id lama; nama baru: {}",
+ "block: {}": "blok: {}",
+ "{} refers to files that do not exist: {}": "{} merujuk berkas yang tidak ada: {}",
+ "{} fps {} != composition {}": "{} fps {} != komposisi {}",
+ "{} size {}x{} != composition {}x{}": "{} ukuran {}x{} != komposisi {}x{}",
+ "{} duration {} s != composition {} s (update one of them)": "{} durasi {} s != komposisi {} s (perbarui salah satunya)",
+ "{} scene {} ends at {} s, past the composition duration": "{} adegan {} berakhir {} s, lewat durasi komposisi",
+ "{} scene {}: key pose {} s is outside the scene": "{} adegan {}: pose kunci {} s di luar adegan",
+ "{}: voice source not chosen yet (decision point G2)": "{}: sumber suara belum dipilih (titik keputusan G2)",
+ "{} ({}): {} scenes, {} VO, {} assets, every referenced file exists": "{} ({}): {} adegan, {} VO, {} aset, semua berkas yang dirujuk ada"
+}

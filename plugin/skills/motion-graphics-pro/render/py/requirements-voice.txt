@@ -1,0 +1,86 @@
+# requirements-voice.txt (old syarat-suara.txt): locked packages of the mgp voice venv (mgp install voice).
+# Proven to work: Windows 11, Python 3.12.10, voice test venv, 05-11-2026.
+# Installed with: pip install --no-deps -r requirements-voice.txt
+#   (chatterbox-tts 0.1.7 pins gradio/spacy-pkuseg/pykakasi that mgp does not use, hence --no-deps).
+# torch==2.6.0 + torchaudio==2.6.0 are NOT here: they are installed first from the index chosen by
+# mgp install (cu126 / cu118 / cpu / rocm6.2.4 / PyPI for macOS).
+# webrtcvad-wheels = wheel build of webrtcvad (no C compiler) for Resemblyzer.
+annotated-doc==0.0.5
+anyio==4.16.0
+audioread==3.1.0
+av==19.0.2
+certifi==2026.10.23
+cffi==2.1.1
+charset-normalizer==3.5.2
+chatterbox-tts==0.1.7
+click==8.5.0
+cloudpickle==3.1.2
+colorama==0.4.6
+conformer==0.3.2
+ctranslate2==4.8.5
+decorator==5.3.1
+diffusers==0.29.0
+einops==0.8.2
+faster-whisper==1.2.1
+filelock==4.2.4
+flatbuffers==25.12.19
+fsspec==2026.9.0
+h11==0.16.0
+hf-xet==1.8.0
+httpcore==1.0.9
+httpx==0.28.1
+huggingface_hub==1.33.0
+idna==3.20
+importlib_metadata==10.1.0
+jaraco.functools==4.6.0
+Jinja2==3.1.6
+joblib==1.6.0
+lazy-loader==0.6
+librosa==0.11.0
+llvmlite==0.50.0
+markdown-it-py==4.2.0
+MarkupSafe==3.0.3
+mdurl==0.1.2
+ml_dtypes==0.5.4
+mpmath==1.3.0
+msgpack==1.2.4
+narwhals==2.28.0
+networkx==3.7
+numba==0.68.1
+numpy==1.26.4
+omegaconf==2.4.0
+onnx==1.23.2
+onnxruntime==1.31.1
+packaging==26.3
+pillow==13.0.0
+platformdirs==4.14.5
+pooch==1.9.0
+protobuf==7.36.2
+pycparser==3.12
+Pygments==2.21.0
+pyloudnorm==0.2.0
+PyYAML==6.0.3
+regex==2026.9.29
+requests==2.34.2
+resemble-perth==1.0.1
+Resemblyzer==0.1.4
+rich==15.0.0
+s3tokenizer==0.3.0
+safetensors==0.5.3
+scikit-learn==1.9.1
+scipy==1.17.1
+shellingham==1.5.4
+soundfile==0.14.0
+soxr==1.1.0
+sympy==1.13.1
+threadpoolctl==3.7.0
+tokenizers==0.22.2
+tqdm==4.70.1
+transformers==5.2.0
+typer==0.27.3
+typer-slim==0.24.0
+typing_extensions==4.16.0
+urllib3==2.8.0
+webrtcvad-wheels==2.0.14.post1
+zipp==4.1.2
+psutil==7.2.2

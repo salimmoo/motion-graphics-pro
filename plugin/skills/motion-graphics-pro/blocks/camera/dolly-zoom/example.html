@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Dolly Zoom · block example camera/dolly-zoom</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@500;800&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="5.5">
+
+<!-- Block camera/dolly-zoom · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-dolly-zoom" data-block="camera/dolly-zoom" data-start="0" data-duration="5" data-track-index="30" class="blk blk-camera-dolly-zoom">
+<script type="application/json" data-block-props>
+{"target": "", "direction": "forward", "strength": 0.7, "depth": 1.5, "ease": "power2.inOut", "bg": "#0b0e1a", "line_color": "#5b7cff", "subject_color": "#ffd36b", "light_color": "#ff7a59", "text": "Dunia bergeser, fokus tetap", "font": "Inter:wght@500;800"}
+</script>
+</div>
+<style>
+.blk-camera-dolly-zoom{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-camera-dolly-zoom .blk-cap{position:absolute;left:0;right:0;bottom:9%;text-align:center;font-weight:800;letter-spacing:-.01em}
+</style>
+<script>
+BLOCK.mount("blk-dolly-zoom", function (k) {
+  var P = k.P, D = k.dur, w = k.w, h = k.h, kek = BLOCK.clamp(+P.strength || 0.6, 0.05, 0.92);
+  var ez = gsap.parseEase(P.ease || "power2.inOut");
+  // jarak kamera d (subjek di z = 0). Fokal diselesaikan tiap frame: f = d, sehingga ukuran subjek
+  // f/d tetap, sedangkan benda di kedalaman z tampil sebesar d/(d+z): latar menjauh atau menyerbu.
+  function jarak(t) { var p = ez(BLOCK.progress(t, 0.35, D - 0.45)); return P.direction === "back" ? 1 - kek + kek * p : 1 - kek * p; }
+  function skala(d, z) { return d / (d + z); }
+  var T = BLOCK.find(P.target);
+  if (T) {
+    var z = +P.depth || 1.5, s0 = skala(jarak(0), z);
+    T.style.transformOrigin = "50% 50%";
+    BLOCK.onTime(k.tl, function (t) { T.style.transform = "scale(" + (skala(jarak(t), z) / s0).toFixed(5) + ")"; }, D);
+    return;
+  }
+  k.root.style.background = P.bg;
+  var cv = BLOCK.canvas(k.root, w, h), c = cv.ctx;
+  var K = 0.42 * Math.min(h, w * 0.85), Wc = 2.4 * Math.max(1, w / h * 0.8), Hc = 1.6 * Math.max(1, h / w * 0.9), cx = w / 2, cy = h * 0.47;
+  var cap = null;
+  if (P.text) {
+    cap = BLOCK.el("div", { class: "blk-cap", style: "color:" + P.subject_color + ";font-family:" + BLOCK.family(P.font) + ";font-size:" + Math.round(54 * k.s) + "px" }, k.root, BLOCK.esc(P.text));
+    k.tl.fromTo(cap, { opacity: 0, y: 30 * k.s }, { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" }, 0.3);
+  }
+  function kotak(d, z) { var s = K * skala(d, z); return [cx - s * Wc / 2, cy - s * Hc / 2, s * Wc, s * Hc]; }
+  function gambar(t) {
+    var d = jarak(t), i, r;
+    c.clearRect(0, 0, w, h);
+    // cahaya pintu di ujung lorong
+    r = kotak(d, 7);
+    var g = c.createRadialGradient(cx, cy, 0, cx, cy, r[2] * 2.2);
+    g.addColorStop(0, BLOCK.rgba(P.light_color, 0.9)); g.addColorStop(0.25, BLOCK.rgba(P.light_color, 0.25)); g.addColorStop(1, BLOCK.rgba(P.light_color, 0));
+    c.fillStyle = g; c.fillRect(0, 0, w, h);
+    c.fillStyle = P.light_color; c.fillRect(r[0] + r[2] * 0.3, r[1] + r[3] * 0.15, r[2] * 0.4, r[3] * 0.85);
+    // garis rusuk menuju titik hilang (diam, karena kamera tepat di poros lorong)
+    c.strokeStyle = BLOCK.rgba(P.line_color, 0.55); c.lineWidth = 2 * k.s;
+    var far = kotak(d, 7), big = 40;
+    [[0, 0], [1, 0], [0, 1], [1, 1]].forEach(function (q) {
+      var fx = far[0] + far[2] * q[0], fy = far[1] + far[3] * q[1];
+      c.beginPath(); c.moveTo(fx, fy); c.lineTo(cx + (fx - cx) * big, cy + (fy - cy) * big); c.stroke();
+    });
+    // bingkai lorong di beberapa kedalaman + lampu langit-langit + jendela dinding
+    for (i = 18; i >= -6; i--) {
+      var z = 0.12 + i * 0.38;
+      if (d + z < 0.12) continue; // di belakang kamera
+      r = kotak(d, z);
+      var a = z < 0 ? 0.55 : BLOCK.clamp(1 - z / 7.5, 0, 1);
+      c.strokeStyle = BLOCK.rgba(P.line_color, 0.15 + 0.6 * a); c.lineWidth = Math.max(1, 3 * k.s * a);
+      c.strokeRect(r[0], r[1], r[2], r[3]);
+      if (i % 2 === 0) {
+        c.fillStyle = BLOCK.rgba(P.subject_color, 0.12 + 0.5 * a);
+        c.beginPath(); c.ellipse(cx, r[1] + r[3] * 0.04, r[2] * 0.08, r[3] * 0.018, 0, 0, Math.PI * 2); c.fill();
+        c.fillStyle = BLOCK.rgba(P.line_color, 0.08 + 0.25 * a);
+        c.fillRect(r[0] + r[2] * 0.015, r[1] + r[3] * 0.25, r[2] * 0.02, r[3] * 0.4);
+        c.fillRect(r[0] + r[2] * 0.965, r[1] + r[3] * 0.25, r[2] * 0.02, r[3] * 0.4);
+      }
+    }
+    // subjek di z = 0: ukurannya tidak pernah berubah
+    var sh = K, fy0 = cy + K * Hc / 2, bw = sh * 0.26;
+    c.fillStyle = "rgba(0,0,0,.45)"; c.beginPath(); c.ellipse(cx, fy0, bw * 0.9, sh * 0.04, 0, 0, Math.PI * 2); c.fill();
+    c.fillStyle = P.subject_color;
+    c.beginPath(); c.roundRect ? c.roundRect(cx - bw / 2, fy0 - sh * 0.78, bw, sh * 0.78, [bw * 0.5, bw * 0.5, bw * 0.12, bw * 0.12]) : c.rect(cx - bw / 2, fy0 - sh * 0.78, bw, sh * 0.78); c.fill();
+    c.beginPath(); c.arc(cx, fy0 - sh * 0.9, sh * 0.1, 0, Math.PI * 2); c.fill();
+    // vinyet
+    var v = c.createRadialGradient(cx, cy, h * 0.3, cx, cy, Math.max(w, h) * 0.75);
+    v.addColorStop(0, "rgba(0,0,0,0)"); v.addColorStop(1, "rgba(0,0,0,.6)");
+    c.fillStyle = v; c.fillRect(0, 0, w, h);
+  }
+  BLOCK.onTime(k.tl, gambar, D);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 5.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5.5);
+</script>
+</body>
+</html>

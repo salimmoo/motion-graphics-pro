@@ -1,0 +1,152 @@
+{
+ "id": "gallery/media-grid",
+ "name": "Media Grid",
+ "name_id": "Kisi Media",
+ "category": "gallery",
+ "description": {
+  "id": "Kisi media bersudut membulat: 2, 3, 4, 3x2, atau satu utama plus dua. Tiap sel terbuka dari tengah bergiliran lalu isinya mengendap pelan. Mode vertikal: media potret mengisi bingkai lebar dengan sisi blur, cermin, atau salinan.",
+  "en": "Rounded media grid (2-up, 3-up, 4-up, 3x2, hero plus two) with staggered box-in entrances and a slow settle. Vertical mode fills a widescreen frame with portrait media using blurred, mirrored or copied sides."
+ },
+ "tags": [
+  "galeri",
+  "kisi",
+  "grid",
+  "media",
+  "placeholder",
+  "vertikal",
+  "potret",
+  "gallery"
+ ],
+ "props": {
+  "layout": {
+   "default": "hero-two",
+   "type": "enum",
+   "options": [
+    "2",
+    "3",
+    "4",
+    "3x2",
+    "hero-two",
+    "vertical"
+   ],
+   "hint": "Tata letak kisi; vertikal = potret di bingkai lebar",
+   "aliases": [
+    "tata"
+   ],
+   "option_aliases": {
+    "utama-dua": "hero-two",
+    "vertikal": "vertical"
+   }
+  },
+  "image": {
+   "default": [],
+   "type": "list",
+   "hint": "Daftar url gambar (opsional). Kosong = kartu placeholder bergradien bernomor",
+   "aliases": [
+    "gambar"
+   ]
+  },
+  "label": {
+   "default": [
+    "Pagi di pasar",
+    "Jalan pulang",
+    "Senja di dermaga",
+    "Kopi pertama",
+    "Hujan sore",
+    "Lampu kota"
+   ],
+   "type": "list",
+   "hint": "Label per sel placeholder"
+  },
+  "side_fill": {
+   "default": "blur",
+   "type": "enum",
+   "options": [
+    "blur",
+    "mirror",
+    "copy"
+   ],
+   "hint": "Isi sisi untuk tata vertikal",
+   "aliases": [
+    "isi_samping"
+   ],
+   "option_aliases": {
+    "cermin": "mirror",
+    "salin": "copy"
+   }
+  },
+  "edge": {
+   "default": 4,
+   "type": "number",
+   "hint": "Margin tepi (% sisi pendek)",
+   "aliases": [
+    "tepi"
+   ]
+  },
+  "gap": {
+   "default": 1.6,
+   "type": "number",
+   "hint": "Celah antar sel (% sisi pendek)",
+   "aliases": [
+    "celah"
+   ]
+  },
+  "radius": {
+   "default": 22,
+   "type": "number",
+   "hint": "Radius sudut (px)"
+  },
+  "pause": {
+   "default": 0.12,
+   "type": "number",
+   "hint": "Jeda antar sel (detik)",
+   "aliases": [
+    "jeda"
+   ]
+  },
+  "start_scale": {
+   "default": 1.22,
+   "type": "number",
+   "hint": "Skala awal isi sel",
+   "aliases": [
+    "skala_awal"
+   ]
+  },
+  "grid_texture": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Tekstur garis kisi (tata vertikal)",
+   "aliases": [
+    "tekstur_kisi"
+   ]
+  },
+  "bg_color": {
+   "default": "#101219",
+   "type": "color",
+   "hint": "Warna latar",
+   "aliases": [
+    "warna_latar"
+   ]
+  },
+  "seed": {
+   "default": 8,
+   "type": "number",
+   "hint": "Seed warna placeholder"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "galeri/kisi-media",
+  "mk-placeholder-grid",
+  "yt-vertical-fill"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

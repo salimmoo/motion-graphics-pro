@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP origamiFold · bangau kertas dilipat</title>
+<style>html,body{margin:0;background:#0e1116}#stage{position:relative;width:1280px;height:720px;overflow:hidden;background:#efe3c9}
+#stage canvas{position:absolute}</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../origami-fold.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720"></div>
+<script>
+// Left: the crane with the default red paper. Right top: blue paper, crease lines on, light from the upper right.
+// Right bottom: the generic helper lib.foldPolygon folding a hexagon twice along two creases.
+const C = MGP.core, OF = MGP.origamiFold, L = OF.lib, stage = document.getElementById("stage");
+const cv = (x, y, w, h) => { const c = document.createElement("canvas"); c.style.left = x + "px"; c.style.top = y + "px"; stage.appendChild(c); return c; };
+const D = 18;
+const a = OF.create(cv(0, 0, 760, 720), { width: 760, height: 720, duration: D });
+const b = OF.create(cv(764, 0, 516, 358), { width: 516, height: 358, duration: D, front: "#2f6fb0", frontAlt: "#4a88c6", back: "#f4f1ea", backAlt: "#e2ddd2",
+  edgeFront: "rgba(20,40,90,.55)", crease: true, light: [0.6, -0.5, 0.65], ambient: 0.55, bg: "#e9e2d3", stepLabels: false });
+// generic fold demo on a plain canvas
+const S = C.setup(cv(764, 362, 516, 358), { width: 516, height: 358 });
+const hex = Array.from({ length: 6 }, (_, i) => [Math.cos(i * Math.PI / 3), Math.sin(i * Math.PI / 3)]);
+const crease1 = [[-0.2, -1.2], [-0.2, 1.2]], crease2 = [[-1.2, 0.35], [1.2, 0.35]];
+function foldDemo(t) {
+  const g = S.begin(), W = S.W, H = S.H; g.fillStyle = "#f2ead9"; g.fillRect(0, 0, W, H);
+  const k = (t % 6) / 6, a1 = Math.PI * 0.95 * C.ease.inOut(C.seg(k, 0.05, 0.4)) * (1 - C.ease.inOut(C.seg(k, 0.8, 0.95)));
+  const a2 = Math.PI * 0.9 * C.ease.inOut(C.seg(k, 0.42, 0.7)) * (1 - C.ease.inOut(C.seg(k, 0.72, 0.8)));
+  const sc = 120, cx = W / 2, cy = H / 2 + 6, P = (q) => [cx + q[0] * sc, cy + q[1] * sc - (q[2] || 0) * sc * 0.12];
+  const poly = (pts, col) => { g.beginPath(); pts.forEach((q, i) => { const s = P(q); i ? g.lineTo(s[0], s[1]) : g.moveTo(s[0], s[1]); }); g.closePath(); g.fillStyle = col; g.fill(); g.strokeStyle = "rgba(60,40,20,.5)"; g.lineWidth = 1; g.stroke(); };
+  // first fold: the left part of the hexagon swings over crease 1
+  const f1 = L.foldPolygon(hex, crease1[0], crease1[1], a1, [-0.9, 0]);
+  // second fold acts on the still-flat part only (the flap stays where fold 1 put it)
+  const f2 = L.foldPolygon(f1.fixed, crease2[0], crease2[1], a2, [0.5, 0.9]);
+  if (f2.fixed) poly(f2.fixed, "#e3b23c");
+  const lit = (ang) => C.mix("#f0c75a", "#8a5a12", 0.5 * (1 - Math.abs(Math.cos(ang))));
+  const backSide = (ang) => Math.cos(ang) < 0;
+  if (f2.moving) poly(f2.moving, backSide(a2) ? "#fff7e6" : lit(a2));
+  if (f1.moving) poly(f1.moving, backSide(a1) ? "#fff7e6" : lit(a1));
+  g.setLineDash([4, 4]); g.strokeStyle = "rgba(60,30,20,.45)";
+  for (const c of [crease1, crease2]) { const p = P(c[0]), q = P(c[1]); g.beginPath(); g.moveTo(p[0], p[1]); g.lineTo(q[0], q[1]); g.stroke(); }
+  g.setLineDash([]);
+}
+const all = [a, b];
+const comp = { duration: D, ready: Promise.all(all.map((x) => x.ready)), seek(t) { all.forEach((x) => x.seek(t)); foldDemo(t); return comp; }, timeline() { return C.timeline(this); } };
+C.expose(comp);
+</script>
+</body>
+</html>

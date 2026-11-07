@@ -1,0 +1,153 @@
+{
+ "id": "ui/toggle",
+ "name": "Toggle",
+ "name_id": "Sakelar",
+ "category": "ui",
+ "description": {
+  "id": "Sakelar UI dengan fisika yang terasa: saat ditekan jempolnya melebar dan lintasan sedikit mengecil, lalu jempol meluncur dengan overshoot dan warna lintasan berganti halus. Mode tunggal menampilkan satu sakelar besar berlabel; mode pengaturan menyalakan baris-baris pengaturan berurutan dengan sorotan aktif dan toast tersimpan.",
+  "en": "A UI toggle with real physicality: a press compresses the thumb and track, then the thumb slides with overshoot while the track colour crossfades. Single mode shows one oversized labelled switch; settings mode flips preference rows in sequence with active highlights and a saved toast."
+ },
+ "tags": [
+  "ui",
+  "toggle",
+  "sakelar",
+  "switch",
+  "pengaturan",
+  "settings",
+  "mikro interaksi"
+ ],
+ "props": {
+  "mode": {
+   "default": "single",
+   "type": "enum",
+   "options": [
+    "single",
+    "settings"
+   ],
+   "option_aliases": {
+    "tunggal": "single",
+    "pengaturan": "settings"
+   }
+  },
+  "off_label": {
+   "default": "Mati",
+   "type": "text",
+   "aliases": [
+    "label_mati"
+   ]
+  },
+  "on_label": {
+   "default": "Nyala",
+   "type": "text",
+   "aliases": [
+    "label_nyala"
+   ]
+  },
+  "pingpong": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Mode tunggal: kembali mati di akhir",
+   "aliases": [
+    "bolak_balik"
+   ]
+  },
+  "title": {
+   "default": "Privasi & Notifikasi",
+   "type": "text",
+   "hint": "Judul kartu (pengaturan)",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "rows": {
+   "default": [
+    [
+     "Notifikasi pesan",
+     "Kabari saya saat ada pesan baru",
+     false
+    ],
+    [
+     "Mode fokus",
+     "Senyapkan semua kecuali kontak favorit",
+     false
+    ],
+    [
+     "Bagikan lokasi",
+     "Hanya saat aplikasi dibuka",
+     true
+    ],
+    [
+     "Cadangan otomatis",
+     "Setiap malam pukul 02.00",
+     false
+    ]
+   ],
+   "type": "list",
+   "hint": "[[judul, keterangan, awal_nyala]]",
+   "aliases": [
+    "baris"
+   ]
+  },
+  "order": {
+   "default": [
+    0,
+    1,
+    3
+   ],
+   "type": "list",
+   "hint": "Indeks baris yang dibalik berurutan",
+   "aliases": [
+    "urutan"
+   ]
+  },
+  "save_text": {
+   "default": "Pengaturan disimpan",
+   "type": "text",
+   "aliases": [
+    "teks_simpan"
+   ]
+  },
+  "accent_color": {
+   "default": "#34c759",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "off_color": {
+   "default": "#d4d7de",
+   "type": "color",
+   "aliases": [
+    "warna_mati"
+   ]
+  },
+  "bg": {
+   "default": "#eef0f5",
+   "type": "color",
+   "hint": "Kosong = transparan",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;600;700",
+   "type": "font"
+  }
+ },
+ "duration": 4,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/toggle",
+  "toggle-flip",
+  "settings-toggle-flow"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

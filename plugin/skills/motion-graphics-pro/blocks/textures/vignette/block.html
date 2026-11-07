@@ -1,0 +1,25 @@
+<!-- Block textures/vignette · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="textures/vignette" data-start="0" data-duration="6" data-track-index="90" class="blk blk-textures-vignette">
+<script type="application/json" data-block-props>
+{"strength": 0.7, "color": "#000000", "shape": "ellipse", "size": 52, "soft": 48, "center_x": 50, "center_y": 50, "breath": 4, "cycle": 6, "enter": 0.8, "exit": 0}
+</script>
+<div class="blk-vg"></div>
+</div>
+<style>
+.blk-textures-vignette{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-textures-vignette .blk-vg{position:absolute;inset:0}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, el = k.root.querySelector(".blk-vg"), D = k.dur, S = Math.max(0.5, +P.cycle || 6);
+  var bentuk = P.shape === "round" ? "circle " + Math.round(Math.hypot(k.w, k.h) / 2) + "px" : "ellipse 72% 72%";
+  // radius bersih bernapas pelan (loop-exact per siklus); masuk/keluar memudarkan seluruh vinyet
+  BLOCK.onTime(k.tl, function (t) {
+    var u = +P.size + (+P.breath || 0) * Math.sin(Math.PI * 2 * t / S), lb = Math.max(1, +P.soft || 40);
+    var a = (+P.strength || 0) * BLOCK.smooth(BLOCK.progress(t, 0, +P.enter || 0.001)) * (P.exit > 0 ? 1 - BLOCK.smooth(BLOCK.progress(t, D - P.exit, D)) : 1);
+    var st = ["transparent " + u.toFixed(2) + "%"];
+    for (var q = 1; q <= 6; q++) { var e = q / 6; st.push(BLOCK.rgba(P.color, (a * e * e * (3 - 2 * e)).toFixed(4)) + " " + (u + lb * e).toFixed(2) + "%"); } // kurva halus: tanpa cincin
+    el.style.background = "radial-gradient(" + bentuk + " at " + P.center_x + "% " + P.center_y + "%," + st.join(",") + ")";
+  }, D);
+});
+</script>

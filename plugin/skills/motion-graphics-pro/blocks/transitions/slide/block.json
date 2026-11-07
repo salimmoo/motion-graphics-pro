@@ -1,0 +1,111 @@
+{
+ "id": "transitions/slide",
+ "name": "Slide",
+ "name_id": "Geser / Dorong",
+ "category": "transitions",
+ "description": {
+  "id": "Adegan lama terdorong keluar sementara adegan baru masuk dari sisi berlawanan. Mode tutup, buka, dan panel warna untuk variasi cover/uncover.",
+  "en": "Outgoing scene is pushed off while the new one slides in. Cover, uncover and colour-panel modes."
+ },
+ "tags": [
+  "transisi",
+  "push",
+  "slide",
+  "cover",
+  "uncover",
+  "wipe",
+  "geser",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "direction": {
+   "default": "left",
+   "type": "enum",
+   "options": [
+    "left",
+    "right",
+    "top",
+    "bottom"
+   ],
+   "hint": "Arah gerak adegan lama",
+   "aliases": [
+    "arah"
+   ],
+   "option_aliases": {
+    "kiri": "left",
+    "kanan": "right",
+    "atas": "top",
+    "bawah": "bottom"
+   }
+  },
+  "mode": {
+   "default": "push",
+   "type": "enum",
+   "options": [
+    "push",
+    "close",
+    "open",
+    "panel"
+   ],
+   "hint": "dorong = keduanya bergerak; tutup = B menutup A; buka = A tersingkap; panel = panel warna menyapu",
+   "option_aliases": {
+    "dorong": "push",
+    "tutup": "close",
+    "buka": "open"
+   }
+  },
+  "ease": {
+   "default": "power3.inOut",
+   "type": "ease",
+   "hint": "Easing GSAP"
+  },
+  "panel": {
+   "default": "#10233f",
+   "type": "color",
+   "hint": "Warna panel (mode panel)"
+  },
+  "shadow": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Bayangan di tepi adegan yang bergerak",
+   "aliases": [
+    "bayangan"
+   ]
+  }
+ },
+ "duration": 1.2,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/geser",
+  "transitions-push",
+  "transitions-cover",
+  "directional-wipe",
+  "page-slide"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 1,
+  "duration": 3
+ }
+}

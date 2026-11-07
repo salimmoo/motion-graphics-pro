@@ -1,0 +1,119 @@
+{
+ "id": "3d/orbit-cards",
+ "name": "Orbit Cards",
+ "name_id": "Kartu Mengorbit",
+ "category": "3d",
+ "description": {
+  "id": "Tiga kartu (atau lebih) mengorbit pusat dalam ruang CSS 3D yang miring: kartu di depan membesar dan terang, yang di belakang meredup dan melewati balik inti bercahaya. Kartu terbang masuk bertahap, lalu orbit berjalan mulus; isi kartu dari props.",
+  "en": "Three (or more) cards orbit a glowing core in a tilted CSS 3D space: front cards grow brighter, back ones dim and pass behind the core. Cards fly in staggered, then orbit smoothly; card content from props."
+ },
+ "tags": [
+  "3d",
+  "orbit",
+  "kartu",
+  "card",
+  "putar",
+  "statistik",
+  "fitur",
+  "showcase",
+  "cards"
+ ],
+ "props": {
+  "card": {
+   "default": [
+    {
+     "judul": "Pengguna aktif",
+     "angka": "12,4 rb",
+     "ket": "naik 18% bulan ini",
+     "warna": "#5b8cff"
+    },
+    {
+     "judul": "Konversi",
+     "angka": "8,2%",
+     "ket": "tertinggi tahun ini",
+     "warna": "#3fc1a5"
+    },
+    {
+     "judul": "Pendapatan",
+     "angka": "Rp 1,3 M",
+     "ket": "kuartal ketiga",
+     "warna": "#ffb547"
+    }
+   ],
+   "type": "list",
+   "hint": "[{judul, angka, ket, warna}]",
+   "aliases": [
+    "kartu"
+   ]
+  },
+  "center": {
+   "default": "Q3",
+   "type": "text",
+   "hint": "Teks inti di pusat orbit; kosong = tanpa inti",
+   "aliases": [
+    "tengah"
+   ]
+  },
+  "turns": {
+   "default": 0.6,
+   "type": "number",
+   "hint": "Putaran orbit selama durasi",
+   "aliases": [
+    "putaran"
+   ]
+  },
+  "radius": {
+   "default": 430,
+   "type": "number",
+   "hint": "px pada 1080"
+  },
+  "skew": {
+   "default": 16,
+   "type": "number",
+   "hint": "Kemiringan bidang orbit (derajat)",
+   "aliases": [
+    "miring"
+   ]
+  },
+  "card_color": {
+   "default": "#f7f4ee",
+   "type": "color",
+   "aliases": [
+    "warna_kartu"
+   ]
+  },
+  "text_color": {
+   "default": "#1b1f2c",
+   "type": "color",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "core_color": {
+   "default": "#8a7dff",
+   "type": "color",
+   "aliases": [
+    "warna_inti"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;700;800",
+   "type": "font"
+  }
+ },
+ "duration": 7,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "3d/kartu-orbit",
+  "three-orbiting-cards"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

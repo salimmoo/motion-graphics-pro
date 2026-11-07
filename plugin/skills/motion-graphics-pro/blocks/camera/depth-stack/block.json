@@ -1,0 +1,134 @@
+{
+ "id": "camera/depth-stack",
+ "name": "Depth Stack",
+ "name_id": "Tumpukan Kedalaman",
+ "category": "camera",
+ "description": {
+  "id": "Rig kamera 3D menembus tumpukan kartu yang berjajar ke belakang: tiap kartu bergiliran masuk bidang fokus, yang terlewati memudar melewati kamera, yang jauh tetap kabur dan redup. Ayunan rig halus menambah paralaks. Bila target diisi, anak-anak elemen host menjadi lapisannya.",
+  "en": "A 3D camera rig travels through a receding stack of cards: each one takes the focal plane in turn, passed cards fade past the lens, far ones stay soft and dim, with a gentle rig sway for parallax. A target's children can be the layers."
+ },
+ "tags": [
+  "kamera",
+  "camera",
+  "3d",
+  "depth",
+  "kedalaman",
+  "parallax",
+  "stack",
+  "fokus"
+ ],
+ "props": {
+  "target": {
+   "default": "",
+   "type": "selector",
+   "hint": "Kosong = kartu bawaan; isi = anak elemen host jadi lapisan"
+  },
+  "card": {
+   "default": [
+    {
+     "judul": "Lapisan depan",
+     "teks": "Yang pertama kau lihat"
+    },
+    {
+     "judul": "Lapisan tengah",
+     "teks": "Konteks mulai terbuka"
+    },
+    {
+     "judul": "Lapisan belakang",
+     "teks": "Detail yang menunggu giliran"
+    },
+    {
+     "judul": "Inti cerita",
+     "teks": "Tujuan akhir kamera"
+    }
+   ],
+   "type": "list",
+   "hint": "Daftar {judul, teks}",
+   "aliases": [
+    "kartu"
+   ]
+  },
+  "distance": {
+   "default": 560,
+   "type": "number",
+   "hint": "Jarak kedalaman antar kartu (px pada 1080)",
+   "aliases": [
+    "jarak"
+   ]
+  },
+  "still": {
+   "default": 0.45,
+   "type": "number",
+   "hint": "Porsi durasi berhenti di tiap kartu",
+   "aliases": [
+    "diam"
+   ]
+  },
+  "ease": {
+   "default": "power3.inOut",
+   "type": "ease"
+  },
+  "blur": {
+   "default": 7,
+   "type": "number",
+   "hint": "Blur per satu jarak kedalaman"
+  },
+  "swing": {
+   "default": 5,
+   "type": "number",
+   "hint": "Ayunan rig (derajat)",
+   "aliases": [
+    "ayun"
+   ]
+  },
+  "bg": {
+   "default": "#0d0f1c",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "color": {
+   "default": [
+    "#ff7a59",
+    "#ffc94d",
+    "#5bc8ff",
+    "#9b7bff"
+   ],
+   "type": "list",
+   "hint": "Warna aksen kartu (berulang)",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "text_color": {
+   "default": "#f6f2ea",
+   "type": "color",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;700;800",
+   "type": "font"
+  }
+ },
+ "duration": 7,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "kamera/tumpuk-kedalaman",
+  "camera-rig-depth-stack"
+ ],
+ "example": {
+  "bg": "empty",
+  "font": [
+   "Inter:wght@400;700;800"
+  ]
+ }
+}

@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Checklist Card · block example hands/checklist-card</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="6.5">
+<div id="adegan" class="adegan ad-kertas"></div>
+<!-- Block hands/checklist-card · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-checklist-card" data-block="hands/checklist-card" data-start="0" data-duration="6" data-track-index="12" class="blk blk-hands-checklist-card">
+<script type="application/json" data-block-props>
+{"title": "Rencana *minggu* ini", "rows": [{"label": "Riset pengguna", "nilai": "beres"}, {"label": "Draf desain", "nilai": "80%"}, {"label": "Uji coba", "nilai": "Jumat"}], "position_x": 50, "position_y": 50, "width": 860, "skew": -1.5, "card_color": "#fbf6e9", "color": "#1d1b18", "accent_color": "#e4572e", "check_color": "#2f8f6a", "font": "Permanent Marker", "font2": "Courier Prime:wght@400;700", "size": 76, "start": 0.3, "wobble": 1, "seed": 22}
+</script>
+<div class="blk-kartu"><div class="blk-judul"></div><div class="blk-daftar"></div><svg class="blk-svg"></svg></div>
+</div>
+<style>
+.blk-hands-checklist-card{position:absolute;inset:0;pointer-events:none}
+.blk-hands-checklist-card .blk-kartu{position:absolute;box-sizing:border-box;padding:2.2em 2.6em 2.4em;border-radius:.6em}
+.blk-hands-checklist-card .blk-judul{line-height:1.1;margin-bottom:.55em;position:relative}
+.blk-hands-checklist-card .blk-row{display:flex;align-items:center;gap:1em;margin-top:.9em;position:relative}
+.blk-hands-checklist-card .blk-kotak{flex:none;width:1.5em;height:1.5em}
+.blk-hands-checklist-card .blk-label{flex:1;white-space:nowrap}
+.blk-hands-checklist-card .blk-nilai{flex:none;white-space:nowrap}
+.blk-hands-checklist-card .blk-svg{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible}
+</style>
+<script>
+BLOCK.mount("blk-checklist-card", function (k) {
+  var P = k.P, tl = k.tl, S = k.s, card = k.root.querySelector(".blk-kartu"), jd = card.querySelector(".blk-judul"), ls = card.querySelector(".blk-daftar"), svg = card.querySelector(".blk-svg");
+  // ---- helper tangan (lokal di blok ini): goresan bergoyang berseed, boil per 1/8 detik, tekstur goresan
+  function wob(pts, amp, seed) {
+    var q = pts.map(function (p, i) { return [p[0] + amp * BLOCK.noise(i * 0.83 + 0.3, seed), p[1] + amp * BLOCK.noise(i * 0.83 + 5.1, seed + 17)]; });
+    var d = "M" + q[0][0].toFixed(1) + " " + q[0][1].toFixed(1);
+    for (var i = 0; i < q.length - 1; i++) {
+      var a = q[i - 1] || q[i], b = q[i], c = q[i + 1], e = q[i + 2] || c;
+      d += "C" + (b[0] + (c[0] - a[0]) / 6).toFixed(1) + " " + (b[1] + (c[1] - a[1]) / 6).toFixed(1) + " " + (c[0] - (e[0] - b[0]) / 6).toFixed(1) + " " +
+        (c[1] - (e[1] - b[1]) / 6).toFixed(1) + " " + c[0].toFixed(1) + " " + c[1].toFixed(1);
+    }
+    return d;
+  }
+  function boil(t) { return Math.floor(t * 8 + 1e-6); } // bentuk berganti tiap 1/8 detik
+  function kotak(x, y, ww, hh, n, lebih) { // keliling kotak mulai kiri atas searah jarum jam, ujung melewati awal sedikit
+    var out = [], L = 2 * (ww + hh); n = n || 32; lebih = lebih == null ? 0.07 : lebih;
+    for (var i = 0; i <= n; i++) {
+      var u = ((i / n) * (1 + lebih) % 1) * L;
+      out.push(u < ww ? [x + u, y] : u < ww + hh ? [x + ww, y + u - ww] : u < 2 * ww + hh ? [x + ww - (u - ww - hh), y + hh] : [x, y + hh - (u - 2 * ww - hh)]);
+    }
+    return out;
+  }
+  function elips(cx, cy, rx, ry, n, a0, putar, spiral) {
+    var out = []; n = n || 36; putar = putar || 1.1; spiral = spiral == null ? 0.06 : spiral;
+    for (var i = 0; i <= n; i++) { var a = a0 + (i / n) * putar * 2 * Math.PI, f = 1 + spiral * (i / n - 0.5); out.push([cx + rx * f * Math.cos(a), cy + ry * f * Math.sin(a)]); }
+    return out;
+  }
+  function kurva(a, c, b, n) { var out = []; n = n || 20; for (var i = 0; i <= n; i++) { var u = i / n, v = 1 - u; out.push([v * v * a[0] + 2 * v * u * c[0] + u * u * b[0], v * v * a[1] + 2 * v * u * c[1] + u * u * b[1]]); } return out; }
+  function tekstur(svg, jenis, s, uid) { // polos | lembut | tajam | semprot -> {filter, lebar}
+    if (jenis === "lembut" || jenis === "semprot") {
+      var df = svg.querySelector("defs") || BLOCK.svg("defs", null, svg), id = "blkf-" + uid + "-" + jenis;
+      var f = BLOCK.svg("filter", { id: id, x: "-20%", y: "-20%", width: "140%", height: "140%" }, df);
+      if (jenis === "lembut") BLOCK.svg("feGaussianBlur", { stdDeviation: 1.3 * s }, f);
+      else {
+        BLOCK.svg("feTurbulence", { type: "fractalNoise", baseFrequency: 1.1 / Math.max(0.5, s), numOctaves: 1, seed: 4, result: "n" }, f);
+        BLOCK.svg("feDisplacementMap", { in: "SourceGraphic", in2: "n", scale: 7 * s, xChannelSelector: "R", yChannelSelector: "G", result: "d" }, f);
+        BLOCK.svg("feColorMatrix", { in: "n", type: "matrix", values: "0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 3.2 -1.1", result: "m" }, f);
+        BLOCK.svg("feComposite", { in: "d", in2: "m", operator: "in" }, f);
+      }
+      return { filter: "url(#" + id + ")", lebar: jenis === "semprot" ? 1.7 : 1.1 };
+    }
+    return { filter: null, lebar: jenis === "tajam" ? 0.6 : 1 };
+  }
+  function goresan(induk, warna, tebal, tx) { // path siap digambar (pathLength 1 -> dashoffset = 1 - kemajuan)
+    var p = BLOCK.svg("path", { fill: "none", stroke: warna, "stroke-width": tebal * tx.lebar, "stroke-linecap": "round", "stroke-linejoin": "round", pathLength: 1, "stroke-dasharray": "1 1.001", "stroke-dashoffset": 1 }, induk);
+    if (tx.filter) p.setAttribute("filter", tx.filter);
+    return p;
+  }
+  function gambar(p, d, prog) { p.setAttribute("d", d); p.setAttribute("stroke-dashoffset", (1 - BLOCK.clamp(prog, 0, 1)).toFixed(4)); p.style.visibility = prog > 0.001 ? "visible" : "hidden"; }
+  // ---- akhir helper
+  var mk = BLOCK.family(P.font, "cursive"), tw = BLOCK.family(P.font2, "monospace");
+  card.style.cssText += ";left:" + P.position_x + "%;top:" + P.position_y + "%;width:" + P.width * S + "px;font-size:" + 16 * S + "px;background:" + P.card_color +
+    ";color:" + P.color + ";box-shadow:0 " + 18 * S + "px " + 50 * S + "px rgba(40,30,10,.22),0 " + 2 * S + "px " + 4 * S + "px rgba(40,30,10,.15)";
+  jd.style.cssText += ";font-family:" + mk + ";font-size:" + P.size * S + "px";
+  BLOCK.split(jd, P.title, "words");
+  var rows = (P.rows || []).map(function (r) {
+    var row = BLOCK.el("div", { class: "blk-row", style: "font-size:" + 40 * S + "px" }, ls);
+    var kt = BLOCK.el("div", { class: "blk-kotak" }, row);
+    var lb = BLOCK.el("div", { class: "blk-label", style: "font-family:" + tw + ";font-weight:400" }, row);
+    var ch = Array.from(String(r.label)).map(function (c) { var s = BLOCK.el("span", null, lb); s.textContent = c; return s; });
+    var nv = BLOCK.el("div", { class: "blk-nilai", style: "font-family:" + mk + ";color:" + P.accent_color + ";font-size:1.15em" }, row, BLOCK.esc(r.nilai));
+    return { kt: kt, ch: ch, nv: nv };
+  });
+  // ukur setelah tata letak (font sudah siap)
+  var W = card.offsetWidth, H = card.offsetHeight; svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+  function kotakDi(e) { var x = 0, y = 0, n = e; while (n && n !== card) { x += n.offsetLeft; y += n.offsetTop; n = n.offsetParent; } return [x, y, e.offsetWidth, e.offsetHeight]; }
+  var tx = { filter: null, lebar: 1 }, amp = 3 * S * P.wobble, gs = [];
+  function tambah(pts, t0, d, warna, tb, a) { gs.push({ p: goresan(svg, warna, tb * S, tx), pts: pts, t0: t0, d: d, a: a || 1 }); }
+  var T = P.start;
+  tl.fromTo(card, { xPercent: -50, yPercent: -50, autoAlpha: 0, y: 40 * S, rotation: P.skew - 4 }, { xPercent: -50, yPercent: -50, autoAlpha: 1, y: 0, rotation: P.skew, duration: 0.7, ease: "back.out(1.6)" }, 0);
+  var kj = jd.querySelectorAll(".blk-kata");
+  tl.fromTo(kj, { autoAlpha: 0, scale: 0.8 }, { autoAlpha: 1, scale: 1, duration: 0.3, ease: "back.out(2)", stagger: 0.14 }, T + 0.3);
+  var bj = kotakDi(jd), tj = T + 0.3 + kj.length * 0.14 + 0.2;
+  tambah(kurva([bj[0], bj[1] + bj[3] + 4 * S], [bj[0] + bj[2] * 0.5, bj[1] + bj[3] - 6 * S], [bj[0] + Math.min(bj[2], W * 0.8), bj[1] + bj[3] + 8 * S], 18), tj, 0.45, P.color, 7);
+  var kc = jd.querySelector(".blk-kunci");
+  if (kc) { var bk = kotakDi(kc); tambah(elips(bk[0] + bk[2] / 2, bk[1] + bk[3] / 2, bk[2] * 0.62, bk[3] * 0.6, 34, -2.6, 1.12, 0.1), tj + 0.35, 0.6, P.accent_color, 6); }
+  var t = tj + 0.85;
+  rows.forEach(function (r, i) {
+    var b = kotakDi(r.kt);
+    tambah(kotak(b[0], b[1], b[2], b[3], 16, 0.06), t, 0.3, P.color, 4.5);
+    r.t0 = t + 0.25; r.dt = 0.034;
+    var tc = r.t0 + r.ch.length * r.dt + 0.1;
+    tambah([[b[0] + b[2] * 0.15, b[1] + b[3] * 0.5], [b[0] + b[2] * 0.42, b[1] + b[3] * 0.85], [b[0] + b[2] * 1.15, b[1] - b[3] * 0.25]], tc, 0.28, P.check_color, 7, 0.6);
+    tl.fromTo(r.nv, { autoAlpha: 0, scale: 0.6, rotation: -10 }, { autoAlpha: 1, scale: 1, rotation: -3, duration: 0.4, ease: "back.out(2.6)" }, tc + 0.2);
+    t = tc + 0.3;
+  });
+  BLOCK.onTime(tl, function (tt) {
+    var bo = boil(tt);
+    gs.forEach(function (g, i) { gambar(g.p, wob(g.pts, amp * g.a, P.seed + i * 13 + bo * 7), BLOCK.smooth((tt - g.t0) / g.d)); });
+    rows.forEach(function (r) { var n = Math.floor((tt - r.t0) / r.dt); r.ch.forEach(function (c, j) { c.style.visibility = j < n ? "visible" : "hidden"; }); });
+  }, k.dur);
+  tl.to(card, { autoAlpha: 0, y: -30 * S, duration: 0.4, ease: "power2.in" }, k.dur - 0.45);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 6.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 6.5);
+</script>
+</body>
+</html>

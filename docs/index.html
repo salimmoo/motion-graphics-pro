@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Motion Graphics Pro — Atelier Kertas</title>
+  <meta name="description" content="Paket skill Claude untuk video motion graphics dari brief sampai render: pilihan frame, alur bergerbang, render lokal mgp, klon suara lokal, gambar gratis, prinsip gerak lanjutan, 260 blok, 104 paket motion, plus jilid Motion dan Vektor." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/guide.css" />
+  <link rel="stylesheet" href="css/guide-v2.css" />
+  <link rel="stylesheet" href="css/gate-themes.css" />
+  <link rel="stylesheet" href="css/demos-plus.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/demos-skills.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/registry.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/demos-ui.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/paket-inline.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/site-modal.css" />
+  <link rel="stylesheet" href="css/v24.css" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="css/i18n.css" />
+  <script src="js/i18n.js"></script>
+</head>
+<body class="mode-gate">
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <svg class="grain" aria-hidden="true"><filter id="gn"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#gn)"/></svg>
+
+  <!-- shared chrome -->
+  <header class="chrome">
+    <a class="brand" href="#gerbang" data-go="gate"><i>Atelier Kertas</i> — Motion Graphics Pro</a>
+    <nav class="chrome-nav">
+      <button class="nv" type="button" data-modal="about">Tentang</button>
+      <button class="nv gold" type="button" data-modal="donasi"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>Donasi</button>
+    </nav>
+    <button class="back-top" id="backTop" type="button" aria-label="Kembali ke lapis sebelumnya"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><b id="backLbl">Kembali</b></button>
+  </header>
+
+  <!-- ===================== LAYER 1 · GATE ===================== -->
+  <section class="stage" id="gate" aria-label="Gerbang">
+    <div class="world" id="gateWorld">
+      <div class="lyr sky" data-k=".06"></div>
+      <div class="lyr glow" data-k=".12"></div>
+      <div class="lyr archbox" data-k=".32" id="archBox">
+        <div class="peek" id="peek"><div class="peek-img"></div><canvas class="peek-stars" id="peekStars"></canvas></div>
+        <div class="rays" id="rays"></div>
+        <div class="gates" id="gates">
+          <div class="leaf l" id="leafL"></div>
+          <div class="leaf r" id="leafR"></div>
+        </div>
+        <button class="lock" id="lock" type="button" aria-label="Buka gembok gerbang"><span class="lock-img"></span><span class="lock-ring"></span></button>
+        <div class="arch"></div>
+      </div>
+      <div class="lyr tree tl" data-k=".55"><div></div></div>
+      <div class="lyr tree tr" data-k=".62"><div></div></div>
+      <svg class="lyr wind" data-k=".7" viewBox="0 0 1920 1080" preserveAspectRatio="none" aria-hidden="true">
+        <defs><linearGradient id="wg" x1="0" x2="1"><stop offset="0" stop-color="#fff8e6" stop-opacity="0"/><stop offset=".5" stop-color="#fff2cf" stop-opacity=".9"/><stop offset="1" stop-color="#e9c77d" stop-opacity="0"/></linearGradient></defs>
+        <g fill="none" stroke="url(#wg)" stroke-linecap="round">
+          <path class="w w1" pathLength="100" d="M-80 760 C 300 640, 520 900, 900 780 S 1500 600, 2000 700" stroke-width="3"/>
+          <path class="w w2" pathLength="100" d="M-80 880 C 260 820, 620 1000, 1000 900 S 1600 820, 2000 900" stroke-width="2"/>
+          <path class="w w3" pathLength="100" d="M-80 520 C 400 470, 700 640, 1080 560 S 1650 420, 2000 520" stroke-width="1.6"/>
+          <path class="w w4" pathLength="100" d="M-80 980 C 400 930, 760 1060, 1180 990 S 1700 940, 2000 1000" stroke-width="4"/>
+        </g>
+      </svg>
+      <div class="lyr clouds cb" data-k=".9"></div>
+      <div class="lyr clouds cf" data-k="1.05"></div>
+    </div>
+    <canvas class="leaves" id="leaves" aria-hidden="true"></canvas>
+    <div class="gate-ui">
+      <div class="gate-title">
+        <p class="kicker">Panduan Skill · Versi 2.4 · 2026</p>
+        <h1>Atelier<br><em>Kertas</em> &amp; Cahaya</h1>
+      </div>
+      <p class="gate-hint" id="gateHint"><span>Klik gembok untuk membuka gerbang</span><i></i></p>
+      <div class="theme-pick" id="themePick">
+        <button class="theme-btn" id="themeBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-controls="themeList"><span class="theme-sw" aria-hidden="true"></span><span class="lbl"><i>Tema </i><b id="themeName">Timur Tengah</b></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button>
+        <ul class="theme-list" id="themeList" role="listbox" aria-label="Pilih tema gerbang" hidden></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== LAYER 2 · CONSTELLATION ===================== -->
+  <section class="stage" id="cosmos" aria-label="Rasi menu">
+    <div class="cosmos-bg" id="cosmosBg"></div>
+    <canvas class="cosmos-cv" id="cosmosCv" aria-hidden="true"></canvas>
+    <svg class="const-svg" id="constSvg" aria-hidden="true"></svg>
+    <nav class="const-nav" id="constNav" aria-label="Menu utama"></nav>
+    <div class="cosmos-ui">
+      <p class="site-copy">© 2026 Salim Muhammad</p>
+      <a class="skip" href="#panduan" data-go="guide">Langsung ke panduan →</a>
+    </div>
+  </section>
+
+  <!-- ===================== LAYER 3 · ORBIT ===================== -->
+  <section class="stage" id="orbit" aria-label="Orbit templat">
+    <div class="orbit-bg" id="orbitBg"></div>
+    <canvas class="orbit-cv" id="orbitCv" aria-hidden="true"></canvas>
+    <div class="orbit-head">
+      <p class="kicker" id="orbitKicker"></p>
+      <h2 id="orbitTitle"></h2>
+      <p class="orbit-sub" id="orbitSub"></p>
+    </div>
+    <div class="orbit-scene" id="orbitScene"><div class="orbit-ring" id="orbitRing"></div></div>
+    <nav class="orbit-tabs" id="orbitTabs" aria-label="Rasi lain"></nav>
+    <p class="site-copy">© 2026 Salim Muhammad</p>
+  </section>
+
+  <!-- ===================== LAYER 4 · GUIDE ===================== -->
+  <section id="guide" aria-label="Panduan">
+    <div class="guide-bg" id="guideBg"></div>
+    <div class="progress"><i id="progress"></i></div>
+    <aside class="toc" id="toc" aria-label="Daftar bab"></aside>
+    <main class="doc" id="doc"></main>
+    <footer class="doc-foot"><p>© 2026 Salim Muhammad · Motion Graphics Pro — Atelier Kertas</p><p>Lisensi Motion Graphics Pro: bebas dipakai dan diubah untuk pekerjaan pribadi maupun klien, dan video hasilmu boleh dijual. Paketnya sendiri tidak boleh dijual, dibagikan ulang, atau diaku sebagai karya sendiri. <a href="https://github.com/salimmoo/motion-graphics-pro/blob/main/LICENSE.md" target="_blank" rel="noopener">Baca lisensi lengkap</a>. Motion Graphics Pro adalah proyek independen, tidak berafiliasi dengan, tidak didukung, dan tidak disponsori oleh Anthropic, HeyGen, atau pemilik merek lain yang disebut. Claude adalah merek Anthropic; merek dan karya pihak ketiga lain milik pemiliknya masing-masing.</p></footer>
+  </section>
+
+  <noscript><p style="position:fixed;inset:40% 0 auto;text-align:center;color:#f4ecd8">Halaman ini membutuhkan JavaScript.</p></noscript>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="js/quality.js" defer></script>
+  <script src="js/layout.js" defer></script>
+  <script src="js/data.js" defer></script>
+  <script src="js/fx.js" defer></script>
+  <script src="js/gate.js" defer></script>
+  <script src="js/gate-themes.js" defer></script>
+  <script src="js/cosmos.js" defer></script>
+  <script src="js/thumbs.js" defer></script>
+  <script src="js/orbit.js" defer></script>
+  <script src="js/site-config.js" defer></script>
+  <script src="js/site-modal.js" defer></script>
+  <!-- skill, vols, demos*, registry, paket-inline, guide, covers: loaded on demand by js/app.js -->
+  <script src="js/app.js" defer></script>
+</body>
+</html>

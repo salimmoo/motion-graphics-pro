@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Tilted Card · block example ui/tilted-card</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="6.5">
+<div id="adegan" class="adegan ad-gelap"></div>
+<!-- Block ui/tilted-card · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-tilted-card" data-block="ui/tilted-card" data-start="0" data-duration="6" data-track-index="30" class="blk blk-ui-tilted-card">
+<script type="application/json" data-block-props>
+{"mode": "skew", "title": "Paket Kreator", "sub": "Semua alat untuk mulai berkarya", "price": "Rp49 rb", "title2": "Paket Tim", "sub2": "Kerja bareng tanpa ribet", "price2": "Rp129 rb", "badge": ["Baru", "Populer"], "accent_color": "#7c5cff", "color2": "#ff6b8b", "card": "#151826", "cursor": true, "skew": 14, "font": "Inter:wght@400;500;600;700;800"}
+</script>
+</div>
+<style>
+.blk-ui-tilted-card{position:absolute;inset:0;pointer-events:none;overflow:hidden;font-family:"Inter",system-ui,sans-serif}
+.blk-ui-tilted-card .pan{position:absolute;inset:0;perspective:1600px}
+.blk-ui-tilted-card .kt{position:absolute;left:50%;top:50%;transform-style:preserve-3d;color:#f4f5fb}
+.blk-ui-tilted-card .kt>*{position:absolute}
+.blk-ui-tilted-card .lap{transform-style:preserve-3d}
+.blk-ui-tilted-card .pil{font-weight:700;white-space:nowrap;border-radius:99px;color:#fff}
+.blk-ui-tilted-card .kur{position:absolute;left:0;top:0;z-index:5}
+</style>
+<script>
+BLOCK.mount("blk-tilted-card", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, E = BLOCK.el, s = k.s, mode = P.mode;
+  var pan = E("div", { class: "pan" }, k.root);
+  var cw = Math.min(k.w * (mode === "split" ? 0.4 : 0.62), 520 * s), ch = cw * 1.25, px = function (v) { return v * cw / 520 + "px"; };
+  function kartu(judul, sub, harga, warna, x) {
+    var wr = E("div", { style: "position:absolute;inset:0;transform-style:preserve-3d" }, pan);
+    var kt = E("div", { class: "kt", style: "width:" + cw + "px;height:" + ch + "px;margin:" + (-ch / 2) + "px 0 0 " + (-cw / 2 + x) + "px" }, wr);
+    var tepi = E("div", { style: "inset:0;border-radius:" + px(34) + ";background:" + BLOCK.rgba("#ffffff", 0.12) }, kt);
+    var bg = E("div", { style: "inset:" + px(2) + ";border-radius:" + px(32) + ";background:linear-gradient(160deg," + BLOCK.mix(P.card, "#ffffff", .06) + "," + P.card + ");box-shadow:0 " + px(40) + " " + px(90) + " rgba(0,0,0,.5)" }, kt);
+    var gb = E("div", { style: "left:" + px(28) + ";right:" + px(28) + ";top:" + px(28) + ";height:" + px(330) + ";border-radius:" + px(22) + ";overflow:hidden;background:radial-gradient(70% 60% at 30% 25%," + BLOCK.mix(warna, "#ffffff", .4) + "," + warna + " 55%," + BLOCK.mix(warna, "#0b0d18", .55) + ")" }, kt);
+    E("div", { style: "position:absolute;right:12%;bottom:-18%;width:60%;height:60%;border-radius:50%;background:" + BLOCK.rgba("#ffffff", 0.18) }, gb);
+    var jd = E("div", { style: "left:" + px(32) + ";top:" + px(384) + ";font-size:" + px(40) + ";font-weight:800;letter-spacing:-.02em" }, kt, BLOCK.esc(judul));
+    var sb = E("div", { style: "left:" + px(32) + ";top:" + px(440) + ";font-size:" + px(21) + ";opacity:.65" }, kt, BLOCK.esc(sub));
+    var hr = E("div", { class: "pil", style: "left:" + px(32) + ";top:" + px(530) + ";padding:" + px(12) + " " + px(22) + ";font-size:" + px(22) + ";background:" + warna }, kt, BLOCK.esc(harga));
+    var sil = E("div", { style: "inset:0;border-radius:" + px(34) }, kt);
+    // lapisan kedalaman (parallax): gambar 30, judul 60, harga 90 px di depan dasar
+    // mode belah: translateZ sungguhan; mode miring: paralaks 2D per lapisan (preserve-3d bertingkat
+    // + overflow/border-radius tidak deterministik saat dirender ulang di SwiftShader)
+    var lap = [[gb, 30], [jd, 60], [sb, 50], [hr, 90], [sil, 100]];
+    if (mode === "split") lap.forEach(function (a) { a[0].style.transform = "translateZ(" + a[1] * cw / 520 + "px)"; });
+    else { wr.style.transformStyle = "flat"; kt.style.transformStyle = "flat"; }
+    return { wr: wr, kt: kt, tepi: tepi, sil: sil, hr: hr, lap: lap };
+  }
+  // kursor terskrip: berjalan halus di atas kartu (fungsi waktu)
+  function kursor(t) { var e = BLOCK.smooth((t - 0.6) / 1.2); return { x: 0.5 + e * (0.34 * Math.sin(t * 1.25 + 0.4) + 0.06 * BLOCK.noise(t * 0.8, 3)), y: 0.5 + e * (0.3 * Math.sin(t * 0.85 + 1.8) + 0.05 * BLOCK.noise(t * 0.7, 5)) }; }
+  var kur = P.cursor ? BLOCK.svg("svg", { class: "kur", viewBox: "0 0 24 24", width: 44 * s, height: 44 * s }, k.root) : null;
+  if (kur) BLOCK.svg("path", { d: "M3 2 L3 19 L8 14.5 L11.5 22 L14.5 20.6 L11 13.3 L17.5 13 Z", fill: "#fff", stroke: "#111", "stroke-width": 1.4, "stroke-linejoin": "round" }, kur);
+  var M = +P.skew;
+  if (mode === "split") {
+    var g = cw * 0.56, A = kartu(P.title, P.sub, P.price, P.accent_color, -g), Bk = kartu(P.title2, P.sub2, P.price2, P.color2, g);
+    [A, Bk].forEach(function (c, i) {
+      var sg = i ? 1 : -1, lb = E("div", { class: "pil", style: "top:" + px(-22) + ";" + (i ? "left:" : "right:") + px(-18) + ";padding:" + px(10) + " " + px(20) + ";font-size:" + px(20) + ";background:#fff;color:#151826;transform:translateZ(" + px(110) + ")" }, c.kt, BLOCK.esc(P.badge[i] || ""));
+      // datang dari sayap berlawanan, terbuka seperti buku (rotateY cermin)
+      tl.fromTo(c.kt, { x: sg * k.w * 0.6, rotationY: -sg * 70, autoAlpha: 0 }, { x: 0, rotationY: -sg * M, autoAlpha: 1, duration: 1.2, ease: "expo.out" }, 0.2 + i * 0.08);
+      tl.fromTo(lb, { scale: 0 }, { scale: 1, duration: 0.7, ease: "blockSpringStrong" }, 1.05 + i * 0.1);
+      tl.fromTo(c.kt, { y: 0 }, { y: sg * 8 * s, duration: (D - 1.4) / 2, ease: "sine.inOut", yoyo: true, repeat: 1, immediateRender: false }, 1.4);
+    });
+    if (kur) kur.style.display = "none";
+    return;
+  }
+  var C = kartu(P.title, P.sub, P.price, P.accent_color, 0);
+  tl.fromTo(pan, { autoAlpha: 0, y: 60 * s, scale: 0.92 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.9, ease: "power3.out" }, 0.1);
+  if (kur) tl.fromTo(kur, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3 }, 0.5);
+  var glare = null;
+  if (mode === "skew") { C.sil.style.overflow = "hidden"; glare = E("div", { style: "position:absolute;left:-50%;top:-50%;width:200%;height:200%;background:radial-gradient(30% 25% at 50% 50%,rgba(255,255,255,.22),transparent 70%)" }, C.sil); }
+  BLOCK.onTime(tl, function (t) {
+    var c = kursor(t), dx = c.x - 0.5, dy = c.y - 0.5;
+    if (kur) kur.style.transform = "translate(" + (k.w / 2 - cw / 2 + c.x * cw) + "px," + (k.h / 2 - ch / 2 + c.y * ch) + "px)";
+    if (mode === "skew") {
+      C.kt.style.transform = "rotateX(" + (Math.round(-dy * 2 * M * 100) / 100) + "deg) rotateY(" + (Math.round(dx * 2 * M * 100) / 100) + "deg)";
+      // kilap: elemen gradien statis yang digeser (gradien berubah di bidang 3D tidak deterministik di SwiftShader)
+      glare.style.transform = "translate(" + Math.round((c.x - 0.5) * cw) + "px," + Math.round((c.y - 0.5) * ch) + "px)";
+      C.lap.forEach(function (a) { if (a[0] !== C.sil) a[0].style.transform = "translate(" + Math.round(dx * a[1] * cw / 520 * 0.5 * 10) / 10 + "px," + Math.round(dy * a[1] * cw / 520 * 0.5 * 10) / 10 + "px)"; });
+    } else {
+      // sorotan kursor + tepi menyala di dekat kursor
+      C.sil.style.background = "radial-gradient(" + px(260) + " circle at " + c.x * 100 + "% " + c.y * 100 + "%," + BLOCK.rgba(P.accent_color, 0.28) + ",transparent 70%)";
+      C.tepi.style.background = "radial-gradient(" + px(300) + " circle at " + c.x * 100 + "% " + c.y * 100 + "%," + P.accent_color + ",rgba(255,255,255,.1) 70%)";
+    }
+  }, D);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 6.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 6.5);
+</script>
+</body>
+</html>

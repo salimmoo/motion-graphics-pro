@@ -1,0 +1,59 @@
+<!-- Block text/tight-tracking · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="text/tight-tracking" data-start="0" data-duration="4" data-track-index="10" class="blk blk-text-tight-tracking">
+<script type="application/json" data-block-props>
+{"text": "BENTUK YANG *TENANG*", "font": "Montserrat:wght@300;500;600;800", "size": 110, "weight": 600, "color": "#f5f3ee", "accent_color": "#ffcf4a", "position_y": 50, "width": 80, "align": "center", "label": "STUDIO GERAK · 2026", "start_spacing": 0.9, "end_spacing": 0.06, "blur": 10, "enter_duration": 1.6, "ease": "expo.out", "exit": "width"}
+</script>
+<div class="blk-tk"><div class="blk-judul"></div><div class="blk-label"></div></div>
+</div>
+<style>
+.blk-text-tight-tracking {position:absolute;inset:0;pointer-events:none}
+.blk-text-tight-tracking .blk-tk{position:absolute;left:50%;transform:translate(-50%,-50%);line-height:1.08}
+.blk-text-tight-tracking .blk-kunci{color:var(--aksen)}
+.blk-text-tight-tracking .blk-judul{white-space:nowrap}
+.blk-text-tight-tracking .blk-label{font-size:.26em;font-weight:500;opacity:.72;margin-top:.9em;white-space:nowrap}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl;
+  var rata = { left: "left", right: "right" }[P.align] || "center";
+  function gayaTeks(el, px) {
+    el.style.cssText += ";top:" + P.position_y + "%;width:" + P.width + "%;color:" + P.color + ";--aksen:" + P.accent_color +
+      ";font-family:" + BLOCK.family(P.font) + ";font-weight:" + P.weight + ";font-size:" + Math.round((px || P.size) * k.s) + "px;text-align:" + rata;
+  }
+  // tunggu stylesheet Google Fonts + wajah font benar-benar termuat sebelum mengukur teks
+  function siapFont(spec) {
+    var ln = Array.prototype.slice.call(document.querySelectorAll('link[href*="fonts.googleapis"]'));
+    return Promise.all(ln.map(function (l) { return l.sheet ? 0 : new Promise(function (ok) { l.addEventListener("load", ok); l.addEventListener("error", ok); }); }))
+      .then(function () { return document.fonts && document.fonts.load ? document.fonts.load(spec || (P.weight + " 100px " + BLOCK.family(P.font))) : 0; })
+      .catch(function () {});
+  }
+  function markupKunci(s) { return BLOCK.esc(s).replace(/\*([^*]+)\*/g, '<span class="blk-kunci">$1</span>').replace(/\\n|\n/g, "<br>"); }
+  return siapFont().then(function () {
+  var el = k.root.querySelector(".blk-tk"), j = el.querySelector(".blk-judul"), lb = el.querySelector(".blk-label");
+  gayaTeks(el);
+  j.innerHTML = markupKunci(P.text);
+  // muat lebar layar pada spasi akhir (rasio tegak)
+  j.style.cssText = "display:inline-block;letter-spacing:" + (P.end_spacing + 0.12) + "em";
+  var muat = k.w * 0.92 / Math.max(1, j.offsetWidth);
+  if (muat < 1) el.style.fontSize = Math.floor(P.size * k.s * muat) + "px";
+  j.style.cssText = "";
+  // letter-spacing menambah ruang setelah huruf terakhir: imbangi dengan padding kiri bila rata tengah
+  var imb = rata === "center";
+  function sp(ls) { var o = { letterSpacing: ls + "em" }; if (imb) o.paddingLeft = ls + "em"; return o; }
+  var keluar = P.exit !== "no", tK = k.dur - 0.75, tM = 0.1 + P.enter_duration;
+  tl.fromTo(j, Object.assign({ opacity: 0, filter: "blur(" + P.blur + "px)" }, sp(P.start_spacing)),
+    Object.assign({ opacity: 1, filter: "blur(0px)", duration: P.enter_duration, ease: P.ease }, sp(P.end_spacing)), 0.1);
+  // hold yang hidup: terus merapat sedikit sampai keluar
+  tl.to(j, Object.assign({ duration: Math.max(0.1, (keluar ? tK : k.dur) - tM), ease: "none" }, sp(P.end_spacing - 0.025)), tM);
+  if (P.label) {
+    lb.textContent = P.label;
+    function sl(ls) { var o = { letterSpacing: ls + "em" }; if (imb) o.paddingLeft = ls + "em"; return o; }
+    tl.fromTo(lb, Object.assign({ opacity: 0, y: 12 * k.s }, sl(1.2)), Object.assign({ opacity: 0.72, y: 0, duration: P.enter_duration * 0.9, ease: P.ease }, sl(0.45)), 0.45);
+  } else lb.remove();
+  if (P.exit === "width") {
+    tl.to(j, Object.assign({ opacity: 0, filter: "blur(" + P.blur * 0.8 + "px)", duration: 0.65, ease: "power2.in" }, sp(P.start_spacing * 0.55)), tK);
+    if (P.label) tl.to(lb, { opacity: 0, duration: 0.4, ease: "power2.in" }, tK);
+  } else if (P.exit === "fade") tl.to(el.children, { opacity: 0, duration: 0.5, ease: "power2.in" }, tK + 0.1);
+  });
+}, { font: true });
+</script>

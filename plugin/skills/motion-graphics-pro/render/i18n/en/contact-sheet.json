@@ -1,0 +1,8 @@
+{
+ "--times poses: project.json not found in the composition folder": "--times poses: project.json not found in the composition folder",
+ "--times poses: project.json has no scenes[].poses yet": "--times poses: project.json has no scenes[].poses yet",
+ "--times: invalid list of seconds: {}": "--times: invalid list of seconds: {}",
+ "key poses off the 1/{} s grid, the next frame is taken: {}": "key poses off the 1/{} s grid, the next frame is taken: {}",
+ "warning: {} of {} frames are fully black: {}. Intended (before a scene, after a block) or not (a scene that never shows, a lost GPU canvas)? Check with mgp frame --t <s>.": "warning: {} of {} frames are fully black: {}. Intended (before a scene, after a block) or not (a scene that never shows, a lost GPU canvas)? Check with mgp frame --t <s>.",
+ "contact sheet of {} frames → {}": "contact sheet of {} frames → {}"
+}

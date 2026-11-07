@@ -1,0 +1,157 @@
+{
+ "id": "accents/light-sweep",
+ "name": "Light Sweep",
+ "name_id": "Sapuan Cahaya",
+ "category": "accents",
+ "description": {
+  "id": "Mode lintas: satu nilai --light-x menggerakkan pita cahaya diagonal, bayangan global, serta sorot dan bayang tiap elemen host sekaligus, lalu cahaya menetap. Mode kilap: kartu mendarat lalu menangkap satu kilap diagonal.",
+  "en": "Pass mode: one --light-x value drives a diagonal light band, global shading and per-element highlights and shadows on host elements in lockstep, then the light settles. Gloss mode: a card lands and catches one diagonal specular gloss."
+ },
+ "tags": [
+  "aksen",
+  "cahaya",
+  "kilap",
+  "gloss",
+  "sweep",
+  "kartu",
+  "accents",
+  "light"
+ ],
+ "props": {
+  "mode": {
+   "default": "across",
+   "type": "enum",
+   "options": [
+    "across",
+    "gloss"
+   ],
+   "option_aliases": {
+    "lintas": "across",
+    "kilap": "gloss"
+   }
+  },
+  "element": {
+   "default": "#adegan .kartu, #adegan .tombol",
+   "type": "selector",
+   "hint": "Selektor elemen host yang ikut disorot (mode lintas)",
+   "aliases": [
+    "elemen"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi horizontal pusat (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi vertikal pusat (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "size": {
+   "default": 640,
+   "type": "number",
+   "hint": "Lebar kartu (mode kilap)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "color": {
+   "default": "#fff4dc",
+   "type": "color",
+   "hint": "Warna cahaya",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#6d4dff",
+   "type": "color",
+   "hint": "Warna kartu (mode kilap)",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "text": {
+   "default": "Pencapaian Baru",
+   "type": "text",
+   "hint": "Judul kartu (mode kilap)",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "small_text": {
+   "default": "Level 12 terbuka",
+   "type": "text",
+   "hint": "Subjudul kartu (mode kilap)",
+   "aliases": [
+    "teks_kecil"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@600;800",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "radius": {
+   "default": 22,
+   "type": "number",
+   "aliases": [
+    "sudut"
+   ]
+  },
+  "strength": {
+   "default": 0.6,
+   "type": "number",
+   "hint": "Kekuatan cahaya 0..1",
+   "aliases": [
+    "kekuatan"
+   ]
+  },
+  "start": {
+   "default": 0.3,
+   "type": "number",
+   "hint": "Waktu mulai lokal (detik)",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "sweep_duration": {
+   "default": 1.6,
+   "type": "number",
+   "aliases": [
+    "durasi_sapu"
+   ]
+  },
+  "ease": {
+   "default": "power2.inOut",
+   "type": "ease"
+  }
+ },
+ "duration": 3.5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "aksen/sapuan-cahaya",
+  "light-sweep-pass",
+  "gloss-sweep"
+ ],
+ "example": {
+  "bg": "ui",
+  "aspect": "16:9",
+  "font": [
+   "Inter:wght@600;800"
+  ]
+ }
+}

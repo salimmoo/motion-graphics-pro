@@ -1,0 +1,133 @@
+{
+ "id": "data/star-rating",
+ "name": "Star Rating",
+ "name_id": "Rating Bintang",
+ "category": "data",
+ "description": {
+  "id": "Deretan bintang yang lapisan warnanya menyapu sampai nilai rating, bintang terakhir terisi sebagian sesuai pecahannya, sementara angka rating menghitung serempak.",
+  "en": "A star row whose coloured layer sweeps to the rating, keeps the fractional last star, and counts the value in sync."
+ },
+ "tags": [
+  "data",
+  "rating",
+  "bintang",
+  "ulasan",
+  "skor",
+  "review",
+  "star"
+ ],
+ "props": {
+  "value": {
+   "default": 4.6,
+   "type": "number",
+   "aliases": [
+    "nilai"
+   ]
+  },
+  "max": {
+   "default": 5,
+   "type": "number",
+   "hint": "Jumlah bintang",
+   "aliases": [
+    "maks"
+   ]
+  },
+  "decimals": {
+   "default": 1,
+   "type": "number",
+   "aliases": [
+    "desimal"
+   ]
+  },
+  "label": {
+   "default": "dari 2.481 ulasan pembeli",
+   "type": "text"
+  },
+  "show_number": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "tampil_angka"
+   ]
+  },
+  "fill_duration": {
+   "default": 1.8,
+   "type": "number",
+   "hint": "detik",
+   "aliases": [
+    "durasi_isi"
+   ]
+  },
+  "ease": {
+   "default": "power2.inOut",
+   "type": "ease"
+  },
+  "color": {
+   "default": "#ffc53d",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "empty_color": {
+   "default": "rgba(255,255,255,0.14)",
+   "type": "color",
+   "aliases": [
+    "warna_kosong"
+   ]
+  },
+  "text_color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;800",
+   "type": "font"
+  },
+  "size": {
+   "default": 120,
+   "type": "number",
+   "hint": "Ukuran satu bintang (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_y"
+   ]
+  }
+ },
+ "duration": 4,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "data/bintang",
+  "star-rating-fill"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@500;800"
+  ]
+ }
+}

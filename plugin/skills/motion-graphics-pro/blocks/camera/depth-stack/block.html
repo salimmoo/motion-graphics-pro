@@ -1,0 +1,64 @@
+<!-- Block camera/depth-stack · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="camera/depth-stack" data-start="0" data-duration="7" data-track-index="30" class="blk blk-camera-depth-stack">
+<script type="application/json" data-block-props>
+{"target": "", "card": [{"judul": "Lapisan depan", "teks": "Yang pertama kau lihat"}, {"judul": "Lapisan tengah", "teks": "Konteks mulai terbuka"}, {"judul": "Lapisan belakang", "teks": "Detail yang menunggu giliran"}, {"judul": "Inti cerita", "teks": "Tujuan akhir kamera"}], "distance": 560, "still": 0.45, "ease": "power3.inOut", "blur": 7, "swing": 5, "bg": "#0d0f1c", "color": ["#ff7a59", "#ffc94d", "#5bc8ff", "#9b7bff"], "text_color": "#f6f2ea", "font": "Inter:wght@400;700;800"}
+</script>
+</div>
+<style>
+.blk-camera-depth-stack{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-camera-depth-stack .blk-pg{position:absolute;inset:0}
+.blk-camera-depth-stack .blk-kartu{position:absolute;left:50%;top:50%;box-sizing:border-box;overflow:hidden;background:#161a2e;box-shadow:0 30px 90px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.1)}
+.blk-camera-depth-stack .blk-pita{position:absolute;left:0;top:0;bottom:0}
+.blk-camera-depth-stack .blk-no{font-weight:800;line-height:1;opacity:.18;position:absolute}
+.blk-camera-depth-stack .blk-jd{font-weight:800;letter-spacing:-.02em;line-height:1}
+.blk-camera-depth-stack .blk-tx{opacity:.75;line-height:1.3}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, w = k.w, h = k.h, s = k.s, D = k.dur, R = k.root, T = BLOCK.find(P.target);
+  var J = (+P.distance || 560) * s, ez = gsap.parseEase(P.ease || "power3.inOut"), bMax = (+P.blur || 10) * s;
+  var pg, kartu = [], host = !!T;
+  if (host) { pg = T; kartu = Array.from(T.children); }
+  else {
+    R.style.background = "radial-gradient(100% 80% at 50% 40%," + BLOCK.mix(P.bg, "#33406e", 0.4) + "," + P.bg + ")";
+    pg = BLOCK.el("div", { class: "blk-pg" }, R);
+    var cw = Math.min(w * (h > w ? 0.72 : 0.5), 760 * s), ch = cw * 0.6, war = Array.isArray(P.color) ? P.color : [P.color];
+    (P.card || []).forEach(function (d, i) {
+      var c = BLOCK.el("div", { class: "blk-kartu", style: "width:" + cw + "px;height:" + ch + "px;margin:" + (-ch / 2) + "px 0 0 " + (-cw / 2) + "px;border-radius:" + Math.round(28 * s) + "px;padding:" + Math.round(cw * 0.08) + "px " + Math.round(cw * 0.09) + "px;color:" + P.text_color + ";font-family:" + BLOCK.family(P.font) }, pg);
+      var wr = war[i % war.length];
+      c.style.background = "linear-gradient(140deg," + BLOCK.mix(wr, "#161a2e", 0.7) + ",#141829 70%)";
+      BLOCK.el("div", { class: "blk-pita", style: "width:" + Math.round(10 * s) + "px;background:" + wr }, c);
+      BLOCK.el("div", { class: "blk-no", style: "right:" + cw * 0.06 + "px;bottom:" + (-cw * 0.04) + "px;font-size:" + Math.round(cw * 0.42) + "px;color:" + wr }, c, ("0" + (i + 1)).slice(-2));
+      BLOCK.el("div", { class: "blk-jd", style: "font-size:" + Math.round(cw * 0.09) + "px;margin:" + cw * 0.12 + "px 0 " + cw * 0.03 + "px" }, c, BLOCK.esc(d.judul || ""));
+      BLOCK.el("div", { class: "blk-tx", style: "font-size:" + Math.round(cw * 0.042) + "px" }, c, BLOCK.esc(d.teks || ""));
+      kartu.push(c);
+    });
+  }
+  pg.style.perspective = Math.round(1100 * s) + "px";
+  pg.style.perspectiveOrigin = "50% 45%";
+  var N = kartu.length; if (!N) return;
+  var dw = D * BLOCK.clamp(+P.still || 0.45, 0.1, 0.9) / N, pn = N > 1 ? (D - N * dw) / (N - 1) : 0;
+  function posisi(t) { // indeks kartu yang difokuskan (pecahan)
+    if (N < 2) return 0;
+    var seg = dw + pn, i = Math.floor(t / seg), r = t - i * seg;
+    return i >= N - 1 ? N - 1 : i + (r < dw ? 0 : ez((r - dw) / pn));
+  }
+  // posisi dunia tiap kartu: makin jauh makin ke belakang, berselang kiri-kanan
+  var ox = kartu.map(function (c, i) { return host ? 0 : i * Math.min(w * 0.17, 330 * s); });
+  var oy = kartu.map(function (c, i) { return host ? 0 : -i * 210 * s; });
+  BLOCK.onTime(k.tl, function (t) {
+    var p = posisi(t), i0 = Math.floor(p), fr = p - i0, i1 = Math.min(N - 1, i0 + 1);
+    var camX = BLOCK.lerp(ox[i0], ox[i1], fr), camY = BLOCK.lerp(oy[i0], oy[i1], fr);
+    var ay = (+P.swing || 0) * Math.sin(t * 0.9), ax = (+P.swing || 0) * 0.4 * Math.sin(t * 0.6 + 1);
+    kartu.forEach(function (c, i) {
+      var zr = (p - i) * J, df = Math.abs(zr) / J;
+      var op = zr > 0 ? 1 - BLOCK.progress(zr, 0.05 * J, 0.75 * J) : 1 - BLOCK.progress(-zr, 2.6 * J, 3.4 * J);
+      c.style.transform = "rotateY(" + ay.toFixed(3) + "deg) rotateX(" + ax.toFixed(3) + "deg) translate3d(" + (ox[i] - camX).toFixed(2) + "px," + (oy[i] - camY).toFixed(2) + "px," + zr.toFixed(2) + "px)";
+      c.style.filter = "blur(" + (bMax * Math.min(df, 1.6)).toFixed(2) + "px) brightness(" + (1 - 0.3 * Math.min(df, 1.5)).toFixed(3) + ")";
+      c.style.opacity = op.toFixed(3);
+      c.style.zIndex = String(Math.round(5000 + zr));
+      c.style.visibility = op <= 0.001 ? "hidden" : "visible";
+    });
+  }, D);
+}, { font: true });
+</script>

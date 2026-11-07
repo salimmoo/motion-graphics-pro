@@ -1,0 +1,65 @@
+<!-- Block ui/notification-stack · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="ui/notification-stack" data-start="0" data-duration="4.5" data-track-index="50" class="blk blk-ui-notification-stack">
+<script type="application/json" data-block-props>
+{"mode": "stack", "list": [{"aplikasi": "Pesan", "judul": "Rina", "isi": "Ada waktu sebentar?"}, {"aplikasi": "Surel", "judul": "Bima", "isi": "Tolong cek dokumen ini ya"}, {"aplikasi": "Kalender", "judul": "Rapat dimajukan", "isi": "Mulai 5 menit lagi"}, {"aplikasi": "Obrolan Tim", "judul": "Sari", "isi": "Klien sudah menunggu di panggilan"}, {"aplikasi": "Pesan", "judul": "Rina", "isi": "Kamu di mana?"}, {"aplikasi": "Panggilan", "judul": "Panggilan video", "isi": "Dodi mengajak bergabung"}, {"aplikasi": "Obrolan Tim", "judul": "Tim Proyek", "isi": "PENTING: balas segera"}, {"aplikasi": "Surel", "judul": "Atasan", "isi": "Revisi harus masuk hari ini"}, {"aplikasi": "Panggilan", "judul": "3 panggilan tak terjawab", "isi": "Dodi, Sari, Bima"}, {"aplikasi": "Pesan", "judul": "Rina", "isi": "Halo??"}], "start_pause": 0.6, "acceleration": 0.8, "clock": "09.41", "date": "Rabu, 5 November", "outro_title": "Satu tempat untuk semua kabar.", "outro_sub": "Ringkas, tenang, terkendali.", "outro_button": "Coba sekarang", "accent_color": "#7c5cff", "bg": "#1d1840", "font": "Inter:wght@400;500;600;700;800"}
+</script>
+</div>
+<style>
+.blk-ui-notification-stack{position:absolute;inset:0;pointer-events:none;overflow:hidden;color:#fff}
+.blk-ui-notification-stack .blk-ls{position:absolute;overflow:hidden}
+.blk-ui-notification-stack .blk-jam{position:absolute;left:0;right:0;text-align:center;font-weight:700;letter-spacing:-.02em;line-height:1}
+.blk-ui-notification-stack .blk-tg{position:absolute;left:0;right:0;text-align:center;font-weight:500;opacity:.85}
+.blk-ui-notification-stack .blk-nt{position:absolute;left:0;top:0;display:flex;align-items:center;box-sizing:border-box;background:#332d5e;box-shadow:0 -6px 18px rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.1)}
+.blk-ui-notification-stack .blk-ik{flex:none}
+.blk-ui-notification-stack .blk-tx{flex:1;min-width:0}
+.blk-ui-notification-stack .blk-tx div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.blk-ui-notification-stack .blk-pn{position:absolute;left:0;right:0;text-align:center}
+.blk-ui-notification-stack .blk-btn{display:inline-block;font-weight:700;color:#fff;border-radius:999px}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, R = k.root, W = k.w, H = k.h, A = P.accent_color, L = P.list || [], n = L.length, D = k.dur;
+  R.style.fontFamily = BLOCK.family(P.font); R.style.background = W / H > 0.62 ? "#0d0f18" : P.bg;
+  // layar kunci: penuh pada potret, ponsel di tengah pada lanskap
+  var lh = H, lw = W, lx = 0, rad = 0;
+  if (W / H > 0.62) { lh = H * 0.92; lw = lh * 0.5; lx = (W - lw) / 2; rad = lw * 0.12; }
+  var u = lw / 400, ly = (H - lh) / 2;
+  var ls = BLOCK.el("div", { class: "blk-ls", style: "left:" + lx + "px;top:" + ly + "px;width:" + lw + "px;height:" + lh + "px;border-radius:" + rad + "px;background:radial-gradient(120% 70% at 20% 10%," + BLOCK.mix(P.bg, A, 0.55) + " 0%," + P.bg + " 55%,#07060f 100%)" }, R);
+  var jam = BLOCK.el("div", { class: "blk-jam", style: "top:" + 70 * u + "px;font-size:" + 92 * u + "px" }, ls, BLOCK.esc(P.clock));
+  var tg = BLOCK.el("div", { class: "blk-tg", style: "top:" + 50 * u + "px;font-size:" + 17 * u + "px" }, ls, BLOCK.esc(P.date));
+  var pal = ["#34c759", "#2f80ff", "#ff3b30", "#7c5cff", "#ff9f0a", "#14b8a6"], cw = lw - 28 * u, chh = 74 * u, gap = 9 * u, top = 200 * u;
+  var C = L.map(function (d, i) {
+    var c = pal[BLOCK.hashStr(d.aplikasi) % pal.length], e = BLOCK.el("div", { class: "blk-nt", style: "width:" + cw + "px;height:" + chh + "px;border-radius:" + 22 * u + "px;padding:0 " + 14 * u + "px;gap:" + 12 * u + "px" }, ls);
+    BLOCK.el("div", { class: "blk-ik", style: "width:" + 40 * u + "px;height:" + 40 * u + "px;border-radius:" + 11 * u + "px;background:linear-gradient(160deg," + BLOCK.mix(c, "#ffffff", 0.3) + "," + c + ")" }, e);
+    BLOCK.el("div", { class: "blk-tx", style: "font-size:" + 15 * u + "px;line-height:1.3" }, e, '<div style="font-weight:700">' + BLOCK.esc(d.judul) + ' <span style="font-weight:500;opacity:.6;font-size:.85em">· ' + BLOCK.esc(d.aplikasi) + "</span></div><div style='opacity:.85'>" + BLOCK.esc(d.isi) + "</div>");
+    return e;
+  });
+  // jadwal tiba: tumpuk = makin cepat (deret geometri), kaskade = ritme tetap
+  var T = [], t = 0.5, dt = P.start_pause;
+  for (var i = 0; i < n; i++) { T.push(t); t += dt; if (P.mode !== "cascade") dt = Math.max(0.07, dt * P.acceleration); }
+  var tEnd = t + 0.3, ez = gsap.parseEase("power3.out"), ezB = gsap.parseEase("back.out(1.5)");
+  var kask = P.mode === "cascade";
+  if (kask) {
+    // seluruh tumpukan terangkat, kartu penutup masuk
+    var pn = BLOCK.el("div", { class: "blk-pn", style: "top:" + lh * 0.38 + "px;padding:0 " + 30 * u + "px" }, ls,
+      '<div style="font-size:' + 34 * u + 'px;font-weight:800;line-height:1.15;letter-spacing:-.01em">' + BLOCK.esc(P.outro_title) + '</div><div style="font-size:' + 18 * u + 'px;opacity:.8;margin:' + 14 * u + 'px 0 ' + 26 * u + 'px">' + BLOCK.esc(P.outro_sub) + '</div><span class="blk-btn" style="background:' + A + ';font-size:' + 18 * u + 'px;padding:' + 14 * u + 'px ' + 30 * u + 'px">' + BLOCK.esc(P.outro_button) + "</span>");
+    tl.fromTo(pn, { autoAlpha: 0, y: 80 * u, scale: 0.94 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.7, ease: "blockSpringSoft" }, tEnd + 0.35);
+    tl.to([jam, tg], { autoAlpha: 0, y: -60 * u, duration: 0.5, ease: "power2.in" }, tEnd);
+  }
+  BLOCK.onTime(tl, function (tt) {
+    var lift = kask ? ez(BLOCK.progress(tt, tEnd, tEnd + 0.7)) : 0;
+    C.forEach(function (e, i) {
+      var a = ezB(BLOCK.progress(tt, T[i], T[i] + 0.38)), pos = 0;
+      for (var j = i + 1; j < n; j++) pos += ez(BLOCK.progress(tt, T[j], T[j] + 0.32));
+      // makin dalam makin rapat: menara padat yang menegangkan
+      var y = 0, p = pos; for (var q = 0; p > 0; q++) { var st = (chh + gap) * Math.max(0.22, 1 - 0.16 * q); y += st * Math.min(1, p); p -= 1; }
+      var sc = Math.max(0.8, 1 - 0.025 * pos), jit = kask ? 0 : BLOCK.boil(tt, i + 3, 12) * 2.5 * u * BLOCK.progress(pos, 4, 8);
+      var yy = top + y - (1 - a) * 70 * u - lift * (lh * 0.9);
+      e.style.transform = "translate(" + (14 * u + jit).toFixed(1) + "px," + yy.toFixed(1) + "px) scale(" + (sc * (0.92 + 0.08 * a)).toFixed(4) + ")";
+      e.style.opacity = (BLOCK.clamp(a * 1.4, 0, 1) * (1 - lift)).toFixed(3);
+      e.style.filter = "brightness(" + Math.max(0.45, 1 - 0.07 * pos).toFixed(3) + ")";
+      e.style.zIndex = String(100 + i);
+    });
+  }, D);
+}, { font: true });
+</script>

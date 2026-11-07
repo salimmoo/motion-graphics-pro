@@ -1,0 +1,51 @@
+<!-- Block text/center-build · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="text/center-build" data-start="0" data-duration="5" data-track-index="10" class="blk blk-text-center-build">
+<script type="application/json" data-block-props>
+{"text": "Satu kata lalu *kalimat* utuh", "font": "Inter:wght@600;800", "size": 96, "weight": 800, "color": "#f5f3ee", "accent_color": "#ffcf4a", "position_y": 50, "width": 96, "align": "center", "word_pause": 0.45, "start": 0.3, "distance": 220, "word_duration": 0.6, "ease": "expo.out", "exit": "fade"}
+</script>
+<div class="blk-tk"><div class="blk-baris"></div></div>
+</div>
+<style>
+.blk-text-center-build {position:absolute;inset:0;pointer-events:none}
+.blk-text-center-build .blk-tk{position:absolute;left:50%;transform:translate(-50%,-50%);line-height:1.08}
+.blk-text-center-build .blk-kunci{color:var(--aksen)}
+.blk-text-center-build .blk-tk{text-align:center!important}
+.blk-text-center-build .blk-baris{display:inline-block;white-space:nowrap}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl;
+  var rata = { left: "left", right: "right" }[P.align] || "center";
+  function gayaTeks(el, px) {
+    el.style.cssText += ";top:" + P.position_y + "%;width:" + P.width + "%;color:" + P.color + ";--aksen:" + P.accent_color +
+      ";font-family:" + BLOCK.family(P.font) + ";font-weight:" + P.weight + ";font-size:" + Math.round((px || P.size) * k.s) + "px;text-align:" + rata;
+  }
+  // tunggu stylesheet Google Fonts + wajah font benar-benar termuat sebelum mengukur teks
+  function siapFont(spec) {
+    var ln = Array.prototype.slice.call(document.querySelectorAll('link[href*="fonts.googleapis"]'));
+    return Promise.all(ln.map(function (l) { return l.sheet ? 0 : new Promise(function (ok) { l.addEventListener("load", ok); l.addEventListener("error", ok); }); }))
+      .then(function () { return document.fonts && document.fonts.load ? document.fonts.load(spec || (P.weight + " 100px " + BLOCK.family(P.font))) : 0; })
+      .catch(function () {});
+  }
+  function markupKunci(s) { return BLOCK.esc(s).replace(/\*([^*]+)\*/g, '<span class="blk-kunci">$1</span>').replace(/\\n|\n/g, "<br>"); }
+  return siapFont().then(function () {
+  var el = k.root.querySelector(".blk-tk"), br = el.querySelector(".blk-baris");
+  gayaTeks(el);
+  var u = BLOCK.split(br, String(P.text).replace(/\\n|\n/g, " "), "words"), n = u.length;
+  var muat = k.w * 0.94 / Math.max(1, br.offsetWidth);
+  if (muat < 1) el.style.fontSize = Math.floor(P.size * k.s * muat) + "px";
+  var L0 = u[0].offsetLeft, tot = u[n - 1].offsetLeft + u[n - 1].offsetWidth - L0;
+  var geser = u.map(function (w) { return (tot - (w.offsetLeft + w.offsetWidth - L0)) / 2; });
+  var d = P.distance * k.s, dk = +P.word_duration;
+  BLOCK.initial(tl, br, { x: geser[0] });
+  u.forEach(function (w, j) {
+    var T = P.start + j * P.word_pause;
+    tl.fromTo(w, { opacity: 0, x: d }, { opacity: 1, x: 0, duration: dk, ease: P.ease }, T);
+    if (j) tl.to(br, { x: geser[j], duration: dk, ease: P.ease }, T);
+  });
+  var tE = k.dur - 0.55;
+  if (P.exit === "fade") tl.to(u, { opacity: 0, duration: 0.45, ease: "power2.in" }, tE + 0.05);
+  else if (P.exit === "up") tl.to(u, { opacity: 0, y: -40 * k.s, duration: 0.45, ease: "power2.in", stagger: 0.03 }, tE + 0.05 - 0.03 * (n - 1));
+  });
+}, { font: true });
+</script>

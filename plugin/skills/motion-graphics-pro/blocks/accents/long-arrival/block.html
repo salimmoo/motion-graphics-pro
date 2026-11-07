@@ -1,0 +1,45 @@
+<!-- Block accents/long-arrival · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="accents/long-arrival" data-start="0" data-duration="4" data-track-index="30" class="blk blk-accents-long-arrival">
+<script type="application/json" data-block-props>
+{"text": "Musim Baru", "sub": "tayang mulai Jumat", "direction": "left", "distance": 700, "steepness": 8, "exit_time": 0.8, "samples": 8, "shutter_angle": 180, "fps": 30, "color": "#f5f3ee", "font": "Inter:wght@600;800", "size": 170, "position_x": 50, "position_y": 48}
+</script>
+<div class="blk-lapis"></div>
+</div>
+<style>
+.blk-accents-long-arrival{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-accents-long-arrival .blk-lapis{position:absolute;inset:0;isolation:isolate}
+.blk-accents-long-arrival .blk-b{position:absolute;left:0;top:0;white-space:nowrap;will-change:transform,opacity}
+.blk-accents-long-arrival .blk-b b{display:block;font-weight:800;line-height:1;letter-spacing:-.02em}
+.blk-accents-long-arrival .blk-b span{display:block;margin-top:.6em;letter-spacing:.16em;text-transform:uppercase;opacity:.7;font-weight:600}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, lap = R.querySelector(".blk-lapis");
+  var proto = BLOCK.el("div", { class: "blk-b", style: "font-family:" + BLOCK.family(P.font) + ";color:" + P.color + ";text-align:center" });
+  BLOCK.el("b", { style: "font-size:" + (P.size * s).toFixed(1) + "px" }, proto).textContent = P.text;
+  if (P.sub) BLOCK.el("span", { style: "font-size:" + (P.size * 0.2 * s).toFixed(1) + "px" }, proto).textContent = P.sub;
+  var N = Math.max(1, P.samples | 0), cp = [];
+  for (var i = N - 1; i >= 1; i--) { var c = proto.cloneNode(true); lap.appendChild(c); cp[i] = c; }
+  lap.appendChild(proto); cp[0] = proto;
+  var bw = proto.offsetWidth, bh = proto.offsetHeight, cx = k.w * P.position_x / 100, cy = k.h * P.position_y / 100;
+  var v = { left: [-1, 0], right: [1, 0], top: [0, -1], bottom: [0, 1] }[P.direction] || [0, 0], skala = P.direction === "scale";
+  var D = P.distance * s, t0 = 0.1, tK = k.dur * P.exit_time, K = P.steepness, eo = gsap.parseEase("power3.in");
+  // tiba yang tidak pernah benar-benar mendarat: ~80% jarak di seperlima awal, sisanya merayap sampai keluar
+  function tiba(u) { return (1 - Math.exp(-K * u)) / (1 - Math.exp(-K)); }
+  function pose(t) {
+    var p = tiba(BLOCK.progress(t, t0, tK)), q = eo(BLOCK.progress(t, tK, k.dur - 0.05)), off = (1 - p) * D - q * D * 1.6;
+    // keluar meneruskan vektor kedatangan (arah gerak sama)
+    if (skala) return { x: 0, y: 0, sc: 0.55 + 0.45 * p + q * 1.2, op: Math.min(1, p * 4) * (1 - q) };
+    return { x: v[0] * off, y: v[1] * off, sc: 1, op: Math.min(1, p * 5) };
+  }
+  // blur rana: sampel pose dalam jendela rana, berbobot sama (lapisan ke-j beropasitas 1/(j+1))
+  var sh = (P.shutter_angle / 360) / P.fps;
+  BLOCK.onTime(tl, function (t) {
+    for (var j = 0; j < N; j++) {
+      var el = cp[N - 1 - j], p = pose(t - sh * j / Math.max(N - 1, 1));
+      el.style.transform = "translate(" + (cx - bw / 2 + p.x).toFixed(1) + "px," + (cy - bh / 2 + p.y).toFixed(1) + "px) scale(" + p.sc.toFixed(4) + ")";
+      el.style.opacity = (p.op / (j + 1)).toFixed(3);
+    }
+  }, k.dur);
+}, { font: true });
+</script>

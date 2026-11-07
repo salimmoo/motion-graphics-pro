@@ -1,0 +1,53 @@
+<!-- Block data/star-rating · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="data/star-rating" data-start="0" data-duration="4" data-track-index="10" class="blk blk-data-star-rating">
+<script type="application/json" data-block-props>
+{"value": 4.6, "max": 5, "decimals": 1, "label": "dari 2.481 ulasan pembeli", "show_number": true, "fill_duration": 1.8, "ease": "power2.inOut", "color": "#ffc53d", "empty_color": "rgba(255,255,255,0.14)", "text_color": "#f5f3ee", "font": "Inter:wght@500;800", "size": 120, "position_x": 50, "position_y": 50}
+</script>
+<div class="blk-w"><div class="blk-n"></div><div class="blk-row"></div><div class="blk-l"></div></div>
+</div>
+<style>
+.blk-data-star-rating{position:absolute;inset:0;pointer-events:none}
+.blk-data-star-rating .blk-w{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;white-space:nowrap}
+.blk-data-star-rating .blk-n{font-weight:800;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.blk-data-star-rating .blk-n small{font-size:.38em;font-weight:500;opacity:.55;margin-left:.15em;letter-spacing:0}
+.blk-data-star-rating .blk-row{display:flex}
+.blk-data-star-rating .blk-st{position:relative}
+.blk-data-star-rating .blk-st svg{position:absolute;inset:0;width:100%;height:100%}
+.blk-data-star-rating .blk-l{opacity:.65;font-weight:500;letter-spacing:.02em}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root;
+  function fmt(v, d) { var a = Math.abs(v).toFixed(d).split("."); a[0] = a[0].replace(/\B(?=(\d{3})+(?!\d))/g, "."); return (v < 0 ? "−" : "") + a[0] + (a[1] ? "," + a[1] : ""); }
+  var w = R.querySelector(".blk-w"), row = R.querySelector(".blk-row"), num = R.querySelector(".blk-n"), lab = R.querySelector(".blk-l");
+  var z = P.size * s, gap = z * 0.16, M = Math.max(1, P.max | 0);
+  w.style.cssText += ";left:" + P.position_x + "%;top:" + P.position_y + "%;color:" + P.text_color + ";font-family:" + BLOCK.family(P.font);
+  num.style.cssText += ";font-size:" + Math.round(z * 1.25) + "px;margin-bottom:" + Math.round(z * 0.3) + "px;display:" + (P.show_number ? "block" : "none");
+  lab.style.cssText += ";font-size:" + Math.round(z * 0.3) + "px;margin-top:" + Math.round(z * 0.32) + "px"; lab.textContent = P.label;
+  // bintang 5 sudut, bentuk sedikit membulat
+  var d = "M50 6 L62.4 36.2 L94.8 38.9 L70.1 60.1 L77.7 91.8 L50 74.6 L22.3 91.8 L29.9 60.1 L5.2 38.9 L37.6 36.2 Z";
+  var st = [];
+  for (var i = 0; i < M; i++) {
+    var e = BLOCK.el("div", { class: "blk-st", style: "width:" + z + "px;height:" + z + "px;margin:0 " + gap / 2 + "px" }, row);
+    var a = BLOCK.svg("svg", { viewBox: "0 0 100 100" }, e);
+    BLOCK.svg("path", { d: d, fill: P.empty_color, stroke: P.empty_color, "stroke-width": 6, "stroke-linejoin": "round" }, a);
+    var b = BLOCK.svg("svg", { viewBox: "0 0 100 100" }, e);
+    BLOCK.svg("path", { d: d, fill: P.color, stroke: P.color, "stroke-width": 6, "stroke-linejoin": "round" }, b);
+    st.push({ e: e, isi: b });
+  }
+  var t0 = 0.45, di = Math.min(P.fill_duration, k.dur - 1.2), ez = gsap.parseEase(P.ease), nilai = BLOCK.clamp(+P.value, 0, M);
+  tl.fromTo(st.map(function (o) { return o.e; }), { opacity: 0, y: 20 * s, scale: 0.6 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(2)", stagger: 0.05 }, 0);
+  tl.fromTo([num, lab], { opacity: 0, y: 14 * s }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out", stagger: 0.1 }, 0.1);
+  BLOCK.onTime(tl, function (t) {
+    var r = nilai * ez(BLOCK.progress(t, t0, t0 + di));
+    st.forEach(function (o, i) {
+      var f = BLOCK.clamp(r - i, 0, 1);    // bintang terakhir tetap pecahan
+      o.isi.style.clipPath = "inset(0 " + ((1 - f) * 100).toFixed(2) + "% 0 0)";
+      var bump = Math.exp(-Math.pow((r - (i + 1)) * 5, 2)) * (r >= i + 0.5 ? 1 : 0);
+      o.isi.style.transform = "scale(" + (1 + 0.14 * bump).toFixed(3) + ")";
+    });
+    num.innerHTML = fmt(r, P.decimals) + "<small>/ " + M + "</small>";
+  }, k.dur);
+  tl.to(w, { opacity: 0, y: -16 * s, duration: 0.4, ease: "power2.in" }, k.dur - 0.45);
+}, { font: true });
+</script>

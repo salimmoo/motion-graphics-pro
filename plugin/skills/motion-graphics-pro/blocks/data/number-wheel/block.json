@@ -1,0 +1,162 @@
+{
+ "id": "data/number-wheel",
+ "name": "Number Wheel",
+ "name_id": "Roda Angka",
+ "category": "data",
+ "description": {
+  "id": "Penghitung digit bergulir untuk metrik, harga, skor, dan papan angka. Gaya odometer (digit atas ikut bergulir saat digit bawah melimpah) atau mesin slot (setiap digit berputar lalu berhenti berurutan), lengkap dengan titik ribuan dan koma desimal.",
+  "en": "A rolling digit counter for metrics, prices, counts and scoreboards. Odometer style (higher digits roll on carry) or slot style (each digit spins and stops in sequence), with Indonesian separators."
+ },
+ "tags": [
+  "data",
+  "angka",
+  "odometer",
+  "digit",
+  "slot",
+  "skor",
+  "harga",
+  "counter",
+  "number",
+  "wheel"
+ ],
+ "props": {
+  "style": {
+   "default": "odometer",
+   "type": "enum",
+   "options": [
+    "odometer",
+    "slot"
+   ],
+   "aliases": [
+    "gaya"
+   ]
+  },
+  "from": {
+   "default": 0,
+   "type": "number",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": 248750,
+   "type": "number",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "decimals": {
+   "default": 0,
+   "type": "number",
+   "aliases": [
+    "desimal"
+   ]
+  },
+  "prefix": {
+   "default": "",
+   "type": "text",
+   "hint": "Mis. Rp",
+   "aliases": [
+    "awalan"
+   ]
+  },
+  "suffix": {
+   "default": "",
+   "type": "text",
+   "aliases": [
+    "akhiran"
+   ]
+  },
+  "label": {
+   "default": "unduhan sejak peluncuran",
+   "type": "text"
+  },
+  "count_duration": {
+   "default": 2.4,
+   "type": "number",
+   "hint": "detik",
+   "aliases": [
+    "durasi_hitung"
+   ]
+  },
+  "ease": {
+   "default": "power2.inOut",
+   "type": "ease"
+  },
+  "tile": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Setiap digit di dalam ubin",
+   "aliases": [
+    "ubin"
+   ]
+  },
+  "color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "tile_color": {
+   "default": "rgba(255,255,255,0.07)",
+   "type": "color",
+   "aliases": [
+    "warna_ubin"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;600;800",
+   "type": "font"
+  },
+  "size": {
+   "default": 180,
+   "type": "number",
+   "hint": "px pada 1080",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "weight": {
+   "default": 800,
+   "type": "number",
+   "aliases": [
+    "berat"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 48,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_y"
+   ]
+  }
+ },
+ "duration": 4,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "data/roda-angka",
+  "number-wheel"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@500;600;800"
+  ]
+ }
+}

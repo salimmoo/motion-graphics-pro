@@ -1,0 +1,239 @@
+{
+ "id": "data/line-chart",
+ "name": "Line Chart",
+ "name_id": "Grafik Garis",
+ "category": "data",
+ "description": {
+  "id": "Satu atau dua garis data tergambar dari kiri ke kanan; titik meletup saat dilewati dan label nilai menumpang di ujung garis sambil menghitung. Sumbu redup, label sumbu x, dan legenda titik warna. Mode turun: satu metrik menurun, angka besar ikut menghitung mundur dan latar meredup serempak.",
+  "en": "One or two SVG series draw on with dots popping and value labels riding the draw front; dim axis, x labels and colour-dot legend. Decline mode: a metric line draws downward while a big number counts down and the background darkens in lockstep."
+ },
+ "tags": [
+  "data",
+  "grafik",
+  "garis",
+  "line-chart",
+  "tren",
+  "editorial",
+  "penurunan",
+  "line",
+  "chart"
+ ],
+ "props": {
+  "mode": {
+   "default": "line",
+   "type": "enum",
+   "options": [
+    "line",
+    "down"
+   ],
+   "hint": "turun = hanya seri pertama, angka besar + latar meredup",
+   "option_aliases": {
+    "garis": "line",
+    "turun": "down"
+   }
+  },
+  "title": {
+   "default": "Kunjungan naik sejak aplikasi baru",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "subtitle": {
+   "default": "Rata-rata kunjungan harian, dalam ribuan",
+   "type": "text",
+   "aliases": [
+    "subjudul"
+   ]
+  },
+  "label": {
+   "default": [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "Mei",
+    "Jun",
+    "Jul",
+    "Agu"
+   ],
+   "type": "list",
+   "hint": "Label sumbu x"
+  },
+  "series": {
+   "default": [
+    {
+     "nama": "Aplikasi",
+     "nilai": [
+      12,
+      14.5,
+      13.8,
+      18.2,
+      22.6,
+      27.1,
+      31.4,
+      36.8
+     ],
+     "warna": "#ff7a45"
+    },
+    {
+     "nama": "Situs web",
+     "nilai": [
+      21,
+      20.4,
+      22.1,
+      21.3,
+      20.2,
+      19.6,
+      18.8,
+      18.1
+     ],
+     "warna": "#5aa9e6"
+    }
+   ],
+   "type": "list",
+   "hint": "[{nama, nilai[], warna}] maks dua seri",
+   "aliases": [
+    "seri"
+   ]
+  },
+  "prefix": {
+   "default": "",
+   "type": "text",
+   "aliases": [
+    "awalan"
+   ]
+  },
+  "suffix": {
+   "default": " rb",
+   "type": "text",
+   "aliases": [
+    "akhiran"
+   ]
+  },
+  "decimals": {
+   "default": 1,
+   "type": "number",
+   "aliases": [
+    "desimal"
+   ]
+  },
+  "draw_duration": {
+   "default": 2.6,
+   "type": "number",
+   "hint": "Lama garis tergambar (detik)",
+   "aliases": [
+    "durasi_gambar"
+   ]
+  },
+  "ease": {
+   "default": "power2.inOut",
+   "type": "ease"
+  },
+  "fill": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Isian area tipis di bawah garis",
+   "aliases": [
+    "isi"
+   ]
+  },
+  "dark": {
+   "default": 0.55,
+   "type": "number",
+   "hint": "Peredupan latar di akhir (mode turun)",
+   "aliases": [
+    "gelap"
+   ]
+  },
+  "text_color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "accent_color": {
+   "default": "#ff5d5d",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "guide_color": {
+   "default": "rgba(255,255,255,0.16)",
+   "type": "color",
+   "aliases": [
+    "warna_bantu"
+   ]
+  },
+  "dot_color": {
+   "default": "#14151f",
+   "type": "color",
+   "hint": "Tepi titik & teks label",
+   "aliases": [
+    "warna_titik"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;600;700;800",
+   "type": "font"
+  },
+  "font2": {
+   "default": "Source Serif 4:wght@600;700",
+   "type": "font"
+  },
+  "left": {
+   "default": 9,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "kiri"
+   ]
+  },
+  "top": {
+   "default": 9,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "atas"
+   ]
+  },
+  "width": {
+   "default": 80,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "height": {
+   "default": 80,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "tinggi"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "1:1",
+  "4:5",
+  "9:16"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "data/garis",
+  "mk-line-graph",
+  "decline-chart"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@400;600;700;800",
+   "Source Serif 4:wght@600;700"
+  ]
+ }
+}

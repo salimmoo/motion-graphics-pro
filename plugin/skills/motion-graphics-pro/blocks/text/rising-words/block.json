@@ -1,0 +1,207 @@
+{
+ "id": "text/rising-words",
+ "name": "Rising Words",
+ "name_id": "Kata Naik Bertahap",
+ "category": "text",
+ "description": {
+  "id": "Kata atau huruf muncul satu per satu: naik dari bawah, dari kabur ke tajam, lalu mendarat lembut. Satu blok untuk fade-up bertahap, per kata, per huruf, dan crossfade tenang.",
+  "en": "Words or letters rise in one by one, blur to sharp, with a soft landing. Covers staggered fade-up, per-word rise, letter-by-letter and calm crossfade."
+ },
+ "tags": [
+  "teks",
+  "kinetik",
+  "stagger",
+  "fade-up",
+  "per-kata",
+  "per-huruf",
+  "reveal",
+  "blur",
+  "text",
+  "rising",
+  "words"
+ ],
+ "props": {
+  "text": {
+   "default": "Gerak yang *jelas* membuat pesan mudah diingat",
+   "type": "text",
+   "hint": "Teks; *kata* = kata kunci berwarna, \\n = baris baru",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "unit": {
+   "default": "words",
+   "type": "enum",
+   "options": [
+    "words",
+    "letters",
+    "row"
+   ],
+   "aliases": [
+    "satuan"
+   ],
+   "option_aliases": {
+    "kata": "words",
+    "huruf": "letters",
+    "baris": "row"
+   }
+  },
+  "direction": {
+   "default": "up",
+   "type": "enum",
+   "options": [
+    "up",
+    "down",
+    "left",
+    "right",
+    "still"
+   ],
+   "aliases": [
+    "arah"
+   ],
+   "option_aliases": {
+    "naik": "up",
+    "turun": "down",
+    "kiri": "left",
+    "kanan": "right",
+    "diam": "still"
+   }
+  },
+  "distance": {
+   "default": 60,
+   "type": "number",
+   "hint": "Jarak tempuh (px pada 1080)",
+   "aliases": [
+    "jarak"
+   ]
+  },
+  "blur": {
+   "default": 10,
+   "type": "number",
+   "hint": "Blur awal (px); 0 = tanpa blur"
+  },
+  "pause": {
+   "default": 0.08,
+   "type": "number",
+   "hint": "Jeda antar unit (detik)",
+   "aliases": [
+    "jeda"
+   ]
+  },
+  "enter_duration": {
+   "default": 0.7,
+   "type": "number",
+   "aliases": [
+    "durasi_masuk"
+   ]
+  },
+  "ease": {
+   "default": "power3.out",
+   "type": "ease"
+  },
+  "exit": {
+   "default": "fade",
+   "type": "enum",
+   "options": [
+    "fade",
+    "up",
+    "no"
+   ],
+   "aliases": [
+    "keluar"
+   ],
+   "option_aliases": {
+    "pudar": "fade",
+    "naik": "up",
+    "tidak": "no"
+   }
+  },
+  "color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "keyword_color": {
+   "default": "#ffcf4a",
+   "type": "color",
+   "aliases": [
+    "warna_kunci"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;700;800",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "size": {
+   "default": 96,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "weight": {
+   "default": 800,
+   "type": "number",
+   "aliases": [
+    "berat"
+   ]
+  },
+  "align": {
+   "default": "center",
+   "type": "enum",
+   "options": [
+    "left",
+    "center",
+    "right"
+   ],
+   "aliases": [
+    "rata"
+   ],
+   "option_aliases": {
+    "kiri": "left",
+    "tengah": "center",
+    "kanan": "right"
+   }
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi vertikal (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "width": {
+   "default": 80,
+   "type": "number",
+   "hint": "Lebar kotak teks (%)",
+   "aliases": [
+    "lebar"
+   ]
+  }
+ },
+ "duration": 4,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "teks/kata-naik",
+  "staggered-fade-up",
+  "per-word-rise",
+  "per-word-crossfade",
+  "bottom-up-letters",
+  "top-down-letters",
+  "text-stagger"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

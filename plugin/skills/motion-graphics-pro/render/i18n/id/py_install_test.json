@@ -1,0 +1,10 @@
+{
+ "mgp install smoke test": "uji asap mgp install",
+ "one sentence with the built-in Chatterbox voice": "satu kalimat dengan suara bawaan Chatterbox",
+ "text to speak (default: a short test sentence in --lang)": "teks yang diucapkan (bawaan: kalimat uji pendek dalam --lang)",
+ "installed modules + torch version": "modul terpasang + versi torch",
+ "the model did not load conds.pt (built-in voice); the chatterbox download is incomplete": "model tidak memuat conds.pt (suara bawaan); unduhan chatterbox belum lengkap",
+ "the {} model is not installed ({}); the test does not download silently: mgp install cutout": "model {} belum terpasang ({}); uji tidak mengunduh diam-diam: mgp install cutout",
+ "cutout test: the subject was not separated (alpha inside {}, corner {})": "uji cutout: subjek tidak terpisah (alpha di dalam {}, sudut {})",
+ "rembg U2-Net on a generated test picture": "rembg U2-Net pada gambar uji buatan"
+}

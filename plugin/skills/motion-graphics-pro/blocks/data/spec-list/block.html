@@ -1,0 +1,53 @@
+<!-- Block data/spec-list · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="data/spec-list" data-start="0" data-duration="5" data-track-index="10" class="blk blk-data-spec-list">
+<script type="application/json" data-block-props>
+{"title": "Spesifikasi utama", "item": ["Baterai: 5.000 mAh", "Layar: 6,7 inci", "Berat: 189 g", "Pengisian cepat: 45 W", "Tahan air: IP68"], "scheme": "dark", "panel": true, "pause": 0.22, "accent_color": "#ffb547", "font": "Inter:wght@400;600;700", "size": 38, "position_x": 8, "position_y": 50, "width": 42}
+</script>
+<div class="blk-p"><div class="blk-j"></div><div class="blk-list"></div></div>
+</div>
+<style>
+.blk-data-spec-list{position:absolute;inset:0;pointer-events:none}
+.blk-data-spec-list .blk-p{position:absolute;transform:translateY(-50%);box-sizing:border-box}
+.blk-data-spec-list .blk-j{font-weight:600;letter-spacing:.16em;text-transform:uppercase}
+.blk-data-spec-list .blk-r{position:relative;display:flex;align-items:center}
+.blk-data-spec-list .blk-r svg{flex:none}
+.blk-data-spec-list .blk-kunci{font-weight:700;white-space:nowrap}
+.blk-data-spec-list .blk-nilai{margin-left:auto;padding-left:1em;font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
+.blk-data-spec-list .blk-gs{position:absolute;left:0;right:0;bottom:0;height:0}
+.blk-data-spec-list .blk-gs i{position:absolute;left:0;top:0;height:100%;width:100%;transform-origin:left center}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, fs = function (v) { return Math.round(v * s) + "px"; };
+  var terang = P.scheme === "light";
+  var C = terang ? { teks: "#16181d", redup: "rgba(22,24,29,.6)", garis: "rgba(22,24,29,.12)", panel: "rgba(255,255,255,.94)" }
+                 : { teks: "#f5f3ee", redup: "rgba(245,243,238,.62)", garis: "rgba(255,255,255,.16)", panel: "rgba(14,16,24,.7)" };
+  var p = R.querySelector(".blk-p"), J = R.querySelector(".blk-j"), list = R.querySelector(".blk-list");
+  p.style.cssText += ";left:" + P.position_x + "%;top:" + P.position_y + "%;width:" + P.width + "%;color:" + C.teks + ";font-family:" + BLOCK.family(P.font) + ";font-size:" + fs(P.size) +
+    (P.panel ? ";background:" + C.panel + ";padding:" + fs(50) + " " + fs(56) + ";border-radius:" + fs(26) : "");
+  J.style.cssText += ";font-size:" + fs(P.size * 0.62) + ";color:" + P.accent_color + ";margin-bottom:" + fs(20); J.textContent = P.title;
+  var t0 = 0.35, jd = P.pause;
+  tl.fromTo(J, { opacity: 0, x: -24 * s }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 0.1);
+  if (P.panel) tl.fromTo(p, { opacity: 0 }, { opacity: 1, duration: 0.45 }, 0);
+  (P.item || []).forEach(function (it, i) {
+    var a = String(it).split(/:\s*/), kunci = a[0], nilai = a.slice(1).join(": ");
+    var r = BLOCK.el("div", { class: "blk-r", style: "padding:" + fs(P.size * 0.62) + " 0" }, list);
+    var ic = P.size * 1.05 * s, sv = BLOCK.svg("svg", { width: ic, height: ic, viewBox: "0 0 24 24", style: "margin-right:" + fs(P.size * 0.6) }, r);
+    var cir = BLOCK.svg("circle", { cx: 12, cy: 12, r: 10.5, fill: "none", stroke: P.accent_color, "stroke-width": 1.6 }, sv);
+    var cek = BLOCK.svg("path", { d: "M7.4 12.4 L10.6 15.4 L16.8 8.8", fill: "none", stroke: P.accent_color, "stroke-width": 2.2, "stroke-linecap": "round", "stroke-linejoin": "round" }, sv);
+    var Lc = BLOCK.prepareStroke(cir), Lk = BLOCK.prepareStroke(cek);
+    BLOCK.el("span", { class: "blk-kunci" }, r).textContent = kunci;
+    if (nilai) BLOCK.el("span", { class: "blk-nilai", style: "color:" + C.redup }, r).textContent = nilai;
+    var gs = BLOCK.el("div", { class: "blk-gs", style: "border-bottom:1px solid " + C.garis }, r);
+    var sw = BLOCK.el("i", { style: "height:" + fs(3) + ";top:" + fs(-1) + ";background:" + P.accent_color }, gs);
+    var t = t0 + i * jd;
+    tl.fromTo(r, { opacity: 0, x: -40 * s }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.out" }, t);
+    tl.fromTo(cir, { strokeDashoffset: Lc }, { strokeDashoffset: 0, duration: 0.45, ease: "power2.out" }, t + 0.05);
+    tl.fromTo(cek, { strokeDashoffset: Lk }, { strokeDashoffset: 0, duration: 0.3, ease: "power2.out" }, t + 0.3);
+    // sapuan garis aksen: masuk dari kiri, lalu surut ke kanan meninggalkan garis tipis
+    tl.fromTo(sw, { scaleX: 0, transformOrigin: "left center" }, { scaleX: 1, duration: 0.5, ease: "power3.inOut" }, t + 0.1)
+      .to(sw, { scaleX: 0, transformOrigin: "right center", duration: 0.5, ease: "power3.inOut" }, t + 0.65);
+  });
+  tl.to(p, { opacity: 0, x: -20 * s, duration: 0.4, ease: "power2.in" }, k.dur - 0.45);
+}, { font: true });
+</script>

@@ -1,0 +1,61 @@
+<!-- Block gallery/cuboid-carousel · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="gallery/cuboid-carousel" data-start="0" data-duration="6" data-track-index="8" class="blk blk-gallery-cuboid-carousel">
+<script type="application/json" data-block-props>
+{"image": [], "label": ["Rencana", "Desain", "Bangun", "Uji", "Rilis", "Ukur", "Ulang"], "count": 7, "width": 270, "height": 350, "thickness": 110, "distance": 430, "amplitude": 70, "wavelength": 1500, "wave_period": 3, "period": 1.5, "swing": 0.8, "tilt": -16, "perspective": 1600, "side_color": "#1c2033", "seed": 6}
+</script>
+<div class="blk-adegan"></div>
+</div>
+<style>
+.blk-gallery-cuboid-carousel{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-gallery-cuboid-carousel .blk-adegan{position:absolute;inset:0;transform-style:preserve-3d}
+.blk-gallery-cuboid-carousel .blk-kub{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d}
+.blk-gallery-cuboid-carousel .blk-sisi{position:absolute;box-sizing:border-box;overflow:hidden}
+.blk-gallery-cuboid-carousel .blk-no{position:absolute;left:9%;bottom:7%;font:800 calc(var(--kw)*.2px)/1 "Inter",system-ui,sans-serif;color:rgba(255,255,255,.95)}
+.blk-gallery-cuboid-carousel .blk-lb{position:absolute;left:9%;top:8%;font:700 calc(var(--kw)*.075px)/1.1 "Inter",system-ui,sans-serif;color:rgba(255,255,255,.9);text-transform:uppercase;letter-spacing:.14em}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, w = k.w, sc = k.root.querySelector(".blk-adegan");
+  sc.style.perspective = P.perspective * k.s + "px";
+  var N = Math.max(3, Math.round(P.count)), W = P.width * k.s, H = P.height * k.s, D = P.thickness * k.s, gap = P.distance * k.s;
+  var rad = 22 * k.s;
+  k.root.style.setProperty("--kw", W);
+  var PAL = [["#ff9a62", "#d9465f"], ["#7ee0d6", "#2d6cdf"], ["#ffd36e", "#ef7b45"], ["#b69cff", "#5b3fd1"], ["#a8e48a", "#2f8f6a"], ["#ff9cc2", "#a23d8a"], ["#93d8ff", "#3150a8"], ["#f6c28b", "#8a4b2e"]];
+  var POLA = ["radial-gradient(circle at 72% 28%,rgba(255,255,255,.4) 0 14%,transparent 15%)", "repeating-linear-gradient(135deg,rgba(255,255,255,.14) 0 7%,transparent 7% 14%)",
+    "radial-gradient(rgba(255,255,255,.3) 14%,transparent 16%) 0 0/16% 12%", "linear-gradient(170deg,transparent 58%,rgba(0,0,0,.2) 58%)"];
+  var g = P.image || [], off = k.random.int(0, 7), kub = [];
+  // sisi bevel: tepi membulat + kilau tepi (inset) sehingga kubus terasa dipahat
+  var bevel = "inset 0 0 0 " + 2 * k.s + "px rgba(255,255,255,.14),inset 0 " + 10 * k.s + "px " + 18 * k.s + "px rgba(255,255,255,.12),inset 0 -" + 10 * k.s + "px " + 18 * k.s + "px rgba(0,0,0,.25)";
+  function sisi(induk, gw, gh, tr, bg) {
+    return BLOCK.el("div", { class: "blk-sisi", style: "left:" + -gw / 2 + "px;top:" + -gh / 2 + "px;width:" + gw + "px;height:" + gh + "px;border-radius:" + rad + "px;transform:" + tr + ";background:" + bg + ";box-shadow:" + bevel }, induk);
+  }
+  for (var i = 0; i < N; i++) {
+    var p = PAL[(i + off) % PAL.length], b = BLOCK.el("div", { class: "blk-kub" }, sc);
+    var tepi = "linear-gradient(180deg," + BLOCK.mix(p[1], P.side_color, 0.35) + "," + BLOCK.mix(p[1], P.side_color, 0.7) + ")";
+    sisi(b, W, H, "rotateY(180deg) translateZ(" + D / 2 + "px)", P.side_color);
+    sisi(b, D, H, "rotateY(90deg) translateZ(" + W / 2 + "px)", tepi);
+    sisi(b, D, H, "rotateY(-90deg) translateZ(" + W / 2 + "px)", tepi);
+    sisi(b, W, D, "rotateX(90deg) translateZ(" + H / 2 + "px)", "linear-gradient(90deg," + BLOCK.mix(p[0], "#ffffff", 0.2) + "," + p[0] + ")");
+    sisi(b, W, D, "rotateX(-90deg) translateZ(" + H / 2 + "px)", BLOCK.mix(p[1], "#000000", 0.5));
+    var f = sisi(b, W, H, "translateZ(" + D / 2 + "px)", g.length ? "center/cover no-repeat url('" + g[i % g.length] + "')" : POLA[i % POLA.length] + ",linear-gradient(150deg," + p[0] + "," + p[1] + ")");
+    if (!g.length) BLOCK.el("span", { class: "blk-no" }, f, ("0" + (i + 1)).slice(-2));
+    if (P.label && P.label[i]) BLOCK.el("span", { class: "blk-lb" }, f, BLOCK.esc(P.label[i]));
+    kub.push(b);
+  }
+  k.tl.fromTo(k.root, { opacity: 1 }, { opacity: 0, duration: 0.45, ease: "power2.in" }, k.dur - 0.5);
+  function ayun(t) { var u = t / P.period, n = Math.floor(u), q = u - n; return n + q + P.swing * Math.sin(2 * Math.PI * q) / (2 * Math.PI); }
+  var L = P.wavelength * k.s, A = P.amplitude * k.s, span = N * gap;
+  BLOCK.onTime(k.tl, function (t) {
+    var geser = ayun(t) * gap, ph = 2 * Math.PI * t / P.wave_period;
+    var masuk = 1 - Math.pow(1 - BLOCK.clamp(t / 1.1, 0, 1), 3);
+    for (var i = 0; i < N; i++) {
+      var x = ((i * gap - geser) % span + span) % span - span / 2 + gap / 2;
+      var y = A * Math.sin(2 * Math.PI * x / L - ph), dy = A * 2 * Math.PI / L * Math.cos(2 * Math.PI * x / L - ph);
+      var pusat = Math.max(0, 1 - Math.abs(x) / (gap * 1.5)), z = -Math.abs(x) * 0.35 + pusat * 90 * k.s;
+      var rz = Math.atan(dy) * 180 / Math.PI * 0.7, ry = -x / w * 38, rx = P.tilt + 10 * Math.cos(2 * Math.PI * x / L - ph);
+      kub[i].style.transform = "translate3d(" + x.toFixed(1) + "px," + (y + (1 - masuk) * 500 * k.s).toFixed(1) + "px," + z.toFixed(1) + "px) rotateX(" + rx.toFixed(2) + "deg) rotateY(" + ry.toFixed(2) + "deg) rotateZ(" + rz.toFixed(2) + "deg)";
+      kub[i].style.visibility = Math.abs(x) > span / 2 - gap * 0.3 ? "hidden" : "visible";
+    }
+  }, k.dur);
+});
+</script>

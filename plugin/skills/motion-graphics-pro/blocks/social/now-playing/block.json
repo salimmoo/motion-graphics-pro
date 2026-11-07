@@ -1,0 +1,149 @@
+{
+ "id": "social/now-playing",
+ "name": "Now Playing",
+ "name_id": "Kartu Sedang Diputar",
+ "category": "social",
+ "description": {
+  "id": "Kartu pemutar musik generik: sampul album buatan yang bergerak pelan, judul lagu dan artis, ekualiser kecil, bilah kemajuan dan waktu yang berjalan mengikuti timeline, serta tombol kendali.",
+  "en": "Generic now-playing music card: animated generated album art, song title and artist, mini equaliser, timeline-driven progress bar and time, and playback controls."
+ },
+ "tags": [
+  "sosial",
+  "musik",
+  "pemutar",
+  "now-playing",
+  "lagu",
+  "kartu",
+  "ui",
+  "social",
+  "now",
+  "playing"
+ ],
+ "props": {
+  "title": {
+   "default": "Senja di Pelabuhan",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "artist": {
+   "default": "Kala Biru",
+   "type": "text",
+   "aliases": [
+    "artis"
+   ]
+  },
+  "top_label": {
+   "default": "Sedang diputar",
+   "type": "text",
+   "aliases": [
+    "label_atas"
+   ]
+  },
+  "song_length": {
+   "default": 222,
+   "type": "number",
+   "hint": "Panjang lagu (detik)",
+   "aliases": [
+    "panjang_lagu"
+   ]
+  },
+  "start_position": {
+   "default": 64,
+   "type": "number",
+   "hint": "Posisi putar saat blok mulai (detik)",
+   "aliases": [
+    "posisi_awal"
+   ]
+  },
+  "accent_color": {
+   "default": "#1ed760",
+   "type": "color",
+   "hint": "Warna ekualiser",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "cover1": {
+   "default": "#ff7a59",
+   "type": "color",
+   "hint": "Warna atas sampul",
+   "aliases": [
+    "sampul1"
+   ]
+  },
+  "cover2": {
+   "default": "#5b2a86",
+   "type": "color",
+   "hint": "Warna bawah sampul",
+   "aliases": [
+    "sampul2"
+   ]
+  },
+  "theme": {
+   "default": "dark",
+   "type": "enum",
+   "options": [
+    "dark",
+    "light"
+   ],
+   "aliases": [
+    "tema"
+   ],
+   "option_aliases": {
+    "gelap": "dark",
+    "terang": "light"
+   }
+  },
+  "position": {
+   "default": "bottom-left",
+   "type": "enum",
+   "options": [
+    "bottom-left",
+    "bottom-right",
+    "center",
+    "top-left"
+   ],
+   "aliases": [
+    "posisi"
+   ],
+   "option_aliases": {
+    "kiri-bawah": "bottom-left",
+    "kanan-bawah": "bottom-right",
+    "tengah": "center",
+    "kiri-atas": "top-left"
+   }
+  },
+  "width": {
+   "default": 760,
+   "type": "number",
+   "hint": "Lebar kartu (px pada 1080)",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;700;800",
+   "type": "font"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "sosial/sedang-diputar",
+  "spotify-card"
+ ],
+ "example": {
+  "bg": "photo",
+  "font": [
+   "Inter:wght@400;500;700;800"
+  ]
+ }
+}

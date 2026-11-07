@@ -1,0 +1,124 @@
+{
+ "id": "backgrounds/lcd-board",
+ "name": "LCD Board",
+ "name_id": "Papan LCD Kertas",
+ "category": "backgrounds",
+ "description": {
+  "id": "Papan kertas bertekstur ala layar LCD: scanline yang hanyut pelan, kisi piksel opsional, butir statis, dan teks yang masuk dari kabur ke fokus dengan judul berpinggiran kromatik.",
+  "en": "A textured paper LCD board: slowly drifting scanlines, optional pixel grid, static grain, and text that enters blur-to-focus with a chromatic-fringe title."
+ },
+ "tags": [
+  "latar",
+  "background",
+  "lcd",
+  "kertas",
+  "scanline",
+  "retro",
+  "judul",
+  "tekstur",
+  "kromatik",
+  "backgrounds",
+  "board"
+ ],
+ "props": {
+  "label": {
+   "default": "SIARAN 08",
+   "type": "text"
+  },
+  "title": {
+   "default": "Catatan Malam",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "subtitle": {
+   "default": "Cerita kecil tentang cahaya kota",
+   "type": "text",
+   "aliases": [
+    "subjudul"
+   ]
+  },
+  "font": {
+   "default": "Space Mono:wght@400;700",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "size": {
+   "default": 170,
+   "type": "number",
+   "hint": "Ukuran judul (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "paper_color": {
+   "default": "#e7e1cf",
+   "type": "color",
+   "aliases": [
+    "warna_kertas"
+   ]
+  },
+  "text_color": {
+   "default": "#1c1a16",
+   "type": "color",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "accent_color": {
+   "default": "#e2412b",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "fringe_color1": {
+   "default": "#ff2a55",
+   "type": "color",
+   "aliases": [
+    "warna_fringe1"
+   ]
+  },
+  "fringe_color2": {
+   "default": "#00b8ff",
+   "type": "color",
+   "aliases": [
+    "warna_fringe2"
+   ]
+  },
+  "pixel_grid": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "grid_piksel"
+   ]
+  },
+  "scan_strength": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Kepekatan scanline (0-1)",
+   "aliases": [
+    "kekuatan_scan"
+   ]
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "latar/papan-lcd",
+  "yt-lcd-background"
+ ],
+ "example": {
+  "bg": "empty",
+  "font": [
+   "Space Mono:wght@400;700"
+  ]
+ }
+}

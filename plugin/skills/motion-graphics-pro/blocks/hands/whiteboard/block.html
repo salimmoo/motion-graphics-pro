@@ -1,0 +1,68 @@
+<!-- Block hands/whiteboard · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="hands/whiteboard" data-start="0" data-duration="6" data-track-index="12" class="blk blk-hands-whiteboard">
+<script type="application/json" data-block-props>
+{"sketch": "lamp", "stroke": [], "color": "#1f2a44", "accent_color": "#e4572e", "thickness": 7, "speed": 900, "lift_pause": 0.12, "start": 0.4, "pen": true, "pen_color": "#2d6cdf", "scale": 0.82, "board": false}
+</script>
+<svg class="blk-svg" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid meet"><g class="blk-tinta"></g><g class="blk-pena"></g></svg>
+</div>
+<style>
+.blk-hands-whiteboard{position:absolute;inset:0;pointer-events:none}
+.blk-hands-whiteboard .blk-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, svg = k.root.querySelector(".blk-svg"), gi = svg.querySelector(".blk-tinta"), gp = svg.querySelector(".blk-pena");
+  // sketsa bawaan dalam ruang 1000x700; {d, aksen} = goresan aksen memakai warna_aksen
+  var SK = {
+    lamp: [{ d: "M430 470 C 330 420 310 260 390 190 C 450 135 550 135 610 190 C 690 260 670 420 570 470" }, { d: "M430 470 L 432 520 L 568 520 L 570 470" },
+      { d: "M440 545 L 560 545" }, { d: "M455 570 L 545 570" }, { d: "M470 470 L 470 380 L 490 340 L 510 380 L 530 340 L 530 470", aksen: 1 },
+      { d: "M500 95 L 500 45", aksen: 1 }, { d: "M650 140 L 690 105", aksen: 1 }, { d: "M350 140 L 310 105", aksen: 1 }, { d: "M720 260 L 775 250", aksen: 1 }, { d: "M280 260 L 225 250", aksen: 1 }],
+    flow: [{ d: "M110 300 L 290 300 L 290 410 L 110 410 Z" }, { d: "M310 355 C 350 350 370 350 405 355" }, { d: "M385 338 L 408 355 L 385 372" },
+      { d: "M500 270 L 590 355 L 500 440 L 410 355 Z" }, { d: "M600 355 C 640 350 660 350 695 355" }, { d: "M675 338 L 698 355 L 675 372" },
+      { d: "M800 355 m -90 0 a 90 75 0 1 0 180 0 a 90 75 0 1 0 -180 0" }, { d: "M765 360 L 790 388 L 840 320", aksen: 1 }, { d: "M130 470 C 300 500 700 500 870 470", aksen: 1 }],
+    rocket: [{ d: "M500 90 C 590 170 610 330 580 470 L 420 470 C 390 330 410 170 500 90 Z" }, { d: "M500 250 m -38 0 a 38 38 0 1 0 76 0 a 38 38 0 1 0 -76 0", aksen: 1 },
+      { d: "M425 400 L 360 500 L 430 470" }, { d: "M575 400 L 640 500 L 570 470" }, { d: "M450 490 L 470 560 L 500 520 L 530 580 L 550 490", aksen: 1 },
+      { d: "M330 250 L 330 330" }, { d: "M670 220 L 670 320" }, { d: "M300 380 L 300 420" }]
+  };
+  var list = (P.stroke && P.stroke.length ? P.stroke : SK[P.sketch] || SK.lamp);
+  var sc = P.scale, g0 = "translate(" + 500 * (1 - sc) + " " + 350 * (1 - sc) + ") scale(" + sc + ")";
+  gi.setAttribute("transform", g0); gp.setAttribute("transform", g0);
+  if (P.board) BLOCK.svg("rect", { x: 20, y: 20, width: 960, height: 660, rx: 18, fill: "#fbfbf8", stroke: "#c9ccd3", "stroke-width": 10 }, gi);
+  // waktu terukur: lama goresan sebanding panjangnya, plus jeda angkat pena; dimuat dalam durasi blok
+  var st = [], tot = 0;
+  list.forEach(function (o) {
+    var p = BLOCK.svg("path", { d: o.d || o, fill: "none", stroke: o.aksen || o.ink === "accent" ? P.accent_color : P.color, "stroke-width": P.thickness, "stroke-linecap": "round", "stroke-linejoin": "round" }, gi);
+    var L = p.getTotalLength() || 1; p.setAttribute("stroke-dasharray", L + " " + (L + 1)); p.setAttribute("stroke-dashoffset", L);
+    st.push({ p: p, L: L, d: L / P.speed }); tot += L / P.speed + P.lift_pause;
+  });
+  var f = Math.min(1, Math.max(1, k.dur - P.start - 1.2) / (tot || 1)), t = P.start;
+  st.forEach(function (o) { o.d *= f; o.t0 = t; t += o.d + P.lift_pause * f; });
+  var Tend = t;
+  // pena: badan spidol miring, ujung tepat di titik tinta
+  var pena = BLOCK.svg("g", null, gp);
+  BLOCK.svg("rect", { x: -9, y: -150, width: 30, height: 120, rx: 8, fill: P.pen_color, transform: "rotate(28)" }, pena);
+  BLOCK.svg("rect", { x: -9, y: -190, width: 30, height: 44, rx: 8, fill: "#1b2333", transform: "rotate(28)" }, pena);
+  BLOCK.svg("path", { d: "M-9 -30 L 21 -30 L 8 0 Z", fill: "#ddd", transform: "rotate(28)" }, pena);
+  BLOCK.svg("circle", { r: 4, fill: P.color }, pena);
+  if (!P.pen) pena.style.display = "none";
+  function titik(o, q) { var pt = o.p.getPointAtLength(BLOCK.clamp(q, 0, 1) * o.L); return [pt.x, pt.y]; }
+  BLOCK.onTime(tl, function (tt) {
+    var pos = null, angkat = 0;
+    for (var i = 0; i < st.length; i++) {
+      var o = st[i], q = BLOCK.clamp((tt - o.t0) / o.d, 0, 1);
+      o.p.setAttribute("stroke-dashoffset", (o.L * (1 - q)).toFixed(2)); o.p.style.visibility = q > 0 ? "visible" : "hidden";
+      if (tt >= o.t0 && tt <= o.t0 + o.d) pos = titik(o, q);
+    }
+    if (!pos) {
+      // meluncur di antara goresan (pena terangkat), masuk di awal, keluar di akhir
+      var nx = null; for (i = 0; i < st.length; i++) if (st[i].t0 > tt) { nx = i; break; }
+      if (nx === null) { var a = titik(st[st.length - 1], 1), u = BLOCK.smooth((tt - Tend) / 0.7); pos = [a[0] + u * 700, a[1] + u * 500]; angkat = 1; }
+      else {
+        var b = titik(st[nx], 0), pa = nx ? titik(st[nx - 1], 1) : [b[0] + 700, b[1] + 500], ts = nx ? st[nx - 1].t0 + st[nx - 1].d : 0;
+        var v = BLOCK.smooth((tt - ts) / (st[nx].t0 - ts || 1)); pos = [BLOCK.lerp(pa[0], b[0], v), BLOCK.lerp(pa[1], b[1], v)]; angkat = Math.sin(Math.PI * v);
+      }
+    }
+    pena.setAttribute("transform", "translate(" + pos[0].toFixed(1) + " " + (pos[1] - angkat * 14).toFixed(1) + ")");
+  }, k.dur);
+}, { font: false });
+</script>

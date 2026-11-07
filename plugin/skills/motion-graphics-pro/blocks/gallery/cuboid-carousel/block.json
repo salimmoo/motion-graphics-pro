@@ -1,0 +1,164 @@
+{
+ "id": "gallery/cuboid-carousel",
+ "name": "Cuboid Carousel",
+ "name_id": "Korsel Kuboid",
+ "category": "gallery",
+ "description": {
+  "id": "Rantai balok 3D bertepi bevel menunggangi gelombang yang merambat, bergeser satu per satu seperti korsel konten. Muka depan memuat gambar atau kartu placeholder berlabel.",
+  "en": "A chain of bevelled 3D cuboids rides a travelling wave and steps along as a content carousel; front faces hold images or labelled placeholder cards."
+ },
+ "tags": [
+  "galeri",
+  "korsel",
+  "3d",
+  "kuboid",
+  "balok",
+  "gelombang",
+  "carousel",
+  "gallery",
+  "cuboid"
+ ],
+ "props": {
+  "image": {
+   "default": [],
+   "type": "list",
+   "hint": "Daftar url gambar (opsional). Kosong = kartu placeholder bergradien bernomor",
+   "aliases": [
+    "gambar"
+   ]
+  },
+  "label": {
+   "default": [
+    "Rencana",
+    "Desain",
+    "Bangun",
+    "Uji",
+    "Rilis",
+    "Ukur",
+    "Ulang"
+   ],
+   "type": "list",
+   "hint": "Daftar label kecil per kartu placeholder (opsional)"
+  },
+  "count": {
+   "default": 7,
+   "type": "number",
+   "hint": "Jumlah balok",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "width": {
+   "default": 270,
+   "type": "number",
+   "hint": "Lebar balok (px pada 1080)",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "height": {
+   "default": 350,
+   "type": "number",
+   "hint": "Tinggi balok",
+   "aliases": [
+    "tinggi"
+   ]
+  },
+  "thickness": {
+   "default": 110,
+   "type": "number",
+   "hint": "Tebal balok",
+   "aliases": [
+    "tebal"
+   ]
+  },
+  "distance": {
+   "default": 430,
+   "type": "number",
+   "hint": "Jarak antar balok",
+   "aliases": [
+    "jarak"
+   ]
+  },
+  "amplitude": {
+   "default": 70,
+   "type": "number",
+   "hint": "Tinggi gelombang",
+   "aliases": [
+    "amplitudo"
+   ]
+  },
+  "wavelength": {
+   "default": 1500,
+   "type": "number",
+   "hint": "Panjang gelombang (px)",
+   "aliases": [
+    "panjang_gelombang"
+   ]
+  },
+  "wave_period": {
+   "default": 3,
+   "type": "number",
+   "hint": "Periode gelombang (detik)",
+   "aliases": [
+    "periode_gelombang"
+   ]
+  },
+  "period": {
+   "default": 1.5,
+   "type": "number",
+   "hint": "Lama satu ayunan (detik)",
+   "aliases": [
+    "periode"
+   ]
+  },
+  "swing": {
+   "default": 0.8,
+   "type": "number",
+   "hint": "Kekuatan ayunan cepat-lambat-cepat (0 = rata, 0.95 = hampir berhenti di tengah)",
+   "aliases": [
+    "ayunan"
+   ]
+  },
+  "tilt": {
+   "default": -16,
+   "type": "number",
+   "hint": "Kemiringan X dasar (derajat)"
+  },
+  "perspective": {
+   "default": 1600,
+   "type": "number",
+   "hint": "Perspektif CSS (px)",
+   "aliases": [
+    "perspektif"
+   ]
+  },
+  "side_color": {
+   "default": "#1c2033",
+   "type": "color",
+   "hint": "Warna sisi gelap",
+   "aliases": [
+    "warna_sisi"
+   ]
+  },
+  "seed": {
+   "default": 6,
+   "type": "number",
+   "hint": "Seed warna"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "galeri/korsel-kuboid",
+  "cuboid-carousel"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

@@ -1,0 +1,159 @@
+{
+ "id": "text/split-flap",
+ "name": "Split Flap",
+ "name_id": "Papan Split-Flap",
+ "category": "text",
+ "description": {
+  "id": "Papan keberangkatan bergaya Solari: setiap sel memutar drumnya maju melewati huruf-huruf di antaranya sampai mendarat di huruf tujuan, sehingga teks muncul sebagai kaskade mekanis, bukan pudar.",
+  "en": "Solari-style departure board: every cell walks its drum forward through the intervening characters of a fixed alphabet until it lands on its target, resolving as a mechanical cascade."
+ },
+ "tags": [
+  "teks",
+  "split-flap",
+  "solari",
+  "papan",
+  "bandara",
+  "mekanis",
+  "flip",
+  "text",
+  "split",
+  "flap"
+ ],
+ "props": {
+  "rows": {
+   "default": [
+    "BERANGKAT 07.45",
+    "TUJUAN MAKASSAR",
+    "*GERBANG 12*"
+   ],
+   "type": "list",
+   "hint": "Baris papan; *baris* = warna aksen",
+   "aliases": [
+    "baris"
+   ]
+  },
+  "cols": {
+   "default": 16,
+   "type": "number",
+   "hint": "Jumlah sel per baris",
+   "aliases": [
+    "kolom"
+   ]
+  },
+  "font": {
+   "default": "Roboto Mono:wght@700",
+   "type": "font",
+   "hint": "Google Font (mono disarankan)"
+  },
+  "size": {
+   "default": 96,
+   "type": "number",
+   "hint": "Tinggi sel (px pada 1080); diperkecil otomatis bila tak muat",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "weight": {
+   "default": 700,
+   "type": "number",
+   "aliases": [
+    "berat"
+   ]
+  },
+  "color": {
+   "default": "#f2efe6",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffcf4a",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "panel_color": {
+   "default": "#1d1f25",
+   "type": "color",
+   "hint": "Warna keping",
+   "aliases": [
+    "warna_panel"
+   ]
+  },
+  "board_color": {
+   "default": "#0c0d10",
+   "type": "color",
+   "hint": "Warna dasar papan",
+   "aliases": [
+    "warna_papan"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi vertikal (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "alphabet": {
+   "default": " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.:-",
+   "type": "text",
+   "hint": "Urutan drum (spasi di depan)",
+   "aliases": [
+    "abjad"
+   ]
+  },
+  "steps": {
+   "default": 0.05,
+   "type": "number",
+   "hint": "Detik per kibasan",
+   "aliases": [
+    "langkah"
+   ]
+  },
+  "start": {
+   "default": 0.3,
+   "type": "number",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "pause": {
+   "default": 0.03,
+   "type": "number",
+   "hint": "Jeda antar sel",
+   "aliases": [
+    "jeda"
+   ]
+  },
+  "line_pause": {
+   "default": 0.18,
+   "type": "number",
+   "aliases": [
+    "jeda_baris"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "teks/split-flap",
+  "split-flap-board"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Roboto Mono:wght@700",
+   "Inter:wght@400;500;600;700;800;900"
+  ]
+ }
+}

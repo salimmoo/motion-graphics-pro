@@ -1,0 +1,180 @@
+{
+ "id": "text/letter-shatter",
+ "name": "Letter Shatter",
+ "name_id": "Huruf Pecah Berkumpul",
+ "category": "text",
+ "description": {
+  "id": "Huruf judul melayang tersebar (sebaran berseed yang tetap), lalu berkumpul menghantam posisinya dengan lewat-batas dan guncangan mendarat tiga frame. Bisa meledak lagi saat keluar.",
+  "en": "Headline glyphs hover in a seeded scatter, then reassemble with an overshooting slam and a three-frame landing shake. Optional explode exit."
+ },
+ "tags": [
+  "teks",
+  "huruf",
+  "scatter",
+  "assemble",
+  "slam",
+  "explode",
+  "kinetik",
+  "text",
+  "letter",
+  "shatter"
+ ],
+ "props": {
+  "text": {
+   "default": "SATU *TUJUAN*",
+   "type": "text",
+   "hint": "Teks; *kata* = kata kunci berwarna aksen, \\n = baris baru",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "font": {
+   "default": "Archivo:wght@800;900",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "size": {
+   "default": 150,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "weight": {
+   "default": 900,
+   "type": "number",
+   "aliases": [
+    "berat"
+   ]
+  },
+  "color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffb02e",
+   "type": "color",
+   "hint": "Warna kata kunci / aksen",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi vertikal (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "width": {
+   "default": 80,
+   "type": "number",
+   "hint": "Lebar kotak teks (%)",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "align": {
+   "default": "center",
+   "type": "enum",
+   "options": [
+    "left",
+    "center",
+    "right"
+   ],
+   "aliases": [
+    "rata"
+   ],
+   "option_aliases": {
+    "kiri": "left",
+    "tengah": "center",
+    "kanan": "right"
+   }
+  },
+  "spread": {
+   "default": 1,
+   "type": "number",
+   "hint": "Kekuatan sebaran (1 = selebar layar)",
+   "aliases": [
+    "sebar"
+   ]
+  },
+  "gather_start": {
+   "default": 1.0,
+   "type": "number",
+   "hint": "Detik mulai berkumpul",
+   "aliases": [
+    "mulai_kumpul"
+   ]
+  },
+  "gather_duration": {
+   "default": 0.7,
+   "type": "number",
+   "aliases": [
+    "durasi_kumpul"
+   ]
+  },
+  "pause": {
+   "default": 0.03,
+   "type": "number",
+   "hint": "Jeda antar huruf (detik)",
+   "aliases": [
+    "jeda"
+   ]
+  },
+  "shake": {
+   "default": 12,
+   "type": "number",
+   "hint": "Guncangan mendarat (px pada 1080)",
+   "aliases": [
+    "guncang"
+   ]
+  },
+  "exit": {
+   "default": "burst",
+   "type": "enum",
+   "options": [
+    "burst",
+    "fade",
+    "no"
+   ],
+   "aliases": [
+    "keluar"
+   ],
+   "option_aliases": {
+    "ledak": "burst",
+    "pudar": "fade",
+    "tidak": "no"
+   }
+  },
+  "seed": {
+   "default": "pecah",
+   "type": "text",
+   "hint": "Benih acak sebaran"
+  }
+ },
+ "duration": 4,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "teks/huruf-pecah",
+  "char-slam-explode"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Archivo:wght@800;900",
+   "Inter:wght@400;500;600;700;800;900"
+  ]
+ }
+}

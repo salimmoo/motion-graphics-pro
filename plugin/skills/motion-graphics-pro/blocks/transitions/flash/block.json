@@ -1,0 +1,97 @@
+{
+ "id": "transitions/flash",
+ "name": "Flash",
+ "name_id": "Kilat Cahaya",
+ "category": "transitions",
+ "description": {
+  "id": "Kilatan seperti blitz kamera: layar terbakar putih (atau hangat, atau gelap untuk dip), adegan berganti tepat di puncak, lalu cahaya surut dengan ekor lembut.",
+  "en": "Camera-flash cut: the frame burns to white (warm, or black for a dip), swaps at the peak, then decays with a soft tail."
+ },
+ "tags": [
+  "transisi",
+  "flash",
+  "putih",
+  "blitz",
+  "dip",
+  "cahaya",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "color": {
+   "default": "white",
+   "type": "enum",
+   "options": [
+    "white",
+    "warm",
+    "black"
+   ],
+   "hint": "putih = flash putih; hangat = cahaya krem-jingga; hitam = dip ke gelap",
+   "aliases": [
+    "warna"
+   ],
+   "option_aliases": {
+    "putih": "white",
+    "hangat": "warm",
+    "hitam": "black"
+   }
+  },
+  "blink": {
+   "default": 2,
+   "type": "number",
+   "hint": "Jumlah kedip (1 = satu flash; 2 = kedip awal kecil lalu flash utama)",
+   "aliases": [
+    "kedip"
+   ]
+  },
+  "peak": {
+   "default": 0.42,
+   "type": "number",
+   "hint": "Posisi puncak / titik ganti (fraksi durasi)",
+   "aliases": [
+    "puncak"
+   ]
+  },
+  "intensity": {
+   "default": 1,
+   "type": "number",
+   "hint": "Kekuatan cahaya 0..1",
+   "aliases": [
+    "intensitas"
+   ]
+  }
+ },
+ "duration": 0.9,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/kilat",
+  "flash-through-white",
+  "editorial-flash-overlay",
+  "transitions-light"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 1.05,
+  "duration": 3
+ }
+}

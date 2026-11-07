@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Paket Motion — 100 Gaya Siap Pakai · Motion Graphics Pro v2</title>
+  <meta name="description" content="Pustaka 104 paket motion siap pakai dalam 11 kategori: preview hidup 10 detik, spesifikasi slot, palet, font, blok per slot, satu perintah pasang, dan alasan riset bersumber." />
+  <meta name="theme-color" content="#070a14" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&family=Syne:wght@500..800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="paket.css" />
+  <link rel="stylesheet" href="../css/i18n.css" />
+  <script src="../js/i18n.js" data-i18n="ui,paket"></script>
+</head>
+<body>
+  <div class="sky" aria-hidden="true"></div>
+  <canvas id="dust" class="dust" aria-hidden="true"></canvas>
+  <svg class="grain" aria-hidden="true"><filter id="gn"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#gn)"/></svg>
+
+  <header class="chrome" id="chrome">
+    <a class="brand" href="../index.html#panduan"><i>Atelier Kertas</i><span> — Motion Graphics Pro</span></a>
+    <nav class="chrome-nav" aria-label="Navigasi">
+      <a href="../index.html#panduan">← Panduan</a>
+      <a href="../index.html#rasi" class="hide-s">Rasi</a>
+      <a href="#pustaka" class="hide-s">Pustaka</a>
+      <button type="button" class="kol-btn" id="kolBtn" aria-controls="drawer" aria-expanded="false">Koleksi <b id="kolN">0</b></button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="hero" aria-labelledby="heroT">
+      <div class="hero-copy">
+        <p class="kicker rise" style="--d:0">Pustaka · Motion Graphics Pro v2</p>
+        <h1 id="heroT" class="hero-t">
+          <span class="ht-a rise" style="--d:1">Paket</span>
+          <span class="ht-b rise" style="--d:2">Motion</span>
+          <span class="ht-c rise" style="--d:3">seratus resep gerak, <em>siap</em> kamu pakai.</span>
+        </h1>
+        <p class="hero-sub rise" style="--d:4">Dari explainer korporat sampai lirik kinetik: tiap paket sudah memadukan latar, komposisi, tipografi, transisi, kamera, dan audio menjadi satu bahasa gerak yang utuh. Tonton preview hidupnya, salin satu perintah, lalu sesuaikan dengan proyekmu.</p>
+        <div class="stats rise" style="--d:5" id="stats"></div>
+        <div class="hero-cta rise" style="--d:6">
+          <a class="btn gold" href="#pustaka">Jelajahi pustaka ↓</a>
+          <button type="button" class="btn" data-kol>Buka koleksimu</button>
+        </div>
+      </div>
+      <div class="hero-deck" id="deck" aria-label="Contoh paket"></div>
+      <a class="scroll-cue" href="#isi" aria-label="Gulir ke bawah"><i></i></a>
+    </section>
+
+    <!-- ================= ISI PAKET ================= -->
+    <section class="intro" id="isi" aria-labelledby="isiT">
+      <div class="sec-head rv">
+        <p class="kicker">Di dalam setiap paket</p>
+        <h2 id="isiT">Bukan sekadar gaya. <em>Resep lengkap</em> yang bisa langsung dieksekusi.</h2>
+      </div>
+      <div class="feat">
+        <article class="feat-c rv" style="--d:0"><b>01</b><h3>Preview <em>hidup</em> 10 detik</h3><p>Animasi kode yang berulang, lengkap dengan batas shot. Geser waktu untuk membedah setiap transisi dan gerak kamera.</p></article>
+        <article class="feat-c rv" style="--d:1"><b>02</b><h3>Spesifikasi <em>slot</em></h3><p>Latar, komposisi, tulisan, subtitle, aksen, irama, transisi, kamera, audio, dan rasio — semua terisi dan saling cocok.</p></article>
+        <article class="feat-c rv" style="--d:2"><b>03</b><h3>Satu perintah <em>pasang</em></h3><p>Blok mgp sudah dipetakan per slot. Salin <code>mgp add … --into index.html</code> dan blok-bloknya masuk ke proyekmu.</p></article>
+        <article class="feat-c rv" style="--d:3"><b>04</b><h3>Alasan <em>bersumber</em></h3><p>Setiap pilihan gaya ditopang riset tren dan data platform, dengan tautan ke sumber aslinya.</p></article>
+      </div>
+    </section>
+
+    <!-- ================= PUSTAKA ================= -->
+    <section class="lib" id="pustaka" aria-label="Pustaka paket">
+      <div class="sec-head rv">
+        <p class="kicker">Pustaka</p>
+        <h2>Sepuluh rak, <em>seratus</em> paket.</h2>
+        <p class="lead">Arahkan kursor ke tile untuk memutar preview — di layar sentuh, tile yang terlihat berputar sendiri. Klik untuk membuka rincian lengkap.</p>
+      </div>
+      <div class="bar" id="bar">
+        <div class="chips" id="kats" role="group" aria-label="Kategori"></div>
+        <div class="bar2">
+          <label class="search"><span class="sr">Cari paket</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="q" type="search" placeholder="Cari nama, kegunaan, font, atau item registry…" autocomplete="off"></label>
+          <div class="chips ars" id="ars" role="group" aria-label="Rasio"></div>
+          <span class="count" id="count" aria-live="polite"></span>
+        </div>
+      </div>
+      <div id="shelves"></div>
+      <p class="empty" id="empty" hidden>Tidak ada paket yang cocok. Coba kata lain atau kembali ke <button type="button" class="link" id="reset">semua kategori</button>.</p>
+    </section>
+
+    <footer class="foot">
+      <div class="foot-in">
+        <p class="foot-t">Siap memberi proyekmu <em>bahasa gerak</em>?</p>
+        <div class="hero-cta"><a class="btn gold" href="../index.html#panduan">Baca panduannya</a><a class="btn" href="../index.html#rasi">Kembali ke rasi</a></div>
+        <p class="foot-n" id="footN"></p>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ================= RINCIAN ================= -->
+  <div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="dT">
+    <div class="sheet-bg" data-close></div>
+    <article class="sheet-in" id="sheetIn">
+      <header class="sheet-top">
+        <p class="kicker" id="dK"></p>
+        <div class="sheet-nav">
+          <button type="button" class="ico" id="dPrev" aria-label="Paket sebelumnya" title="Sebelumnya (←)">←</button>
+          <button type="button" class="ico" id="dNext" aria-label="Paket berikutnya" title="Berikutnya (→)">→</button>
+          <button type="button" class="ico x" id="dX" aria-label="Tutup rincian" title="Tutup (Esc)">✕</button>
+        </div>
+      </header>
+      <div class="sheet-body">
+        <div class="sv">
+          <div class="sv-wrap" id="svWrap"><div class="sv-glow" id="svGlow"></div><div class="sv-stage" id="stage"></div></div>
+          <div class="scrub">
+            <button type="button" class="pp" id="pp" aria-label="Jeda">❚❚</button>
+            <div class="track" id="track">
+              <div class="segs" id="segs"></div>
+              <div class="fill" id="fill"></div>
+              <div class="head" id="head"></div>
+              <input type="range" id="scrub" min="0" max="9999" step="10" value="0" aria-label="Posisi waktu preview">
+            </div>
+            <span class="tc" id="tc">00,0 / 10,0</span>
+          </div>
+          <div class="shots" id="shots"></div>
+          <p class="sv-note" id="svNote"></p>
+        </div>
+        <div class="si" id="info"></div>
+      </div>
+    </article>
+  </div>
+
+  <!-- ================= KOLEKSI ================= -->
+  <aside class="drawer" id="drawer" hidden aria-labelledby="kT">
+    <div class="drawer-bg" data-kclose></div>
+    <div class="drawer-in">
+      <header class="drawer-top">
+        <div><p class="kicker">Tersimpan di browser ini</p><h2 id="kT">Koleksi<em>mu</em></h2></div>
+        <button type="button" class="ico x" data-kclose aria-label="Tutup koleksi">✕</button>
+      </header>
+      <ol class="kol" id="kol"></ol>
+      <footer class="drawer-foot">
+        <button type="button" class="btn gold" id="kCopy">Salin JSON</button>
+        <button type="button" class="btn" id="kDl">Unduh .json</button>
+        <button type="button" class="btn ghost" id="kClear">Kosongkan</button>
+      </footer>
+    </div>
+  </aside>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <noscript><p class="nojs">Halaman ini membutuhkan JavaScript untuk menampilkan pustaka dan preview.</p></noscript>
+
+  <script src="data.js"></script>
+  <script src="paket_preview.js"></script>
+  <script src="paket.js"></script>
+</body>
+</html>

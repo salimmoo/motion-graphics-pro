@@ -1,0 +1,17 @@
+{
+ "size must look like 1080x1920, not {}": "Ukuran harus seperti 1080x1920, bukan {}",
+ "name a composition file, e.g. `mgp render index.html`.": "Sebutkan file komposisi, mis. `mgp render index.html`.",
+ "file not found: {}": "berkas tidak ditemukan: {}",
+ "--root must contain the composition file.": "--root harus memuat file komposisi.",
+ "the captions file has no timed words: {}": "File teks tidak berisi kata bertimer: {}",
+ "--vars: cannot read JSON {}: {}": "--vars: gagal membaca JSON {}: {}",
+ "--vars must hold one JSON object {key: value}": "--vars harus berisi satu objek JSON {kunci: nilai}",
+ "--variables is not valid JSON (in PowerShell, write it to a file and use --vars file.json)": "--variables bukan JSON yang sah (di PowerShell, tulis ke file lalu pakai --vars file.json)",
+ "--var must look like key=value, not \"{}\"": "--var harus berbentuk kunci=nilai, bukan \"{}\"",
+ "variables do not match their declaration (--strict-variables):": "variabel tidak sesuai deklarasi (--strict-variables):",
+ "variable warning: {}": "peringatan variabel: {}",
+ "--native-gsap: the gsap package is not installed, so the page would keep using mgp.motion. Install it yourself first: cd motion-graphics-pro/render && npm install gsap (GSAP licence by its makers), or run without --native-gsap.": "--native-gsap: paket gsap tidak terpasang, jadi halaman akan tetap memakai mgp.motion. Pasang sendiri dulu: cd motion-graphics-pro/render && npm install gsap (lisensi GSAP milik pembuatnya), atau jalankan tanpa --native-gsap.",
+ "--native-gsap: the page still uses mgp.motion ({}): the composition loads motion.js/gerak.js itself through <script src>, not gsap. For a comparison, make a copy that loads gsap.min.js.": "--native-gsap: halaman tetap memakai mgp.motion ({}): komposisi memuat motion.js/gerak.js sendiri lewat <script src>, bukan gsap. Untuk banding, buat salinan yang memuat gsap.min.js.",
+ "cannot read the composition duration. Set window.__duration, data-duration on the root, or --duration <seconds>.": "Durasi komposisi tidak terbaca. Isi window.__duration, data-duration di root, atau --duration <detik>.",
+ "empty range: --from {} --to {}": "Rentang kosong: --from {} --to {}"
+}

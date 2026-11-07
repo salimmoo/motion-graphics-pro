@@ -1,0 +1,108 @@
+{
+ "id": "camera/shake",
+ "name": "Shake",
+ "name_id": "Goyang Kamera",
+ "category": "camera",
+ "description": {
+  "id": "Guncangan kamera prosedural untuk adegan apa pun: genggam tangan yang santai, tele yang gelisah karena lensa panjang, atau gempa dengan ledakan getar dan blur gerak. Noise berseed, bentuk tertutup, aman di-seek; adegan otomatis diperbesar sedikit supaya tepi tidak terbuka.",
+  "en": "Procedural camera shake for any scene: handheld, telephoto or earthquake profiles with seeded closed-form noise, motion blur and automatic overscan."
+ },
+ "tags": [
+  "kamera",
+  "camera",
+  "shake",
+  "handheld",
+  "goyang",
+  "gempa",
+  "telephoto",
+  "noise"
+ ],
+ "props": {
+  "target": {
+   "default": "#adegan",
+   "type": "selector",
+   "hint": "Elemen host yang diguncang"
+  },
+  "profile": {
+   "default": "handheld",
+   "type": "enum",
+   "options": [
+    "handheld",
+    "tele",
+    "quake"
+   ],
+   "hint": "Karakter guncangan",
+   "aliases": [
+    "profil"
+   ],
+   "option_aliases": {
+    "genggam": "handheld",
+    "gempa": "quake"
+   }
+  },
+  "intensity": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali amplitudo",
+   "aliases": [
+    "intensitas"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali frekuensi",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "seed": {
+   "default": 7,
+   "type": "number",
+   "hint": "Seed noise"
+  },
+  "enter": {
+   "default": 0.4,
+   "type": "number",
+   "hint": "Lama guncangan menguat di awal (detik)",
+   "aliases": [
+    "masuk"
+   ]
+  },
+  "exit": {
+   "default": 0.4,
+   "type": "number",
+   "hint": "Lama guncangan mereda di akhir (detik)",
+   "aliases": [
+    "keluar"
+   ]
+  },
+  "motion_blur": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Blur sebanding kecepatan guncangan",
+   "aliases": [
+    "blur_gerak"
+   ]
+  }
+ },
+ "duration": 4,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "kamera/goyang",
+  "camera-shake"
+ ],
+ "example": {
+  "bg": "photo",
+  "props": {
+   "profile": "quake",
+   "intensity": 0.8
+  }
+ }
+}

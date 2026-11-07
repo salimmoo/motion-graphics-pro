@@ -1,0 +1,109 @@
+{
+ "id": "3d/exploded-stack",
+ "name": "Exploded Stack",
+ "name_id": "Tumpukan Meledak",
+ "category": "3d",
+ "description": {
+  "id": "Lempeng berlapis isometrik turun bertumpuk, lalu terpisah renggang dengan label di samping tiap lapisan, ditahan sebentar, kemudian menyatu kembali menjadi satu tumpukan. Cocok untuk diagram arsitektur sistem atau lapisan produk; CSS 3D murni.",
+  "en": "Isometric layer plates drop into a stack, explode apart with a label beside each layer, hold, then collapse back into one stack. Built for architecture and system diagrams; pure CSS 3D."
+ },
+ "tags": [
+  "3d",
+  "isometrik",
+  "lapisan",
+  "stack",
+  "diagram",
+  "arsitektur",
+  "exploded",
+  "sistem"
+ ],
+ "props": {
+  "layer": {
+   "default": [
+    {
+     "judul": "Antarmuka",
+     "ket": "Aplikasi web dan seluler",
+     "warna": "#5b8cff"
+    },
+    {
+     "judul": "Layanan API",
+     "ket": "Gerbang dan otentikasi",
+     "warna": "#3fc1a5"
+    },
+    {
+     "judul": "Logika bisnis",
+     "ket": "Aturan, alur, antrean",
+     "warna": "#ffb547"
+    },
+    {
+     "judul": "Basis data",
+     "ket": "Penyimpanan dan cadangan",
+     "warna": "#ff6b6b"
+    }
+   ],
+   "type": "list",
+   "hint": "Dari atas ke bawah: [{judul, ket, warna}]",
+   "aliases": [
+    "lapisan"
+   ]
+  },
+  "distance": {
+   "default": 150,
+   "type": "number",
+   "hint": "Jarak antar lapisan saat meledak (px pada 1080)",
+   "aliases": [
+    "jarak"
+   ]
+  },
+  "size": {
+   "default": 330,
+   "type": "number",
+   "hint": "Sisi lempeng (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "thickness": {
+   "default": 26,
+   "type": "number",
+   "hint": "Tebal lempeng",
+   "aliases": [
+    "tebal"
+   ]
+  },
+  "text_color": {
+   "default": "#f4f1ea",
+   "type": "color",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "position_x": {
+   "default": 40,
+   "type": "number",
+   "hint": "Pusat tumpukan (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;700;800",
+   "type": "font"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "3d/tumpukan-meledak",
+  "exploded-stack"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

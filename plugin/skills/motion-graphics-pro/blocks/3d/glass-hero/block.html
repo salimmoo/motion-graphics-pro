@@ -1,0 +1,60 @@
+<!-- Block 3d/glass-hero · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="3d/glass-hero" data-start="0" data-duration="6" data-track-index="6" class="blk blk-3d-glass-hero">
+<script type="application/json" data-block-props>
+{"text": "JERNIH", "sub": "melihat lebih dalam", "shape": "capsule", "size": 430, "lens": 1.22, "distortion": 60, "chromatic": 7, "rotate": 38, "text_color": "#f4f1ea", "bg_color": "#141826", "glass_color": "#bfe3ff", "text_size": 330, "font": "Archivo Black:wght@400", "font2": "Inter:wght@500;600"}
+</script>
+</div>
+<style>
+.blk-3d-glass-hero{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-3d-glass-hero .blk-lap{position:absolute;left:0;top:0}
+.blk-3d-glass-hero .blk-jdl{position:absolute;left:0;right:0;text-align:center;line-height:.9;white-space:nowrap;letter-spacing:-.01em}
+.blk-3d-glass-hero .blk-sub{position:absolute;left:0;right:0;text-align:center;letter-spacing:.3em;text-transform:uppercase}
+.blk-3d-glass-hero .blk-kaca{position:absolute;overflow:hidden}
+.blk-3d-glass-hero .blk-kilau{position:absolute;border-radius:50%}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+var P = k.P, s = k.s, W = k.w, H = k.h, fam = BLOCK.family(P.font), fam2 = BLOCK.family(P.font2), id = k.id;
+  k.root.style.background = "radial-gradient(80% 70% at 50% 45%," + BLOCK.mix(P.bg_color, "#ffffff", 0.08) + "," + P.bg_color + ")";
+  var fs = Math.min(+P.text_size * s, W * 1.12 / Math.max(3, String(P.text).length));
+  function judul(par, warna) {
+    var l = BLOCK.el("div", { class: "blk-lap", style: "width:" + W + "px;height:" + H + "px" }, par);
+    BLOCK.el("div", { class: "blk-jdl", style: "top:" + (H / 2 - fs * 0.48) + "px;font:" + fs + "px/0.9 " + fam + ";color:" + warna }, l).textContent = P.text;
+    if (P.sub) BLOCK.el("div", { class: "blk-sub", style: "top:" + (H / 2 + fs * 0.55) + "px;font:500 " + Math.round(30 * s) + "px/1 " + fam2 + ";color:" + warna + ";opacity:.7" }, l).textContent = P.sub;
+    return l;
+  }
+  var luar = judul(k.root, P.text_color);
+  // filter refraksi: noise lembut -> geser (diputar lewat feOffset per waktu)
+  var defs = BLOCK.svg("svg", { width: 0, height: 0, style: "position:absolute" }, k.root);
+  var f = BLOCK.svg("filter", { id: id + "-ref", x: "-20%", y: "-20%", width: "140%", height: "140%" }, defs);
+  BLOCK.svg("feTurbulence", { type: "fractalNoise", baseFrequency: (0.0035 / s).toFixed(5), numOctaves: 2, seed: 4, result: "n" }, f);
+  var off = BLOCK.svg("feOffset", { in: "n", dx: 0, dy: 0, result: "n2" }, f);
+  BLOCK.svg("feDisplacementMap", { in: "SourceGraphic", in2: "n2", scale: +P.distortion * s, xChannelSelector: "R", yChannelSelector: "G" }, f);
+  var gh = +P.size * s, gw = P.shape === "capsule" ? gh * 0.56 : gh, rad = P.shape === "box" ? 0.16 * gh + "px" : P.shape === "ball" ? "50%" : gw / 2 + "px";
+  var kaca = BLOCK.el("div", { class: "blk-kaca", style: "width:" + gw + "px;height:" + gh + "px;border-radius:" + rad + ";background:" + BLOCK.rgba(P.glass_color, 0.08) +
+    ";backdrop-filter:blur(" + 3 * s + "px) saturate(1.3);-webkit-backdrop-filter:blur(" + 3 * s + "px);box-shadow:inset 0 0 " + 30 * s + "px " + BLOCK.rgba(P.glass_color, 0.35) + ",inset " + 6 * s + "px " + 8 * s + "px " + 14 * s + "px rgba(255,255,255,.35),0 " + 40 * s + "px " + 80 * s + "px rgba(0,0,0,.45);border:" + 1.5 * s + "px solid " + BLOCK.rgba("#ffffff", 0.4) }, k.root);
+  // isi lensa: tiga salinan judul (merah, biru, putih) diperbesar dan dibengkokkan
+  var lensa = BLOCK.el("div", { class: "blk-lap", style: "width:" + W + "px;height:" + H + "px;filter:url(#" + id + "-ref)" }, kaca);
+  var lr = judul(lensa, "#ff3b6b"), lb = judul(lensa, "#3bc8ff"), lw = judul(lensa, P.text_color);
+  lr.style.mixBlendMode = lb.style.mixBlendMode = "screen"; lw.style.mixBlendMode = "screen";
+  BLOCK.el("div", { style: "position:absolute;inset:0;background:linear-gradient(160deg,rgba(255,255,255,.22),rgba(255,255,255,0) 40%,rgba(255,255,255,0) 70%,rgba(180,220,255,.18));border-radius:inherit" }, kaca);
+  var kl = BLOCK.el("div", { class: "blk-kilau", style: "width:" + gw * 0.5 + "px;height:" + gh * 0.16 + "px;background:radial-gradient(closest-side,rgba(255,255,255,.85),rgba(255,255,255,0))" }, kaca);
+  var ch = +P.chromatic * s, mag = +P.lens || 1.2;
+  BLOCK.onTime(k.tl, function (t) {
+    // naik dengan pegas, lalu melayang dan bergeser pelan di depan judul
+    var up = BLOCK.spring(BLOCK.clamp((t - 0.15) / 1.6, 0, 1) * 1.6, 0.9, 0.42), u = t / k.dur;
+    var gx = W / 2 + (u - 0.5) * W * 0.18 + Math.sin(t * 0.9) * 10 * s, gy = H / 2 + (1 - up) * (H * 0.75) + Math.sin(t * 1.3) * 8 * s;
+    var rot = -12 + +P.rotate * u, al = BLOCK.clamp(t / 0.3, 0, 1);
+    kaca.style.left = (gx - gw / 2) + "px"; kaca.style.top = (gy - gh / 2) + "px"; kaca.style.opacity = al;
+    kaca.style.transform = "rotate(" + rot.toFixed(2) + "deg)";
+    var ox = -(gx - gw / 2), oy = -(gy - gh / 2), tr = "rotate(" + (-rot).toFixed(2) + "deg) scale(" + mag + ")";
+    lensa.style.left = ox + "px"; lensa.style.top = oy + "px"; lensa.style.transformOrigin = gx + "px " + gy + "px"; lensa.style.transform = tr;
+    var sp = ch * (1 + 0.5 * Math.sin(t * 1.7));
+    lr.style.transform = "translate(" + (-sp) + "px,0)"; lb.style.transform = "translate(" + sp + "px,0)";
+    off.setAttribute("dx", (Math.sin(t * 0.8) * 60 * s).toFixed(1)); off.setAttribute("dy", (t * 40 * s).toFixed(1));
+    var ka = rot * Math.PI / 180 + 2.2;
+    kl.style.left = (gw / 2 + Math.cos(ka) * gw * 0.22 - gw * 0.25) + "px"; kl.style.top = (gh * 0.18 + Math.sin(ka) * gh * 0.04) + "px"; kl.style.transform = "rotate(" + (-25 - rot * 0.3) + "deg)";
+  }, k.dur);
+  k.tl.fromTo(luar, { autoAlpha: 0, scale: 1.06 }, { autoAlpha: 1, scale: 1, duration: 0.9, ease: "power3.out", immediateRender: true }, 0);
+}, { font: true });
+</script>

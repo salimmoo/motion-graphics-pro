@@ -1,0 +1,43 @@
+<!-- Block backgrounds/strands · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="backgrounds/strands" data-start="0" data-duration="8" data-track-index="0" class="blk blk-backgrounds-strands">
+<script type="application/json" data-block-props>
+{"style": "strand", "color1": "#ff4fa3", "color2": "#4f7bff", "core_color": "#ffffff", "bg": "#000000", "count": 7, "amplitude": 0.22, "speed": 1, "resolution": 0.5}
+</script>
+</div>
+<style>
+.blk-backgrounds-strands{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-backgrounds-strands canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P;
+  var KEPALA = [
+    "void main(){vec2 p=(gl_FragCoord.xy-.5*u_res)/u_res.y;float t=u_t*u_kec;float ar=u_res.x/u_res.y;vec3 col=u_lat;float px=1./u_res.y;"
+  ].join("\n");
+  var GAYA = {
+    "strand": [
+    "for(int i=0;i<10;i++){float fi=float(i);if(fi>=u_n)break;float k=fi/max(u_n-1.,1.);",
+    "float y=u_amp*sin(p.x*(1.3+.35*fi)+t*(.55+.12*fi)+fi*1.7)*(.55+.45*sin(t*.3+fi*2.))+.05*sin(p.x*4.+t*1.3+fi)+(k-.5)*u_amp*.6;",
+    "float d=abs(p.y-y);vec3 c=mix(u_c1,u_c2,clamp(k+.25*sin(p.x*1.5+t*.4),0.,1.));",
+    "col+=c*(.0035/(d+.004))*.45+c*smoothstep(2.5*px,0.,d)*.8;}",
+    "col*=smoothstep(ar*.5,ar*.5-.35,abs(p.x));"
+  ].join("\n"),
+    "sine": [
+    "float env=.75+.25*sin(t*.5);float y=u_amp*env*sin(p.x*5.-t*2.4);float d=abs(p.y-y);",
+    "col+=mix(u_c1,u_c2,.5+.5*sin(p.x*1.5-t*.6))*(.006/(d+.006))*.5;col+=u_ci*smoothstep(3.*px,0.,d);",
+    "for(int j=1;j<3;j++){float fj=float(j);float y2=u_amp*env*sin(p.x*5.-t*2.4-fj*.5)*(1.-.25*fj);col+=u_ci*smoothstep(2.*px,0.,abs(p.y-y2))*(.35/fj);}",
+    "col*=smoothstep(ar*.5,ar*.5-.25,abs(p.x));"
+  ].join("\n")
+  };
+  var EKOR = [
+    "col=max(col,u_lat);col=1.-exp(-col*1.3);col+=(h21(gl_FragCoord.xy+fract(u_t))-0.5)/128.;gl_FragColor=vec4(col,1.);}"
+  ].join("\n");
+  var cv = BLOCK.el("canvas", null, k.root);
+  var r = Math.max(0.1, Math.min(1, +P.resolution || 0.5));
+  cv.width = Math.round(k.w * r); cv.height = Math.round(k.h * r);
+  var sh = BLOCK.shader(cv, KEPALA + "\n" + (GAYA[P.style] || GAYA["strand"]) + "\n" + EKOR, { u_c1: BLOCK.vec3(P.color1), u_c2: BLOCK.vec3(P.color2), u_ci: BLOCK.vec3(P.core_color), u_lat: BLOCK.vec3(P.bg), u_n: Math.min(10, Math.max(1, Math.round(P.count))), u_amp: +P.amplitude, u_kec: +P.speed });
+  if (!sh.ok) { cv.remove(); k.root.style.background = P.bg; return; }
+  BLOCK.onTime(k.tl, function (t) { sh.draw(t); }, k.dur);
+});
+</script>

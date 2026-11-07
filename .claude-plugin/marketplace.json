@@ -1,0 +1,23 @@
+{
+  "name": "salimmoo",
+  "owner": {
+    "name": "Salim Muhammad",
+    "url": "https://github.com/salimmoo"
+  },
+  "metadata": {
+    "description": "Motion Graphics Pro: Claude skills for motion graphics videos, brief to render."
+  },
+  "plugins": [
+    {
+      "name": "motion-graphics-pro",
+      "source": "./plugin",
+      "description": "Motion graphics videos from a plain-language brief to a finished file: concept, script, voice, assets, motion in code, QC and a local render with mgp. Three skills: motion-graphics-pro, motion-graphics, vector-character.",
+      "author": {
+        "name": "Salim Muhammad"
+      },
+      "homepage": "https://salimmoo.github.io/motion-graphics-pro/",
+      "repository": "https://github.com/salimmoo/motion-graphics-pro",
+      "category": "creative"
+    }
+  ]
+}

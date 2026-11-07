@@ -1,0 +1,62 @@
+<!-- Block labels/clean · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="labels/clean" data-start="0" data-duration="5" data-track-index="30" class="blk blk-labels-clean">
+<script type="application/json" data-block-props>
+{"style": "card", "name": "Rara Pramesti", "role": "Pendiri Kebun Kota", "accent_color": "#2f6bff", "position": "bottom-left", "enter": "style", "exit": "fade", "font": "Inter:wght@400;500;700;800", "size": 44, "bottom": 11, "edge": 6}
+</script>
+<div class="blk-pos"></div>
+</div>
+<style>
+.blk-labels-clean{position:absolute;inset:0;pointer-events:none}
+.blk-labels-clean .blk-pos{position:absolute;left:0;right:0;display:flex}
+.blk-labels-clean .blk-kar{display:flex;align-items:stretch;gap:calc(var(--s)*22px);line-height:1.1;white-space:nowrap}
+.blk-labels-clean .blk-kol{display:flex;flex-direction:column;justify-content:center}
+.blk-labels-clean .blk-nm{font-weight:700;letter-spacing:-.01em}
+.blk-labels-clean .blk-pr{font-weight:500;margin-top:calc(var(--s)*6px);font-size:.6em}
+.blk-labels-clean .blk-card{background:#fff;color:#14161b;padding:calc(var(--s)*22px) calc(var(--s)*40px) calc(var(--s)*22px) calc(var(--s)*22px);border-radius:calc(var(--s)*10px);box-shadow:0 calc(var(--s)*14px) calc(var(--s)*40px) rgba(0,0,0,.22)}
+.blk-labels-clean .blk-card .blk-pr{color:#5b616e}
+.blk-labels-clean .blk-tab{width:calc(var(--s)*8px);border-radius:calc(var(--s)*4px);background:var(--a);transform-origin:50% 100%}
+.blk-labels-clean .blk-pill{background:#fff;color:#14161b;align-items:center;padding:calc(var(--s)*18px) calc(var(--s)*44px) calc(var(--s)*18px) calc(var(--s)*28px);border-radius:999px;box-shadow:0 calc(var(--s)*12px) calc(var(--s)*36px) rgba(0,0,0,.2)}
+.blk-labels-clean .blk-pill .blk-kol{flex-direction:row;align-items:baseline;gap:calc(var(--s)*18px)}
+.blk-labels-clean .blk-pill .blk-pr{margin:0;color:#6a707c;padding-left:calc(var(--s)*18px);border-left:calc(var(--s)*2px) solid #d9dce2}
+.blk-labels-clean .blk-titik{position:relative;width:calc(var(--s)*18px);height:calc(var(--s)*18px);border-radius:50%;background:var(--a);flex:none}
+.blk-labels-clean .blk-cincin{position:absolute;inset:0;border-radius:50%;background:var(--a)}
+.blk-labels-clean .blk-dark{background:rgba(26,28,33,.94);color:#fff;padding:calc(var(--s)*24px) calc(var(--s)*40px);border-radius:calc(var(--s)*14px);box-shadow:0 calc(var(--s)*16px) calc(var(--s)*44px) rgba(0,0,0,.35)}
+.blk-labels-clean .blk-dark .blk-pr{color:#c4c8d0;margin-top:calc(var(--s)*12px)}
+.blk-labels-clean .blk-gar{height:calc(var(--s)*4px);border-radius:2px;background:var(--a);margin-top:calc(var(--s)*12px);width:calc(var(--s)*96px);transform-origin:0 50%}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, D = k.dur, E = BLOCK.el;
+  var pos = k.root.querySelector(".blk-pos");
+  pos.style.cssText = "bottom:" + P.bottom + "%;padding:0 " + P.edge + "%;justify-content:" +
+    ({ "bottom-right": "flex-end", "bottom-center": "center" }[P.position] || "flex-start");
+  k.root.style.cssText += ";--s:" + s + ";--a:" + P.accent_color;
+  var g = { card: 1, pill: 1, dark: 1 }[P.style] ? P.style : "card";
+  var kar = E("div", { class: "blk-kar blk-" + g, style: "font-family:" + BLOCK.family(P.font) + ";font-size:" + Math.round(P.size * s) + "px" }, pos);
+  var tab, titik, cincin, gar;
+  if (g === "card") tab = E("div", { class: "blk-tab" }, kar);
+  if (g === "pill") { titik = E("div", { class: "blk-titik" }, kar); cincin = E("div", { class: "blk-cincin" }, titik); }
+  var kol = E("div", { class: "blk-kol" }, kar);
+  var nm = E("div", { class: "blk-nm" }, kol); nm.textContent = P.name;
+  if (g === "dark") gar = E("div", { class: "blk-gar" }, kol);
+  var pr = E("div", { class: "blk-pr" }, kol); pr.textContent = P.role;
+  var masuk = P.enter === "style" ? { card: "sweep", pill: "pop", dark: "up" }[g] : P.enter, t0 = 0.2;
+  var R = g === "pill" ? "999px" : Math.round(12 * s) + "px";
+  if (masuk === "sweep") tl.fromTo(kar, { clipPath: "inset(0% 100% 0% 0% round " + R + ")" }, { clipPath: "inset(0% 0% 0% 0% round " + R + ")", duration: 0.75, ease: "power3.inOut" }, t0);
+  else if (masuk === "pop") tl.fromTo(kar, { scale: 0.6, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.6, ease: "back.out(1.9)" }, t0);
+  else if (masuk === "up") tl.fromTo(kar, { y: 70 * s, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.75, ease: "power3.out" }, t0);
+  else tl.fromTo(kar, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6, ease: "power1.out" }, t0);
+  if (tab) tl.fromTo(tab, { scaleY: 0 }, { scaleY: 1, duration: 0.5, ease: "power3.out" }, t0 + 0.25);
+  tl.fromTo(nm, { x: -24 * s, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.6, ease: "power3.out" }, t0 + 0.3);
+  if (gar) tl.fromTo(gar, { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.inOut" }, t0 + 0.5);
+  tl.fromTo(pr, { y: 12 * s, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.55, ease: "power2.out" }, t0 + 0.55);
+  // tahan yang hidup: dorong sangat halus + denyut titik status
+  var arah = P.position === "bottom-right" ? -1 : 1;
+  tl.fromTo(kol, { x: 0 }, { x: 6 * s * arah, duration: Math.max(0.5, D - 2), ease: "sine.inOut" }, 1.2);
+  if (cincin) tl.fromTo(cincin, { scale: 1, opacity: 0.55 }, { scale: 2.4, opacity: 0, duration: 1.1, ease: "power2.out", repeat: Math.max(0, Math.floor((D - 1.6) / 1.1) - 1) }, 0.8);
+  var tk = D - 0.6;
+  if (P.exit === "fade") tl.to(kar, { autoAlpha: 0, duration: 0.45, ease: "power2.in" }, tk);
+  else if (P.exit === "sweep") tl.to(kar, { clipPath: "inset(0% 0% 0% 100% round " + R + ")", duration: 0.5, ease: "power3.in" }, tk);
+  else if (P.exit === "down") tl.to(kar, { y: 50 * s, autoAlpha: 0, duration: 0.5, ease: "power3.in" }, tk);
+}, { font: true });
+</script>

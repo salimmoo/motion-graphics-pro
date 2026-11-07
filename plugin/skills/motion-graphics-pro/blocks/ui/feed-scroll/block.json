@@ -1,0 +1,120 @@
+{
+ "id": "ui/feed-scroll",
+ "name": "Feed Scroll",
+ "name_id": "Feed Bergulir",
+ "category": "ui",
+ "description": {
+  "id": "Kolom kartu unggahan yang beragam (teks, gambar, jajak pendapat) bergulir naik dengan laju gelisah dan jejak gerak tipis. Gerak bisa diulang mulus: posisi akhir tepat kembali ke awal. Mode kerangka (skeleton berkilau) atau isi berwarna.",
+  "en": "A loop-friendly column of varied post cards scrolls upward with an agitated pace and subtle motion trails. Skeleton (shimmer) or filled mode."
+ },
+ "tags": [
+  "ui",
+  "feed",
+  "scroll",
+  "skeleton",
+  "sosial",
+  "loop",
+  "ponsel"
+ ],
+ "props": {
+  "mode": {
+   "default": "skeleton",
+   "type": "enum",
+   "options": [
+    "skeleton",
+    "fill"
+   ],
+   "option_aliases": {
+    "kerangka": "skeleton",
+    "isi": "fill"
+   }
+  },
+  "frame": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Di dalam bingkai ponsel; false = kolom lepas setinggi layar",
+   "aliases": [
+    "bingkai"
+   ]
+  },
+  "count": {
+   "default": 7,
+   "type": "number",
+   "hint": "Kartu per set",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "turns": {
+   "default": 2,
+   "type": "number",
+   "hint": "Berapa set yang lewat selama durasi (bulat agar mulus diulang)",
+   "aliases": [
+    "putaran"
+   ]
+  },
+  "restless": {
+   "default": 0.6,
+   "type": "number",
+   "hint": "0 = laju rata; 0.6 = tersendat-sendat gelisah (maks 0.62)",
+   "aliases": [
+    "gelisah"
+   ]
+  },
+  "trail": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Jejak gerak sesuai kecepatan",
+   "aliases": [
+    "jejak"
+   ]
+  },
+  "accent_color": {
+   "default": "#6c8cff",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "screen": {
+   "default": "#f1f3f8",
+   "type": "color",
+   "aliases": [
+    "layar"
+   ]
+  },
+  "card": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "kartu"
+   ]
+  },
+  "skeleton": {
+   "default": "#e2e6ee",
+   "type": "color",
+   "aliases": [
+    "kerangka"
+   ]
+  },
+  "seed": {
+   "default": 11,
+   "type": "number"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/feed-gulir",
+  "scroll-feed"
+ ],
+ "example": {
+  "bg": "dark",
+  "aspect": "9:16"
+ }
+}

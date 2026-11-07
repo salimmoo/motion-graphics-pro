@@ -1,0 +1,43 @@
+<!-- Block transitions/rubber · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/rubber" data-start="0" data-duration="2" data-track-index="20" class="blk blk-transitions-rubber">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "direction": "left", "pull": 0.12, "stretch": 0.06, "shake": true, "shadow": true}
+</script>
+</div>
+<style>
+.blk-transitions-rubber{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, W = k.w, H = k.h, s = k.s, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to);
+  var v = { left: [-1, 0], right: [1, 0], top: [0, -1], bottom: [0, 1] }[P.direction] || [-1, 0];
+  var L = v[0] ? W : H, tr = +P.pull || 0.12, rg = +P.stretch || 0.06;
+  // asal transform di sisi berlawanan arah tarik: panel meregang seperti karet yang ditahan
+  var org = v[0] < 0 ? "100% 50%" : v[0] > 0 ? "0% 50%" : v[1] < 0 ? "50% 100%" : "50% 0%";
+  var t1 = D * 0.42, t2 = D * 0.56, t3 = D * 0.74;
+  var out3 = function (x) { return 1 - Math.pow(1 - x, 3); };
+  function gambar(t) {
+    if (!A) return;
+    var a = out3(BLOCK.progress(t, D * 0.04, t1)), d, st;
+    // tarik melawan hambatan (makin lambat), tahan dengan getar tegang, lalu lepas menembus tepi
+    d = a * tr * L; st = 1 + a * rg;
+    if (t > t1 && t < t2 && P.shake) d += BLOCK.noise(t * 60, 4) * 3 * s * BLOCK.progress(t, t1, t1 + 0.05);
+    var q = BLOCK.progress(t, t2, t3), sn = q * q * q;
+    d = BLOCK.lerp(d, L * 1.25, sn); st = BLOCK.lerp(st, 1 + rg * 2.5, Math.sin(Math.PI * Math.min(1, q * 1.2)));
+    var sq = 1 - (st - 1) * 0.35, sx = v[0] ? st : sq, sy = v[1] ? st : sq;
+    A.style.transformOrigin = org;
+    A.style.transform = "translate(" + (v[0] * d).toFixed(1) + "px," + (v[1] * d).toFixed(1) + "px) scale(" + sx.toFixed(4) + "," + sy.toFixed(4) + ")";
+    A.style.boxShadow = P.shadow ? "0 0 " + Math.round(60 * s) + "px rgba(0,0,0," + (0.5 * Math.min(1, a * 2)).toFixed(3) + ")" : "none";
+    if (t >= t3) { A.style.transform = ""; A.style.boxShadow = ""; }
+    if (Bk) {
+      // adegan baru mapan di belakang dengan pegas begitu panel lepas
+      var b = t < t2 ? 0 : BLOCK.spring(t - t2, 1.6, 0.42), sc = 1.08 - 0.08 * b;
+      Bk.style.transform = "scale(" + sc.toFixed(4) + ")";
+      Bk.style.filter = "brightness(" + (0.6 + 0.4 * Math.min(1, b)).toFixed(3) + ")";
+    }
+  }
+  if (Bk) BLOCK.initial(tl, Bk, { autoAlpha: 0, zIndex: 1 }).set(Bk, { autoAlpha: 1 }, 0.02);
+  if (A) BLOCK.initial(tl, A, { autoAlpha: 1, zIndex: 2 }).set(A, { autoAlpha: 0 }, t3);
+  BLOCK.onTime(tl, gambar, D);
+});
+</script>

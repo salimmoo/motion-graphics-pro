@@ -1,0 +1,107 @@
+<!-- Block ui/cursor-drag · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="ui/cursor-drag" data-start="0" data-duration="4.5" data-track-index="40" class="blk blk-ui-cursor-drag">
+<script type="application/json" data-block-props>
+{"mode": "drag-release", "title": "", "cols": ["Rencana", "Dikerjakan", "Selesai"], "card": [["Riset pengguna", "Uji prototipe", "Tulis panduan"], ["Sketsa beranda", "Revisi ikon"], ["Rilis versi 2"]], "drag": [0, 1, 2], "photo_count": 12, "select_text": "dipilih", "accent_color": "#2d6cdf", "bg": "#eef1f6", "font": "Inter:wght@500;600;700"}
+</script>
+<div class="blk-pn"><div class="blk-hd"></div><div class="blk-isi"></div></div>
+<div class="blk-cur"><svg viewBox="0 0 30 44"><path d="M1 1 L1 33 L9 25.5 L14.5 38.5 L20 36 L14.6 23.4 L25.5 23.4 Z" fill="#111827" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/></svg></div>
+</div>
+<style>
+.blk-ui-cursor-drag{position:absolute;inset:0;pointer-events:none;overflow:hidden;color:#1b2333}
+.blk-ui-cursor-drag .blk-pn{position:absolute;inset:0}
+.blk-ui-cursor-drag .blk-hd{position:absolute;left:0;right:0;top:0;background:#fff;border-bottom:1px solid #d9dee8;display:flex;align-items:center;font-weight:700}
+.blk-ui-cursor-drag .blk-isi{position:absolute;inset:0}
+.blk-ui-cursor-drag .blk-kol{position:absolute;background:#e3e8f1;font-weight:700;color:#5b6478}
+.blk-ui-cursor-drag .blk-kt{position:absolute;left:0;top:0;background:#fff;box-sizing:border-box;box-shadow:0 2px 6px rgba(20,30,60,.08);font-weight:600}
+.blk-ui-cursor-drag .blk-tag{display:inline-block;border-radius:999px}
+.blk-ui-cursor-drag .blk-slot{position:absolute;border-style:dashed;box-sizing:border-box}
+.blk-ui-cursor-drag .blk-ft{position:absolute;overflow:hidden;box-sizing:border-box}
+.blk-ui-cursor-drag .blk-ft svg{position:absolute;left:0;bottom:0;width:100%;height:60%}
+.blk-ui-cursor-drag .blk-ck{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.blk-ui-cursor-drag .blk-mq{position:absolute;left:0;top:0;box-sizing:border-box}
+.blk-ui-cursor-drag .blk-pil{position:absolute;left:50%;color:#fff;border-radius:999px;font-weight:700;white-space:nowrap}
+.blk-ui-cursor-drag .blk-cur{position:absolute;left:0;top:0;width:0;height:0}
+.blk-ui-cursor-drag .blk-cur svg{position:absolute;left:0;top:0;overflow:visible;transform-origin:0 0;filter:drop-shadow(0 3px 5px rgba(0,0,0,.3))}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, A = P.accent_color, W = k.w, H = k.h;
+  R.style.fontFamily = BLOCK.family(P.font); R.style.background = P.bg;
+  var hd = R.querySelector(".blk-hd"), isi = R.querySelector(".blk-isi"), cur = R.querySelector(".blk-cur"), sv = cur.querySelector("svg");
+  var hh = 96 * s; hd.style.cssText += ";height:" + hh + "px;font-size:" + 34 * s + "px;padding-left:" + 40 * s + "px";
+  hd.innerHTML = '<span style="width:' + 22 * s + 'px;height:' + 22 * s + 'px;border-radius:6px;background:' + A + ';margin-right:' + 16 * s + 'px"></span>' + BLOCK.esc(P.title || (P.mode === "box-select" ? "Galeri Foto" : "Papan Proyek"));
+  sv.setAttribute("width", 30 * s); sv.setAttribute("height", 44 * s);
+  var X0 = W * 0.05, Y0 = hh + 40 * s, BW = W * 0.9, BH = H - Y0 - 40 * s, r = 16 * s;
+  BLOCK.initial(tl, cur, { x: W * 1.05, y: H * 0.9 });
+  if (P.mode === "box-select") {
+    var nc = W >= H ? 4 : 3, nf = Math.max(nc, P.photo_count | 0), nr = Math.ceil(nf / nc), g = 18 * s;
+    var tw = (BW - g * (nc - 1)) / nc, th = Math.min((BH - g * (nr - 1)) / nr, tw * 0.8), hue = [200, 25, 150, 280, 50, 340, 110, 220];
+    var tiles = [];
+    for (var i = 0; i < nf; i++) {
+      var cx = X0 + (i % nc) * (tw + g), cy = Y0 + Math.floor(i / nc) * (th + g), hu = hue[i % hue.length] + i * 7;
+      var f = BLOCK.el("div", { class: "blk-ft", style: "left:" + cx + "px;top:" + cy + "px;width:" + tw + "px;height:" + th + "px;border-radius:" + r + "px;background:linear-gradient(160deg,hsl(" + hu + ",70%,78%),hsl(" + (hu + 30) + ",55%,55%))" }, isi);
+      f.innerHTML = '<svg viewBox="0 0 100 60" preserveAspectRatio="none"><path d="M0 60 L0 40 L28 14 L50 36 L66 24 L100 50 L100 60Z" fill="hsla(' + hu + ',40%,30%,.45)"/></svg>';
+      var ck = BLOCK.el("div", { class: "blk-ck", style: "right:" + 12 * s + "px;top:" + 12 * s + "px;width:" + 40 * s + "px;height:" + 40 * s + "px;background:" + A }, f, '<svg width="60%" height="60%" viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+      tiles.push({ f: f, ck: ck, x: cx, y: cy, x2: cx + tw, y2: cy + th, t: null });
+    }
+    var mq = BLOCK.el("div", { class: "blk-mq", style: "border:" + 2.5 * s + "px solid " + A + ";background:" + BLOCK.rgba(A, 0.14) + ";border-radius:" + 6 * s + "px" }, isi);
+    var pil = BLOCK.el("div", { class: "blk-pil", style: "bottom:" + 34 * s + "px;background:#1b2333;font-size:" + 28 * s + "px;padding:" + 14 * s + "px " + 30 * s + "px;box-shadow:0 10px 30px rgba(0,0,0,.25)" }, R);
+    var sx = X0 - 24 * s, sy = Y0 - 20 * s, ex = X0 + tw * (nc - 1.4) + g * (nc - 2), ey = Y0 + th * 1.6 + g, ta = 0.9, tb = 2.6, ez = gsap.parseEase("power2.inOut");
+    tl.to(cur, { x: sx, y: sy, duration: 0.75, ease: "power3.out" }, 0.1).to(sv, { scale: 0.88, duration: 0.08 }, ta - 0.08)
+      .to(cur, { x: ex, y: ey, duration: tb - ta, ease: "power2.inOut" }, ta).to(sv, { scale: 1, duration: 0.25, ease: "back.out(3)" }, tb + 0.05)
+      .to(cur, { x: W * 1.05, y: H * 1.05, duration: 0.7, ease: "power3.in" }, tb + 0.9);
+    // waktu sentuh tiap ubin: cari numerik sekali saat membangun (deterministik)
+    for (var q = 0; q <= 240; q++) {
+      var tt = ta + (tb - ta) * q / 240, p = ez(q / 240), rx = BLOCK.lerp(sx, ex, p), ry = BLOCK.lerp(sy, ey, p);
+      tiles.forEach(function (T) { if (T.t == null && rx >= T.x && ry >= T.y) T.t = tt; });
+    }
+    tiles.forEach(function (T) {
+      BLOCK.initial(tl, T.ck, { scale: 0, autoAlpha: 0 });
+      if (T.t == null) return;
+      tl.to(T.ck, { scale: 1, autoAlpha: 1, duration: 0.35, ease: "back.out(3)" }, T.t)
+        .fromTo(T.f, { boxShadow: "0 0 0 0px " + BLOCK.rgba(A, 0) }, { boxShadow: "0 0 0 " + 6 * s + "px " + BLOCK.rgba(A, 0.9), duration: 0.18, ease: "power2.out" }, T.t)
+        .fromTo(T.f, { scale: 1 }, { scale: 0.95, duration: 0.18, ease: "power2.out" }, T.t);
+    });
+    tl.fromTo(pil, { xPercent: -50, y: 80 * s, autoAlpha: 0 }, { xPercent: -50, y: 0, autoAlpha: 1, duration: 0.5, ease: "back.out(1.8)" }, ta + 0.2);
+    var last = "";
+    BLOCK.onTime(tl, function (t) {
+      var on = t >= ta && t < tb + 0.2, p = ez(BLOCK.progress(t, ta, tb)), rx = BLOCK.lerp(sx, ex, p), ry = BLOCK.lerp(sy, ey, p);
+      mq.style.display = on ? "block" : "none";
+      mq.style.transform = "translate(" + sx + "px," + sy + "px)"; mq.style.width = Math.max(0, rx - sx) + "px"; mq.style.height = Math.max(0, ry - sy) + "px";
+      var n = tiles.filter(function (T) { return T.t != null && t >= T.t; }).length, str = n + " foto " + P.select_text;
+      if (str !== last) { pil.textContent = str; last = str; }
+    }, k.dur);
+    return;
+  }
+  // ---- seret-lepas: papan kanban
+  var K = P.cols || [], nk = K.length || 3, gk = 24 * s, kw = (BW - gk * (nk - 1)) / nk, ch = 112 * s, gc = 16 * s, pad = 18 * s, top = 70 * s;
+  var warnaTag = ["#f59e0b", "#2d6cdf", "#16b364", "#ef4466", "#8b5cf6"], kartu = [], pos = function (c, j) { return { x: X0 + c * (kw + gk) + pad, y: Y0 + top + j * (ch + gc) }; };
+  K.forEach(function (nm, c) {
+    BLOCK.el("div", { class: "blk-kol", style: "left:" + (X0 + c * (kw + gk)) + "px;top:" + Y0 + "px;width:" + kw + "px;height:" + BH + "px;border-radius:" + 20 * s + "px;font-size:" + 24 * s + "px;padding:" + 22 * s + "px " + pad + "px;box-sizing:border-box" }, isi, BLOCK.esc(nm) + " <span style='opacity:.6'>" + ((P.card[c] || []).length) + "</span>");
+  });
+  (P.card || []).forEach(function (col, c) {
+    kartu[c] = col.map(function (tx, j) {
+      var e = BLOCK.el("div", { class: "blk-kt", style: "width:" + (kw - 2 * pad) + "px;height:" + ch + "px;border-radius:" + 14 * s + "px;padding:" + 18 * s + "px " + 20 * s + "px;font-size:" + 25 * s + "px" }, isi,
+        '<span class="blk-tag" style="width:' + 54 * s + 'px;height:' + 10 * s + 'px;background:' + warnaTag[(c * 2 + j) % 5] + '"></span><div style="margin-top:' + 14 * s + 'px">' + BLOCK.esc(tx) + "</div>");
+      var p = pos(c, j); BLOCK.initial(tl, e, { x: p.x, y: p.y }); return e;
+    });
+  });
+  var sc = P.drag[0], sj = P.drag[1], dc = P.drag[2], kc = (kartu[sc] || [])[sj];
+  if (!kc) return;
+  var dj = (kartu[dc] || []).length, a = pos(sc, sj), b = pos(dc, dj), ox = (kw - 2 * pad) * 0.42, oy = ch * 0.55;
+  var slot = BLOCK.el("div", { class: "blk-slot", style: "left:" + b.x + "px;top:" + b.y + "px;width:" + (kw - 2 * pad) + "px;height:" + ch + "px;border-radius:" + 14 * s + "px;border:" + 3 * s + "px dashed " + BLOCK.rgba(A, 0.6) + ";background:" + BLOCK.rgba(A, 0.07) }, isi);
+  isi.appendChild(kc); // kartu yang diseret di atas yang lain
+  var t1 = 1.0, t2 = 1.35, t3 = 2.65;
+  tl.to(cur, { x: a.x + ox, y: a.y + oy, duration: 0.85, ease: "power3.out" }, 0.1)
+    .to(sv, { scale: 0.88, duration: 0.08 }, t1)
+    .to(kc, { scale: 1.05, rotation: 2.5, boxShadow: "0 " + 26 * s + "px " + 50 * s + "px rgba(20,30,60,.28)", duration: 0.3, ease: "back.out(2)" }, t1 + 0.04)
+    .to(kc, { x: b.x, y: b.y, duration: t3 - t2, ease: "power2.inOut" }, t2).to(cur, { x: b.x + ox, y: b.y + oy, duration: t3 - t2, ease: "power2.inOut" }, t2)
+    .to(kc, { rotation: 5, duration: (t3 - t2) * 0.45, ease: "sine.out" }, t2).to(kc, { rotation: 0, duration: (t3 - t2) * 0.55, ease: "sine.inOut" }, t2 + (t3 - t2) * 0.45)
+    .fromTo(slot, { autoAlpha: 0, scale: 0.94 }, { autoAlpha: 1, scale: 1, duration: 0.35, ease: "power2.out" }, t2 + 0.3)
+    .to(kc, { scale: 1, boxShadow: "0 2px 6px rgba(20,30,60,.08)", duration: 0.45, ease: "back.out(2.2)" }, t3)
+    .to(slot, { autoAlpha: 0, duration: 0.2 }, t3).to(sv, { scale: 1, duration: 0.25, ease: "back.out(3)" }, t3 + 0.05)
+    .to(cur, { x: b.x + ox + 140 * s, y: b.y + oy + 160 * s, duration: 0.8, ease: "power2.inOut" }, t3 + 0.4);
+  // kartu di bawahnya merapat menutup celah
+  (kartu[sc] || []).slice(sj + 1).forEach(function (e, i) { var p = pos(sc, sj + i); tl.to(e, { x: p.x, y: p.y, duration: 0.5, ease: "back.out(1.4)" }, t2 + 0.25 + i * 0.06); });
+}, { font: true });
+</script>

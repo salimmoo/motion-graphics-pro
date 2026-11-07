@@ -1,0 +1,128 @@
+{
+ "id": "ui/touch-blob",
+ "name": "Touch Blob",
+ "name_id": "Gumpalan Lembut Disentuh",
+ "category": "ui",
+ "description": {
+  "id": "Gumpalan lembut berbutir bernapas pelan dengan gerak internal. Titik sentuh terskrip datang melambat, gumpalan menggembung tertarik ke arahnya, lalu setelah dilepas kembali dengan pegas yang mempertahankan kecepatan. Tanpa tepi keras sama sekali.",
+  "en": "A granular soft blob idles with slow internal drift; a scripted touch dot decel-arrives, the blob bulges toward it, then recovers on a velocity-preserving spring. No hard edges."
+ },
+ "tags": [
+  "ui",
+  "blob",
+  "sentuh",
+  "touch",
+  "pegas",
+  "organik",
+  "kanvas",
+  "lembut"
+ ],
+ "props": {
+  "color1": {
+   "default": "#ff8fb1",
+   "type": "color",
+   "aliases": [
+    "warna1"
+   ]
+  },
+  "color2": {
+   "default": "#7a6bff",
+   "type": "color",
+   "aliases": [
+    "warna2"
+   ]
+  },
+  "color3": {
+   "default": "#ffd08a",
+   "type": "color",
+   "hint": "Warna sorot di dalam gumpalan",
+   "aliases": [
+    "warna3"
+   ]
+  },
+  "bg": {
+   "default": "#f3eee8",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "size": {
+   "default": 300,
+   "type": "number",
+   "hint": "Jari-jari gumpalan (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "touch": {
+   "default": [
+    0.71,
+    0.4
+   ],
+   "type": "list",
+   "hint": "[x, y] titik sentuh relatif layar (0..1)",
+   "aliases": [
+    "sentuh"
+   ]
+  },
+  "arrive": {
+   "default": 1.4,
+   "type": "number",
+   "hint": "Detik titik menyentuh",
+   "aliases": [
+    "tiba"
+   ]
+  },
+  "release": {
+   "default": 3.6,
+   "type": "number",
+   "hint": "Detik titik dilepas",
+   "aliases": [
+    "lepas"
+   ]
+  },
+  "pull": {
+   "default": 0.92,
+   "type": "number",
+   "hint": "Seberapa jauh tonjolan menjangkau titik sentuh (1 = menyentuh)",
+   "aliases": [
+    "tarikan"
+   ]
+  },
+  "grain": {
+   "default": 0.18,
+   "type": "number",
+   "hint": "Kekuatan butiran (0..1)",
+   "aliases": [
+    "butir"
+   ]
+  },
+  "dot": {
+   "default": "#1d1b22",
+   "type": "color",
+   "hint": "Warna titik sentuh",
+   "aliases": [
+    "titik"
+   ]
+  },
+  "seed": {
+   "default": 9,
+   "type": "number"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/blob-sentuh",
+  "soft-blob-touch"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

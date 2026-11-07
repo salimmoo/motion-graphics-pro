@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Liquid Glass · block example ui/liquid-glass</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="6.5">
+
+<!-- Block ui/liquid-glass · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-liquid-glass" data-block="ui/liquid-glass" data-start="0" data-duration="6" data-track-index="30" class="blk blk-ui-liquid-glass">
+<script type="application/json" data-block-props>
+{"mode": "widget", "bg": true, "bg_color": ["#2a1b6e", "#ff5f8f", "#36c6ff", "#7b5cff", "#ffb86b"], "title": "Aktivitas minggu ini", "stat": [["Langkah", "48.210"], ["Tidur", "7 j 20 m"]], "chip": ["Lari", "Yoga", "Sepeda", "Renang"], "notification": [["Pesan", "Rani: Jadi ketemu jam tujuh?"], ["Kalender", "Rapat tim dimulai 10 menit lagi"], ["Kesehatan", "Target langkah hari ini tercapai"], ["Musik", "Daftar putar baru siap untukmu"]], "blur": 26, "font": "Inter:wght@400;500;600;700;800", "seed": 5}
+</script>
+</div>
+<style>
+.blk-ui-liquid-glass{position:absolute;inset:0;pointer-events:none;overflow:hidden;font-family:"Inter",system-ui,sans-serif;color:#fff}
+.blk-ui-liquid-glass .lt{position:absolute;inset:0;overflow:hidden}
+.blk-ui-liquid-glass .bl{position:absolute;border-radius:50%;left:0;top:0}
+.blk-ui-liquid-glass .kc{position:absolute;box-sizing:border-box;overflow:hidden;text-shadow:0 1px 2px rgba(0,0,0,.12)}
+.blk-ui-liquid-glass .kc::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(160deg,rgba(255,255,255,.34) 0%,rgba(255,255,255,.06) 38%,rgba(255,255,255,0) 60%,rgba(255,255,255,.12) 100%)}
+.blk-ui-liquid-glass .lb{opacity:.75;font-weight:500}
+.blk-ui-liquid-glass .nl{font-weight:800;letter-spacing:-.02em}
+</style>
+<script>
+BLOCK.mount("blk-liquid-glass", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, E = BLOCK.el, s = k.s, W = k.w, H = k.h, rng = k.random, lebar = W > H * 1.2;
+  // latar gradien bergerak buatan blok: gumpalan warna besar yang berputar lambat
+  if (P.bg) {
+    var lt = E("div", { class: "lt", style: "background:" + P.bg_color[0] }, k.root), bls = [];
+    P.bg_color.slice(1).forEach(function (c, i) {
+      var r = Math.max(W, H) * (0.35 + rng() * 0.2);
+      bls.push({ el: E("div", { class: "bl", style: "width:" + 2 * r + "px;height:" + 2 * r + "px;margin:" + -r + "px 0 0 " + -r + "px;background:radial-gradient(circle," + c + " 0%," + BLOCK.rgba(c, 0.5) + " 40%," + BLOCK.rgba(c, 0) + " 70%)" }, lt), cx: 0.2 + rng() * 0.6, cy: 0.2 + rng() * 0.6, ax: 0.18 + rng() * 0.15, ay: 0.15 + rng() * 0.15, w: 0.25 + rng() * 0.3, f: rng() * 6.28 });
+    });
+    BLOCK.onTime(tl, function (t) { bls.forEach(function (b) { b.el.style.transform = "translate(" + (b.cx + b.ax * Math.sin(t * b.w + b.f)) * W + "px," + (b.cy + b.ay * Math.cos(t * b.w * 0.8 + b.f)) * H + "px)"; }); }, D);
+  }
+  var u = Math.min(W / 1920, H / 1080) * (lebar ? 1 : 1.55), px = function (v) { return v * u + "px"; };
+  function kaca(x, y, w, h, r) {
+    return E("div", { class: "kc", style: "left:" + x + "px;top:" + y + "px;width:" + w + "px;height:" + h + "px;border-radius:" + px(r || 34) + ";padding:" + px(30) + ";background:rgba(255,255,255,.14);backdrop-filter:blur(" + P.blur * u + "px) saturate(1.7);-webkit-backdrop-filter:blur(" + P.blur * u + "px) saturate(1.7);border:" + Math.max(1, 1.5 * u) + "px solid rgba(255,255,255,.38);box-shadow:inset 0 " + px(1.5) + " 0 rgba(255,255,255,.55),0 " + px(30) + " " + px(60) + " rgba(10,5,40,.28)" }, k.root);
+  }
+  var cx = W / 2, cy = H / 2;
+  if (P.mode === "notification") {
+    // notifikasi kaca jatuh satu per satu, yang lama terdorong turun dan mengecil
+    var nw = Math.min(W * 0.86, 760 * u), nh = 118 * u, gap = 18 * u, N = P.notification.length, y0 = H * (lebar ? 0.2 : 0.3), dt = (D - 1.6) / N;
+    P.notification.forEach(function (n, i) {
+      var c = kaca(cx - nw / 2, y0, nw, nh, 30);
+      c.style.display = "flex"; c.style.alignItems = "center"; c.style.gap = px(22); c.style.padding = "0 " + px(26);
+      E("div", { style: "flex:none;width:" + px(64) + ";height:" + px(64) + ";border-radius:" + px(18) + ";background:linear-gradient(140deg," + P.bg_color[(i + 1) % P.bg_color.length] + "," + P.bg_color[(i + 2) % P.bg_color.length] + ");box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)" }, c);
+      var tx = E("div", { style: "flex:1;min-width:0" }, c);
+      E("div", { style: "font-weight:700;font-size:" + px(24) + ";display:flex;justify-content:space-between" }, tx, BLOCK.esc(n[0]) + '<span style="opacity:.6;font-weight:500;font-size:' + px(19) + '">baru saja</span>');
+      E("div", { style: "font-size:" + px(23) + ";opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" }, tx, BLOCK.esc(n[1]));
+      c.style.zIndex = 10 + i;
+      var ti = 0.3 + i * dt;
+      tl.fromTo(c, { y: -H * 0.25, scale: 0.9, autoAlpha: 0 }, { y: 0, scale: 1, autoAlpha: 1, duration: 0.8, ease: "blockSpring" }, ti);
+      for (var j = i + 1; j < N; j++) tl.to(c, { y: (j - i) * (nh * 0.5 + gap), scale: 1 - (j - i) * 0.05, opacity: Math.max(0, 1 - (j - i) * 0.3), duration: 0.7, ease: "power3.out" }, 0.3 + j * dt);
+    });
+    return;
+  }
+  // widget: dua kartu statistik, panel unggulan, deretan chip pil
+  var G = 24 * u, aw = Math.min(W * 0.86, 1240 * u), ax = cx - aw / 2, kart = [];
+  var tinggiTot = lebar ? 560 * u : 1180 * u, ay = cy - tinggiTot / 2;
+  var sw = lebar ? 360 * u : aw, sh = 200 * u;
+  P.stat.forEach(function (st, i) {
+    var c = kaca(ax, ay + i * (sh + G), sw, sh);
+    E("div", { class: "lb", style: "font-size:" + px(24) }, c, BLOCK.esc(st[0])); E("div", { class: "nl", style: "font-size:" + px(62) + ";margin-top:" + px(12) }, c, BLOCK.esc(st[1]));
+    kart.push(c);
+  });
+  var px0 = lebar ? ax + sw + G : ax, py0 = lebar ? ay : ay + 2 * (sh + G), pw = lebar ? aw - sw - G : aw, phh = lebar ? 2 * sh + G : 420 * u;
+  var sp = kaca(px0, py0, pw, phh, 40); kart.push(sp);
+  E("div", { class: "lb", style: "font-size:" + px(24) }, sp, "Ringkasan");
+  E("div", { class: "nl", style: "font-size:" + px(46) + ";margin-top:" + px(8) }, sp, BLOCK.esc(P.title));
+  var gv = BLOCK.svg("svg", { viewBox: "0 0 600 160", preserveAspectRatio: "none", style: "position:absolute;left:" + px(30) + ";right:" + px(30) + ";bottom:" + px(30) + ";width:calc(100% - " + px(60) + ");height:" + px(160) }, sp);
+  var pts = [20, 60, 45, 90, 70, 120, 105, 140], d = "M0 " + (160 - pts[0]);
+  pts.forEach(function (v, i) { if (i) d += " L" + i * (600 / (pts.length - 1)) + " " + (160 - v); });
+  var gr = BLOCK.svg("path", { d: d, fill: "none", stroke: "#fff", "stroke-width": 5, "stroke-linecap": "round", "stroke-linejoin": "round", "vector-effect": "non-scaling-stroke" }, gv);
+  var cyc = (lebar ? ay + phh + G : py0 + phh + G), chx = ax, chips = [];
+  P.chip.forEach(function (c, i) {
+    var w = (c.length * 15 + 70) * u, el = kaca(chx, cyc, w, 74 * u, 99);
+    el.style.padding = "0"; el.style.display = "flex"; el.style.alignItems = "center"; el.style.justifyContent = "center"; el.style.fontWeight = 600; el.style.fontSize = px(25);
+    el.innerHTML = BLOCK.esc(c); if (i === 0) el.style.background = "rgba(255,255,255,.32)";
+    chx += w + 14 * u; chips.push(el);
+  });
+  var L = BLOCK.prepareStroke(gr);
+  tl.fromTo(kart, { autoAlpha: 0, y: 50 * u, scale: 0.94 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.9, ease: "power3.out", stagger: 0.1 }, 0.2)
+    .fromTo(gr, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: 1.2, ease: "power2.inOut" }, 0.8)
+    .fromTo(chips, { autoAlpha: 0, scale: 0.6 }, { autoAlpha: 1, scale: 1, duration: 0.6, ease: "blockSpringStrong", stagger: 0.07 }, 0.9);
+  kart.concat(chips).forEach(function (c, i) { tl.fromTo(c, { y: 0 }, { y: (i % 2 ? 1 : -1) * 7 * u, duration: (D - 2) / 2, ease: "sine.inOut", yoyo: true, repeat: 1, immediateRender: false }, 1.6 + i * 0.05); });
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 6.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 6.5);
+</script>
+</body>
+</html>

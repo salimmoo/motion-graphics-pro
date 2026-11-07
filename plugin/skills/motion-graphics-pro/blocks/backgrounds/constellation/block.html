@@ -1,0 +1,28 @@
+<!-- Block backgrounds/constellation · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="backgrounds/constellation" data-start="0" data-duration="8" data-track-index="0" class="blk blk-backgrounds-constellation">
+<script type="application/json" data-block-props>
+{"constellation": [], "label": true, "star": 280, "dust": 1500, "orbit": true, "line_color": "#fff2cf", "bg_color": "#050816", "nebula": true, "highlight": -1, "highlight_start": 5, "seed": 11}
+</script>
+</div>
+<style>
+.blk-backgrounds-constellation{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.blk-backgrounds-constellation .blk-wadah{position:absolute;inset:0}
+.blk-backgrounds-constellation canvas{position:absolute;inset:0;width:100% !important;height:100% !important}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+var P = k.P;
+  if (!window.MGP || !MGP.constellationLines) { console.error("[blok] backgrounds/constellation needs lib:mgp.js"); return; }
+  // ukuran logis: sisi pendek 720 (skala rancangan modul), piksel kanvas = resolusi penuh lewat dpr
+  var f = Math.min(k.w, k.h) / 720, W = Math.round(k.w / f), H = Math.round(k.h / f);
+  var wadah = BLOCK.el("div", { class: "blk-wadah" }, k.root);
+  var o = { width: W, height: H, dpr: f, fit: true, duration: k.dur, seed: +P.seed, stars: +P.star, dust: +P.dust,
+    labels: !!P.label, bg: P.bg_color, background: P.nebula ? "nebula" : P.bg_color,
+    lineColors: [P.line_color, BLOCK.mix(P.line_color, "#ffc860", 0.35)] };
+  if (P.constellation && P.constellation.length) o.constellations = P.constellation;
+  if (!P.orbit) o.rings = [];
+  if (+P.highlight >= 0) o.focus = { index: +P.highlight, t: +P.highlight_start };
+  var inst = MGP.constellationLines.create(wadah, o);
+  return Promise.resolve(inst.ready).then(function () { BLOCK.onTime(k.tl, function (t) { inst.seek(t); }, k.dur); });
+});
+</script>

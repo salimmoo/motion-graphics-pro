@@ -1,0 +1,126 @@
+{
+ "id": "accents/core-orbit",
+ "name": "Core Orbit",
+ "name_id": "Orbit Inti",
+ "category": "accents",
+ "description": {
+  "id": "Inti tetap di tengah menjadi jangkar bagi satelit yang mengorbit di elips miring masing-masing. Putaran melambat secara deterministik sampai setiap satelit berhenti di posisi akhir yang tersusun rapi, lalu labelnya muncul. Satelit di belakang inti tampak lebih kecil dan redup.",
+  "en": "A fixed nucleus anchors satellites on their own tilted elliptical orbits. The spin decelerates deterministically until every satellite settles into a composed lockup and its label appears; satellites behind the nucleus read smaller and dimmer."
+ },
+ "tags": [
+  "aksen",
+  "orbit",
+  "inti",
+  "satelit",
+  "ekosistem",
+  "diagram",
+  "lockup",
+  "accents",
+  "core"
+ ],
+ "props": {
+  "core": {
+   "default": "Inti Data",
+   "type": "text",
+   "aliases": [
+    "inti"
+   ]
+  },
+  "satellite": {
+   "default": [
+    "Keamanan",
+    "Integrasi",
+    "Otomasi",
+    "Pelaporan",
+    "Cadangan"
+   ],
+   "type": "list",
+   "aliases": [
+    "satelit"
+   ]
+  },
+  "scale": {
+   "default": 0.78,
+   "type": "number",
+   "hint": "Ukuran orbit terluar terhadap bingkai",
+   "aliases": [
+    "skala"
+   ]
+  },
+  "tilt": {
+   "default": 0.42,
+   "type": "number",
+   "hint": "Perbandingan sumbu pendek/panjang orbit",
+   "aliases": [
+    "kemiringan"
+   ]
+  },
+  "core_size": {
+   "default": 230,
+   "type": "number",
+   "hint": "Diameter inti (px pada 1080)",
+   "aliases": [
+    "ukuran_inti"
+   ]
+  },
+  "color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "core_color": {
+   "default": "#7048e8",
+   "type": "color",
+   "aliases": [
+    "warna_inti"
+   ]
+  },
+  "accent_color": {
+   "default": "#20c997",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@600;800",
+   "type": "font"
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_y"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "aksen/orbit-inti",
+  "locked-nucleus-orbit"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@600;800"
+  ]
+ }
+}

@@ -1,0 +1,62 @@
+<!-- Block subtitles/glitch · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="subtitles/glitch" data-start="0" data-duration="5" data-track-index="30" class="blk blk-subtitles-glitch">
+<script type="application/json" data-block-props>
+{"text": "Sinyal sempat terputus tapi pesannya tetap sampai", "words": [], "kps": 2.5, "max_words": 3, "font": "Space Grotesk:wght@700", "size": 84, "color": "#ffffff", "bottom": 15, "uppercase": true, "color_1": "#ff1f4b", "color_2": "#19e3ff", "slide": 9, "intensity": 1, "scanline_overlay": true, "line_opacity": 0.18}
+</script>
+<div class="blk-crt"></div>
+<div class="blk-cap"></div>
+</div>
+<style>
+.blk-subtitles-glitch{position:absolute;inset:0;pointer-events:none}
+.blk-subtitles-glitch .blk-crt{position:absolute;inset:0}
+.blk-subtitles-glitch .blk-cap{position:absolute;left:5%;right:5%;text-align:center;line-height:1.15}
+.blk-subtitles-glitch .blk-hal{position:absolute;left:0;right:0;bottom:0}
+.blk-subtitles-glitch .blk-iris{position:absolute;left:0;right:0;top:0}
+.blk-subtitles-glitch .blk-w{display:inline-block;margin:0 .12em}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, root = k.root, cap = root.querySelector(".blk-cap"), crt = root.querySelector(".blk-crt");
+  cap.style.cssText += ";bottom:" + P.bottom + "%;color:" + P.color + ";font-family:" + BLOCK.family(P.font) + ";font-size:" +
+    Math.round(P.size * s) + "px" + (P.uppercase ? ";text-transform:uppercase" : "");
+  var gp = Math.max(2, Math.round(2 * s));
+  if (P.scanline_overlay) crt.style.cssText += ";background:repeating-linear-gradient(0deg,rgba(0,0,0," + P.line_opacity + ") 0 " + gp + "px,transparent " + gp + "px " + gp * 2 +
+    "px),radial-gradient(120% 90% at 50% 50%,transparent 55%,rgba(0,0,0," + (P.line_opacity * 2.2).toFixed(2) + ") 100%)";
+  var pages = BLOCK.pages(BLOCK.words(P), P.max_words);
+  pages.forEach(function (pg, pi) {
+    var h = BLOCK.el("div", { class: "blk-hal" }, cap);
+    var isi = BLOCK.el("div", null, h), iris = BLOCK.el("div", { class: "blk-iris" }, h); // iris = salinan yang diiris & digeser
+    BLOCK.initial(tl, h, { autoAlpha: 0 }).set(h, { autoAlpha: 1 }, pg.mulai).set(h, { autoAlpha: 0 }, pg.akhir);
+    pg.kata.forEach(function (w) {
+      [isi, iris].forEach(function (lap) {
+        var e = BLOCK.el("span", { class: "blk-w" }, lap); e.textContent = String(w.teks).replace(/\*/g, "");
+        BLOCK.initial(tl, e, { opacity: 0 }); tl.set(e, { opacity: 1 }, w.mulai);
+      });
+    });
+    pg.h = h; pg.isi = isi; pg.iris = iris;
+  });
+  // intensitas glitch = ledakan tiap kata masuk + lonjakan acak berseed; semua murni dari t
+  BLOCK.onTime(tl, function (t) {
+    if (P.scanline_overlay) crt.style.backgroundPosition = "0 " + ((t * 40 * s) % (gp * 2)).toFixed(1) + "px,0 0";
+    pages.forEach(function (pg, pi) {
+      if (t < pg.mulai || t >= pg.akhir) return;
+      var I = 0;
+      pg.kata.forEach(function (w) { var dt = t - w.mulai; if (dt >= 0) I = Math.max(I, Math.exp(-dt * 9)); });
+      var g = BLOCK.boil(t, pi + 3, 12);
+      if (g > 0.62) I = Math.max(I, (g - 0.62) * 2.2);
+      I *= P.intensity;
+      var j = BLOCK.boil(t, pi + 11, 24), dx = P.slide * s * (0.35 + I * 1.6) * (0.7 + 0.3 * j);
+      var sh = dx.toFixed(1) + "px 0 " + BLOCK.rgba(P.color_1, 0.9) + "," + (-dx).toFixed(1) + "px 0 " + BLOCK.rgba(P.color_2, 0.9);
+      pg.isi.style.textShadow = sh;
+      pg.isi.style.transform = "translateX(" + (I * j * 6 * s).toFixed(1) + "px) skewX(" + (I * j * 6).toFixed(2) + "deg)";
+      if (I > 0.22) {
+        var a = (50 + 45 * BLOCK.boil(t, pi + 21, 24)), b = Math.max(0, 100 - a - 8 - 22 * I);
+        pg.iris.style.visibility = "inherit";
+        pg.iris.style.clipPath = "inset(" + a.toFixed(1) + "% -10% " + b.toFixed(1) + "% -10%)";
+        pg.iris.style.transform = "translateX(" + (BLOCK.boil(t, pi + 31, 24) * 26 * s * I).toFixed(1) + "px)";
+        pg.iris.style.textShadow = (-dx * 1.5).toFixed(1) + "px 0 " + P.color_2;
+      } else pg.iris.style.visibility = "hidden";
+    });
+  }, k.dur);
+}, { font: true });
+</script>

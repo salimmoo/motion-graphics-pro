@@ -1,0 +1,80 @@
+<!-- Block social/post-card · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="social/post-card" data-start="0" data-duration="6" data-track-index="30" class="blk blk-social-post-card">
+<script type="application/json" data-block-props>
+{"platform": "x", "theme": "dark", "name": "Nadia Kirana", "account": "@nadiakirana", "community": "s/BerkebunKota", "time": "2 jam", "title": "Tomat ceri pertama dari balkon lantai 12!", "text": "Tiga bulan nyiram tiap pagi, akhirnya panen juga. Ternyata kuncinya cuma sinar matahari dan sabar.", "verified": true, "reply": 248, "share": 1320, "like": 9840, "views": 182000, "accent_color": "", "position_x": 50, "position_y": 50, "width": 900, "font": "Inter:wght@400;500;700;800"}
+</script>
+</div>
+<style>
+.blk-social-post-card{position:absolute;inset:0;pointer-events:none}
+.blk-social-post-card .blk-pos{position:absolute;transform:translate(-50%,-50%)}
+.blk-social-post-card .blk-kartu{box-sizing:border-box;border-radius:calc(var(--s)*28px);padding:calc(var(--s)*40px) calc(var(--s)*44px);line-height:1.35;box-shadow:0 calc(var(--s)*30px) calc(var(--s)*80px) rgba(0,0,0,.35)}
+.blk-social-post-card .blk-kep{display:flex;align-items:center;gap:calc(var(--s)*20px)}
+.blk-social-post-card .blk-av{width:calc(var(--s)*92px);height:calc(var(--s)*92px);border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:calc(var(--s)*36px)}
+.blk-social-post-card .blk-nm{font-weight:800;font-size:calc(var(--s)*36px);display:flex;align-items:center;gap:calc(var(--s)*10px);line-height:1.1}
+.blk-social-post-card .blk-ak{font-size:calc(var(--s)*28px);opacity:.6;line-height:1.2}
+.blk-social-post-card .blk-tx{font-size:calc(var(--s)*38px);margin:calc(var(--s)*26px) 0}
+.blk-social-post-card .blk-jdl{font-size:calc(var(--s)*44px);font-weight:800;line-height:1.2;margin-top:calc(var(--s)*18px)}
+.blk-social-post-card .blk-met{display:flex;justify-content:space-between;font-size:calc(var(--s)*28px);padding-top:calc(var(--s)*22px);border-top:1px solid var(--garis)}
+.blk-social-post-card .blk-m{display:flex;align-items:center;gap:calc(var(--s)*10px);opacity:.75;font-variant-numeric:tabular-nums}
+.blk-social-post-card .blk-m svg{width:calc(var(--s)*34px);height:calc(var(--s)*34px)}
+.blk-social-post-card .blk-badan{display:flex;gap:calc(var(--s)*28px)}
+.blk-social-post-card .blk-vote{display:flex;flex-direction:column;align-items:center;gap:calc(var(--s)*6px);font-weight:800;font-size:calc(var(--s)*30px);flex:none}
+.blk-social-post-card .blk-vote svg{width:calc(var(--s)*48px);height:calc(var(--s)*48px)}
+.blk-social-post-card .blk-kom{font-weight:700;font-size:calc(var(--s)*28px)}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, D = k.dur, E = BLOCK.el, R = k.root;
+  var rd = P.platform === "reddit", gelap = P.theme === "dark";
+  var aks = P.accent_color || (rd ? "#ff4500" : "#1d9bf0");
+  var bg = gelap ? (rd ? "#1a1a1b" : "#000000") : "#ffffff", fg = gelap ? "#e7e9ea" : "#0f1419";
+  R.style.cssText += ";--s:" + s + ";--garis:" + (gelap ? "rgba(255,255,255,.14)" : "rgba(0,0,0,.1)");
+  var pos = E("div", { class: "blk-pos", style: "left:" + P.position_x + "%;top:" + P.position_y + "%" }, R);
+  var kar = E("div", { class: "blk-kartu", style: "width:" + Math.min(P.width * s, k.w * 0.9) + "px;background:" + bg + ";color:" + fg + ";font-family:" + BLOCK.family(P.font) + (gelap && !rd ? ";border:1px solid rgba(255,255,255,.16)" : "") }, pos);
+  function ikon(d, w) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="' + (w || 1.8) + '" stroke-linecap="round" stroke-linejoin="round">' + d + "</svg>"; }
+  var I = {
+    balas: '<path d="M4 5h16v11H9l-5 4z"/>', ulang: '<path d="M7 7h10l-3-3M17 17H7l3 3M17 7v6M7 17v-6"/>',
+    suka: '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>', tayang: '<path d="M5 20V11M10 20V5M15 20v-7M20 20V9"/>',
+    naik: '<path d="M12 4l7 8h-4v8H9v-8H5z"/>', turun: '<path d="M12 20l7-8h-4V4H9v8H5z"/>', bagi: '<path d="M12 3v12M7 8l5-5 5 5M5 14v6h14v-6"/>'
+  };
+  var ini = String(P.name).split(/\s+/).map(function (w) { return w[0]; }).join("").slice(0, 2).toUpperCase();
+  var kep = E("div", { class: "blk-kep" }, kar);
+  var av = E("div", { class: "blk-av", style: "background:linear-gradient(135deg," + aks + "," + BLOCK.mix(aks, "#000000", 0.45) + ")" + (rd ? ";width:" + Math.round(64 * s) + "px;height:" + Math.round(64 * s) + "px;font-size:" + Math.round(26 * s) + "px" : "") }, kep, ini);
+  var id = E("div", null, kep);
+  var cek = P.verified ? '<svg viewBox="0 0 24 24" style="width:' + Math.round(34 * s) + 'px;height:' + Math.round(34 * s) + 'px"><circle cx="12" cy="12" r="10" fill="' + aks + '"/><path d="M7.5 12.5l3 3 6-6.5" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>' : "";
+  var vote, angkaV, isi = kar, metrik = [];
+  if (rd) {
+    E("div", { class: "blk-kom" }, id, BLOCK.esc(P.community));
+    E("div", { class: "blk-ak" }, id, "oleh u/" + BLOCK.esc(String(P.account).replace(/^@/, "")) + " · " + BLOCK.esc(P.time));
+    var badan = E("div", { class: "blk-badan" }, kar);
+    vote = E("div", { class: "blk-vote" }, badan); var up = E("div", { style: "color:" + aks }, vote, ikon(I.naik, 2)); angkaV = E("div", null, vote); E("div", { style: "opacity:.5" }, vote, ikon(I.turun, 2));
+    isi = E("div", { style: "flex:1" }, badan);
+    E("div", { class: "blk-jdl" }, isi, BLOCK.esc(P.title));
+  } else {
+    E("div", { class: "blk-nm" }, id, BLOCK.esc(P.name) + cek);
+    E("div", { class: "blk-ak" }, id, BLOCK.esc(P.account) + " · " + BLOCK.esc(P.time));
+  }
+  var tx = E("div", { class: "blk-tx" }, isi);
+  var kata = BLOCK.split(tx, P.text, "words");
+  var met = E("div", { class: "blk-met" }, isi);
+  var daftar = rd ? [["balas", P.reply, " komentar"], ["bagi", P.share, " bagikan"]] : [["balas", P.reply], ["ulang", P.share], ["suka", P.like], ["tayang", P.views]];
+  daftar.forEach(function (d) { var m = E("div", { class: "blk-m" }, met, ikon(I[d[0]])); var n = E("span", null, m); metrik.push({ el: m, n: n, v: +d[1] || 0, akhir: d[2] || "", kunci: d[0] }); });
+  function fmt(v) { v = Math.round(v); return v >= 1e6 ? (v / 1e6).toFixed(1).replace(".", ",") + " jt" : v >= 1e4 ? (v / 1e3).toFixed(1).replace(".", ",") + " rb" : v.toLocaleString("id-ID"); }
+  // masuk: kartu naik + skala halus, teks per kata, metrik menghitung naik
+  tl.fromTo(kar, { y: 80 * s, scale: 0.94, autoAlpha: 0 }, { y: 0, scale: 1, autoAlpha: 1, duration: 0.8, ease: "blockSpringSoft" }, 0.1);
+  tl.fromTo([av, id], { x: -20 * s, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out", stagger: 0.08 }, 0.35);
+  tl.fromTo(kata, { y: 14 * s, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.4, ease: "power2.out", stagger: Math.min(0.06, 1.4 / kata.length) }, 0.55);
+  var tm = 0.7 + Math.min(1.4, kata.length * 0.06);
+  var o = { p: 0 };
+  function hitung() { metrik.forEach(function (m) { m.n.textContent = fmt(m.v * o.p) + m.akhir; }); if (angkaV) angkaV.textContent = fmt(P.like * o.p); }
+  tl.fromTo(metrik.map(function (m) { return m.el; }), { y: 10 * s, autoAlpha: 0 }, { y: 0, autoAlpha: 0.75, duration: 0.4, stagger: 0.06 }, tm - 0.2);
+  tl.fromTo(o, { p: 0.6 }, { p: 1, duration: D - tm - 0.6, ease: "power2.out", onUpdate: hitung }, tm);
+  hitung();
+  // aksi: suka meletup (x) / panah naik menyala (reddit)
+  var sasaran = rd ? up : metrik[2].el;
+  tl.to(sasaran, { scale: 1.35, color: rd ? aks : "#f91880", opacity: 1, duration: 0.18, ease: "power2.out" }, tm + 0.6)
+    .to(sasaran, { scale: 1, duration: 0.5, ease: "back.out(3)" }, tm + 0.78);
+  if (!rd) tl.set(sasaran.querySelector("path"), { attr: { fill: "#f91880" } }, tm + 0.62);
+  tl.to(kar, { y: -40 * s, autoAlpha: 0, duration: 0.45, ease: "power2.in" }, D - 0.5);
+}, { font: true });
+</script>

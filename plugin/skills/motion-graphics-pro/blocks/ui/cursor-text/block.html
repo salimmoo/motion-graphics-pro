@@ -1,0 +1,130 @@
+<!-- Block ui/cursor-text · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="ui/cursor-text" data-start="0" data-duration="5" data-track-index="40" class="blk blk-ui-cursor-text">
+<script type="application/json" data-block-props>
+{"mode": "text-select", "title": "Catatan Rapat", "text": "Tim sepakat merilis fitur baru minggu depan setelah uji coba bersama pengguna selesai dan semua catatan dirapikan.", "phrase": "merilis fitur baru minggu depan", "file": ["Laporan Q3", "Foto Tim", "Anggaran", "Presentasi", "Catatan"], "file_index": 1, "action": "duplicate", "new_name": "Foto Tim Final", "accent_color": "#2d6cdf", "bg": "#eef1f6", "font": "Inter:wght@400;500;600;700"}
+</script>
+<div class="blk-isi"></div>
+<div class="blk-cur"><svg class="blk-ar" viewBox="0 0 30 44"><path d="M1 1 L1 33 L9 25.5 L14.5 38.5 L20 36 L14.6 23.4 L25.5 23.4 Z" fill="#111827" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/></svg><svg class="blk-ib" viewBox="-8 -20 16 40"><path d="M-5 -17 Q0 -17 0 -13 L0 13 Q0 17 -5 17 M5 -17 Q0 -17 0 -13 M0 13 Q0 17 5 17 M-3 0 L3 0" fill="none" stroke="#fff" stroke-width="4.5" stroke-linecap="round"/><path d="M-5 -17 Q0 -17 0 -13 L0 13 Q0 17 -5 17 M5 -17 Q0 -17 0 -13 M0 13 Q0 17 5 17 M-3 0 L3 0" fill="none" stroke="#111827" stroke-width="2" stroke-linecap="round"/></svg></div>
+</div>
+<style>
+.blk-ui-cursor-text{position:absolute;inset:0;pointer-events:none;overflow:hidden;color:#1b2333}
+.blk-ui-cursor-text .blk-isi{position:absolute;inset:0}
+.blk-ui-cursor-text .blk-dok{position:absolute;background:#fff;box-sizing:border-box;box-shadow:0 10px 40px rgba(20,30,60,.10)}
+.blk-ui-cursor-text .blk-dok h3{margin:0;font-weight:700}
+.blk-ui-cursor-text .blk-dok p{margin:0;font-weight:400;color:#2a3242}
+.blk-ui-cursor-text .blk-ch{border-radius:2px}
+.blk-ui-cursor-text .blk-tb{position:absolute;left:0;top:0;display:flex;background:#1b2333;box-shadow:0 12px 30px rgba(0,0,0,.25)}
+.blk-ui-cursor-text .blk-tb div{display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+.blk-ui-cursor-text .blk-fl{position:absolute;left:0;top:0;display:flex;flex-direction:column;align-items:center;font-weight:500;text-align:center}
+.blk-ui-cursor-text .blk-nm{white-space:nowrap}
+.blk-ui-cursor-text .blk-mn{position:absolute;left:0;top:0;background:rgba(255,255,255,.96);box-shadow:0 18px 50px rgba(20,30,60,.25);transform-origin:0 0;border:1px solid #e3e7ef}
+.blk-ui-cursor-text .blk-mi{position:relative;display:flex;align-items:center;font-weight:500;white-space:nowrap}
+.blk-ui-cursor-text .blk-hv{position:absolute;left:0;top:0}
+.blk-ui-cursor-text .blk-toast{position:absolute;left:50%;display:flex;align-items:center;background:#1b2333;color:#fff;font-weight:600;white-space:nowrap}
+.blk-ui-cursor-text .blk-cur{position:absolute;left:0;top:0;width:0;height:0}
+.blk-ui-cursor-text .blk-cur svg{position:absolute;overflow:visible;transform-origin:0 0}
+.blk-ui-cursor-text .blk-ar{left:0;top:0;filter:drop-shadow(0 3px 5px rgba(0,0,0,.3))}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, A = P.accent_color, W = k.w, H = k.h;
+  R.style.fontFamily = BLOCK.family(P.font); R.style.background = P.bg;
+  var isi = R.querySelector(".blk-isi"), cur = R.querySelector(".blk-cur"), ar = R.querySelector(".blk-ar"), ib = R.querySelector(".blk-ib");
+  ar.setAttribute("width", 30 * s); ar.setAttribute("height", 44 * s); ib.setAttribute("width", 16 * s * 1.4); ib.setAttribute("height", 40 * s * 1.4);
+  ib.style.left = -8 * s * 1.4 + "px"; ib.style.top = -20 * s * 1.4 + "px";
+  var rr = R.getBoundingClientRect(), fx = W / (rr.width || W);
+  function kotak(e) { var r = e.getBoundingClientRect(); return { x: (r.left - rr.left) * fx, y: (r.top - rr.top) * fx, w: r.width * fx, h: r.height * fx }; }
+  var KEY = [], ibeam = [], ez = {};
+  function ke(t, x, y, e) { KEY.push({ t: t, x: x, y: y, e: ez[e || "power2.inOut"] || (ez[e || "power2.inOut"] = gsap.parseEase(e || "power2.inOut")) }); }
+  function klik(t, el) { tl.to(el || ar, { scale: 0.85, duration: 0.07 }, t).to(el || ar, { scale: 1, duration: 0.3, ease: "back.out(3)" }, t + 0.08); }
+  var fs = 40 * s, extra = function () {};
+  if (P.mode !== "context-menu") {
+    var dw = Math.min(W * 0.78, 1300 * s), dok = BLOCK.el("div", { class: "blk-dok", style: "left:" + (W - dw) / 2 + "px;top:" + H * 0.22 + "px;width:" + dw + "px;padding:" + 60 * s + "px " + 70 * s + "px;border-radius:" + 24 * s + "px" }, isi);
+    BLOCK.el("h3", { style: "font-size:" + 54 * s + "px;margin-bottom:" + 28 * s + "px" }, dok, BLOCK.esc(P.title));
+    var p = BLOCK.el("p", { style: "font-size:" + fs + "px;line-height:1.65" }, dok), tx = String(P.text), i0 = Math.max(0, tx.indexOf(P.phrase)), fr = tx.indexOf(P.phrase) >= 0 ? P.phrase : tx.split(" ").slice(0, 3).join(" ");
+    p.appendChild(document.createTextNode(tx.slice(0, i0)));
+    var fe = BLOCK.el("span", null, p), ch = Array.from(fr).map(function (c) { var e = BLOCK.el("span", { class: "blk-ch" }, fe); e.textContent = c; return e; });
+    p.appendChild(document.createTextNode(tx.slice(i0 + fr.length)));
+    var bx = ch.map(kotak), N = ch.length, ta = 1.05, tb = 2.25;
+    ke(0, W * 1.05, H * 0.95); ke(0.9, bx[0].x, bx[0].y + bx[0].h / 2, "power3.out"); ke(ta, bx[0].x, bx[0].y + bx[0].h / 2);
+    bx.forEach(function (b, i) { ke(ta + (tb - ta) * (i + 1) / N, b.x + b.w, b.y + b.h / 2, "none"); });
+    ibeam.push([0.55, 2.55]);
+    // bilah format muncul di atas seleksi
+    var tbar = BLOCK.el("div", { class: "blk-tb", style: "border-radius:" + 14 * s + "px;padding:" + 6 * s + "px" }, isi), bt = [];
+    ["B", "I", "U", "↗"].forEach(function (c, i) { bt.push(BLOCK.el("div", { style: "width:" + 60 * s + "px;height:" + 56 * s + "px;border-radius:" + 9 * s + "px;font-size:" + 28 * s + "px;" + (i === 1 ? "font-style:italic;" : i === 2 ? "text-decoration:underline;" : "") }, tbar, c)); });
+    var tw = 4 * 60 * s + 12 * s, mx = (bx[0].x + bx[N - 1].x + bx[N - 1].w) / 2, tyy = bx[0].y - 56 * s - 34 * s;
+    if (bx[N - 1].y > bx[0].y + 4) mx = bx[0].x + tw / 2;
+    tl.fromTo(tbar, { x: mx - tw / 2, y: tyy + 16 * s, autoAlpha: 0, scale: 0.9 }, { x: mx - tw / 2, y: tyy, autoAlpha: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 2.4);
+    var b0x = mx - tw / 2 + 6 * s + 30 * s, b0y = tyy + 6 * s + 34 * s;
+    ke(2.6, bx[N - 1].x + bx[N - 1].w, bx[N - 1].y + bx[N - 1].h / 2); ke(3.2, b0x, b0y, "power3.inOut");
+    klik(3.25); tl.fromTo(bt[0], { background: "rgba(255,255,255,0)" }, { background: A, duration: 0.15 }, 3.28);
+    ke(3.9, b0x + 20 * s, b0y + 70 * s); ke(4.6, b0x + 60 * s, b0y + 140 * s, "power2.out");
+    extra = function (t) {
+      var n = BLOCK.clamp(Math.ceil((t - ta) / (tb - ta) * N), 0, N);
+      ch.forEach(function (e, i) { var on = t >= ta && i < n; e.style.background = on ? BLOCK.rgba(A, 0.25) : "transparent"; });
+      fe.style.fontWeight = t >= 3.3 ? "700" : "400";
+    };
+  } else {
+    var F = P.file || [], nf = F.length, cw = 210 * s, gap = 40 * s, cols = Math.max(1, Math.min(nf + 1, Math.floor((W * 0.86 + gap) / (cw + gap))));
+    var gx = (W - (cols * cw + (cols - 1) * gap)) / 2, ri = 200 * s, gy = (H - Math.ceil((nf + 1) / cols) * (ri + 80 * s)) / 2 - 40 * s, wr = ["#2d6cdf", "#f59e0b", "#16b364", "#ef4466", "#8b5cf6"];
+    var slot = function (i) { return { x: gx + (i % cols) * (cw + gap), y: gy + Math.floor(i / cols) * (ri + 80 * s) }; };
+    var ikon = function (i) { var c = wr[i % 5]; return i === 1 ? '<svg width="' + 120 * s + '" height="' + 120 * s + '" viewBox="0 0 60 60"><path d="M4 14 Q4 10 8 10 L22 10 L27 15 L52 15 Q56 15 56 19 L56 48 Q56 52 52 52 L8 52 Q4 52 4 48 Z" fill="' + c + '"/><path d="M4 22 L56 22" stroke="rgba(255,255,255,.35)" stroke-width="2"/></svg>'
+      : '<svg width="' + 120 * s + '" height="' + 120 * s + '" viewBox="0 0 60 60"><path d="M12 4 L38 4 L50 16 L50 56 L12 56 Z" fill="#fff" stroke="#cfd6e3" stroke-width="2"/><path d="M38 4 L38 16 L50 16" fill="#e8ecf3" stroke="#cfd6e3" stroke-width="2"/><rect x="18" y="26" width="26" height="4" rx="2" fill="' + c + '"/><rect x="18" y="34" width="20" height="4" rx="2" fill="#d5dbe6"/><rect x="18" y="42" width="23" height="4" rx="2" fill="#d5dbe6"/></svg>'; };
+    var fl = F.map(function (nm, i) {
+      var e = BLOCK.el("div", { class: "blk-fl", style: "width:" + cw + "px;font-size:" + 26 * s + "px;gap:" + 14 * s + "px" }, isi, ikon(i) + '<div class="blk-nm" style="padding:' + 4 * s + 'px ' + 10 * s + 'px;border-radius:' + 8 * s + 'px">' + BLOCK.esc(nm) + "</div>");
+      var q = slot(i); BLOCK.initial(tl, e, { x: q.x, y: q.y }); return e;
+    });
+    var fi = BLOCK.clamp(P.file_index | 0, 0, nf - 1), tgt = fl[fi], q0 = slot(fi), cx = q0.x + cw * 0.55, cy = q0.y + 70 * s;
+    var nmEl = tgt.querySelector(".blk-nm"), aksi = P.action, items = [["Buka", ""], ["Duplikat", "duplicate"], ["Ganti nama", "rename"], ["Salin tautan", "link"], ["Pindahkan ke Sampah", "delete"]];
+    var mn = BLOCK.el("div", { class: "blk-mn", style: "border-radius:" + 16 * s + "px;padding:" + 8 * s + "px;font-size:" + 26 * s + "px;width:" + 330 * s + "px" }, isi);
+    var hv = BLOCK.el("div", { class: "blk-hv", style: "width:" + 314 * s + "px;height:" + 56 * s + "px;border-radius:" + 10 * s + "px;background:" + A }, mn);
+    var mi = items.map(function (it, i) { return BLOCK.el("div", { class: "blk-mi", style: "height:" + 56 * s + "px;padding:0 " + 18 * s + "px;" + (i === 4 ? "color:#e5484d;border-top:1px solid #e3e7ef;margin-top:" + 4 * s + "px" : "") }, mn, it[0]); });
+    var pilih = Math.max(1, items.findIndex(function (it) { return it[1] === aksi; })), mx2 = cx + 4 * s, my2 = cy + 4 * s;
+    tl.fromTo(tgt.querySelector("svg"), { scale: 1 }, { scale: 0.94, duration: 0.08 }, 1.0).to(tgt.querySelector("svg"), { scale: 1, duration: 0.3, ease: "back.out(3)" }, 1.08);
+    tl.fromTo(mn, { x: mx2, y: my2, scale: 0.2, autoAlpha: 0 }, { x: mx2, y: my2, scale: 1, autoAlpha: 1, duration: 0.32, ease: "back.out(1.7)" }, 1.05)
+      .to(mn, { scale: 0.95, autoAlpha: 0, duration: 0.16, ease: "power2.in" }, 2.45);
+    ke(0, W * 1.05, H * 0.95); ke(0.9, cx, cy, "power3.out"); ke(1.4, cx, cy);
+    var it0y = my2 + 8 * s + 28 * s, iy = function (i) { return it0y + i * 56 * s + (i === 4 ? 5 * s : 0); };
+    ke(1.6, mx2 + 90 * s, iy(0), "power2.out"); ke(2.2, mx2 + 120 * s, iy(pilih), "power2.inOut"); klik(2.3);
+    ke(2.9, mx2 + 200 * s, iy(pilih) + 120 * s, "power2.inOut"); ke(4.6, mx2 + 240 * s, iy(pilih) + 170 * s, "sine.inOut");
+    var hvy = -1, t3 = 2.55, toast = null, nmAsli = nmEl.textContent;
+    function bersulang(teks) {
+      toast = BLOCK.el("div", { class: "blk-toast", style: "bottom:" + 60 * s + "px;font-size:" + 28 * s + "px;padding:" + 18 * s + "px " + 30 * s + "px;border-radius:" + 16 * s + "px;gap:" + 14 * s + "px" }, R, '<svg width="' + 30 * s + '" height="' + 30 * s + '" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="' + A + '"/><path d="M5.5 10.5l3 3 6-7" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>' + BLOCK.esc(teks));
+      tl.fromTo(toast, { xPercent: -50, y: 120 * s, autoAlpha: 0 }, { xPercent: -50, y: 0, autoAlpha: 1, duration: 0.5, ease: "back.out(1.6)" }, t3 + 0.15);
+    }
+    if (aksi === "duplicate") {
+      var dup = BLOCK.el("div", { class: "blk-fl", style: "width:" + cw + "px;font-size:" + 26 * s + "px;gap:" + 14 * s + "px" }, isi, ikon(fi) + '<div class="blk-nm" style="padding:' + 4 * s + 'px ' + 10 * s + 'px">' + BLOCK.esc(F[fi]) + " salinan</div>");
+      var qd = slot(nf); tl.fromTo(dup, { x: q0.x, y: q0.y, scale: 0.6, autoAlpha: 0 }, { x: qd.x, y: qd.y, scale: 1, autoAlpha: 1, duration: 0.6, ease: "back.out(1.5)" }, t3);
+    } else if (aksi === "delete") {
+      tl.to(tgt, { scale: 0.3, autoAlpha: 0, y: q0.y + 60 * s, duration: 0.4, ease: "power3.in" }, t3);
+      fl.slice(fi + 1).forEach(function (e, i) { var q = slot(fi + i); tl.to(e, { x: q.x, y: q.y, duration: 0.5, ease: "back.out(1.4)" }, t3 + 0.35 + i * 0.05); });
+      bersulang("Dipindahkan ke Sampah");
+    } else if (aksi === "link") bersulang("Tautan disalin");
+    extra = function (t) {
+      var my = KEY.length ? posisi(t).y : 0, idx = -1;
+      if (t >= 1.3 && t < 2.45) for (var i = 0; i < 5; i++) if (Math.abs(my - iy(i)) < 28 * s) idx = i;
+      if (idx !== hvy) { hv.style.display = idx < 0 ? "none" : "block"; if (idx >= 0) hv.style.top = (mi[idx].offsetTop) + "px"; mi.forEach(function (m, j) { m.style.color = j === idx ? "#fff" : j === 4 ? "#e5484d" : ""; }); hvy = idx; }
+      var pilihNm = t >= 1.0 && t < (aksi === "rename" ? 2.55 : t3);
+      nmEl.style.background = pilihNm ? A : ""; nmEl.style.color = pilihNm ? "#fff" : "";
+      if (aksi === "rename") {
+        var nb = String(P.new_name), n = Math.round(BLOCK.progress(t, 2.75, 3.6) * nb.length), str = t < 2.75 ? nmAsli : nb.slice(0, n);
+        if (nmEl.textContent !== str) nmEl.textContent = str || "​";
+        nmEl.style.outline = t >= t3 && t < 3.8 ? 3 * s + "px solid " + A : "none";
+        nmEl.style.backgroundColor = t >= t3 && t < 2.75 ? BLOCK.rgba(A, 0.25) : t >= t3 && t < 3.8 ? "#fff" : "";
+      }
+    };
+  }
+  function posisi(t) {
+    if (t <= KEY[0].t) return KEY[0];
+    for (var i = 1; i < KEY.length; i++) if (t <= KEY[i].t) { var a = KEY[i - 1], b = KEY[i], p = b.e(BLOCK.progress(t, a.t, b.t)); return { x: BLOCK.lerp(a.x, b.x, p), y: BLOCK.lerp(a.y, b.y, p) }; }
+    return KEY[KEY.length - 1];
+  }
+  KEY.sort(function (a, b) { return a.t - b.t; });
+  BLOCK.onTime(tl, function (t) {
+    var q = posisi(t), I = ibeam.some(function (r) { return t >= r[0] && t < r[1]; });
+    cur.style.transform = "translate(" + q.x.toFixed(1) + "px," + q.y.toFixed(1) + "px)";
+    ar.style.display = I ? "none" : "block"; ib.style.display = I ? "block" : "none";
+    extra(t);
+  }, k.dur);
+}, { font: true });
+</script>

@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Board Intro · block example logos/board-intro</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800;900&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="5.5">
+
+<!-- Block logos/board-intro · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-board-intro" data-block="logos/board-intro" data-start="0" data-duration="5" data-track-index="20" class="blk blk-logos-board-intro">
+<script type="application/json" data-block-props>
+{"brand_name": "KELAS SORE", "kicker": "Episode 12 · Ekonomi rumah tangga", "title": "Cara menabung tanpa merasa pelit", "paper_color": "#f6f1e4", "line_color": "#9fc3e6", "ink_color": "#1c2230", "accent_color": "#ff6b4a", "line_count": 16, "wobble": 1, "font": "Archivo:wght@600;800;900", "font2": "JetBrains Mono:wght@500;700", "size": 104}
+</script>
+</div>
+<style>
+.blk-logos-board-intro{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-logos-board-intro .blk-papan{position:absolute;inset:0}
+.blk-logos-board-intro .blk-papan svg{position:absolute;inset:0;width:100%;height:100%}
+.blk-logos-board-intro .blk-isi{position:absolute;left:9%;right:9%;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:flex-start}
+.blk-logos-board-intro .blk-stp{position:relative;width:calc(var(--s)*260px);height:calc(var(--s)*260px);margin-bottom:calc(var(--s)*46px)}
+.blk-logos-board-intro .blk-stp svg{width:100%;height:100%;overflow:visible}
+.blk-logos-board-intro .blk-slot{position:relative;height:calc(var(--s)*60px);width:100%}
+.blk-logos-board-intro .blk-kick{position:absolute;left:0;top:0;font-family:var(--f2);font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:calc(var(--s)*32px);white-space:nowrap}
+.blk-logos-board-intro .blk-kick i{position:absolute;left:0;right:0;bottom:calc(var(--s)*-12px);height:calc(var(--s)*4px);background:var(--a);transform-origin:0 50%}
+.blk-logos-board-intro .blk-jrow{display:flex;align-items:center;gap:calc(var(--s)*30px);margin-top:calc(var(--s)*-30px)}
+.blk-logos-board-intro .blk-jd{font-weight:900;letter-spacing:-.03em;line-height:1.02}
+.blk-logos-board-intro .blk-jd>span{display:inline-block}
+.blk-logos-board-intro .blk-chip{flex:none;display:flex;align-items:center;justify-content:center;width:calc(var(--s)*130px);height:calc(var(--s)*84px);border-radius:calc(var(--s)*42px);background:var(--a)}
+.blk-logos-board-intro .blk-chip svg{width:55%;height:55%}
+</style>
+<script>
+BLOCK.mount("blk-board-intro", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, D = k.dur, E = BLOCK.el, R = k.root, A = P.accent_color, ink = P.ink_color;
+  R.style.cssText += ";--s:" + s + ";--a:" + A + ";--f2:" + BLOCK.family(P.font2, "monospace") + ";background:" + P.paper_color + ";color:" + ink + ";font-family:" + BLOCK.family(P.font);
+  // papan bergaris: garis tangan yang "mendidih" (berubah 8x per detik, berseed)
+  var pp = E("div", { class: "blk-papan" }, R), sv = BLOCK.svg("svg", { viewBox: "0 0 " + k.w + " " + k.h, preserveAspectRatio: "none" }, pp);
+  var n = Math.max(4, Math.round(P.line_count)), gs = [], gap = k.h / (n + 1);
+  for (var i = 0; i < n; i++) gs.push(BLOCK.svg("path", { fill: "none", stroke: P.line_color, "stroke-width": 2.2 * s, "stroke-linecap": "round", opacity: 0.85 }, sv));
+  var margin = BLOCK.svg("path", { fill: "none", stroke: BLOCK.rgba(A, 0.55), "stroke-width": 2.5 * s }, sv);
+  function garisTangan(y, seed, f) {
+    var d = "M" + (-20) + "," + y.toFixed(1), seg = 8, amp = 5 * s * P.wobble;
+    for (var j = 1; j <= seg; j++) { var x = -20 + (k.w + 40) * j / seg; d += " L" + x.toFixed(1) + "," + (y + BLOCK.noise(j * 1.7 + f * 5.3, seed) * amp).toFixed(1); }
+    return d;
+  }
+  BLOCK.onTime(tl, function (t) {
+    var f = Math.floor(t * 8 + 1e-6);
+    gs.forEach(function (g, i) { g.setAttribute("d", garisTangan(gap * (i + 1), i + 3, f)); });
+    var mx = k.w * 0.06, dm = "M" + mx + ",-10";
+    for (var j = 1; j <= 6; j++) dm += " L" + (mx + BLOCK.noise(j * 2.1 + f * 4.1, 77) * 4 * s * P.wobble).toFixed(1) + "," + (k.h * j / 6 + 10).toFixed(1);
+    margin.setAttribute("d", dm);
+  }, D);
+  tl.fromTo(gs, { scaleX: 0, transformOrigin: "0% 50%" }, { scaleX: 1, duration: 0.6, ease: "power3.out", stagger: 0.025 }, 0);
+  var isi = E("div", { class: "blk-isi" }, R);
+  // stempel logo
+  var stp = E("div", { class: "blk-stp" }, isi), nm = String(P.brand_name);
+  var pid = k.id + "-lk";
+  stp.innerHTML = '<svg viewBox="0 0 100 100"><defs><path id="' + pid + '" d="M50 50 m-36 0 a36 36 0 1 1 72 0 a36 36 0 1 1 -72 0"/></defs>' +
+    '<circle cx="50" cy="50" r="47" fill="' + A + '"/><circle cx="50" cy="50" r="42" fill="none" stroke="' + P.paper_color + '" stroke-width="1.4" stroke-dasharray="3 2.4"/>' +
+    '<text font-size="10" font-weight="800" letter-spacing="2.2" fill="' + P.paper_color + '" font-family="inherit"><textPath href="#' + pid + '">' + BLOCK.esc(nm + " · " + nm + " · ") + "</textPath></text>" +
+    '<path d="M36 60 L50 34 L64 60 Z" fill="' + P.paper_color + '"/><circle cx="50" cy="64" r="4" fill="' + ink + '"/></svg>';
+  var slot = E("div", { class: "blk-slot" }, isi);
+  var kick = E("div", { class: "blk-kick" }, slot, BLOCK.esc(P.kicker) + "<i></i>");
+  var jrow = E("div", { class: "blk-jrow" }, isi);
+  var jd = E("div", { class: "blk-jd", style: "font-size:" + Math.round(P.size * s) + "px;max-width:" + Math.round(k.w * 0.7) + "px" }, jrow);
+  var kata = BLOCK.split(jd, P.title, "words");
+  var chip = E("div", { class: "blk-chip" }, jrow, '<svg viewBox="0 0 24 24" fill="none" stroke="' + P.paper_color + '" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg>');
+  // urutan: stempel menghentak, kicker, lalu kicker memberi jalan untuk judul + chip panah
+  tl.fromTo(stp, { scale: 2.2, rotation: -30, autoAlpha: 0 }, { scale: 1, rotation: -8, autoAlpha: 1, duration: 0.45, ease: "power4.in" }, 0.3)
+    .to(stp, { scaleX: 1.12, scaleY: 0.88, duration: 0.06, yoyo: true, repeat: 1, ease: "power2.out" }, 0.75)
+    .fromTo(stp.querySelector("text"), { rotation: 0, svgOrigin: "50 50" }, { rotation: 120, svgOrigin: "50 50", duration: D, ease: "none", immediateRender: false }, 0.75);
+  tl.fromTo(kick, { clipPath: "inset(0% 100% -40% 0%)" }, { clipPath: "inset(0% 0% -40% 0%)", duration: 0.55, ease: "power3.inOut" }, 0.9)
+    .fromTo(kick.querySelector("i"), { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out" }, 1.3)
+    .to(kick, { yPercent: -120, autoAlpha: 0, duration: 0.4, ease: "power3.in" }, 2.0);
+  var tj = 2.15;
+  tl
+    .fromTo(kata, { yPercent: 80, autoAlpha: 0, rotation: 3 }, { yPercent: 0, autoAlpha: 1, rotation: 0, duration: 0.6, ease: "back.out(1.6)", stagger: 0.07 }, tj)
+    .fromTo(chip, { scale: 0, rotation: -40 }, { scale: 1, rotation: 0, duration: 0.55, ease: "back.out(2.6)" }, tj + kata.length * 0.07 + 0.15)
+    .fromTo(chip.firstChild, { x: 0 }, { x: 8 * s, duration: 0.35, ease: "sine.inOut", yoyo: true, repeat: Math.max(1, Math.floor((D - tj - 1.4) / 0.35)), immediateRender: false }, tj + kata.length * 0.07 + 0.7);
+  tl.to(isi.children, { autoAlpha: 0, y: -20 * s, duration: 0.4, ease: "power2.in", stagger: 0.04 }, D - 0.5);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 5.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5.5);
+</script>
+</body>
+</html>

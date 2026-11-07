@@ -1,0 +1,81 @@
+<!-- Block textures/stop-motion · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="textures/stop-motion" data-start="0" data-duration="5" data-track-index="40" class="blk blk-textures-stop-motion">
+<script type="application/json" data-block-props>
+{"target": "", "fps": 12, "boil": 3, "boil_rotation": 1.2, "color": ["#e8553d", "#2d6cdf", "#f2b632", "#3f8f6b"], "ground_color": "#c9b48a", "pause": 0.32, "splash": true, "seed": 8}
+</script>
+</div>
+<style>
+.blk-textures-stop-motion{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-textures-stop-motion svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.blk-textures-stop-motion .blk-kertas{filter:drop-shadow(3px 5px 0 rgba(40,25,10,.28))}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, w = k.w, h = k.h, s = k.s, D = k.dur, fps = Math.max(1, +P.fps || 12), sd = +P.seed || 8, N = BLOCK.noise;
+  var bA = (+P.boil || 0) * s, bR = +P.boil_rotation || 0;
+  // hukum waktu bertangga: SEMUA gerak dibaca dari tq = floor(t*fps)/fps (on-twos pada 24 fps)
+  function boil(step, i) { return [N(step * 3.7, sd + i * 11) * bA, N(step * 3.7 + 50, sd + i * 11) * bA, N(step * 3.7 + 90, sd + i * 11) * bR]; }
+  var T = P.target ? Array.from(document.querySelectorAll(P.target)) : [];
+  if (T.length) { // mode host: elemen target "mendidih" (goyang posisi/rotasi per 1/fps)
+    T.forEach(function (e) { e.style.transformOrigin = "50% 50%"; });
+    BLOCK.onTime(k.tl, function (t) {
+      var st = Math.floor(t * fps + 1e-6);
+      T.forEach(function (e, i) { var b = boil(st, i); e.style.transform = "translate(" + b[0].toFixed(2) + "px," + b[1].toFixed(2) + "px) rotate(" + b[2].toFixed(3) + "deg)"; });
+    }, D);
+    return;
+  }
+  // mode demo: empat bentuk kertas dilempar lalu mendarat dengan squash, garis tepi ikut mendidih
+  var sv = BLOCK.svg("svg", { viewBox: "0 0 " + w + " " + h }, k.root), war = P.color || ["#e8553d"];
+  var gy = h * 0.66, sz = Math.min(w * 0.075, 105 * s), TAU = Math.PI * 2;
+  var tanah = BLOCK.svg("path", { class: "blk-kertas", fill: P.ground_color }, sv);
+  function bentuk(j) { // titik dasar (radius ~1) untuk lingkaran, kotak, segitiga, bintang
+    var p = [], n, q;
+    if (j === 0) for (q = 0; q < 28; q++) p.push([Math.cos(q / 28 * TAU), Math.sin(q / 28 * TAU)]);
+    else if (j === 1) [[-1, -1], [1, -1], [1, 1], [-1, 1]].forEach(function (a, i, A) { var b = A[(i + 1) % 4]; for (q = 0; q < 6; q++) p.push([BLOCK.lerp(a[0], b[0], q / 6) * 0.88, BLOCK.lerp(a[1], b[1], q / 6) * 0.88]); });
+    else if (j === 2) for (n = 0; n < 3; n++) { var a1 = -Math.PI / 2 + n * TAU / 3, a2 = a1 + TAU / 3; for (q = 0; q < 7; q++) p.push([BLOCK.lerp(Math.cos(a1), Math.cos(a2), q / 7) * 1.1, BLOCK.lerp(Math.sin(a1), Math.sin(a2), q / 7) * 1.1 + 0.15]); }
+    else for (q = 0; q < 10; q++) { var r = q % 2 ? 0.48 : 1.08, an = -Math.PI / 2 + q * TAU / 10; p.push([Math.cos(an) * r, Math.sin(an) * r]); }
+    return p;
+  }
+  var benda = [0, 1, 2, 3].map(function (j) {
+    var g = BLOCK.svg("g", { class: "blk-kertas" }, sv);
+    return {
+      bay: BLOCK.svg("ellipse", { fill: "rgba(40,25,10,.18)" }, sv), g: g, pts: bentuk(j),
+      path: BLOCK.svg("path", { fill: war[j % war.length], stroke: BLOCK.mix(war[j % war.length], "#000000", 0.25), "stroke-width": 2 * s, "stroke-linejoin": "round" }, g),
+      xf: w * (0.2 + j * 0.2), dir: j % 2 ? 1 : -1, tl: 0.3 + j * (+P.pause || 0.32) + 0.6
+    };
+  });
+  var spark = BLOCK.svg("g", { fill: "#fffaf0", stroke: "#2a2420", "stroke-width": 1.5 * s }, sv);
+  function jalur(pts, st, i, sx, sy) {
+    return pts.map(function (p, q) {
+      var wob = 0.05 * N(st * 2.3 + q * 1.7, sd + i * 7); // tepi gunting yang bergetar per langkah
+      return (q ? "L" : "M") + (p[0] * (1 + wob) * sx * sz).toFixed(1) + " " + (p[1] * (1 + wob) * sy * sz).toFixed(1);
+    }).join("") + "Z";
+  }
+  BLOCK.onTime(k.tl, function (t) {
+    var tq = BLOCK.step(t, fps), st = Math.round(tq * fps), sp = "";
+    var d = "M0 " + h; // tanah kertas dengan tepi sobek yang mendidih
+    for (var x = 0; x <= w + 40; x += 40 * s) d += "L" + x.toFixed(1) + " " + (gy + N(x * 0.05 + st * 0.9, sd + 99) * 6 * s).toFixed(1);
+    tanah.setAttribute("d", d + "L" + w + " " + h + "Z");
+    benda.forEach(function (b, i) {
+      var t0 = b.tl - 0.6, u = BLOCK.progress(tq, t0, b.tl), bo = boil(st, i);
+      var x0 = b.dir < 0 ? -sz * 2 : w + sz * 2, x = BLOCK.lerp(x0, b.xf, u), y0 = gy - h * 0.3, yf = gy - sz; // dilempar dari sisi layar
+      var y = BLOCK.lerp(y0, yf, u) - 4 * h * 0.28 * u * (1 - u), rot = (1 - u) * 300 * b.dir, sx = 1, sy = 1;
+      var dt = tq - b.tl;
+      if (dt >= 0) { // mendarat: squash 2 frame lalu pegas bertangga ke diam
+        var e = dt < 2 / fps ? 1 : Math.exp(-(dt - 2 / fps) * 7) * Math.cos((dt - 2 / fps) * 18);
+        sy = 1 - 0.3 * e; sx = 1 + 0.22 * e; y = yf + sz * (1 - sy);
+        if (P.splash && st - Math.round(b.tl * fps) <= 2 + (i % 2)) // percikan hidup tepat 2-3 frame
+          for (var q = 0; q < 4; q++) { var an = -Math.PI * (0.15 + 0.23 * q), r = sz * (1.25 + 0.25 * (st - Math.round(b.tl * fps))), cx = x + Math.cos(an) * r, cy = gy + Math.sin(an) * r * 0.8, z = 11 * s;
+            sp += "M" + (cx - z) + " " + cy + "L" + cx + " " + (cy - z) + "L" + (cx + z) + " " + cy + "L" + cx + " " + (cy + z) + "Z"; }
+      }
+      if (u <= 0 && dt < 0 && tq < t0) { b.g.setAttribute("visibility", "hidden"); b.bay.setAttribute("visibility", "hidden"); return; }
+      b.g.setAttribute("visibility", "visible"); b.bay.setAttribute("visibility", "visible");
+      b.path.setAttribute("d", jalur(b.pts, st, i, sx, sy));
+      b.g.setAttribute("transform", "translate(" + (x + bo[0]).toFixed(1) + " " + (y + bo[1]).toFixed(1) + ") rotate(" + (rot + bo[2] * 2).toFixed(2) + ")");
+      var hgt = BLOCK.clamp((gy - (y + sz)) / (h * 0.4), 0, 1);
+      b.bay.setAttribute("cx", x); b.bay.setAttribute("cy", gy + 4 * s); b.bay.setAttribute("rx", sz * (1.1 - 0.6 * hgt) * sx); b.bay.setAttribute("ry", sz * 0.18 * (1 - 0.6 * hgt));
+    });
+    spark.innerHTML = sp ? '<path d="' + sp + '"/>' : "";
+  }, D);
+});
+</script>

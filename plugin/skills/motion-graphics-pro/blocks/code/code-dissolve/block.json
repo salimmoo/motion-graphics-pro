@@ -1,0 +1,137 @@
+{
+ "id": "code/code-dissolve",
+ "name": "Code Dissolve",
+ "name_id": "Kode Larut & Partikel",
+ "category": "code",
+ "description": {
+  "id": "Kode muncul dari kekacauan di kanvas: teks dirender luring lalu pikselnya disampel. Mode larut: kode terurai dari noise berseed dengan tepi depan berpendar kromatik, lalu tajam. Mode partikel: ribuan titik berhamburan di seluruh bingkai lalu terbang tepat ke piksel glyph dan menjadi teks bersorot sintaks.",
+  "en": "Code resolves out of chaos on canvas from offline-sampled text pixels. Dissolve mode reveals it from seeded noise with a chromatic glowing front; particle mode flies thousands of scattered points onto the exact glyph pixels."
+ },
+ "tags": [
+  "kode",
+  "partikel",
+  "dissolve",
+  "noise",
+  "kanvas",
+  "reveal",
+  "syntax-highlight",
+  "developer",
+  "code"
+ ],
+ "props": {
+  "mode": {
+   "default": "dissolve",
+   "type": "enum",
+   "options": [
+    "dissolve",
+    "particles"
+   ],
+   "option_aliases": {
+    "larut": "dissolve",
+    "partikel": "particles"
+   }
+  },
+  "code": {
+   "default": "def latih(model, data, epoch=10):\n    for e in range(epoch):\n        rugi = model.langkah(data)\n        print(f\"epoch {e}: {rugi:.4f}\")\n    return model",
+   "type": "text",
+   "aliases": [
+    "kode"
+   ]
+  },
+  "lang": {
+   "default": "py",
+   "type": "enum",
+   "options": [
+    "js",
+    "py",
+    "html",
+    "bash"
+   ],
+   "aliases": [
+    "bahasa"
+   ]
+  },
+  "theme": {
+   "default": "dark-2026",
+   "type": "enum",
+   "options": [
+    "dark-2026",
+    "modern-dark",
+    "light",
+    "terminal-pro"
+   ],
+   "aliases": [
+    "tema"
+   ],
+   "option_aliases": {
+    "gelap-2026": "dark-2026",
+    "gelap-modern": "modern-dark",
+    "terang": "light"
+   }
+  },
+  "file": {
+   "default": "latih.py",
+   "type": "text",
+   "aliases": [
+    "berkas"
+   ]
+  },
+  "size": {
+   "default": 32,
+   "type": "number",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "start": {
+   "default": 0.6,
+   "type": "number",
+   "hint": "Detik efek mulai",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "done": {
+   "default": 4.4,
+   "type": "number",
+   "hint": "Detik kode utuh dan tajam",
+   "aliases": [
+    "selesai"
+   ]
+  },
+  "particle_steps": {
+   "default": 3,
+   "type": "number",
+   "hint": "Jarak sampel piksel (mode partikel); kecil = lebih banyak titik",
+   "aliases": [
+    "langkah_partikel"
+   ]
+  },
+  "font": {
+   "default": "JetBrains Mono:wght@400;500;700",
+   "type": "font"
+  },
+  "seed": {
+   "default": 12,
+   "type": "number"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "1:1",
+  "9:16"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "kode/kode-larut",
+  "code-shader-dissolve",
+  "code-particle-assemble"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "JetBrains Mono:wght@400;500;700"
+  ]
+ }
+}

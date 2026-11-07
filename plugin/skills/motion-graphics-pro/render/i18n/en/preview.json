@@ -1,0 +1,16 @@
+{
+  "Play": "Play",
+  "Pause": "Pause",
+  "driver": "driver",
+  "Cannot read the duration: set window.__duration or data-duration on the root.": "Cannot read the duration: set window.__duration or data-duration on the root.",
+  "Space": "Space",
+  "Left arrow": "Left arrow",
+  "Right arrow": "Right arrow",
+  "Loop": "Loop",
+  "Sound": "Sound",
+  "loading...": "loading...",
+  "Space play · arrows per frame · Shift+arrows per second": "Space play · arrows per frame · Shift+arrows per second",
+  "mgp preview: {}": "mgp preview: {}",
+  "composition: {}": "composition: {}",
+  "Ctrl+C to stop.": "Ctrl+C to stop."
+}

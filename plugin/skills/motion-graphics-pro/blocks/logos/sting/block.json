@@ -1,0 +1,127 @@
+{
+ "id": "logos/sting",
+ "name": "Sting",
+ "name_id": "Sting Logo",
+ "category": "logos",
+ "description": {
+  "id": "Wordmark menghentak ke ukuran akhirnya dengan guncangan kecil, melepas satu cincin aksen dan satu kilat putih, lalu bertahan tenang. Tanda logo sederhana dari props bentuk.",
+  "en": "A wordmark slams into its final scale with a small shake, fires one accent ring and one white impact frame, then holds. Simple logo mark from a shape prop."
+ },
+ "tags": [
+  "logo",
+  "sting",
+  "wordmark",
+  "hentak",
+  "impact",
+  "pembuka",
+  "penutup",
+  "logos"
+ ],
+ "props": {
+  "brand_name": {
+   "default": "LANGKAH",
+   "type": "text",
+   "aliases": [
+    "nama_merek"
+   ]
+  },
+  "shape": {
+   "default": "circle",
+   "type": "enum",
+   "options": [
+    "circle",
+    "box",
+    "triangle",
+    "leaf",
+    "none"
+   ],
+   "hint": "Tanda logo di depan wordmark",
+   "aliases": [
+    "bentuk"
+   ],
+   "option_aliases": {
+    "lingkaran": "circle",
+    "kotak": "box",
+    "segitiga": "triangle",
+    "daun": "leaf",
+    "tanpa": "none"
+   }
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#ff5a36",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg": {
+   "default": "#0d0f14",
+   "type": "color",
+   "hint": "Warna latar; kosong = transparan",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "font": {
+   "default": "Archivo Black",
+   "type": "font"
+  },
+  "size": {
+   "default": 170,
+   "type": "number",
+   "hint": "Ukuran wordmark (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "stomp_time": {
+   "default": 0.55,
+   "type": "number",
+   "hint": "Saat tumbukan (detik)",
+   "aliases": [
+    "waktu_hentak"
+   ]
+  },
+  "flash": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Satu bingkai kilat putih",
+   "aliases": [
+    "kilat"
+   ]
+  },
+  "ring": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Cincin aksen saat tumbukan",
+   "aliases": [
+    "cincin"
+   ]
+  }
+ },
+ "duration": 3,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "logo/sting",
+  "logo-sting"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Archivo Black"
+  ]
+ }
+}

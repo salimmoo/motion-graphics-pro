@@ -1,0 +1,81 @@
+<!-- Block backgrounds/galaxy · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="backgrounds/galaxy" data-start="0" data-duration="10" data-track-index="0" class="blk blk-backgrounds-galaxy">
+<script type="application/json" data-block-props>
+{"style": "spiral", "color1": "#7fb2ff", "color2": "#ff6fb5", "core_color": "#ffe2b0", "bg": "#03040a", "count": 6000, "tilt": 58, "size": 1, "speed": 1, "resolution": 0.5}
+</script>
+</div>
+<style>
+.blk-backgrounds-galaxy{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-backgrounds-galaxy canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P;
+  if (P.style === "orb") {
+    var cv = BLOCK.el("canvas", null, k.root);
+    var r = Math.max(0.1, Math.min(1, +P.resolution || 0.5));
+    cv.width = Math.round(k.w * r); cv.height = Math.round(k.h * r);
+    var sh = BLOCK.shader(cv, [
+    "void main(){vec2 p=(gl_FragCoord.xy-.5*u_res)/(min(u_res.x,u_res.y)*u_uk);float t=u_t*u_kec;float q=length(p);vec3 col=u_lat;",
+    "vec2 g0=floor(gl_FragCoord.xy/2.);float hs=h21(g0);col+=vec3(step(.996,hs)*(.5+.5*sin(t*2.+hs*80.)))*smoothstep(1.05,1.4,q);",
+    "if(q<1.){vec3 n=vec3(p,sqrt(1.-q*q));float lo=atan(n.x,n.z)+t*.12;float la=asin(n.y);vec2 g=vec2(lo*1.2,la*2.4);",
+    "float w=fbm(g*1.4+vec2(t*.04,0.));float band=.5+.5*sin(la*7.+w*4.+lo*.6);float v=fbm(g*2.2+w*2.);",
+    "vec3 c=mix(u_c2*.5,u_c1,band)*(.35+1.1*v);c=mix(c,u_c3,smoothstep(.62,.85,v)*.7);",
+    "float dust=smoothstep(.3,.7,fbm(g*3.+7.));c*=.55+.45*dust;",
+    "vec2 sg=floor(g*80.);float st=step(.988,h21(sg))*(.55+.45*sin(t*3.+h21(sg+3.)*40.));c+=vec3(st)*.9;",
+    "c*=.25+.85*max(dot(n,normalize(vec3(-.4,.5,.75))),0.)+.25;float f=pow(1.-n.z,2.5);c+=hsv2rgb(vec3(f*.9+t*.03+p.x*.2,.55,1.))*f*.9;",
+    "col=mix(col,c,clamp((1.-q)*u_res.y*u_uk*.5,0.,1.));}",
+    "float e=q-1.;col.r+=exp(-pow((e-.012)/.012,2.))*.7;col.g+=exp(-pow((e-.004)/.012,2.))*.7;col.b+=exp(-pow((e+.004)/.012,2.))*.8;",
+    "col+=u_c2*exp(-max(e,0.)*9.)*step(0.,e)*.25;col=1.-exp(-col*1.5);",
+    "col+=(h21(gl_FragCoord.xy+fract(u_t))-.5)/128.;gl_FragColor=vec4(col,1.);}"
+  ].join("\n"), { u_c1: BLOCK.vec3(P.color1), u_c2: BLOCK.vec3(P.color2), u_c3: BLOCK.vec3(P.core_color), u_lat: BLOCK.vec3(P.bg), u_uk: 0.32 * (+P.size || 1), u_kec: +P.speed });
+    if (sh.ok) { BLOCK.onTime(k.tl, function (t) { sh.draw(t); }, k.dur); return; }
+    cv.remove();
+  }
+  // spiral: bintang disemai sekali, posisi tiap frame dihitung tertutup dari t (rotasi diferensial)
+  var K = BLOCK.canvas(k.root, k.w, k.h), x = K.ctx, A = k.random;
+  var N = Math.max(500, Math.min(12000, Math.round(+P.count || 6000)));
+  var Rm = Math.min(k.w, k.h) * 0.46 * (+P.size || 1), cx = k.w / 2, cy = k.h / 2;
+  var warna = [P.core_color, BLOCK.mix(P.core_color, P.color1, 0.5), P.color1, P.color2];
+  var ember = [], i, j;
+  for (i = 0; i < 4; i++) for (j = 0; j < 3; j++) ember.push([]);
+  for (i = 0; i < N; i++) {
+    var u = A(), rr = Math.pow(u, 0.75), lengan = A() < 0.5 ? 0 : Math.PI;
+    var g = (A() + A() + A() - 1.5) * (0.8 - 0.4 * rr), cakram = A() < 0.22;          // sebaran di sekitar lengan
+    var th = lengan + Math.log(rr + 0.04) * 2.6 + g + (rr < 0.12 || cakram ? A() * 6.283 : 0);
+    var ci = rr < 0.12 ? 0 : rr < 0.3 ? 1 : A() < 0.12 ? 3 : 2;
+    ember[ci * 3 + Math.min(2, Math.floor(A() * 3))].push([rr * Rm, th, (1 + A() * 1.6) * k.s * (ci === 0 ? 1.4 : 1)]);
+  }
+  var miring = Math.cos((+P.tilt || 0) * Math.PI / 180), putar = 0.35;
+  var inti = x.createRadialGradient(0, 0, 0, 0, 0, Rm * 0.32);
+  inti.addColorStop(0, BLOCK.rgba(P.core_color, 0.85)); inti.addColorStop(0.35, BLOCK.rgba(P.core_color, 0.25)); inti.addColorStop(1, BLOCK.rgba(P.core_color, 0));
+  function gambar(t) {
+    x.globalCompositeOperation = "source-over"; x.fillStyle = P.bg; x.fillRect(0, 0, k.w, k.h);
+    x.globalCompositeOperation = "lighter";
+    var tt = t * (+P.speed || 1);
+    for (var b = 0; b < ember.length; b++) {
+      var L = ember[b]; if (!L.length) continue;
+      x.fillStyle = warna[Math.floor(b / 3)]; x.globalAlpha = [0.45, 0.75, 1][b % 3];
+      x.beginPath();
+      for (var m = 0; m < L.length; m++) {
+        var s = L[m], rp = s[0] / Rm, om = 0.9 / (rp + 0.12);        // kurva rotasi datar: dalam lebih cepat
+        var a = s[1] + om * tt * 0.12, X = Math.cos(a) * s[0], Y = Math.sin(a) * s[0] * miring;
+        var px = cx + X * Math.cos(putar) - Y * Math.sin(putar), py = cy + X * Math.sin(putar) + Y * Math.cos(putar);
+        x.rect(px, py, s[2], s[2]);
+      }
+      x.fill();
+      if (b % 3 === 2 && b > 2) {                                   // kabut lengan: versi besar dan samar
+        x.globalAlpha = 0.05; x.beginPath();
+        for (m = 0; m < L.length; m += 2) { s = L[m]; rp = s[0] / Rm; a = s[1] + 0.9 / (rp + 0.12) * tt * 0.12; X = Math.cos(a) * s[0]; Y = Math.sin(a) * s[0] * miring;
+          x.rect(cx + X * Math.cos(putar) - Y * Math.sin(putar) - 6 * k.s, cy + X * Math.sin(putar) + Y * Math.cos(putar) - 6 * k.s, 12 * k.s, 12 * k.s); }
+        x.fill();
+      }
+    }
+    x.globalAlpha = 1; x.save(); x.translate(cx, cy); x.rotate(putar); x.scale(1, miring); x.fillStyle = inti;
+    x.beginPath(); x.arc(0, 0, Rm * 0.32, 0, 6.283); x.fill(); x.restore();
+    x.globalCompositeOperation = "source-over";
+  }
+  BLOCK.onTime(k.tl, gambar, k.dur);
+});
+</script>

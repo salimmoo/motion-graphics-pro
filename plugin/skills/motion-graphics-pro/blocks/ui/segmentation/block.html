@@ -1,0 +1,57 @@
+<!-- Block ui/segmentation · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="ui/segmentation" data-start="0" data-duration="6" data-track-index="40" class="blk blk-ui-segmentation">
+<script type="application/json" data-block-props>
+{"region": [{"label": "ORANG 0.97", "x": 39.4, "y": 42.5, "l": 7.4, "t": 40, "bentuk": "kapsul", "warna": "#ff4d8d"}, {"label": "MATAHARI 0.91", "x": 61.5, "y": 21, "l": 14.5, "t": 26.5, "bentuk": "elips", "warna": "#ffd84d"}, {"label": "BUKIT 0.88", "x": 30, "y": 46, "l": 70, "t": 34, "bentuk": "bukit", "warna": "#4dffb8"}, {"label": "TANAH 0.93", "x": 0, "y": 76, "l": 100, "t": 24, "bentuk": "kotak", "warna": "#4da6ff"}], "steps": 10, "dense": 0.38, "pause": 0.35, "start": 0.3, "delete": true, "color": "#ffffff", "font": "JetBrains Mono:wght@400;500;700", "seed": 3}
+</script>
+</div>
+<style>
+.blk-ui-segmentation{position:absolute;inset:0;pointer-events:none;overflow:hidden;font-family:"JetBrains Mono",ui-monospace,monospace}
+.blk-ui-segmentation .ms{position:absolute}
+.blk-ui-segmentation .ms i{position:absolute;inset:0}
+.blk-ui-segmentation .bk{position:absolute;box-sizing:border-box}
+.blk-ui-segmentation .chip{position:absolute;white-space:nowrap;font-weight:700;color:#0b0d12;letter-spacing:.06em}
+.blk-ui-segmentation .hud{position:absolute;inset:0}
+.blk-ui-segmentation .hud div{position:absolute;white-space:nowrap}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, E = BLOCK.el, s = k.s, rng = k.random, N = Math.max(2, P.steps | 0);
+  var hud = E("div", { class: "hud", style: "color:" + P.color + ";font-size:" + 20 * s + "px" }, k.root);
+  var info = E("div", { style: "left:3%;top:4%;opacity:.85" }, hud, "SEGMENTASI · " + P.region.length + " WILAYAH");
+  var fr = E("div", { style: "right:3%;top:4%;opacity:.6" }, hud);
+  var scan = E("div", { style: "left:0;right:0;height:" + 2 * s + "px;background:" + BLOCK.rgba(P.color, 0.5) + ";box-shadow:0 0 " + 12 * s + "px " + P.color }, hud);
+  var bentuk = { kotak: "0", elips: "50%", kapsul: "999px 999px 18% 18%", bukit: "50% 50% 0 0 / 100% 100% 0 0" };
+  var regs = P.region.map(function (w, i) {
+    var box = "left:" + w.x + "%;top:" + w.y + "%;width:" + w.l + "%;height:" + w.t + "%";
+    var ms = E("div", { class: "ms", style: box + ";border-radius:" + (bentuk[w.bentuk] || 0) + ";overflow:hidden" }, k.root);
+    // isi tembus pandang + garis pindai halus
+    E("i", { style: "background:" + BLOCK.rgba(w.warna, P.dense) + ";background-image:repeating-linear-gradient(0deg," + BLOCK.rgba(w.warna, 0.35) + " 0 " + 1.5 * s + "px,transparent " + 1.5 * s + "px " + 5 * s + "px)" }, ms);
+    var bk = E("div", { class: "bk", style: box + ";border:" + Math.max(1, 2 * s) + "px solid " + w.warna }, k.root);
+    var chip = E("div", { class: "chip", style: "left:" + w.x + "%;top:calc(" + w.y + "% - " + 30 * s + "px);font-size:" + 16 * s + "px;padding:" + 4 * s + "px " + 9 * s + "px;background:" + w.warna }, k.root, BLOCK.esc(w.label));
+    return { ms: ms, bk: bk, chip: chip, t0: +P.start + i * P.pause };
+  });
+  var tHapus = P.delete ? D - 1.1 : D + 1;
+  // banjir terkuantisasi: mask terbuka dari atas ke bawah per langkah scanline
+  BLOCK.onTime(tl, function (t) {
+    regs.forEach(function (R) {
+      var q = BLOCK.clamp((t - R.t0) / 0.6, 0, 1), qs = Math.ceil(q * N) / N, h = BLOCK.clamp((t - tHapus) / 0.5, 0, 1), hs = Math.ceil(h * N) / N;
+      R.ms.style.clipPath = "inset(" + hs * 100 + "% 0 " + (1 - qs) * 100 + "% 0)";
+      R.ms.style.visibility = qs > hs ? "visible" : "hidden";
+    });
+    var sc = BLOCK.clamp((t - +P.start) / (D - +P.start - 0.8), 0, 1);
+    scan.style.top = (sc * 100) + "%"; scan.style.opacity = sc > 0 && sc < 1 ? 1 : 0;
+    fr.textContent = "F" + ("000" + Math.floor(t * 30)).slice(-4) + " · " + (52 + Math.round(BLOCK.boil(t, 2, 6) * 4)) + " MS";
+  }, D);
+  regs.forEach(function (R, i) {
+    tl.fromTo(R.bk, { autoAlpha: 0, scale: 1.08 }, { autoAlpha: 1, scale: 1, duration: 0.3, ease: "steps(3)" }, R.t0 + 0.45)
+      .fromTo(R.chip, { autoAlpha: 0, x: -8 * s }, { autoAlpha: 1, x: 0, duration: 0.25, ease: "steps(3)" }, R.t0 + 0.55);
+    if (P.delete) tl.to([R.bk, R.chip], { autoAlpha: 0, duration: 0.2, ease: "steps(2)" }, tHapus + i * 0.05);
+  });
+  tl.fromTo(info, { autoAlpha: 0 }, { autoAlpha: 0.85, duration: 0.2, ease: "steps(2)" }, 0.1);
+  // kedip HUD dua frame di waktu berseed
+  for (var j = 0; j < 4; j++) {
+    var tf = BLOCK.lerp(+P.start + 0.5, D - 1.3, (j + rng()) / 4);
+    tl.set(k.root, { opacity: 0.55 }, tf).set(k.root, { opacity: 1 }, tf + 2 / 30);
+  }
+}, { font: true });
+</script>

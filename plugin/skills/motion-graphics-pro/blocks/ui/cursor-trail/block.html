@@ -1,0 +1,68 @@
+<!-- Block ui/cursor-trail · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="ui/cursor-trail" data-start="0" data-duration="5.5" data-track-index="40" class="blk blk-ui-cursor-trail">
+<script type="application/json" data-block-props>
+{"title": "Pengaturan", "rows": [["Mode gelap", "Tampilan lebih nyaman di malam hari"], ["Notifikasi", "Kabari saya saat ada pesan baru"], ["Cadangan otomatis", "Simpan salinan setiap hari"], ["Lokasi", "Izinkan akses lokasi perangkat"]], "click": [0, 2, 3], "step_duration": 1.4, "dot_spacing": 22, "accent_color": "#2d6cdf", "bg": "#eef1f6", "font": "Inter:wght@400;500;600;700"}
+</script>
+<div class="blk-pn"></div>
+<svg class="blk-jj"></svg>
+<div class="blk-cur"><svg viewBox="0 0 30 44"><path d="M1 1 L1 33 L9 25.5 L14.5 38.5 L20 36 L14.6 23.4 L25.5 23.4 Z" fill="#111827" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/></svg></div>
+</div>
+<style>
+.blk-ui-cursor-trail{position:absolute;inset:0;pointer-events:none;overflow:hidden;color:#1b2333}
+.blk-ui-cursor-trail .blk-pn{position:absolute;background:#fff;box-sizing:border-box;box-shadow:0 12px 40px rgba(20,30,60,.1)}
+.blk-ui-cursor-trail .blk-pn h3{margin:0;font-weight:700}
+.blk-ui-cursor-trail .blk-br{position:relative;display:flex;align-items:center;justify-content:space-between;border-top:1px solid #e6e9f0}
+.blk-ui-cursor-trail .blk-br b{display:block;font-weight:600}
+.blk-ui-cursor-trail .blk-br small{display:block;color:#7a8396;font-weight:400}
+.blk-ui-cursor-trail .blk-tr{position:relative;flex:none;border-radius:999px;background:#d5dbe6}
+.blk-ui-cursor-trail .blk-th{position:absolute;top:50%;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.blk-ui-cursor-trail .blk-jj{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible}
+.blk-ui-cursor-trail .blk-mk{position:absolute;left:0;top:0;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;border:3px solid #fff;box-shadow:0 6px 16px rgba(0,0,0,.2)}
+.blk-ui-cursor-trail .blk-cur{position:absolute;left:0;top:0;width:0;height:0}
+.blk-ui-cursor-trail .blk-cur svg{position:absolute;left:0;top:0;overflow:visible;transform-origin:0 0;filter:drop-shadow(0 3px 5px rgba(0,0,0,.3))}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, A = P.accent_color, W = k.w, H = k.h;
+  R.style.fontFamily = BLOCK.family(P.font); R.style.background = P.bg;
+  var pn = R.querySelector(".blk-pn"), jj = R.querySelector(".blk-jj"), cur = R.querySelector(".blk-cur"), sv = cur.querySelector("svg");
+  sv.setAttribute("width", 30 * s); sv.setAttribute("height", 44 * s);
+  var pw = Math.min(W * 0.86, 1000 * s), rh = 128 * s, B = P.rows || [];
+  pn.style.cssText += ";width:" + pw + "px;left:" + (W - pw) / 2 + "px;top:" + (H - (B.length * rh + 150 * s)) / 2 + "px;border-radius:" + 28 * s + "px;padding:" + 40 * s + "px " + 48 * s + "px " + 10 * s + "px";
+  BLOCK.el("h3", { style: "font-size:" + 46 * s + "px;margin-bottom:" + 26 * s + "px" }, pn, BLOCK.esc(P.title));
+  var tw = 92 * s, th = 54 * s, tg = B.map(function (b) {
+    var r = BLOCK.el("div", { class: "blk-br", style: "height:" + rh + "px;font-size:" + 32 * s + "px" }, pn, "<div><b>" + BLOCK.esc(b[0]) + '</b><small style="font-size:' + 24 * s + 'px;margin-top:' + 6 * s + 'px">' + BLOCK.esc(b[1] || "") + "</small></div>");
+    var tr = BLOCK.el("div", { class: "blk-tr", style: "width:" + tw + "px;height:" + th + "px" }, r), hb = BLOCK.el("div", { class: "blk-th", style: "width:" + (th - 8 * s) + "px;height:" + (th - 8 * s) + "px;left:" + 4 * s + "px" }, tr);
+    BLOCK.initial(tl, hb, { yPercent: -50, x: 0 });
+    return { tr: tr, th: hb };
+  });
+  var rr = R.getBoundingClientRect(), fx = W / (rr.width || W);
+  var pts = [{ x: W * 0.22, y: H * 0.9 }].concat((P.click || []).filter(function (i) { return tg[i]; }).map(function (i) { var r = tg[i].tr.getBoundingClientRect(); return { x: (r.left - rr.left + r.width * 0.5) * fx, y: (r.top - rr.top + r.height * 0.55) * fx, i: i }; }));
+  var DL = P.step_duration, sp = P.dot_spacing * s, seg = [], ez = gsap.parseEase("power2.inOut");
+  for (var j = 1; j < pts.length; j++) {
+    var a = pts[j - 1], b = pts[j], dx = b.x - a.x, dy = b.y - a.y, L = Math.hypot(dx, dy) || 1, bend = (j % 2 ? 1 : -1) * 0.22 * L;
+    var cx = (a.x + b.x) / 2 - dy / L * bend, cy = (a.y + b.y) / 2 + dx / L * bend, sm = [{ x: a.x, y: a.y, d: 0 }];
+    for (var q = 1; q <= 80; q++) { var u = q / 80, x = (1 - u) * (1 - u) * a.x + 2 * u * (1 - u) * cx + u * u * b.x, y = (1 - u) * (1 - u) * a.y + 2 * u * (1 - u) * cy + u * u * b.y, pv = sm[q - 1]; sm.push({ x: x, y: y, d: pv.d + Math.hypot(x - pv.x, y - pv.y) }); }
+    var tot = sm[80].d, t0 = 0.35 + (j - 1) * DL, t1 = t0 + DL * 0.62, dots = [];
+    // titik jejak berjarak sama menurut panjang lintasan
+    for (var dd = sp; dd < tot - sp * 0.6; dd += sp) { var m = 1; while (sm[m].d < dd) m++; var f = (dd - sm[m - 1].d) / (sm[m].d - sm[m - 1].d || 1); dots.push({ d: dd, e: BLOCK.svg("circle", { cx: BLOCK.lerp(sm[m - 1].x, sm[m].x, f), cy: BLOCK.lerp(sm[m - 1].y, sm[m].y, f), r: 4.5 * s, fill: A, opacity: 0 }, jj) }); }
+    seg.push({ sm: sm, tot: tot, t0: t0, t1: t1, dots: dots });
+    var tc = t1 + 0.1, mk = BLOCK.el("div", { class: "blk-mk", style: "width:" + 50 * s + "px;height:" + 50 * s + "px;background:" + A + ";font-size:" + 24 * s + "px" }, R, String(j));
+    tl.fromTo(mk, { x: b.x - 25 * s - 46 * s, y: b.y - 25 * s - 52 * s, scale: 0, autoAlpha: 0 }, { x: b.x - 25 * s - 46 * s, y: b.y - 25 * s - 52 * s, scale: 1, autoAlpha: 1, duration: 0.4, ease: "back.out(2.6)" }, tc + 0.05);
+    tl.to(sv, { scale: 0.84, duration: 0.07 }, tc).to(sv, { scale: 1, duration: 0.3, ease: "back.out(3)" }, tc + 0.08);
+    var T = tg[b.i];
+    tl.to(T.th, { x: tw - th, duration: 0.42, ease: "back.out(2.2)" }, tc + 0.04).to(T.tr, { backgroundColor: A, duration: 0.25 }, tc + 0.04);
+  }
+  function di(sg, dist) { var m = 1; while (m < 80 && sg.sm[m].d < dist) m++; var a = sg.sm[m - 1], b = sg.sm[m], f = (dist - a.d) / (b.d - a.d || 1); return { x: BLOCK.lerp(a.x, b.x, BLOCK.clamp(f, 0, 1)), y: BLOCK.lerp(a.y, b.y, BLOCK.clamp(f, 0, 1)) }; }
+  tl.fromTo(cur, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.3 }, 0.05);
+  BLOCK.onTime(tl, function (t) {
+    var pos = pts[0];
+    seg.forEach(function (sg, j) {
+      var p = ez(BLOCK.progress(t, sg.t0, sg.t1)), dist = p * sg.tot, nx = seg[j + 1], fade = nx ? 1 - BLOCK.progress(t, nx.t0, nx.t0 + 0.45) : 1;
+      if (t >= sg.t0) pos = di(sg, dist);
+      sg.dots.forEach(function (D) { var o = t >= sg.t0 && D.d <= dist ? 0.85 * fade : 0; D.e.setAttribute("opacity", o.toFixed(3)); });
+    });
+    cur.style.transform = "translate(" + pos.x.toFixed(1) + "px," + pos.y.toFixed(1) + "px)";
+  }, k.dur);
+}, { font: true });
+</script>

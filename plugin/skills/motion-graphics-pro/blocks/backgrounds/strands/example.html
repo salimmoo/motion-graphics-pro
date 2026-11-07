@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Strands · block example backgrounds/strands</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="8.5">
+
+<!-- Block backgrounds/strands · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-strands" data-block="backgrounds/strands" data-start="0" data-duration="8" data-track-index="0" class="blk blk-backgrounds-strands">
+<script type="application/json" data-block-props>
+{"style": "strand", "color1": "#ff4fa3", "color2": "#4f7bff", "core_color": "#ffffff", "bg": "#000000", "count": 7, "amplitude": 0.22, "speed": 1, "resolution": 0.5}
+</script>
+</div>
+<style>
+.blk-backgrounds-strands{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-backgrounds-strands canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+</style>
+<script>
+BLOCK.mount("blk-strands", function (k) {
+  var P = k.P;
+  var KEPALA = [
+    "void main(){vec2 p=(gl_FragCoord.xy-.5*u_res)/u_res.y;float t=u_t*u_kec;float ar=u_res.x/u_res.y;vec3 col=u_lat;float px=1./u_res.y;"
+  ].join("\n");
+  var GAYA = {
+    "strand": [
+    "for(int i=0;i<10;i++){float fi=float(i);if(fi>=u_n)break;float k=fi/max(u_n-1.,1.);",
+    "float y=u_amp*sin(p.x*(1.3+.35*fi)+t*(.55+.12*fi)+fi*1.7)*(.55+.45*sin(t*.3+fi*2.))+.05*sin(p.x*4.+t*1.3+fi)+(k-.5)*u_amp*.6;",
+    "float d=abs(p.y-y);vec3 c=mix(u_c1,u_c2,clamp(k+.25*sin(p.x*1.5+t*.4),0.,1.));",
+    "col+=c*(.0035/(d+.004))*.45+c*smoothstep(2.5*px,0.,d)*.8;}",
+    "col*=smoothstep(ar*.5,ar*.5-.35,abs(p.x));"
+  ].join("\n"),
+    "sine": [
+    "float env=.75+.25*sin(t*.5);float y=u_amp*env*sin(p.x*5.-t*2.4);float d=abs(p.y-y);",
+    "col+=mix(u_c1,u_c2,.5+.5*sin(p.x*1.5-t*.6))*(.006/(d+.006))*.5;col+=u_ci*smoothstep(3.*px,0.,d);",
+    "for(int j=1;j<3;j++){float fj=float(j);float y2=u_amp*env*sin(p.x*5.-t*2.4-fj*.5)*(1.-.25*fj);col+=u_ci*smoothstep(2.*px,0.,abs(p.y-y2))*(.35/fj);}",
+    "col*=smoothstep(ar*.5,ar*.5-.25,abs(p.x));"
+  ].join("\n")
+  };
+  var EKOR = [
+    "col=max(col,u_lat);col=1.-exp(-col*1.3);col+=(h21(gl_FragCoord.xy+fract(u_t))-0.5)/128.;gl_FragColor=vec4(col,1.);}"
+  ].join("\n");
+  var cv = BLOCK.el("canvas", null, k.root);
+  var r = Math.max(0.1, Math.min(1, +P.resolution || 0.5));
+  cv.width = Math.round(k.w * r); cv.height = Math.round(k.h * r);
+  var sh = BLOCK.shader(cv, KEPALA + "\n" + (GAYA[P.style] || GAYA["strand"]) + "\n" + EKOR, { u_c1: BLOCK.vec3(P.color1), u_c2: BLOCK.vec3(P.color2), u_ci: BLOCK.vec3(P.core_color), u_lat: BLOCK.vec3(P.bg), u_n: Math.min(10, Math.max(1, Math.round(P.count))), u_amp: +P.amplitude, u_kec: +P.speed });
+  if (!sh.ok) { cv.remove(); k.root.style.background = P.bg; return; }
+  BLOCK.onTime(k.tl, function (t) { sh.draw(t); }, k.dur);
+});
+</script>
+</div>
+<script>
+  window.__duration = 8.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 8.5);
+</script>
+</body>
+</html>

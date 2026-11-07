@@ -1,0 +1,113 @@
+{
+ "id": "transitions/iris",
+ "name": "Iris",
+ "name_id": "Iris Bulat",
+ "category": "transitions",
+ "description": {
+  "id": "Lingkaran membuka dari titik pilihan dan menyingkap adegan baru dalam satu gerak mantap. Gaya klasik meredupkan adegan lama dan memberi cincin aksen di tepi iris; ada juga tepi lembut dan iris tutup-buka.",
+  "en": "A circle opens from an authored origin revealing B over A in one confident pass. Classic dims and desaturates A with an accent rim; soft-edge and close-then-open variants."
+ },
+ "tags": [
+  "transisi",
+  "iris",
+  "lingkaran",
+  "clip-path",
+  "reveal",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "mode": {
+   "default": "classic",
+   "type": "enum",
+   "options": [
+    "classic",
+    "soft",
+    "close"
+   ],
+   "hint": "klasik = iris + cincin aksen; lembut = tepi berbulu; tutup = iris menutup A ke warna lalu membuka B",
+   "option_aliases": {
+    "klasik": "classic",
+    "lembut": "soft",
+    "tutup": "close"
+   }
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Titik pusat iris X (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Titik pusat iris Y (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffd166",
+   "type": "color",
+   "hint": "Warna cincin (klasik)",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "color": {
+   "default": "#0b0c10",
+   "type": "color",
+   "hint": "Warna layar saat iris tertutup (mode tutup)",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "thickness": {
+   "default": 6,
+   "type": "number",
+   "hint": "Tebal cincin (px pada 1080)",
+   "aliases": [
+    "tebal"
+   ]
+  },
+  "ease": {
+   "default": "power3.inOut",
+   "type": "ease",
+   "hint": "Easing GSAP"
+  }
+ },
+ "duration": 1.1,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/iris",
+  "iris-reveal",
+  "sdf-iris"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.95,
+  "duration": 3
+ }
+}

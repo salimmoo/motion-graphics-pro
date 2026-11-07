@@ -1,0 +1,70 @@
+<!-- Block accents/chip-ring · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="accents/chip-ring" data-start="0" data-duration="5" data-track-index="30" class="blk blk-accents-chip-ring">
+<script type="application/json" data-block-props>
+{"mode": "surround", "subject": "Kamu", "item": ["Rapat pagi", "Tenggat laporan", "Email klien", "Revisi desain", "Tagihan", "Pesan grup", "Jadwal ulang", "Presentasi"], "count": 26, "converge": true, "pause": 0.12, "radius": 300, "subject_size": 240, "color": "#f5f3ee", "accent_color": "#7cc4ff", "subject_color": "#3b5bdb", "card_color": "#252838", "ping_color": "#ff4d4f", "font": "Inter:wght@500;600;800", "position_x": 50, "position_y": 50, "seed": 3}
+</script>
+<div class="blk-redup"></div>
+<div class="blk-pusat"><div class="blk-sub"></div></div>
+</div>
+<style>
+.blk-accents-chip-ring{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-accents-chip-ring .blk-redup{position:absolute;inset:0;opacity:0}
+.blk-accents-chip-ring .blk-pusat{position:absolute;left:0;top:0;width:0;height:0}
+.blk-accents-chip-ring .blk-sub{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:800;line-height:1.05}
+.blk-accents-chip-ring .blk-c{position:absolute;left:0;top:0;white-space:nowrap;display:flex;align-items:center;box-sizing:border-box}
+.blk-accents-chip-ring .blk-c i{display:block;border-radius:50%;flex:none}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, rng = k.random, fs = function (v) { return (v * s).toFixed(1) + "px"; };
+  var pus = R.querySelector(".blk-pusat"), sub = R.querySelector(".blk-sub"), redup = R.querySelector(".blk-redup"), desak = P.mode === "push";
+  R.style.fontFamily = BLOCK.family(P.font); R.style.color = P.color;
+  pus.style.left = P.position_x + "%"; pus.style.top = P.position_y + "%";
+  var sr = P.subject_size * s / 2;
+  sub.style.cssText += ";left:" + (-sr) + "px;top:" + (-sr) + "px;width:" + 2 * sr + "px;height:" + 2 * sr + "px;font-size:" + fs(P.subject_size * 0.16) +
+    ";background:radial-gradient(circle at 35% 30%," + BLOCK.mix(P.subject_color, "#ffffff", 0.25) + "," + P.subject_color + ");box-shadow:0 0 0 " + fs(10) + " " + BLOCK.rgba(P.subject_color, 0.18) + ",0 " + fs(30) + " " + fs(80) + " rgba(0,0,0,.35)";
+  sub.textContent = P.subject;
+  redup.style.background = "radial-gradient(ellipse at " + P.position_x + "% " + P.position_y + "%,rgba(0,0,0,0) 30%,rgba(0,0,0,.75) 100%)";
+  var rx = Math.min(k.w * 0.42, P.radius * s * (k.w > k.h ? 1.6 : 1)), ry = Math.min(k.h * 0.4, P.radius * s * (k.w > k.h ? 1 : 1.5));
+  var items = P.item || [], t0 = 0.5;
+  tl.fromTo(sub, { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.6, ease: "back.out(1.7)" }, 0);
+  function chip(label, ping) {
+    var c = BLOCK.el("div", { class: "blk-c" }, pus);
+    if (ping) {
+      var z = 54 * s; c.style.cssText += ";width:" + z + "px;height:" + z + "px;justify-content:center;border-radius:50%;background:" + P.ping_color + ";color:#fff;font-weight:800;font-size:" + fs(24);
+      c.textContent = label;
+    } else {
+      c.style.cssText += ";font-size:" + fs(desak ? 24 : 27) + ";padding:" + fs(desak ? 14 : 12) + " " + fs(24) + ";border-radius:" + fs(desak ? 18 : 40) +
+        (desak ? ";background:" + P.card_color + ";box-shadow:0 " + fs(10) + " " + fs(26) + " rgba(0,0,0,.3);font-weight:600" : ";border:1px solid " + BLOCK.rgba(P.color, 0.55) + ";background:" + BLOCK.rgba(P.color, 0.04));
+      BLOCK.el("i", { style: "width:" + fs(desak ? 20 : 9) + ";height:" + fs(desak ? 20 : 9) + ";margin-right:" + fs(12) + ";background:" + (desak ? BLOCK.mix(P.accent_color, P.ping_color, rng()) : P.accent_color) + (desak ? ";border-radius:" + fs(6) : "") }, c);
+      c.appendChild(document.createTextNode(label));
+    }
+    return c;
+  }
+  if (!desak) {
+    // kepung: chip garis rambut berkumpul di cincin elips, lalu opsional merapat ke dalam
+    var n = items.length;
+    items.forEach(function (it, i) {
+      var c = chip(it), a = -Math.PI / 2 + i / n * Math.PI * 2, cw = c.offsetWidth / 2, ch = c.offsetHeight / 2;
+      var x = Math.cos(a) * rx - cw, y = Math.sin(a) * ry - ch, t = t0 + i * P.pause;
+      tl.fromTo(c, { x: x * 1.45, y: y * 1.45 + ch * 0.45, opacity: 0, filter: "blur(8px)" }, { x: x, y: y, opacity: 1, filter: "blur(0px)", duration: 0.8, ease: "power3.out" }, t);
+      if (P.converge) tl.to(c, { x: Math.cos(a) * rx * 0.7 - cw, y: Math.sin(a) * ry * 0.7 - ch, duration: 1.1, ease: "power2.inOut" }, k.dur - 1.9);
+    });
+    if (P.converge) tl.fromTo(redup, { opacity: 0 }, { opacity: 0.7, duration: 1.1, ease: "power2.inOut" }, k.dur - 1.9);
+  } else {
+    // desak: tugas, tab, ping datang makin cepat dari luar bingkai dan menumpuk di sekitar subjek yang tenang
+    var N = P.count, span = k.dur - 1.6, far = Math.hypot(k.w, k.h) * 0.62;
+    for (var i = 0; i < N; i++) {
+      var ping = i % 4 === 3, c = chip(ping ? String(rng.int(2, 99)) : items[i % Math.max(items.length, 1)] || "", ping);
+      var a = rng() * Math.PI * 2, r = rng.range(0.5, 1.05), cw = c.offsetWidth / 2, ch = c.offsetHeight / 2;
+      var tx = Math.cos(a) * rx * r - cw, ty = Math.sin(a) * ry * r - ch, t = t0 + span * Math.sqrt(i / N), d = BLOCK.lerp(0.9, 0.45, i / N);
+      tl.fromTo(c, { x: Math.cos(a) * far - cw, y: Math.sin(a) * far - ch, rotation: rng.range(-25, 25), opacity: 1 },
+        { x: tx, y: ty, rotation: rng.range(-8, 8), duration: d, ease: "power3.in" }, t - d);
+      tl.fromTo(c, { scale: 1 }, { scale: 1.08, duration: 0.07, ease: "power1.out", yoyo: true, repeat: 1, immediateRender: false }, t);
+    }
+    tl.fromTo(redup, { opacity: 0 }, { opacity: 0.65, duration: span, ease: "power2.in" }, t0);
+    tl.fromTo(sub, { scale: 1 }, { scale: 1.03, duration: 1.2, ease: "sine.inOut", yoyo: true, repeat: 1 }, 1);
+  }
+  tl.to(R, { opacity: 0, duration: 0.4, ease: "power2.in" }, k.dur - 0.45);
+}, { font: true });
+</script>

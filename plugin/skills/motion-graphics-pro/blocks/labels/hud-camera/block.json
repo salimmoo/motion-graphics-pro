@@ -1,0 +1,139 @@
+{
+ "id": "labels/hud-camera",
+ "name": "HUD Camera",
+ "name_id": "HUD Kamera",
+ "category": "labels",
+ "description": {
+  "id": "Hamparan layar kamera genggam: REC berkedip, ikon baterai, mode rekam, jam dan tanggal yang bisa diubah, kode waktu yang berjalan mengikuti timeline, siku bingkai, dan bidikan tengah.",
+  "en": "Camcorder overlay: blinking REC, battery, record mode, editable time and date, a timeline-driven timecode counter, corner brackets and centre reticle."
+ },
+ "tags": [
+  "label",
+  "hud",
+  "kamera",
+  "camcorder",
+  "rec",
+  "kode-waktu",
+  "vlog",
+  "retro",
+  "labels",
+  "camera"
+ ],
+ "props": {
+  "rec_text": {
+   "default": "REC",
+   "type": "text",
+   "aliases": [
+    "teks_rec"
+   ]
+  },
+  "date": {
+   "default": "05 NOV 2026",
+   "type": "text",
+   "aliases": [
+    "tanggal"
+   ]
+  },
+  "clock": {
+   "default": "16:42",
+   "type": "text",
+   "aliases": [
+    "jam"
+   ]
+  },
+  "mode": {
+   "default": "SP",
+   "type": "text",
+   "hint": "Teks mode rekam di kanan atas"
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "rec_color": {
+   "default": "#ff2b2b",
+   "type": "color",
+   "aliases": [
+    "warna_rec"
+   ]
+  },
+  "battery": {
+   "default": 70,
+   "type": "number",
+   "hint": "Isi baterai 0..100; <= 20 berkedip",
+   "aliases": [
+    "baterai"
+   ]
+  },
+  "initial_code": {
+   "default": 754,
+   "type": "number",
+   "hint": "Kode waktu awal (detik)",
+   "aliases": [
+    "kode_awal"
+   ]
+  },
+  "fps": {
+   "default": 30,
+   "type": "number",
+   "hint": "Bingkai per detik penghitung"
+  },
+  "corners": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Siku di empat sudut",
+   "aliases": [
+    "sudut"
+   ]
+  },
+  "aim": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Tanda bidik di tengah",
+   "aliases": [
+    "bidik"
+   ]
+  },
+  "scanlines": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Garis pindai halus",
+   "aliases": [
+    "garis_pindai"
+   ]
+  },
+  "font": {
+   "default": "VT323",
+   "type": "font"
+  },
+  "size": {
+   "default": 54,
+   "type": "number",
+   "hint": "Ukuran teks (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "label/hud-kamera",
+  "camcorder-hud"
+ ],
+ "example": {
+  "bg": "photo",
+  "font": [
+   "VT323"
+  ]
+ }
+}

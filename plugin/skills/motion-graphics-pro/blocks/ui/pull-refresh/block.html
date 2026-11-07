@@ -1,0 +1,71 @@
+<!-- Block ui/pull-refresh · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="ui/pull-refresh" data-start="0" data-duration="4" data-track-index="40" class="blk blk-ui-pull-refresh">
+<script type="application/json" data-block-props>
+{"title": "Kotak Masuk", "item": [["Rina", "Draf presentasi sudah siap ditinjau"], ["Tim Desain", "Jadwal rapat dipindah ke Kamis"], ["Bima", "Foto acara kemarin sudah diunggah"], ["Sari", "Terima kasih atas bantuannya!"], ["Dodi", "Anggaran kuartal sudah disetujui"], ["Admin", "Pembaruan kebijakan cuti"]], "new_item": ["Nadia", "Kabar baik: proyek kita lolos seleksi"], "pull_text": "Tarik untuk memuat", "release_text": "Lepaskan untuk memuat", "accent_color": "#2d6cdf", "bg": "#dfe5ef", "font": "Inter:wght@400;500;600;700"}
+</script>
+</div>
+<style>
+.blk-ui-pull-refresh{position:absolute;inset:0;pointer-events:none;overflow:hidden;color:#1b2333}
+.blk-ui-pull-refresh .blk-hp{position:absolute;background:#0d1117}
+.blk-ui-pull-refresh .blk-ly{position:absolute;overflow:hidden;background:#f6f7fb}
+.blk-ui-pull-refresh .blk-hd{position:absolute;left:0;right:0;top:0;background:#fff;z-index:2;font-weight:700;box-sizing:border-box;border-bottom:1px solid #e6e9f0}
+.blk-ui-pull-refresh .blk-ls{position:absolute;left:0;right:0}
+.blk-ui-pull-refresh .blk-rw{position:absolute;left:0;right:0;display:flex;align-items:center;background:#fff;box-sizing:border-box;border-bottom:1px solid #eef0f5}
+.blk-ui-pull-refresh .blk-rw b{display:block;font-weight:600}
+.blk-ui-pull-refresh .blk-rw span{display:block;color:#7a8396;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.blk-ui-pull-refresh .blk-av{flex:none;border-radius:50%}
+.blk-ui-pull-refresh .blk-ind{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;color:#7a8396;font-weight:500}
+.blk-ui-pull-refresh .blk-tc{position:absolute;left:0;top:0;border-radius:50%;background:rgba(120,130,150,.38);border:2px solid rgba(255,255,255,.9);box-sizing:border-box;z-index:3}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, R = k.root, A = P.accent_color, W = k.w, H = k.h;
+  R.style.fontFamily = BLOCK.family(P.font); R.style.background = P.bg;
+  var ph = H * 0.88, pw = Math.min(ph * 0.48, W * 0.9); ph = pw / 0.48; var u = pw / 400;
+  var hp = BLOCK.el("div", { class: "blk-hp", style: "width:" + pw + "px;height:" + ph + "px;left:" + (W - pw) / 2 + "px;top:" + (H - ph) / 2 + "px;border-radius:" + 58 * u + "px;box-shadow:0 " + 30 * u + "px " + 70 * u + "px rgba(20,30,60,.3)" }, R);
+  var ly = BLOCK.el("div", { class: "blk-ly", style: "inset:" + 10 * u + "px;border-radius:" + 48 * u + "px" }, hp), hh = 130 * u, rh = 104 * u;
+  BLOCK.el("div", { class: "blk-hd", style: "height:" + hh + "px;font-size:" + 34 * u + "px;padding:" + 70 * u + "px " + 26 * u + "px 0" }, ly, BLOCK.esc(P.title));
+  var ind = BLOCK.el("div", { class: "blk-ind", style: "top:" + (hh + 18 * u) + "px;font-size:" + 15 * u + "px;gap:" + 8 * u + "px" }, ly);
+  ind.innerHTML = '<svg width="' + 40 * u + '" height="' + 40 * u + '" viewBox="-20 -20 40 40"><circle r="14" fill="none" stroke="#d5dbe6" stroke-width="3.5"/><circle class="blk-arc" r="14" fill="none" stroke="' + A + '" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="88" stroke-dashoffset="88" transform="rotate(-90)"/><path class="blk-pa" d="M0 -6 L0 6 M-5 1 L0 6 L5 1" fill="none" stroke="' + A + '" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><div class="blk-it"></div>';
+  var svg = ind.querySelector("svg"), arc = ind.querySelector(".blk-arc"), pa = ind.querySelector(".blk-pa"), it = ind.querySelector(".blk-it");
+  var ls = BLOCK.el("div", { class: "blk-ls", style: "top:" + hh + "px;height:" + (ph - hh) + "px" }, ly);
+  var warna = ["#ff8a5b", "#5b9bff", "#36c58f", "#b17cff", "#ffc24a", "#ff6b8a", "#4bc6d9"];
+  function baris(d, i) {
+    var r = BLOCK.el("div", { class: "blk-rw", style: "height:" + rh + "px;padding:0 " + 24 * u + "px;gap:" + 18 * u + "px" }, ls);
+    BLOCK.el("div", { class: "blk-av", style: "width:" + 58 * u + "px;height:" + 58 * u + "px;background:" + warna[i % warna.length] }, r);
+    BLOCK.el("div", { style: "min-width:0;font-size:" + 20 * u + "px" }, r, "<b>" + BLOCK.esc(d[0]) + '</b><span style="font-size:' + 17 * u + 'px;margin-top:' + 4 * u + 'px">' + BLOCK.esc(d[1]) + "</span>");
+    return r;
+  }
+  var rows = (P.item || []).map(function (d, i) { var r = baris(d, i + 1); BLOCK.initial(tl, r, { y: i * rh }); return r; });
+  var nb = baris(P.new_item || ["", ""], 0);
+  // waktu: sentuh, tarik (karet), lepas ke ambang, memuat, selesai
+  var t0 = 0.45, t1 = 1.55, tL = 1.55, tD = 2.75, thr = 92 * u, c = 260 * u, Dmax = 520 * u, eIn = gsap.parseEase("power1.inOut"), eOut = gsap.parseEase("power3.out"), eBack = gsap.parseEase("power3.inOut");
+  var karet = function (d) { return c * (1 - 1 / (d / c + 1)); }; // makin ditarik makin berat
+  var offRel = karet(Dmax);
+  function offset(t) {
+    if (t < t0) return 0;
+    if (t < t1) return karet(Dmax * eIn(BLOCK.progress(t, t0, t1)));
+    if (t < tD) return BLOCK.lerp(offRel, thr, eOut(BLOCK.progress(t, t1, t1 + 0.4)));
+    return BLOCK.lerp(thr, 0, eBack(BLOCK.progress(t, tD, tD + 0.5)));
+  }
+  var d = 66 * u, tc = BLOCK.el("div", { class: "blk-tc", style: "width:" + d + "px;height:" + d + "px" }, R), fx = W / 2 + 40 * u, fy = (H - ph) / 2 + 10 * u + hh + 120 * u;
+  tl.to(rows, { y: function (i) { return (i + 1) * rh; }, duration: 0.5, ease: "back.out(1.4)" }, tD + 0.05)
+    .fromTo(nb, { y: 0, autoAlpha: 0, scale: 0.96 }, { y: 0, autoAlpha: 1, scale: 1, duration: 0.45, ease: "back.out(1.6)" }, tD + 0.15);
+  var lastT = "";
+  BLOCK.onTime(tl, function (t) {
+    var o = offset(t), p = BLOCK.clamp(o / thr, 0, 1), armed = t < t1 && o >= thr, load = t >= t1 && t < tD;
+    ls.style.transform = "translateY(" + o.toFixed(1) + "px)";
+    ind.style.opacity = (t < tD ? BLOCK.clamp(o / (thr * 0.5), 0, 1) : 1 - BLOCK.progress(t, tD, tD + 0.25)).toFixed(3);
+    // panah berputar ke atas saat ambang tercapai, lalu berganti spinner busur terbatas
+    pa.style.display = load ? "none" : "block";
+    pa.setAttribute("transform", "rotate(" + (armed ? 180 : 0) + ")");
+    arc.setAttribute("stroke-dashoffset", (88 - (load ? 60 : 88 * p * 0.9)).toFixed(1));
+    svg.style.transform = "rotate(" + (load ? (t - t1) * 420 : p * 200) + "deg) scale(" + (armed ? 1.1 : 1) + ")";
+    var str = load ? "Memuat…" : armed ? P.release_text : P.pull_text;
+    if (str !== lastT) { it.textContent = str; lastT = str; }
+    // lingkaran sentuh mengikuti jari (lebih jauh dari list karena resistansi)
+    var on = BLOCK.progress(t, t0 - 0.15, t0) * (1 - BLOCK.progress(t, t1, t1 + 0.2)), fd = t < t1 ? Dmax * eIn(BLOCK.progress(t, t0, t1)) * 0.55 : Dmax * 0.55;
+    tc.style.opacity = on.toFixed(3); tc.style.transform = "translate(" + (fx - d / 2) + "px," + (fy + fd - d / 2).toFixed(1) + "px) scale(" + (1.3 - 0.3 * on).toFixed(3) + ")";
+  }, k.dur);
+}, { font: true });
+</script>

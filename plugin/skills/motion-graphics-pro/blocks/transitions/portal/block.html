@@ -1,0 +1,62 @@
+<!-- Block transitions/portal · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/portal" data-start="0" data-duration="3" data-track-index="20" class="blk blk-transitions-portal">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "shape": "circle", "position_x": 50, "position_y": 52, "size": 0.17, "color": "#ffd98a", "color_2": "#ff7a45", "particles": 140, "seed": 9}
+</script>
+</div>
+<style>
+.blk-transitions-portal{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-transitions-portal svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, W = k.w, H = k.h, s = k.s, R = k.random, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to);
+  var cx = W * (+P.position_x || 50) / 100, cy = H * (+P.position_y || 50) / 100, r0 = Math.min(W, H) * (+P.size || 0.17);
+  var lengkung = P.shape === "curve", id = k.id + "-g";
+  var jauh = Math.max(Math.hypot(cx, cy), Math.hypot(W - cx, cy), Math.hypot(cx, H - cy), Math.hypot(W - cx, H - cy)) * (lengkung ? 1.15 : 1.02);
+  var cv = BLOCK.canvas(k.root, W, H), g = cv.ctx;
+  var sv = BLOCK.svg("svg", { viewBox: "0 0 " + W + " " + H }, k.root);
+  var f = BLOCK.svg("filter", { id: id, x: "-50%", y: "-50%", width: "200%", height: "200%" }, BLOCK.svg("defs", null, sv));
+  BLOCK.svg("feGaussianBlur", { stdDeviation: (14 * s).toFixed(1) }, f);
+  var cahaya = BLOCK.svg("path", { fill: "none", stroke: P.color_2, filter: "url(#" + id + ")" }, sv);
+  var cincin = BLOCK.svg("path", { fill: "none", stroke: P.color, "stroke-linecap": "round" }, sv);
+  // bentuk lubang: lingkaran, atau lengkung (gapura) setinggi 1.35 x lebar
+  function jalur(r) {
+    if (!lengkung) return "M" + (cx - r).toFixed(1) + " " + cy.toFixed(1) + "a" + r.toFixed(1) + " " + r.toFixed(1) + " 0 1 0 " + (2 * r).toFixed(1) + " 0a" + r.toFixed(1) + " " + r.toFixed(1) + " 0 1 0 " + (-2 * r).toFixed(1) + " 0Z";
+    var hb = r * 1.35, top = cy - hb + r;
+    return "M" + (cx - r).toFixed(1) + " " + (cy + hb).toFixed(1) + "V" + top.toFixed(1) + "a" + r.toFixed(1) + " " + r.toFixed(1) + " 0 0 1 " + (2 * r).toFixed(1) + " 0V" + (cy + hb).toFixed(1) + "Z";
+  }
+  var mote = [];
+  for (var i = 0; i < (+P.particles || 0); i++) mote.push({ a: R() * 6.2832, v: 0.25 + R() * 0.9, t0: D * (0.08 + R() * 0.7), sz: (1.5 + R() * 4) * s, c: R() < 0.5 ? P.color : P.color_2 });
+  var t1 = D * 0.16, t2 = D * 0.56, t3 = D * 0.92;
+  function gambar(t) {
+    // buka (pegas), tumbuh pelan sambil berdenyut, lalu kamera menembus
+    var o = t < t1 ? BLOCK.spring(BLOCK.progress(t, 0.02, t1) * 0.9, 1.2, 0.45) : 1;
+    var q = BLOCK.progress(t, t2, t3), dorong = q * q * q;
+    var r = r0 * o * (1 + 0.12 * BLOCK.progress(t, t1, t2) + 0.02 * Math.sin(t * 9)), rr = BLOCK.lerp(r, jauh, dorong);
+    var d = jalur(Math.max(0.1, rr));
+    if (Bk) {
+      // klip dihitung di koordinat lokal B (B ikut diskalakan dari pusat lubang)
+      var bs = BLOCK.lerp(1.35, 1, BLOCK.smooth(BLOCK.progress(t, 0, t3)));
+      Bk.style.clipPath = t >= t3 ? "none" : o <= 0.001 ? "circle(0 at 50% 50%)" : "path('" + jalur(Math.max(0.1, rr / bs)) + "')";
+      Bk.style.transformOrigin = cx + "px " + cy + "px"; Bk.style.transform = "scale(" + bs.toFixed(4) + ")";
+    }
+    if (A) { A.style.transformOrigin = cx + "px " + cy + "px"; A.style.transform = t >= t3 ? "" : "scale(" + (1 + 2.2 * dorong).toFixed(4) + ")"; }
+    var ra = (1 - BLOCK.progress(q, 0.55, 0.95)) * BLOCK.progress(o, 0, 0.3);
+    cincin.setAttribute("d", d); cahaya.setAttribute("d", d);
+    cincin.setAttribute("stroke-width", (6 * s * (1 + dorong * 3)).toFixed(1)); cahaya.setAttribute("stroke-width", (40 * s * (1 + dorong * 2)).toFixed(1));
+    cincin.setAttribute("opacity", ra.toFixed(3)); cahaya.setAttribute("opacity", (ra * (0.75 + 0.25 * Math.sin(t * 13))).toFixed(3));
+    // percik cahaya terbang keluar dari lubang ke arah kamera
+    g.clearRect(0, 0, W, H); g.globalCompositeOperation = "lighter";
+    mote.forEach(function (m) {
+      var u = t - m.t0; if (u <= 0 || u > 1.1) return;
+      var dist = rr * 0.9 + (u * u * 1.6 + u * 0.3) * m.v * Math.min(W, H) * (1 + dorong * 2), al = (1 - u / 1.1) * BLOCK.progress(u, 0, 0.08);
+      g.globalAlpha = al; g.fillStyle = m.c; g.beginPath(); g.arc(cx + Math.cos(m.a) * dist, cy + Math.sin(m.a) * dist * (lengkung ? 1.2 : 1), m.sz * (1 + u * 1.5), 0, 6.2832); g.fill();
+    });
+    g.globalAlpha = 1; g.globalCompositeOperation = "source-over";
+  }
+  BLOCK.onTime(tl, gambar, D);
+  if (Bk) BLOCK.initial(tl, Bk, { autoAlpha: 1 });
+  if (A) BLOCK.initial(tl, A, { autoAlpha: 1 }).set(A, { autoAlpha: 0 }, t3);
+});
+</script>

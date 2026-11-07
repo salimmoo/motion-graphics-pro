@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Globe · block example maps/globe</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="8.5">
+<div id="adegan" class="adegan ad-gelap"></div>
+<!-- Block maps/globe · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-globe" data-block="maps/globe" data-start="0" data-duration="8" data-track-index="4" class="blk blk-maps-globe">
+<script type="application/json" data-block-props>
+{"dot": [{"nama": "Jakarta", "lat": -6.2, "lon": 106.8}, {"nama": "Singapura", "lat": 1.35, "lon": 103.8}, {"nama": "Tokyo", "lat": 35.7, "lon": 139.7}, {"nama": "Sydney", "lat": -33.9, "lon": 151.2}, {"nama": "Dubai", "lat": 25.2, "lon": 55.3}, {"nama": "Mumbai", "lat": 19.1, "lon": 72.9}], "arc": [[0, 2], [0, 3], [0, 4], [0, 5], [1, 2]], "lon_start": 80, "rotate": 7, "skew": 14, "land": true, "dot_count": 4200, "size": 40, "position_x": 50, "position_y": 52, "sea_color": "#2b4a7a", "land_color": "#9fd3ff", "arc_color": "#ffc35a", "label_color": "#f4f1ea", "light_color": "#4f8dff", "label": true, "font": "Inter:wght@500;700", "seed": 4}
+</script>
+</div>
+<style>
+.blk-maps-globe{position:absolute;inset:0;pointer-events:none}
+</style>
+<script>
+BLOCK.mount("blk-globe", function (k) {
+var P = k.P, s = k.s, RAD = Math.PI / 180, fam = BLOCK.family(P.font), R = BLOCK.random(+P.seed || 4);
+  var cv = BLOCK.canvas(k.root, k.w, k.h, 1), g = cv.ctx;
+  var cx = k.w * P.position_x / 100, cy = k.h * P.position_y / 100, Rg = Math.min(k.w, k.h) * P.size / 100;
+  // titik bola: spiral Fibonacci (rata), daratan = ambang medan gelombang berseed (ilustratif)
+  var N = Math.max(300, +P.dot_count | 0), dots = [], waves = [];
+  for (var w = 0; w < 9; w++) { var th = R() * Math.PI * 2, ph = Math.acos(2 * R() - 1); waves.push([Math.sin(ph) * Math.cos(th), Math.cos(ph), Math.sin(ph) * Math.sin(th), 3 + R() * 5, R() * 6.3, 1 / (1 + w * 0.3)]); }
+  for (var i = 0; i < N; i++) {
+    var y = 1 - 2 * (i + 0.5) / N, r = Math.sqrt(1 - y * y), a = i * 2.39996323;
+    var v = [Math.cos(a) * r, y, Math.sin(a) * r], f = 0;
+    waves.forEach(function (q) { f += q[5] * Math.sin((q[0] * v[0] + q[1] * v[1] + q[2] * v[2]) * q[3] + q[4]); });
+    var lat = Math.asin(y), lon = Math.atan2(v[0], v[2]);
+    dots.push({ lat: lat, lon: lon, land: P.land && f > 0.9 && Math.abs(y) < 0.93 });
+  }
+  var pts = (P.dot || []).map(function (p) { return { n: p.nama, lat: +p.lat * RAD, lon: +p.lon * RAD }; });
+  var arcs = (P.arc || []).filter(function (b) { return pts[b[0]] && pts[b[1]]; });
+  var tilt = +P.skew * RAD, ct = Math.cos(tilt), st = Math.sin(tilt);
+  function proj(lat, lon, lon0, alt) {
+    var cl = Math.cos(lat), d = lon - lon0, x = cl * Math.sin(d), yy = Math.sin(lat), z = cl * Math.cos(d);
+    var y2 = yy * ct - z * st, z2 = yy * st + z * ct, m = alt || 1;
+    return [cx + Rg * x * m, cy - Rg * y2 * m, z2, x * m, y2 * m];
+  }
+  function vec(p) { var c = Math.cos(p.lat); return [c * Math.sin(p.lon), Math.sin(p.lat), c * Math.cos(p.lon)]; }
+  function slerp(a, b, u) {
+    var d = Math.acos(Math.max(-1, Math.min(1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2]))) || 1e-6, sa = Math.sin((1 - u) * d) / Math.sin(d), sb = Math.sin(u * d) / Math.sin(d);
+    var v = [a[0] * sa + b[0] * sb, a[1] * sa + b[1] * sb, a[2] * sa + b[2] * sb];
+    return { lat: Math.asin(v[1]), lon: Math.atan2(v[0], v[2]), d: d };
+  }
+  var cL = BLOCK.hexToRgb(P.land_color), cS = BLOCK.hexToRgb(BLOCK.mix(P.sea_color, "#ffffff", 0.5));
+  function gambar(t) {
+    g.clearRect(0, 0, k.w, k.h);
+    var intro = BLOCK.smooth(BLOCK.progress(t, 0, 1.2)), sc = 0.86 + 0.14 * intro;
+    var lon0 = (+P.lon_start + +P.rotate * t - (1 - intro) * 25) * RAD;
+    g.save(); g.globalAlpha = intro;
+    g.translate(cx, cy); g.scale(sc, sc); g.translate(-cx, -cy);
+    // pendar atmosfer + badan bola
+    var gl = g.createRadialGradient(cx, cy, Rg * 0.9, cx, cy, Rg * 1.28);
+    gl.addColorStop(0, BLOCK.rgba(P.light_color, 0.45)); gl.addColorStop(1, BLOCK.rgba(P.light_color, 0));
+    g.fillStyle = gl; g.beginPath(); g.arc(cx, cy, Rg * 1.28, 0, Math.PI * 2); g.fill();
+    var bd = g.createRadialGradient(cx - Rg * 0.35, cy - Rg * 0.4, Rg * 0.1, cx, cy, Rg);
+    bd.addColorStop(0, BLOCK.mix(P.sea_color, "#ffffff", 0.12)); bd.addColorStop(1, BLOCK.mix(P.sea_color, "#000000", 0.6));
+    g.fillStyle = bd; g.beginPath(); g.arc(cx, cy, Rg, 0, Math.PI * 2); g.fill();
+    for (var i = 0; i < dots.length; i++) {
+      var d = dots[i], q = proj(d.lat, d.lon, lon0); if (q[2] <= 0.02) continue;
+      var lit = 0.35 + 0.65 * q[2], c = d.land ? cL : cS, rr = (d.land ? 3.2 : 1.3) * s * (0.55 + 0.45 * q[2]);
+      g.fillStyle = "rgba(" + c[0] + "," + c[1] + "," + c[2] + "," + (d.land ? 0.95 * lit : 0.4 * lit + 0.18).toFixed(3) + ")";
+      g.fillRect(q[0] - rr, q[1] - rr, rr * 2, rr * 2);
+    }
+    // busur antar titik: tumbuh berurutan, bagian di balik bola disembunyikan
+    arcs.forEach(function (b, ai) {
+      var A = vec(pts[b[0]]), B = vec(pts[b[1]]), t0 = 1.3 + ai * 0.45, u = BLOCK.smooth(BLOCK.progress(t, t0, t0 + 1.3));
+      if (u <= 0) return;
+      var n = 48, lift = 0.08 + 0.22 * slerp(A, B, 0.5).d / Math.PI, pen = false, last = null;
+      g.lineWidth = 3 * s; g.strokeStyle = P.arc_color; g.lineCap = "round"; g.shadowColor = P.arc_color; g.shadowBlur = 10 * s;
+      g.beginPath();
+      for (var j = 0; j <= n * u; j++) {
+        var uu = j / n, m = slerp(A, B, uu), q = proj(m.lat, m.lon, lon0, 1 + lift * Math.sin(Math.PI * uu));
+        var vis = q[2] > 0 || (q[3] * q[3] + q[4] * q[4]) > 1;
+        if (vis) { if (!pen) g.moveTo(q[0], q[1]); else g.lineTo(q[0], q[1]); pen = true; last = q; } else pen = false;
+      }
+      g.stroke(); g.shadowBlur = 0;
+      if (last && u < 1) { g.fillStyle = "#fffbe8"; g.beginPath(); g.arc(last[0], last[1], 4.5 * s, 0, Math.PI * 2); g.fill(); }
+      if (u >= 1) {
+        var e = proj(pts[b[1]].lat, pts[b[1]].lon, lon0), k2 = ((t - t0 - 1.3) % 1.6) / 1.6;
+        if (e[2] > 0) { g.strokeStyle = BLOCK.rgba(P.arc_color, 0.8 * (1 - k2)); g.lineWidth = 2 * s; g.beginPath(); g.arc(e[0], e[1], (6 + 22 * k2) * s, 0, Math.PI * 2); g.stroke(); }
+      }
+    });
+    // titik kota + label
+    g.font = "700 " + Math.round(24 * s) + "px " + fam; g.textBaseline = "middle";
+    pts.forEach(function (p, pi) {
+      var q = proj(p.lat, p.lon, lon0); if (q[2] <= 0.05) return;
+      var al = Math.min(1, q[2] * 4) * BLOCK.smooth(BLOCK.progress(t, 1 + pi * 0.12, 1.5 + pi * 0.12));
+      g.globalAlpha = intro * al; g.fillStyle = "#ffffff"; g.beginPath(); g.arc(q[0], q[1], 5 * s, 0, Math.PI * 2); g.fill();
+      g.strokeStyle = P.arc_color; g.lineWidth = 2 * s; g.stroke();
+      if (P.label) { g.fillStyle = "rgba(10,14,30,.55)"; var tw = g.measureText(p.n).width; g.fillRect(q[0] + 12 * s, q[1] - 17 * s, tw + 18 * s, 34 * s); g.fillStyle = P.label_color; g.fillText(p.n, q[0] + 21 * s, q[1] + 1); }
+    });
+    g.restore();
+  }
+  // kanvas butuh font benar-benar termuat sebelum frame pertama (deterministik)
+  var fl = document.fonts && document.fonts.load ? document.fonts.load("700 " + Math.round(24 * s) + "px " + fam).catch(function () {}) : Promise.resolve();
+  return fl.then(function () { BLOCK.onTime(k.tl, gambar, k.dur); });
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 8.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 8.5);
+</script>
+</body>
+</html>

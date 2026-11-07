@@ -1,0 +1,70 @@
+<!-- Block transitions/aberration · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/aberration" data-start="0" data-duration="1" data-track-index="20" class="blk blk-transitions-aberration">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "mode": "sweep", "direction": "left", "strength": 1, "ease": "expo.inOut"}
+</script>
+</div>
+<style>
+.blk-transitions-aberration{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to), D = k.dur, W = k.w, H = k.h, s = k.s;
+  function gaya(el, o) { if (el) for (var n in o) el.style[n] = o[n]; }
+  function bersih(el, tampil) { gaya(el, { transform: "", filter: "", opacity: "", clipPath: "", webkitMaskImage: "", maskImage: "", transformOrigin: "", zIndex: "", borderRadius: "", boxShadow: "", backfaceVisibility: "", visibility: tampil ? "" : "hidden" }); }
+  function ez(n) { return gsap.parseEase(n || "none") || gsap.parseEase("none"); }
+  function peta(n, fn, cx, cy) {
+    var mw = 192, mh = Math.max(2, Math.round(mw * H / W)), md = Math.min(W, H);
+    var c = document.createElement("canvas"); c.width = mw; c.height = mh * n;
+    var x = c.getContext("2d"), im = x.createImageData(mw, mh * n), dt = im.data;
+    for (var f = 0; f < n; f++) for (var j = 0; j < mh; j++) for (var i = 0; i < mw; i++) {
+      var v = fn(((i + 0.5) / mw * W - cx) / md, ((j + 0.5) / mh * H - cy) / md, f / n), o = ((f * mh + j) * mw + i) * 4;
+      dt[o] = 128 + 127 * BLOCK.clamp(v[0], -1, 1); dt[o + 1] = 128 + 127 * BLOCK.clamp(v[1], -1, 1); dt[o + 2] = 128; dt[o + 3] = 255;
+    }
+    x.putImageData(im, 0, 0);
+    return c.toDataURL("image/png");
+  }
+
+  var E = ez(P.ease), kk = +P.strength || 1, radial = P.mode === "radial", fid = "blkf-" + k.id;
+  var ar = { left: [-1, 0], right: [1, 0], top: [0, -1], bottom: [0, 1] }[P.direction] || [-1, 0], hor = ar[0] !== 0, sg = hor ? ar[0] : ar[1], L = hor ? W : H;
+  var sv = BLOCK.svg("svg", { width: 0, height: 0, style: "position:absolute" }, k.root);
+  var fl = BLOCK.svg("filter", { id: fid, filterUnits: "userSpaceOnUse", primitiveUnits: "userSpaceOnUse", x: -W * 0.05, y: -H * 0.05, width: W * 1.1, height: H * 1.1, "color-interpolation-filters": "sRGB" }, sv);
+  var M = { r: "1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0", g: "0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0", b: "0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0" };
+  var geser = [];
+  if (radial) {
+    var md = Math.min(W, H), rm = Math.hypot(W, H) / 2 / md;
+    var im = BLOCK.svg("feImage", { x: 0, y: 0, width: W, height: H, preserveAspectRatio: "none", result: "m" }, fl);
+    im.setAttribute("href", peta(1, function (x, y) { return [x / rm, y / rm]; }, W / 2, H / 2));
+    ["r", "b"].forEach(function (c) { geser.push(BLOCK.svg("feDisplacementMap", { "in": "SourceGraphic", in2: "m", scale: 0, xChannelSelector: "R", yChannelSelector: "G", result: "d" + c }, fl)); BLOCK.svg("feColorMatrix", { "in": "d" + c, type: "matrix", values: M[c], result: c }, fl); });
+    BLOCK.svg("feColorMatrix", { "in": "SourceGraphic", type: "matrix", values: M.g, result: "g" }, fl);
+  } else {
+    ["r", "g", "b"].forEach(function (c) { BLOCK.svg("feColorMatrix", { "in": "SourceGraphic", type: "matrix", values: M[c], result: c + "0" }, fl); geser.push(BLOCK.svg("feOffset", { "in": c + "0", dx: 0, dy: 0, result: c }, fl)); });
+  }
+  BLOCK.svg("feBlend", { "in": "r", in2: "g", mode: "screen", result: "rg" }, fl);
+  BLOCK.svg("feBlend", { "in": "rg", in2: "b", mode: "screen", result: "rgb" }, fl);
+  if (!radial) BLOCK.svg("feComposite", { "in": "rgb", in2: "SourceGraphic", operator: "in" }, fl);
+  function laju(u) { var e = 0.004; return (E(Math.min(1, u + e)) - E(Math.max(0, u - e))) / (2 * e); }
+  BLOCK.onTime(tl, function (t) {
+    var u = t / D;
+    if (u <= 0 || u >= 1) { bersih(A, u <= 0); bersih(Bk, u >= 1); return; }
+    var f = "url(#" + fid + ")";
+    if (radial) {
+      var e = Math.pow(Math.sin(Math.PI * u), 1.5), S = 70 * s * kk * e, x = ez("sine.inOut")(BLOCK.progress(u, 0.4, 0.6));
+      geser[0].setAttribute("scale", (-S).toFixed(2)); geser[1].setAttribute("scale", S.toFixed(2));
+      var a = ez("power3.in")(Math.min(1, u / 0.55)), b = ez("power3.out")(BLOCK.clamp((u - 0.45) / 0.55, 0, 1));
+      gaya(A, { visibility: u < 0.6 ? "" : "hidden", filter: f, transform: "scale(" + (1.03 + 0.35 * a) + ")" });
+      gaya(Bk, { visibility: x > 0 ? "" : "hidden", filter: f, opacity: x, transform: "scale(" + (1.25 - 0.25 * b + 0.03 * e) + ")" });
+    } else {
+      var p = E(u), v = laju(u), o = Math.min(26 * s * kk, v * 4 * s * kk), dx = hor ? o : 0, dy = hor ? 0 : o;
+      geser[0].setAttribute("dx", (sg * dx).toFixed(1)); geser[0].setAttribute("dy", (sg * dy).toFixed(1));
+      geser[2].setAttribute("dx", (-sg * dx).toFixed(1)); geser[2].setAttribute("dy", (-sg * dy).toFixed(1));
+      var ax = 1 + 0.5 / L, sx = hor ? "scaleX(" + ax + ")" : "scaleY(" + ax + ")";
+      var tr = function (q) { return (hor ? "translate3d(" + q + "px,0,0) " : "translate3d(0," + q + "px,0) ") + sx; };
+      var jA = hor ? (sg < 0 ? "0% 50%" : "100% 50%") : (sg < 0 ? "50% 0%" : "50% 100%"), jB = hor ? (sg < 0 ? "100% 50%" : "0% 50%") : (sg < 0 ? "50% 100%" : "50% 0%");
+      gaya(A, { visibility: p < 1 ? "" : "hidden", filter: o > 0.5 ? f : "", transformOrigin: jA, transform: tr(sg * p * L) });
+      gaya(Bk, { visibility: "", filter: o > 0.5 ? f : "", transformOrigin: jB, transform: tr(sg * (p - 1) * L) });
+    }
+  }, D);
+});
+</script>

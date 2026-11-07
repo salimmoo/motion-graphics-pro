@@ -1,0 +1,65 @@
+<!-- Block transitions/parallax-zoom · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/parallax-zoom" data-start="0" data-duration="3" data-track-index="20" class="blk blk-transitions-parallax-zoom">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "mode": "full", "label": ["Pembuka", "Riset", "Sketsa", "Warna", "Gerak", "Suara", "Uji", "Rilis", "Arsip"], "palette": ["#efe4cc", "#c9a77a", "#a9b89a", "#9db4c8", "#d98c6a", "#e2b65a"], "parallax": 0.6, "bg_color": "#1a1815", "font": "Inter:wght@700;800"}
+</script>
+</div>
+<style>
+.blk-transitions-parallax-zoom{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-transitions-parallax-zoom .blk-latar{position:absolute;inset:0}
+.blk-transitions-parallax-zoom .blk-kartu{position:absolute;left:0;top:0;overflow:hidden;transform-origin:50% 50%}
+.blk-transitions-parallax-zoom .blk-isi{position:absolute;left:0;top:0;transform-origin:0 0}
+.blk-transitions-parallax-zoom .blk-isi>*{position:absolute;inset:0}
+.blk-transitions-parallax-zoom .blk-lbl{position:absolute;left:8%;bottom:9%;font-weight:800;letter-spacing:-.01em}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, W = k.w, H = k.h, s = k.s, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to);
+  var mode = P.mode || "full", f = 0.3, cw = W * f, ch = H * f, gp = Math.min(W, H) * 0.035, SM = 1 / f, par = +P.parallax || 0.6;
+  var lat = BLOCK.el("div", { class: "blk-latar", style: "background:radial-gradient(80% 80% at 50% 50%," + BLOCK.mix(P.bg_color, "#ffffff", 0.07) + "," + P.bg_color + ")" }, k.root);
+  var pal = P.palette && P.palette.length ? P.palette : ["#efe4cc"], lab = P.label || [];
+  function klon(el, induk) {
+    var w = BLOCK.el("div", { class: "blk-isi", style: "width:" + W + "px;height:" + H + "px;transform:scale(" + f + ")" }, induk);
+    var c = el.cloneNode(true); c.removeAttribute("id"); c.querySelectorAll("[id]").forEach(function (e) { e.removeAttribute("id"); }); c.style.cssText += ";visibility:inherit;opacity:1;transform:none"; w.appendChild(c);
+  }
+  // kisi 3x3 (mode penuh 4x3); kartu tengah = adegan lama, kartu kanan = adegan baru (mode zoom: tengah = adegan baru)
+  var kartu = [];
+  for (var j = -1; j <= 1; j++) for (var i = -1; i <= (mode === "full" ? 2 : 1); i++) {
+    var e = BLOCK.el("div", { class: "blk-kartu", style: "width:" + cw + "px;height:" + ch + "px;box-shadow:0 " + Math.round(10 * s) + "px " + Math.round(30 * s) + "px rgba(0,0,0,.4)" }, k.root);
+    var n = kartu.length, isi = null;
+    if (i === 0 && j === 0) isi = mode === "zoom" ? Bk : A;
+    if (i === 1 && j === 0 && mode === "full") isi = Bk;
+    if (isi) klon(isi, e);
+    else {
+      e.style.background = "repeating-linear-gradient(0deg,rgba(0,0,0,.05) 0 1px,transparent 1px " + Math.round(14 * s) + "px)," + pal[n % pal.length];
+      var l = BLOCK.el("div", { class: "blk-lbl", style: "font-family:" + BLOCK.family(P.font) + ";font-size:" + Math.round(34 * s) + "px;color:#1d1b18" }, e);
+      l.textContent = lab[n % Math.max(1, lab.length)] || "";
+    }
+    kartu.push({ el: e, gx: i * (cw + gp), gy: j * (ch + gp), i: i, j: j });
+  }
+  var io = function (x) { return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+  var a1 = D * 0.05, a2 = D * 0.4, b1 = D * 0.58, b2 = D * 0.95;
+  // kamera: skala S dan titik fokus (koordinat kisi); fokus = kartu yang tidak ikut paralaks
+  function kamera(t) {
+    if (mode === "zoom") return { S: BLOCK.lerp(1, SM, io(BLOCK.progress(t, D * 0.15, D * 0.9))), fx: 0, fk: [0, 0] };
+    var S = BLOCK.lerp(SM, 1, io(BLOCK.progress(t, a1, a2)));
+    if (mode === "unzoom") return { S: S, fx: 0, fk: [0, 0] };
+    var px = io(BLOCK.progress(t, a2, b1)) * (cw + gp), q = BLOCK.progress(t, b1, b2);
+    S = t < b1 ? S : BLOCK.lerp(1, SM, io(q));
+    return { S: S, fx: px, fk: t < (a2 + b1) / 2 ? [0, 0] : [1, 0] };
+  }
+  function gambar(t) {
+    var c = kamera(t), S = c.S, m = 1 + par * (S - 1) / (SM - 1), rad = 18 * s * (1 - (S - 1) / (SM - 1));
+    kartu.forEach(function (q) {
+      var fok = q.i === c.fk[0] && q.j === c.fk[1], mm = fok ? 1 : m;
+      var x = W / 2 + (q.gx - c.fx) * S * mm, y = H / 2 + q.gy * S * mm;
+      q.el.style.transform = "translate(" + (x - cw / 2).toFixed(2) + "px," + (y - ch / 2).toFixed(2) + "px) scale(" + S.toFixed(4) + ")";
+      q.el.style.borderRadius = rad.toFixed(2) + "px";
+    });
+    if (mode === "unzoom") k.root.style.opacity = (1 - BLOCK.smooth(BLOCK.progress(t, D * 0.78, D))).toFixed(3);
+  }
+  BLOCK.onTime(tl, gambar, D);
+  if (A) BLOCK.initial(tl, A, { autoAlpha: 1 }).set(A, { autoAlpha: 0 }, 0.02);
+  if (Bk) BLOCK.initial(tl, Bk, { autoAlpha: 0 }).set(Bk, { autoAlpha: 1 }, mode === "unzoom" ? D * 0.78 : D - 0.02);
+}, { font: true });
+</script>

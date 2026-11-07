@@ -1,0 +1,101 @@
+{
+ "id": "transitions/morph-swap",
+ "name": "Morph Swap",
+ "name_id": "Morph Tukar",
+ "category": "transitions",
+ "description": {
+  "id": "Dua adegan bertumpuk di satu pusat: adegan lama memadat atau berubah siluet (lingkaran, pil, kotak membulat), isinya ditukar di bentuk terkecil, lalu adegan baru mengembang kembali memenuhi layar.",
+  "en": "Two scenes stacked on one shared centre: the old one condenses or reshapes into a silhouette (circle, pill, rounded box), swaps content at the smallest shape, then the new one expands to fill the frame."
+ },
+ "tags": [
+  "transisi",
+  "morph",
+  "tukar",
+  "swap",
+  "bentuk",
+  "siluet",
+  "condense",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "mode": {
+   "default": "shape",
+   "type": "enum",
+   "options": [
+    "shape",
+    "dense"
+   ],
+   "hint": "bentuk = siluet berubah lalu isi ditukar; padat = A mengecil-pudar tepat saat B membesar",
+   "option_aliases": {
+    "bentuk": "shape",
+    "padat": "dense"
+   }
+  },
+  "shape": {
+   "default": "circle",
+   "type": "enum",
+   "options": [
+    "circle",
+    "pill",
+    "box"
+   ],
+   "hint": "Siluet titik tukar (mode bentuk)",
+   "aliases": [
+    "bentuk"
+   ],
+   "option_aliases": {
+    "lingkaran": "circle",
+    "pil": "pill",
+    "kotak": "box"
+   }
+  },
+  "size": {
+   "default": 0.42,
+   "type": "number",
+   "hint": "Ukuran siluet (bagian sisi pendek layar)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "bg_color": {
+   "default": "#14161f",
+   "type": "color",
+   "hint": "Latar di belakang siluet",
+   "aliases": [
+    "warna_latar"
+   ]
+  }
+ },
+ "duration": 2,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/morph-tukar",
+  "morph-swap"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.6,
+  "duration": 3
+ }
+}

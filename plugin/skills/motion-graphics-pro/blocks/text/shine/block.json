@@ -1,0 +1,191 @@
+{
+ "id": "text/shine",
+ "name": "Shine",
+ "name_id": "Kilau Cahaya",
+ "category": "text",
+ "description": {
+  "id": "Satu sapuan cahaya spekular melintas di dalam huruf lalu teks kembali ke warna biasanya. Mode ulang menyapu beberapa kali dengan jeda, cocok untuk aksen AI dan reveal premium.",
+  "en": "One specular light sweep passes through the glyphs, then the text returns to its normal colour. Repeat mode sweeps several times for AI accents and premium reveals."
+ },
+ "tags": [
+  "teks",
+  "shimmer",
+  "kilau",
+  "sweep",
+  "gradient",
+  "premium",
+  "ai",
+  "text",
+  "shine"
+ ],
+ "props": {
+  "text": {
+   "default": "Hasil yang *bersinar*",
+   "type": "text",
+   "hint": "Teks; *kata* = kata kunci berwarna aksen, \\n = baris baru",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@600;800",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "size": {
+   "default": 120,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "weight": {
+   "default": 800,
+   "type": "number",
+   "aliases": [
+    "berat"
+   ]
+  },
+  "color": {
+   "default": "#bdb7ab",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffcf4a",
+   "type": "color",
+   "hint": "Warna kata kunci / aksen",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi vertikal (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "width": {
+   "default": 80,
+   "type": "number",
+   "hint": "Lebar kotak teks (%)",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "align": {
+   "default": "center",
+   "type": "enum",
+   "options": [
+    "left",
+    "center",
+    "right"
+   ],
+   "aliases": [
+    "rata"
+   ],
+   "option_aliases": {
+    "kiri": "left",
+    "tengah": "center",
+    "kanan": "right"
+   }
+  },
+  "mode": {
+   "default": "once",
+   "type": "enum",
+   "options": [
+    "once",
+    "repeat"
+   ],
+   "option_aliases": {
+    "sekali": "once",
+    "ulang": "repeat"
+   }
+  },
+  "shine_color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna_kilau"
+   ]
+  },
+  "shine_width": {
+   "default": 3,
+   "type": "number",
+   "hint": "Lebar pita kilau (% dari gradien)",
+   "aliases": [
+    "lebar_kilau"
+   ]
+  },
+  "angle": {
+   "default": 110,
+   "type": "number",
+   "hint": "Sudut sapuan (derajat)",
+   "aliases": [
+    "sudut"
+   ]
+  },
+  "shine_start": {
+   "default": 1.3,
+   "type": "number",
+   "aliases": [
+    "mulai_kilau"
+   ]
+  },
+  "shine_duration": {
+   "default": 1.3,
+   "type": "number",
+   "aliases": [
+    "durasi_kilau"
+   ]
+  },
+  "repeat": {
+   "default": 3,
+   "type": "number",
+   "hint": "Mode ulang: jumlah sapuan",
+   "aliases": [
+    "ulangan"
+   ]
+  },
+  "repeat_pause": {
+   "default": 0.35,
+   "type": "number",
+   "aliases": [
+    "jeda_ulang"
+   ]
+  },
+  "light": {
+   "default": 0.55,
+   "type": "number",
+   "hint": "Kekuatan pendar (0-1)",
+   "aliases": [
+    "cahaya"
+   ]
+  }
+ },
+ "duration": 4.5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "teks/kilau",
+  "text-shimmer",
+  "shimmer-sweep"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@600;800",
+   "Inter:wght@400;500;600;700;800;900"
+  ]
+ }
+}

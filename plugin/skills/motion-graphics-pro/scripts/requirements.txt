@@ -1,0 +1,3 @@
+# magenta_key.py (old name kunci_magenta.py) needs only these two packages.
+numpy>=1.24
+Pillow>=10.0

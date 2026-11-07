@@ -1,0 +1,157 @@
+{
+ "id": "labels/news-ticker",
+ "name": "News Ticker",
+ "name_id": "Ticker Berita",
+ "category": "labels",
+ "description": {
+  "id": "Lower third siaran berita: label langsung dengan titik berkedip, pita judul putih, dan teks berjalan berisi kabar-kabar singkat di bilah gelap beserta jam.",
+  "en": "Broadcast-style news lower third: live label with blinking dot, white headline ribbon and a scrolling news crawl with clock on a dark bar."
+ },
+ "tags": [
+  "label",
+  "lower-third",
+  "berita",
+  "ticker",
+  "crawl",
+  "siaran",
+  "langsung",
+  "labels",
+  "news"
+ ],
+ "props": {
+  "label": {
+   "default": "Langsung",
+   "type": "text",
+   "hint": "Teks label langsung"
+  },
+  "title": {
+   "default": "Panen raya padi dimulai serentak di lima provinsi",
+   "type": "text",
+   "hint": "Judul di pita putih",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "news": {
+   "default": [
+    "Harga cabai turun 12 persen pekan ini",
+    "Kereta cepat tambah jadwal akhir pekan",
+    "Hujan lebat diprakirakan di Jawa bagian barat",
+    "Tim nasional lolos ke babak final"
+   ],
+   "type": "list",
+   "hint": "Kabar untuk teks berjalan",
+   "aliases": [
+    "berita"
+   ]
+  },
+  "clock": {
+   "default": "19.45 WIB",
+   "type": "text",
+   "aliases": [
+    "jam"
+   ]
+  },
+  "accent_color": {
+   "default": "#e3262f",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "dark_color": {
+   "default": "#0e1424",
+   "type": "color",
+   "hint": "Warna bilah teks berjalan",
+   "aliases": [
+    "warna_gelap"
+   ]
+  },
+  "speed": {
+   "default": 160,
+   "type": "number",
+   "hint": "Kecepatan teks berjalan (px/detik pada 1080)",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "position": {
+   "default": "bottom",
+   "type": "enum",
+   "options": [
+    "bottom",
+    "top"
+   ],
+   "aliases": [
+    "posisi"
+   ],
+   "option_aliases": {
+    "bawah": "bottom",
+    "atas": "top"
+   }
+  },
+  "enter": {
+   "default": "sweep",
+   "type": "enum",
+   "options": [
+    "sweep",
+    "up",
+    "fade"
+   ],
+   "aliases": [
+    "masuk"
+   ],
+   "option_aliases": {
+    "sapu": "sweep",
+    "naik": "up",
+    "pudar": "fade"
+   }
+  },
+  "exit": {
+   "default": "down",
+   "type": "enum",
+   "options": [
+    "down",
+    "fade",
+    "no"
+   ],
+   "aliases": [
+    "keluar"
+   ],
+   "option_aliases": {
+    "turun": "down",
+    "pudar": "fade",
+    "tidak": "no"
+   }
+  },
+  "font": {
+   "default": "Inter:wght@500;700;800",
+   "type": "font"
+  },
+  "size": {
+   "default": 40,
+   "type": "number",
+   "hint": "Ukuran judul (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "1:1",
+  "9:16"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "label/ticker-berita",
+  "news-ticker"
+ ],
+ "example": {
+  "bg": "photo",
+  "font": [
+   "Inter:wght@500;700;800"
+  ]
+ }
+}

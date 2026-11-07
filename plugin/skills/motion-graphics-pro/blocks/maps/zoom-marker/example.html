@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Zoom Marker · block example maps/zoom-marker</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="6.5">
+
+<!-- Block maps/zoom-marker · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-zoom-marker" data-block="maps/zoom-marker" data-start="0" data-duration="6" data-track-index="4" class="blk blk-maps-zoom-marker">
+<script type="application/json" data-block-props>
+{"preset": "indonesia", "shape": "square", "target": "MA", "text": "AKSES DITUTUP", "sub": "Pelayaran dihentikan sementara", "zoom": 2.6, "map_color": "#ebe4d4", "map_line_color": "#a89f8c", "mark_color": "#d7261e", "wash_color": "#9a1d16", "wash_strength": 0.28, "sea_color": "#cfdde3", "font": "Inter:wght@600;800;900", "seed": 3}
+</script>
+</div>
+<style>
+.blk-maps-zoom-marker{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-maps-zoom-marker svg{position:absolute;inset:0;width:100%;height:100%}
+.blk-maps-zoom-marker .blk-cuci{position:absolute;inset:0;mix-blend-mode:multiply}
+.blk-maps-zoom-marker .blk-label{position:absolute;transform:translate(-50%,-100%);text-align:center;white-space:nowrap}
+.blk-maps-zoom-marker .blk-label b{display:inline-block;color:#fff;padding:.25em .6em;letter-spacing:.04em;box-shadow:0 .25em .8em rgba(60,0,0,.35)}
+.blk-maps-zoom-marker .blk-label span{display:table;margin:.45em auto 0;font-weight:600;background:rgba(255,250,240,.88);padding:.2em .55em}
+</style>
+<script>
+BLOCK.mount("blk-zoom-marker", function (k) {
+// ---- peta ubin bersama (geografi ilustratif: ubin sama besar, susunan kira-kira geografis) ----
+  var PETA = {
+    raw: { indonesia: "AC:Aceh:0:0|SU:Sumatera Utara:1:1|RI:Riau:2:1|KR:Kepulauan Riau:3:0|SB:Sumatera Barat:1:2|JA:Jambi:2:2|BE:Bengkulu:2:3|SS:Sumatera Selatan:3:2|BB:Bangka Belitung:4:2|LA:Lampung:3:3|BT:Banten:4:4|JK:DKI Jakarta:5:3|JB:Jawa Barat:5:4|JT:Jawa Tengah:6:4|YO:DI Yogyakarta:6:5|JI:Jawa Timur:7:4|BA:Bali:8:4|NB:Nusa Tenggara Barat:9:4|NT:Nusa Tenggara Timur:10:4|KB:Kalimantan Barat:5:1|KT:Kalimantan Tengah:6:1|KI:Kalimantan Timur:7:1|KU:Kalimantan Utara:7:0|KS:Kalimantan Selatan:7:2|GO:Gorontalo:9:1|SA:Sulawesi Utara:10:1|ST:Sulawesi Tengah:9:2|SR:Sulawesi Barat:8:3|SN:Sulawesi Selatan:9:3|SG:Sulawesi Tenggara:10:3|MU:Maluku Utara:11:1|MA:Maluku:11:2|PD:Papua Barat Daya:12:1|PB:Papua Barat:13:1|PA:Papua:15:1|PT:Papua Tengah:14:2|PP:Papua Pegunungan:15:2|PS:Papua Selatan:15:3", as: "AK:Alaska:0:0|ME:Maine:10:0|VT:Vermont:9:1|NH:New Hampshire:10:1|WA:Washington:0:2|ID:Idaho:1:2|MT:Montana:2:2|ND:North Dakota:3:2|MN:Minnesota:4:2|IL:Illinois:5:2|WI:Wisconsin:6:2|MI:Michigan:7:2|NY:New York:8:2|RI:Rhode Island:9:2|MA:Massachusetts:10:2|OR:Oregon:0:3|NV:Nevada:1:3|WY:Wyoming:2:3|SD:South Dakota:3:3|IA:Iowa:4:3|IN:Indiana:5:3|OH:Ohio:6:3|PA:Pennsylvania:7:3|NJ:New Jersey:8:3|CT:Connecticut:9:3|CA:California:0:4|UT:Utah:1:4|CO:Colorado:2:4|NE:Nebraska:3:4|MO:Missouri:4:4|KY:Kentucky:5:4|WV:West Virginia:6:4|VA:Virginia:7:4|MD:Maryland:8:4|DE:Delaware:9:4|AZ:Arizona:1:5|NM:New Mexico:2:5|KS:Kansas:3:5|AR:Arkansas:4:5|TN:Tennessee:5:5|NC:North Carolina:6:5|SC:South Carolina:7:5|OK:Oklahoma:3:6|LA:Louisiana:4:6|MS:Mississippi:5:6|AL:Alabama:6:6|GA:Georgia:7:6|HI:Hawaii:0:7|TX:Texas:3:7|FL:Florida:8:7" },
+    data: function (preset) {
+      return (this.raw[preset] || this.raw.indonesia).split("|").map(function (s) { var a = s.split(":"); return { k: a[0], n: a[1], c: +a[2], r: +a[3] }; });
+    },
+    // susun ubin di kotak {x,y,w,h}; bentuk "square" | "hex"
+    tata: function (D, bentuk, box) {
+      var hex = bentuk === "hex", cols = 0, rows = 0;
+      D.forEach(function (d) { cols = Math.max(cols, d.c + 1); rows = Math.max(rows, d.r + 1); });
+      var cw = cols + (hex ? 0.5 : 0), rh = hex ? 0.866 : 1, ch = (rows - 1) * rh + 1;
+      var s = Math.min(box.w / cw, box.h / ch), ox = box.x + (box.w - cw * s) / 2, oy = box.y + (box.h - ch * s) / 2;
+      D.forEach(function (d) { d.cx = ox + (d.c + 0.5 + (hex && d.r % 2 ? 0.5 : 0)) * s; d.cy = oy + (d.r * rh + 0.5) * s; d.s = s; });
+      return { s: s, hex: hex, x: ox, y: oy, w: cw * s, h: ch * s };
+    },
+    bentuk: function (hex, s, gap) {
+      var R = hex ? s / Math.sqrt(3) * (1 - gap) : 0, h = s * (1 - gap) / 2;
+      if (!hex) return "M" + (-h) + "," + (-h + h * 0.2) + "Q" + (-h) + "," + (-h) + " " + (-h + h * 0.2) + "," + (-h) + "H" + (h - h * 0.2) + "Q" + h + "," + (-h) + " " + h + "," + (-h + h * 0.2) +
+        "V" + (h - h * 0.2) + "Q" + h + "," + h + " " + (h - h * 0.2) + "," + h + "H" + (-h + h * 0.2) + "Q" + (-h) + "," + h + " " + (-h) + "," + (h - h * 0.2) + "Z";
+      var p = []; for (var i = 0; i < 6; i++) { var a = Math.PI / 3 * i - Math.PI / 2; p.push((R * Math.cos(a)).toFixed(2) + "," + (R * Math.sin(a)).toFixed(2)); }
+      return "M" + p.join("L") + "Z";
+    },
+    cari: function (D, kode) { for (var i = 0; i < D.length; i++) if (D[i].k === String(kode).toUpperCase()) return D[i]; return null; },
+    // lengkung busur kuadrat dari a ke b, naik ke atas sebesar fraksi jarak
+    busur: function (a, b, lengkung) {
+      var mx = (a.cx + b.cx) / 2, my = (a.cy + b.cy) / 2, dx = b.cx - a.cx, dy = b.cy - a.cy, L = Math.sqrt(dx * dx + dy * dy) || 1;
+      var nx = dy / L, ny = -dx / L; if (ny > 0) { nx = -nx; ny = -ny; }
+      return "M" + a.cx + "," + a.cy + "Q" + (mx + nx * L * lengkung) + "," + (my + ny * L * lengkung) + " " + b.cx + "," + b.cy;
+    }
+  };
+  function petaDasar(svg, D, T, warna, garis, label, ukLabel, font) {
+    var g = BLOCK.svg("g", { class: "blk-dasar" }, svg), d0 = PETA.bentuk(T.hex, T.s, 0.08), els = [];
+    D.forEach(function (d) {
+      var gg = BLOCK.svg("g", { transform: "translate(" + d.cx + "," + d.cy + ")" }, g);
+      var p = BLOCK.svg("path", { d: d0, fill: warna, stroke: garis, "stroke-width": Math.max(1, T.s * 0.02) }, gg);
+      if (label) { var tx = BLOCK.svg("text", { "text-anchor": "middle", "dominant-baseline": "central", "font-size": ukLabel, "font-weight": 600, fill: garis, "font-family": font }, gg); tx.textContent = d.k; }
+      d.g = gg; d.p = p; els.push(gg);
+    });
+    return { g: g, els: els };
+  }
+
+  var P = k.P, tl = k.tl, s = k.s, W = k.w, H = k.h, fam = BLOCK.family(P.font), R = BLOCK.random(+P.seed || 3);
+  k.root.style.background = P.sea_color;
+  var D = PETA.data(P.preset), pad = 0.07 * Math.min(W, H);
+  var T = PETA.tata(D, P.shape, { x: pad, y: pad, w: W - 2 * pad, h: H - 2 * pad });
+  var svg = BLOCK.svg("svg", { viewBox: "0 0 " + W + " " + H }, k.root), cam = BLOCK.svg("g", {}, svg);
+  var base = petaDasar(cam, D, T, P.map_color, P.map_line_color, true, T.s * 0.24, fam);
+  var tg = PETA.cari(D, P.target) || D[Math.floor(D.length / 2)], z = +P.zoom || 2.6;
+  // ubin sasaran memerah, sisanya meredup
+  var lain = D.filter(function (d) { return d !== tg; }).map(function (d) { return d.p; });
+  tl.to(lain, { fill: BLOCK.mix(P.map_color, "#8a8478", 0.35), duration: 0.8, ease: "power2.out" }, 1.3)
+    .fromTo(tg.p, { fill: P.map_color }, { fill: P.mark_color, duration: 0.5, ease: "power2.out", immediateRender: true }, 1.5);
+  // kamera: zoom ke sasaran (pusat layar sedikit di bawah tengah agar label muat)
+  var fx = W / 2, fy = H * 0.56;
+  tl.fromTo(cam, { x: 0, y: 0, scale: 1, svgOrigin: "0 0" }, { x: fx - tg.cx * z, y: fy - tg.cy * z, scale: z, duration: 1.6, ease: "power3.inOut", immediateRender: true }, 0.4)
+    .to(cam, { x: fx - tg.cx * z * 1.04, y: fy - tg.cy * z * 1.04, scale: z * 1.04, duration: Math.max(0.5, k.dur - 2.0), ease: "sine.inOut" }, 2.0);
+  // coretan lingkaran tangan
+  var pts = [], n = 70, turns = 1.18, a0 = -2.3 + R() * 0.4, rx = T.s * 0.92, ry = T.s * 0.78, sd = R() * 50;
+  for (var i = 0; i <= n; i++) {
+    var u = i / n, a = a0 + u * Math.PI * 2 * turns, j = 1 + BLOCK.noise(u * 5, sd) * 0.09 + u * 0.08;
+    pts.push((tg.cx + Math.cos(a) * rx * j).toFixed(1) + "," + (tg.cy + Math.sin(a) * ry * j).toFixed(1));
+  }
+  var sc = BLOCK.svg("path", { d: "M" + pts.join("L"), fill: "none", stroke: P.mark_color, "stroke-width": (9 * s / z).toFixed(2), "stroke-linecap": "round", "stroke-linejoin": "round" }, cam);
+  var Ls = BLOCK.prepareStroke(sc);
+  tl.fromTo(sc, { strokeDashoffset: Ls }, { strokeDashoffset: 0, duration: 0.75, ease: "power2.inOut", immediateRender: true }, 2.0);
+  // sapuan editorial kemerahan
+  var cuci = BLOCK.el("div", { class: "blk-cuci", style: "background:radial-gradient(70% 70% at 50% 56%," + BLOCK.rgba(P.wash_color, 0.25) + "," + BLOCK.rgba(P.wash_color, 0.9) + ")" }, k.root);
+  tl.fromTo(cuci, { autoAlpha: 0 }, { autoAlpha: +P.wash_strength, duration: 0.9, ease: "power2.out", immediateRender: true }, 1.4);
+  // label meletup di atas sasaran
+  var lb = BLOCK.el("div", { class: "blk-label", style: "left:50%;top:" + ((fy - ry * z * 1.15) / H * 100).toFixed(2) + "%;font-family:" + fam }, k.root);
+  BLOCK.el("b", { style: "background:" + P.mark_color + ";font-weight:900;font-size:" + Math.round(64 * s) + "px" }, lb).textContent = P.text;
+  if (P.sub) BLOCK.el("span", { style: "color:#2a0c0a;font-size:" + Math.round(28 * s) + "px" }, lb).textContent = P.sub;
+  tl.fromTo(lb, { autoAlpha: 0, scale: 0.4, rotation: -8 }, { autoAlpha: 1, scale: 1, rotation: -2.5, duration: 0.6, ease: "blockSpringStrong", immediateRender: true }, 2.65);
+  tl.fromTo(base.els, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5, stagger: 0.3 / D.length, ease: "power1.out", immediateRender: true }, 0);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 6.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 6.5);
+</script>
+</body>
+</html>

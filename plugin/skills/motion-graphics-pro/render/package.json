@@ -1,0 +1,29 @@
+{
+  "name": "mgp",
+  "version": "0.3.0",
+  "description": "mgp (formerly Rekam): render HTML compositions (mgp.motion timelines, canvas, CSS; HyperFrames-compatible composition format) to MP4/ProRes/PNG frame by frame, locally with Chrome/Edge + ffmpeg.",
+  "type": "module",
+  "bin": {
+    "mgp": "bin/mgp.mjs",
+    "rekam": "bin/rekam.mjs"
+  },
+  "files": [
+    "bin",
+    "src",
+    "py",
+    "i18n",
+    "studio",
+    "examples",
+    "fonts",
+    "README.md",
+    "NOTICE"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "check-examples": "node bin/mgp.mjs check examples/kinetic-9x16.html && node bin/mgp.mjs check examples/canvas-seek.html && node bin/mgp.mjs check examples/compat/index.html",
+    "cek-contoh": "npm run check-examples"
+  },
+  "license": "SEE LICENSE IN ../../LICENSE.md"
+}

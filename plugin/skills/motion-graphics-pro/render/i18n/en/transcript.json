@@ -1,0 +1,16 @@
+{
+  "No transcription engine found.\nPick one:\n  1. faster-whisper (Python, MIT):  python -m pip install faster-whisper\n     (the venv in render/.venv is used automatically; another venv: --python <path> or env MGP_PYTHON)\n  2. whisper.cpp: put whisper-cli on PATH (or env MGP_WHISPER_CPP) and download a ggml model,\n     e.g. ggml-small.bin, then pass --model-file <path> or env MGP_WHISPER_MODEL.\n.en models (small.en etc.) translate other languages into English; for Indonesian use --model small --language id.": "No transcription engine found.\nPick one:\n  1. faster-whisper (Python, MIT):  python -m pip install faster-whisper\n     (the venv in render/.venv is used automatically; another venv: --python <path> or env MGP_PYTHON)\n  2. whisper.cpp: put whisper-cli on PATH (or env MGP_WHISPER_CPP) and download a ggml model,\n     e.g. ggml-small.bin, then pass --model-file <path> or env MGP_WHISPER_MODEL.\n.en models (small.en etc.) translate other languages into English; for Indonesian use --model small --language id.",
+  "ffmpeg failed: {}": "ffmpeg failed: {}",
+  "whisper.cpp found ({}) but not the model ggml-{}.bin. Pass --model-file <path> or env MGP_WHISPER_MODEL.": "whisper.cpp found ({}) but not the model ggml-{}.bin. Pass --model-file <path> or env MGP_WHISPER_MODEL.",
+  "whisper.cpp failed: {}": "whisper.cpp failed: {}",
+  "Name a file: mgp transcribe voice.wav -o words.json --language id [--model small] [--fix-with script.txt]": "Name a file: mgp transcribe voice.wav -o words.json --language id [--model small] [--fix-with script.txt]",
+  "file not found: {}": "file not found: {}",
+  "warning: model {} is English only and translates other languages; use --model {}": "warning: model {} is English only and translates other languages; use --model {}",
+  ", language {}": ", language {}",
+  ", language auto": ", language auto",
+  "transcribe: faster-whisper, model {}{} ({})": "transcribe: faster-whisper, model {}{} ({})",
+  "transcribe: whisper.cpp ({}), model {}": "transcribe: whisper.cpp ({}), model {}",
+  "fix to script: {} script words, {} ASR words; match {}, respelled {}, merged {}, split {}, inserted {}, dropped {}": "fix to script: {} script words, {} ASR words; match {}, respelled {}, merged {}, split {}, inserted {}, dropped {}",
+  "{} words -> {}": "{} words -> {}",
+  "(language {})": "(language {})"
+}

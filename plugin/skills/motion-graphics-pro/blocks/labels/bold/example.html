@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Bold · block example labels/bold</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="5.5">
+<div id="adegan" class="adegan ad-foto"><div class="mth"></div><div class="bk1"></div><div class="bk2"></div><div class="tanah"></div><div class="sosok"></div></div>
+<!-- Block labels/bold · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-bold" data-block="labels/bold" data-start="0" data-duration="5" data-track-index="30" class="blk blk-labels-bold">
+<script type="application/json" data-block-props>
+{"style": "block", "name": "Dimas Arya", "role": "Pembawa Acara", "accent_color": "#ff3d2e", "dark_color": "#111216", "position": "bottom-left", "enter": "style", "exit": "sweep", "font": "Oswald:wght@500;600;700", "font2": "JetBrains Mono:wght@500;700", "size": 64, "uppercase": true, "bottom": 11, "edge": 6}
+</script>
+<div class="blk-pos"><div class="blk-kol"></div></div>
+</div>
+<style>
+.blk-labels-bold{position:absolute;inset:0;pointer-events:none}
+.blk-labels-bold .blk-pos{position:absolute;left:0;right:0;display:flex}
+.blk-labels-bold .blk-kol{display:flex;flex-direction:column;white-space:nowrap;line-height:1}
+.blk-labels-bold .blk-bar{display:inline-block;padding:calc(var(--s)*16px) calc(var(--s)*30px)}
+.blk-labels-bold .blk-mask{display:block;overflow:hidden;padding-bottom:.06em}
+.blk-labels-bold .blk-nm{display:inline-block;font-weight:700;letter-spacing:.01em}
+.blk-labels-bold .blk-pr{font-family:var(--f2);font-weight:700;font-size:.42em;letter-spacing:.12em;text-transform:uppercase}
+.blk-labels-bold .blk-tag{align-self:flex-start;padding:calc(var(--s)*10px) calc(var(--s)*18px);margin-top:calc(var(--s)*-8px);margin-left:calc(var(--s)*30px);color:#111}
+.blk-labels-bold .blk-kanan .blk-tag{align-self:flex-end;margin-left:0;margin-right:calc(var(--s)*30px)}
+.blk-labels-bold .blk-color .blk-pr{display:block;margin-top:calc(var(--s)*12px);font-weight:500;opacity:.9}
+.blk-labels-bold .blk-bar2{margin-left:calc(var(--s)*44px);padding:calc(var(--s)*12px) calc(var(--s)*24px)}
+.blk-labels-bold .blk-kanan .blk-bar2{margin-left:0;margin-right:calc(var(--s)*44px)}
+.blk-labels-bold .blk-news .blk-bar{padding:calc(var(--s)*8px) calc(var(--s)*20px)}
+.blk-labels-bold .blk-news .blk-pr{font-family:inherit;font-weight:500;letter-spacing:.02em;text-transform:none;font-size:.5em}
+.blk-labels-bold .blk-news .blk-bar2{margin:calc(var(--s)*14px) 0 0;padding:calc(var(--s)*8px) calc(var(--s)*16px)}
+</style>
+<script>
+BLOCK.mount("blk-bold", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, D = k.dur, E = BLOCK.el, A = P.accent_color, G = P.dark_color;
+  var kanan = P.position === "bottom-right", tengah = P.position === "bottom-center";
+  var pos = k.root.querySelector(".blk-pos"), kol = pos.firstChild;
+  pos.style.cssText = "bottom:" + P.bottom + "%;padding:0 " + P.edge + "%;justify-content:" + (kanan ? "flex-end" : tengah ? "center" : "flex-start");
+  k.root.style.cssText += ";--s:" + s + ";--f2:" + BLOCK.family(P.font2, "monospace");
+  var g = { block: 1, color: 1, stack: 1, news: 1 }[P.style] ? P.style : "block";
+  kol.className = "blk-kol blk-" + g + (kanan ? " blk-kanan" : "");
+  kol.style.cssText = "font-family:" + BLOCK.family(P.font) + ";font-size:" + Math.round(P.size * s) + "px;align-items:" + (kanan ? "flex-end" : tengah ? "center" : "flex-start");
+  var namaT = P.uppercase ? String(P.name).toUpperCase() : P.name;
+  function bar(bg, warna, induk) { return E("div", { class: "blk-bar", style: "background:" + bg + ";color:" + warna }, induk || kol); }
+  function nama(induk) { var m = E("span", { class: "blk-mask" }, induk), n = E("span", { class: "blk-nm" }, m); n.textContent = namaT; return n; }
+  var b1, b2, nm, pr, t0 = 0.2, R = kanan ? "inset(0% 0% 0% 100%)" : "inset(0% 100% 0% 0%)", R2 = kanan ? "inset(0% 100% 0% 0%)" : "inset(0% 0% 0% 100%)", F = "inset(0% 0% 0% 0%)";
+  if (g === "block") {
+    b1 = bar(G, "#fff"); nm = nama(b1);
+    b2 = E("div", { class: "blk-tag", style: "background:" + A }, kol); pr = E("span", { class: "blk-pr" }, b2); pr.textContent = P.role;
+  } else if (g === "color") {
+    b1 = bar(A, "#fff"); nm = nama(b1); pr = E("span", { class: "blk-pr" }, b1); pr.textContent = P.role;
+  } else if (g === "stack") {
+    b1 = bar(G, "#fff"); nm = nama(b1);
+    b2 = bar(A, "#fff"); b2.classList.add("blk-bar2"); pr = E("span", { class: "blk-pr" }, b2); pr.textContent = P.role;
+  } else {
+    b1 = bar("#fff", "#111"); b1.style.boxShadow = Math.round(9 * s) + "px " + Math.round(9 * s) + "px 0 " + A; nm = nama(b1);
+    b2 = bar(A, "#fff"); b2.classList.add("blk-bar2"); b2.style.boxShadow = Math.round(7 * s) + "px " + Math.round(7 * s) + "px 0 #fff";
+    pr = E("span", { class: "blk-pr" }, b2); pr.textContent = P.role;
+  }
+  var masuk = P.enter === "style" ? { block: "sweep", color: "slide", stack: "sweep", news: "sweep" }[g] : P.enter;
+  if (masuk !== "sweep") BLOCK.initial(tl, b1, { clipPath: F });
+  if (g === "block") BLOCK.initial(tl, b2, { clipPath: F });
+  if (masuk === "sweep") tl.fromTo(b1, { clipPath: R }, { clipPath: F, duration: 0.5, ease: "power4.inOut" }, t0);
+  else if (masuk === "slide") tl.fromTo(b1, { x: (kanan ? 1 : -1) * 0.75 * k.w, autoAlpha: 1 }, { x: 0, duration: 0.75, ease: "back.out(1.3)" }, t0);
+  else if (masuk === "pop") tl.fromTo(b1, { scale: 0.5, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.5, ease: "back.out(2.2)" }, t0);
+  else tl.fromTo(b1, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 }, t0);
+  tl.fromTo(nm, { yPercent: 110 }, { yPercent: 0, duration: 0.55, ease: "power4.out" }, t0 + 0.28);
+  if (g === "block") tl.fromTo(b2, { scale: 0, rotation: -6, transformOrigin: kanan ? "100% 0%" : "0% 0%" }, { scale: 1, rotation: 0, duration: 0.5, ease: "back.out(2.6)" }, t0 + 0.6);
+  else if (g === "color") tl.fromTo(pr, { x: -20 * s, autoAlpha: 0 }, { x: 0, autoAlpha: 0.9, duration: 0.5, ease: "power3.out" }, t0 + 0.55);
+  else tl.fromTo(b2, { clipPath: R2 }, { clipPath: F, duration: 0.5, ease: "power4.inOut" }, t0 + 0.4)
+    .fromTo(pr, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4 }, t0 + 0.65);
+  // tahan yang hidup: nama bergeser tipis
+  tl.fromTo(nm, { x: 0 }, { x: (kanan ? -1 : 1) * 7 * s, duration: Math.max(0.5, D - 2.2), ease: "sine.inOut" }, 1.1);
+  var tk = D - 0.6, semua = b2 ? [b2, b1] : [b1];
+  if (P.exit === "sweep") tl.to(semua, { clipPath: R2, duration: 0.45, ease: "power4.in", stagger: 0.08 }, tk);
+  else if (P.exit === "fade") tl.to(semua, { autoAlpha: 0, duration: 0.4, ease: "power2.in", stagger: 0.06 }, tk);
+  else if (P.exit === "down") tl.to(semua, { y: 60 * s, autoAlpha: 0, duration: 0.45, ease: "power3.in", stagger: 0.06 }, tk);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 5.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5.5);
+</script>
+</body>
+</html>

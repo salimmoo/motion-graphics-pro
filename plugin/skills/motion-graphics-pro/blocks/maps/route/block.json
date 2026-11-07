@@ -1,0 +1,168 @@
+{
+ "id": "maps/route",
+ "name": "Route",
+ "name_id": "Peta Rute Perjalanan",
+ "category": "maps",
+ "description": {
+  "id": "Garis rute tumbuh dari ujungnya, pesawat atau kapal menghadap arah jalan, berhenti sebentar di tiap kota dengan pin menyala dan label kertas, kamera mengikuti lembut. Gaya karton, maket 3D, atau atlas bersih. Daratan dibangkitkan dari seed (ilustratif, bukan garis pantai nyata); rute dalam koordinat piksel bidang 1600x1000.",
+  "en": "A route line grows from its tip, a plane or boat follows the path, pausing at each city with a glowing pin and paper label while the camera follows. Cardboard, 3D diorama or clean atlas styles. Land is seeded (illustrative, not real coastlines); route in 1600x1000 plane pixels."
+ },
+ "tags": [
+  "peta",
+  "map",
+  "rute",
+  "route",
+  "perjalanan",
+  "pesawat",
+  "kapal",
+  "flight",
+  "maps"
+ ],
+ "props": {
+  "style": {
+   "default": "cardboard",
+   "type": "enum",
+   "options": [
+    "cardboard",
+    "3d",
+    "original"
+   ],
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "karton": "cardboard",
+    "asli": "original"
+   }
+  },
+  "vehicle": {
+   "default": "plane",
+   "type": "enum",
+   "options": [
+    "plane",
+    "ship",
+    "arrow",
+    "dot"
+   ],
+   "aliases": [
+    "kendaraan"
+   ],
+   "option_aliases": {
+    "pesawat": "plane",
+    "kapal": "ship",
+    "panah": "arrow",
+    "titik": "dot"
+   }
+  },
+  "route": {
+   "default": [
+    [
+     330,
+     600
+    ],
+    [
+     430,
+     565
+    ],
+    [
+     545,
+     585
+    ],
+    [
+     655,
+     625
+    ],
+    [
+     760,
+     660
+    ],
+    [
+     880,
+     640
+    ],
+    [
+     1000,
+     575
+    ],
+    [
+     1120,
+     505
+    ],
+    [
+     1235,
+     470
+    ]
+   ],
+   "type": "list",
+   "hint": "Titik rute [x, y] pada bidang 1600x1000",
+   "aliases": [
+    "rute"
+   ]
+  },
+  "stopover": {
+   "default": [
+    {
+     "i": 0,
+     "nama": "Jakarta",
+     "sub": "Berangkat"
+    },
+    {
+     "i": 4,
+     "nama": "Surabaya",
+     "sub": "Transit"
+    },
+    {
+     "i": 8,
+     "nama": "Makassar",
+     "sub": "Tiba"
+    }
+   ],
+   "type": "list",
+   "hint": "[{i: indeks titik, nama, sub}]",
+   "aliases": [
+    "singgah"
+   ]
+  },
+  "follow": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Kamera mengikuti kendaraan",
+   "aliases": [
+    "ikuti"
+   ]
+  },
+  "route_color": {
+   "default": "#b23a32",
+   "type": "color",
+   "aliases": [
+    "warna_rute"
+   ]
+  },
+  "label": {
+   "default": false,
+   "type": "boolean",
+   "hint": "HUD jarak/kecepatan modul"
+  },
+  "seed": {
+   "default": 5,
+   "type": "number",
+   "hint": "Seed daratan ilustratif"
+  }
+ },
+ "duration": 10,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [
+  "lib:mgp.js"
+ ],
+ "aliases": [
+  "peta/rute",
+  "nyc-paris-flight"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

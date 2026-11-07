@@ -1,0 +1,69 @@
+<!-- Block data/counter · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="data/counter" data-start="0" data-duration="4" data-track-index="10" class="blk blk-data-counter">
+<script type="application/json" data-block-props>
+{"mode": "number", "from": 0, "to": 12480, "decimals": 0, "prefix": "", "suffix": "", "label": "pengguna aktif bulan ini", "count_duration": 1.8, "ease": "power3.out", "coin": 16, "color": "#f5f3ee", "accent_color": "#34c759", "font": "Inter:wght@500;600;800", "size": 200, "weight": 800, "position_x": 50, "position_y": 48}
+</script>
+<div class="blk-w"><div class="blk-koin"></div><div class="blk-n"></div><div class="blk-l"></div></div>
+</div>
+<style>
+.blk-data-counter{position:absolute;inset:0;pointer-events:none}
+.blk-data-counter .blk-w{position:absolute;transform:translate(-50%,-50%);text-align:center;white-space:nowrap}
+.blk-data-counter .blk-n{position:relative;font-variant-numeric:tabular-nums;letter-spacing:-.03em;line-height:1}
+.blk-data-counter .blk-n span{display:inline-block}
+.blk-data-counter .blk-af{font-size:.5em;font-weight:600;letter-spacing:0;vertical-align:.62em;margin:0 .08em}
+.blk-data-counter .blk-l{margin-top:.9em;letter-spacing:.16em;text-transform:uppercase;opacity:.7;font-weight:500}
+.blk-data-counter .blk-koin{position:absolute;left:50%;top:40%;width:0;height:0}
+.blk-data-counter .blk-c{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;color:#7a5200;
+ background:radial-gradient(circle at 35% 30%,#fff3b8 0%,#ffd34d 38%,#e0a412 75%,#b07a06 100%);box-shadow:inset 0 0 0 .07em #b88409,inset 0 0 0 .16em #ffe27a}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root;
+  var w = R.querySelector(".blk-w"), n = R.querySelector(".blk-n"), lab = R.querySelector(".blk-l"), lk = R.querySelector(".blk-koin");
+  function fmt(v, d) { var a = Math.abs(v).toFixed(d).split("."); a[0] = a[0].replace(/\B(?=(\d{3})+(?!\d))/g, "."); return (v < 0 ? "−" : "") + a[0] + (a[1] ? "," + a[1] : ""); }
+  w.style.cssText += ";left:" + P.position_x + "%;top:" + P.position_y + "%;color:" + P.color + ";font-family:" + BLOCK.family(P.font);
+  n.style.cssText += ";font-size:" + Math.round(P.size * s) + "px;font-weight:" + P.weight;
+  lab.style.fontSize = Math.round(P.size * 0.16 * s) + "px"; lab.textContent = P.label;
+  var af = function (t) { return t ? '<span class="blk-af">' + BLOCK.esc(t) + "</span>" : ""; };
+  var t0 = 0.25, dh = Math.min(P.count_duration, k.dur - 1), tb = t0 + dh, ez = gsap.parseEase(P.ease);
+  tl.fromTo(w, { opacity: 0, y: 30 * s }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0);
+  if (P.mode === "pop") {
+    // digit pop-in: setiap karakter nilai akhir muncul bertahap dengan blur dan angkat
+    n.innerHTML = af(P.prefix);
+    var ch = Array.from(fmt(+P.to, P.decimals)).map(function (c) { var e = BLOCK.el("span", null, n); e.textContent = c; return e; });
+    n.insertAdjacentHTML("beforeend", af(P.suffix));
+    var gap = Math.min(0.09, dh / Math.max(ch.length, 1) * 0.5);
+    tl.fromTo(ch, { opacity: 0, y: 0.35 * P.size * s, scale: 0.6, filter: "blur(14px)" },
+      { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.55, ease: "back.out(2.2)", stagger: gap }, t0);
+    tl.fromTo(lab, { opacity: 0 }, { opacity: 0.7, duration: 0.5 }, t0 + gap * ch.length);
+  } else {
+    n.innerHTML = af(P.prefix) + '<span class="blk-v"></span>' + af(P.suffix);
+    var v = n.querySelector(".blk-v");
+    BLOCK.onTime(tl, function (t) { var p = ez(BLOCK.progress(t, t0, tb)); v.textContent = fmt(P.from + (P.to - P.from) * p, P.decimals); }, k.dur);
+    tl.fromTo(n, { scale: 1 }, { scale: P.mode === "money" ? 1.1 : 1.045, duration: 0.14, ease: "power2.out", yoyo: true, repeat: 1 }, tb);
+  }
+  if (P.mode === "money") {
+    // kilat hijau + koin meletup (lintasan balistik bentuk tertutup)
+    tl.fromTo(n, { color: P.color, textShadow: "0 0 0px " + BLOCK.rgba(P.accent_color, 0) },
+      { color: P.accent_color, textShadow: "0 0 " + Math.round(40 * s) + "px " + BLOCK.rgba(P.accent_color, 0.8), duration: 0.12, ease: "power1.out" }, tb)
+      .to(n, { color: BLOCK.mix(P.color, P.accent_color, 0.55), textShadow: "0 0 " + Math.round(18 * s) + "px " + BLOCK.rgba(P.accent_color, 0.25), duration: 0.9, ease: "power2.out" }, tb + 0.14);
+    var cs = [], r = k.random, cz = 64 * s;
+    for (var i = 0; i < P.coin; i++) {
+      var c = BLOCK.el("div", { class: "blk-c", style: "width:" + cz + "px;height:" + cz + "px;margin:" + (-cz / 2) + "px 0 0 " + (-cz / 2) + "px;font-size:" + Math.round(cz * 0.34) + "px" }, lk, "Rp");
+      var a = -Math.PI / 2 + r.range(-1.15, 1.15), sp = r.range(900, 1700) * s;
+      cs.push({ el: c, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, w: r.range(-540, 540), sk: r.range(0.6, 1.05), d: r.range(0, 0.08) });
+    }
+    var g = 2200 * s;
+    BLOCK.onTime(tl, function (t) {
+      cs.forEach(function (c) {
+        var u = t - tb - c.d;
+        if (u <= 0) { c.el.style.opacity = 0; return; }
+        var sc = c.sk * Math.min(1, u / 0.12), x = c.vx * u, y = c.vy * u + 0.5 * g * u * u;
+        c.el.style.opacity = BLOCK.clamp(2 - u * 1.2, 0, 1);
+        c.el.style.transform = "translate(" + x.toFixed(1) + "px," + y.toFixed(1) + "px) rotate(" + (c.w * u).toFixed(1) + "deg) scale(" + sc.toFixed(3) + ") rotateY(" + (u * 720 % 360).toFixed(0) + "deg)";
+      });
+    }, k.dur);
+  }
+  tl.to(w, { opacity: 0, y: -20 * s, duration: 0.4, ease: "power2.in" }, k.dur - 0.45);
+}, { font: true });
+</script>

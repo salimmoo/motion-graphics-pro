@@ -1,0 +1,20 @@
+{
+ "no global WebSocket (needs Node 22+). Use pipe mode (the default).": "no global WebSocket (needs Node 22+). Use pipe mode (the default).",
+ "cannot connect to {}: {}": "cannot connect to {}: {}",
+ "{}: CDP session already closed": "{}: CDP session already closed",
+ "{}: browser connection already closed": "{}: browser connection already closed",
+ "{}: browser connection closed": "{}: browser connection closed",
+ "executablePath is required": "executablePath is required",
+ "browser output": "browser output",
+ "cannot start {}: {}": "cannot start {}: {}",
+ "browser exited before CDP was ready (code {})": "browser exited before CDP was ready (code {})",
+ "browser did not open the DevTools port within {} s": "browser did not open the DevTools port within {} s",
+ "browser did not answer CDP within {} s": "browser did not answer CDP within {} s",
+ "script error": "script error",
+ "the page renderer crashed (out of memory, or its renderer/GPU process was killed while other heavy jobs ran)": "the page renderer crashed (out of memory, or its renderer/GPU process was killed while other heavy jobs ran)",
+ "page closed": "page closed",
+ "waiting for \"{}\" took longer than {} s": "waiting for \"{}\" took longer than {} s",
+ "cannot open {}: {}": "cannot open {}: {}",
+ "{} did not finish within {} s": "{} did not finish within {} s",
+ "waitForFunction took longer than {} s": "waitForFunction took longer than {} s"
+}

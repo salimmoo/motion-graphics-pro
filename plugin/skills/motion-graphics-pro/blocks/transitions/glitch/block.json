@@ -1,0 +1,93 @@
+{
+ "id": "transitions/glitch",
+ "name": "Glitch",
+ "name_id": "Glitch Digital",
+ "category": "transitions",
+ "description": {
+  "id": "Sinyal rusak: potongan horizontal tergeser, kanal warna terbelah, blok warna berkedip, lalu adegan berganti di tengah kekacauan. Mode analog lebih lembut dengan pita bergulir seperti pita video.",
+  "en": "Broken signal: horizontal slice displacement, RGB split, flickering colour blocks and a cut in the chaos. Analog mode is softer with a rolling tape bar."
+ },
+ "tags": [
+  "transisi",
+  "glitch",
+  "digital",
+  "rgb",
+  "vhs",
+  "sinyal",
+  "datamosh",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "mode": {
+   "default": "digital",
+   "type": "enum",
+   "options": [
+    "digital",
+    "analog"
+   ],
+   "hint": "digital = potongan tajam + blok warna; analog = pita lembut + garis gulir"
+  },
+  "strength": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali kekuatan",
+   "aliases": [
+    "kekuatan"
+   ]
+  },
+  "fps": {
+   "default": 24,
+   "type": "number",
+   "hint": "Laju perubahan pola glitch (per detik)"
+  },
+  "accent_color": {
+   "default": "#00e5ff",
+   "type": "color",
+   "hint": "Warna blok 1",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "accent_color2": {
+   "default": "#ff2bd6",
+   "type": "color",
+   "hint": "Warna blok 2",
+   "aliases": [
+    "warna_aksen2"
+   ]
+  }
+ },
+ "duration": 0.9,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/glitch",
+  "glitch",
+  "transitions-other"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 1.05,
+  "duration": 3
+ }
+}

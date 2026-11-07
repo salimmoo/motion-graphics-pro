@@ -1,0 +1,64 @@
+<!-- Block gallery/circle-carousel · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="gallery/circle-carousel" data-start="0" data-duration="6" data-track-index="8" class="blk blk-gallery-circle-carousel">
+<script type="application/json" data-block-props>
+{"image": [], "label": [], "count": 12, "style": "ring", "radius": 1, "card_size": 300, "card_aspect": 0.75, "back_scale": 0.42, "period": 1.5, "swing": 0.85, "steps": 1, "direction": 1, "corner_radius": 16, "position_y": 50, "shadow": true, "seed": 3}
+</script>
+<div class="blk-panggung"></div>
+</div>
+<style>
+.blk-gallery-circle-carousel{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-gallery-circle-carousel .blk-panggung{position:absolute;inset:0}
+.blk-gallery-circle-carousel .blk-kartu{position:absolute;left:0;top:0;overflow:hidden;will-change:transform}
+.blk-gallery-circle-carousel .blk-no{position:absolute;left:9%;bottom:7%;font:800 calc(var(--kw)*.22px)/1 "Inter",system-ui,sans-serif;color:rgba(255,255,255,.94);letter-spacing:-.02em}
+.blk-gallery-circle-carousel .blk-lb{position:absolute;left:9%;top:8%;font:600 calc(var(--kw)*.075px)/1.1 "Inter",system-ui,sans-serif;color:rgba(255,255,255,.85);text-transform:uppercase;letter-spacing:.12em}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, w = k.w, h = k.h, st = k.root.querySelector(".blk-panggung");
+  var N = Math.max(3, Math.round(P.count)), kw = P.card_size * k.s, kh = kw / (P.card_aspect || 0.75);
+  k.root.style.setProperty("--kw", kw);
+  // kartu placeholder: gradien + pola + nomor (dipakai bila daftar gambar kosong)
+  var PAL = [["#ff9a62", "#d9465f"], ["#7ee0d6", "#2d6cdf"], ["#ffd36e", "#ef7b45"], ["#b69cff", "#5b3fd1"], ["#a8e48a", "#2f8f6a"], ["#ff9cc2", "#a23d8a"], ["#93d8ff", "#3150a8"], ["#f6c28b", "#8a4b2e"]];
+  var POLA = ["radial-gradient(circle at 72% 28%,rgba(255,255,255,.4) 0 14%,transparent 15%)", "repeating-linear-gradient(135deg,rgba(255,255,255,.14) 0 7%,transparent 7% 14%)",
+    "radial-gradient(rgba(255,255,255,.3) 14%,transparent 16%) 0 0/16% 12%", "linear-gradient(170deg,transparent 58%,rgba(0,0,0,.2) 58%)"];
+  var g = P.image || [], off = k.random.int(0, 7);
+  var kartu = [];
+  for (var i = 0; i < N; i++) {
+    var c = BLOCK.el("div", { class: "blk-kartu", style: "width:" + kw + "px;height:" + kh + "px;border-radius:" + P.corner_radius * k.s + "px" }, st);
+    if (g.length) c.style.background = "center/cover no-repeat url('" + g[i % g.length] + "')";
+    else {
+      var p = PAL[(i + off) % PAL.length];
+      c.style.background = POLA[i % POLA.length] + ",linear-gradient(150deg," + p[0] + "," + p[1] + ")";
+      BLOCK.el("span", { class: "blk-no" }, c, ("0" + (i + 1)).slice(-2));
+      if (P.label && P.label[i]) BLOCK.el("span", { class: "blk-lb" }, c, BLOCK.esc(P.label[i]));
+    }
+    if (P.shadow) c.style.boxShadow = "0 " + 18 * k.s + "px " + 40 * k.s + "px rgba(0,0,0,.35)";
+    kartu.push(c);
+  }
+  // gaya 1-5: [x, y, kedalaman, rotasi kartu] dari sudut a (0 = depan)
+  var R = P.radius, cy = h * P.position_y / 100;
+  var GAYA = {
+    ring: function (a) { return [0.36 * w * Math.sin(a), 0.11 * h * Math.cos(a), Math.cos(a), 0]; },
+    wheel: function (a) { return [0.05 * w * Math.cos(a), 0.34 * h * Math.sin(a), Math.cos(a), -8 * Math.sin(a)]; },
+    flat: function (a) { var r = 0.33 * Math.min(w, h); return [r * Math.sin(a), r * Math.cos(a), Math.cos(a), -a * 180 / Math.PI * 0.25]; },
+    skew: function (a) { var x = 0.36 * w * Math.sin(a), y = 0.12 * h * Math.cos(a), q = -0.3; return [x * Math.cos(q) - y * Math.sin(q), x * Math.sin(q) + y * Math.cos(q), Math.cos(a), -10]; },
+    fan: function (a) { return [0.42 * w * Math.sin(a), -0.2 * h * Math.cos(a) + 0.06 * h, Math.cos(a), 22 * Math.sin(a)]; }
+  };
+  var fn = GAYA[P.style] || GAYA.ring;
+  // ayunan cepat-lambat-cepat: f(p) = p + k sin(2πp)/2π  (laju 1+k di ujung, 1-k di tengah)
+  function ayun(t) { var u = t / P.period, n = Math.floor(u), q = u - n; return n + q + P.swing * Math.sin(2 * Math.PI * q) / (2 * Math.PI); }
+  BLOCK.onTime(k.tl, function (t) {
+    var rot = ayun(t) * P.steps * (P.direction < 0 ? -1 : 1) * 2 * Math.PI / N;
+    var masuk = BLOCK.smooth(t / 0.7), keluar = 1 - BLOCK.smooth((t - (k.dur - 0.5)) / 0.5);
+    for (var i = 0; i < N; i++) {
+      var a = 2 * Math.PI * i / N - rot, v = fn(a), d = (v[2] + 1) / 2;
+      var sc = (P.back_scale + (1 - P.back_scale) * d * d) * (0.6 + 0.4 * masuk);
+      var c = kartu[i];
+      c.style.transform = "translate(" + (w / 2 + v[0] * R * (0.5 + 0.5 * masuk) - kw / 2) + "px," + (cy + v[1] * R - kh / 2) + "px) rotate(" + v[3] + "deg) scale(" + sc + ")";
+      c.style.zIndex = Math.round(d * 1000);
+      c.style.opacity = masuk * keluar;
+      c.style.filter = "brightness(" + (0.45 + 0.55 * d).toFixed(3) + ")";
+    }
+  }, k.dur);
+});
+</script>

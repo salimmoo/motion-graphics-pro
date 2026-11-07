@@ -1,0 +1,8 @@
+{
+  "script error: {}": "galat skrip: {}",
+  "error {}": "galat {}",
+  "console: {}": "konsol: {}",
+  "request failed: {}": "permintaan gagal: {}",
+  "asset {}: {}": "aset {}: {}",
+  "... and {} more (mgp check <composition> lists them all)": "... dan {} lagi (mgp check <komposisi> untuk semuanya)"
+}

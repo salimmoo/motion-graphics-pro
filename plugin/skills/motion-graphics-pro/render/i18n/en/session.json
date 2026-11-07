@@ -1,0 +1,17 @@
+{
+  "size must look like 1080x1920, not {}": "size must look like 1080x1920, not {}",
+  "name a composition file, e.g. `mgp render index.html`.": "name a composition file, e.g. `mgp render index.html`.",
+  "file not found: {}": "file not found: {}",
+  "--root must contain the composition file.": "--root must contain the composition file.",
+  "the captions file has no timed words: {}": "the captions file has no timed words: {}",
+  "--vars: cannot read JSON {}: {}": "--vars: cannot read JSON {}: {}",
+  "--vars must hold one JSON object {key: value}": "--vars must hold one JSON object {key: value}",
+  "--variables is not valid JSON (in PowerShell, write it to a file and use --vars file.json)": "--variables is not valid JSON (in PowerShell, write it to a file and use --vars file.json)",
+  "--var must look like key=value, not \"{}\"": "--var must look like key=value, not \"{}\"",
+  "variables do not match their declaration (--strict-variables):": "variables do not match their declaration (--strict-variables):",
+  "variable warning: {}": "variable warning: {}",
+  "--native-gsap: the gsap package is not installed, so the page would keep using mgp.motion. Install it yourself first: cd motion-graphics-pro/render && npm install gsap (GSAP licence by its makers), or run without --native-gsap.": "--native-gsap: the gsap package is not installed, so the page would keep using mgp.motion. Install it yourself first: cd motion-graphics-pro/render && npm install gsap (GSAP licence by its makers), or run without --native-gsap.",
+  "--native-gsap: the page still uses mgp.motion ({}): the composition loads motion.js/gerak.js itself through <script src>, not gsap. For a comparison, make a copy that loads gsap.min.js.": "--native-gsap: the page still uses mgp.motion ({}): the composition loads motion.js/gerak.js itself through <script src>, not gsap. For a comparison, make a copy that loads gsap.min.js.",
+  "cannot read the composition duration. Set window.__duration, data-duration on the root, or --duration <seconds>.": "cannot read the composition duration. Set window.__duration, data-duration on the root, or --duration <seconds>.",
+  "empty range: --from {} --to {}": "empty range: --from {} --to {}"
+}

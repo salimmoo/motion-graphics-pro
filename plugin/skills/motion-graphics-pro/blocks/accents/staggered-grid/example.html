@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Staggered Grid · block example accents/staggered-grid</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="5.5">
+<div id="adegan" class="adegan ad-gelap"></div>
+<!-- Block accents/staggered-grid · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-staggered-grid" data-block="accents/staggered-grid" data-start="0" data-duration="5" data-track-index="30" class="blk blk-accents-staggered-grid">
+<script type="application/json" data-block-props>
+{"style": "card", "pattern": "center", "item": [{"label": "01 Pantau", "judul": "Grafik waktu nyata", "isi": "Lihat lonjakan sebelum jadi masalah."}, {"label": "02 Aman", "judul": "Akses terkunci", "isi": "Izin per peran, tercatat rapi."}, {"label": "03 Cepat", "judul": "Respons kilat", "isi": "Halaman terbuka di bawah satu detik."}, {"label": "04 Ukur", "judul": "Laporan otomatis", "isi": "Ringkasan terkirim setiap Senin."}, {"label": "05 Simpan", "judul": "Cadangan awan", "isi": "Data tersalin di dua wilayah."}, {"label": "06 Lindungi", "judul": "Enkripsi penuh", "isi": "Dari perangkat sampai server."}], "cols": 3, "rows": 5, "pause": 0.14, "ease": "power3.out", "exit": true, "gap": 28, "radius": 22, "stack_height": 300, "color": "#f5f3ee", "card_color": "#1d2030", "accent_color": "#9ad1ff", "font": "Inter:wght@400;700", "font2": "JetBrains Mono:wght@500", "left": 8, "top": 12, "width": 84, "height": 76, "seed": 5}
+</script>
+<div class="blk-g"></div>
+</div>
+<style>
+.blk-accents-staggered-grid{position:absolute;inset:0;pointer-events:none}
+.blk-accents-staggered-grid .blk-g{position:absolute;display:grid}
+.blk-accents-staggered-grid .blk-kt{position:relative;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden}
+.blk-accents-staggered-grid .blk-lb{letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+.blk-accents-staggered-grid .blk-isi{line-height:1.4}
+.blk-accents-staggered-grid .blk-tumpuk{position:absolute}
+</style>
+<script>
+BLOCK.mount("blk-staggered-grid", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, rng = k.random, fs = function (v) { return (v * s).toFixed(1) + "px"; };
+  var g = R.querySelector(".blk-g"), gaya = P.style, items = P.item || [];
+  g.style.cssText += ";left:" + P.left + "%;top:" + P.top + "%;width:" + P.width + "%;height:" + P.height + "%;gap:" + fs(P.gap) + ";color:" + P.color + ";font-family:" + BLOCK.family(P.font);
+  // ikon garis tipis (viewBox 24) yang tergambar
+  var IK = ["M4 12h4l2-6 4 12 2-6h4", "M5 11V8a7 7 0 0 1 14 0v3M5 11h14v9H5z", "M13 3 5 14h6l-1 7 8-11h-6z", "M4 20V10m6 10V4m6 16v-7m4 7H3", "M7 18a4 4 0 0 1 0-8 6 6 0 0 1 11 2 3 3 0 0 1 0 6z", "M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z", "M3 12a9 9 0 1 0 18 0 9 9 0 1 0-18 0M12 7v5l3 3", "M4 6h16M4 12h16M4 18h10"];
+  var cards = [], kol, bar, n;
+  if (gaya === "tile") { kol = P.cols; bar = P.rows; n = kol * bar; }
+  else { n = items.length; kol = gaya === "stack" ? 1 : Math.min(P.cols, n, k.w < k.h ? 2 : 99); bar = Math.ceil(n / kol); }
+  if (gaya !== "stack") g.style.cssText += ";grid-template-columns:repeat(" + kol + ",1fr);grid-template-rows:repeat(" + bar + ",1fr)";
+  for (var i = 0; i < n; i++) {
+    var it = items[i] || {}, c, r = Math.floor(i / kol), q = i % kol;
+    if (gaya === "tile") {
+      var u = (r / Math.max(bar - 1, 1) + q / Math.max(kol - 1, 1)) / 2;
+      c = BLOCK.el("div", { class: "blk-kt", style: "border-radius:" + fs(P.radius) + ";background:" + BLOCK.mix(P.card_color, P.accent_color, 0.15 + 0.7 * u) }, g);
+    } else {
+      c = BLOCK.el("div", { class: "blk-kt" + (gaya === "stack" ? " blk-tumpuk" : ""), style: "padding:" + fs(36) + ";border-radius:" + fs(P.radius) + ";background:" + P.card_color + ";border:1px solid " + BLOCK.rgba(P.color, 0.12) + ";box-shadow:0 " + fs(16) + " " + fs(40) + " rgba(0,0,0,.22)" }, g);
+      if (gaya === "stack") c.style.cssText += ";left:0;right:0;top:50%;height:" + (P.stack_height * s) + "px;margin-top:" + (-P.stack_height * s / 2) + "px";
+      var sv = BLOCK.svg("svg", { width: 52 * s, height: 52 * s, viewBox: "0 0 24 24", style: "flex:none;margin-bottom:" + fs(22) }, c);
+      var pa = BLOCK.svg("path", { d: IK[i % IK.length], fill: "none", stroke: P.accent_color, "stroke-width": 1.5, "stroke-linecap": "round", "stroke-linejoin": "round" }, sv);
+      var L = BLOCK.prepareStroke(pa);
+      BLOCK.el("div", { class: "blk-lb", style: "font-family:" + BLOCK.family(P.font2, "monospace") + ";font-size:" + fs(22) + ";color:" + P.accent_color }, c).textContent = it.label || "";
+      BLOCK.el("div", { style: "font-weight:700;font-size:" + fs(36) + ";margin-top:" + fs(10) + ";line-height:1.15" }, c).textContent = it.judul || "";
+      if (it.isi) BLOCK.el("div", { class: "blk-isi", style: "font-size:" + fs(24) + ";opacity:.62;margin-top:" + fs(12) }, c).textContent = it.isi;
+      c._ikon = pa; c._L = L;
+    }
+    cards.push({ el: c, r: r, q: q, i: i });
+  }
+  // urutan stagger dari pola: urut | baris | tengah | sudut | acak
+  var cr = (bar - 1) / 2, cq = (kol - 1) / 2, perm = cards.map(function (o) { return rng(); });
+  cards.forEach(function (o) {
+    o.d = { order: o.i, row: o.r + o.q * 0.25, center: Math.hypot(o.r - cr, o.q - cq), corner: Math.hypot(o.r, o.q), random: perm[o.i] * n }[P.pattern];
+    if (o.d == null) o.d = o.i;
+  });
+  var t0 = 0.3, jd = P.pause, ez = P.ease;
+  cards.forEach(function (o) {
+    var t = t0 + o.d * jd;
+    if (gaya === "stack") {
+      // tumpukan kartu berkeyframe: masuk dari bawah, sedikit lewat, mendarat; kartu sebelumnya mundur
+      var off = (n - 1 - o.i);
+      tl.fromTo(o.el, { y: k.h * 0.7, rotation: o.i % 2 ? 6 : -6, opacity: 0, zIndex: o.i },
+        { keyframes: [{ y: -18 * s, rotation: o.i % 2 ? -1.5 : 1.5, opacity: 1, duration: 0.45, ease: ez }, { y: 0, rotation: 0, duration: 0.3, ease: "power2.inOut" }] }, t);
+      for (var j = o.i + 1; j < n; j++) {
+        var lvl = j - o.i;
+        tl.to(o.el, { y: -lvl * 34 * s, scale: 1 - lvl * 0.05, filter: "brightness(" + (1 - lvl * 0.12) + ")", duration: 0.45, ease: "power3.out" }, t0 + j * jd);
+      }
+      return;
+    }
+    var dari = gaya === "tile" && P.pattern !== "order" ? { opacity: 0, scale: 0.4, y: 0 } : { opacity: 0, y: 40 * s, scale: 1 };
+    tl.fromTo(o.el, dari, { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: ez }, t);
+    if (o.el._ikon) tl.fromTo(o.el._ikon, { strokeDashoffset: o.el._L }, { strokeDashoffset: 0, duration: 0.8, ease: "power2.inOut" }, t + 0.15);
+  });
+  if (P.exit) tl.to(cards.map(function (o) { return o.el; }), { opacity: 0, y: -20 * s, duration: 0.35, ease: "power2.in", stagger: 0.03 }, k.dur - 0.6);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 5.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5.5);
+</script>
+</body>
+</html>

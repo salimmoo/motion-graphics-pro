@@ -1,0 +1,134 @@
+{
+ "id": "text/marquee-3d",
+ "name": "Marquee 3D",
+ "name_id": "Marquee Perspektif",
+ "category": "text",
+ "description": {
+  "id": "Daftar kata di atas bidang yang dimiringkan dalam 3D, bergulir menjauh menuju cakrawala dan memudar dalam kabut. Mode pita membuat dua pita teks miring yang berjalan berlawanan arah.",
+  "en": "A word list on a tilted 3D plane rolls away toward the horizon and fades into haze. Ribbon mode runs two tilted text bands in opposite directions."
+ },
+ "tags": [
+  "teks",
+  "marquee",
+  "3d",
+  "perspektif",
+  "ticker",
+  "loop",
+  "horizon",
+  "text"
+ ],
+ "props": {
+  "list": {
+   "default": [
+    "DESAIN",
+    "*GERAK*",
+    "CERITA",
+    "SUARA",
+    "*RITME*",
+    "WARNA"
+   ],
+   "type": "list",
+   "hint": "Item; *item* = warna aksen",
+   "aliases": [
+    "daftar"
+   ]
+  },
+  "mode": {
+   "default": "horizon",
+   "type": "enum",
+   "options": [
+    "horizon",
+    "ribbon"
+   ],
+   "hint": "horizon = bidang miring menjauh; pita = dua pita berlawanan arah",
+   "option_aliases": {
+    "pita": "ribbon"
+   }
+  },
+  "font": {
+   "default": "Anton",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "size": {
+   "default": 210,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "weight": {
+   "default": 400,
+   "type": "number",
+   "aliases": [
+    "berat"
+   ]
+  },
+  "color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#ff5a4e",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "hint": "Item per detik (horizon) / faktor laju (pita)",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "angle": {
+   "default": 58,
+   "type": "number",
+   "hint": "Kemiringan bidang (derajat)",
+   "aliases": [
+    "sudut"
+   ]
+  },
+  "fog": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Pudar menuju cakrawala",
+   "aliases": [
+    "kabut"
+   ]
+  },
+  "separator": {
+   "default": "✦",
+   "type": "text",
+   "hint": "Mode pita: pemisah antar item",
+   "aliases": [
+    "pemisah"
+   ]
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "teks/marquee-3d",
+  "perspective-marquee"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Anton",
+   "Inter:wght@400;500;600;700;800;900"
+  ]
+ }
+}

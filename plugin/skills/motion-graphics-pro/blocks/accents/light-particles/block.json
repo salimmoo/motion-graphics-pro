@@ -1,0 +1,115 @@
+{
+ "id": "accents/light-particles",
+ "name": "Light Particles",
+ "name_id": "Partikel Cahaya Menyingkap",
+ "category": "accents",
+ "description": {
+  "id": "Medan butir cahaya berseed mengalir dari tepi layar, berkumpul ke bingkai gambar, berkilau menelusuri tepinya, lalu menipis sementara gambar tersingkap jernih di bawahnya. Gambar dari url opsional; tanpa url tampil ilustrasi pengganti.",
+  "en": "A seeded field of light motes streams in, converges on an image slot, sparkles along its edge, then thins out while the image reveals clean underneath. Optional image url; placeholder art otherwise."
+ },
+ "tags": [
+  "aksen",
+  "partikel",
+  "cahaya",
+  "reveal",
+  "kilau",
+  "sparkle",
+  "gambar",
+  "accents",
+  "light",
+  "particles"
+ ],
+ "props": {
+  "image": {
+   "default": "",
+   "type": "text",
+   "hint": "Url gambar (opsional); kosong = ilustrasi pengganti",
+   "aliases": [
+    "gambar"
+   ]
+  },
+  "width": {
+   "default": 52,
+   "type": "number",
+   "hint": "Lebar bingkai (% lebar layar)",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "image_aspect": {
+   "default": 1.5,
+   "type": "number",
+   "hint": "Lebar / tinggi bingkai",
+   "aliases": [
+    "rasio_gambar"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "radius": {
+   "default": 24,
+   "type": "number",
+   "hint": "Radius sudut (px pada 1080)",
+   "aliases": [
+    "sudut"
+   ]
+  },
+  "count": {
+   "default": 120,
+   "type": "number",
+   "hint": "Jumlah butir yang berkumpul",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "open_start": {
+   "default": 1.2,
+   "type": "number",
+   "hint": "Detik gambar mulai tersingkap",
+   "aliases": [
+    "mulai_buka"
+   ]
+  },
+  "bg": {
+   "default": "",
+   "type": "color",
+   "hint": "Warna latar; kosong = transparan",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "seed": {
+   "default": 5,
+   "type": "number"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [
+  "lib:mgp.js"
+ ],
+ "aliases": [
+  "aksen/partikel-cahaya",
+  "particle-image-reveal"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

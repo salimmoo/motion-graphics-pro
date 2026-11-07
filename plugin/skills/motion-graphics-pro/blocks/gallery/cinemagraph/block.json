@@ -1,0 +1,129 @@
+{
+ "id": "gallery/cinemagraph",
+ "name": "Cinemagraph",
+ "name_id": "Sinemagraf",
+ "category": "gallery",
+ "description": {
+  "id": "Foto diam dengan satu wilayah hidup: seluruh bingkai membeku, hanya uap di atas cangkir yang terus mengepul dalam jendela berbulu. Periode uap membagi durasi sehingga render berulang mulus.",
+  "en": "A still photograph with one living region: the frame is frozen while steam keeps rising inside a feathered window above a cup, with a period that divides the duration so the render loops."
+ },
+ "tags": [
+  "galeri",
+  "sinemagraf",
+  "cinemagraph",
+  "uap",
+  "loop",
+  "foto",
+  "kanvas",
+  "gallery"
+ ],
+ "props": {
+  "image": {
+   "default": "",
+   "type": "text",
+   "hint": "Url foto diam (opsional). Kosong = adegan cangkir buatan sendiri",
+   "aliases": [
+    "gambar"
+   ]
+  },
+  "period": {
+   "default": 2,
+   "type": "number",
+   "hint": "Periode uap (detik), dibulatkan agar membagi durasi",
+   "aliases": [
+    "periode"
+   ]
+  },
+  "steam_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi sumber uap X (%)",
+   "aliases": [
+    "uap_x"
+   ]
+  },
+  "steam_y": {
+   "default": 55,
+   "type": "number",
+   "hint": "Posisi sumber uap Y (%), bibir cangkir",
+   "aliases": [
+    "uap_y"
+   ]
+  },
+  "steam_height": {
+   "default": 34,
+   "type": "number",
+   "hint": "Tinggi kepulan (% tinggi layar)",
+   "aliases": [
+    "tinggi_uap"
+   ]
+  },
+  "window_width": {
+   "default": 26,
+   "type": "number",
+   "hint": "Lebar jendela hidup (% sisi pendek)",
+   "aliases": [
+    "lebar_jendela"
+   ]
+  },
+  "blob_count": {
+   "default": 16,
+   "type": "number",
+   "hint": "Jumlah gumpal uap",
+   "aliases": [
+    "jumlah_gumpal"
+   ]
+  },
+  "strength": {
+   "default": 0.75,
+   "type": "number",
+   "hint": "Kepekatan uap 0-1",
+   "aliases": [
+    "kekuatan"
+   ]
+  },
+  "steam_color": {
+   "default": "#ffffff",
+   "type": "color",
+   "hint": "Warna uap",
+   "aliases": [
+    "warna_uap"
+   ]
+  },
+  "wall_color": {
+   "default": "#3b2c26",
+   "type": "color",
+   "hint": "Warna dinding adegan",
+   "aliases": [
+    "warna_dinding"
+   ]
+  },
+  "cup_color": {
+   "default": "#efe7dc",
+   "type": "color",
+   "hint": "Warna cangkir",
+   "aliases": [
+    "warna_cangkir"
+   ]
+  },
+  "seed": {
+   "default": 9,
+   "type": "number",
+   "hint": "Seed"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "galeri/sinemagraf",
+  "cinemagraph"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

@@ -1,0 +1,98 @@
+{
+ "id": "3d/gooey",
+ "name": "Gooey",
+ "name_id": "Titik Gooey",
+ "category": "3d",
+ "description": {
+  "id": "Satu titik membelah menjadi menu tiga titik dengan leher metaball yang lengket, berputar menjadi tanda pusaran dengan jejak gerak, lalu pecah lagi menjadi tiga titik dan menyatu kembali menjadi satu. Efek lengket dari filter SVG blur + ambang colormatrix.",
+  "en": "A dot splits into a three-dot menu with a gooey metaball neck, spins into a swirl mark with motion trails, then breaks back into three dots and merges into one. The goo is an SVG blur and colour-matrix threshold filter."
+ },
+ "tags": [
+  "3d",
+  "gooey",
+  "metaball",
+  "titik",
+  "menu",
+  "loader",
+  "logo",
+  "cair"
+ ],
+ "props": {
+  "color": {
+   "default": "#ff5a36",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "size": {
+   "default": 46,
+   "type": "number",
+   "hint": "Jari-jari titik (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "distance": {
+   "default": 130,
+   "type": "number",
+   "hint": "Jarak antar titik",
+   "aliases": [
+    "jarak"
+   ]
+  },
+  "turns": {
+   "default": 2.25,
+   "type": "number",
+   "hint": "Jumlah putaran pusaran",
+   "aliases": [
+    "putaran"
+   ]
+  },
+  "sticky": {
+   "default": 14,
+   "type": "number",
+   "hint": "Blur filter (makin besar makin lengket)",
+   "aliases": [
+    "lengket"
+   ]
+  },
+  "trail": {
+   "default": 1.1,
+   "type": "number",
+   "hint": "Panjang jejak gerak saat berputar (radian maks)",
+   "aliases": [
+    "jejak"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "aliases": [
+    "posisi_y"
+   ]
+  }
+ },
+ "duration": 4.5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "3d/gooey",
+  "gooey-split"
+ ],
+ "example": {
+  "bg": "light"
+ }
+}

@@ -1,0 +1,96 @@
+<!-- Block hands/circle · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="hands/circle" data-start="0" data-duration="4.5" data-track-index="12" class="blk blk-hands-circle">
+<script type="application/json" data-block-props>
+{"position_x": 50, "position_y": 50, "radius_x": 220, "radius_y": 150, "scribble_fill": false, "text": "di sini!", "label_x": 78, "label_y": 20, "texture": "plain", "color": "#e4572e", "fill_color": "#e4572e", "text_color": "#26211d", "thickness": 9, "font": "Caveat:wght@700", "size": 96, "start": 0.3, "wobble": 1, "seed": 15}
+</script>
+<svg class="blk-svg"><g class="blk-bentuk"></g></svg>
+<div class="blk-lb"></div>
+</div>
+<style>
+.blk-hands-circle{position:absolute;inset:0;pointer-events:none}
+.blk-hands-circle .blk-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.blk-hands-circle .blk-lb{position:absolute;white-space:nowrap}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, w = k.w, h = k.h, svg = k.root.querySelector(".blk-svg"), g = svg.querySelector(".blk-bentuk"), lb = k.root.querySelector(".blk-lb");
+  // ---- helper tangan (lokal di blok ini): goresan bergoyang berseed, boil per 1/8 detik, tekstur goresan
+  function wob(pts, amp, seed) {
+    var q = pts.map(function (p, i) { return [p[0] + amp * BLOCK.noise(i * 0.83 + 0.3, seed), p[1] + amp * BLOCK.noise(i * 0.83 + 5.1, seed + 17)]; });
+    var d = "M" + q[0][0].toFixed(1) + " " + q[0][1].toFixed(1);
+    for (var i = 0; i < q.length - 1; i++) {
+      var a = q[i - 1] || q[i], b = q[i], c = q[i + 1], e = q[i + 2] || c;
+      d += "C" + (b[0] + (c[0] - a[0]) / 6).toFixed(1) + " " + (b[1] + (c[1] - a[1]) / 6).toFixed(1) + " " + (c[0] - (e[0] - b[0]) / 6).toFixed(1) + " " +
+        (c[1] - (e[1] - b[1]) / 6).toFixed(1) + " " + c[0].toFixed(1) + " " + c[1].toFixed(1);
+    }
+    return d;
+  }
+  function boil(t) { return Math.floor(t * 8 + 1e-6); } // bentuk berganti tiap 1/8 detik
+  function kotak(x, y, ww, hh, n, lebih) { // keliling kotak mulai kiri atas searah jarum jam, ujung melewati awal sedikit
+    var out = [], L = 2 * (ww + hh); n = n || 32; lebih = lebih == null ? 0.07 : lebih;
+    for (var i = 0; i <= n; i++) {
+      var u = ((i / n) * (1 + lebih) % 1) * L;
+      out.push(u < ww ? [x + u, y] : u < ww + hh ? [x + ww, y + u - ww] : u < 2 * ww + hh ? [x + ww - (u - ww - hh), y + hh] : [x, y + hh - (u - 2 * ww - hh)]);
+    }
+    return out;
+  }
+  function elips(cx, cy, rx, ry, n, a0, putar, spiral) {
+    var out = []; n = n || 36; putar = putar || 1.1; spiral = spiral == null ? 0.06 : spiral;
+    for (var i = 0; i <= n; i++) { var a = a0 + (i / n) * putar * 2 * Math.PI, f = 1 + spiral * (i / n - 0.5); out.push([cx + rx * f * Math.cos(a), cy + ry * f * Math.sin(a)]); }
+    return out;
+  }
+  function kurva(a, c, b, n) { var out = []; n = n || 20; for (var i = 0; i <= n; i++) { var u = i / n, v = 1 - u; out.push([v * v * a[0] + 2 * v * u * c[0] + u * u * b[0], v * v * a[1] + 2 * v * u * c[1] + u * u * b[1]]); } return out; }
+  function tekstur(svg, jenis, s, uid) { // polos | lembut | tajam | semprot -> {filter, lebar}
+    if (jenis === "soft" || jenis === "spray") {
+      var df = svg.querySelector("defs") || BLOCK.svg("defs", null, svg), id = "blkf-" + uid + "-" + jenis;
+      var f = BLOCK.svg("filter", { id: id, x: "-20%", y: "-20%", width: "140%", height: "140%" }, df);
+      if (jenis === "soft") BLOCK.svg("feGaussianBlur", { stdDeviation: 1.3 * s }, f);
+      else {
+        BLOCK.svg("feTurbulence", { type: "fractalNoise", baseFrequency: 1.1 / Math.max(0.5, s), numOctaves: 1, seed: 4, result: "n" }, f);
+        BLOCK.svg("feDisplacementMap", { in: "SourceGraphic", in2: "n", scale: 7 * s, xChannelSelector: "R", yChannelSelector: "G", result: "d" }, f);
+        BLOCK.svg("feColorMatrix", { in: "n", type: "matrix", values: "0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 3.2 -1.1", result: "m" }, f);
+        BLOCK.svg("feComposite", { in: "d", in2: "m", operator: "in" }, f);
+      }
+      return { filter: "url(#" + id + ")", lebar: jenis === "spray" ? 1.7 : 1.1 };
+    }
+    return { filter: null, lebar: jenis === "sharp" ? 0.6 : 1 };
+  }
+  function goresan(induk, warna, tebal, tx) { // path siap digambar (pathLength 1 -> dashoffset = 1 - kemajuan)
+    var p = BLOCK.svg("path", { fill: "none", stroke: warna, "stroke-width": tebal * tx.lebar, "stroke-linecap": "round", "stroke-linejoin": "round", pathLength: 1, "stroke-dasharray": "1 1.001", "stroke-dashoffset": 1 }, induk);
+    if (tx.filter) p.setAttribute("filter", tx.filter);
+    return p;
+  }
+  function gambar(p, d, prog) { p.setAttribute("d", d); p.setAttribute("stroke-dashoffset", (1 - BLOCK.clamp(prog, 0, 1)).toFixed(4)); p.style.visibility = prog > 0.001 ? "visible" : "hidden"; }
+  // ---- akhir helper
+  svg.setAttribute("viewBox", "0 0 " + w + " " + h);
+  var cx = P.position_x / 100 * w, cy = P.position_y / 100 * h, rx = P.radius_x * k.s, ry = P.radius_y * k.s, Lx = P.label_x / 100 * w, Ly = P.label_y / 100 * h;
+  var tx = tekstur(svg, P.texture, k.s, k.id), tb = P.thickness * k.s, amp = 5 * k.s * P.wobble;
+  // isian coret: zigzag di dalam elips
+  var zz = [];
+  if (P.scribble_fill) for (var i = 0; i <= 14; i++) { var yy = cy - ry * 0.78 + i * ry * 1.56 / 14, half = rx * 0.85 * Math.sqrt(Math.max(0, 1 - Math.pow((yy - cy) / ry, 2))); zz.push([cx + (i % 2 ? half : -half), yy]); }
+  var pz = P.scribble_fill ? goresan(g, P.fill_color, tb * 1.6, tx) : null; if (pz) pz.setAttribute("stroke-opacity", ".35");
+  var pe = goresan(g, P.color, tb, tx), pk = goresan(g, P.color, tb * 0.8, tx);
+  var a0 = -2.4, el = elips(cx, cy, rx, ry, 40, a0, 1.12, 0.08);
+  // konektor lengkung dari tepi elips ke label
+  var ang = Math.atan2(Ly - cy, Lx - cx), e0 = [cx + Math.cos(ang) * rx * 1.08, cy + Math.sin(ang) * ry * 1.08];
+  var e1 = [Lx - Math.cos(ang) * 70 * k.s, Ly - Math.sin(ang) * 40 * k.s], mid = [(e0[0] + e1[0]) / 2 + (e1[1] - e0[1]) * 0.25, (e0[1] + e1[1]) / 2 - (e1[0] - e0[0]) * 0.25];
+  var kon = kurva(e0, mid, e1, 16);
+  lb.style.cssText += ";left:" + Lx + "px;top:" + Ly + "px;color:" + P.text_color + ";font-family:" + BLOCK.family(P.font, "cursive") + ";font-size:" + P.size * k.s + "px";
+  lb.textContent = P.text;
+  var T0 = P.start, Te = 0.85, Tz = T0 + Te, Tk = Tz + (P.scribble_fill ? 0.6 : 0.05), Tl = Tk + 0.4;
+  // label meletup dengan momentum dari arah konektor
+  tl.fromTo(lb, { xPercent: -50, yPercent: -50, autoAlpha: 0, scale: 0.4, x: -Math.cos(ang) * 60 * k.s, y: -Math.sin(ang) * 60 * k.s, rotation: -12 },
+    { xPercent: -50, yPercent: -50, autoAlpha: 1, scale: 1, x: 0, y: 0, rotation: -3, duration: 0.55, ease: "back.out(2.6)" }, Tl);
+  BLOCK.onTime(tl, function (t) {
+    var b = boil(t), s = P.seed + b * 7;
+    gambar(pe, wob(el, amp, s), BLOCK.smooth((t - T0) / Te));
+    if (pz) gambar(pz, wob(zz, amp * 1.4, s + 9), BLOCK.progress(t, Tz - 0.1, Tz + 0.5));
+    gambar(pk, wob(kon, amp * 0.7, s + 13), BLOCK.smooth((t - Tk) / 0.4));
+    // bentuk menyerap kedatangan label: pepat bervolume tetap, teredam
+    var q = t - (Tl + 0.3), a = q > 0 ? 0.07 * Math.exp(-6 * q) * Math.cos(q * 20) : 0, sx = 1 + a, sy = 1 / sx;
+    g.setAttribute("transform", "translate(" + cx + " " + cy + ") scale(" + sx.toFixed(4) + " " + sy.toFixed(4) + ") translate(" + -cx + " " + -cy + ")");
+    lb.style.translate = (BLOCK.boil(t, P.seed + 2) * k.s * P.wobble).toFixed(2) + "px " + (BLOCK.boil(t, P.seed + 4) * k.s * P.wobble).toFixed(2) + "px";
+  }, k.dur);
+  tl.to([svg, lb], { autoAlpha: 0, duration: 0.35, ease: "power2.in" }, k.dur - 0.4);
+}, { font: true });
+</script>

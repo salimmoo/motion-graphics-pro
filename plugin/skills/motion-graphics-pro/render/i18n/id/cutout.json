@@ -1,0 +1,13 @@
+{
+ "rembg is not installed in any Python that was found (install.json cutout venv, MGP_PYTHON, render/.venv, PATH).\nInstall it once (own small venv, locked packages + the U2-Net model with sha256, CPU, ~0.6 GB):\n  mgp install cutout              (progress: mgp install cutout --status)\nAlready have a venv with rembg (e.g. made by hand)? Register it: mgp install cutout --adopt\n  (found automatically in ~/vrb; any other venv: --python <path> or env MGP_PYTHON).\nWithout a model, for assets on a flat colour background: --key magenta (background #FF00FF) or --key #00ff00.": "rembg belum terpasang di Python mana pun yang ditemukan (venv cutout di install.json, MGP_PYTHON, render/.venv, PATH).\nPasang sekali (venv kecil sendiri, paket terkunci + model U2-Net dengan sha256, CPU, ~0,6 GB):\n  mgp install cutout              (progres: mgp install cutout --status)\nSudah punya venv berisi rembg (mis. dibuat manual)? Daftarkan: mgp install cutout --adopt\n  (~/vrb ditemukan otomatis; venv lain: --python <path> atau env MGP_PYTHON).\nTanpa model, untuk aset berlatar warna rata: --key magenta (latar #FF00FF) atau --key #00ff00.",
+ "ffmpeg failed: {}": "ffmpeg gagal: {}",
+ "Video output with alpha must be .webm (VP9 alpha) or .mov (ProRes 4444), not {}": "Keluaran video beralfa harus .webm (VP9 alfa) atau .mov (ProRes 4444), bukan {}",
+ "--key must be magenta, green, blue or a colour #rrggbb, not \"{}\"": "--key harus magenta, green (hijau), blue (biru), atau warna #rrggbb, bukan \"{}\"",
+ "Name a file: mgp cutout person.png -o cutout.png  |  mgp cutout clip.mp4 -o cutout.webm": "Sebutkan berkas: mgp cutout orang.png -o potong.png  |  mgp cutout klip.mp4 -o potong.webm",
+ "Image output with alpha must be .png": "Keluaran gambar beralfa harus .png",
+ "cutout (magenta key, numpy) -> {}  {} s": "potong-latar (kunci magenta, numpy) -> {}  {} s",
+ "cutout (key {}, ffmpeg) -> {}  {} s": "potong-latar (kunci {}, ffmpeg) -> {}  {} s",
+ "cutout: model {} (rembg, {})": "potong-latar: model {} (rembg, {})",
+ "done: {}{}  ({} s)": "selesai: {}{}  ({} s)",
+ "{} frames @ {} fps": "{} frame @ {} fps"
+}

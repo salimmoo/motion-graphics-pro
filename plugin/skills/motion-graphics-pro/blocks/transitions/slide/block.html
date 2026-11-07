@@ -1,0 +1,39 @@
+<!-- Block transitions/slide · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/slide" data-start="0" data-duration="1.2" data-track-index="20" class="blk blk-transitions-slide">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "direction": "left", "mode": "push", "ease": "power3.inOut", "panel": "#10233f", "shadow": true}
+</script>
+</div>
+<style>
+.blk-transitions-slide{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-transitions-slide .blk-panel{position:absolute;inset:0}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to);
+  var arah = { left: [-1, 0], right: [1, 0], top: [0, -1], bottom: [0, 1] }[P.direction] || [-1, 0];
+  var dx = arah[0] * k.w, dy = arah[1] * k.h, D = k.dur;
+  // mode: dorong (A keluar, B masuk bersamaan) | tutup (B menutup A yang diam) | buka (A tersingkap, B diam)
+  //       panel (panel warna menyapu, adegan diganti di tengah)
+  if (P.mode === "panel" || (!A && !Bk)) {
+    var pn = BLOCK.el("div", { class: "blk-panel", style: "background:" + P.panel }, k.root);
+    tl.fromTo(pn, { x: -dx, y: -dy }, { x: 0, y: 0, duration: D * 0.45, ease: "power3.in" }, 0)
+      .to(pn, { x: dx, y: dy, duration: D * 0.45, ease: "power3.out" }, D * 0.55);
+    if (A) BLOCK.initial(tl, A, { autoAlpha: 1 }).set(A, { autoAlpha: 0 }, D * 0.5);
+    if (Bk) BLOCK.initial(tl, Bk, { autoAlpha: 0 }).set(Bk, { autoAlpha: 1 }, D * 0.5);
+    return;
+  }
+  var sh = P.shadow ? "0 0 " + Math.round(60 * k.s) + "px rgba(0,0,0,.45)" : "none";
+  var buka = P.mode === "open";
+  if (Bk) BLOCK.initial(tl, Bk, { autoAlpha: 1, zIndex: buka ? 1 : 2, boxShadow: buka ? "none" : sh });
+  if (A) BLOCK.initial(tl, A, { autoAlpha: 1, zIndex: buka ? 2 : 1, boxShadow: buka ? sh : "none" });
+  if (buka) {
+    if (A) tl.fromTo(A, { x: 0, y: 0 }, { x: dx, y: dy, duration: D, ease: P.ease }, 0);
+  } else {
+    if (Bk) tl.fromTo(Bk, { x: -dx, y: -dy }, { x: 0, y: 0, duration: D, ease: P.ease }, 0);
+    if (A && P.mode === "push") tl.fromTo(A, { x: 0, y: 0 }, { x: dx, y: dy, duration: D, ease: P.ease }, 0);
+    if (A && P.mode === "close") tl.fromTo(A, { x: 0, y: 0, filter: "brightness(1)" }, { x: dx * 0.25, y: dy * 0.25, filter: "brightness(0.6)", duration: D, ease: P.ease }, 0);
+  }
+  if (A) tl.set(A, { autoAlpha: 0 }, D);
+});
+</script>

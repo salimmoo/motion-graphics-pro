@@ -1,0 +1,127 @@
+{
+ "id": "subtitles/heavy",
+ "name": "Heavy",
+ "name_id": "Subtitle Ganti Berat",
+ "category": "subtitles",
+ "description": {
+  "id": "Satu baris muncul tipis dan redup, lalu setiap kata menebal halus saat diucapkan (font variabel) dan menipis kembali ketika baris berganti.",
+  "en": "A line appears thin and dim; each word smoothly gains weight as it is spoken (variable font) and thins out again when the line changes."
+ },
+ "tags": [
+  "subtitle",
+  "caption",
+  "font-variabel",
+  "elegan",
+  "weight",
+  "subtitles",
+  "heavy"
+ ],
+ "props": {
+  "text": {
+   "default": "Pelan-pelan saja, semua akan sampai pada waktunya",
+   "type": "text",
+   "hint": "Teks subtitle; *kata* = kata kunci (bila didukung). Dipakai bila kata kosong",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "words": {
+   "default": [],
+   "type": "timed-words",
+   "hint": "[{teks, mulai, akhir}] dari transkrip; kosong = dihitung dari teks",
+   "aliases": [
+    "kata"
+   ]
+  },
+  "kps": {
+   "default": 2.0,
+   "type": "number",
+   "hint": "Kata per detik bila tanpa transkrip"
+  },
+  "max_words": {
+   "default": 4,
+   "type": "number",
+   "hint": "Maksimum kata per halaman subtitle",
+   "aliases": [
+    "maks_kata"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@100..900",
+   "type": "font",
+   "hint": "Google Font variabel (rentang wght)"
+  },
+  "size": {
+   "default": 70,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "bottom": {
+   "default": 16,
+   "type": "number",
+   "hint": "Jarak dari bawah (%)",
+   "aliases": [
+    "bawah"
+   ]
+  },
+  "uppercase": {
+   "default": false,
+   "type": "boolean",
+   "aliases": [
+    "huruf_besar"
+   ]
+  },
+  "start_weight": {
+   "default": 200,
+   "type": "number",
+   "hint": "Berat sebelum diucap",
+   "aliases": [
+    "berat_awal"
+   ]
+  },
+  "end_weight": {
+   "default": 800,
+   "type": "number",
+   "hint": "Berat saat diucap",
+   "aliases": [
+    "berat_akhir"
+   ]
+  },
+  "start_opacity": {
+   "default": 0.5,
+   "type": "number",
+   "aliases": [
+    "opasitas_awal"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "subtitle/berat",
+  "caption-weight-shift"
+ ],
+ "example": {
+  "bg": "photo",
+  "aspect": "9:16",
+  "font": [
+   "Inter:wght@100..900"
+  ]
+ }
+}

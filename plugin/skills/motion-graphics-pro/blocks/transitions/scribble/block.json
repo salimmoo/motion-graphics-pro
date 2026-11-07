@@ -1,0 +1,99 @@
+{
+ "id": "transitions/scribble",
+ "name": "Scribble",
+ "name_id": "Coretan Spidol",
+ "category": "transitions",
+ "description": {
+  "id": "Transisi penutup: pita-pita coretan spidol berseed menumpuk menutup layar dengan ganjal padat, adegan diganti di baliknya, lalu coretan terhapus dari pangkalnya dan membuka adegan baru.",
+  "en": "Overlay transition: seeded marker scribble bands accumulate to cover the frame over a solid backstop, the scene cuts beneath, then the scribbles erase from their start to reveal the next scene."
+ },
+ "tags": [
+  "transisi",
+  "coretan",
+  "spidol",
+  "scribble",
+  "marker",
+  "tangan",
+  "overlay",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "color": {
+   "default": "#1e2b4a",
+   "type": "color",
+   "hint": "Warna spidol (juga ganjal)",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "color_2": {
+   "default": "#2b3d66",
+   "type": "color",
+   "hint": "Warna pita selang-seling",
+   "aliases": [
+    "warna_2"
+   ]
+  },
+  "ribbon": {
+   "default": 5,
+   "type": "number",
+   "hint": "Jumlah pita coretan",
+   "aliases": [
+    "pita"
+   ]
+  },
+  "thickness": {
+   "default": 120,
+   "type": "number",
+   "hint": "Tebal goresan (px pada 1080)",
+   "aliases": [
+    "tebal"
+   ]
+  },
+  "roughness": {
+   "default": 1,
+   "type": "number",
+   "hint": "Kekasaran tepi dan zigzag",
+   "aliases": [
+    "kasar"
+   ]
+  },
+  "seed": {
+   "default": 4,
+   "type": "number",
+   "hint": "Seed bentuk coretan"
+  }
+ },
+ "duration": 2.4,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/coretan",
+  "hw-scribble-transition"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 1,
+  "duration": 3.6
+ }
+}

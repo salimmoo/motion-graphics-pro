@@ -1,0 +1,42 @@
+<!-- Block backgrounds/beat-pulse · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="backgrounds/beat-pulse" data-start="0" data-duration="6" data-track-index="0" class="blk blk-backgrounds-beat-pulse">
+<script type="application/json" data-block-props>
+{"bpm": 120, "beats": [], "beat_start": 0.25, "accent_color": "#ff3d7f", "bg": "#0b0710", "strength": 1, "decay": 5, "ring": true}
+</script>
+</div>
+<style>
+.blk-backgrounds-beat-pulse{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-backgrounds-beat-pulse canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.blk-backgrounds-beat-pulse .dk-lapis{position:absolute;inset:-10%;will-change:transform,opacity}
+.blk-backgrounds-beat-pulse .dk-cincin{position:absolute;left:50%;top:50%;border-radius:50%;box-sizing:border-box}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P;
+  var aks = P.accent_color, kuat = +P.strength || 1, luruh = Math.max(0.5, +P.decay || 6);
+  k.root.style.background = P.bg;
+  var sudut = BLOCK.el("div", { class: "dk-lapis", style: "background:radial-gradient(60% 70% at 0% 100%," + BLOCK.rgba(BLOCK.mix(aks, "#000000", 0.35), 0.55) + ",transparent 70%),radial-gradient(60% 70% at 100% 0%," + BLOCK.rgba(BLOCK.mix(aks, "#ffffff", 0.2), 0.4) + ",transparent 70%)" }, k.root);
+  var glow = BLOCK.el("div", { class: "dk-lapis", style: "background:radial-gradient(circle at 50% 50%," + BLOCK.rgba(BLOCK.mix(aks, "#ffffff", 0.25), 0.95) + " 0%," + BLOCK.rgba(aks, 0.5) + " 28%,transparent 62%)" }, k.root);
+  var cincin = BLOCK.el("div", { class: "dk-cincin", style: "border:" + Math.max(2, 4 * k.s) + "px solid " + aks + ";width:" + Math.min(k.w, k.h) * 0.6 + "px;height:" + Math.min(k.w, k.h) * 0.6 + "px" }, k.root);
+  if (!P.ring) cincin.style.display = "none";
+  // grid ketukan: daftar detik (bila diisi) atau bpm
+  var KT = (Array.isArray(P.beats) && P.beats.length) ? P.beats.map(Number).sort(function (a, b) { return a - b; }) : null;
+  var per = 60 / Math.max(1, +P.bpm || 120), off = +P.beat_start || 0;
+  function ketukTerakhir(t) {
+    if (KT) { var b = null; for (var i = 0; i < KT.length && KT[i] <= t; i++) b = KT[i]; return b == null ? null : [b, i - 1]; }
+    if (t < off) return null; var n = Math.floor((t - off) / per + 1e-6); return [off + n * per, n];
+  }
+  function gambar(t) {
+    var b = ketukTerakhir(t), umur = b ? t - b[0] : 99, aksen = b && b[1] % 4 === 0 ? 1 : 0.7;
+    var e = Math.exp(-umur * luruh) * aksen * kuat;
+    glow.style.opacity = (0.28 + 0.72 * Math.min(1, e)).toFixed(3);
+    glow.style.transform = "scale(" + (1 + 0.1 * e).toFixed(4) + ")";
+    glow.style.filter = "saturate(" + (0.55 + 0.9 * e).toFixed(3) + ")";
+    sudut.style.opacity = (0.5 + 0.5 * Math.min(1, e)).toFixed(3);
+    var u = Math.min(1, umur / 0.9);
+    cincin.style.opacity = b ? (0.8 * (1 - u) * (1 - u) * aksen).toFixed(3) : "0";
+    cincin.style.transform = "translate(-50%,-50%) scale(" + (0.35 + 1.4 * (1 - Math.pow(1 - u, 3))).toFixed(4) + ")";
+  }
+  BLOCK.onTime(k.tl, gambar, k.dur);
+});
+</script>

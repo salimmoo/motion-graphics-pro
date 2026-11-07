@@ -1,0 +1,118 @@
+{
+ "id": "textures/crt",
+ "name": "CRT",
+ "name_id": "Layar CRT",
+ "category": "textures",
+ "description": {
+  "id": "Tampilan monitor tabung jadul untuk adegan apa pun: garis pindai, masker sub-piksel RGB, aberasi kromatik nyata pada kanal warna adegan, lengkung sudut dan vinyet tabung, kedip terkendali per frame, pita terang yang bergulir, serta efek nyala tabung di awal.",
+  "en": "Retro CRT look for any scene: scanlines, RGB shadow mask, real per-channel chromatic aberration, curved corners and tube vignette, controlled per-frame flicker, a rolling bright band and a power-on effect."
+ },
+ "tags": [
+  "tekstur",
+  "texture",
+  "crt",
+  "retro",
+  "scanline",
+  "aberasi",
+  "chromatic-aberration",
+  "monitor",
+  "vhs",
+  "textures"
+ ],
+ "props": {
+  "target": {
+   "default": "#adegan",
+   "type": "selector",
+   "hint": "Adegan host yang diberi aberasi, kedip dan efek nyala"
+  },
+  "line": {
+   "default": 4,
+   "type": "number",
+   "hint": "Jarak garis pindai (px pada 1080)",
+   "aliases": [
+    "garis"
+   ]
+  },
+  "line_strength": {
+   "default": 0.38,
+   "type": "number",
+   "hint": "Kegelapan garis pindai (0-1)",
+   "aliases": [
+    "kekuatan_garis"
+   ]
+  },
+  "aberration": {
+   "default": 3,
+   "type": "number",
+   "hint": "Geseran kanal merah/biru (px), 0 = mati",
+   "aliases": [
+    "aberasi"
+   ]
+  },
+  "curve": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Sudut melengkung dan vinyet tabung",
+   "aliases": [
+    "lengkung"
+   ]
+  },
+  "blink": {
+   "default": 0.07,
+   "type": "number",
+   "hint": "Amplitudo kedip kecerahan",
+   "aliases": [
+    "kedip"
+   ]
+  },
+  "rolling_band": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Pita terang yang bergulir ke bawah",
+   "aliases": [
+    "pita_gulir"
+   ]
+  },
+  "phosphor": {
+   "default": "#bfffd4",
+   "type": "color",
+   "hint": "Rona fosfor",
+   "aliases": [
+    "fosfor"
+   ]
+  },
+  "phosphor_strength": {
+   "default": 0.08,
+   "type": "number",
+   "aliases": [
+    "kekuatan_fosfor"
+   ]
+  },
+  "power_on": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Efek tabung menyala di awal",
+   "aliases": [
+    "nyala"
+   ]
+  },
+  "seed": {
+   "default": 9,
+   "type": "number"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "tekstur/crt"
+ ],
+ "example": {
+  "bg": "text"
+ }
+}

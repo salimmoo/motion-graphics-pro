@@ -1,0 +1,175 @@
+{
+ "id": "accents/line-stroke",
+ "name": "Line Stroke",
+ "name_id": "Gores Garis",
+ "category": "accents",
+ "description": {
+  "id": "Garis tergambar dari panjang terukurnya: bingkai membulat searah jarum jam untuk menandai callout, jejak jalur SVG yang terisi bila tertutup lalu hanyut halus, atau pemuat dengan ruas cahaya yang berputar.",
+  "en": "Strokes drawn from their measured length: a rounded callout outline drawn clockwise, an SVG path trace that fills when closed and drifts, or a loader with a travelling light segment."
+ },
+ "tags": [
+  "aksen",
+  "garis",
+  "stroke",
+  "outline",
+  "loader",
+  "svg",
+  "accents",
+  "line"
+ ],
+ "props": {
+  "mode": {
+   "default": "frame",
+   "type": "enum",
+   "options": [
+    "frame",
+    "trail",
+    "loader"
+   ],
+   "option_aliases": {
+    "bingkai": "frame",
+    "jejak": "trail",
+    "pemuat": "loader"
+   }
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi horizontal pusat (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi vertikal pusat (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "width": {
+   "default": 46,
+   "type": "number",
+   "hint": "Lebar bingkai (% layar) / sisi kotak jejak dan pemuat (% sisi pendek)",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "height": {
+   "default": 16,
+   "type": "number",
+   "hint": "Tinggi bingkai (% layar)",
+   "aliases": [
+    "tinggi"
+   ]
+  },
+  "radius": {
+   "default": 28,
+   "type": "number"
+  },
+  "size": {
+   "default": 6,
+   "type": "number",
+   "hint": "Tebal garis (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "color": {
+   "default": "#ffd23f",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffd23f",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "text": {
+   "default": "",
+   "type": "text",
+   "hint": "Label opsional (di dalam bingkai / di bawah jejak)",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@600;700",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "path": {
+   "default": "",
+   "type": "text",
+   "hint": "Path SVG kustom dalam kotak 0..100 (jejak/pemuat)",
+   "aliases": [
+    "jalur"
+   ]
+  },
+  "fill": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Isi jalur tertutup setelah tergambar",
+   "aliases": [
+    "isi"
+   ]
+  },
+  "start": {
+   "default": 0.3,
+   "type": "number",
+   "hint": "Waktu mulai lokal (detik)",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "stroke_duration": {
+   "default": 1.1,
+   "type": "number",
+   "aliases": [
+    "durasi_gores"
+   ]
+  },
+  "ease": {
+   "default": "power2.inOut",
+   "type": "ease"
+  },
+  "speed": {
+   "default": 0.7,
+   "type": "number",
+   "hint": "Putaran per detik (pemuat)",
+   "aliases": [
+    "kecepatan"
+   ]
+  }
+ },
+ "duration": 3,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "aksen/gores-garis",
+  "outline-draw",
+  "svg-stroke-trace",
+  "svg-line-draw-loader"
+ ],
+ "example": {
+  "bg": "ui",
+  "aspect": "16:9",
+  "props": {
+   "position_x": 83,
+   "position_y": 43.5,
+   "width": 22,
+   "height": 12,
+   "size": 5
+  }
+ }
+}

@@ -1,0 +1,137 @@
+{
+ "id": "ui/cursor-drag",
+ "name": "Cursor Drag",
+ "name_id": "Kursor Seret",
+ "category": "ui",
+ "description": {
+  "id": "Kursor menyeret di antarmuka tiruan. Mode seret-lepas: kartu tugas diangkat, miring mengikuti gerak, dibawa ke kolom lain lalu diletakkan dengan mantap sementara daftar asal merapat. Mode pilih-kotak: kotak seleksi ditarik di atas galeri foto, setiap ubin yang tersentuh menyala dan memunculkan centang, pil penghitung bertambah.",
+  "en": "A cursor dragging in a mock UI. Drag-drop mode lifts a task card, tilts it into the motion, drops it in another column while the list closes the gap. Marquee mode drags a selection box over a photo grid; each touched tile rings and pops a check while a pill counts up."
+ },
+ "tags": [
+  "ui",
+  "kursor",
+  "drag",
+  "drop",
+  "kanban",
+  "marquee",
+  "seleksi",
+  "galeri",
+  "cursor"
+ ],
+ "props": {
+  "mode": {
+   "default": "drag-release",
+   "type": "enum",
+   "options": [
+    "drag-release",
+    "box-select"
+   ],
+   "option_aliases": {
+    "seret-lepas": "drag-release",
+    "pilih-kotak": "box-select"
+   }
+  },
+  "title": {
+   "default": "",
+   "type": "text",
+   "hint": "Judul di bilah atas; kosong = otomatis (Papan Proyek / Galeri Foto)",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "cols": {
+   "default": [
+    "Rencana",
+    "Dikerjakan",
+    "Selesai"
+   ],
+   "type": "list",
+   "hint": "Nama kolom kanban",
+   "aliases": [
+    "kolom"
+   ]
+  },
+  "card": {
+   "default": [
+    [
+     "Riset pengguna",
+     "Uji prototipe",
+     "Tulis panduan"
+    ],
+    [
+     "Sketsa beranda",
+     "Revisi ikon"
+    ],
+    [
+     "Rilis versi 2"
+    ]
+   ],
+   "type": "list",
+   "hint": "Kartu per kolom",
+   "aliases": [
+    "kartu"
+   ]
+  },
+  "drag": {
+   "default": [
+    0,
+    1,
+    2
+   ],
+   "type": "list",
+   "hint": "[kolom asal, indeks kartu, kolom tujuan]",
+   "aliases": [
+    "seret"
+   ]
+  },
+  "photo_count": {
+   "default": 12,
+   "type": "number",
+   "hint": "Jumlah ubin foto (pilih-kotak)",
+   "aliases": [
+    "jumlah_foto"
+   ]
+  },
+  "select_text": {
+   "default": "dipilih",
+   "type": "text",
+   "aliases": [
+    "teks_pilih"
+   ]
+  },
+  "accent_color": {
+   "default": "#2d6cdf",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg": {
+   "default": "#eef1f6",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;600;700",
+   "type": "font"
+  }
+ },
+ "duration": 4.5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/kursor-seret",
+  "cursor-drag-drop",
+  "cursor-marquee-select"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP rubberhose + stroke tetap</title>
+<style>html,body{margin:0;background:#111}#stage{position:relative;width:1280px;height:720px;overflow:hidden;background:#111}#stage canvas{position:absolute}
+.tag{position:absolute;font:600 20px/1 system-ui,"Segoe UI",Arial,sans-serif;color:#1b1226;background:rgba(255,246,228,.85);padding:6px 10px;border-radius:6px}</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../figure3d.js"></script>
+<script src="../character-styles.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720">
+  <canvas id="a" style="left:0;top:0"></canvas><canvas id="b" style="left:640px;top:0"></canvas>
+  <canvas id="c" style="left:0;top:360px"></canvas><canvas id="d" style="left:640px;top:360px"></canvas>
+  <div class="tag" style="left:14px;top:14px">anggota kaku (lama)</div><div class="tag" style="left:654px;top:14px">anggota: "karet" (rubberhose)</div>
+  <div class="tag" style="left:14px;top:374px">zoom, garis ikut menebal</div><div class="tag" style="left:654px;top:374px">zoom + strokeTetap: 2 px</div>
+</div>
+<script>
+// Rubberhose: kaki = satu busur berpanjang tetap pinggul -> pergelangan, tidak pernah turun melewati telapak.
+// Baris bawah: skala tokoh berdenyut 0,35 -> 0,8; kiri garis tinta ikut diskala, kanan tetap 2 px layar.
+const D = 6, base = { style: "vector", action: "walk", width: 640, height: 360, duration: D };
+const A = MGP.characterStyles.create("#a", base), B = MGP.characterStyles.create("#b", Object.assign({ anggota: "karet" }, base));
+const zoomOf = (t) => 0.35 + 0.45 * (0.5 - 0.5 * Math.cos(t / D * 2 * Math.PI));
+const Cc = MGP.characterStyles.create("#c", Object.assign({ anggota: "karet", scale: 0.5 }, base));
+const Dd = MGP.characterStyles.create("#d", Object.assign({ anggota: "karet", scale: 0.5, strokeTetap: 2 }, base));
+const all = [A, B, Cc, Dd];
+const comp = { duration: D, ready: Promise.all(all.map((x) => x.ready)),
+  seek(t) { Cc.opts.scale = Dd.opts.scale = zoomOf(t); all.forEach((x) => x.seek(t)); return this; }, timeline() { return MGP.core.timeline(this); } };
+MGP.core.expose(comp);
+</script>
+</body>
+</html>

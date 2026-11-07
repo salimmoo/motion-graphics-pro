@@ -1,0 +1,102 @@
+{
+ "id": "transitions/flip-3d",
+ "name": "Flip 3D",
+ "name_id": "Balik 3D",
+ "category": "transitions",
+ "description": {
+  "id": "Transisi perspektif 3D: adegan berbalik seperti kartu, berputar sebagai sisi kubus, atau terayun terbuka seperti pintu menyingkap adegan baru di belakangnya.",
+  "en": "3D perspective transitions: card flip, cube rotation, or a door swing revealing B behind."
+ },
+ "tags": [
+  "transisi",
+  "3d",
+  "flip",
+  "kubus",
+  "cube",
+  "pintu",
+  "perspektif",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "mode": {
+   "default": "cube",
+   "type": "enum",
+   "options": [
+    "flip",
+    "cube",
+    "door"
+   ],
+   "hint": "balik = kartu dibalik; kubus = sisi kubus berputar; pintu = A terayun terbuka",
+   "option_aliases": {
+    "balik": "flip",
+    "kubus": "cube",
+    "pintu": "door"
+   }
+  },
+  "direction": {
+   "default": "left",
+   "type": "enum",
+   "options": [
+    "left",
+    "right",
+    "top",
+    "bottom"
+   ],
+   "hint": "Arah gerak / engsel",
+   "aliases": [
+    "arah"
+   ],
+   "option_aliases": {
+    "kiri": "left",
+    "kanan": "right",
+    "atas": "top",
+    "bawah": "bottom"
+   }
+  },
+  "perspective": {
+   "default": 1800,
+   "type": "number",
+   "hint": "Jarak perspektif (px pada 1080)",
+   "aliases": [
+    "perspektif"
+   ]
+  },
+  "ease": {
+   "default": "power3.inOut",
+   "type": "ease",
+   "hint": "Easing GSAP"
+  }
+ },
+ "duration": 1.2,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/balik-3d",
+  "transitions-3d"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.9,
+  "duration": 3
+ }
+}

@@ -1,0 +1,153 @@
+{
+ "id": "accents/hub",
+ "name": "Hub",
+ "name_id": "Hub Konstelasi",
+ "category": "accents",
+ "description": {
+  "id": "Pusat tetap dengan simpul-simpul di sekelilingnya: garis penghubung SVG tergambar keluar dari pusat sesuai urutan narasi, simpul menyala saat tersambung, lalu semuanya merapat menjadi satu kesatuan. Mode avatar: avatar huruf memenuhi awan elips yang longgar dengan tautan halus ke label pusat.",
+  "en": "A fixed central hub: real-length SVG connectors draw outward in narration order, nodes brighten as they connect, then the group settles into one lockup. Avatar mode: lettermark avatars fill a loose elliptical cloud with fine links to the central proof label."
+ },
+ "tags": [
+  "aksen",
+  "hub",
+  "jaringan",
+  "konstelasi",
+  "fitur",
+  "avatar",
+  "komunitas",
+  "diagram",
+  "accents"
+ ],
+ "props": {
+  "mode": {
+   "default": "constellation",
+   "type": "enum",
+   "options": [
+    "constellation",
+    "avatar"
+   ],
+   "option_aliases": {
+    "konstelasi": "constellation"
+   }
+  },
+  "center_label": {
+   "default": "Satu Platform",
+   "type": "text",
+   "aliases": [
+    "label_pusat"
+   ]
+  },
+  "center_sub": {
+   "default": "semua terhubung",
+   "type": "text",
+   "aliases": [
+    "sub_pusat"
+   ]
+  },
+  "item": {
+   "default": [
+    "Pembayaran",
+    "Laporan",
+    "Inventaris",
+    "Pengiriman",
+    "Pelanggan",
+    "Analitik"
+   ],
+   "type": "list",
+   "hint": "Label simpul (mode avatar: nama untuk inisial)"
+  },
+  "pause": {
+   "default": 0.35,
+   "type": "number",
+   "hint": "Jeda antar simpul (detik)",
+   "aliases": [
+    "jeda"
+   ]
+  },
+  "radius": {
+   "default": 330,
+   "type": "number",
+   "hint": "Jari-jari susunan (px pada 1080)"
+  },
+  "center_size": {
+   "default": 260,
+   "type": "number",
+   "hint": "Diameter pusat (px pada 1080)",
+   "aliases": [
+    "ukuran_pusat"
+   ]
+  },
+  "color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#58c4dd",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "node_color": {
+   "default": "#1f2233",
+   "type": "color",
+   "aliases": [
+    "warna_node"
+   ]
+  },
+  "center_color": {
+   "default": "#141622",
+   "type": "color",
+   "aliases": [
+    "warna_pusat"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;600;800",
+   "type": "font"
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "seed": {
+   "default": 7,
+   "type": "number",
+   "hint": "Seed tata letak awan (mode avatar)"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "aksen/hub",
+  "constellation-hub",
+  "avatar-cloud"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@500;600;800"
+  ]
+ }
+}

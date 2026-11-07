@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Spring Pop · block example accents/spring-pop</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="3.5">
+<div id="adegan" class="adegan ad-ui"><div class="bar"></div><div class="side"></div><div class="kartu" style="left:22%;top:12%;width:36%;height:38%"></div><div class="kartu" style="left:61%;top:12%;width:35%;height:38%"></div><div class="kartu" style="left:22%;top:54%;width:74%;height:40%"></div><div id="tombol-contoh" class="tombol" style="left:74%;top:40%;width:18%;height:7%">Simpan</div></div>
+<!-- Block accents/spring-pop · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-spring-pop" data-block="accents/spring-pop" data-start="0" data-duration="3" data-track-index="40" class="blk blk-accents-spring-pop">
+<script type="application/json" data-block-props>
+{"mode": "notification", "text": "Baru!", "number": 12, "position_x": 92, "position_y": 38, "size": 90, "color": "#ff3b5c", "accent_color": "#ffffff", "font": "Poppins:wght@700;800", "start_scale": 0.55, "ease": "back.out(2.4)", "start": 0.3, "exit": true}
+</script>
+<div class="blk-pos"><div class="blk-pop"><div class="blk-ping"></div><div class="blk-isi"></div></div></div>
+</div>
+<style>
+.blk-accents-spring-pop{position:absolute;inset:0;pointer-events:none}
+.blk-accents-spring-pop .blk-pos{position:absolute;transform:translate(-50%,-50%)}
+.blk-accents-spring-pop .blk-pop{position:relative}
+.blk-accents-spring-pop .blk-ping{position:absolute;inset:0}
+.blk-accents-spring-pop .blk-isi{position:relative;display:flex;align-items:center;justify-content:center;white-space:nowrap;font-weight:800;line-height:1}
+.blk-accents-spring-pop .blk-roda{display:inline-block;overflow:hidden;height:1em;vertical-align:top}
+.blk-accents-spring-pop .blk-roda div{line-height:1em;text-align:center}
+.blk-accents-spring-pop .blk-titik{display:inline-block;border-radius:50%}
+</style>
+<script>
+BLOCK.mount("blk-spring-pop", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, root = k.root;
+  var pos = root.querySelector(".blk-pos"), pop = root.querySelector(".blk-pop"), ping = root.querySelector(".blk-ping"), isi = root.querySelector(".blk-isi");
+  var H = P.size * s, t0 = +P.start || 0;
+  pos.style.left = P.position_x + "%"; pos.style.top = P.position_y + "%";
+  isi.style.cssText += ";font-family:" + BLOCK.family(P.font) + ";color:" + P.accent_color + ";background:" + P.color +
+    ";box-shadow:0 " + Math.round(H * 0.12) + "px " + Math.round(H * 0.35) + "px " + BLOCK.rgba(P.color, 0.45);
+  var roda = null, n = Math.max(0, Math.round(+P.number || 0));
+  if (P.mode === "notification") {
+    // lingkaran angka: hitungan bergulir naik saat lencana mendarat
+    isi.style.cssText += ";width:" + H + "px;height:" + H + "px;border-radius:50%;font-size:" + Math.round(H * 0.5) + "px";
+    roda = BLOCK.el("span", { class: "blk-roda" }, isi);
+    var dari = Math.max(0, n - 9), kol = BLOCK.el("div", null, roda);
+    for (var i = dari; i <= n; i++) BLOCK.el("div", null, kol, n > 99 && i === n ? "99+" : String(i));
+    ping.style.borderRadius = "50%";
+    tl.fromTo(kol, { y: 0 }, { y: -(n - dari) * H * 0.5, duration: 0.7, ease: "power3.out" }, t0 + 0.18);
+  } else {
+    var pil = P.mode === "pill";
+    isi.style.cssText += ";height:" + H + "px;padding:0 " + Math.round(H * 0.42) + "px;border-radius:" + Math.round(H / 2) + "px;font-size:" + Math.round(H * 0.46) + "px;gap:" + Math.round(H * 0.18) + "px";
+    ping.style.borderRadius = Math.round(H / 2) + "px";
+    if (pil) { var d = BLOCK.el("span", { class: "blk-titik", style: "width:" + Math.round(H * 0.24) + "px;height:" + Math.round(H * 0.24) + "px;background:" + P.accent_color }, isi);
+      tl.fromTo(d, { opacity: 1 }, { opacity: 0.25, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: Math.max(1, Math.floor((k.dur - t0 - 0.6) / 0.5)) }, t0 + 0.5); }
+    BLOCK.el("span", null, isi).textContent = P.text;
+  }
+  ping.style.border = Math.max(2, Math.round(H * 0.05)) + "px solid " + P.color;
+  // pop: dari skala dekat-diam, lewat ukuran penuh sekali, lalu diam
+  tl.fromTo(pop, { scale: P.start_scale, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: P.ease }, t0);
+  var np = Math.max(1, Math.floor((k.dur - t0 - 0.9) / 1.1));
+  tl.fromTo(ping, { scale: 1, opacity: 0.7 }, { scale: 1.7, opacity: 0, duration: 0.9, ease: "power2.out", repeat: np - 1, repeatDelay: 0.2 }, t0 + 0.25);
+  if (P.exit) tl.to(pop, { scale: 0.6, opacity: 0, duration: 0.3, ease: "power2.in" }, k.dur - 0.35);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 3.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 3.5);
+</script>
+</body>
+</html>

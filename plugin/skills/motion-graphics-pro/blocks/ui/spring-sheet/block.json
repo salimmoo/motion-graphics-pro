@@ -1,0 +1,158 @@
+{
+ "id": "ui/spring-sheet",
+ "name": "Spring Sheet",
+ "name_id": "Lembar Bawah Pegas",
+ "category": "ui",
+ "description": {
+  "id": "Lembar bawah melesat naik di layar ponsel dengan pegas sungguhan yang dihitung tiap frame: lewat sedikit, lalu mengendap. Mode bagikan memutar pratinjau dengan potongan cepat, latar buram ikut berganti, dan ditutup ketukan Kirim.",
+  "en": "A bottom sheet rushes up on a real per-frame spring, overshoots and settles. Share mode cycles previews on a fast cut rhythm over a swapping blurred ground and ends on a send tap."
+ },
+ "tags": [
+  "ui",
+  "ponsel",
+  "bottom-sheet",
+  "pegas",
+  "spring",
+  "share-sheet",
+  "aplikasi",
+  "sheet"
+ ],
+ "props": {
+  "mode": {
+   "default": "share",
+   "type": "enum",
+   "options": [
+    "sheet",
+    "share"
+   ],
+   "hint": "lembar = daftar aksi; bagikan = pratinjau berganti + ketukan kirim",
+   "option_aliases": {
+    "lembar": "sheet",
+    "bagikan": "share"
+   }
+  },
+  "title": {
+   "default": "Bagikan ke",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "item": {
+   "default": [
+    "Salin tautan",
+    "Simpan ke album",
+    "Kirim lewat pesan",
+    "Lainnya"
+   ],
+   "type": "list",
+   "hint": "Baris aksi (mode lembar)"
+  },
+  "preview": {
+   "default": [
+    "#ff8a5b",
+    "#4fb7ff",
+    "#9b7bff",
+    "#33d39a"
+   ],
+   "type": "list",
+   "hint": "Warna pratinjau yang berganti (mode bagikan)",
+   "aliases": [
+    "pratinjau"
+   ]
+  },
+  "contacts": {
+   "default": [
+    "Rani",
+    "Dimas",
+    "Ayu",
+    "Bima"
+   ],
+   "type": "list",
+   "aliases": [
+    "kontak"
+   ]
+  },
+  "button": {
+   "default": "Kirim",
+   "type": "text",
+   "aliases": [
+    "tombol"
+   ]
+  },
+  "done_button": {
+   "default": "Terkirim",
+   "type": "text",
+   "aliases": [
+    "tombol_selesai"
+   ]
+  },
+  "accent_color": {
+   "default": "#2d6cdf",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "screen": {
+   "default": "#f2f4f8",
+   "type": "color",
+   "hint": "Warna dasar layar",
+   "aliases": [
+    "layar"
+   ]
+  },
+  "start": {
+   "default": 0.35,
+   "type": "number",
+   "hint": "Detik lembar mulai naik",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "frequency": {
+   "default": 1.6,
+   "type": "number",
+   "hint": "Frekuensi pegas (Hz)",
+   "aliases": [
+    "frekuensi"
+   ]
+  },
+  "damping": {
+   "default": 0.34,
+   "type": "number",
+   "hint": "Rasio redaman pegas (0..1)",
+   "aliases": [
+    "redaman"
+   ]
+  },
+  "rhythm": {
+   "default": 0.4,
+   "type": "number",
+   "hint": "Detik per potongan pratinjau",
+   "aliases": [
+    "irama"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700;800",
+   "type": "font"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/lembar-pegas",
+  "sheet-spring-up",
+  "share-sheet-carousel"
+ ],
+ "example": {
+  "bg": "dark",
+  "aspect": "9:16"
+ }
+}

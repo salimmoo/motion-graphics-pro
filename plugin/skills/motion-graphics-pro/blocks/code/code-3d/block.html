@@ -1,0 +1,106 @@
+<!-- Block code/code-3d · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="code/code-3d" data-start="0" data-duration="6" data-track-index="30" class="blk blk-code-code-3d">
+<script type="application/json" data-block-props>
+{"code": "async function muat(id) {\n  const res = await fetch(`/api/produk/${id}`);\n  if (!res.ok) throw new Error(\"gagal\");\n  return res.json();\n}", "lang": "js", "theme": "dark-2026", "size": 30, "thickness": 46, "layer": 12, "turns": 1, "landing": 3.0, "font": "JetBrains Mono:wght@400;500;700"}
+</script>
+</div>
+<style>
+.blk-code-code-3d{position:absolute;inset:0;pointer-events:none;overflow:hidden;perspective:1800px}
+.blk-code-code-3d .slab{position:absolute;left:50%;top:50%;transform-style:preserve-3d}
+.blk-code-code-3d .lp{position:absolute;left:0;top:0;width:100%;height:100%;box-sizing:border-box}
+.blk-code-code-3d .rw{white-space:pre;font-variant-ligatures:none}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, E = BLOCK.el, s = k.s, W = k.w, H = k.h;
+  // --- penyorot sintaks kecil (token regex) + tema; ditulis sendiri, disalin per blok kode ---
+  var TEMA = {
+    "dark-2026": { bg: "#15161c", panel: "#1c1d25", garis: "#2a2c37", teks: "#d8dbe6", redup: "#5f6478", kw: "#c792ea", str: "#a6dc78", num: "#f7a26c", kom: "#6a7089", fn: "#80b4ff", tag: "#ff7d9e", atr: "#ffd27a", aksen: "#7c9cff", kursor: "#9fb4ff", hapus: "#ff5c6c", tambah: "#3fd07f" },
+    "modern-dark": { bg: "#1f1f1f", panel: "#181818", garis: "#2b2b2b", teks: "#cccccc", redup: "#6e7681", kw: "#569cd6", str: "#ce9178", num: "#b5cea8", kom: "#6a9955", fn: "#dcdcaa", tag: "#569cd6", atr: "#9cdcfe", aksen: "#0078d4", kursor: "#aeafad", hapus: "#f14c4c", tambah: "#2ea043" },
+    "light": { bg: "#ffffff", panel: "#f3f4f6", garis: "#e3e5e9", teks: "#1f2328", redup: "#8c959f", kw: "#cf222e", str: "#0a3069", num: "#0550ae", kom: "#6e7781", fn: "#8250df", tag: "#116329", atr: "#953800", aksen: "#0969da", kursor: "#0969da", hapus: "#cf222e", tambah: "#1a7f37" },
+    "terminal-pro": { bg: "#050505", panel: "#161616", garis: "#262626", teks: "#c8c8c8", redup: "#6c6c6c", kw: "#ececec", str: "#b8e86a", num: "#d8d8d8", kom: "#6c6c6c", fn: "#ffffff", tag: "#b8e86a", atr: "#c8c8c8", aksen: "#a6ff00", kursor: "#a6ff00", hapus: "#ff6b6b", tambah: "#a6ff00" }
+  };
+  var KW = {
+    js: "const|let|var|function|return|if|else|for|while|of|in|new|class|extends|import|from|export|default|async|await|try|catch|throw|true|false|null|undefined|this|typeof",
+    py: "def|class|return|if|elif|else|for|while|in|not|and|or|import|from|as|with|try|except|raise|lambda|True|False|None|yield|async|await|pass",
+    bash: "if|then|else|fi|for|do|done|in|case|esac|function|export|echo|cd|sudo|return|while|local"
+  };
+  function aturan(bhs) {
+    if (bhs === "html") return [[/<!--.*?(-->|$)/y, "kom"], [/"[^"]*"|'[^']*'/y, "str"], [/<\/?[\w-]+|\/?>/y, "tag"], [/[\w-]+(?==)/y, "atr"], [/\s+/y, "sp"], [/[^\s<>"'=]+|=/y, "teks"]];
+    var kw = new RegExp("(?:" + (KW[bhs] || KW.js) + ")(?![\\w$])", "y"), r = [];
+    r.push([bhs === "js" ? /\/\/.*/y : /#.*/y, "kom"]);
+    r.push([/"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`[^`]*`/y, "str"]);
+    if (bhs === "bash") r.push([/--?[A-Za-z][\w-]*/y, "num"], [/\$[\w{}]+/y, "atr"]);
+    r.push([/\d+(?:\.\d+)?(?![\w$])/y, "num"], [kw, "kw"], [/[A-Za-z_$][\w$]*(?=\s*\()/y, "fn"], [/\s+/y, "sp"], [bhs === "bash" ? /[A-Za-z_$~.][\w$.\/~-]*/y : /[A-Za-z_$][\w$]*/y, "teks"], [/[^\sA-Za-z_$\d]+?/y, "tanda"]);
+    return r;
+  }
+  /** sorot(kode, bahasa) -> [[{t, c}]] per baris */
+  function sorot(kode, bhs) {
+    var R = aturan(bhs);
+    return String(kode).split("\n").map(function (ln) {
+      var out = [], i = 0;
+      while (i < ln.length) {
+        var ok = false;
+        for (var j = 0; j < R.length; j++) {
+          R[j][0].lastIndex = i; var m = R[j][0].exec(ln);
+          if (m && m[0].length) { out.push({ t: m[0], c: R[j][1] }); i += m[0].length; ok = true; break; }
+        }
+        if (!ok) { out.push({ t: ln[i], c: "teks" }); i++; }
+      }
+      return out;
+    });
+  }
+  function warnaTok(T, c) { return T[c] || T.teks; }
+  /** tunggu berkas font termuat (fonts.ready saja belum cukup untuk mengukur) */
+  function muatFont(spec, berat) {
+    if (!document.fonts || !document.fonts.load) return Promise.resolve();
+    var fam = BLOCK.family(spec, "monospace");
+    return Promise.all((berat || [400]).map(function (b) { return document.fonts.load(b + " 20px " + fam, "Aa{}"); })).catch(function () {});
+  }
+  /** jendela generik: bilah judul + tiga titik, isi di bawahnya */
+  function jendela(par, T, w, h, judul, s, mono) {
+    var win = BLOCK.el("div", { style: "position:absolute;left:50%;top:50%;width:" + w + "px;height:" + h + "px;margin:" + (-h / 2) + "px 0 0 " + (-w / 2) + "px;border-radius:" + 14 * s + "px;background:" + T.bg + ";box-shadow:0 " + 30 * s + "px " + 80 * s + "px rgba(0,0,0,.5),0 0 0 1px " + T.garis + ";overflow:hidden" }, par);
+    var bar = BLOCK.el("div", { style: "position:absolute;left:0;right:0;top:0;height:" + 44 * s + "px;background:" + T.panel + ";border-bottom:1px solid " + T.garis + ";display:flex;align-items:center;justify-content:center;color:" + T.redup + ";font:500 " + 16 * s + "px " + mono }, win, BLOCK.esc(judul));
+    ["#ff5f57", "#febc2e", "#28c840"].forEach(function (c, i) { BLOCK.el("div", { style: "position:absolute;left:" + (18 + i * 22) * s + "px;top:50%;width:" + 12 * s + "px;height:" + 12 * s + "px;margin-top:" + (-6 * s) + "px;border-radius:50%;background:" + c }, bar); });
+    var isi = BLOCK.el("div", { style: "position:absolute;left:0;right:0;top:" + 44 * s + "px;bottom:0;overflow:hidden" }, win);
+    return { win: win, bar: bar, isi: isi };
+  }
+  // --- akhir penyorot ---
+  var T = TEMA[P.theme] || TEMA["dark-2026"], mono = BLOCK.family(P.font, "ui-monospace, monospace");
+  return muatFont(P.font, [400, 700]).then(function () {
+    var baris = sorot(P.code, P.lang), fs = P.size * s, lh = fs * 1.6;
+    var kol = Math.max.apply(null, String(P.code).split("\n").map(function (x) { return x.length; }));
+    var sw = kol * fs * 0.62 + 110 * s, sh = baris.length * lh + 110 * s;
+    if (sw > W * 0.86) { var f = W * 0.86 / sw; fs *= f; lh *= f; sw *= f; sh = baris.length * lh + 110 * s * f; }
+    var r = 28 * s, tb = P.thickness * s, n = Math.max(2, P.layer | 0);
+    var slab = E("div", { class: "slab", style: "width:" + sw + "px;height:" + sh + "px;margin:" + (-sh / 2) + "px 0 0 " + (-sw / 2) + "px" }, k.root);
+    // ekstrusi: lapisan bertumpuk di kedalaman, makin gelap ke belakang (tepi bevel lebih terang)
+    for (var i = n - 1; i >= 1; i--) {
+      var q = i / (n - 1), c = BLOCK.mix(BLOCK.mix(T.panel, "#ffffff", 0.12), "#000000", 0.25 + 0.5 * q);
+      E("div", { class: "lp", style: "border-radius:" + r + "px;background:" + c + ";transform:translateZ(" + (-tb * q) + "px)" }, slab);
+    }
+    var muka = E("div", { class: "lp", style: "border-radius:" + r + "px;background:linear-gradient(160deg," + BLOCK.mix(T.bg, "#ffffff", .06) + "," + T.bg + ");box-shadow:inset 0 0 0 " + 2 * s + "px " + BLOCK.rgba("#ffffff", 0.14) + ";overflow:hidden" }, slab);
+    var kd = E("div", { style: "position:absolute;left:" + 55 * s + "px;top:" + 55 * s + "px;font:" + fs + "px/" + lh + "px " + mono + ";color:" + T.teks }, muka);
+    baris.forEach(function (toks) { var rw = E("div", { class: "rw" }, kd); toks.forEach(function (tk) { var sp = E("span", { style: "color:" + warnaTok(T, tk.c) }, rw); sp.textContent = tk.t; }); });
+    // kilau cahaya: pita gradien statis yang digeser (bukan gradien yang berubah)
+    var kil = E("div", { style: "position:absolute;top:-20%;bottom:-20%;left:0;width:60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.16),transparent)" }, muka);
+    var tL = +P.landing, PU = 360 * P.turns;
+    function pose(t) {
+      var a = BLOCK.clamp(t / tL, 0, 1), e = 1 - Math.pow(1 - a, 2.4), b = BLOCK.clamp((t - tL) / 1.2, 0, 1), eb = BLOCK.smooth(b);
+      return {
+        ry: BLOCK.lerp(-PU - 40, -14, e) + eb * 8 + Math.sin(t * 0.7) * 2 * b,
+        rx: BLOCK.lerp(42, 10, e) - eb * 4 + Math.sin(t * 0.5 + 1) * 1.5 * b,
+        rz: BLOCK.lerp(-18, 0, e),
+        z: BLOCK.lerp(-900 * s, 0, e), y: BLOCK.lerp(H * 0.25, 0, e)
+      };
+    }
+    BLOCK.onTime(tl, function (t) {
+      var p = pose(t);
+      slab.style.transform = "translateY(" + p.y + "px) translateZ(" + p.z + "px) rotateX(" + p.rx + "deg) rotateY(" + p.ry + "deg) rotateZ(" + p.rz + "deg)";
+      var hd = ((p.ry % 360) + 540) % 360 - 180; // -180..180, 0 = menghadap kamera
+      kil.style.transform = "translateX(" + (-hd / 60 * sw - sw * 0.75) + "px)";
+    }, D);
+    tl.fromTo(slab, { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0);
+  });
+}, { font: true });
+</script>

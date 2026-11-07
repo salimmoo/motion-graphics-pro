@@ -1,0 +1,135 @@
+{
+ "id": "maps/zoom-marker",
+ "name": "Zoom Marker",
+ "name_id": "Peta Zoom dan Tandai",
+ "category": "maps",
+ "description": {
+  "id": "Kamera memperbesar ke satu wilayah di peta ubin, cahaya editorial kemerahan menyapu layar, coretan lingkaran merah tergambar tangan di sekeliling sasaran, lalu label peringatan meletup. Peta memakai preset ubin Indonesia atau AS (geografi ilustratif); sasaran dan teks dari props.",
+  "en": "The camera zooms into one region of a tile-grid map, a reddish editorial wash sweeps in, a hand-drawn red scribble circles the target and a warning label pops. Indonesia or US tile presets (illustrative geography); target and text from props."
+ },
+ "tags": [
+  "peta",
+  "map",
+  "zoom",
+  "tandai",
+  "coretan",
+  "editorial",
+  "berita",
+  "highlight",
+  "maps",
+  "marker"
+ ],
+ "props": {
+  "preset": {
+   "default": "indonesia",
+   "type": "enum",
+   "options": [
+    "indonesia",
+    "as"
+   ]
+  },
+  "shape": {
+   "default": "square",
+   "type": "enum",
+   "options": [
+    "hex",
+    "square"
+   ],
+   "aliases": [
+    "bentuk"
+   ],
+   "option_aliases": {
+    "heksa": "hex",
+    "persegi": "square"
+   }
+  },
+  "target": {
+   "default": "MA",
+   "type": "text",
+   "hint": "Kode wilayah sasaran"
+  },
+  "text": {
+   "default": "AKSES DITUTUP",
+   "type": "text",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "sub": {
+   "default": "Pelayaran dihentikan sementara",
+   "type": "text"
+  },
+  "zoom": {
+   "default": 2.6,
+   "type": "number",
+   "hint": "Perbesaran kamera"
+  },
+  "map_color": {
+   "default": "#ebe4d4",
+   "type": "color",
+   "aliases": [
+    "warna_peta"
+   ]
+  },
+  "map_line_color": {
+   "default": "#a89f8c",
+   "type": "color",
+   "aliases": [
+    "warna_garis_peta"
+   ]
+  },
+  "mark_color": {
+   "default": "#d7261e",
+   "type": "color",
+   "aliases": [
+    "warna_tanda"
+   ]
+  },
+  "wash_color": {
+   "default": "#9a1d16",
+   "type": "color",
+   "hint": "Warna sapuan editorial",
+   "aliases": [
+    "warna_cuci"
+   ]
+  },
+  "wash_strength": {
+   "default": 0.28,
+   "type": "number",
+   "hint": "Kekuatan sapuan 0..1",
+   "aliases": [
+    "kuat_cuci"
+   ]
+  },
+  "sea_color": {
+   "default": "#cfdde3",
+   "type": "color",
+   "aliases": [
+    "warna_laut"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@600;800;900",
+   "type": "font"
+  },
+  "seed": {
+   "default": 3,
+   "type": "number"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "peta/zoom-tandai",
+  "north-korea-locked-down"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

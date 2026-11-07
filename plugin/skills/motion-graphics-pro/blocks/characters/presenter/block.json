@@ -1,0 +1,111 @@
+{
+ "id": "characters/presenter",
+ "name": "Presenter",
+ "name_id": "Presenter Bicara",
+ "category": "characters",
+ "description": {
+  "id": "Presenter vektor berbicara dengan lip-sync dari kalimat Bahasa Indonesia: teks diubah menjadi urutan bentuk mulut 12 gambar per detik, kepala mengangguk mengikuti tekanan kata, berkedip, dan tersenyum di akhir. Subtitle karaoke opsional.",
+  "en": "A vector presenter talks with lip-sync generated from an Indonesian sentence: text becomes a 12 fps viseme track, the head nods on stresses, blinks and smiles at the end. Optional karaoke captions."
+ },
+ "tags": [
+  "tokoh",
+  "presenter",
+  "lipsync",
+  "narator",
+  "bicara",
+  "avatar",
+  "wajah",
+  "characters"
+ ],
+ "props": {
+  "text": {
+   "default": "Halo semua, hari ini kita belajar membaca peta.",
+   "type": "text",
+   "hint": "Kalimat yang diucapkan (menentukan bentuk mulut)",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "subtitle": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Subtitle karaoke di bawah wajah"
+  },
+  "shirt_color": {
+   "default": "#6f8a64",
+   "type": "color",
+   "aliases": [
+    "warna_baju"
+   ]
+  },
+  "skin_color": {
+   "default": "#e8b48f",
+   "type": "color",
+   "aliases": [
+    "warna_kulit"
+   ]
+  },
+  "hair_color": {
+   "default": "#2a1d1a",
+   "type": "color",
+   "aliases": [
+    "warna_rambut"
+   ]
+  },
+  "bg_color": {
+   "default": "#e9a46a",
+   "type": "color",
+   "hint": "Warna di luar bingkai wajah",
+   "aliases": [
+    "warna_latar"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Pusat bingkai (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Pusat bingkai (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "size": {
+   "default": 100,
+   "type": "number",
+   "hint": "Sisi bingkai (% sisi pendek layar)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "start": {
+   "default": 0.3,
+   "type": "number",
+   "hint": "Detik mulai bicara",
+   "aliases": [
+    "mulai"
+   ]
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [
+  "lib:mgp.js"
+ ],
+ "aliases": [
+  "tokoh/presenter"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

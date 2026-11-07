@@ -1,0 +1,129 @@
+{
+ "id": "transitions/radial",
+ "name": "Radial",
+ "name_id": "Sapuan Radial",
+ "category": "transitions",
+ "description": {
+  "id": "Adegan baru tersingkap oleh sapuan melingkar: jarum jam, kipas yang membuka simetris, atau sinar berjeruji yang melebar bersamaan.",
+  "en": "Radial wipes: clock sweep, symmetric fan opening, or multi-spoke sunburst reveal."
+ },
+ "tags": [
+  "transisi",
+  "radial",
+  "clock-wipe",
+  "kipas",
+  "sinar",
+  "conic",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "mode": {
+   "default": "clock",
+   "type": "enum",
+   "options": [
+    "clock",
+    "fan",
+    "rays"
+   ],
+   "hint": "jam = sapuan jarum jam; kipas = membuka simetris; sinar = beberapa jeruji sekaligus",
+   "option_aliases": {
+    "jam": "clock",
+    "kipas": "fan",
+    "sinar": "rays"
+   }
+  },
+  "segment": {
+   "default": 6,
+   "type": "number",
+   "hint": "Jumlah jeruji (mode sinar)",
+   "aliases": [
+    "segmen"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Pusat X (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Pusat Y (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "start_angle": {
+   "default": 0,
+   "type": "number",
+   "hint": "Sudut mulai (derajat, 0 = atas)",
+   "aliases": [
+    "sudut_awal"
+   ]
+  },
+  "opposite": {
+   "default": false,
+   "type": "boolean",
+   "hint": "Sapuan berlawanan arah jarum jam",
+   "aliases": [
+    "berlawanan"
+   ]
+  },
+  "line": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Garis aksen di tepi sapuan",
+   "aliases": [
+    "garis"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffffff",
+   "type": "color",
+   "hint": "Warna garis tepi",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "ease": {
+   "default": "power2.inOut",
+   "type": "ease",
+   "hint": "Easing GSAP"
+  }
+ },
+ "duration": 1.1,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/radial",
+  "transitions-radial"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.95,
+  "duration": 3
+ }
+}

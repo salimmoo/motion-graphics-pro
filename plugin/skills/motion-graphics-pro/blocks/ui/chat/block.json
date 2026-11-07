@@ -1,0 +1,143 @@
+{
+ "id": "ui/chat",
+ "name": "Chat",
+ "name_id": "Utas Obrolan",
+ "category": "ui",
+ "description": {
+  "id": "Percakapan pesan singkat utuh di ponsel: bilah atas dengan avatar dan nama, gelembung berekor yang tumbuh dari sudut pengirim, indikator mengetik sebelum balasan, baris emoji besar, kartu tautan, gambar, tanda Terkirim, dan utas yang bergulir naik ketukan demi ketukan. Opsional kartu penutup.",
+  "en": "A full text conversation on a phone: header with avatar and name, tailed bubbles growing from the sender's corner, typing indicator before replies, large emoji rows, link cards, images, a Delivered receipt and a thread that scrolls up beat by beat. Optional closing card."
+ },
+ "tags": [
+  "ui",
+  "obrolan",
+  "chat",
+  "pesan",
+  "gelembung",
+  "mengetik",
+  "ponsel",
+  "percakapan"
+ ],
+ "props": {
+  "name": {
+   "default": "Nadia",
+   "type": "text",
+   "hint": "Nama lawan bicara",
+   "aliases": [
+    "nama"
+   ]
+  },
+  "message": {
+   "default": [
+    {
+     "dari": "dia",
+     "teks": "Jadi berangkat ke pantai besok?"
+    },
+    {
+     "dari": "saya",
+     "teks": "Jadi dong! Jam 6 pagi ya"
+    },
+    {
+     "dari": "saya",
+     "teks": "Aku bawa bekal 😄"
+    },
+    {
+     "dari": "dia",
+     "teks": "🏖️🌅",
+     "jenis": "emoji"
+    },
+    {
+     "dari": "dia",
+     "teks": "Ini tempat yang kemarin aku ceritain",
+     "jenis": "tautan",
+     "judul": "Pantai Pasir Putih · Panduan lengkap"
+    },
+    {
+     "dari": "saya",
+     "teks": "Wah bagus banget, sampai ketemu besok!"
+    }
+   ],
+   "type": "list",
+   "hint": "[{dari: saya|dia, teks, jenis?: teks|emoji|gambar|tautan, judul? (tautan)}]",
+   "aliases": [
+    "pesan"
+   ]
+  },
+  "start": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Detik pesan pertama",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali tempo (2 = dua kali lebih cepat)",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "sent": {
+   "default": "Terkirim",
+   "type": "text",
+   "hint": "Tanda di bawah pesan saya terakhir",
+   "aliases": [
+    "terkirim"
+   ]
+  },
+  "outro": {
+   "default": "",
+   "type": "text",
+   "hint": "Teks kartu penutup; kosong = tanpa",
+   "aliases": [
+    "penutup"
+   ]
+  },
+  "my_color": {
+   "default": "#2f7cf6",
+   "type": "color",
+   "aliases": [
+    "warna_saya"
+   ]
+  },
+  "their_color": {
+   "default": "#e9e9ee",
+   "type": "color",
+   "aliases": [
+    "warna_dia"
+   ]
+  },
+  "bg": {
+   "default": "#dfe5ef",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700",
+   "type": "font"
+  }
+ },
+ "duration": 9,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/obrolan",
+  "chat-thread",
+  "chat-message",
+  "typing-indicator",
+  "message-thread-reveal",
+  "thread-message-stack"
+ ],
+ "example": {
+  "bg": "empty",
+  "aspect": "9:16"
+ }
+}

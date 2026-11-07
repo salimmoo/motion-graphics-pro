@@ -1,0 +1,65 @@
+<!-- Block transitions/whip-pan · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/whip-pan" data-start="0" data-duration="0.9" data-track-index="20" class="blk blk-transitions-whip-pan">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "direction": "left", "mode": "whip", "blur": 1, "cut_distance": 0.14, "line": true}
+</script>
+</div>
+<style>
+.blk-transitions-whip-pan{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-transitions-whip-pan .blk-garis{position:absolute;inset:0;opacity:0;mix-blend-mode:screen}
+.blk-transitions-whip-pan .blk-garis i{position:absolute;display:block;border-radius:99px;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.8),rgba(255,255,255,0))}
+.blk-transitions-whip-pan .blk-garis.v i{background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.8),rgba(255,255,255,0))}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to), D = k.dur, W = k.w, H = k.h, s = k.s;
+  function gaya(el, o) { if (el) for (var n in o) el.style[n] = o[n]; }
+  function bersih(el, tampil) { gaya(el, { transform: "", filter: "", opacity: "", clipPath: "", webkitMaskImage: "", maskImage: "", transformOrigin: "", zIndex: "", borderRadius: "", boxShadow: "", backfaceVisibility: "", visibility: tampil ? "" : "hidden" }); }
+  function ez(n) { return gsap.parseEase(n || "none") || gsap.parseEase("none"); }
+  var ar = { left: [-1, 0], right: [1, 0], top: [0, -1], bottom: [0, 1] }[P.direction] || [-1, 0];
+  var hor = ar[0] !== 0, sg = hor ? ar[0] : ar[1], L = hor ? W : H, potong = P.mode === "cut";
+  var fid = "blkf-" + k.id;
+  var sv = BLOCK.svg("svg", { width: 0, height: 0, style: "position:absolute" }, k.root);
+  var fl = BLOCK.svg("filter", { id: fid, x: "-5%", y: "-5%", width: "110%", height: "110%", "color-interpolation-filters": "sRGB" }, sv);
+  var gb = BLOCK.svg("feGaussianBlur", { "in": "SourceGraphic", stdDeviation: "0" }, fl);
+  var lap = BLOCK.el("div", { class: "blk-garis" + (hor ? "" : " v") }, k.root), gs = [];
+  for (var i = 0; P.line && i < 18; i++) {
+    var g = BLOCK.el("i", null, lap), tb = (1 + k.random() * 2.5) * s;
+    g._x = k.random() * 130 - 15; g._p = 18 + k.random() * 40;
+    g.style.cssText = hor ? "top:" + (k.random() * 100) + "%;height:" + tb + "px;width:" + g._p + "%" : "left:" + (k.random() * 100) + "%;width:" + tb + "px;height:" + g._p + "%";
+    gs.push(g);
+  }
+  var eIn = ez(potong ? "power4.in" : "power3.in"), eOut = ez("power4.out"), jr = potong ? +P.cut_distance || 0.14 : 1;
+  function prog(u) { return u < 0.5 ? eIn(u * 2) * 0.5 : 0.5 + eOut((u - 0.5) * 2) * 0.5; }
+  function geser(el, off, sc, ax, asal) {
+    if (!el) return;
+    var tr = hor ? "translate3d(" + off + "px,0,0)" : "translate3d(0," + off + "px,0)";
+    if (ax) { el.style.transformOrigin = asal; tr += hor ? " scaleX(" + ax + ")" : " scaleY(" + ax + ")"; }
+    el.style.transform = tr + (sc !== 1 ? " scale(" + sc + ")" : "");
+  }
+  // tepi jauh tiap adegan (asal skala) supaya tepi dekat sambungan memanjang menutup celah blur
+  var jauhA = hor ? (sg < 0 ? "0% 50%" : "100% 50%") : (sg < 0 ? "50% 0%" : "50% 100%");
+  var jauhB = hor ? (sg < 0 ? "100% 50%" : "0% 50%") : (sg < 0 ? "50% 100%" : "50% 0%");
+  BLOCK.onTime(tl, function (t) {
+    var u = t / D;
+    if (u <= 0 || u >= 1) { bersih(A, u <= 0); bersih(Bk, u >= 1); lap.style.opacity = 0; return; }
+    var p = prog(u), e = 0.004, v = (prog(Math.min(1, u + e)) - prog(Math.max(0, u - e))) / (2 * e);
+    var sig = Math.min(+P.blur * 70 * s, v * L * jr * 0.04 * +P.blur), f = sig > 0.5 ? "url(#" + fid + ")" : "";
+    gb.setAttribute("stdDeviation", hor ? sig + " 0" : "0 " + sig);
+    if (potong) {
+      var pa = u < 0.5 ? eIn(u * 2) : 1, pb = u < 0.5 ? 0 : eOut((u - 0.5) * 2);
+      gaya(A, { visibility: u < 0.5 ? "" : "hidden", filter: f }); geser(A, sg * pa * jr * L, 1 + 2 * jr * pa);
+      gaya(Bk, { visibility: u >= 0.5 ? "" : "hidden", filter: f }); geser(Bk, sg * (pb - 1) * jr * L, 1 + 2 * jr * (1 - pb));
+    } else {
+      var ax = 1 + 2.2 * sig / L;
+      gaya(A, { visibility: "", filter: f }); geser(A, sg * p * L, 1, ax, jauhA);
+      gaya(Bk, { visibility: "", filter: f }); geser(Bk, sg * (p - 1) * L, 1, ax, jauhB);
+    }
+    lap.style.opacity = Math.min(1, v / (potong ? 4 : 2.5)) * 0.4;
+    gs.forEach(function (g) {
+      var x = ((g._x + sg * p * 160) % 145 + 145) % 145 - 20;
+      g.style[hor ? "left" : "top"] = x + "%";
+    });
+  }, D);
+});
+</script>

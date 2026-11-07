@@ -1,0 +1,14 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;900&family=Fraunces:opsz,wght@9..144,700&display=block">
+<style>html,body{margin:0;background:#111}</style></head><body>
+<div id="root" data-composition-id="main" data-duration="2" data-fps="24" data-width="800" data-height="400"><canvas id="c" width="800" height="400"></canvas></div>
+<p style="font-family:Inter;color:#fff;position:absolute;left:10px;top:360px;margin:0">DOM text in Inter</p>
+<script>
+const c = document.getElementById("c"), g = c.getContext("2d");
+window.__seek = (t) => {
+  g.fillStyle = "#111"; g.fillRect(0, 0, 800, 400);
+  g.fillStyle = "#fff"; g.font = "900 100px Montserrat"; g.fillText("Montserrat", 20, 120);
+  if (t >= 1) { g.font = "700 80px 'Fraunces', serif"; g.fillText("Fraunces " + t.toFixed(1), 20, 230); }
+  g.font = "400 50px 'NotAFontXYZ', sans-serif"; g.fillText("fallback", 20, 320);
+};
+</script></body></html>

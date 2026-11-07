@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Shuffle Stack · block example gallery/shuffle-stack</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="6">
+<div id="adegan" class="adegan ad-gelap"></div>
+<!-- Block gallery/shuffle-stack · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-shuffle-stack" data-block="gallery/shuffle-stack" data-start="0" data-duration="5.5" data-track-index="8" class="blk blk-gallery-shuffle-stack">
+<script type="application/json" data-block-props>
+{"image": [], "label": ["Ide", "Sketsa", "Rancang", "Rilis"], "count": 4, "gesture": [0.8, 2.0, 2.45, 3.8], "throw_duration": 0.95, "width": 360, "card_aspect": 0.78, "stack_gap": 38, "throw_height": 300, "side": 1, "position_x": 50, "position_y": 80, "font": "Inter:wght@600;800", "seed": 11}
+</script>
+<div class="blk-tumpuk"></div>
+</div>
+<style>
+.blk-gallery-shuffle-stack{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-gallery-shuffle-stack .blk-tumpuk{position:absolute;width:0;height:0}
+.blk-gallery-shuffle-stack .blk-kartu{position:absolute;overflow:hidden;box-sizing:border-box;padding:1.6em;transform-origin:50% 100%}
+.blk-gallery-shuffle-stack .blk-kartu b{position:absolute;left:1.4em;bottom:1.1em;font-weight:800;font-size:3.2em;letter-spacing:-.02em;color:#fff}
+.blk-gallery-shuffle-stack .blk-kartu i{position:absolute;left:1.6em;top:1.5em;font-style:normal;font-weight:600;font-size:1.1em;letter-spacing:.16em;color:rgba(255,255,255,.8)}
+</style>
+<script>
+BLOCK.mount("blk-shuffle-stack", function (k) {
+  var P = k.P, st = k.root.querySelector(".blk-tumpuk");
+  st.style.left = P.position_x + "%"; st.style.top = P.position_y + "%";
+  var N = BLOCK.clamp(Math.round(P.count), 2, 6), W = P.width * k.s, H = W / (P.card_aspect || 0.78), gap = P.stack_gap * k.s;
+  var PAL = [["#ff9a62", "#d9465f"], ["#7ee0d6", "#2d6cdf"], ["#ffd36e", "#ef7b45"], ["#b69cff", "#5b3fd1"], ["#a8e48a", "#2f8f6a"], ["#ff9cc2", "#a23d8a"]];
+  var POLA = ["radial-gradient(circle at 78% 22%,rgba(255,255,255,.35) 0 12%,transparent 13%)", "repeating-linear-gradient(135deg,rgba(255,255,255,.12) 0 6%,transparent 6% 12%)", "radial-gradient(rgba(255,255,255,.25) 12%,transparent 14%) 0 0/14% 11%"];
+  var g = P.image || [], off = k.random.int(0, 5), el = [];
+  for (var i = 0; i < N; i++) {
+    var p = PAL[(i + off) % PAL.length];
+    var c = BLOCK.el("div", { class: "blk-kartu", style: "left:" + -W / 2 + "px;top:" + -H + "px;width:" + W + "px;height:" + H + "px;border-radius:" + 26 * k.s + "px;font-size:" + 16 * k.s + "px;font-family:" + BLOCK.family(P.font) +
+      ";box-shadow:0 " + 20 * k.s + "px " + 50 * k.s + "px rgba(0,0,0,.35);background:" + (g.length ? "center/cover url('" + g[i % g.length] + "')" : POLA[i % POLA.length] + ",linear-gradient(155deg," + p[0] + "," + p[1] + ")") }, st,
+      "<i>" + ("0" + (i + 1)).slice(-2) + "</i><b>" + BLOCK.esc((P.label || [])[i] || "") + "</b>");
+    el.push(c);
+  }
+  // urutan diskret per isyarat: kartu paling belakang dilempar ke depan
+  var cues = (P.gesture || []).slice().sort(function (a, b) { return a - b; }), order = [], lempar = [];
+  for (i = 0; i < N; i++) order.push(i);
+  cues.forEach(function (tc) { var b = order[N - 1]; lempar.push(b); order = [b].concat(order.slice(0, N - 1)); });
+  var Dl = P.throw_duration, Ht = P.throw_height * k.s;
+  function eLempar(p) { return p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; }
+  function ePegas(p) { return p <= 0 ? 0 : p >= 1 ? 1 : BLOCK.spring(p * 1.2, 1.6, 0.45) * (1 - p) + p; }
+  BLOCK.onTime(k.tl, function (t) {
+    var masuk = 1 - Math.pow(1 - BLOCK.clamp(t / 0.7, 0, 1), 3);
+    for (var i = 0; i < N; i++) {
+      // posisi slot kontinu = jumlah sumbangan semua isyarat (tumpang-tindih -> kecepatan tersambung)
+      var slot = i, lift = 0, rot = 0, sx = 0, squash = 0, terbang = false;
+      for (var c = 0; c < cues.length; c++) {
+        var pp = (t - cues[c]) / Dl; if (pp <= 0) continue; var q = Math.min(pp, 1);
+        if (lempar[c] === i) {
+          slot -= (N - 1) * eLempar(q);
+          if (pp < 1) { lift += Math.sin(Math.PI * q) * Ht; rot += Math.sin(Math.PI * q) * 14 * P.side; sx += Math.sin(Math.PI * q) * W * 0.55 * P.side; terbang = q > 0.45; }
+          var lp = (t - cues[c] - Dl) / 0.5; if (lp > 0 && lp < 1) squash += Math.exp(-5 * lp) * Math.cos(lp * 14) * 0.08;
+        } else {
+          var e2 = ePegas(BLOCK.clamp((pp - 0.55) / 0.9, 0, 1)); slot += e2;
+          var lp2 = (pp - 0.85) / 0.6; if (lp2 > 0 && lp2 < 1) squash += Math.sin(Math.PI * lp2) * 0.035 * Math.exp(-2 * lp2);
+        }
+      }
+      var sc = 1 - slot * 0.055, d = BLOCK.clamp(slot / (N - 1), 0, 1);
+      var e = el[i];
+      e.style.transform = "translate(" + sx.toFixed(1) + "px," + (-slot * gap - lift + (1 - masuk) * 300 * k.s).toFixed(1) + "px) rotate(" + rot.toFixed(2) + "deg) scale(" + (sc * (1 + squash * 0.6)).toFixed(4) + "," + (sc * (1 - squash)).toFixed(4) + ")";
+      e.style.zIndex = terbang ? 999 : Math.round(500 - slot * 100);
+      e.style.filter = "brightness(" + (1 - 0.35 * d).toFixed(3) + ")";
+      e.style.opacity = masuk.toFixed(3);
+    }
+  }, k.dur);
+  k.tl.to(st, { autoAlpha: 0, y: 40 * k.s, duration: 0.45, ease: "power2.in" }, k.dur - 0.5);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 6;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 6);
+</script>
+</body>
+</html>

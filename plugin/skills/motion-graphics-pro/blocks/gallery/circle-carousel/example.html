@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Circle Carousel · block example gallery/circle-carousel</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="6.5">
+<div id="adegan" class="adegan ad-gelap"></div>
+<!-- Block gallery/circle-carousel · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-circle-carousel" data-block="gallery/circle-carousel" data-start="0" data-duration="6" data-track-index="8" class="blk blk-gallery-circle-carousel">
+<script type="application/json" data-block-props>
+{"image": [], "label": [], "count": 12, "style": "ring", "radius": 1, "card_size": 300, "card_aspect": 0.75, "back_scale": 0.42, "period": 1.5, "swing": 0.85, "steps": 1, "direction": 1, "corner_radius": 16, "position_y": 50, "shadow": true, "seed": 3}
+</script>
+<div class="blk-panggung"></div>
+</div>
+<style>
+.blk-gallery-circle-carousel{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-gallery-circle-carousel .blk-panggung{position:absolute;inset:0}
+.blk-gallery-circle-carousel .blk-kartu{position:absolute;left:0;top:0;overflow:hidden;will-change:transform}
+.blk-gallery-circle-carousel .blk-no{position:absolute;left:9%;bottom:7%;font:800 calc(var(--kw)*.22px)/1 "Inter",system-ui,sans-serif;color:rgba(255,255,255,.94);letter-spacing:-.02em}
+.blk-gallery-circle-carousel .blk-lb{position:absolute;left:9%;top:8%;font:600 calc(var(--kw)*.075px)/1.1 "Inter",system-ui,sans-serif;color:rgba(255,255,255,.85);text-transform:uppercase;letter-spacing:.12em}
+</style>
+<script>
+BLOCK.mount("blk-circle-carousel", function (k) {
+  var P = k.P, w = k.w, h = k.h, st = k.root.querySelector(".blk-panggung");
+  var N = Math.max(3, Math.round(P.count)), kw = P.card_size * k.s, kh = kw / (P.card_aspect || 0.75);
+  k.root.style.setProperty("--kw", kw);
+  // kartu placeholder: gradien + pola + nomor (dipakai bila daftar gambar kosong)
+  var PAL = [["#ff9a62", "#d9465f"], ["#7ee0d6", "#2d6cdf"], ["#ffd36e", "#ef7b45"], ["#b69cff", "#5b3fd1"], ["#a8e48a", "#2f8f6a"], ["#ff9cc2", "#a23d8a"], ["#93d8ff", "#3150a8"], ["#f6c28b", "#8a4b2e"]];
+  var POLA = ["radial-gradient(circle at 72% 28%,rgba(255,255,255,.4) 0 14%,transparent 15%)", "repeating-linear-gradient(135deg,rgba(255,255,255,.14) 0 7%,transparent 7% 14%)",
+    "radial-gradient(rgba(255,255,255,.3) 14%,transparent 16%) 0 0/16% 12%", "linear-gradient(170deg,transparent 58%,rgba(0,0,0,.2) 58%)"];
+  var g = P.image || [], off = k.random.int(0, 7);
+  var kartu = [];
+  for (var i = 0; i < N; i++) {
+    var c = BLOCK.el("div", { class: "blk-kartu", style: "width:" + kw + "px;height:" + kh + "px;border-radius:" + P.corner_radius * k.s + "px" }, st);
+    if (g.length) c.style.background = "center/cover no-repeat url('" + g[i % g.length] + "')";
+    else {
+      var p = PAL[(i + off) % PAL.length];
+      c.style.background = POLA[i % POLA.length] + ",linear-gradient(150deg," + p[0] + "," + p[1] + ")";
+      BLOCK.el("span", { class: "blk-no" }, c, ("0" + (i + 1)).slice(-2));
+      if (P.label && P.label[i]) BLOCK.el("span", { class: "blk-lb" }, c, BLOCK.esc(P.label[i]));
+    }
+    if (P.shadow) c.style.boxShadow = "0 " + 18 * k.s + "px " + 40 * k.s + "px rgba(0,0,0,.35)";
+    kartu.push(c);
+  }
+  // gaya 1-5: [x, y, kedalaman, rotasi kartu] dari sudut a (0 = depan)
+  var R = P.radius, cy = h * P.position_y / 100;
+  var GAYA = {
+    ring: function (a) { return [0.36 * w * Math.sin(a), 0.11 * h * Math.cos(a), Math.cos(a), 0]; },
+    wheel: function (a) { return [0.05 * w * Math.cos(a), 0.34 * h * Math.sin(a), Math.cos(a), -8 * Math.sin(a)]; },
+    flat: function (a) { var r = 0.33 * Math.min(w, h); return [r * Math.sin(a), r * Math.cos(a), Math.cos(a), -a * 180 / Math.PI * 0.25]; },
+    skew: function (a) { var x = 0.36 * w * Math.sin(a), y = 0.12 * h * Math.cos(a), q = -0.3; return [x * Math.cos(q) - y * Math.sin(q), x * Math.sin(q) + y * Math.cos(q), Math.cos(a), -10]; },
+    fan: function (a) { return [0.42 * w * Math.sin(a), -0.2 * h * Math.cos(a) + 0.06 * h, Math.cos(a), 22 * Math.sin(a)]; }
+  };
+  var fn = GAYA[P.style] || GAYA.ring;
+  // ayunan cepat-lambat-cepat: f(p) = p + k sin(2πp)/2π  (laju 1+k di ujung, 1-k di tengah)
+  function ayun(t) { var u = t / P.period, n = Math.floor(u), q = u - n; return n + q + P.swing * Math.sin(2 * Math.PI * q) / (2 * Math.PI); }
+  BLOCK.onTime(k.tl, function (t) {
+    var rot = ayun(t) * P.steps * (P.direction < 0 ? -1 : 1) * 2 * Math.PI / N;
+    var masuk = BLOCK.smooth(t / 0.7), keluar = 1 - BLOCK.smooth((t - (k.dur - 0.5)) / 0.5);
+    for (var i = 0; i < N; i++) {
+      var a = 2 * Math.PI * i / N - rot, v = fn(a), d = (v[2] + 1) / 2;
+      var sc = (P.back_scale + (1 - P.back_scale) * d * d) * (0.6 + 0.4 * masuk);
+      var c = kartu[i];
+      c.style.transform = "translate(" + (w / 2 + v[0] * R * (0.5 + 0.5 * masuk) - kw / 2) + "px," + (cy + v[1] * R - kh / 2) + "px) rotate(" + v[3] + "deg) scale(" + sc + ")";
+      c.style.zIndex = Math.round(d * 1000);
+      c.style.opacity = masuk * keluar;
+      c.style.filter = "brightness(" + (0.45 + 0.55 * d).toFixed(3) + ")";
+    }
+  }, k.dur);
+});
+</script>
+</div>
+<script>
+  window.__duration = 6.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 6.5);
+</script>
+</body>
+</html>

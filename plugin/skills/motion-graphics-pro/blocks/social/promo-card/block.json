@@ -1,0 +1,168 @@
+{
+ "id": "social/promo-card",
+ "name": "Promo Card",
+ "name_id": "Kartu Promo",
+ "category": "social",
+ "description": {
+  "id": "Adegan promo siap pakai: mozaik avatar yang hidup dengan judul promosi tebal dan label penawaran, intro kreator hangat yang berubah menjadi kartu ikuti, atau etalase produk dengan lencana diskon, harga coret, dan tombol ajakan.",
+  "en": "Ready-made promo scene: a living avatar mosaic with bold promo type and offer callout, a warm creator intro that resolves into a follow card, or a product showcase with discount badge, struck-through price and CTA."
+ },
+ "tags": [
+  "sosial",
+  "promo",
+  "iklan",
+  "avatar",
+  "kreator",
+  "produk",
+  "diskon",
+  "cta",
+  "social",
+  "card"
+ ],
+ "props": {
+  "style": {
+   "default": "avatar",
+   "type": "enum",
+   "options": [
+    "avatar",
+    "creator",
+    "product"
+   ],
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "kreator": "creator",
+    "produk": "product"
+   }
+  },
+  "title": {
+   "default": "Video presentasi tanpa kamera",
+   "type": "text",
+   "hint": "Judul promo (gaya avatar)",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "sub": {
+   "default": "Pilih avatar, tulis naskah, jadi dalam lima menit.",
+   "type": "text"
+  },
+  "cta": {
+   "default": "Diskon 40% minggu ini",
+   "type": "text",
+   "hint": "Label penawaran (gaya avatar)",
+   "aliases": [
+    "ajakan"
+   ]
+  },
+  "name": {
+   "default": "Bima Pratama",
+   "type": "text",
+   "hint": "Nama kreator (gaya kreator)",
+   "aliases": [
+    "nama"
+   ]
+  },
+  "account": {
+   "default": "@bimabikin",
+   "type": "text",
+   "aliases": [
+    "akun"
+   ]
+  },
+  "greeting": {
+   "default": [
+    "Halo!",
+    "Aku Bima,",
+    "suka bikin hal kecil jadi seru."
+   ],
+   "type": "list",
+   "hint": "Baris sapaan pembuka (gaya kreator)",
+   "aliases": [
+    "sapaan"
+   ]
+  },
+  "product": {
+   "default": "Serum Embun",
+   "type": "text",
+   "hint": "Nama produk (gaya produk)",
+   "aliases": [
+    "produk"
+   ]
+  },
+  "price": {
+   "default": "Rp89.000",
+   "type": "text",
+   "aliases": [
+    "harga"
+   ]
+  },
+  "old_price": {
+   "default": "Rp129.000",
+   "type": "text",
+   "aliases": [
+    "harga_lama"
+   ]
+  },
+  "discount": {
+   "default": "-30%",
+   "type": "text",
+   "aliases": [
+    "diskon"
+   ]
+  },
+  "product_caption": {
+   "default": "Lembap seharian, ringan di kulit.",
+   "type": "text",
+   "aliases": [
+    "keterangan_produk"
+   ]
+  },
+  "button": {
+   "default": "Coba sekarang",
+   "type": "text",
+   "aliases": [
+    "tombol"
+   ]
+  },
+  "accent_color": {
+   "default": "#7c5cff",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg_color": {
+   "default": "#f3efe8",
+   "type": "color",
+   "aliases": [
+    "warna_latar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;700;800;900",
+   "type": "font"
+  }
+ },
+ "duration": 7,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "sosial/kartu-promo",
+  "heygen-avatar-promo-card",
+  "blue-sweater-intro-video",
+  "product-promo"
+ ],
+ "example": {
+  "bg": "empty",
+  "font": [
+   "Inter:wght@500;700;800;900"
+  ]
+ }
+}

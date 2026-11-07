@@ -1,0 +1,69 @@
+<!-- Block camera/station · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="camera/station" data-start="0" data-duration="8" data-track-index="30" class="blk blk-camera-station">
+<script type="application/json" data-block-props>
+{"target": "", "station": [{"judul": "Rencana", "teks": "Susun langkah sejak hari pertama"}, {"judul": "Rancang", "teks": "Ubah ide menjadi bentuk visual"}, {"judul": "Bangun", "teks": "Gerakkan setiap elemen dengan tujuan"}, {"judul": "Rilis", "teks": "Kirim, ukur, lalu perbaiki"}], "still": 0.55, "ease": "power3.inOut", "bg": "#0f1424", "color": "#f4f1ea", "accent_color": "#ffb547", "font": "Inter:wght@400;600;800", "motion_blur": true}
+</script>
+</div>
+<style>
+.blk-camera-station{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-camera-station .blk-grid{position:absolute;inset:0;opacity:.5}
+.blk-camera-station .blk-strip{position:absolute;inset:0}
+.blk-camera-station .blk-kartu{position:absolute;top:50%;box-sizing:border-box;border-radius:var(--r);background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.14);box-shadow:0 var(--b) calc(var(--b)*3) rgba(0,0,0,.35);overflow:hidden}
+.blk-camera-station .blk-no{font-weight:800;letter-spacing:.12em;opacity:.9}
+.blk-camera-station .blk-jd{font-weight:800;letter-spacing:-.02em;line-height:1}
+.blk-camera-station .blk-tx{font-weight:400;opacity:.72;line-height:1.3}
+.blk-camera-station .blk-rel{position:absolute;height:2px;background:rgba(255,255,255,.18)}
+.blk-camera-station .blk-isi-rel{position:absolute;left:0;top:0;bottom:0}
+.blk-camera-station .blk-titik{position:absolute;border-radius:50%;transform:translate(-50%,-50%)}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, w = k.w, s = k.s, D = k.dur, T = BLOCK.find(P.target);
+  var data = Array.isArray(P.station) && P.station.length ? P.station : [{ judul: "Stasiun", teks: "" }];
+  var N = data.length, ez = gsap.parseEase(P.ease || "power3.inOut");
+  var dw = D * BLOCK.clamp(+P.still || 0.5, 0.1, 0.9) / N, pn = N > 1 ? (D - N * dw) / (N - 1) : 0;
+  function posisi(t) { // indeks stasiun pecahan: diam di tiap stasiun, lalu geser ke berikutnya
+    if (N < 2) return 0;
+    var seg = dw + pn, i = Math.floor(t / seg), r = t - i * seg;
+    return i >= N - 1 ? N - 1 : i + (r < dw ? 0 : ez((r - dw) / pn));
+  }
+  if (T) { // mode host: target dianggap pita lebar yang digeser per stasiun
+    var jauh = Math.max(0, T.scrollWidth - w);
+    BLOCK.onTime(k.tl, function (t) { T.style.transform = "translate(" + (-posisi(t) / Math.max(1, N - 1) * jauh).toFixed(2) + "px,0px)"; }, D);
+    return;
+  }
+  var R = k.root, cw = Math.min(w * 0.72, 880 * s), gap = cw + 150 * s, ak = P.accent_color;
+  R.style.cssText += ";background:" + P.bg + ";color:" + P.color + ";font-family:" + BLOCK.family(P.font) +
+    ";--r:" + Math.round(28 * s) + "px;--b:" + Math.round(18 * s) + "px";
+  var grid = BLOCK.el("div", { class: "blk-grid", style: "background-image:radial-gradient(" + BLOCK.rgba(P.color, 0.22) + " " + 1.6 * s + "px,transparent " + 2.2 * s + "px);background-size:" + 46 * s + "px " + 46 * s + "px" }, R);
+  var strip = BLOCK.el("div", { class: "blk-strip" }, R);
+  var relY = "calc(50% + " + Math.round(250 * s) + "px)";
+  var rel = BLOCK.el("div", { class: "blk-rel", style: "top:" + relY + ";left:" + (w / 2 - 40 * s) + "px;width:" + ((N - 1) * gap + 80 * s) + "px" }, strip);
+  var isi = BLOCK.el("div", { class: "blk-isi-rel", style: "background:" + ak + ";left:" + 40 * s + "px" }, rel);
+  var kartu = [], titik = [];
+  data.forEach(function (d, i) {
+    var c = BLOCK.el("div", { class: "blk-kartu", style: "left:" + (w / 2 + i * gap) + "px;width:" + cw + "px;padding:" + Math.round(54 * s) + "px " + Math.round(60 * s) + "px" }, strip);
+    var dalam = BLOCK.el("div", null, c);
+    BLOCK.el("div", { class: "blk-no", style: "color:" + ak + ";font-size:" + Math.round(26 * s) + "px;margin-bottom:" + Math.round(22 * s) + "px" }, dalam, ("0" + (i + 1)).slice(-2) + " / " + ("0" + N).slice(-2));
+    BLOCK.el("div", { class: "blk-jd", style: "font-size:" + Math.round(96 * s) + "px;margin-bottom:" + Math.round(20 * s) + "px" }, dalam, BLOCK.esc(d.judul || ""));
+    BLOCK.el("div", { class: "blk-tx", style: "font-size:" + Math.round(34 * s) + "px" }, dalam, BLOCK.esc(d.teks || ""));
+    c._dalam = dalam; kartu.push(c);
+    titik.push(BLOCK.el("div", { class: "blk-titik", style: "top:" + relY + ";left:" + (w / 2 + i * gap) + "px;width:" + 22 * s + "px;height:" + 22 * s + "px;border:" + 3 * s + "px solid " + ak }, strip));
+  });
+  BLOCK.onTime(k.tl, function (t) {
+    var x = posisi(t), v = Math.abs(x - posisi(Math.max(0, t - 1 / 60))) * gap;
+    strip.style.transform = "translate(" + (-x * gap).toFixed(2) + "px,0px)";
+    strip.style.filter = P.motion_blur && v > 0.5 ? "blur(" + Math.min(v * 0.06, 6 * s).toFixed(2) + "px)" : "none";
+    grid.style.backgroundPosition = (-x * gap * 0.35).toFixed(2) + "px 0";
+    isi.style.width = (x * gap) + "px";
+    kartu.forEach(function (c, i) {
+      var d = i - x, e = Math.min(Math.abs(d), 1);
+      c.style.transform = "translate(-50%,-50%) scale(" + (1 - 0.1 * e).toFixed(4) + ")";
+      c.style.opacity = (1 - 0.55 * e).toFixed(3);
+      c._dalam.style.transform = "translateX(" + (d * -60 * s).toFixed(2) + "px)"; // paralaks isi kartu
+      titik[i].style.background = x >= i - 0.02 ? P.accent_color : P.bg;
+      titik[i].style.transform = "translate(-50%,-50%) scale(" + (1 + 0.5 * (1 - e)).toFixed(3) + ")";
+    });
+  }, D);
+}, { font: true });
+</script>

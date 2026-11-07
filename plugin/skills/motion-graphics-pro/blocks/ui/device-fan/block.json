@@ -1,0 +1,90 @@
+{
+ "id": "ui/device-fan",
+ "name": "Device Fan",
+ "name_id": "Kipas Perangkat",
+ "category": "ui",
+ "description": {
+  "id": "Tiruan desktop, tablet, dan ponsel berawal dari satu tumpukan di tengah lalu mekar menjadi susunan kipas yang percaya diri, kemudian melayang halus. Layar memakai gambar sendiri atau kerangka aplikasi bertoken warna aksen.",
+  "en": "Desktop, tablet and phone mockups fan out from a centred stack into a proud splayed arrangement with a subtle idle float. Screens take your images or an accent-tokened skeleton."
+ },
+ "tags": [
+  "ui",
+  "mockup",
+  "perangkat",
+  "responsif",
+  "multi perangkat",
+  "demo produk",
+  "kipas",
+  "device",
+  "fan"
+ ],
+ "props": {
+  "desktop_image": {
+   "default": "",
+   "type": "text",
+   "hint": "Gambar layar desktop; kosong = kerangka",
+   "aliases": [
+    "gambar_desktop"
+   ]
+  },
+  "tablet_image": {
+   "default": "",
+   "type": "text",
+   "aliases": [
+    "gambar_tablet"
+   ]
+  },
+  "phone_image": {
+   "default": "",
+   "type": "text",
+   "aliases": [
+    "gambar_ponsel"
+   ]
+  },
+  "accent_color": {
+   "default": "#ff6a3d",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg": {
+   "default": "#f1ece6",
+   "type": "color",
+   "hint": "Kosong = transparan",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "spread": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali jarak kipas",
+   "aliases": [
+    "sebaran"
+   ]
+  },
+  "float": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "melayang"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/perangkat-kipas",
+  "multi-device-splay"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

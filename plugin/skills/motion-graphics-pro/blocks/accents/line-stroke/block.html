@@ -1,0 +1,69 @@
+<!-- Block accents/line-stroke · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="accents/line-stroke" data-start="0" data-duration="3" data-track-index="40" class="blk blk-accents-line-stroke">
+<script type="application/json" data-block-props>
+{"mode": "frame", "position_x": 50, "position_y": 50, "width": 46, "height": 16, "radius": 28, "size": 6, "color": "#ffd23f", "accent_color": "#ffd23f", "text": "", "font": "Inter:wght@600;700", "path": "", "fill": true, "start": 0.3, "stroke_duration": 1.1, "ease": "power2.inOut", "speed": 0.7}
+</script>
+<div class="blk-lap"></div>
+</div>
+<style>
+.blk-accents-line-stroke{position:absolute;inset:0;pointer-events:none}
+.blk-accents-line-stroke .blk-lap{position:absolute;left:0;top:0}
+.blk-accents-line-stroke svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.blk-accents-line-stroke .blk-label{position:absolute;left:0;right:0;text-align:center;white-space:nowrap;font-weight:700;line-height:1}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, root = k.root, lap = root.querySelector(".blk-lap"), t0 = +P.start || 0, D = +P.stroke_duration || 1.1;
+  var mode = P.mode, sw = P.size * s, glow = "drop-shadow(0 0 " + Math.round(10 * s) + "px " + BLOCK.rgba(P.accent_color, 0.75) + ")";
+  var X = k.w * P.position_x / 100, Y = k.h * P.position_y / 100, Wb, Hb, vb, d, skala;
+  if (mode === "frame") {
+    // persegi membulat, mulai dari tengah atas, searah jarum jam
+    Wb = k.w * P.width / 100; Hb = k.h * P.height / 100;
+    var r = Math.min(P.radius * s, Wb / 2, Hb / 2), x0 = 0, y0 = 0, x1 = Wb, y1 = Hb;
+    d = "M" + Wb / 2 + " 0H" + (x1 - r) + "A" + r + " " + r + " 0 0 1 " + x1 + " " + r + "V" + (y1 - r) + "A" + r + " " + r + " 0 0 1 " + (x1 - r) + " " + y1 +
+      "H" + r + "A" + r + " " + r + " 0 0 1 0 " + (y1 - r) + "V" + r + "A" + r + " " + r + " 0 0 1 " + r + " 0Z";
+    vb = "0 0 " + Wb + " " + Hb; skala = 1;
+  } else {
+    Wb = Hb = Math.min(k.w, k.h) * P.width / 100; vb = "0 0 100 100"; skala = 100 / Wb;
+    d = P.path || (mode === "loader" ? "M50 50C62 30 90 30 90 50C90 70 62 70 50 50C38 30 10 30 10 50C10 70 38 70 50 50Z"
+      : "M50 86C20 64 6 44 16 26C26 10 44 14 50 30C56 14 74 10 84 26C94 44 80 64 50 86Z");
+  }
+  lap.style.cssText += ";left:" + (X - Wb / 2) + "px;top:" + (Y - Hb / 2) + "px;width:" + Wb + "px;height:" + Hb + "px";
+  var sv = BLOCK.svg("svg", { viewBox: vb }, lap), w = sw * skala;
+  var isi = BLOCK.svg("path", { d: d, fill: P.accent_color, "fill-opacity": 0 }, sv);
+  var trek = mode === "loader" ? BLOCK.svg("path", { d: d, fill: "none", stroke: P.color, "stroke-opacity": 0.18, "stroke-width": w, "stroke-linecap": "round" }, sv) : null;
+  var g = BLOCK.svg("path", { d: d, fill: "none", stroke: P.color, "stroke-width": w, "stroke-linecap": "round", "stroke-linejoin": "round" }, sv);
+  sv.style.filter = glow;
+  var L = BLOCK.prepareStroke(g), tertutup = /z\s*$/i.test(d);
+  if (P.text) {
+    var lb = BLOCK.el("div", { class: "blk-label", style: "font-family:" + BLOCK.family(P.font) + ";color:" + P.color + ";font-size:" + Math.round(40 * s) + "px;" +
+      (mode === "frame" ? "top:50%;transform:translateY(-50%)" : "top:calc(100% + " + Math.round(24 * s) + "px)") }, lap);
+    lb.textContent = P.text;
+    tl.fromTo(lb, { opacity: 0, y: 10 * s }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, t0 + D * 0.5);
+  }
+  if (mode === "loader") {
+    // pemuat: trek tergambar, lalu ruas cahaya mengejar sepanjang jalur (dashoffset murni dari t)
+    tl.fromTo(trek, { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, t0);
+    var seg = L * 0.28;
+    g.style.strokeDasharray = seg + " " + (L - seg);
+    BLOCK.onTime(tl, function (t) {
+      var p = Math.max(0, t - t0), ramp = BLOCK.smooth(BLOCK.clamp(p / 0.5, 0, 1));
+      g.style.strokeDashoffset = (-(p * P.speed * L + p * p * 0.15 * L)).toFixed(2);
+      g.style.opacity = ramp.toFixed(3);
+    }, k.dur);
+    return;
+  }
+  tl.fromTo(g, { strokeDashoffset: L }, { strokeDashoffset: 0, duration: D, ease: P.ease }, t0);
+  if (mode === "frame") {
+    // penutupan bersih: denyut tebal garis saat ujung bertemu pangkal
+    tl.to(g, { attr: { "stroke-width": w * 1.6 }, duration: 0.12, ease: "power2.out" }, t0 + D)
+      .to(g, { attr: { "stroke-width": w }, duration: 0.35, ease: "power2.inOut" }, t0 + D + 0.12);
+  } else {
+    if (P.fill && tertutup) tl.fromTo(isi, { attr: { "fill-opacity": 0 } }, { attr: { "fill-opacity": 0.85 }, duration: 0.5, ease: "power2.out" }, t0 + D - 0.05);
+    // tahan dengan hanyut halus
+    BLOCK.onTime(tl, function (t) {
+      lap.style.transform = "translate(" + (BLOCK.noise(t * 0.6, 2) * 6 * s).toFixed(2) + "px," + (BLOCK.noise(t * 0.5, 5) * 6 * s).toFixed(2) + "px) rotate(" + (BLOCK.noise(t * 0.4, 9) * 2.5).toFixed(2) + "deg)";
+    }, k.dur);
+  }
+}, { font: true });
+</script>

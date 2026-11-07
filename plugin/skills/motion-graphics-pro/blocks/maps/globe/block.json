@@ -1,0 +1,215 @@
+{
+ "id": "maps/globe",
+ "name": "Globe",
+ "name_id": "Globe Titik Berputar",
+ "category": "maps",
+ "description": {
+  "id": "Bola dunia dari ribuan titik berputar pelan dengan kemiringan, daratan ilustratif berseed (bukan garis pantai nyata) atau tanpa daratan, busur lengkung antar kota yang tumbuh satu per satu, denyut di titik tujuan, dan label kota. Posisi kota dari lintang/bujur.",
+  "en": "A dotted globe turns slowly with tilt, seeded illustrative land (not real coastlines) or none, curved arcs between cities growing one by one, destination pulses and city labels. Cities placed by latitude/longitude."
+ },
+ "tags": [
+  "peta",
+  "globe",
+  "bola dunia",
+  "dunia",
+  "world",
+  "busur",
+  "titik",
+  "3d",
+  "maps"
+ ],
+ "props": {
+  "dot": {
+   "default": [
+    {
+     "nama": "Jakarta",
+     "lat": -6.2,
+     "lon": 106.8
+    },
+    {
+     "nama": "Singapura",
+     "lat": 1.35,
+     "lon": 103.8
+    },
+    {
+     "nama": "Tokyo",
+     "lat": 35.7,
+     "lon": 139.7
+    },
+    {
+     "nama": "Sydney",
+     "lat": -33.9,
+     "lon": 151.2
+    },
+    {
+     "nama": "Dubai",
+     "lat": 25.2,
+     "lon": 55.3
+    },
+    {
+     "nama": "Mumbai",
+     "lat": 19.1,
+     "lon": 72.9
+    }
+   ],
+   "type": "list",
+   "hint": "[{nama, lat, lon}]",
+   "aliases": [
+    "titik"
+   ]
+  },
+  "arc": {
+   "default": [
+    [
+     0,
+     2
+    ],
+    [
+     0,
+     3
+    ],
+    [
+     0,
+     4
+    ],
+    [
+     0,
+     5
+    ],
+    [
+     1,
+     2
+    ]
+   ],
+   "type": "list",
+   "hint": "Pasangan indeks titik [[a, b], ...]",
+   "aliases": [
+    "busur"
+   ]
+  },
+  "lon_start": {
+   "default": 80,
+   "type": "number",
+   "hint": "Bujur di tengah saat mulai (derajat)",
+   "aliases": [
+    "bujur_awal"
+   ]
+  },
+  "rotate": {
+   "default": 7,
+   "type": "number",
+   "hint": "Kecepatan putar (derajat/detik)",
+   "aliases": [
+    "putar"
+   ]
+  },
+  "skew": {
+   "default": 14,
+   "type": "number",
+   "hint": "Kemiringan ke utara (derajat)",
+   "aliases": [
+    "miring"
+   ]
+  },
+  "land": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Daratan ilustratif berseed",
+   "aliases": [
+    "daratan"
+   ]
+  },
+  "dot_count": {
+   "default": 4200,
+   "type": "number",
+   "aliases": [
+    "jumlah_titik"
+   ]
+  },
+  "size": {
+   "default": 40,
+   "type": "number",
+   "hint": "Jari-jari (% sisi pendek)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 52,
+   "type": "number",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "sea_color": {
+   "default": "#2b4a7a",
+   "type": "color",
+   "aliases": [
+    "warna_laut"
+   ]
+  },
+  "land_color": {
+   "default": "#9fd3ff",
+   "type": "color",
+   "aliases": [
+    "warna_darat"
+   ]
+  },
+  "arc_color": {
+   "default": "#ffc35a",
+   "type": "color",
+   "aliases": [
+    "warna_busur"
+   ]
+  },
+  "label_color": {
+   "default": "#f4f1ea",
+   "type": "color",
+   "aliases": [
+    "warna_label"
+   ]
+  },
+  "light_color": {
+   "default": "#4f8dff",
+   "type": "color",
+   "hint": "Pendar atmosfer",
+   "aliases": [
+    "warna_cahaya"
+   ]
+  },
+  "label": {
+   "default": true,
+   "type": "boolean"
+  },
+  "font": {
+   "default": "Inter:wght@500;700",
+   "type": "font"
+  },
+  "seed": {
+   "default": 4,
+   "type": "number"
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "peta/globe",
+  "world-map"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

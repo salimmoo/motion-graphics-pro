@@ -1,0 +1,56 @@
+<!-- Block ui/device-dive · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="ui/device-dive" data-start="0" data-duration="5" data-track-index="30" class="blk blk-ui-device-dive">
+<script type="application/json" data-block-props>
+{"title": "Ruang Kerja", "greeting": "Selamat pagi, Rani", "card": ["Rapat 09.30", "Laporan Q3", "Desain beranda", "Ulasan kode"], "accent_color": "#6a5cff", "color2": "#ff7a59", "screen": "#f3f4f8", "dive": 1.9, "font": "Inter:wght@400;500;600;700;800"}
+</script>
+</div>
+<style>
+.blk-ui-device-dive{position:absolute;inset:0;pointer-events:none;overflow:hidden;font-family:"Inter",system-ui,sans-serif;perspective:1800px}
+.blk-ui-device-dive .hp{position:absolute;left:50%;top:50%;background:#0c0e13;box-shadow:0 40px 100px rgba(0,0,0,.55),inset 0 0 0 2px #2a2e38}
+.blk-ui-device-dive .ly{position:absolute;overflow:hidden}
+.blk-ui-device-dive .ui{position:absolute;inset:0;overflow:hidden}
+.blk-ui-device-dive .ui>*,.blk-ui-device-dive .ly>*{position:absolute;box-sizing:border-box}
+.blk-ui-device-dive .kt{border-radius:5%/8%;background:#fff;box-shadow:0 10px 30px rgba(20,30,60,.08);color:#1b2030;font-weight:700}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, E = BLOCK.el, s = k.s, W = k.w, H = k.h, ac = P.accent_color, tp = +P.dive;
+  var grad = "linear-gradient(135deg," + ac + "," + P.color2 + ")";
+  var ph = Math.min(H * 0.8, W * 0.9 * 2.1), pw = ph / 2.1, u = pw / 400, bz = 13 * u;
+  var hp = E("div", { class: "hp", style: "width:" + pw + "px;height:" + ph + "px;margin:" + (-ph / 2) + "px 0 0 " + (-pw / 2) + "px;border-radius:" + 60 * u + "px" }, k.root);
+  var ly = E("div", { class: "ly", style: "inset:" + bz + "px;border-radius:" + 48 * u + "px;background:" + P.screen }, hp);
+  // isi layar ponsel (versi kecil)
+  E("div", { style: "left:6%;top:8%;font-weight:800;font-size:" + 30 * u + "px;color:#1b2030" }, ly, BLOCK.esc(P.title));
+  E("div", { style: "left:6%;right:6%;top:15%;height:22%;border-radius:" + 24 * u + "px;background:" + grad }, ly);
+  P.card.forEach(function (n, i) { E("div", { class: "kt", style: "left:" + (6 + (i % 2) * 45.5) + "%;top:" + (41 + Math.floor(i / 2) * 18) + "%;width:42.5%;height:15%;padding:" + 14 * u + "px;font-size:" + 16 * u + "px" }, ly, BLOCK.esc(n)); });
+  // UI layar penuh berlapis yang mengembang mengisi bingkai
+  var ui = E("div", { class: "ui", style: "background:" + P.screen }, k.root), lebar = W > H, f = Math.min(W, H) / 1080;
+  var lap = [];
+  var side = lebar ? E("div", { style: "left:0;top:0;bottom:0;width:18%;background:#fff;border-right:1px solid #e3e6ee" }, ui) : null;
+  if (side) { lap.push({ el: side, z: 0 }); for (var i = 0; i < 5; i++) E("div", { style: "position:absolute;left:14%;width:" + (i ? 60 : 72) + "%;top:" + (10 + i * 8) + "%;height:" + 18 * f + "px;border-radius:99px;background:" + (i === 1 ? ac : "#e3e6ee") }, side); }
+  var x0 = lebar ? 21 : 5, wr = lebar ? 76 : 90;
+  var jd = E("div", { style: "left:" + x0 + "%;top:7%;font-weight:800;font-size:" + 64 * f + "px;color:#1b2030;letter-spacing:-.02em" }, ui, BLOCK.esc(P.greeting)); lap.push({ el: jd, z: 1 });
+  var hero = E("div", { style: "left:" + x0 + "%;top:" + (lebar ? 19 : 13) + "%;width:" + wr + "%;height:" + (lebar ? 30 : 22) + "%;border-radius:" + 36 * f + "px;background:" + grad + ";box-shadow:0 20px 50px " + BLOCK.rgba(ac, .35) }, ui); lap.push({ el: hero, z: 2 });
+  E("div", { style: "position:absolute;left:5%;bottom:14%;color:#fff;font-weight:800;font-size:" + 72 * f + "px" }, hero, "4 tugas");
+  P.card.forEach(function (n, i) {
+    var cl = lebar ? 4 : 2, cwp = (wr - (cl - 1) * 2) / cl, r = Math.floor(i / cl);
+    var kt = E("div", { class: "kt", style: "left:" + (x0 + (i % cl) * (cwp + 2)) + "%;top:" + ((lebar ? 54 : 39) + r * 22) + "%;width:" + cwp + "%;height:" + (lebar ? 34 : 19) + "%;padding:" + 28 * f + "px;font-size:" + 30 * f + "px" }, ui, BLOCK.esc(n));
+    E("div", { style: "position:absolute;left:" + 28 * f + "px;bottom:" + 28 * f + "px;width:40%;height:" + 14 * f + "px;border-radius:99px;background:" + BLOCK.mix(ac, "#ffffff", 0.6 - i * 0.1) }, kt);
+    lap.push({ el: kt, z: 3 + i * 0.3 });
+  });
+  // 1) ponsel naik ke bingkai
+  tl.fromTo(hp, { y: H * 0.75, rotationX: 28, rotationZ: -4 }, { y: 0, rotationX: 0, rotationZ: 0, duration: 1.3, ease: "expo.out" }, 0)
+    .fromTo(hp, { scale: 1 }, { scale: 1.04, duration: tp - 1.1, ease: "sine.inOut", immediateRender: false }, 1.1);
+  // 2) kamera menembus layar: ponsel membesar dengan percepatan
+  var S = Math.max(W / (pw - 2 * bz), H / (ph - 2 * bz)) * 1.6;
+  tl.to(hp, { scale: S, duration: 1.0, ease: "power3.in" }, tp);
+  // 3) UI penuh terbuka dari kotak layar ke seluruh bingkai, lapisan mengembang dengan paralaks
+  var sx = (W - pw * 1.04 + 2 * bz) / 2, sy = (H - ph * 1.04 + 2 * bz) / 2, rr = 48 * u;
+  tl.fromTo(ui, { clipPath: "inset(" + sy + "px " + sx + "px round " + rr + "px)" }, { clipPath: "inset(0px 0px round 0px)", duration: 0.85, ease: "expo.inOut" }, tp + 0.35);
+  BLOCK.initial(tl, ui, { autoAlpha: 0 }); tl.set(ui, { autoAlpha: 1 }, tp + 0.35);
+  lap.forEach(function (L) {
+    tl.fromTo(L.el, { scale: 0.55 - L.z * 0.04, y: 40 * s * L.z, autoAlpha: 0 }, { scale: 1, y: 0, autoAlpha: 1, duration: 0.9 + L.z * 0.08, ease: "expo.out" }, tp + 0.5 + L.z * 0.05);
+  });
+  tl.set(hp, { autoAlpha: 0 }, tp + 1.2);
+}, { font: true });
+</script>

@@ -1,0 +1,108 @@
+{
+ "id": "code/code-morph",
+ "name": "Code Morph",
+ "name_id": "Morph Kode",
+ "category": "code",
+ "description": {
+  "id": "Satu potongan kode berubah menjadi potongan berikutnya: token yang sama meluncur dari posisi lama ke posisi baru, token yang pergi memudar, token baru muncul, dan jendela menyesuaikan tinggi. Bisa beberapa langkah berurutan, cocok untuk menjelaskan refaktor.",
+  "en": "One snippet transforms into the next: matching tokens glide from old to new positions, leavers fade out, enterers fade in, and the window resizes. Multiple steps in sequence, ideal for explaining refactors."
+ },
+ "tags": [
+  "kode",
+  "morph",
+  "magic-move",
+  "refaktor",
+  "transisi",
+  "syntax-highlight",
+  "developer",
+  "code"
+ ],
+ "props": {
+  "steps": {
+   "default": [
+    "let total = 0;\nfor (const x of harga) {\n  total = total + x;\n}",
+    "const total = harga.reduce((a, x) => a + x, 0);",
+    "const total = harga\n  .filter((x) => x > 0)\n  .reduce((a, x) => a + x, 0);"
+   ],
+   "type": "list",
+   "hint": "Daftar potongan kode berurutan (2 atau lebih)",
+   "aliases": [
+    "langkah"
+   ]
+  },
+  "lang": {
+   "default": "js",
+   "type": "enum",
+   "options": [
+    "js",
+    "py",
+    "html",
+    "bash"
+   ],
+   "aliases": [
+    "bahasa"
+   ]
+  },
+  "theme": {
+   "default": "dark-2026",
+   "type": "enum",
+   "options": [
+    "dark-2026",
+    "modern-dark",
+    "light",
+    "terminal-pro"
+   ],
+   "aliases": [
+    "tema"
+   ],
+   "option_aliases": {
+    "gelap-2026": "dark-2026",
+    "gelap-modern": "modern-dark",
+    "terang": "light"
+   }
+  },
+  "file": {
+   "default": "total.js",
+   "type": "text",
+   "aliases": [
+    "berkas"
+   ]
+  },
+  "size": {
+   "default": 34,
+   "type": "number",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "morph_duration": {
+   "default": 1.0,
+   "type": "number",
+   "hint": "Lama tiap perpindahan (detik)",
+   "aliases": [
+    "durasi_morph"
+   ]
+  },
+  "font": {
+   "default": "JetBrains Mono:wght@400;500;700",
+   "type": "font"
+  }
+ },
+ "duration": 7,
+ "aspect": [
+  "16:9",
+  "1:1",
+  "9:16"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "kode/morph-kode",
+  "code-morph"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "JetBrains Mono:wght@400;500;700"
+  ]
+ }
+}

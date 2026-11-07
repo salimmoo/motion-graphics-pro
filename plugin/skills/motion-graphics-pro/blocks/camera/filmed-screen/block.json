@@ -1,0 +1,161 @@
+{
+ "id": "camera/filmed-screen",
+ "name": "Filmed Screen",
+ "name_id": "Layar Terfilmkan",
+ "category": "camera",
+ "description": {
+  "id": "Adeganmu seolah difilmkan dari layar monitor di ruang gelap: perspektif 3D, sub-piksel LED, garis pindai, kilau kaca, bingkai, bidang fokus dangkal di tepi, dan warna per bidikan. Beberapa bidikan meluncur dari satu sudut ke sudut lain. Mode warp: satu sudut tetap dengan goyang pelan, cocok untuk cuplikan video.",
+  "en": "Your scene filmed off a screen in a dark room: 3D perspective, LED sub-pixels, scanlines, glass sheen, bezel, shallow depth of field and per-shot colour grades, with shots gliding between angles. Warp mode holds a single angle with a gentle drift."
+ },
+ "tags": [
+  "kamera",
+  "camera",
+  "screen",
+  "monitor",
+  "layar",
+  "led",
+  "scanline",
+  "perspektif",
+  "depth-of-field",
+  "filmed"
+ ],
+ "props": {
+  "target": {
+   "default": "#adegan",
+   "type": "selector",
+   "hint": "Elemen host yang tampil di layar"
+  },
+  "mode": {
+   "default": "film",
+   "type": "enum",
+   "options": [
+    "film",
+    "warp"
+   ],
+   "hint": "film = beberapa bidikan meluncur; warp = satu sudut tetap"
+  },
+  "shot": {
+   "default": [
+    {
+     "ry": -20,
+     "rx": 7,
+     "skala": 0.7,
+     "x": -3,
+     "y": 1,
+     "warna": "#3d6bff"
+    },
+    {
+     "ry": 14,
+     "rx": -5,
+     "skala": 0.78,
+     "x": 4,
+     "y": -1,
+     "warna": "#ff9a3c"
+    },
+    {
+     "ry": -7,
+     "rx": 10,
+     "skala": 0.9,
+     "x": 0,
+     "y": 2,
+     "warna": "#7cf0c5"
+    }
+   ],
+   "type": "list",
+   "hint": "Daftar {ry, rx (derajat), skala, x, y (%), warna grade}",
+   "aliases": [
+    "bidikan"
+   ]
+  },
+  "transition": {
+   "default": 1.1,
+   "type": "number",
+   "hint": "Lama luncur antar bidikan (detik)",
+   "aliases": [
+    "transisi"
+   ]
+  },
+  "ease": {
+   "default": "power2.inOut",
+   "type": "ease"
+  },
+  "color_strength": {
+   "default": 0.16,
+   "type": "number",
+   "hint": "Kekuatan grade warna per bidikan",
+   "aliases": [
+    "kekuatan_warna"
+   ]
+  },
+  "subpixel": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Pola sub-piksel RGB",
+   "aliases": [
+    "subpiksel"
+   ]
+  },
+  "scanlines": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "garis_pindai"
+   ]
+  },
+  "shine": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Kilau kaca yang ikut sudut",
+   "aliases": [
+    "kilau"
+   ]
+  },
+  "frame": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Bingkai monitor dan bayangan",
+   "aliases": [
+    "bingkai"
+   ]
+  },
+  "edge_focus": {
+   "default": 9,
+   "type": "number",
+   "hint": "Blur kedalaman fokus di tepi (px pada 1080), 0 = mati",
+   "aliases": [
+    "fokus_tepi"
+   ]
+  },
+  "space": {
+   "default": "#07080c",
+   "type": "color",
+   "hint": "Warna ruang di belakang layar",
+   "aliases": [
+    "ruang"
+   ]
+  },
+  "perspective": {
+   "default": 1500,
+   "type": "number",
+   "aliases": [
+    "perspektif"
+   ]
+  }
+ },
+ "duration": 7,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "kamera/layar-terfilmkan",
+  "filmed-screen",
+  "yt-screen-warp"
+ ],
+ "example": {
+  "bg": "ui"
+ }
+}

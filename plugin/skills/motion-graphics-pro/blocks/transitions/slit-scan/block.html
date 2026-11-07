@@ -1,0 +1,53 @@
+<!-- Block transitions/slit-scan · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/slit-scan" data-start="0" data-duration="2.4" data-track-index="20" class="blk blk-transitions-slit-scan">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "text": "Babak Dua", "sub": "perjalanan berlanjut", "color": "#f1e6d0", "text_color": "#1d1b18", "accent_color": "#e8553d", "shape": "wave", "line_pause": 0.32, "rows": 120, "font": "Fraunces:wght@600;800"}
+</script>
+</div>
+<style>
+.blk-transitions-slit-scan{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, W = k.w, H = k.h, s = k.s, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to);
+  var cv = BLOCK.canvas(k.root, W, H), g = cv.ctx, fam = BLOCK.family(P.font, "Georgia, serif");
+  // subjek: panel judul digambar sekali ke kanvas lepas (setelah font kanvas termuat)
+  var fl = document.fonts && document.fonts.load ? Promise.all([document.fonts.load("800 40px " + fam, P.text), document.fonts.load("600 40px " + fam, P.sub)]).catch(function () {}) : Promise.resolve();
+  return fl.then(function () {
+  var pn = document.createElement("canvas"); pn.width = W; pn.height = H;
+  var q = pn.getContext("2d"), lg = q.createLinearGradient(0, 0, W, H);
+  lg.addColorStop(0, BLOCK.mix(P.color, "#ffffff", 0.25)); lg.addColorStop(1, BLOCK.mix(P.color, "#000000", 0.08));
+  q.fillStyle = lg; q.fillRect(0, 0, W, H);
+  q.fillStyle = P.accent_color; q.fillRect(0, H * 0.5 + 120 * s, W, 10 * s);
+  q.fillStyle = BLOCK.rgba(P.text_color, 0.08); for (var i = 0; i < W; i += 28 * s) q.fillRect(i, 0, 1, H);
+  q.fillStyle = P.text_color; q.textAlign = "center"; q.textBaseline = "middle";
+  q.font = "800 " + Math.round(170 * s) + "px " + fam; q.fillText(P.text, W / 2, H * 0.5);
+  q.font = "600 " + Math.round(40 * s) + "px " + fam; q.fillStyle = BLOCK.rgba(P.text_color, 0.7); q.fillText(P.sub, W / 2, H * 0.5 + 190 * s);
+  var n = Math.max(8, +P.rows || 120), rh = H / n, O = +P.line_pause || 0.32;
+  var f = function (r) {
+    var u = r / (n - 1);
+    if (P.shape === "skew") return u;
+    if (P.shape === "random") return 0.5 + 0.5 * BLOCK.noise(u * 9, 5);
+    return 0.5 + 0.5 * Math.sin(u * Math.PI * 3);
+  };
+  var ta = D * 0.3, th = D * 0.5, out3 = function (x) { return 1 - Math.pow(1 - x, 3); };
+  // satu fungsi posisi murni; tiap baris mengambil sampel pada t - offset(baris)
+  function posisi(t) {
+    if (t < th) return W * (1 - out3(BLOCK.progress(t, 0, ta)));
+    var x = BLOCK.progress(t, th, th + ta); return -W * x * x * x;
+  }
+  function gambar(t) {
+    g.clearRect(0, 0, W, H);
+    for (var r = 0; r < n; r++) {
+      var x = posisi(t - O * f(r)), y = Math.floor(r * rh), h = Math.floor((r + 1) * rh) - y;
+      if (x >= W || x <= -W) continue;
+      g.drawImage(pn, 0, y, W, h, x, y, W, h);
+    }
+  }
+  BLOCK.onTime(tl, gambar, D);
+  var tm = (ta + O + th) / 2;
+  if (A) BLOCK.initial(tl, A, { autoAlpha: 1 }).set(A, { autoAlpha: 0 }, tm);
+  if (Bk) BLOCK.initial(tl, Bk, { autoAlpha: 0 }).set(Bk, { autoAlpha: 1 }, tm);
+  });
+}, { font: true });
+</script>

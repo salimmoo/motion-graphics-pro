@@ -1,0 +1,13 @@
+{
+ "lib/sfx/sfx.js not found. Set env MGP_SFX_LIB to the path of motion-graphics/lib/sfx/sfx.js": "lib/sfx/sfx.js not found. Set env MGP_SFX_LIB to the path of motion-graphics/lib/sfx/sfx.js",
+ "mgp sfx: procedural, deterministic (seed) sound effects, 48 kHz WAV\n  mgp sfx list [--json]                         presets and their parameters\n  mgp sfx <preset> -o out.wav [--duration 0.8] [--seed 1] [--param k=v ...] [--gain -3] [--pan -0.5] [--bit 16|24|32]\n  mgp sfx mix cues.json -o sfx.wav [--duration 12] [--peak -1]\n        cues.json: [{\"t\": 1.2, \"sfx\": \"whoosh\", \"seed\": 2, \"duration\": 0.7, \"gain\": -6, \"pan\": 0.3, \"param\": {\"to\": 3000}}]\n        or {\"duration\": 12, \"cues\": [...]}; then: mgp render index.html --audio sfx.wav -o out.mp4\n  mgp sfx proof -o folder [--preset whoosh,pop]   WAV + spectrogram PNG + loudness (EBU R128) per preset\nOld Indonesian preset/parameter names still work (ketik = type, --param ke=... = to=...).": "mgp sfx: procedural, deterministic (seed) sound effects, 48 kHz WAV\n  mgp sfx list [--json]                         presets and their parameters\n  mgp sfx <preset> -o out.wav [--duration 0.8] [--seed 1] [--param k=v ...] [--gain -3] [--pan -0.5] [--bit 16|24|32]\n  mgp sfx mix cues.json -o sfx.wav [--duration 12] [--peak -1]\n        cues.json: [{\"t\": 1.2, \"sfx\": \"whoosh\", \"seed\": 2, \"duration\": 0.7, \"gain\": -6, \"pan\": 0.3, \"param\": {\"to\": 3000}}]\n        or {\"duration\": 12, \"cues\": [...]}; then: mgp render index.html --audio sfx.wav -o out.mp4\n  mgp sfx proof -o folder [--preset whoosh,pop]   WAV + spectrogram PNG + loudness (EBU R128) per preset\nOld Indonesian preset/parameter names still work (ketik = type, --param ke=... = to=...).",
+ "--param must look like key=value (got: \"{}\")": "--param must look like key=value (got: \"{}\")",
+ "ffmpeg showspectrumpic failed: ": "ffmpeg showspectrumpic failed: ",
+ "  (old names / aliases: {})": "  (old names / aliases: {})",
+ "Every preset: --duration, --seed (another sound that stays the same every time), --gain dB, --pan -1..1.": "Every preset: --duration, --seed (another sound that stays the same every time), --gain dB, --pan -1..1.",
+ "Name a cue file: mgp sfx mix cues.json -o sfx.wav": "Name a cue file: mgp sfx mix cues.json -o sfx.wav",
+ "{} cues, {} s → {}": "{} cues, {} s → {}",
+ "mux into the video: mgp render index.html --audio {} -o out.mp4": "mux into the video: mgp render index.html --audio {} -o out.mp4",
+ "{} {} s  {} LUFS  peak {} dBTP  RMS {} dBFS": "{} {} s  {} LUFS  peak {} dBTP  RMS {} dBFS",
+ "{} (seed {}, {} s, {}) → {}": "{} (seed {}, {} s, {}) → {}"
+}

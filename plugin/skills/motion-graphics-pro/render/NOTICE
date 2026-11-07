@@ -1,0 +1,194 @@
+Rekam
+Bagian dari paket Motion Graphics Pro. Hak cipta (c) 2026 Salim Muhammad.
+Lisensi: lihat ../../LICENSE.md.
+
+Seluruh kode Rekam ditulis sendiri. Tidak ada berkas kode HyperFrames yang disalin.
+
+Gagasan dan kompatibilitas
+--------------------------
+Rekam dibuat agar komposisi yang mengikuti kontrak HyperFrames tetap bisa dirender
+tanpa HyperFrames. Bentuk berikut mengikuti HyperFrames supaya komposisi lama tetap
+jalan; nama atribut dan perilakunya berasal dari dokumentasi HyperFrames:
+
+  - atribut komposisi: data-composition-id, data-composition-src, data-start,
+    data-duration, data-width, data-height, data-fps, data-media-start,
+    data-volume, data-playback-rate, data-has-audio, kelas .clip
+  - pendaftaran timeline: window.__timelines["<id>"] = timeline GSAP yang dijeda
+  - scene di dalam <template> dengan root #root
+  - event "hf-seek" dengan detail { time, waitUntil }
+  - window.__hfLottie, window.__hfAnime, window.__hf.buildReady
+  - prinsip "seek timeline yang dijeda per frame, bukan merekam real time"
+  - data-no-timeline untuk komposisi diam
+  - variabel komposisi: data-composition-variables (id, type, label, default,
+    tipe string/number/color/boolean/enum), data-var-text, data-var-src, var(--id),
+    data-variable-values pada host, window.__hyperframes.getVariables(), serta
+    semantik opsi --variables / --variables-file / --strict-variables
+  - window.__hyperframes.fitTextFontSize(teks, { fontFamily, fontWeight, maxWidth,
+    baseFontSize, minFontSize, step }) -> { fontSize }, beserta nilai bawaannya
+    (78 / 42 / 2; maxWidth 1600 lanskap, 900 potret)
+  - pemeriksaan tata letak: batas teks 2,6% sisi pendek (text_below_floor), teks
+    meluber/terpotong/keluar kanvas, temuan sesaat vs bertahan, dan atribut
+    data-layout-allow-overflow, data-layout-bleed, data-layout-ignore
+  - pembagian kerja media: grade/look, koreksi footage gelap atau datar, stilisasi
+    (blur, pixelate, halftone, palet), normalisasi loudness, potong latar dengan
+    lapisan plate, transkrip waktu per kata dengan bentuk [{id, text, start, end}]
+    dan peringatan bahwa model .en menerjemahkan bahasa lain
+Implementasi semua butir di atas ditulis ulang: rantai filter ffmpeg, daftar look,
+pencarian ukuran font, audit tata letak, dan penyelarasan transkrip ke naskah adalah
+kode Rekam sendiri.
+
+rekam lottie (src/lottie.mjs)
+-----------------------------
+Memakai pemutar dan pengekspor MGP.lottie (motion-graphics/lib/lottie/), ditulis sendiri
+dari deskripsi format Lottie di lottie-docs (LottieFiles, CC-BY 4.0). Tidak ada kode
+lottie-web (MIT, Airbnb/Bodymovin) yang disalin; lottie-web hanya dipakai sebagai
+pembanding di halaman uji paritas dan tidak dibundel.
+
+Rekam Studio (studio/, src/studio.mjs)
+--------------------------------------
+Editor visual Rekam ditulis sendiri, kode dan gaya tampilannya. Tidak ada kode, CSS,
+ikon, atau aset HyperFrames Studio yang disalin. Gagasan yang diambil dari HyperFrames
+Studio (Apache-2.0) dan dokumentasinya:
+  - editor timeline lokal di browser untuk komposisi HTML: pratinjau dengan scrubber,
+    trek per data-track-index, klip yang bisa digeser dan dipangkas, panel variabel
+  - menyunting langsung di kanvas pratinjau lalu menulis balik ke berkas sumber
+  - grid ketukan dari berkas beats/<audio>.json (beatTimes) untuk magnet linimasa
+Format animasi terstruktur (blok rekam-timeline), pemuatnya (studio/pemuat.js),
+transform dasar data-x/data-y/data-rotate/data-scale, keyframe "kunci", dan nama
+preset adalah rancangan Rekam sendiri.
+
+rekam sfx (src/sfx.mjs, ../../motion-graphics/lib/sfx/sfx.js)
+-------------------------------------------------------------
+Sintesis suara ditulis sendiri dalam JavaScript murni, tanpa sampel rekaman. Rumus dan
+algoritme umum yang diikuti (semuanya domain publik atau rumus terbuka):
+  - koefisien biquad dari "Audio EQ Cookbook" (Robert Bristow-Johnson)
+  - filter derau merah muda (pink noise) Paul Kellet
+  - struktur gema Schroeder/Freeverb (Jezar at Dreampoint, domain publik): 8 comb + 4 allpass
+  - generator acak mulberry32 (Tommy Ettinger, domain publik)
+Pengukuran loudness dan spektrogram memakai ffmpeg (ebur128, showspectrumpic).
+
+HyperFrames
+  Copyright HeyGen, Inc.
+  https://github.com/heygen-com/hyperframes
+  Dilisensikan di bawah Apache License, Version 2.0
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Gerak (src/gerak.js, salinan dari motion-graphics/lib/gerak/gerak.js)
+---------------------------------------------------------------------
+Mesin animasi/tween yang ditulis sendiri dari nol untuk paket ini; tidak ada kode GSAP yang
+disalin. Rekam melayani Gerak setiap kali komposisi meminta GSAP (CDN atau /__rekam/gsap/).
+Agar komposisi lama tetap jalan, Gerak meniru bentuk API publik GSAP 3 (nama fungsi seperti
+gsap.timeline/to/from/fromTo/set, bentuk vars, parameter posisi, nama ease seperti "power2.out").
+Perilakunya disamakan lewat uji kotak hitam (membandingkan keluaran, lihat lib/gerak/uji/);
+rumus ease adalah fungsi matematika standar (Penner dan sejenisnya).
+
+GSAP asli (opsional, tidak dibundel, tidak dibutuhkan)
+------------------------------------------------------
+  gsap              Standard "No Charge" License GreenSock / Webflow
+                    https://gsap.com/standard-license
+Hanya dipakai bila pengguna memasangnya sendiri (npm i gsap) dan menjalankan Rekam dengan
+--gsap-asli. Pemakaian GSAP tunduk pada lisensinya sendiri.
+Alat luar: ffmpeg/ffprobe (LGPL/GPL, dipasang terpisah oleh pengguna),
+Google Chrome atau Microsoft Edge (dipasang terpisah oleh pengguna).
+
+Klien CDP (src/cdp.mjs)
+-----------------------
+Ditulis sendiri di atas modul bawaan Node.js (child_process, pipa fd 3/4, WebSocket global),
+mengikuti spesifikasi Chrome DevTools Protocol yang terbuka
+(https://chromedevtools.github.io/devtools-protocol/). Tidak ada kode Playwright yang
+disalin. Daftar switch peluncuran Chromium (BASE_SWITCHES / BASE_DISABLED_FEATURES) disusun
+mengikuti nilai bawaan playwright-core 1.64 (Apache-2.0, Microsoft Corporation) agar hasil
+render sama dengan versi Rekam sebelumnya; yang diambil hanya daftar nama switch.
+
+Font bundel (fonts/)
+--------------------
+Dibundel dan didistribusikan ulang di bawah SIL Open Font License 1.1 (OFL-1.1). Teks lisensi
+lengkap ada di fonts/<nama>/OFL.txt (diambil dari github.com/google/fonts). Berkas WOFF2
+disimpan persis seperti yang dikirim Google Fonts (fonts.gstatic.com, subset latin/latin-ext,
+arabic untuk Noto Naskh Arabic); Rekam tidak mengubah, mengganti nama, atau menjual font ini
+secara terpisah. Font yang memakai Reserved Font Name tetap memakai nama aslinya karena tidak
+dimodifikasi. Daftar berkas dan URL asal: fonts/fonts.json.
+  Fraunces            Copyright 2018 The Fraunces Project Authors (github.com/undercasetype/Fraunces)
+  Geist, Geist Mono   Copyright 2024 The Geist Project Authors (github.com/vercel/geist-font)
+  Cinzel              Copyright 2020 The Cinzel Project Authors (github.com/NDISCOVER/Cinzel)
+  Inter               Copyright 2020 The Inter Project Authors (github.com/rsms/inter)
+  Poppins             Copyright 2020 The Poppins Project Authors (github.com/itfoundry/Poppins)
+  Space Grotesk       Copyright 2020 The Space Grotesk Project Authors (github.com/floriankarsten/space-grotesk)
+  Playfair Display    Copyright 2017 The Playfair Display Project Authors (github.com/clauseggers/Playfair-Display),
+                      Reserved Font Name "Playfair Display"
+  DM Serif Display    Copyright 2014-2018 Adobe, Reserved Font Name 'Source'; Copyright 2019 Google LLC
+  Caveat              Copyright 2014 The Caveat Project Authors (github.com/googlefonts/caveat)
+  Press Start 2P      Copyright 2012 The Press Start 2P Project Authors (cody@zone38.net),
+                      Reserved Font Name "Press Start 2P"
+  Noto Sans           Copyright 2022 The Noto Project Authors (github.com/notofonts/latin-greek-cyrillic)
+  Noto Naskh Arabic   Copyright 2022 The Noto Project Authors (github.com/notofonts/arabic)
+  JetBrains Mono      Copyright 2020 The JetBrains Mono Project Authors (github.com/JetBrains/JetBrainsMono)
+  Montserrat          Copyright 2024 The Montserrat.Git Project Authors (github.com/JulietaUla/Montserrat)
+  Lora                Copyright 2011 The Lora Project Authors (github.com/cyrealtype/Lora-Cyrillic),
+                      Reserved Font Name "Lora"
+  Nunito              Copyright 2014 The Nunito Project Authors (github.com/googlefonts/nunito)
+  Bebas Neue          Copyright 2010 Dharma Type
+  Anton               Copyright 2020 The Anton Project Authors (github.com/googlefonts/AntonFont)
+  Oswald              Copyright 2016 The Oswald Project Authors (github.com/googlefonts/OswaldFont)
+  Archivo Black       Copyright 2017 The Archivo Black Project Authors (github.com/Omnibus-Type/ArchivoBlack)
+  Patrick Hand        Copyright 2010-2012 Patrick Wagesreiter
+  Cormorant Garamond  Copyright 2015 The Cormorant Project Authors (github.com/CatharsisFonts/Cormorant)
+  Source Serif 4      Copyright 2014 The Source Serif 4 Project Authors (github.com/adobe-fonts/source-serif)
+
+Alat Python opsional (tidak dibundel; dipasang sendiri oleh pengguna lewat pip)
+------------------------------------------------------------------------------
+  rembg            MIT          Daniel Gatis, https://github.com/danielgatis/rembg
+                   (model U2-Net, Apache-2.0, Xuebin Qin dkk.; diunduh rembg saat dipakai)
+  onnxruntime      MIT          Microsoft Corporation
+  faster-whisper   MIT          SYSTRAN, https://github.com/SYSTRAN/faster-whisper
+                   (model Whisper, MIT, OpenAI; diunduh dari Hugging Face saat dipakai)
+  numpy, Pillow    BSD / HPND   untuk kunci magenta (logika dari scripts/kunci_magenta.py)
+  whisper.cpp      MIT          ggml-org, https://github.com/ggml-org/whisper.cpp (alternatif)
+Rekam hanya memanggil alat ini bila tersedia; tidak ada kode atau model yang disalin.
+
+rekam suara (src/suara.mjs, py/suara_mesin.py, ../suara/)
+--------------------------------------------------------
+Kode, teks bacaan, dan pemeriksa kalimat izin ditulis sendiri. Mesin di bawah ini tidak
+dibundel; pengguna memasangnya lewat pip, dan bobotnya diunduh dari Hugging Face saat dipakai.
+Lisensi dicek dari repo dan kartu model pada 05-11-2026:
+  chatterbox-tts   MIT         Resemble AI. Kode https://github.com/resemble-ai/chatterbox (LICENSE),
+                               bobot https://huggingface.co/ResembleAI/chatterbox (license: mit):
+                               Chatterbox Multilingual t3_mtl23ls_v2, s3gen, ve
+  resemble-perth   MIT         Resemble AI, https://github.com/resemble-ai/Perth (watermark tak
+                               terdengar yang dipasang Chatterbox di setiap keluaran)
+  OpenVoice V2     MIT         MyShell.ai. Kode https://github.com/myshell-ai/OpenVoice (LICENSE),
+                               bobot https://huggingface.co/myshell-ai/OpenVoiceV2 (license: mit);
+                               hanya tone color converter yang dipakai
+  resemblyzer      Apache-2.0  Resemble AI, https://github.com/resemble-ai/Resemblyzer (kemiripan penutur)
+  webrtcvad-wheels MIT         paket jadi webrtcvad (kode VAD WebRTC, BSD-3, Google)
+  faster-whisper   MIT         SYSTRAN (cek kalimat izin dan WER); model Whisper MIT (OpenAI)
+  PyTorch          BSD-3       https://github.com/pytorch/pytorch
+Dicek tetapi tidak dipakai: kNN-VC (MIT, https://github.com/bshall/knn-vc; WavLM-Large MIT,
+Microsoft, https://github.com/microsoft/unilm; lisensi dicek, belum diuji) dan Piper id_ID-news_tts
+(lisensi dataset tidak dinyatakan jelas di kartu model,
+https://huggingface.co/rhasspy/piper-voices/tree/main/id/id_ID/news_tts/medium).
+Sengaja tidak dipakai karena lisensi bobotnya tidak mengizinkan pemakaian komersial: XTTS (CPML),
+bobot F5-TTS (CC-BY-NC), Fish-Speech, MMS-TTS (CC-BY-NC).
+ElevenLabs adalah layanan berbayar pihak ketiga. Rekam hanya memanggil API-nya dengan kunci milik
+pengguna (env ELEVENLABS_API_KEY); pemakaiannya tunduk pada ketentuan ElevenLabs.
+
+rekam gambar (src/gambar.mjs, py/gambar_mesin.py, contoh/kit-rig.html)
+-----------------------------------------------------------------------
+Kode, resep prompt, templat slot, pemotong (iris) dan rig contoh ditulis sendiri. Tidak ada model
+yang dibundel. Lisensi dan ketentuan dicek pada 05-11-2026:
+  FLUX.2 [klein] 4B   Apache-2.0  Black Forest Labs, https://huggingface.co/black-forest-labs/FLUX.2-klein-4B
+  FLUX.1 [schnell]    Apache-2.0  Black Forest Labs, https://huggingface.co/black-forest-labs/FLUX.1-schnell
+                                  (cermin tanpa gate: https://huggingface.co/unsloth/FLUX.1-schnell)
+  GGUF                            unsloth/FLUX.2-klein-4B-GGUF, unsloth/Qwen3-4B-GGUF (Qwen3 Apache-2.0),
+                                  city96/FLUX.1-schnell-gguf, city96/t5-v1_1-xxl-encoder-gguf
+  diffusers, transformers, accelerate, huggingface_hub  Apache-2.0  Hugging Face
+  gguf (gguf-py)      MIT         ggml-org
+  scipy (opsional)    BSD-3       pelabelan komponen di iris; tanpa scipy dipakai BFS numpy sendiri
+Layanan (dipanggil dengan kunci pengguna, atau tanpa kunci untuk Space publik):
+  Hugging Face Space black-forest-labs/FLUX.2-klein-4B dan /FLUX.1-schnell (ZeroGPU), API Gradio
+  Cloudflare Workers AI @cf/black-forest-labs/flux-2-klein-4b dan flux-1-schnell; ketentuan BFL
+    https://bfl.ai/legal/terms-of-service (keluaran milik pengguna; dilarang dipakai melatih model lain)
+  Pollinations gen.pollinations.ai (Myceli.AI OÜ); ketentuan: lisensi model berlaku, cek sebelum komersial
+Sengaja tidak dipakai: SDXL-Turbo (sai-nc-community), FLUX.1 Kontext [dev] dan FLUX.2 [klein] 9B
+(non-komersial), Gemini API gambar (tidak ada free tier). Higgsfield hanya disebut sebagai panduan;
+rekam gambar tidak memanggil API berbayar.

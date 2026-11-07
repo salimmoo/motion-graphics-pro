@@ -1,0 +1,32 @@
+<!-- Block backgrounds/liquid · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="backgrounds/liquid" data-start="0" data-duration="8" data-track-index="0" class="blk blk-backgrounds-liquid">
+<script type="application/json" data-block-props>
+{"color": "#0b5c7a", "inner_color": "#071a33", "highlight_color": "#c9f6ff", "wave": 1, "speed": 1, "resolution": 0.5}
+</script>
+</div>
+<style>
+.blk-backgrounds-liquid{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-backgrounds-liquid canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P;
+  var cv = BLOCK.el("canvas", null, k.root);
+  var r = Math.max(0.1, Math.min(1, +P.resolution || 0.5));
+  cv.width = Math.round(k.w * r); cv.height = Math.round(k.h * r);
+  var sh = BLOCK.shader(cv, [
+    "float H(vec2 p,float t){return u_gl*(.18*sin(p.x*2.1+t*1.1)+.14*sin(p.y*2.7-t*1.3+p.x*.6)+.08*sin((p.x-p.y)*4.3+t*1.7)+.22*vnoise(p*1.7+vec2(t*.35,-t*.25)));}",
+    "void main(){vec2 uv=gl_FragCoord.xy/u_res;float ar=u_res.x/u_res.y;float t=u_t*u_kec;",
+    "float dz=1./(1.08-uv.y*.86);vec2 p=vec2((uv.x-.5)*ar*dz,dz*1.6);float e=.02*dz;",
+    "float h0=H(p,t);float hx=H(p+vec2(e,0.),t);float hy=H(p+vec2(0.,e),t);vec3 n=normalize(vec3(-(hx-h0)/e,1.,-(hy-h0)/e*1.4));",
+    "vec3 V=normalize(vec3(0.,.55,-1.));vec3 L=normalize(vec3(-.35,.8,.55));float dif=max(dot(n,L),0.);",
+    "vec3 R=reflect(-L,n);float sp=pow(max(dot(R,-V*vec3(1.,-1.,1.)),0.),48.);float fr=pow(1.-max(n.y,0.),2.);",
+    "vec3 col=mix(u_c,u_cd,.35-h0*.8);col*=.45+.75*dif;col+=u_cs*(sp*1.2+fr*.25);",
+    "col=mix(col,u_cd,smoothstep(1.8,5.5,dz));",
+    "col+=(h21(gl_FragCoord.xy+fract(u_t))-0.5)/128.;gl_FragColor=vec4(col,1.);}"
+  ].join("\n"), { u_c: BLOCK.vec3(P.color), u_cd: BLOCK.vec3(P.inner_color), u_cs: BLOCK.vec3(P.highlight_color), u_gl: +P.wave, u_kec: +P.speed });
+  if (!sh.ok) { cv.remove(); k.root.style.background = "linear-gradient(180deg," + P.inner_color + "," + P.color + ")"; return; }
+  BLOCK.onTime(k.tl, function (t) { sh.draw(t); }, k.dur);
+});
+</script>

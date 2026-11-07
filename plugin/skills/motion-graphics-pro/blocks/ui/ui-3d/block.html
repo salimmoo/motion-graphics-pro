@@ -1,0 +1,53 @@
+<!-- Block ui/ui-3d · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="ui/ui-3d" data-start="0" data-duration="5" data-track-index="30" class="blk blk-ui-ui-3d">
+<script type="application/json" data-block-props>
+{"mode": "skew", "title": "Ringkasan Penjualan", "stat": [["Pendapatan", "Rp84 jt"], ["Pesanan", "1.284"], ["Pelanggan baru", "312"]], "bar": [42, 58, 51, 70, 66, 82, 94], "accent_color": "#4f7cff", "surface": "#ffffff", "panel_bg": "#eef1f7", "ink": "#1a2030", "font": "Inter:wght@400;500;600;700;800"}
+</script>
+</div>
+<style>
+.blk-ui-ui-3d{position:absolute;inset:0;pointer-events:none;overflow:hidden;font-family:"Inter",system-ui,sans-serif;perspective:1700px}
+.blk-ui-ui-3d .dash{position:absolute;left:50%;top:50%;transform-style:preserve-3d;box-sizing:border-box}
+.blk-ui-ui-3d .pn{position:absolute;box-sizing:border-box;overflow:hidden}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, E = BLOCK.el, W = k.w, H = k.h, ac = P.accent_color, ink = P.ink, mode = P.mode, lebar = W > H * 1.2;
+  var dw = Math.min(W * (lebar ? 0.78 : 0.84), H * (lebar ? 1.3 : 0.62)), dh = lebar ? dw * 0.6 : dw * 1.45, u = dw / 1400, px = function (v) { return v * u + "px"; };
+  var dash = E("div", { class: "dash", style: "width:" + dw + "px;height:" + dh + "px;margin:" + (-dh / 2) + "px 0 0 " + (-dw / 2) + "px;border-radius:" + px(28) + ";background:" + P.panel_bg + ";box-shadow:0 " + px(50) + " " + px(120) + " rgba(0,0,0,.45)" }, k.root);
+  var pan = [];
+  function panel(x, y, w, h, isi) { var p = E("div", { class: "pn", style: "left:" + x + "%;top:" + y + "%;width:" + w + "%;height:" + h + "%;border-radius:" + px(22) + ";background:" + P.surface + ";padding:" + px(28) + ";color:" + ink + ";box-shadow:0 " + px(6) + " " + px(20) + " rgba(20,30,60,.07)" }, dash); if (isi) isi(p); pan.push(p); return p; }
+  var hd = panel(2.5, 3.5, 95, lebar ? 12 : 7, function (p) { p.style.display = "flex"; p.style.alignItems = "center"; p.style.justifyContent = "space-between"; E("div", { style: "font-weight:800;font-size:" + px(lebar ? 40 : 52) }, p, BLOCK.esc(P.title)); E("div", { style: "width:" + px(64) + ";height:" + px(64) + ";border-radius:50%;background:" + ac }, p); });
+  var top0 = lebar ? 19 : 13;
+  P.stat.forEach(function (st, i) {
+    var x = lebar ? 2.5 + i * 32.33 : 2.5, y = lebar ? top0 : top0 + i * 11, w = lebar ? 30.33 : 95, h = lebar ? 24 : 9.5;
+    panel(x, y, w, h, function (p) { E("div", { style: "font-size:" + px(lebar ? 24 : 34) + ";opacity:.55" }, p, BLOCK.esc(st[0])); E("div", { style: "font-weight:800;font-size:" + px(lebar ? 60 : 64) + ";margin-top:" + px(8) + ";letter-spacing:-.02em;" + (i === 0 ? "color:" + ac : "") }, p, BLOCK.esc(st[1])); });
+  });
+  var cy = lebar ? 46 : 47, bars = [];
+  panel(2.5, cy, lebar ? 61 : 95, lebar ? 50 : 26, function (p) {
+    E("div", { style: "font-weight:700;font-size:" + px(lebar ? 26 : 34) }, p, "Tren mingguan");
+    var g = E("div", { style: "position:absolute;left:" + px(28) + ";right:" + px(28) + ";bottom:" + px(28) + ";top:" + px(lebar ? 90 : 100) + ";display:flex;align-items:flex-end;gap:" + px(18) }, p);
+    P.bar.forEach(function (v, i) { bars.push(E("div", { style: "flex:1;height:" + v + "%;border-radius:" + px(10) + " " + px(10) + " " + px(4) + " " + px(4) + ";transform-origin:50% 100%;background:" + (i === P.bar.length - 1 ? ac : BLOCK.mix(ac, "#ffffff", 0.65)) }, g)); });
+  });
+  panel(lebar ? 65.5 : 2.5, lebar ? cy : 75.5, lebar ? 32 : 95, lebar ? 50 : 21, function (p) {
+    E("div", { style: "font-weight:700;font-size:" + px(lebar ? 26 : 34) + ";margin-bottom:" + px(12) }, p, "Pesanan terbaru");
+    for (var i = 0; i < 4; i++) { var r = E("div", { style: "display:flex;align-items:center;gap:" + px(14) + ";height:" + px(lebar ? 74 : 60) + ";border-top:1px solid #eceff4" }, p); E("div", { style: "width:" + px(40) + ";height:" + px(40) + ";border-radius:" + px(12) + ";background:" + BLOCK.mix(ac, "#ffffff", 0.5 + i * 0.1) }, r); E("div", { style: "height:" + px(14) + ";width:" + (60 - i * 8) + "%;border-radius:99px;background:#e1e5ec" }, r); }
+  });
+  if (mode === "fold") {
+    // tiap panel terlipat turun dari engsel atasnya
+    tl.fromTo(dash, { autoAlpha: 0, scale: 0.96 }, { autoAlpha: 1, scale: 1, duration: 0.5, ease: "power2.out" }, 0);
+    tl.fromTo(pan, { rotationX: -95, autoAlpha: 0, transformOrigin: "50% 0%" }, { rotationX: 0, autoAlpha: 1, duration: 0.9, ease: "back.out(1.4)", stagger: 0.12 }, 0.3);
+  } else if (mode === "stack") {
+    // lapisan terurai di kedalaman lalu merapat jadi satu
+    tl.fromTo(dash, { rotationX: 40, rotationZ: -18, scale: 0.62, autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4 }, 0)
+      .to(dash, { rotationX: 0, rotationZ: 0, scale: 1, duration: 1.4, ease: "expo.inOut" }, 1.5);
+    pan.forEach(function (p, i) { tl.fromTo(p, { z: 0 }, { z: (70 + i * 45) * u * 2, duration: 1.0, ease: "power3.out" }, 0.2 + i * 0.04).to(p, { z: 0, duration: 1.1, ease: "expo.inOut" }, 1.6 + i * 0.03); });
+  } else {
+    // dasbor miring jauh di bidang, lalu terangkat dan merata menghadap kamera
+    tl.fromTo(dash, { rotationX: 62, y: H * 0.35, scale: 0.8, autoAlpha: 0 }, { autoAlpha: 1, duration: 0.5 }, 0)
+      .to(dash, { rotationX: 0, y: 0, scale: 1, duration: 2.4, ease: "expo.out" }, 0.1);
+    tl.fromTo(pan, { z: 60 * u, autoAlpha: 0 }, { z: 0, autoAlpha: 1, duration: 0.8, ease: "power3.out", stagger: 0.07 }, 0.4);
+  }
+  tl.fromTo(bars, { scaleY: 0 }, { scaleY: 1, duration: 0.7, ease: "back.out(1.6)", stagger: 0.06 }, mode === "stack" ? 2.6 : 1.3);
+  tl.fromTo(dash, { y: 0 }, { y: -10 * k.s, duration: Math.max(0.5, D - 3), ease: "sine.inOut", immediateRender: false }, 3);
+}, { font: true });
+</script>

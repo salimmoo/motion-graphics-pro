@@ -1,0 +1,30 @@
+<!-- Block backgrounds/falling-lines · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="backgrounds/falling-lines" data-start="0" data-duration="8" data-track-index="0" class="blk blk-backgrounds-falling-lines">
+<script type="application/json" data-block-props>
+{"color": "#ffffff", "bg": "#000000", "count": 70, "thickness": 3, "length": 0.35, "speed": 1, "resolution": 0.5}
+</script>
+</div>
+<style>
+.blk-backgrounds-falling-lines{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-backgrounds-falling-lines canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P;
+  var cv = BLOCK.el("canvas", null, k.root);
+  var r = Math.max(0.1, Math.min(1, +P.resolution || 0.5));
+  cv.width = Math.round(k.w * r); cv.height = Math.round(k.h * r);
+  var sh = BLOCK.shader(cv, [
+    "void main(){vec2 uv=gl_FragCoord.xy/u_res;float t=u_t*u_kec;float x=uv.x*u_n;float i=floor(x);",
+    "float dpx=abs(fract(x)-.5)*u_res.x/u_n;float lw=max(u_tb*u_res.y/1080.,.6);float core=smoothstep(lw,lw*.3,dpx);float halo=exp(-dpx/(lw*4.))*.18;",
+    "vec3 col=u_lat;float aktif=step(.25,h21(vec2(i,9.)));",
+    "for(int j=0;j<2;j++){float fj=float(j);float sp=.25+.75*h21(vec2(i,1.+fj*13.));float ph=h21(vec2(i,7.+fj*5.));float ln=u_pj*(.5+h21(vec2(i,3.+fj)));",
+    "float head=1.25-fract(t*sp*.3+ph)*(1.5+ln);float d=uv.y-head;float tr=d>=0.?exp(-d/ln*3.)*step(d,ln*1.6):0.;",
+    "float br=.45+.55*h21(vec2(i,11.+fj));col+=u_w*tr*br*(core+halo)*aktif*(1.-.55*fj);}",
+    "col+=(h21(gl_FragCoord.xy+fract(u_t))-0.5)/128.;gl_FragColor=vec4(col,1.);}"
+  ].join("\n"), { u_w: BLOCK.vec3(P.color), u_lat: BLOCK.vec3(P.bg), u_n: Math.max(4, Math.round(P.count)), u_tb: +P.thickness, u_pj: +P.length, u_kec: +P.speed });
+  if (!sh.ok) { cv.remove(); k.root.style.background = P.bg; return; }
+  BLOCK.onTime(k.tl, function (t) { sh.draw(t); }, k.dur);
+});
+</script>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Feather Highlight · block example accents/feather-highlight</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="5.5">
+<div id="adegan" class="adegan ad-ui"><div class="bar"></div><div class="side"></div><div class="kartu" style="left:22%;top:12%;width:36%;height:38%"></div><div class="kartu" style="left:61%;top:12%;width:35%;height:38%"></div><div class="kartu" style="left:22%;top:54%;width:74%;height:40%"></div><div id="tombol-contoh" class="tombol" style="left:74%;top:40%;width:18%;height:7%">Simpan</div></div>
+<!-- Block accents/feather-highlight · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-feather-highlight" data-block="accents/feather-highlight" data-start="0" data-duration="5" data-track-index="30" class="blk blk-accents-feather-highlight">
+<script type="application/json" data-block-props>
+{"dot": [{"x": 40, "y": 31, "lebar": 36, "tinggi": 38, "teks": "Ringkasan minggu ini"}, {"x": 83, "y": 43.5, "lebar": 18, "tinggi": 7, "teks": "Simpan perubahan"}, {"x": 59, "y": 74, "lebar": 74, "tinggi": 40, "teks": "Riwayat transaksi"}], "dark": 0.72, "feather": 0.35, "loose": 1.25, "slide_duration": 0.8, "ease": "power3.inOut", "color": "#05060b", "label_color": "#ffffff", "text_color": "#141622", "font": "Inter:wght@600", "size": 30}
+</script>
+<div class="blk-tirai"></div>
+<div class="blk-kt"></div>
+</div>
+<style>
+.blk-accents-feather-highlight{position:absolute;inset:0;pointer-events:none;--x:50%;--y:50%;--rx:20%;--ry:20%}
+.blk-accents-feather-highlight .blk-tirai{position:absolute;inset:0}
+.blk-accents-feather-highlight .blk-kt{position:absolute;left:0;top:0;white-space:nowrap;font-weight:600}
+</style>
+<script>
+BLOCK.mount("blk-feather-highlight", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, fs = function (v) { return (v * s).toFixed(1) + "px"; };
+  var tirai = R.querySelector(".blk-tirai"), kt = R.querySelector(".blk-kt"), rb = R.getBoundingClientRect(), sk = k.w / (rb.width || k.w);
+  // setiap titik: selektor elemen host, atau {x, y, lebar, tinggi, teks} dalam persen
+  var T = (P.dot || []).map(function (q) {
+    var o = typeof q === "string" ? { sel: q } : q, el = o.sel && BLOCK.find(o.sel);
+    if (el) { var a = el.getBoundingClientRect(); return { x: (a.left - rb.left + a.width / 2) * sk, y: (a.top - rb.top + a.height / 2) * sk, rx: a.width * sk * 0.5, ry: a.height * sk * 0.5, teks: o.teks || "" }; }
+    return { x: k.w * (+o.x || 50) / 100, y: k.h * (+o.y || 50) / 100, rx: k.w * (+o.lebar || 20) / 200, ry: k.h * (+o.tinggi || 20) / 200, teks: o.teks || "" };
+  });
+  if (!T.length) T = [{ x: k.w / 2, y: k.h / 2, rx: k.w * 0.15, ry: k.h * 0.15, teks: "" }];
+  var n = T.length, t0 = 0.5, tEnd = k.dur - 0.6, seg = (tEnd - t0) / n, gl = Math.min(P.slide_duration, seg * 0.6), ez = gsap.parseEase(P.ease);
+  var pad = P.loose, bulu = BLOCK.clamp(P.feather, 0.02, 0.95), warn = BLOCK.rgba(P.color, P.dark);
+  kt.style.cssText += ";font-family:" + BLOCK.family(P.font) + ";font-size:" + fs(P.size) + ";color:" + P.text_color + ";background:" + P.label_color + ";padding:" + fs(P.size * 0.45) + " " + fs(P.size * 0.8) + ";border-radius:" + fs(P.size) + ";box-shadow:0 " + fs(10) + " " + fs(30) + " rgba(0,0,0,.35)";
+  BLOCK.onTime(tl, function (t) {
+    // indeks titik aktif + geseran halus ke titik berikutnya
+    var j = BLOCK.clamp(Math.floor((t - t0) / seg), 0, n - 1), u = j < n - 1 ? ez(BLOCK.progress(t, t0 + (j + 1) * seg - gl, t0 + (j + 1) * seg)) : 0;
+    var A = T[j], B = T[Math.min(j + 1, n - 1)], L = function (a, b) { return a + (b - a) * u; };
+    var x = L(A.x, B.x), y = L(A.y, B.y), rx = L(A.rx, B.rx) * pad, ry = L(A.ry, B.ry) * pad;
+    var masuk = BLOCK.smooth(BLOCK.progress(t, 0, t0)), keluar = 1 - BLOCK.smooth(BLOCK.progress(t, tEnd, k.dur - 0.05)), on = masuk * keluar;
+    var grow = 1 + 1.8 * (1 - on);                                  // lubang membesar saat tirai belum/sudah turun
+    R.style.setProperty("--x", x.toFixed(1) + "px"); R.style.setProperty("--y", y.toFixed(1) + "px");
+    R.style.setProperty("--rx", (rx * grow).toFixed(1) + "px"); R.style.setProperty("--ry", (ry * grow).toFixed(1) + "px");
+    tirai.style.background = "radial-gradient(var(--rx) var(--ry) at var(--x) var(--y),rgba(0,0,0,0) " + ((1 - bulu) * 100).toFixed(1) + "%," + warn + " 100%)";
+    tirai.style.opacity = on.toFixed(3);
+    // label menempel di bawah lubang; berganti saat geseran berada di tengah
+    var Q = u > 0.5 ? B : A, mid = Math.abs(u - 0.5) * 2, op = on * (j < n - 1 ? BLOCK.smooth(mid) : 1);
+    kt.textContent = Q.teks; kt.style.display = Q.teks ? "block" : "none";
+    var kw = kt.offsetWidth, ly = y + ry * 1.05 + 18 * s;
+    if (ly + kt.offsetHeight > k.h * 0.96) ly = y - ry * 1.05 - kt.offsetHeight - 18 * s;
+    kt.style.transform = "translate(" + BLOCK.clamp(x - kw / 2, 12 * s, k.w - kw - 12 * s).toFixed(1) + "px," + ly.toFixed(1) + "px)";
+    kt.style.opacity = op.toFixed(3);
+  }, k.dur);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 5.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5.5);
+</script>
+</body>
+</html>

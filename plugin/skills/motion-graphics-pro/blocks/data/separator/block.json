@@ -1,0 +1,156 @@
+{
+ "id": "data/separator",
+ "name": "Separator",
+ "name_id": "Garis Pemisah",
+ "category": "data",
+ "description": {
+  "id": "Garis pemisah struktural setipis satu piksel, horizontal atau vertikal, yang tersingkap dari awal, tengah, atau akhir. Opsional tik di ujung dan label kecil; aman di-seek ke waktu mana pun.",
+  "en": "A one-pixel structural separator, horizontal or vertical, revealed from start, centre or end. Optional end ticks and a small label; seek-safe at any time."
+ },
+ "tags": [
+  "data",
+  "garis",
+  "pemisah",
+  "separator",
+  "divider",
+  "tata-letak"
+ ],
+ "props": {
+  "orientation": {
+   "default": "horizontal",
+   "type": "enum",
+   "options": [
+    "horizontal",
+    "vertical"
+   ],
+   "aliases": [
+    "orientasi"
+   ],
+   "option_aliases": {
+    "vertikal": "vertical"
+   }
+  },
+  "origin": {
+   "default": "start",
+   "type": "enum",
+   "options": [
+    "start",
+    "center",
+    "end"
+   ],
+   "hint": "Dari mana garis tersingkap",
+   "aliases": [
+    "asal"
+   ],
+   "option_aliases": {
+    "awal": "start",
+    "tengah": "center",
+    "akhir": "end"
+   }
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Titik tengah (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 64,
+   "type": "number",
+   "hint": "Titik tengah (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "length": {
+   "default": 60,
+   "type": "number",
+   "hint": "% lebar (atau tinggi bila vertikal)",
+   "aliases": [
+    "panjang"
+   ]
+  },
+  "thickness": {
+   "default": 1,
+   "type": "number",
+   "hint": "px pada 1080",
+   "aliases": [
+    "ketebalan"
+   ]
+  },
+  "end": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Tik kecil di kedua ujung",
+   "aliases": [
+    "ujung"
+   ]
+  },
+  "label": {
+   "default": "Bagian 02",
+   "type": "text",
+   "hint": "Kosongkan bila tidak perlu"
+  },
+  "label_size": {
+   "default": 22,
+   "type": "number",
+   "aliases": [
+    "ukuran_label"
+   ]
+  },
+  "enter_duration": {
+   "default": 0.9,
+   "type": "number",
+   "aliases": [
+    "durasi_masuk"
+   ]
+  },
+  "ease": {
+   "default": "power3.inOut",
+   "type": "ease"
+  },
+  "exit": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "keluar"
+   ]
+  },
+  "color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "font": {
+   "default": "JetBrains Mono:wght@500",
+   "type": "font"
+  }
+ },
+ "duration": 3,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "data/pemisah",
+  "separator"
+ ],
+ "example": {
+  "bg": "text",
+  "block_duration": 4,
+  "props": {
+   "position_y": 71,
+   "length": 46
+  },
+  "font": [
+   "JetBrains Mono:wght@500"
+  ]
+ }
+}

@@ -1,0 +1,155 @@
+{
+ "id": "subtitles/texture",
+ "name": "Texture",
+ "name_id": "Subtitle Bertekstur",
+ "category": "subtitles",
+ "description": {
+  "id": "Huruf besar kapital diisi tekstur prosedural yang mengalir: lava, marmer, logam, kayu, beton, atau batu. Tekstur dibuat di kanvas, tanpa gambar luar.",
+  "en": "Large uppercase words filled with a flowing procedural texture: lava, marble, metal, wood, concrete or rock. Textures are generated on canvas, no external images."
+ },
+ "tags": [
+  "subtitle",
+  "caption",
+  "tekstur",
+  "mask",
+  "lava",
+  "marmer",
+  "logam",
+  "subtitles",
+  "texture"
+ ],
+ "props": {
+  "text": {
+   "default": "Kekuatan lahir dari tekanan yang panjang",
+   "type": "text",
+   "hint": "Teks subtitle; *kata* = kata kunci (bila didukung). Dipakai bila kata kosong",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "words": {
+   "default": [],
+   "type": "timed-words",
+   "hint": "[{teks, mulai, akhir}] dari transkrip; kosong = dihitung dari teks",
+   "aliases": [
+    "kata"
+   ]
+  },
+  "kps": {
+   "default": 1.8,
+   "type": "number",
+   "hint": "Kata per detik bila tanpa transkrip"
+  },
+  "max_words": {
+   "default": 2,
+   "type": "number",
+   "hint": "Maksimum kata per halaman subtitle",
+   "aliases": [
+    "maks_kata"
+   ]
+  },
+  "font": {
+   "default": "Anton:wght@400",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "size": {
+   "default": 210,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "bottom": {
+   "default": 36,
+   "type": "number",
+   "hint": "Jarak dari bawah (%)",
+   "aliases": [
+    "bawah"
+   ]
+  },
+  "uppercase": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "huruf_besar"
+   ]
+  },
+  "texture": {
+   "default": "lava",
+   "type": "enum",
+   "options": [
+    "lava",
+    "marble",
+    "metal",
+    "wood",
+    "concrete",
+    "stone"
+   ],
+   "aliases": [
+    "tekstur"
+   ],
+   "option_aliases": {
+    "marmer": "marble",
+    "logam": "metal",
+    "kayu": "wood",
+    "beton": "concrete",
+    "batu": "stone"
+   }
+  },
+  "speed": {
+   "default": 40,
+   "type": "number",
+   "hint": "Kecepatan aliran tekstur (px/detik)",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "texture_scale": {
+   "default": 1,
+   "type": "number",
+   "aliases": [
+    "skala_tekstur"
+   ]
+  },
+  "shadow": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "bayangan"
+   ]
+  },
+  "seed": {
+   "default": 5,
+   "type": "number",
+   "hint": "Seed pola tekstur"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "subtitle/tekstur",
+  "caption-texture"
+ ],
+ "example": {
+  "bg": "photo",
+  "aspect": "9:16",
+  "font": [
+   "Anton:wght@400"
+  ]
+ }
+}

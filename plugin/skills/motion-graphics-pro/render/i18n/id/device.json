@@ -1,0 +1,14 @@
+{
+ "Apple Silicon (unified memory)": "Apple Silicon (memori terpadu)",
+ "this ffmpeg has no {}": "ffmpeg ini tidak punya {}",
+ "NVIDIA driver too old for this ffmpeg (needs >= {}); update the driver, or point MGP_FFMPEG to ffmpeg 7.x/8.0 [{}]": "driver NVIDIA terlalu lama untuk ffmpeg ini (butuh >= {}); perbarui driver, atau arahkan MGP_FFMPEG ke ffmpeg 7.x/8.0 [{}]",
+ "code {}": "kode {}",
+ "libx264 (CPU, deterministic)": "libx264 (CPU, deterministik)",
+ "unknown --encoder \"{}\" (auto, cpu, nvenc, qsv, amf, videotoolbox)": "--encoder tidak dikenal \"{}\" (auto, cpu, nvenc, qsv, amf, videotoolbox)",
+ "nvenc: free VRAM {} GB, needs ~{} GB": "nvenc: VRAM kosong {} GB, butuh ~{} GB",
+ "{} ({}, test encode passed in {} ms)": "{} ({}, uji encode lolos {} ms)",
+ "this ffmpeg has no hardware H.264 encoder": "tidak ada encoder hardware H.264 di ffmpeg ini",
+ "libx264 (CPU); hardware encoder cannot be used: {}": "libx264 (CPU); encoder hardware tidak bisa dipakai: {}",
+ "GPU free after {} s": "GPU bebas setelah {} s",
+ "GPU in use by '{}' (PID {}); waiting at most {} s...": "GPU sedang dipakai '{}' (PID {}); menunggu maks {} s..."
+}

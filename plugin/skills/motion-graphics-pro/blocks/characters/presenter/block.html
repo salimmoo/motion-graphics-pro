@@ -1,0 +1,31 @@
+<!-- Block characters/presenter · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="characters/presenter" data-start="0" data-duration="6" data-track-index="6" class="blk blk-characters-presenter">
+<script type="application/json" data-block-props>
+{"text": "Halo semua, hari ini kita belajar membaca peta.", "subtitle": true, "shirt_color": "#6f8a64", "skin_color": "#e8b48f", "hair_color": "#2a1d1a", "bg_color": "#e9a46a", "position_x": 50, "position_y": 50, "size": 100, "start": 0.3}
+</script>
+</div>
+<style>
+.blk-characters-presenter{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.blk-characters-presenter .blk-wadah{position:absolute;transform:translate(-50%,-50%);overflow:hidden}
+.blk-characters-presenter canvas{position:absolute;inset:0;width:100% !important;height:100% !important}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+var P = k.P;
+  if (!window.MGP || !MGP.lipsync) { console.error("[blok] characters/presenter needs lib:mgp.js"); return; }
+  var sisi = Math.round(Math.min(k.w, k.h) * (+P.size || 100) / 100), f = sisi / 720;
+  var wl = P.bg_color, c = function (b, t) { return BLOCK.mix(wl, b, t); };
+  var bgs = [c("#fff3dd", 0.45), wl, c("#8a4a55", 0.5), c("#2e1828", 0.62), c("#2e1828", 0.8)];
+  k.root.style.background = "radial-gradient(ellipse 70% 80% at " + P.position_x + "% " + P.position_y + "%," + bgs[2] + " 0%," + bgs[3] + " 55%," + bgs[4] + " 100%)";
+  var wadah = BLOCK.el("div", { class: "blk-wadah", style: "left:" + P.position_x + "%;top:" + P.position_y + "%;width:" + sisi + "px;height:" + sisi + "px" }, k.root);
+  // tepi bingkai dilebur ke latar bila bingkai tidak memenuhi layar
+  var m = [];
+  if (sisi < k.w - 1) m.push("linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%)");
+  if (sisi < k.h - 1) m.push("linear-gradient(180deg,transparent 0,#000 10%,#000 90%,transparent 100%)");
+  if (m.length) { wadah.style.webkitMaskImage = wadah.style.maskImage = m.join(","); if (m.length > 1) wadah.style.webkitMaskComposite = "source-in", wadah.style.maskComposite = "intersect"; }
+  var inst = MGP.lipsync.create(wadah, { width: 720, height: 720, dpr: f, fit: true, face: "presenter", text: P.text, captions: !!P.subtitle,
+    lead: +P.start, duration: k.dur, palette: { bg: bgs, shirt: P.shirt_color, shirtShade: BLOCK.mix(P.shirt_color, "#000000", 0.22), skin: P.skin_color, skinShade: BLOCK.mix(P.skin_color, "#7a3a20", 0.25), hair: P.hair_color } });
+  k.tl.fromTo(wadah, { scale: 0.92, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.5, ease: "power3.out", immediateRender: true }, 0);
+  return Promise.resolve(inst.ready).then(function () { BLOCK.onTime(k.tl, function (t) { inst.seek(t); }, k.dur); });
+});
+</script>

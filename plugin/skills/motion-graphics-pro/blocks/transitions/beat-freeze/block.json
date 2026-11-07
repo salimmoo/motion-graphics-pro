@@ -1,0 +1,120 @@
+{
+ "id": "transitions/beat-freeze",
+ "name": "Beat Freeze",
+ "name_id": "Beku di Ketukan",
+ "category": "transitions",
+ "description": {
+  "id": "Untuk promo dan montase berirama: dorongan kecepatan yang makin kencang menuju ketukan, beku-bingkai yang menghantam seperti foto berbingkai dengan kilat, lalu potong keras ke adegan baru yang masuk menghentak.",
+  "en": "For beat-led promos and montages: a speed ramp into the beat, a freeze-frame hit that slams in as a framed still with a flash, then a hard cut into the next scene with a punch-in."
+ },
+ "tags": [
+  "transisi",
+  "beat",
+  "ketukan",
+  "freeze frame",
+  "speed ramp",
+  "musik",
+  "montase",
+  "hard cut",
+  "transitions",
+  "freeze"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "beats": {
+   "default": 0.9,
+   "type": "number",
+   "hint": "Waktu ketukan (detik sejak blok mulai): saat beku menghantam",
+   "aliases": [
+    "ketukan"
+   ]
+  },
+  "hold": {
+   "default": 0.6,
+   "type": "number",
+   "hint": "Lama beku sebelum potong keras (detik)",
+   "aliases": [
+    "tahan"
+   ]
+  },
+  "flash": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Kilat putih di ketukan dan di potongan",
+   "aliases": [
+    "kilat"
+   ]
+  },
+  "frame": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Beku tampil sebagai foto berbingkai miring",
+   "aliases": [
+    "bingkai"
+   ]
+  },
+  "text": {
+   "default": "",
+   "type": "text",
+   "hint": "Stempel teks saat beku (kosong = tanpa)",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "bg_color": {
+   "default": "#16130f",
+   "type": "color",
+   "hint": "Latar di belakang foto beku",
+   "aliases": [
+    "warna_latar"
+   ]
+  },
+  "frame_color": {
+   "default": "#fbf7ee",
+   "type": "color",
+   "hint": "Warna bingkai foto dan stempel",
+   "aliases": [
+    "warna_bingkai"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@800;900",
+   "type": "font",
+   "hint": "Font stempel"
+  }
+ },
+ "duration": 2.2,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/beku-ketukan",
+  "beat-freeze-cut"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.4,
+  "duration": 3,
+  "props": {
+   "text": "Tahan!"
+  }
+ }
+}

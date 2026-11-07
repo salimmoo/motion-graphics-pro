@@ -1,0 +1,168 @@
+{
+ "id": "text/center-build",
+ "name": "Center Build",
+ "name_id": "Bangun dari Tengah",
+ "category": "text",
+ "description": {
+  "id": "Kata-kata masuk satu per satu dari kanan dan mendorong frasa yang tumbuh ke kiri, sehingga kalimat selalu seimbang di tengah sampai baris terakhir terkunci.",
+  "en": "Words enter from the right and push the growing phrase left, so the line stays centred until the final sentence locks."
+ },
+ "tags": [
+  "teks",
+  "kinetik",
+  "kata",
+  "build",
+  "tengah",
+  "push",
+  "text",
+  "center"
+ ],
+ "props": {
+  "text": {
+   "default": "Satu kata lalu *kalimat* utuh",
+   "type": "text",
+   "hint": "Teks; *kata* = kata kunci berwarna aksen, \\n = baris baru",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@600;800",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "size": {
+   "default": 96,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "weight": {
+   "default": 800,
+   "type": "number",
+   "aliases": [
+    "berat"
+   ]
+  },
+  "color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffcf4a",
+   "type": "color",
+   "hint": "Warna kata kunci / aksen",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi vertikal (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "width": {
+   "default": 96,
+   "type": "number",
+   "hint": "Lebar kotak teks (%)",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "align": {
+   "default": "center",
+   "type": "enum",
+   "options": [
+    "left",
+    "center",
+    "right"
+   ],
+   "aliases": [
+    "rata"
+   ],
+   "option_aliases": {
+    "kiri": "left",
+    "tengah": "center",
+    "kanan": "right"
+   }
+  },
+  "word_pause": {
+   "default": 0.45,
+   "type": "number",
+   "hint": "Jeda antar kata (detik)",
+   "aliases": [
+    "jeda_kata"
+   ]
+  },
+  "start": {
+   "default": 0.3,
+   "type": "number",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "distance": {
+   "default": 220,
+   "type": "number",
+   "hint": "Jarak masuk dari kanan (px pada 1080)",
+   "aliases": [
+    "jarak"
+   ]
+  },
+  "word_duration": {
+   "default": 0.6,
+   "type": "number",
+   "aliases": [
+    "durasi_kata"
+   ]
+  },
+  "ease": {
+   "default": "expo.out",
+   "type": "ease"
+  },
+  "exit": {
+   "default": "fade",
+   "type": "enum",
+   "options": [
+    "fade",
+    "up",
+    "no"
+   ],
+   "aliases": [
+    "keluar"
+   ],
+   "option_aliases": {
+    "pudar": "fade",
+    "naik": "up",
+    "tidak": "no"
+   }
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "teks/bangun-tengah",
+  "kinetic-center-build"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@600;800",
+   "Inter:wght@400;500;600;700;800;900"
+  ]
+ }
+}

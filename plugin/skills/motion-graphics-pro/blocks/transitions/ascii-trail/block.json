@@ -1,0 +1,117 @@
+{
+ "id": "transitions/ascii-trail",
+ "name": "Ascii Trail",
+ "name_id": "Jejak ASCII",
+ "category": "transitions",
+ "description": {
+  "id": "Kurva-S menyapu kisi karakter ASCII yang deterministik: sel-sel menyala makin padat, lalu membalik pergi satu per satu menyingkap adegan baru di baliknya.",
+  "en": "An S-curve sweeps through a deterministic ASCII grid: cells light up, densify, then flip away one by one to reveal the next scene behind."
+ },
+ "tags": [
+  "transisi",
+  "ascii",
+  "kode",
+  "terminal",
+  "kisi",
+  "glyph",
+  "reveal",
+  "transitions",
+  "trail"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "color": {
+   "default": "#12140f",
+   "type": "color",
+   "hint": "Warna sel",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "text_color": {
+   "default": "#b8f5a0",
+   "type": "color",
+   "hint": "Warna karakter",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "character": {
+   "default": " .:-=+*#%@",
+   "type": "text",
+   "hint": "Deret karakter dari renggang ke padat",
+   "aliases": [
+    "karakter"
+   ]
+  },
+  "size": {
+   "default": 22,
+   "type": "number",
+   "hint": "Lebar sel (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "trail_width": {
+   "default": 0.22,
+   "type": "number",
+   "hint": "Lebar pita ASCII (bagian lebar layar)",
+   "aliases": [
+    "lebar_jejak"
+   ]
+  },
+  "curve": {
+   "default": 0.2,
+   "type": "number",
+   "hint": "Kelengkungan kurva-S",
+   "aliases": [
+    "lengkung"
+   ]
+  },
+  "seed": {
+   "default": 2,
+   "type": "number",
+   "hint": "Seed pola karakter"
+  },
+  "font": {
+   "default": "JetBrains Mono:wght@500;700",
+   "type": "font",
+   "hint": "Font monospace"
+  }
+ },
+ "duration": 2.4,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/ascii-jejak",
+  "ascii-trail-reveal"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.8,
+  "duration": 3.4,
+  "font": [
+   "Inter:wght@400;500;600;700;800;900",
+   "JetBrains Mono:wght@500;700"
+  ]
+ }
+}

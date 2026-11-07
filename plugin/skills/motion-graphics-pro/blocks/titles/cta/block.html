@@ -1,0 +1,58 @@
+<!-- Block titles/cta · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="titles/cta" data-start="0" data-duration="4" data-track-index="20" class="blk blk-titles-cta">
+<script type="application/json" data-block-props>
+{"mode": "outro", "title": "Mulai rapikan keuanganmu hari ini", "button": "Coba gratis", "micro": "Tanpa kartu kredit · Batal kapan saja", "badge": [["Unduh di", "Toko Aplikasi"], ["Dapatkan di", "Pasar Aplikasi"]], "color": "#15161a", "accent_color": "#2f6bff", "bg": "#f5f2ec", "font": "Inter:wght@500;700;800;900", "size": 120}
+</script>
+<div class="blk-c"></div>
+</div>
+<style>
+.blk-titles-cta{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-titles-cta .blk-c{position:absolute;left:50%;top:50%;width:86%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;text-align:center}
+.blk-titles-cta .blk-jd{font-weight:900;letter-spacing:-.04em;line-height:1}
+.blk-titles-cta .blk-jd .blk-kata{transform-origin:50% 80%}
+.blk-titles-cta .blk-kap{margin-top:calc(var(--s)*56px);display:inline-flex;align-items:center;gap:calc(var(--s)*18px);color:#fff;font-weight:800;font-size:calc(var(--s)*44px);padding:calc(var(--s)*30px) calc(var(--s)*68px);border-radius:999px}
+.blk-titles-cta .blk-kap svg{width:calc(var(--s)*40px);height:calc(var(--s)*40px)}
+.blk-titles-cta .blk-mk{margin-top:calc(var(--s)*28px);font-weight:500;font-size:calc(var(--s)*28px);opacity:.55}
+.blk-titles-cta .blk-lc{display:flex;gap:calc(var(--s)*28px);margin-top:calc(var(--s)*60px);flex-wrap:wrap;justify-content:center}
+.blk-titles-cta .blk-bd{display:flex;align-items:center;gap:calc(var(--s)*18px);width:calc(var(--s)*380px);box-sizing:border-box;padding:calc(var(--s)*20px) calc(var(--s)*28px);border-radius:calc(var(--s)*22px);background:#111;color:#fff;text-align:left;border:calc(var(--s)*2px) solid rgba(255,255,255,.25)}
+.blk-titles-cta .blk-bd svg{width:calc(var(--s)*64px);height:calc(var(--s)*64px);flex:none}
+.blk-titles-cta .blk-bd small{display:block;font-size:calc(var(--s)*20px);opacity:.75;font-weight:500}
+.blk-titles-cta .blk-bd b{display:block;font-size:calc(var(--s)*34px);font-weight:800;letter-spacing:-.01em;line-height:1.1}
+.blk-titles-cta .blk-glow{position:absolute;left:50%;top:50%;width:120%;height:120%}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, D = k.dur, E = BLOCK.el, R = k.root, A = P.accent_color, m = P.mode;
+  if (P.bg) R.style.background = P.bg;
+  R.style.cssText += ";--s:" + s + ";color:" + P.color + ";font-family:" + BLOCK.family(P.font);
+  // cahaya latar yang bergeser sangat pelan (menjaga tahan tetap hidup tanpa menggerakkan tipografi)
+  var glow = E("div", { class: "blk-glow", style: "background:radial-gradient(40% 40% at 50% 50%," + BLOCK.rgba(A, 0.12) + ",transparent 70%)" }, R);
+  R.insertBefore(glow, R.querySelector(".blk-c"));
+  tl.fromTo(glow, { xPercent: -56, yPercent: -50, scale: 0.9 }, { xPercent: -44, yPercent: -50, scale: 1.1, duration: D, ease: "sine.inOut" }, 0);
+  var c = R.querySelector(".blk-c");
+  var jd = E("div", { class: "blk-jd", style: "font-size:" + Math.round(P.size * s * (m === "store" ? 0.8 : 1)) + "px" }, c);
+  var kata = BLOCK.split(jd, P.title, m === "lockup" ? "lines" : "words");
+  if (m === "outro") {
+    // kata mendarat satu per satu dari skala besar
+    tl.fromTo(kata, { scale: 1.6, autoAlpha: 0, filter: "blur(10px)" }, { scale: 1, autoAlpha: 1, filter: "blur(0px)", duration: 0.55, ease: "power4.out", stagger: 0.13 }, 0.2);
+  } else if (m === "lockup") {
+    kata.forEach(function (u) { u.parentNode.style.overflow = "hidden"; u.parentNode.style.paddingBottom = ".06em"; });
+    tl.fromTo(kata, { yPercent: 105 }, { yPercent: 0, duration: 0.8, ease: "power4.out", stagger: 0.12 }, 0.2);
+  } else tl.fromTo(kata, { y: 30 * s, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6, ease: "power3.out", stagger: 0.06 }, 0.2);
+  var tB = 0.2 + kata.length * (m === "outro" ? 0.13 : m === "lockup" ? 0.12 : 0.06) + 0.35;
+  if (m === "store") {
+    // dua lencana unduh generik dengan ukuran sama (tanpa logo merek)
+    var lc = E("div", { class: "blk-lc" }, c), IK = ['<path d="M32 10v30M20 30l12 12 12-12M14 50h36" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>',
+      '<path d="M16 22h32l-3 30H19z" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round"/><path d="M24 22a8 8 0 0 1 16 0" fill="none" stroke="#fff" stroke-width="5"/>'];
+    var bd = (P.badge || []).slice(0, 2).map(function (l, i) { return E("div", { class: "blk-bd" }, lc, '<svg viewBox="0 0 64 64">' + IK[i % 2] + '</svg><span><small>' + BLOCK.esc(l[0]) + "</small><b>" + BLOCK.esc(l[1]) + "</b></span>"); });
+    tl.fromTo(bd, { y: 40 * s, autoAlpha: 0, scale: 0.9 }, { y: 0, autoAlpha: 1, scale: 1, duration: 0.6, ease: "back.out(1.8)", stagger: 0.12 }, tB);
+    if (P.micro) tl.fromTo(E("div", { class: "blk-mk" }, c, BLOCK.esc(P.micro)), { autoAlpha: 0 }, { autoAlpha: 0.55, duration: 0.6 }, tB + 0.5);
+    return;
+  }
+  var kap = E("div", { class: "blk-kap", style: "background:" + A + ";box-shadow:0 " + Math.round(18 * s) + "px " + Math.round(40 * s) + "px " + BLOCK.rgba(A, 0.35) }, c,
+    BLOCK.esc(P.button) + '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>');
+  // satu letupan dengan satu pantulan
+  tl.fromTo(kap, { scale: 0, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.6, ease: "back.out(2.2)" }, tB);
+  if (m === "lockup" && P.micro) tl.fromTo(E("div", { class: "blk-mk" }, c, BLOCK.esc(P.micro)), { y: 10 * s, autoAlpha: 0 }, { y: 0, autoAlpha: 0.55, duration: 0.6, ease: "power2.out" }, tB + 0.35);
+}, { font: true });
+</script>

@@ -1,0 +1,138 @@
+{
+ "id": "paper/kresling",
+ "name": "Kresling",
+ "name_id": "Menara Kresling",
+ "category": "paper",
+ "description": {
+  "id": "Menara pola Kresling: setiap tingkat memuntir sambil turun (satu diagonal dijaga panjangnya), lalu naik lagi. Cocok untuk aksen mekanis atau transisi pegas.",
+  "en": "A Kresling pattern tower: every storey twists as it compresses (one diagonal keeps its length), then rises again. Good for mechanical accents or springy transitions."
+ },
+ "tags": [
+  "kresling",
+  "silinder",
+  "puntir",
+  "twist",
+  "origami",
+  "lipat",
+  "paper",
+  "fold",
+  "tower"
+ ],
+ "props": {
+  "motion": {
+   "default": "pingpong",
+   "type": "enum",
+   "options": [
+    "open",
+    "close",
+    "pingpong"
+   ],
+   "hint": "buka, tutup, bolak",
+   "aliases": [
+    "gerak"
+   ],
+   "option_aliases": {
+    "buka": "open",
+    "tutup": "close",
+    "bolak": "pingpong"
+   }
+  },
+  "front_color": {
+   "default": "#f2d796",
+   "type": "color",
+   "hint": "Warna luar",
+   "aliases": [
+    "warna_depan"
+   ]
+  },
+  "back_color": {
+   "default": "#9c7a3c",
+   "type": "color",
+   "hint": "Warna dalam",
+   "aliases": [
+    "warna_belakang"
+   ]
+  },
+  "side": {
+   "default": 6,
+   "type": "number",
+   "hint": "Jumlah sisi poligon",
+   "aliases": [
+    "sisi"
+   ]
+  },
+  "level": {
+   "default": 3,
+   "type": "number",
+   "hint": "Jumlah tingkat",
+   "aliases": [
+    "tingkat"
+   ]
+  },
+  "rotate": {
+   "default": -10,
+   "type": "number",
+   "hint": "Putaran kamera, derajat per detik",
+   "aliases": [
+    "putar"
+   ]
+  },
+  "bg": {
+   "default": "color",
+   "type": "enum",
+   "options": [
+    "color",
+    "transparent"
+   ],
+   "hint": "Latar di belakang lembar",
+   "aliases": [
+    "latar"
+   ],
+   "option_aliases": {
+    "warna": "color",
+    "transparan": "transparent"
+   }
+  },
+  "bg_color": {
+   "default": "#1c2236",
+   "type": "color",
+   "hint": "Dipakai bila latar = warna",
+   "aliases": [
+    "warna_latar"
+   ]
+  },
+  "size": {
+   "default": 0.8,
+   "type": "number",
+   "hint": "Ukuran model (bagian sisi pendek)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "ease": {
+   "default": "pegas.sigap",
+   "type": "text",
+   "hint": "Ease lipat: pegas.sigap, pegas.memantul, pegas.berat, inOut"
+  },
+  "label": {
+   "default": false,
+   "type": "boolean",
+   "hint": "Label validator (Maekawa/Kawasaki)"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [
+  "lib:mgp.js"
+ ],
+ "aliases": [
+  "kertas/kresling"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

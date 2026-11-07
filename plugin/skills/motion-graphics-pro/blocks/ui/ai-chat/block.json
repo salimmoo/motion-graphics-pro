@@ -1,0 +1,184 @@
+{
+ "id": "ui/ai-chat",
+ "name": "AI Chat",
+ "name_id": "Obrolan Asisten AI",
+ "category": "ui",
+ "description": {
+  "id": "Percakapan dengan asisten AI generik. Mode ai: keyboard naik, pertanyaan diketik lalu dikirim, langkah kerja (mencari, menalar) berputar lalu tercentang, titik berpikir berdenyut, dan jawaban mengalir kata demi kata dengan ritme token yang tidak rata, lengkap dengan butir daftar, tabel opsional, dan kartu penutup. Mode peringkat: pertanyaan diketik di kartu obrolan, tiga pilihan muncul, lalu pilihan yang dipromosikan menyelip ke posisinya sementara yang lain turun.",
+  "en": "A conversation with a generic AI assistant. AI mode: keyboard rises, a prompt is typed and sent, work steps spin then check, a thinking dot pulses and the answer streams word by word on an uneven token rhythm with bullets, an optional table and closing card. Rank mode: a question types into a chat card, three picks appear, then a promoted pick slides into its slot while the others step down."
+ },
+ "tags": [
+  "ui",
+  "ai",
+  "chat",
+  "asisten",
+  "streaming",
+  "prompt",
+  "peringkat",
+  "jawaban"
+ ],
+ "props": {
+  "mode": {
+   "default": "ai",
+   "type": "enum",
+   "options": [
+    "ai",
+    "ranking"
+   ],
+   "option_aliases": {
+    "peringkat": "ranking"
+   }
+  },
+  "name": {
+   "default": "Asisten",
+   "type": "text",
+   "hint": "Nama asisten generik",
+   "aliases": [
+    "nama"
+   ]
+  },
+  "question": {
+   "default": "Apa saja tips tidur nyenyak?",
+   "type": "text",
+   "hint": "Pertanyaan (mode ai)",
+   "aliases": [
+    "pertanyaan"
+   ]
+  },
+  "ranking_question": {
+   "default": "Kopi lokal apa yang paling enak?",
+   "type": "text",
+   "hint": "Pertanyaan (mode peringkat)",
+   "aliases": [
+    "pertanyaan_peringkat"
+   ]
+  },
+  "steps": {
+   "default": [
+    "Mencari referensi",
+    "Menyusun jawaban"
+   ],
+   "type": "list",
+   "hint": "Langkah kerja sebelum menjawab; [] = tanpa",
+   "aliases": [
+    "langkah"
+   ]
+  },
+  "answer": {
+   "default": "Tentu! Berikut beberapa kebiasaan yang terbukti membantu:\n- Tidur dan bangun di jam yang sama setiap hari\n- Jauhkan layar ponsel satu jam sebelum tidur\n- Jaga kamar tetap gelap, sejuk, dan tenang\n- Batasi kopi setelah pukul dua siang\nMulailah dari satu kebiasaan dulu, lalu tambah perlahan.",
+   "type": "text",
+   "hint": "Teks jawaban; \n = baris baru, baris diawali '- ' = butir",
+   "aliases": [
+    "jawaban"
+   ]
+  },
+  "table": {
+   "default": [],
+   "type": "list",
+   "hint": "Tabel perbandingan opsional [[sel, ...], ...]; baris pertama = kepala",
+   "aliases": [
+    "tabel"
+   ]
+  },
+  "ranking": {
+   "default": [
+    [
+     "Kopi Arunika",
+     "Rasa cokelat, harga bersahabat"
+    ],
+    [
+     "Kopi Lembah",
+     "Biji lokal, sangrai sedang"
+    ],
+    [
+     "Kopi Tepian",
+     "Cocok untuk seduh dingin"
+    ]
+   ],
+   "type": "list",
+   "hint": "[[nama, keterangan]] pilihan awal (mode peringkat)",
+   "aliases": [
+    "peringkat"
+   ]
+  },
+  "promo": {
+   "default": [
+    "Kopi Senja",
+    "Paling banyak direkomendasikan"
+   ],
+   "type": "list",
+   "hint": "[nama, keterangan] yang menyelip naik",
+   "aliases": [
+    "promosi"
+   ]
+  },
+  "promo_position": {
+   "default": 0,
+   "type": "number",
+   "hint": "Slot tujuan promosi (0 = teratas)",
+   "aliases": [
+    "posisi_promosi"
+   ]
+  },
+  "up_label": {
+   "default": "Naik ke #1",
+   "type": "text",
+   "aliases": [
+    "label_naik"
+   ]
+  },
+  "outro": {
+   "default": "",
+   "type": "text",
+   "hint": "Teks kartu penutup (mode ai); kosong = tanpa",
+   "aliases": [
+    "penutup"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali tempo",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "accent_color": {
+   "default": "#7c5cff",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg": {
+   "default": "#e7e4f3",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700;800",
+   "type": "font"
+  }
+ },
+ "duration": 9,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/obrolan-ai",
+  "ai-chat-reveal",
+  "chatgpt-exchange",
+  "claude-exchange",
+  "ai-answer-rank"
+ ],
+ "example": {
+  "bg": "empty",
+  "aspect": "9:16"
+ }
+}

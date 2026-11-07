@@ -1,0 +1,67 @@
+<!-- Block text/line-swap · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="text/line-swap" data-start="0" data-duration="6" data-track-index="10" class="blk blk-text-line-swap">
+<script type="application/json" data-block-props>
+{"list": ["Ide yang sederhana", "Eksekusi yang *rapi*", "Hasil yang *bertahan*"], "font": "Inter:wght@500;800", "size": 100, "weight": 800, "color": "#f5f3ee", "accent_color": "#ffcf4a", "position_y": 50, "width": 86, "align": "center", "mode": "mask", "swap_duration": 0.75, "underline": true, "start": 0.2, "exit": true}
+</script>
+<div class="blk-tk"></div>
+</div>
+<style>
+.blk-text-line-swap {position:absolute;inset:0;pointer-events:none}
+.blk-text-line-swap .blk-tk{position:absolute;left:50%;transform:translate(-50%,-50%);line-height:1.08}
+.blk-text-line-swap .blk-kunci{color:var(--aksen)}
+.blk-text-line-swap .blk-tumpuk{display:grid;padding:.08em 0 .14em}
+.blk-text-line-swap .blk-tumpuk.blk-m{overflow:hidden}
+.blk-text-line-swap .blk-l{grid-area:1/1}
+.blk-text-line-swap .blk-kunci{position:relative}
+.blk-text-line-swap .blk-garis{position:absolute;left:0;right:0;bottom:-.06em;height:.075em;border-radius:.04em;background:var(--aksen);transform-origin:left center}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl;
+  var rata = { left: "left", right: "right" }[P.align] || "center";
+  function gayaTeks(el, px) {
+    el.style.cssText += ";top:" + P.position_y + "%;width:" + P.width + "%;color:" + P.color + ";--aksen:" + P.accent_color +
+      ";font-family:" + BLOCK.family(P.font) + ";font-weight:" + P.weight + ";font-size:" + Math.round((px || P.size) * k.s) + "px;text-align:" + rata;
+  }
+  // tunggu stylesheet Google Fonts + wajah font benar-benar termuat sebelum mengukur teks
+  function siapFont(spec) {
+    var ln = Array.prototype.slice.call(document.querySelectorAll('link[href*="fonts.googleapis"]'));
+    return Promise.all(ln.map(function (l) { return l.sheet ? 0 : new Promise(function (ok) { l.addEventListener("load", ok); l.addEventListener("error", ok); }); }))
+      .then(function () { return document.fonts && document.fonts.load ? document.fonts.load(spec || (P.weight + " 100px " + BLOCK.family(P.font))) : 0; })
+      .catch(function () {});
+  }
+  function markupKunci(s) { return BLOCK.esc(s).replace(/\*([^*]+)\*/g, '<span class="blk-kunci">$1</span>').replace(/\\n|\n/g, "<br>"); }
+  return siapFont().then(function () {
+  var el = k.root.querySelector(".blk-tk");
+  gayaTeks(el);
+  var tp = BLOCK.el("div", { class: "blk-tumpuk" + (P.mode === "mask" ? " blk-m" : "") }, el);
+  var daftar = P.list || [], n = daftar.length, dt = +P.swap_duration, fs = P.size * k.s;
+  var L = daftar.map(function (s) {
+    var l = BLOCK.el("div", { class: "blk-l" }, tp), w = BLOCK.split(l, s, "words"), g = [];
+    if (P.underline) l.querySelectorAll(".blk-kunci").forEach(function (kk) { g.push(BLOCK.el("span", { class: "blk-garis" }, kk)); });
+    return { el: l, w: w, g: g };
+  });
+  var H = (k.dur - P.start - (P.exit ? 0.2 : 0)) / Math.max(1, n);
+  function masuk(L, T) {
+    if (P.mode === "mask") tl.fromTo(L.el, { yPercent: 115, autoAlpha: 1 }, { yPercent: 0, duration: dt, ease: "power4.inOut" }, T);
+    else if (P.mode === "y-axis") { tl.set(L.el, { autoAlpha: 1 }, T); tl.fromTo(L.w, { y: fs * 0.6, opacity: 0 }, { y: 0, opacity: 1, duration: dt, ease: "power3.out", stagger: 0.045 }, T); }
+    else if (P.mode === "z-axis") tl.fromTo(L.el, { scale: 0.82, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: dt, ease: "power3.out" }, T);
+    else tl.fromTo(L.el, { y: fs * 0.35, autoAlpha: 0, filter: "blur(0px)" }, { y: 0, autoAlpha: 1, duration: dt, ease: "power3.out" }, T);
+    if (L.g.length) tl.fromTo(L.g, { scaleX: 0 }, { scaleX: 1, duration: 0.5, ease: "power3.out", stagger: 0.1 }, T + dt * 0.65);
+  }
+  function keluar(L, T) {
+    if (P.mode === "mask") tl.to(L.el, { yPercent: -115, duration: dt, ease: "power4.inOut" }, T);
+    else if (P.mode === "y-axis") tl.to(L.w, { y: -fs * 0.6, opacity: 0, duration: dt * 0.7, ease: "power2.in", stagger: 0.045 }, T - dt * 0.35);
+    else if (P.mode === "z-axis") tl.to(L.el, { scale: 1.16, autoAlpha: 0, duration: dt * 0.8, ease: "power2.in" }, T - dt * 0.3);
+    else tl.to(L.el, { autoAlpha: 0, filter: "blur(" + Math.round(14 * k.s) + "px)", y: -fs * 0.12, duration: dt * 0.75, ease: "power2.in" }, T - dt * 0.35);
+  }
+  L.forEach(function (l, i) {
+    BLOCK.initial(tl, l.el, P.mode === "mask" ? { yPercent: 115 } : { autoAlpha: 0 });
+    var T = P.start + i * H;
+    masuk(l, i === 0 ? T : T + (P.mode === "mask" ? 0 : dt * 0.15));
+    if (i < n - 1) keluar(l, T + H);
+    else if (P.exit) keluar(l, k.dur - dt - 0.05 + (P.mode === "mask" ? 0 : dt * 0.35));
+  });
+  });
+}, { font: true });
+</script>

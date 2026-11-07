@@ -1,0 +1,20 @@
+/*
+ * Font lokal untuk contoh lib/ (tanpa internet).
+ *
+ * Berkas font tidak disalin ke skill ini: yang dipakai adalah bundel font Rekam di skill
+ * motion-graphics-pro (render/fonts/, 24 keluarga OFL, lisensi di tiap folder dan di
+ * render/NOTICE). Kedua skill dipasang berdampingan (~/.claude/skills/motion-graphics dan
+ * ~/.claude/skills/motion-graphics-pro), jadi path relatif di bawah ini benar dari folder lib/.
+ *
+ *  - Lewat Rekam (rekam render/cek/pratinjau/studio): selalu jalan. Server Rekam memetakan
+ *    path .../motion-graphics-pro/render/fonts/... ke bundelnya walau di luar root server,
+ *    dan permintaan Google Fonts dari MGP.core.fontsReady pun sudah dialihkan ke lokal.
+ *  - Dibuka langsung sebagai file:// di Chrome/Edge: Chrome memblokir font dari file://
+ *    (CORS); pakai `rekam pratinjau`, server HTTP lokal, atau Firefox.
+ *  - Tanpa skill motion-graphics-pro: @import gagal diam-diam dan MGP.core.fontsReady
+ *    kembali memuat dari Google Fonts (butuh internet) seperti sebelumnya.
+ *
+ * Bila ada @font-face lokal untuk sebuah keluarga, MGP.core.fontsReady tidak memanggil Google
+ * Fonts dan memuat semua face lokal keluarga itu lebih dulu (deterministik untuk kanvas).
+ */
+@import url("../../motion-graphics-pro/render/fonts/fonts.css");

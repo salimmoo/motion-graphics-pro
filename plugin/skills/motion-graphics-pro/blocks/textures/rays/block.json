@@ -1,0 +1,131 @@
+{
+ "id": "textures/rays",
+ "name": "Rays",
+ "name_id": "Sinar Cahaya",
+ "category": "textures",
+ "description": {
+  "id": "Berkas cahaya dari shader ringan. Mode cahaya: sinar yang mekar dari sudut dan hanyut pelan, dicampur screen di atas adegan (atau di atas latar biru tua bila warna latar diisi). Mode semburat: jari-jari krem dan hitam yang memancar dari tengah dan berputar pelan, cocok sebagai latar judul retro.",
+  "en": "Light rays from a lightweight shader. Light mode: rays fanning from a corner and drifting, screen-blended over the scene (or over a deep field when a background colour is set). Burst mode: cream and black rays radiating from the centre and slowly turning."
+ },
+ "tags": [
+  "tekstur",
+  "texture",
+  "godrays",
+  "sinar",
+  "sunburst",
+  "cahaya",
+  "shader",
+  "overlay",
+  "retro",
+  "textures",
+  "rays"
+ ],
+ "props": {
+  "mode": {
+   "default": "light",
+   "type": "enum",
+   "options": [
+    "light",
+    "fringe"
+   ],
+   "option_aliases": {
+    "cahaya": "light",
+    "semburat": "fringe"
+   }
+  },
+  "color": {
+   "default": "#ffe2a8",
+   "type": "color",
+   "hint": "Warna sinar / jari-jari terang",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "color2": {
+   "default": "#0b1640",
+   "type": "color",
+   "hint": "Jari-jari gelap (semburat)",
+   "aliases": [
+    "warna2"
+   ]
+  },
+  "bg": {
+   "default": "",
+   "type": "color",
+   "hint": "Mode cahaya: kosong = overlay screen; isi = latar opak",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "count": {
+   "default": 14,
+   "type": "number",
+   "hint": "Kerapatan sinar / jumlah jari-jari",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "origin_x": {
+   "default": 0.08,
+   "type": "number",
+   "hint": "Titik asal sinar (0-1 dari kiri)",
+   "aliases": [
+    "asal_x"
+   ]
+  },
+  "origin_y": {
+   "default": 0.02,
+   "type": "number",
+   "hint": "Titik asal sinar (0-1 dari atas)",
+   "aliases": [
+    "asal_y"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "intensity": {
+   "default": 0.9,
+   "type": "number",
+   "aliases": [
+    "intensitas"
+   ]
+  },
+  "enter": {
+   "default": 0.8,
+   "type": "number",
+   "hint": "Lama muncul overlay (detik)",
+   "aliases": [
+    "masuk"
+   ]
+  },
+  "resolution": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Skala resolusi shader (0.2-1)",
+   "aliases": [
+    "resolusi"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "tekstur/sinar",
+  "godrays",
+  "sun-burst"
+ ],
+ "example": {
+  "bg": "photo"
+ }
+}

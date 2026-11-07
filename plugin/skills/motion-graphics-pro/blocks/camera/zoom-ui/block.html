@@ -1,0 +1,94 @@
+<!-- Block camera/zoom-ui · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="camera/zoom-ui" data-start="0" data-duration="6" data-track-index="30" class="blk blk-camera-zoom-ui">
+<script type="application/json" data-block-props>
+{"target": "#adegan", "mode": "focus", "anchor": "#tombol-contoh", "zoom": 2.2, "zoom_time": 1.4, "zoom_duration": 1.2, "ease": "power3.inOut", "settled": true, "halo": true, "halo_color": "#2d6cdf", "click": [[40, 30], [52, 72], "#tombol-contoh"], "click_start": 1.2, "click_pause": 1.3, "cursor_zoom": 1.8, "cursor_color": "#121826"}
+</script>
+</div>
+<style>
+.blk-camera-zoom-ui{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-camera-zoom-ui .blk-halo{position:absolute;left:0;top:0;opacity:0}
+.blk-camera-zoom-ui .blk-cincin{position:absolute;left:0;top:0;border-radius:50%;opacity:0}
+.blk-camera-zoom-ui .blk-kursor{position:absolute;left:0;top:0;transform-origin:0 0;filter:drop-shadow(0 2px 3px rgba(0,0,0,.35))}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, w = k.w, h = k.h, s = k.s, D = k.dur, R = k.root, T = BLOCK.find(P.target);
+  if (!T) { console.warn("[camera/zoom-ui] target not found: " + P.target); return; }
+  var rr = R.getBoundingClientRect(), rt = T.getBoundingClientRect(), sk = w / (rr.width || w);
+  var ox = (rt.left - rr.left) * sk, oy = (rt.top - rr.top) * sk, tw = rt.width * sk || w, th = rt.height * sk || h;
+  var ez = gsap.parseEase(P.ease || "power3.inOut"), io = gsap.parseEase("power2.inOut"), out3 = gsap.parseEase("power3.out");
+  T.style.transformOrigin = "0 0";
+  function pusat(x) { // titik lokal (dalam koordinat target) dari [x%, y%] atau selektor
+    if (typeof x === "string") {
+      var e = BLOCK.find(x); if (!e) return [tw / 2, th / 2];
+      var r = e.getBoundingClientRect();
+      return [(r.left - rt.left + r.width / 2) * sk, (r.top - rt.top + r.height / 2) * sk, r.width * sk, r.height * sk];
+    }
+    return [x[0] / 100 * tw, x[1] / 100 * th, 0, 0];
+  }
+  // kamera: titik lokal F dibawa ke tengah layar pada skala S; dijepit supaya layar tetap tertutup
+  function kamera(S, F) {
+    var tx = w / 2 - ox - S * F[0], ty = h / 2 - oy - S * F[1];
+    var x0 = w - ox - S * tw, x1 = -ox, y0 = h - oy - S * th, y1 = -oy;
+    tx = x0 <= x1 ? BLOCK.clamp(tx, x0, x1) : (w - S * tw) / 2 - ox;
+    ty = y0 <= y1 ? BLOCK.clamp(ty, y0, y1) : (h - S * th) / 2 - oy;
+    T.style.transform = "translate(" + tx.toFixed(2) + "px," + ty.toFixed(2) + "px) scale(" + S.toFixed(5) + ")";
+    return function (L) { return [ox + tx + S * L[0], oy + ty + S * L[1]]; };
+  }
+  var tengah = [w / 2 - ox, h / 2 - oy];
+  function mapan(t) { return P.settled ? out3(BLOCK.progress(t, 0, 0.9)) : 1; }
+  if (P.mode !== "cursor") {
+    var A = pusat(P.anchor || [70, 40]);
+    var halo = P.halo ? BLOCK.el("div", { class: "blk-halo", style: "border-radius:" + Math.round(18 * s) + "px;box-shadow:0 0 0 " + Math.round(3 * s) + "px " + P.halo_color + ",0 0 " + Math.round(46 * s) + "px " + Math.round(10 * s) + "px " + BLOCK.rgba(P.halo_color, 0.45) }, R) : null;
+    BLOCK.onTime(k.tl, function (t) {
+      var z = ez(BLOCK.progress(t, +P.zoom_time, +P.zoom_time + Math.max(0.1, +P.zoom_duration))), e = mapan(t);
+      var S = (1 + (P.zoom - 1) * z) * (1 + 0.05 * (1 - e));
+      var ke = kamera(S, [BLOCK.lerp(tengah[0], A[0], z), BLOCK.lerp(tengah[1], A[1], z)]);
+      T.style.opacity = P.settled ? BLOCK.progress(t, 0, 0.35).toFixed(3) : "";
+      if (halo) {
+        var c = ke(A), pw = (A[2] || 80 * s) * S + 28 * s, ph = (A[3] || 60 * s) * S + 28 * s;
+        var hz = BLOCK.progress(z, 0.6, 1) * (0.85 + 0.15 * Math.sin(t * 4));
+        halo.style.cssText += ";width:" + pw + "px;height:" + ph + "px;transform:translate(" + (c[0] - pw / 2).toFixed(2) + "px," + (c[1] - ph / 2).toFixed(2) + "px);opacity:" + hz.toFixed(3);
+      }
+    }, D);
+    return;
+  }
+  // ---- mode kursor: rekaman layar dengan auto-zoom yang mengikuti kursor
+  var titik = (P.click || []).map(pusat), n = titik.length;
+  if (!n) titik = [[tw / 2, th / 2]], n = 1;
+  var tk = titik.map(function (p, i) { return +P.click_start + i * +P.click_pause; });
+  var awal = [tw * 0.56, th * 0.96], akhir = [tw * 1.06, th * 1.12], tL = tk[n - 1];
+  function kursor(t) {
+    var a = awal, b = awal, u = 0, i;
+    for (i = 0; i < n; i++) {
+      if (t < tk[i] - 0.7) break;
+      a = i ? titik[i - 1] : awal; b = titik[i]; u = io(BLOCK.progress(t, tk[i] - 0.7, tk[i] - 0.06));
+    }
+    if (t > tL + 0.5) { a = titik[n - 1]; b = akhir; u = io(BLOCK.progress(t, tL + 0.5, tL + 1.3)); }
+    var dx = b[0] - a[0], dy = b[1] - a[1], arc = Math.sin(Math.PI * u) * 0.08; // lintasan sedikit melengkung
+    return [a[0] + dx * u - dy * arc, a[1] + dy * u + dx * arc];
+  }
+  function ikut(t) { // kamera mengekor kursor dengan jendela rata-rata (seperti pegas halus)
+    var x = 0, y = 0, m = 8;
+    for (var j = 0; j < m; j++) { var p = kursor(Math.max(0, t - j * 0.05)); x += p[0]; y += p[1]; }
+    return [x / m, y / m];
+  }
+  var kur = BLOCK.el("div", { class: "blk-kursor" }, R);
+  kur.innerHTML = '<svg width="' + 40 * s + '" height="' + 40 * s + '" viewBox="0 0 24 24"><path d="M3 2l17 9.5-7.4 1.6L9.2 21z" fill="' + P.cursor_color + '" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>';
+  var cincin = titik.map(function () { return BLOCK.el("div", { class: "blk-cincin", style: "border:" + Math.round(4 * s) + "px solid " + P.halo_color }, R); });
+  BLOCK.onTime(k.tl, function (t) {
+    var naik = io(BLOCK.progress(t, tk[0] - 1.1, tk[0] - 0.35)), turun = io(BLOCK.progress(t, tL + 0.55, tL + 1.5));
+    var S = 1 + (P.cursor_zoom - 1) * naik * (1 - turun);
+    var ke = kamera(S, ikut(t));
+    T.style.opacity = "";
+    var c = ke(kursor(t)), tek = 1;
+    tk.forEach(function (ti, i) {
+      var d = t - ti; if (d > -0.02 && d < 0.16) tek = 0.8; // tekan
+      var u = BLOCK.progress(t, ti, ti + 0.6), r = (14 + 70 * out3(u)) * s * S, p = ke(titik[i]);
+      cincin[i].style.cssText += ";width:" + 2 * r + "px;height:" + 2 * r + "px;transform:translate(" + (p[0] - r).toFixed(2) + "px," + (p[1] - r).toFixed(2) + "px);opacity:" + (u > 0 && u < 1 ? (1 - u) : 0).toFixed(3);
+    });
+    kur.style.transform = "translate(" + c[0].toFixed(2) + "px," + c[1].toFixed(2) + "px) scale(" + ((0.75 + 0.25 * S) * tek).toFixed(4) + ")";
+    kur.style.opacity = t > tL + 1.25 ? 0 : 1;
+  }, D);
+});
+</script>

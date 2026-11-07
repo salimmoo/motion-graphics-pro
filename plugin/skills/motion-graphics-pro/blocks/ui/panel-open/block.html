@@ -1,0 +1,75 @@
+<!-- Block ui/panel-open · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="ui/panel-open" data-start="0" data-duration="5" data-track-index="30" class="blk blk-ui-panel-open">
+<script type="application/json" data-block-props>
+{"mode": "morph", "title": "Kopi Gunung Halu", "sub": "Arabika · sangrai sedang", "rows": ["Asal: Bandung Selatan", "Proses: natural, 21 hari", "Catatan rasa: cokelat, jeruk, madu"], "button": "Tambah ke keranjang", "accent_color": "#e0703a", "surface": "#ffffff", "ink": "#1c1f2a", "open": 0.8, "close": true, "font": "Inter:wght@400;500;600;700;800"}
+</script>
+</div>
+<style>
+.blk-ui-panel-open{position:absolute;inset:0;pointer-events:none;overflow:hidden;font-family:"Inter",system-ui,sans-serif}
+.blk-ui-panel-open .kt{position:absolute;left:50%;top:50%;overflow:hidden;box-sizing:border-box;transform-origin:0 0}
+.blk-ui-panel-open .in{position:absolute;left:0;top:0;transform-origin:0 0}
+.blk-ui-panel-open .in>*{position:absolute}
+.blk-ui-panel-open .rw{display:flex;align-items:center;border-top:1px solid rgba(0,0,0,.07)}
+.blk-ui-panel-open .tb{display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, E = BLOCK.el, s = k.s, ink = P.ink, ac = P.accent_color, mode = P.mode;
+  var t0 = +P.open, t1 = P.close ? D - 1.3 : D + 1, gam = "linear-gradient(150deg," + BLOCK.mix(ac, "#ffe2b8", .5) + "," + ac + " 55%," + BLOCK.mix(ac, "#2a1408", .55) + ")";
+  var fw = Math.min(k.w * 0.82, 640 * s), u = fw / 640, px = function (v) { return v * u + "px"; };
+  var bayang = "box-shadow:0 " + px(24) + " " + px(70) + " rgba(0,0,0,.35)";
+  if (mode === "morph") {
+    // satu kali ukur dua tata letak; wadah berubah hanya lewat transform, anak dikompensasi skala
+    var fh = Math.min(k.h * 0.86, fw * 1.25), sw = 280 * u, sh = 200 * u, hx = fh * 0.46;
+    var kt = E("div", { class: "kt", style: "width:" + fw + "px;height:" + fh + "px;left:calc(50% - " + fw / 2 + "px);top:calc(50% - " + fh / 2 + "px);background:" + P.surface + ";" + bayang }, k.root);
+    var inn = E("div", { class: "in", style: "width:" + fw + "px;height:" + fh + "px" }, kt);
+    var gb = E("div", { style: "left:0;top:0;width:" + fw + "px;height:" + hx + "px;background:" + gam + ";transform-origin:0 0" }, inn);
+    var jd = E("div", { style: "left:" + px(28) + ";top:0;font-weight:800;color:" + ink + ";white-space:nowrap;transform-origin:0 0;font-size:" + px(40) }, inn, BLOCK.esc(P.title));
+    var dt = E("div", { style: "left:" + px(28) + ";right:" + px(28) + ";top:" + (hx + 84 * u) + "px;color:" + ink }, inn);
+    E("div", { style: "font-size:" + px(22) + ";opacity:.6;margin-bottom:" + px(14) }, dt, BLOCK.esc(P.sub));
+    P.rows.forEach(function (b) { E("div", { class: "rw", style: "height:" + px(54) + ";font-size:" + px(21) }, dt, BLOCK.esc(b)); });
+    E("div", { class: "tb", style: "margin-top:" + px(18) + ";height:" + px(64) + ";border-radius:" + px(18) + ";font-size:" + px(22) + ";background:" + ac }, dt, BLOCK.esc(P.button));
+    var sx = sw / fw, sy = sh / fh, ox = -fw * 0.18, oy = fh * 0.12, pr = { p: 0 };
+    function lukis() {
+      var p = pr.p, a = BLOCK.lerp(sx, 1, p), b = BLOCK.lerp(sy, 1, p);
+      var X = BLOCK.lerp(fw / 2 - sw / 2 + ox, 0, p), Y = BLOCK.lerp(fh / 2 - sh / 2 + oy, 0, p);
+      kt.style.transform = "translate(" + X + "px," + Y + "px) scale(" + a + "," + b + ")";
+      kt.style.borderRadius = (24 * u / a) + "px / " + (24 * u / b) + "px";
+      inn.style.transform = "scale(" + 1 / a + "," + 1 / b + ")";
+      // tampak kecil: gambar menutup kartu, judul di dasar kartu; tampak besar: gambar jadi hero
+      var vw = fw * a, vh = fh * b, cs = Math.max(vw / fw, vh / hx), g = BLOCK.lerp(cs, 1, BLOCK.clamp(p * 1.15, 0, 1));
+      gb.style.transform = "scale(" + g + ")";
+      var js = BLOCK.lerp(0.6, 1, p), jy = BLOCK.lerp(vh - 56 * u, hx + 24 * u, p);
+      jd.style.transform = "translateY(" + jy + "px) scale(" + js + ")";
+      jd.style.color = BLOCK.mix("#ffffff", ink, BLOCK.clamp(p * 2 - 0.4, 0, 1));
+      dt.style.opacity = BLOCK.clamp((p - 0.55) / 0.35, 0, 1);
+      dt.style.transform = "translateY(" + (1 - p) * 30 * u + "px)";
+    }
+    tl.fromTo(pr, { p: 0 }, { p: 1, duration: 0.95, ease: "blockSpringSoft", onUpdate: lukis }, t0);
+    if (P.close) tl.to(pr, { p: 0, duration: 0.8, ease: "expo.inOut", onUpdate: lukis }, t1);
+    tl.fromTo(kt, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.4 }, 0);
+    lukis();
+    return;
+  }
+  // panel: tinggi memanjang + isi memudar; ubah-ukuran: kartu ringkas melebar jadi panel detail
+  var ub = mode === "resize", w0 = ub ? 380 * u : fw, h0 = ub ? 120 * u : 110 * u;
+  var kt2 = E("div", { class: "kt", style: "width:" + w0 + "px;height:" + h0 + "px;margin:" + (-h0 / 2) + "px 0 0 " + (-w0 / 2) + "px;border-radius:" + px(26) + ";background:" + P.surface + ";color:" + ink + ";padding:" + px(26) + ";" + bayang }, k.root);
+  var hd = E("div", { style: "display:flex;align-items:center;gap:" + px(18) + ";height:" + px(68) }, kt2);
+  E("div", { style: "flex:none;width:" + px(68) + ";height:" + px(68) + ";border-radius:" + px(18) + ";background:" + gam }, hd);
+  var tt = E("div", { style: "flex:1;min-width:0;white-space:nowrap" }, hd);
+  E("div", { style: "font-weight:800;font-size:" + px(28) }, tt, BLOCK.esc(P.title));
+  E("div", { style: "font-size:" + px(19) + ";opacity:.55" }, tt, BLOCK.esc(P.sub));
+  var chev = E("div", { style: "flex:none;font-size:" + px(30) + ";opacity:.5" }, hd, "&#8964;");
+  var isi = E("div", { style: "margin-top:" + px(22) + ";width:" + (fw - 52 * u) + "px" }, kt2), anak = [];
+  if (ub) anak.push(E("div", { style: "height:" + px(200) + ";border-radius:" + px(18) + ";margin-bottom:" + px(14) + ";background:" + gam }, isi));
+  P.rows.forEach(function (b) { anak.push(E("div", { class: "rw", style: "height:" + px(56) + ";font-size:" + px(21) }, isi, BLOCK.esc(b))); });
+  anak.push(E("div", { class: "tb", style: "margin-top:" + px(16) + ";height:" + px(62) + ";border-radius:" + px(16) + ";font-size:" + px(21) + ";background:" + ac }, isi, BLOCK.esc(P.button)));
+  var w1 = fw, h1 = h0 + 22 * u + (ub ? 214 * u : 0) + P.rows.length * 56 * u + 78 * u + (ub ? 0 : 0);
+  tl.fromTo(kt2, { autoAlpha: 0, y: 30 * s }, { autoAlpha: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0);
+  tl.fromTo(kt2, { width: w0, height: h0, marginLeft: -w0 / 2, marginTop: -h0 / 2 }, { width: w1, height: h1, marginLeft: -w1 / 2, marginTop: -h1 / 2, duration: 0.75, ease: "expo.out" }, t0)
+    .fromTo(chev, { rotation: 0 }, { rotation: 180, duration: 0.5, ease: "back.out(2)" }, t0)
+    .fromTo(anak, { autoAlpha: 0, y: 14 * u }, { autoAlpha: 1, y: 0, duration: 0.45, ease: "power2.out", stagger: 0.06 }, t0 + 0.18);
+  if (P.close) tl.to(anak, { autoAlpha: 0, duration: 0.2, ease: "power1.in" }, t1)
+    .to(kt2, { width: w0, height: h0, marginLeft: -w0 / 2, marginTop: -h0 / 2, duration: 0.6, ease: "expo.inOut" }, t1 + 0.1).to(chev, { rotation: 0, duration: 0.4 }, t1 + 0.1);
+}, { font: true });
+</script>

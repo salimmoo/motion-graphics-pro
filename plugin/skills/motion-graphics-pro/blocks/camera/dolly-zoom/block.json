@@ -1,0 +1,122 @@
+{
+ "id": "camera/dolly-zoom",
+ "name": "Dolly Zoom",
+ "name_id": "Dolly Zoom (Vertigo)",
+ "category": "camera",
+ "description": {
+  "id": "Efek vertigo: kamera maju atau mundur sementara fokal lensa berubah berlawanan, jadi subjek tetap sebesar semula sementara lorong di belakangnya menjauh atau menyerbu. Fokal dihitung dari jarak setiap frame, bukan dikira-kira. Membawa panggung lorong sendiri; bila target diisi, elemen host diperlakukan sebagai latar di kedalaman tertentu.",
+  "en": "Vertigo shot: the camera dollies while focal length changes the opposite way, so the subject holds its size while the corridor behind recedes or rushes in. Focal length is solved from distance every frame. Ships its own corridor; a target is treated as a background layer at a given depth."
+ },
+ "tags": [
+  "kamera",
+  "camera",
+  "dolly-zoom",
+  "vertigo",
+  "kedalaman",
+  "depth",
+  "sinematik",
+  "dolly",
+  "zoom"
+ ],
+ "props": {
+  "target": {
+   "default": "",
+   "type": "selector",
+   "hint": "Kosong = lorong bawaan; isi = elemen host sebagai latar"
+  },
+  "direction": {
+   "default": "forward",
+   "type": "enum",
+   "options": [
+    "forward",
+    "back"
+   ],
+   "hint": "maju = latar menjauh; mundur = latar menyerbu",
+   "aliases": [
+    "arah"
+   ],
+   "option_aliases": {
+    "maju": "forward",
+    "mundur": "back"
+   }
+  },
+  "strength": {
+   "default": 0.7,
+   "type": "number",
+   "hint": "Porsi jarak yang ditempuh kamera (0.05-0.92)",
+   "aliases": [
+    "kekuatan"
+   ]
+  },
+  "depth": {
+   "default": 1.5,
+   "type": "number",
+   "hint": "Kedalaman latar host (mode target)",
+   "aliases": [
+    "kedalaman"
+   ]
+  },
+  "ease": {
+   "default": "power2.inOut",
+   "type": "ease"
+  },
+  "bg": {
+   "default": "#0b0e1a",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "line_color": {
+   "default": "#5b7cff",
+   "type": "color",
+   "aliases": [
+    "warna_garis"
+   ]
+  },
+  "subject_color": {
+   "default": "#ffd36b",
+   "type": "color",
+   "aliases": [
+    "warna_subjek"
+   ]
+  },
+  "light_color": {
+   "default": "#ff7a59",
+   "type": "color",
+   "aliases": [
+    "warna_cahaya"
+   ]
+  },
+  "text": {
+   "default": "Dunia bergeser, fokus tetap",
+   "type": "text",
+   "hint": "Keterangan bawah; kosong = tanpa teks",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;800",
+   "type": "font"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "kamera/dolly-zoom",
+  "camera-dolly-zoom"
+ ],
+ "example": {
+  "bg": "empty",
+  "font": [
+   "Inter:wght@500;800"
+  ]
+ }
+}

@@ -1,0 +1,142 @@
+{
+ "id": "ui/tilted-card",
+ "name": "Tilted Card",
+ "name_id": "Kartu Miring 3D",
+ "category": "ui",
+ "description": {
+  "id": "Kartu produk dengan lapisan kedalaman yang miring mengikuti kursor terskrip, lengkap dengan kilap paralaks. Mode belah: dua kartu datang dari sayap berlawanan dan terbuka seperti buku dengan lencana yang meletup pegas. Mode sorot: kursor membawa lampu sorot dan tepi kartu menyala di dekatnya.",
+  "en": "A layered product card tilting toward a scripted cursor with parallax glare. Split mode brings two cards in from opposite wings with mirrored book-open tilts and spring-popped badges. Spotlight mode lights the card and its border around the cursor."
+ },
+ "tags": [
+  "ui",
+  "kartu",
+  "tilt",
+  "3d",
+  "parallax",
+  "spotlight",
+  "hover",
+  "produk",
+  "tilted",
+  "card"
+ ],
+ "props": {
+  "mode": {
+   "default": "skew",
+   "type": "enum",
+   "options": [
+    "skew",
+    "split",
+    "highlight"
+   ],
+   "option_aliases": {
+    "miring": "skew",
+    "belah": "split",
+    "sorot": "highlight"
+   }
+  },
+  "title": {
+   "default": "Paket Kreator",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "sub": {
+   "default": "Semua alat untuk mulai berkarya",
+   "type": "text"
+  },
+  "price": {
+   "default": "Rp49 rb",
+   "type": "text",
+   "aliases": [
+    "harga"
+   ]
+  },
+  "title2": {
+   "default": "Paket Tim",
+   "type": "text",
+   "hint": "Kartu kedua (mode belah)",
+   "aliases": [
+    "judul2"
+   ]
+  },
+  "sub2": {
+   "default": "Kerja bareng tanpa ribet",
+   "type": "text"
+  },
+  "price2": {
+   "default": "Rp129 rb",
+   "type": "text",
+   "aliases": [
+    "harga2"
+   ]
+  },
+  "badge": {
+   "default": [
+    "Baru",
+    "Populer"
+   ],
+   "type": "list",
+   "hint": "Lencana pil di tepi dalam (mode belah)",
+   "aliases": [
+    "lencana"
+   ]
+  },
+  "accent_color": {
+   "default": "#7c5cff",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "color2": {
+   "default": "#ff6b8b",
+   "type": "color",
+   "aliases": [
+    "warna2"
+   ]
+  },
+  "card": {
+   "default": "#151826",
+   "type": "color",
+   "aliases": [
+    "kartu"
+   ]
+  },
+  "cursor": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "kursor"
+   ]
+  },
+  "skew": {
+   "default": 14,
+   "type": "number",
+   "hint": "Sudut miring maksimum (derajat)",
+   "aliases": [
+    "miring"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700;800",
+   "type": "font"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/kartu-miring",
+  "tilt-card",
+  "split-tilt-cards",
+  "spotlight-card"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

@@ -1,0 +1,68 @@
+<!-- Block transitions/burn · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/burn" data-start="0" data-duration="1.8" data-track-index="20" class="blk blk-transitions-burn">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "direction": "random", "scale": 1, "edge_width": 1, "ember_color": "#fff1a8", "fire_color": "#ff7a1a", "charcoal_color": "#1c0d05", "seed": 5, "ease": "power1.inOut"}
+</script>
+</div>
+<style>
+.blk-transitions-burn{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to), D = k.dur, W = k.w, H = k.h, s = k.s;
+  function gaya(el, o) { if (el) for (var n in o) el.style[n] = o[n]; }
+  function bersih(el, tampil) { gaya(el, { transform: "", filter: "", opacity: "", clipPath: "", webkitMaskImage: "", maskImage: "", transformOrigin: "", zIndex: "", borderRadius: "", boxShadow: "", backfaceVisibility: "", visibility: tampil ? "" : "hidden" }); }
+  function ez(n) { return gsap.parseEase(n || "none") || gsap.parseEase("none"); }
+  function peta(n, fn, cx, cy) {
+    var mw = 192, mh = Math.max(2, Math.round(mw * H / W)), md = Math.min(W, H);
+    var c = document.createElement("canvas"); c.width = mw; c.height = mh * n;
+    var x = c.getContext("2d"), im = x.createImageData(mw, mh * n), dt = im.data;
+    for (var f = 0; f < n; f++) for (var j = 0; j < mh; j++) for (var i = 0; i < mw; i++) {
+      var v = fn(((i + 0.5) / mw * W - cx) / md, ((j + 0.5) / mh * H - cy) / md, f / n), o = ((f * mh + j) * mw + i) * 4;
+      dt[o] = 128 + 127 * BLOCK.clamp(v[0], -1, 1); dt[o + 1] = 128 + 127 * BLOCK.clamp(v[1], -1, 1); dt[o + 2] = 128; dt[o + 3] = 255;
+    }
+    x.putImageData(im, 0, 0);
+    return c.toDataURL("image/png");
+  }
+
+  var E = ez(P.ease), fid = "blkf-" + k.id, lw = +P.edge_width || 1, arah = P.direction;
+  var sv = BLOCK.svg("svg", { width: 0, height: 0, style: "position:absolute" }, k.root);
+  var fl = BLOCK.svg("filter", { id: fid, x: "-5%", y: "-5%", width: "110%", height: "110%", "color-interpolation-filters": "sRGB" }, sv);
+  BLOCK.svg("feTurbulence", { type: "turbulence", baseFrequency: (0.005 / (+P.scale || 1) / s).toFixed(5), numOctaves: 4, seed: +P.seed || 5, result: "n" }, fl);
+  BLOCK.svg("feColorMatrix", { "in": "n", type: "matrix", values: "1.4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1", result: "nr" }, fl);
+  if (arah !== "random") {
+    var im = BLOCK.svg("feImage", { preserveAspectRatio: "none", result: "gr" }, fl);
+    im.setAttribute("x", 0); im.setAttribute("y", 0); im.setAttribute("width", W); im.setAttribute("height", H);
+    var md = Math.min(W, H);
+    im.setAttribute("href", peta(1, function (x, y) {
+      var px = x * md / W + 0.5, py = y * md / H + 0.5;
+      var v = arah === "left" ? px : arah === "right" ? 1 - px : arah === "top" ? py : arah === "bottom" ? 1 - py : Math.min(1, Math.hypot(x, y) * md / Math.hypot(W, H) * 2);
+      return [v * 2 - 1, 0];
+    }, W / 2, H / 2));
+    BLOCK.svg("feComposite", { "in": "nr", in2: "gr", operator: "arithmetic", k1: 0, k2: 0.45, k3: 0.55, k4: 0, result: "nb" }, fl);
+  }
+  var src = arah !== "random" ? "nb" : "nr";
+  BLOCK.svg("feColorMatrix", { "in": src, type: "matrix", values: "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0", result: "mb" }, fl);
+  var K = 45, tepi = [0, 0.025 * lw, 0.05 * lw, 0.07 * lw], fa = [];
+  tepi.forEach(function (e, i) { var ct = BLOCK.svg("feComponentTransfer", { "in": "mb", result: "m" + i }, fl); fa.push(BLOCK.svg("feFuncA", { type: "linear", slope: K, intercept: 0 }, ct)); });
+  [["ember_color", 3], ["fire_color", 2], ["charcoal_color", 1]].forEach(function (c) {
+    BLOCK.svg("feFlood", { "flood-color": P[c[0]], result: "f" + c[1] }, fl);
+    BLOCK.svg("feComposite", { "in": "f" + c[1], in2: "m" + c[1], operator: "in", result: "L" + c[1] }, fl);
+  });
+  BLOCK.svg("feComposite", { "in": "SourceGraphic", in2: "m0", operator: "in", result: "L0" }, fl);
+  BLOCK.svg("feComposite", { "in": "SourceGraphic", in2: "m1", operator: "in", result: "sa" }, fl);
+  BLOCK.svg("feComposite", { "in": "L1", in2: "sa", operator: "arithmetic", k1: 0, k2: 0.75, k3: 0.25, k4: 0, result: "L1b" }, fl);
+  BLOCK.svg("feGaussianBlur", { "in": "L2", stdDeviation: 10 * s, result: "G" }, fl);
+  var mg = BLOCK.svg("feMerge", null, fl);
+  ["G", "L3", "L2", "L1b", "L0"].forEach(function (n) { BLOCK.svg("feMergeNode", { "in": n }, mg); });
+  BLOCK.onTime(tl, function (t) {
+    var u = t / D;
+    if (u <= 0 || u >= 1) { bersih(A, u <= 0); bersih(Bk, u >= 1); return; }
+    var th = BLOCK.lerp(arah === "random" ? -0.08 : 0.02, 1.05, E(u));
+    fa.forEach(function (f, i) { f.setAttribute("intercept", (-K * (th - tepi[i])).toFixed(3)); });
+    gaya(A, { visibility: "", zIndex: 2, filter: "url(#" + fid + ")" });
+    gaya(Bk, { visibility: "", zIndex: 1 });
+  }, D);
+});
+</script>

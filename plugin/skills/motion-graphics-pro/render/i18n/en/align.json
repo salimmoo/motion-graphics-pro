@@ -1,0 +1,15 @@
+{
+ "ffmpeg cannot be started ({}). Install ffmpeg or set env MGP_FFMPEG.": "ffmpeg cannot be started ({}). Install ffmpeg or set env MGP_FFMPEG.",
+ "ffmpeg failed: ": "ffmpeg failed: ",
+ "audio not readable: {}": "audio not readable: {}",
+ "empty script": "empty script",
+ "Name an audio file: mgp align voice.wav --script text.txt -o words.json": "Name an audio file: mgp align voice.wav --script text.txt -o words.json",
+ "file not found: {}": "file not found: {}",
+ "--script is required: a text file path or the text itself": "--script is required: a text file path or the text itself",
+ "align: {} words, {} syllables; {} nuclei detected ({} used, {} syllables without a nucleus); {} pauses; speech {} of {} s": "align: {} words, {} syllables; {} nuclei detected ({} used, {} syllables without a nucleus); {} pauses; speech {} of {} s",
+ "{} words -> {}": "{} words -> {}",
+ "{} letters -> {}": "{} letters -> {}",
+ "mgp align <audio> [script.txt | --script text.txt] -o words.json [--language id|en] [--letters phones.json] [--json] [--quiet]\n\nAligns a script to audio without Whisper: syllable nucleus detection + dynamic programming.\n  --script, -n   path of a text file or the text itself (required; may also be the 2nd positional, the flag wins)\n  -o, --out      JSON output [{id,text,start,end,syllables}] (default: words.json)\n  --language     id (default) or en: syllable splitting rules and number spelling\n  --letters      also write per-letter timing [{start,end,phone}] for MGP.lipsync.visemes()\n  --param k=v    change an algorithm parameter (repeatable; see PARAM in src/align.mjs)\n  --json         print a JSON summary to stdout\n  --quiet        no messages on stderr\nOld names still work: mgp selaras, --naskah/--teks, --bahasa, --huruf, --diam.": "mgp align <audio> [script.txt | --script text.txt] -o words.json [--language id|en] [--letters phones.json] [--json] [--quiet]\n\nAligns a script to audio without Whisper: syllable nucleus detection + dynamic programming.\n  --script, -n   path of a text file or the text itself (required; may also be the 2nd positional, the flag wins)\n  -o, --out      JSON output [{id,text,start,end,syllables}] (default: words.json)\n  --language     id (default) or en: syllable splitting rules and number spelling\n  --letters      also write per-letter timing [{start,end,phone}] for MGP.lipsync.visemes()\n  --param k=v    change an algorithm parameter (repeatable; see PARAM in src/align.mjs)\n  --json         print a JSON summary to stdout\n  --quiet        no messages on stderr\nOld names still work: mgp selaras, --naskah/--teks, --bahasa, --huruf, --diam.",
+ "unknown parameter: {}": "unknown parameter: {}",
+ "--language must be id or en": "--language must be id or en"
+}

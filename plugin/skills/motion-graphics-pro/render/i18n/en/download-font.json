@@ -1,0 +1,8 @@
+{
+  "no face for {}": "no face for {}",
+  "not WOFF2: {}": "not WOFF2: {}",
+  "licence not found for {}": "licence not found for {}",
+  "{}: {} files, {} KB, {}": "{}: {} files, {} KB, {}",
+  "unknown family: {}": "unknown family: {}",
+  "done: {} families, {} MB -> {}": "done: {} families, {} MB -> {}"
+}

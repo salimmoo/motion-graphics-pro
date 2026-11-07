@@ -1,0 +1,118 @@
+<!-- Block code/diff · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="code/diff" data-start="0" data-duration="6" data-track-index="30" class="blk blk-code-diff">
+<script type="application/json" data-block-props>
+{"old": "function sapa(nama) {\n  var teks = \"Halo, \" + nama;\n  console.log(teks);\n  return teks;\n}", "new": "function sapa(nama, waktu = \"pagi\") {\n  const teks = `Selamat ${waktu}, ${nama}`;\n  return teks;\n}", "lang": "js", "theme": "dark-2026", "file": "sapa.js", "size": 30, "delete_start": 1.0, "add_start": 2.4, "font": "JetBrains Mono:wght@400;500;700"}
+</script>
+</div>
+<style>
+.blk-code-diff{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-code-diff .rw{position:relative;white-space:pre;overflow:hidden;font-variant-ligatures:none;display:flex;align-items:center}
+.blk-code-diff .g{flex:none;text-align:right;box-sizing:border-box}
+.blk-code-diff .tn{flex:none;text-align:center;font-weight:700}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, E = BLOCK.el, s = k.s, W = k.w, H = k.h;
+  // --- penyorot sintaks kecil (token regex) + tema; ditulis sendiri, disalin per blok kode ---
+  var TEMA = {
+    "dark-2026": { bg: "#15161c", panel: "#1c1d25", garis: "#2a2c37", teks: "#d8dbe6", redup: "#5f6478", kw: "#c792ea", str: "#a6dc78", num: "#f7a26c", kom: "#6a7089", fn: "#80b4ff", tag: "#ff7d9e", atr: "#ffd27a", aksen: "#7c9cff", kursor: "#9fb4ff", hapus: "#ff5c6c", tambah: "#3fd07f" },
+    "modern-dark": { bg: "#1f1f1f", panel: "#181818", garis: "#2b2b2b", teks: "#cccccc", redup: "#6e7681", kw: "#569cd6", str: "#ce9178", num: "#b5cea8", kom: "#6a9955", fn: "#dcdcaa", tag: "#569cd6", atr: "#9cdcfe", aksen: "#0078d4", kursor: "#aeafad", hapus: "#f14c4c", tambah: "#2ea043" },
+    "light": { bg: "#ffffff", panel: "#f3f4f6", garis: "#e3e5e9", teks: "#1f2328", redup: "#8c959f", kw: "#cf222e", str: "#0a3069", num: "#0550ae", kom: "#6e7781", fn: "#8250df", tag: "#116329", atr: "#953800", aksen: "#0969da", kursor: "#0969da", hapus: "#cf222e", tambah: "#1a7f37" },
+    "terminal-pro": { bg: "#050505", panel: "#161616", garis: "#262626", teks: "#c8c8c8", redup: "#6c6c6c", kw: "#ececec", str: "#b8e86a", num: "#d8d8d8", kom: "#6c6c6c", fn: "#ffffff", tag: "#b8e86a", atr: "#c8c8c8", aksen: "#a6ff00", kursor: "#a6ff00", hapus: "#ff6b6b", tambah: "#a6ff00" }
+  };
+  var KW = {
+    js: "const|let|var|function|return|if|else|for|while|of|in|new|class|extends|import|from|export|default|async|await|try|catch|throw|true|false|null|undefined|this|typeof",
+    py: "def|class|return|if|elif|else|for|while|in|not|and|or|import|from|as|with|try|except|raise|lambda|True|False|None|yield|async|await|pass",
+    bash: "if|then|else|fi|for|do|done|in|case|esac|function|export|echo|cd|sudo|return|while|local"
+  };
+  function aturan(bhs) {
+    if (bhs === "html") return [[/<!--.*?(-->|$)/y, "kom"], [/"[^"]*"|'[^']*'/y, "str"], [/<\/?[\w-]+|\/?>/y, "tag"], [/[\w-]+(?==)/y, "atr"], [/\s+/y, "sp"], [/[^\s<>"'=]+|=/y, "teks"]];
+    var kw = new RegExp("(?:" + (KW[bhs] || KW.js) + ")(?![\\w$])", "y"), r = [];
+    r.push([bhs === "js" ? /\/\/.*/y : /#.*/y, "kom"]);
+    r.push([/"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`[^`]*`/y, "str"]);
+    if (bhs === "bash") r.push([/--?[A-Za-z][\w-]*/y, "num"], [/\$[\w{}]+/y, "atr"]);
+    r.push([/\d+(?:\.\d+)?(?![\w$])/y, "num"], [kw, "kw"], [/[A-Za-z_$][\w$]*(?=\s*\()/y, "fn"], [/\s+/y, "sp"], [bhs === "bash" ? /[A-Za-z_$~.][\w$.\/~-]*/y : /[A-Za-z_$][\w$]*/y, "teks"], [/[^\sA-Za-z_$\d]+?/y, "tanda"]);
+    return r;
+  }
+  /** sorot(kode, bahasa) -> [[{t, c}]] per baris */
+  function sorot(kode, bhs) {
+    var R = aturan(bhs);
+    return String(kode).split("\n").map(function (ln) {
+      var out = [], i = 0;
+      while (i < ln.length) {
+        var ok = false;
+        for (var j = 0; j < R.length; j++) {
+          R[j][0].lastIndex = i; var m = R[j][0].exec(ln);
+          if (m && m[0].length) { out.push({ t: m[0], c: R[j][1] }); i += m[0].length; ok = true; break; }
+        }
+        if (!ok) { out.push({ t: ln[i], c: "teks" }); i++; }
+      }
+      return out;
+    });
+  }
+  function warnaTok(T, c) { return T[c] || T.teks; }
+  /** tunggu berkas font termuat (fonts.ready saja belum cukup untuk mengukur) */
+  function muatFont(spec, berat) {
+    if (!document.fonts || !document.fonts.load) return Promise.resolve();
+    var fam = BLOCK.family(spec, "monospace");
+    return Promise.all((berat || [400]).map(function (b) { return document.fonts.load(b + " 20px " + fam, "Aa{}"); })).catch(function () {});
+  }
+  /** jendela generik: bilah judul + tiga titik, isi di bawahnya */
+  function jendela(par, T, w, h, judul, s, mono) {
+    var win = BLOCK.el("div", { style: "position:absolute;left:50%;top:50%;width:" + w + "px;height:" + h + "px;margin:" + (-h / 2) + "px 0 0 " + (-w / 2) + "px;border-radius:" + 14 * s + "px;background:" + T.bg + ";box-shadow:0 " + 30 * s + "px " + 80 * s + "px rgba(0,0,0,.5),0 0 0 1px " + T.garis + ";overflow:hidden" }, par);
+    var bar = BLOCK.el("div", { style: "position:absolute;left:0;right:0;top:0;height:" + 44 * s + "px;background:" + T.panel + ";border-bottom:1px solid " + T.garis + ";display:flex;align-items:center;justify-content:center;color:" + T.redup + ";font:500 " + 16 * s + "px " + mono }, win, BLOCK.esc(judul));
+    ["#ff5f57", "#febc2e", "#28c840"].forEach(function (c, i) { BLOCK.el("div", { style: "position:absolute;left:" + (18 + i * 22) * s + "px;top:50%;width:" + 12 * s + "px;height:" + 12 * s + "px;margin-top:" + (-6 * s) + "px;border-radius:50%;background:" + c }, bar); });
+    var isi = BLOCK.el("div", { style: "position:absolute;left:0;right:0;top:" + 44 * s + "px;bottom:0;overflow:hidden" }, win);
+    return { win: win, bar: bar, isi: isi };
+  }
+  // --- akhir penyorot ---
+  var T = TEMA[P.theme] || TEMA["dark-2026"], mono = BLOCK.family(P.font, "ui-monospace, monospace");
+  // diff baris (LCS)
+  function diff(a, b) {
+    var n = a.length, m = b.length, L = [], i, j;
+    for (i = 0; i <= n; i++) { L.push([]); for (j = 0; j <= m; j++) L[i][j] = 0; }
+    for (i = n - 1; i >= 0; i--) for (j = m - 1; j >= 0; j--) L[i][j] = a[i] === b[j] ? L[i + 1][j + 1] + 1 : Math.max(L[i + 1][j], L[i][j + 1]);
+    var out = []; i = 0; j = 0;
+    while (i < n || j < m) {
+      if (i < n && j < m && a[i] === b[j]) { out.push({ j: "=", t: a[i], a: i + 1, b: j + 1 }); i++; j++; }
+      else if (i < n && (j >= m || L[i + 1][j] >= L[i][j + 1])) { out.push({ j: "-", t: a[i], a: i + 1 }); i++; }
+      else { out.push({ j: "+", t: b[j], b: j + 1 }); j++; }
+    }
+    return out;
+  }
+  return muatFont(P.font, [400, 700]).then(function () {
+    var A = String(P.old).split("\n"), Bb = String(P.new).split("\n"), d = diff(A, Bb);
+    var fs = P.size * s, lh = fs * 1.65, ww = Math.min(W * 0.9, H * 1.5), wh = Math.min(H * 0.86, (Math.max(A.length, Bb.length) + d.filter(function (x) { return x.j !== "="; }).length * 0.5) * lh + 140 * s);
+    var j = jendela(k.root, T, ww, wh, P.file, s, mono);
+    var box = E("div", { style: "position:absolute;left:0;right:0;top:" + 20 * s + "px;font:" + fs + "px " + mono + ";color:" + T.teks }, j.isi);
+    var dels = [], adds = [];
+    d.forEach(function (x) {
+      var r = E("div", { class: "rw", style: "height:" + lh + "px" }, box);
+      var bg = E("div", { style: "position:absolute;inset:0;opacity:0;background:" + BLOCK.rgba(x.j === "-" ? T.hapus : T.tambah, 0.18) + ";border-left:" + 4 * s + "px solid " + (x.j === "-" ? T.hapus : T.tambah) }, r);
+      E("span", { class: "g", style: "width:" + fs * 2.4 + "px;color:" + T.redup + ";opacity:.7" }, r, x.a ? String(x.a) : "");
+      E("span", { class: "g", style: "width:" + fs * 2.4 + "px;color:" + T.redup + ";opacity:.7;padding-right:" + fs * 0.4 + "px" }, r, x.b ? String(x.b) : "");
+      var tn = E("span", { class: "tn", style: "width:" + fs * 1.4 + "px;color:" + (x.j === "-" ? T.hapus : T.tambah) + ";opacity:0" }, r, x.j === "=" ? "" : x.j);
+      var kd = E("span", { style: "position:relative" }, r);
+      (sorot(x.t, P.lang)[0] || []).forEach(function (tk) { var sp = E("span", { style: "color:" + warnaTok(T, tk.c) }, kd); sp.textContent = tk.t; });
+      if (x.j === "-") dels.push({ r: r, bg: bg, tn: tn, kd: kd });
+      if (x.j === "+") adds.push({ r: r, bg: bg, tn: tn, kd: kd });
+    });
+    var th = +P.delete_start, ta = +P.add_start;
+    tl.fromTo(j.win, { autoAlpha: 0, y: 30 * s }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+    BLOCK.initial(tl, adds.map(function (a) { return a.r; }), { height: 0, opacity: 0 });
+    // baris merah: ditandai, dicoret pudar, lalu menciut
+    dels.forEach(function (x, i) {
+      tl.to([x.bg, x.tn], { opacity: 1, duration: 0.25, ease: "power2.out" }, th + i * 0.08)
+        .to(x.kd, { opacity: 0.45, duration: 0.3 }, th + 0.3 + i * 0.08)
+        .to(x.r, { height: 0, opacity: 0, duration: 0.5, ease: "power3.inOut" }, ta - 0.75 + i * 0.07);
+    });
+    // baris hijau: melebar masuk, kilat hijau, lalu mengendap tipis
+    adds.forEach(function (x, i) {
+      tl.to(x.r, { height: lh, opacity: 1, duration: 0.55, ease: "power3.out" }, ta + i * 0.1)
+        .fromTo([x.bg, x.tn], { opacity: 0 }, { opacity: 1, duration: 0.2 }, ta + i * 0.1)
+        .fromTo(x.kd, { x: -14 * s, opacity: 0 }, { x: 0, opacity: 1, duration: 0.45, ease: "power3.out" }, ta + 0.1 + i * 0.1)
+        .to(x.bg, { opacity: 0.55, duration: 0.8 }, ta + 1.0 + i * 0.1);
+    });
+  });
+}, { font: true });
+</script>

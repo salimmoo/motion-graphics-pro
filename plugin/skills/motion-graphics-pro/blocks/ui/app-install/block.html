@@ -1,0 +1,87 @@
+<!-- Block ui/app-install · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="ui/app-install" data-start="0" data-duration="7" data-track-index="30" class="blk blk-ui-app-install">
+<script type="application/json" data-block-props>
+{"query": "vpn aman", "app_name": "Teduh VPN", "developer": "Studio Teduh", "rating": "4,8", "other": [["Jaring Lindung", "#ff8a5b"], ["Kunci Sinyal", "#9b7bff"], ["Rute Privat", "#ffc94d"]], "button": "Pasang", "open_button": "Buka", "slogan": "Internetan tenang, di mana saja", "accent_color": "#2f7bff", "icon_color": "#22c58b", "font": "Inter:wght@400;500;600;700;800"}
+</script>
+</div>
+<style>
+.blk-ui-app-install{position:absolute;inset:0;pointer-events:none;overflow:hidden;font-family:"Inter",system-ui,sans-serif}
+.blk-ui-app-install .hp{position:absolute;left:50%;top:50%;background:#0c0e13;box-shadow:0 30px 90px rgba(0,0,0,.5),inset 0 0 0 2px #2a2e38}
+.blk-ui-app-install .ly{position:absolute;overflow:hidden;background:#fff;color:#12151d}
+.blk-ui-app-install .ly>*{position:absolute}
+.blk-ui-app-install .rw{display:flex;align-items:center}
+.blk-ui-app-install .ic{flex:none;display:flex;align-items:center;justify-content:center}
+.blk-ui-app-install .tb{flex:none;position:relative;display:flex;align-items:center;justify-content:center;font-weight:800;border-radius:99px}
+.blk-ui-app-install .tb>*{position:absolute}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, E = BLOCK.el, ac = P.accent_color;
+  var ph = Math.min(k.h * 0.88, k.w * 0.92 * 2.1), pw = ph / 2.1, u = pw / 400, px = function (v) { return v * u + "px"; };
+  var hp = E("div", { class: "hp", style: "width:" + pw + "px;height:" + ph + "px;margin:" + (-ph / 2) + "px 0 0 " + (-pw / 2) + "px;border-radius:" + px(60) }, k.root);
+  var ly = E("div", { class: "ly", style: "inset:" + px(13) + ";border-radius:" + px(48) }, hp);
+  E("div", { style: "left:" + px(24) + ";top:" + px(64) + ";font-weight:800;font-size:" + px(34) }, ly, "Cari");
+  var cari = E("div", { class: "rw", style: "left:" + px(20) + ";right:" + px(20) + ";top:" + px(116) + ";height:" + px(50) + ";border-radius:" + px(14) + ";background:#eff1f5;padding:0 " + px(16) + ";gap:" + px(10) + ";font-size:" + px(19) }, ly);
+  E("span", { style: "opacity:.4" }, cari, "&#9906;");
+  var kq = E("span", null, cari), caret = E("span", { style: "width:" + px(2) + ";height:" + px(24) + ";background:" + ac }, cari);
+  function ikon(par, sz, warna, logo) {
+    var ic = E("div", { class: "ic", style: "width:" + px(sz) + ";height:" + px(sz) + ";border-radius:" + px(sz * 0.26) + ";background:linear-gradient(150deg," + BLOCK.mix(warna, "#ffffff", .3) + "," + warna + ")" }, par);
+    if (logo) { var sv = BLOCK.svg("svg", { viewBox: "0 0 24 24", width: sz * 0.6 * u, height: sz * 0.6 * u }, ic); BLOCK.svg("path", { d: "M12 2.5 L20 5.5 V11.5 C20 16.5 16.5 20 12 21.5 C7.5 20 4 16.5 4 11.5 V5.5 Z", fill: "#fff" }, sv); BLOCK.svg("path", { d: "M8.5 12 L11 14.5 L15.8 9.5", fill: "none", stroke: warna, "stroke-width": 2.2, "stroke-linecap": "round", "stroke-linejoin": "round" }, sv); }
+    return ic;
+  }
+  // hasil pencarian
+  var hasil = E("div", { style: "left:" + px(20) + ";right:" + px(20) + ";top:" + px(190) }, ly), baris = [];
+  var r0 = E("div", { class: "rw", style: "gap:" + px(14) + ";height:" + px(96) }, hasil);
+  ikon(r0, 72, P.icon_color, true);
+  var nm = E("div", { style: "flex:1;min-width:0" }, r0);
+  E("div", { style: "font-weight:800;font-size:" + px(20) }, nm, BLOCK.esc(P.app_name));
+  E("div", { style: "font-size:" + px(15) + ";opacity:.55" }, nm, BLOCK.esc(P.developer));
+  E("div", { style: "font-size:" + px(15) + ";color:#f5a623" }, nm, "&#9733;&#9733;&#9733;&#9733;&#9733; <span style='color:#12151d;opacity:.55'>" + BLOCK.esc(P.rating) + "</span>");
+  var tb = E("div", { class: "tb", style: "width:" + px(96) + ";height:" + px(38) + ";background:#eef2f8;color:" + ac + ";font-size:" + px(16) }, r0);
+  var lb1 = E("span", null, tb, BLOCK.esc(P.button)), lb2 = E("span", null, tb, BLOCK.esc(P.open_button));
+  var cin = BLOCK.svg("svg", { viewBox: "0 0 40 40", width: 38 * u, height: 38 * u }, tb);
+  BLOCK.svg("circle", { cx: 20, cy: 20, r: 15, fill: "none", stroke: "#d5dbe6", "stroke-width": 3.5 }, cin);
+  var prog = BLOCK.svg("circle", { cx: 20, cy: 20, r: 15, fill: "none", stroke: ac, "stroke-width": 3.5, "stroke-linecap": "round", transform: "rotate(-90 20 20)" }, cin);
+  BLOCK.svg("rect", { x: 16, y: 16, width: 8, height: 8, rx: 1.5, fill: ac }, cin);
+  baris.push(r0);
+  var tangkap = E("div", { style: "height:" + px(200) + ";border-radius:" + px(18) + ";margin:" + px(6) + " 0 " + px(14) + ";background:linear-gradient(140deg," + BLOCK.mix(P.icon_color, "#ffffff", .55) + "," + P.icon_color + ");display:flex;align-items:flex-end;padding:" + px(18) + ";box-sizing:border-box;color:#fff;font-weight:800;font-size:" + px(24) }, hasil, BLOCK.esc(P.slogan));
+  baris.push(tangkap);
+  P.other.forEach(function (a) {
+    var r = E("div", { class: "rw", style: "gap:" + px(14) + ";height:" + px(84) + ";border-top:1px solid #eceff4" }, hasil);
+    ikon(r, 60, a[1], false); E("div", { style: "flex:1;font-weight:700;font-size:" + px(18) }, r, BLOCK.esc(a[0]));
+    E("div", { class: "tb", style: "width:" + px(96) + ";height:" + px(38) + ";background:#eef2f8;color:" + ac + ";font-size:" + px(16) }, r, BLOCK.esc(P.button));
+    baris.push(r);
+  });
+  var dot = E("div", { style: "left:0;top:0;width:" + px(54) + ";height:" + px(54) + ";border-radius:50%;background:rgba(20,30,50,.25);box-shadow:0 0 0 " + px(2) + " rgba(255,255,255,.8);z-index:5" }, ly);
+  // pembuka aplikasi
+  var spl = E("div", { style: "inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:" + px(18) + ";background:" + P.icon_color + ";color:#fff;z-index:6" }, ly);
+  var bi = ikon(spl, 120, BLOCK.mix(P.icon_color, "#ffffff", 0.15), true);
+  var st = E("div", { style: "font-weight:800;font-size:" + px(30) }, spl, BLOCK.esc(P.app_name));
+  // urutan waktu
+  var kq0 = 0.5, kd = 0.09, tk = kq0 + P.query.length * kd, tTap = tk + 1.0, tDl = tTap + 0.25, tSel = tDl + 1.6, tBuka = tSel + 0.6;
+  BLOCK.onTime(tl, function (t) {
+    var n = BLOCK.clamp(Math.floor((t - kq0) / kd), 0, P.query.length); kq.textContent = P.query.slice(0, n);
+    caret.style.opacity = t < tk + 0.3 || Math.floor(t * 2.2) % 2 ? 1 : 0;
+    var q = BLOCK.clamp((t - tDl) / (tSel - tDl), 0, 1), e = 1 - Math.pow(1 - q, 1.6), C = 2 * Math.PI * 15;
+    prog.setAttribute("stroke-dasharray", (C * e) + " " + C);
+  }, D);
+  // posisi tombol relatif layar (offset, tahan terhadap skala host)
+  var bx = hasil.offsetLeft + tb.offsetLeft + tb.offsetWidth / 2 - 27 * u, by = hasil.offsetTop + tb.offsetTop + tb.offsetHeight / 2 - 27 * u;
+  BLOCK.initial(tl, [lb2, cin, dot, spl], { autoAlpha: 0 });
+  tl.fromTo(hp, { y: 40 * u, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6, ease: "power3.out" }, 0)
+    .fromTo(baris, { autoAlpha: 0, y: 24 * u }, { autoAlpha: 1, y: 0, duration: 0.5, ease: "power3.out", stagger: 0.07 }, tk + 0.1)
+    // ketuk Pasang -> lingkar unduhan -> Buka
+    .fromTo(dot, { x: bx + 40 * u, y: by + 160 * u, autoAlpha: 0, scale: 1 }, { x: bx, y: by, autoAlpha: 1, duration: 0.5, ease: "power3.out", immediateRender: false }, tTap - 0.5)
+    .to(dot, { scale: 0.7, duration: 0.1, yoyo: true, repeat: 1 }, tTap).to(dot, { autoAlpha: 0, duration: 0.2 }, tTap + 0.25)
+    .to(tb, { scale: 0.9, duration: 0.1, yoyo: true, repeat: 1 }, tTap)
+    .to(lb1, { autoAlpha: 0, duration: 0.12 }, tDl).to(tb, { width: 40 * u, backgroundColor: "rgba(0,0,0,0)", duration: 0.35, ease: "power3.inOut" }, tDl)
+    .to(cin, { autoAlpha: 1, duration: 0.2 }, tDl + 0.2).to(cin, { autoAlpha: 0, scale: 0.6, duration: 0.2 }, tSel)
+    .to(tb, { width: 96 * u, backgroundColor: ac, color: "#fff", duration: 0.45, ease: "back.out(1.8)" }, tSel + 0.1)
+    .fromTo(lb2, { scale: 0.6 }, { autoAlpha: 1, scale: 1, duration: 0.4, ease: "back.out(2)", immediateRender: false }, tSel + 0.2)
+    .fromTo(dot, { x: bx + 30 * u, y: by + 120 * u, autoAlpha: 0, scale: 1 }, { x: bx, y: by, autoAlpha: 1, duration: 0.4, ease: "power3.out", immediateRender: false }, tBuka - 0.1)
+    .to(dot, { scale: 0.7, duration: 0.1, yoyo: true, repeat: 1 }, tBuka + 0.3)
+    .fromTo(spl, { autoAlpha: 0, clipPath: "circle(0% at 82% 30%)" }, { autoAlpha: 1, clipPath: "circle(150% at 82% 30%)", duration: 0.7, ease: "expo.inOut", immediateRender: false }, tBuka + 0.4)
+    .fromTo(bi, { scale: 0.4 }, { scale: 1, duration: 0.8, ease: "blockSpring", immediateRender: false }, tBuka + 0.55)
+    .fromTo(st, { autoAlpha: 0, y: 14 * u }, { autoAlpha: 1, y: 0, duration: 0.4, immediateRender: false }, tBuka + 0.8);
+}, { font: true });
+</script>

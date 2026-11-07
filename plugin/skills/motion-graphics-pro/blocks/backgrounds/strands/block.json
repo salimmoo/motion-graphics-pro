@@ -1,0 +1,117 @@
+{
+ "id": "backgrounds/strands",
+ "name": "Strands",
+ "name_id": "Untai Cahaya",
+ "category": "backgrounds",
+ "description": {
+  "id": "Pita cahaya tipis merah muda dan biru meliuk-liuk di latar hitam, atau satu gelombang sinus bercahaya yang merambat melintasi layar.",
+  "en": "Thin ribbons of pink and blue light weave across a black field, or a single glowing sine wave travels across the frame."
+ },
+ "tags": [
+  "latar",
+  "background",
+  "untai",
+  "pita",
+  "sinus",
+  "gelombang",
+  "cahaya",
+  "shader",
+  "webgl",
+  "backgrounds",
+  "strands"
+ ],
+ "props": {
+  "style": {
+   "default": "strand",
+   "type": "enum",
+   "options": [
+    "strand",
+    "sine"
+   ],
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "untai": "strand",
+    "sinus": "sine"
+   }
+  },
+  "color1": {
+   "default": "#ff4fa3",
+   "type": "color",
+   "aliases": [
+    "warna1"
+   ]
+  },
+  "color2": {
+   "default": "#4f7bff",
+   "type": "color",
+   "aliases": [
+    "warna2"
+   ]
+  },
+  "core_color": {
+   "default": "#ffffff",
+   "type": "color",
+   "hint": "Warna inti garis (gaya sinus)",
+   "aliases": [
+    "warna_inti"
+   ]
+  },
+  "bg": {
+   "default": "#000000",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "count": {
+   "default": 7,
+   "type": "number",
+   "hint": "Jumlah untai (maks 10)",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "amplitude": {
+   "default": 0.22,
+   "type": "number",
+   "hint": "Tinggi liukan (fraksi tinggi layar)",
+   "aliases": [
+    "amplitudo"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali kecepatan gerak",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "resolution": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Skala resolusi shader (0.25-1); kecil = lebih cepat",
+   "aliases": [
+    "resolusi"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "latar/untai",
+  "strands",
+  "sine-wave"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

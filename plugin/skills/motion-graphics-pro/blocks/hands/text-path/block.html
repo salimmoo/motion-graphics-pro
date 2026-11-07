@@ -1,0 +1,37 @@
+<!-- Block hands/text-path · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="hands/text-path" data-start="0" data-duration="5" data-track-index="12" class="blk blk-hands-text-path">
+<script type="application/json" data-block-props>
+{"text": "ikuti angin ke mana pun ia membawamu pulang", "path": "M 160 760 C 460 380, 760 380, 960 560 S 1460 820, 1760 360", "space": [1920, 1080], "show_path": true, "color": "#26211d", "path_color": "#e4572e", "font": "Caveat:wght@700", "size": 112, "start": 0.3, "kps": 16, "offset": 14, "wobble": 1, "seed": 20}
+</script>
+<svg class="blk-svg" preserveAspectRatio="xMidYMid meet"><path class="blk-jalur" fill="none"/><text class="blk-teks"><textPath class="blk-tp"></textPath></text></svg>
+</div>
+<style>
+.blk-hands-text-path{position:absolute;inset:0;pointer-events:none}
+.blk-hands-text-path .blk-svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, svg = k.root.querySelector(".blk-svg"), jl = svg.querySelector(".blk-jalur"), tx = svg.querySelector(".blk-teks"), tp = svg.querySelector(".blk-tp");
+  var R = P.space || [1920, 1080], id = "blkj-" + k.id;
+  // ruang jalur (koordinat path) dipasang ke layar dengan "meet": jalur adalah satu-satunya masukan geometri
+  svg.setAttribute("viewBox", "0 0 " + R[0] + " " + R[1]);
+  jl.setAttribute("id", id); jl.setAttribute("d", P.path);
+  jl.setAttribute("stroke", P.path_color); jl.setAttribute("stroke-width", 3); jl.setAttribute("stroke-linecap", "round");
+  jl.setAttribute("pathLength", 1); jl.setAttribute("stroke-dasharray", "0.004 0.012");
+  if (!P.show_path) jl.style.display = "none";
+  tp.setAttribute("href", "#" + id);
+  tx.setAttribute("fill", P.color); tx.setAttribute("font-size", P.size); tx.setAttribute("dy", -P.offset);
+  tx.style.fontFamily = BLOCK.family(P.font, "cursive");
+  var ch = Array.from(String(P.text)), sp = ch.map(function (c) { var s = BLOCK.svg("tspan", null, tp); s.textContent = c; return s; });
+  var T0 = P.start, dt = 1 / P.kps, Tend = T0 + ch.length * dt;
+  tl.fromTo(jl, { opacity: 0 }, { opacity: 0.55, duration: 0.6, ease: "power1.out" }, 0);
+  tl.to(jl, { opacity: 0.18, duration: 0.6 }, Tend);
+  BLOCK.onTime(tl, function (t) {
+    // tiap huruf muncul berurutan di sepanjang jalur dengan fade singkat
+    for (var i = 0; i < sp.length; i++) sp[i].setAttribute("opacity", BLOCK.clamp((t - T0 - i * dt) / 0.14, 0, 1).toFixed(3));
+    var g = P.wobble;
+    tx.setAttribute("transform", "translate(" + (BLOCK.boil(t, P.seed) * 1.5 * g).toFixed(2) + " " + (BLOCK.boil(t, P.seed + 7) * 1.5 * g).toFixed(2) + ")");
+  }, k.dur);
+  tl.to(svg, { autoAlpha: 0, duration: 0.35, ease: "power2.in" }, k.dur - 0.4);
+}, { font: true });
+</script>

@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="id" data-composition-variables='[{"id":"judul","type":"string","label":"Judul","default":"Gerak yang bisa disunting"},{"id":"warna-aksen","type":"color","label":"Warna aksen","default":"#ffb547"}]' data-bpm="120" data-markers='[{"t":0.3,"label":"judul"},{"t":1.8,"label":"kartu"},{"t":4.3,"label":"keluar"},{"t":4.8,"label":"penutup"}]'>
+<head>
+<meta charset="utf-8">
+<title>Studio demo 9:16</title>
+<!-- Example composition that is fully editable in mgp Studio:
+     clips (data-start/data-duration/data-track-index), variables, base transform (data-x/data-y/data-rotate/data-scale),
+     structured animation and keyframes in the mgp-timeline block, built by the loader at the end of <body>. -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<style>
+  html, body { margin: 0; background: #0d0f17; }
+  #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; color: #f4f1ea;
+    font-family: system-ui, "Segoe UI", Arial, sans-serif; }
+  #latar { position: absolute; inset: 0; background: radial-gradient(110% 70% at 20% 15%, #2c3566 0%, #141828 55%, #0d0f17 100%); }
+  #judul { position: absolute; left: 90px; top: 470px; width: 900px; font-size: 124px; font-weight: 900; line-height: 1.02; letter-spacing: -0.02em; }
+  #garis { position: absolute; left: 94px; top: 760px; width: 420px; height: 14px; border-radius: 7px; background: var(--warna-aksen); }
+  #sub { position: absolute; left: 94px; top: 810px; width: 860px; font-size: 46px; line-height: 1.3; color: #b8bccb; }
+  #kartu { position: absolute; left: 140px; top: 1060px; width: 800px; height: 380px; border-radius: 36px; background: #1d2236;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45), inset 0 0 0 2px rgba(255, 255, 255, 0.06); }
+  #kartu-teks { position: absolute; left: 60px; top: 64px; font-size: 60px; font-weight: 800; }
+  #kartu-angka { position: absolute; left: 60px; top: 160px; font-size: 140px; font-weight: 900; color: var(--warna-aksen); }
+  .bulat { position: absolute; top: 1580px; width: 96px; height: 96px; border-radius: 50%; }
+  #b1 { left: 292px; background: #ff5f6d; }
+  #b2 { left: 492px; background: #ffc371; }
+  #b3 { left: 692px; background: #7cc4ff; }
+  #penutup { position: absolute; left: 0; right: 0; top: 880px; text-align: center; font-size: 120px; font-weight: 900; }
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="demo" data-start="0" data-duration="6" data-fps="30" data-width="1080" data-height="1920">
+  <div id="latar"></div>
+  <div id="judul" class="clip" data-start="0.3" data-duration="4.4" data-track-index="1" data-var-text="judul">Gerak yang bisa disunting</div>
+  <div id="garis" class="clip" data-start="0.7" data-duration="4" data-track-index="2"></div>
+  <div id="sub" class="clip" data-start="1" data-duration="3.75" data-track-index="3">Seret, putar, ubah ease, lalu simpan. mgp merender hasil yang sama.</div>
+  <div id="kartu" class="clip" data-start="1.8" data-duration="3" data-track-index="4">
+    <div id="kartu-teks">Frame per detik</div>
+    <div id="kartu-angka">30</div>
+  </div>
+  <div id="b1" class="bulat clip" data-start="2.5" data-duration="2.3" data-track-index="5"></div>
+  <div id="b2" class="bulat clip" data-start="2.65" data-duration="2.15" data-track-index="6"></div>
+  <div id="b3" class="bulat clip" data-start="2.8" data-duration="2" data-track-index="7"></div>
+  <div id="penutup" class="clip" data-start="4.8" data-duration="1.2" data-track-index="1">Selesai.</div>
+  <audio id="beat" class="clip" preload="none" src="assets/beat.wav" data-start="0" data-track-index="9" data-volume="0.6"></audio>
+</div>
+<script type="application/json" id="mgp-timeline">
+{
+  "versi": 1,
+  "animasi": [
+    {"id":"a1","target":"#judul","preset":"naik-bertahap","at":0.3,"durasi":0.7,"ease":"power3.out","stagger":0.08},
+    {"id":"a2","target":"#garis","preset":"tumbuh-garis","at":0.7,"durasi":0.8,"ease":"expo.out"},
+    {"id":"a3","target":"#sub","preset":"pudar","at":1,"durasi":0.6,"ease":"power1.out"},
+    {"id":"a4","target":"#kartu","preset":"lipat-kertas","at":1.8,"durasi":0.8,"ease":"back.out(1.4)"},
+    {"id":"a5","target":"#kartu-angka","preset":"pop","at":2.3,"durasi":0.6,"ease":"back.out(1.8)"},
+    {"id":"a6","target":"#b1","preset":"pantul","at":2.5,"durasi":1,"ease":"bounce.out"},
+    {"id":"a7","target":"#b2","preset":"pantul","at":2.65,"durasi":1,"ease":"bounce.out"},
+    {"id":"a8","target":"#b3","preset":"pantul","at":2.8,"durasi":1,"ease":"bounce.out"},
+    {"id":"a9","target":"#kartu","preset":"denyut","at":3.5,"durasi":0.25,"ease":"sine.inOut"},
+    {"id":"a10","target":"#judul","preset":"pudar-keluar","at":4.3,"durasi":0.4,"ease":"power1.in"},
+    {"id":"a11","target":"#sub","preset":"geser-keluar-bawah","at":4.3,"durasi":0.45,"ease":"power2.in"},
+    {"id":"a12","target":"#kartu","preset":"skala-keluar","at":4.4,"durasi":0.4,"ease":"power2.in"},
+    {"id":"a13","target":"#penutup","preset":"ketik","at":4.85,"durasi":0.01,"ease":"none","stagger":0.05}
+  ],
+  "kunci": [
+    {"target":"#kartu-teks","prop":"x","keys":[{"t":3,"v":0},{"t":3.9,"v":60,"ease":"power2.inOut"}]}
+  ]
+}
+</script>
+<script id="mgp-loader">
+/* mgp Studio - loader v1 (old name: Rekam Studio pemuat)
+ * Builds the animation from the block <script type="application/json" id="mgp-timeline"> (old id rekam-timeline).
+ * Studio copies this file into the composition (<script id="mgp-loader">, old id rekam-pemuat), so the
+ * composition stays self-contained: mgp, Studio and a plain browser give the same result.
+ * Yang dikerjakan:
+ *   - variabel: data-composition-variables pada <html> -> var(--id), data-var-text, data-var-src
+ *   - lapisan tersembunyi: [data-hidden] tidak tampil
+ *   - transform dasar: data-x, data-y (px), data-rotate (derajat), data-scale, ikut digabung
+ *     dengan tween GSAP yang menganimasikan properti yang sama (animasi ikut bergeser)
+ *   - animasi: preset (masuk/keluar/tekanan) atau from/to bebas, plus keyframe ("kunci")
+ * Butuh GSAP 3. Taruh sebagai skrip terakhir di <body>.
+ */
+(function () {
+  "use strict";
+  var P = window.MgpLoader = window.RekamPemuat = window.MgpLoader || window.RekamPemuat || {};
+  P.versi = 1;
+
+  var N = { opacity: 1, x: 0, y: 0, scale: 1, scaleX: 1, scaleY: 1, rotation: 0, rotationX: 0, rotationY: 0, filter: "blur(0px)", clipPath: "inset(0% 0% 0% 0%)" };
+  function natural(state) { var o = {}; for (var k in state) if (k in N) o[k] = N[k]; return o; }
+  function masuk(label, en, state, ease, durasi, extra) {
+    return Object.assign({ peran: "masuk", label: label, en: en, ease: ease || "power3.out", durasi: durasi || 0.6,
+      buat: function (o) { var s = typeof state === "function" ? state(o) : state; return { from: s, to: natural(s) }; } }, extra || {});
+  }
+  function keluar(label, en, state, ease, durasi) {
+    return { peran: "keluar", label: label, en: en, ease: ease || "power2.in", durasi: durasi || 0.5,
+      buat: function (o) { var s = typeof state === "function" ? state(o) : state; return { from: natural(s), to: s }; } };
+  }
+  function tekanan(label, en, to, ease, durasi, extra) {
+    return Object.assign({ peran: "tekanan", label: label, en: en, ease: ease || "sine.inOut", durasi: durasi || 0.4,
+      buat: function (o) { return { to: typeof to === "function" ? to(o) : to }; } }, extra || {});
+  }
+  var J = function (o) { return o.jarak != null ? +o.jarak : 120; };
+
+  P.PRESET = P.PRESET || {
+    "pudar": masuk("Pudar masuk", "Fade in", { opacity: 0 }, "power1.out", 0.5),
+    "geser-kiri": masuk("Geser masuk dari kiri", "Slide in from left", function (o) { return { x: -J(o), opacity: 0 }; }),
+    "geser-kanan": masuk("Geser masuk dari kanan", "Slide in from right", function (o) { return { x: J(o), opacity: 0 }; }),
+    "geser-atas": masuk("Geser masuk dari atas", "Slide in from top", function (o) { return { y: -J(o), opacity: 0 }; }),
+    "geser-bawah": masuk("Geser masuk dari bawah", "Slide in from bottom", function (o) { return { y: J(o), opacity: 0 }; }),
+    "skala": masuk("Skala masuk", "Scale in", { scale: 0.6, opacity: 0 }, "power3.out", 0.6),
+    "pop": masuk("Pop (pegas)", "Spring pop", { scale: 0 }, "back.out(1.8)", 0.6),
+    "putar": masuk("Putar masuk", "Spin in", { rotation: -180, scale: 0.4, opacity: 0 }, "power3.out", 0.8),
+    "pantul": masuk("Pantul jatuh", "Bounce drop", function (o) { return { y: -J(o) * 3, opacity: 0 }; }, "bounce.out", 1),
+    "ketik": masuk("Ketik (per huruf)", "Typewriter", { opacity: 0 }, "none", 0.01, { pecah: "huruf", stagger: 0.05 }),
+    "naik-bertahap": masuk("Naik bertahap (per kata)", "Staggered fade up", function (o) { return { y: J(o) / 3, opacity: 0 }; }, "power3.out", 0.6, { pecah: "kata", stagger: 0.08 }),
+    "tumbuh-garis": masuk("Tumbuh garis", "Line grow", { scaleX: 0 }, "expo.out", 0.8, { origin: "0% 50%" }),
+    "lipat-kertas": masuk("Lipat kertas", "Paper fold", { rotationX: -90, opacity: 0 }, "back.out(1.4)", 0.8, { origin: "50% 0%", perspektif: 900 }),
+    "kabur": masuk("Kabur masuk", "Blur in", { filter: "blur(24px)", opacity: 0 }, "power2.out", 0.7),
+    "tirai": masuk("Tirai (buka dari kiri)", "Wipe reveal", { clipPath: "inset(0% 100% 0% 0%)" }, "power3.inOut", 0.8),
+    "pudar-keluar": keluar("Pudar keluar", "Fade out", { opacity: 0 }, "power1.in", 0.5),
+    "geser-keluar-kiri": keluar("Geser keluar ke kiri", "Slide out left", function (o) { return { x: -J(o), opacity: 0 }; }),
+    "geser-keluar-kanan": keluar("Geser keluar ke kanan", "Slide out right", function (o) { return { x: J(o), opacity: 0 }; }),
+    "geser-keluar-atas": keluar("Geser keluar ke atas", "Slide out up", function (o) { return { y: -J(o), opacity: 0 }; }),
+    "geser-keluar-bawah": keluar("Geser keluar ke bawah", "Slide out down", function (o) { return { y: J(o), opacity: 0 }; }),
+    "skala-keluar": keluar("Skala keluar", "Scale out", { scale: 0.6, opacity: 0 }),
+    "kabur-keluar": keluar("Kabur keluar", "Blur out", { filter: "blur(24px)", opacity: 0 }),
+    "denyut": tekanan("Denyut", "Pulse", { scale: 1.12 }, "sine.inOut", 0.25, { yoyo: true, repeat: 1 }),
+    "goyang": tekanan("Goyang", "Shake", { keyframes: { rotation: [0, -7, 7, -4, 4, 0] } }, "none", 0.5),
+    "kedip": tekanan("Kedip", "Blink", { opacity: 0.25 }, "steps(1)", 0.12, { yoyo: true, repeat: 3 }),
+    "ayun": tekanan("Ayun", "Swing", { rotation: 8 }, "sine.inOut", 0.4, { yoyo: true, repeat: 1 }),
+    "melayang": tekanan("Melayang", "Float", function (o) { return { y: -J(o) / 6 }; }, "sine.inOut", 0.8, { yoyo: true, repeat: 1 }),
+  };
+
+  // ---------------------------------------------------------------- util
+  function pecah(el, mode) {
+    el.__rkPecah = el.__rkPecah || {};
+    if (el.__rkPecah[mode]) return el.__rkPecah[mode];
+    // teks terikat variabel: isi nilai sekarang lalu lepaskan ikatan di DOM hidup, supaya
+    // pengikatan ulang oleh runtime tidak menghapus potongan huruf/kata (sumber tidak berubah)
+    var vk = el.getAttribute("data-var-text");
+    if (vk) {
+      var vals = window.__hyperframes && window.__hyperframes.getVariables ? window.__hyperframes.getVariables() : P.nilaiVariabel || {};
+      if (vk in vals) el.textContent = String(vals[vk]);
+      el.removeAttribute("data-var-text");
+      el.setAttribute("data-var-text-lepas", vk);
+    }
+    var spans = [];
+    var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT), nodes = [], n;
+    while ((n = walker.nextNode())) nodes.push(n);
+    nodes.forEach(function (tn) {
+      var parts = mode === "kata" ? tn.textContent.split(/(\s+)/) : Array.from(tn.textContent);
+      var frag = document.createDocumentFragment();
+      parts.forEach(function (p) {
+        if (!p) return;
+        if (/^\s+$/.test(p)) { frag.appendChild(document.createTextNode(p)); return; }
+        var s = document.createElement("span");
+        s.className = "rk-" + mode; s.style.display = "inline-block"; s.textContent = p;
+        frag.appendChild(s); spans.push(s);
+      });
+      tn.parentNode.replaceChild(frag, tn);
+    });
+    el.__rkPecah[mode] = spans;
+    return spans;
+  }
+  function targetsOf(sel, mode) {
+    var els = Array.prototype.slice.call(document.querySelectorAll(sel));
+    if (!mode) return els;
+    var out = [];
+    els.forEach(function (e) { out = out.concat(pecah(e, mode)); });
+    return out;
+  }
+  function variabel() {
+    // the mgp runtime already bound the variables (including values from --var); the loader only fills them when opened without mgp
+    if (window.__mgpRuntime || window.__rekam) return;
+    var raw = document.documentElement.getAttribute("data-composition-variables");
+    if (!raw) return;
+    var list; try { list = JSON.parse(raw); } catch (e) { console.error("[pemuat] data-composition-variables bukan JSON: " + e.message); return; }
+    var vals = {};
+    (list || []).forEach(function (v) { vals[v.id] = v.value != null ? v.value : v.default; });
+    var root = document.documentElement;
+    (list || []).forEach(function (v) {
+      var val = vals[v.id];
+      root.style.setProperty("--" + v.id, v.type === "number" && v.unit ? val + v.unit : String(val));
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("[data-var-text]"), function (el) {
+      var k = el.getAttribute("data-var-text"); if (k in vals) el.textContent = vals[k];
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("*"), function (el) {
+      Array.prototype.forEach.call(el.attributes, function (a) {
+        if (a.name.indexOf("data-var-") !== 0 || a.name === "data-var-text") return;
+        if (a.value in vals && vals[a.value] != null) el.setAttribute(a.name.slice(9), vals[a.value]);
+      });
+    });
+    P.nilaiVariabel = vals;
+  }
+  var ROT = { rotation: 1, rotate: 1, rotationZ: 1 };
+  function baseOf(el) {
+    if (!el || !el.getAttribute) return null;
+    var x = +el.getAttribute("data-x") || 0, y = +el.getAttribute("data-y") || 0, r = +el.getAttribute("data-rotate") || 0;
+    var s = el.hasAttribute("data-scale") ? +el.getAttribute("data-scale") : 1;
+    if (!x && !y && !r && s === 1) return null;
+    return { x: x, y: y, rotation: r, scale: s };
+  }
+  function shiftVal(v, b, mul) {
+    if (typeof v === "string" && /^[+-]=/.test(v)) return v;
+    var n = parseFloat(v);
+    if (!isFinite(n)) return v;
+    return mul ? n * b : n + b;
+  }
+  function geserVars(vars, keys) {
+    if (!vars) return;
+    keys.forEach(function (k) {
+      if (!(k in vars)) return;
+      var orig = vars[k];
+      var kind = ROT[k] ? "rotation" : k === "scale" || k === "scaleX" || k === "scaleY" ? "scale" : k;
+      vars[k] = function (i, el, list) {
+        var o = typeof orig === "function" ? orig(i, el, list) : orig;
+        var b = baseOf(el); if (!b) return o;
+        return kind === "scale" ? shiftVal(o, b.scale, true) : shiftVal(o, b[kind], false);
+      };
+    });
+  }
+  // gabungkan transform dasar ke semua tween yang menganimasikan x/y/rotasi/skala elemen ber-basis
+  function terapkanBasis(tl) {
+    var els = Array.prototype.slice.call(document.querySelectorAll("[data-x],[data-y],[data-rotate],[data-scale]"));
+    if (!els.length) return;
+    els.forEach(function (el) {
+      if (el.closest("template")) return;
+      var b = baseOf(el); if (!b) return;
+      gsap.set(el, { x: b.x, y: b.y, rotation: b.rotation, scale: b.scale });
+    });
+    var all = [];
+    var roots = [tl];
+    var tls = window.__timelines || {};
+    Object.keys(tls).forEach(function (k) { if (tls[k] && tls[k] !== tl) roots.push(tls[k]); });
+    if (window.__timeline && window.__timeline !== tl) roots.push(window.__timeline);
+    roots.forEach(function (r) { if (r && r.getChildren) all = all.concat(r.getChildren(true, true, false)); });
+    var keys = ["x", "y", "rotation", "rotate", "rotationZ", "scale", "scaleX", "scaleY"];
+    all.forEach(function (tw) {
+      var tg = tw.targets ? tw.targets() : [];
+      if (!tg.some(function (e) { return els.indexOf(e) >= 0; })) return;
+      geserVars(tw.vars, keys);
+      if (tw.vars.startAt) geserVars(tw.vars.startAt, keys);
+      tw.invalidate();
+    });
+    // sapu maju lalu kembali ke 0: nilai awal tercatat ulang dengan urutan yang benar
+    roots.forEach(function (r) {
+      if (!r || !r.totalTime) return;
+      var t = r.totalTime();
+      r.totalTime(r.totalDuration(), true); r.totalTime(0, true); r.totalTime(t, true);
+    });
+  }
+
+  // ---------------------------------------------------------------- bangun
+  P.bangun = function (spec, tl) {
+    var dibuat = [];
+    (spec.animasi || []).forEach(function (a, ai) {
+      if (!a || !a.target || a.nonaktif) return;
+      var p = a.preset ? P.PRESET[a.preset] : null;
+      if (a.preset && !p) { console.error("[pemuat] preset tidak dikenal: " + a.preset); return; }
+      var def = p ? p.buat(a) : { from: a.from, to: a.to };
+      var mode = a.pecah != null ? a.pecah : p && p.pecah;
+      var tg = targetsOf(a.target, mode || null);
+      if (!tg.length) { console.warn("[pemuat] target tidak ditemukan: " + a.target); return; }
+      var durasi = a.durasi != null ? +a.durasi : p ? p.durasi : 0.5;
+      var ease = a.ease || (p ? p.ease : "power2.out");
+      var peran = p ? p.peran : a.from ? "masuk" : "tekanan";
+      var to = Object.assign({}, def.to || {}, { duration: durasi, ease: ease, data: { studioId: a.id || "a" + ai } });
+      var st = a.stagger != null ? a.stagger : p && p.stagger;
+      if (st) to.stagger = st;
+      var rep = a.repeat != null ? a.repeat : p && p.repeat;
+      if (rep) to.repeat = rep;
+      if (a.yoyo != null ? a.yoyo : p && p.yoyo) to.yoyo = true;
+      if (p && p.origin) gsap.set(tg, { transformOrigin: p.origin });
+      if (p && p.perspektif) gsap.set(tg, { transformPerspective: p.perspektif });
+      var at = a.at != null ? +a.at : 0;
+      var tw;
+      if (def.from) { to.immediateRender = peran === "masuk"; tw = tl.fromTo(tg, Object.assign({}, def.from), to, at); }
+      else { to.immediateRender = false; tw = tl.to(tg, to, at); }
+      dibuat.push(tw);
+    });
+    (spec.kunci || []).forEach(function (k, ki) {
+      if (!k || !k.target || !k.prop || !k.keys || !k.keys.length) return;
+      var tg = targetsOf(k.target, null);
+      if (!tg.length) return;
+      var keys = k.keys.slice().sort(function (a, b) { return a.t - b.t; });
+      var o0 = {}; o0[k.prop] = keys[0].v;
+      tl.set(tg, Object.assign(o0, { data: { studioKunci: ki, key: 0 } }), 0);
+      for (var i = 1; i < keys.length; i++) {
+        var f = {}, t = {};
+        f[k.prop] = keys[i - 1].v; t[k.prop] = keys[i].v;
+        Object.assign(t, { duration: Math.max(0.0001, keys[i].t - keys[i - 1].t), ease: keys[i].ease || k.ease || "power1.inOut", immediateRender: false, data: { studioKunci: ki, key: i } });
+        tl.fromTo(tg, f, t, keys[i - 1].t);
+      }
+    });
+    return dibuat;
+  };
+
+  // ---------------------------------------------------------------- jalankan
+  var blok = document.getElementById("mgp-timeline") || document.getElementById("rekam-timeline");
+  if (!blok || !window.gsap) { if (blok) console.error("[pemuat] GSAP belum dimuat"); return; }
+  if (P.__sudah) return;
+  P.__sudah = true;
+  var spec;
+  try { spec = JSON.parse(blok.textContent || "{}"); } catch (e) { console.error("[pemuat] rekam-timeline bukan JSON: " + e.message); return; }
+  P.spec = spec;
+  var st = document.createElement("style");
+  st.textContent = "[data-hidden]{display:none!important}";
+  document.head.appendChild(st);
+  variabel();
+  var root = null;
+  Array.prototype.forEach.call(document.querySelectorAll("[data-composition-id]"), function (el) {
+    if (!root && !(el.parentElement && el.parentElement.closest("[data-composition-id]"))) root = el;
+  });
+  window.__timelines = window.__timelines || {};
+  var rid = root && root.getAttribute("data-composition-id");
+  var tl = (rid && window.__timelines[rid]) || window.__timeline;
+  if (!tl) {
+    tl = gsap.timeline({ paused: true });
+    if (rid) window.__timelines[rid] = tl; else window.__timeline = tl;
+  }
+  if (spec.durasi && window.__duration == null && !(root && root.hasAttribute("data-duration"))) window.__duration = +spec.durasi;
+  P.timeline = tl;
+  P.bangun(spec, tl);
+  terapkanBasis(tl);
+})();
+</script>
+</body>
+</html>

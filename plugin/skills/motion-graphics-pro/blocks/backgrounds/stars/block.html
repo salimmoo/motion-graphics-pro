@@ -1,0 +1,48 @@
+<!-- Block backgrounds/stars · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="backgrounds/stars" data-start="0" data-duration="8" data-track-index="0" class="blk blk-backgrounds-stars">
+<script type="application/json" data-block-props>
+{"density": "sparse", "count": 1, "color": "#ffffff", "bg": "", "direction": 180, "center_mask": 0.35, "speed": 1}
+</script>
+</div>
+<style>
+.blk-backgrounds-stars{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-backgrounds-stars canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, A = k.random;
+  var K = BLOCK.canvas(k.root, k.w, k.h), x = K.ctx;
+  var luas = k.w * k.h / (1920 * 1080), N = Math.round((P.density === "dense" ? 900 : 380) * luas * (+P.count || 1));
+  var cx = k.w / 2, cy = k.h / 2, rad = Math.hypot(cx, cy), mk = +P.center_mask;
+  var bintang = [];
+  for (var i = 0; i < N; i++) {
+    var u = A(), tier = u < 0.62 ? 0 : u < 0.92 ? 1 : 2;                  // tiga ukuran
+    bintang.push({ x: A() * k.w, y: A() * k.h, lapis: A() < 0.6 ? 0 : 1, tier: tier,
+      r: [1.1, 1.8, 2.8][tier] * (0.8 + A() * 0.4) * k.s, a: [0.6, 0.85, 1][tier] * (0.7 + A() * 0.3),
+      f: 0.6 + A() * 2.2, ph: A() * 6.283, kel: A() * 0.6 });
+  }
+  var ar = (+P.direction || 0) * Math.PI / 180, vx = Math.cos(ar), vy = Math.sin(ar);
+  function wrap(v, m) { return ((v % m) + m) % m; }
+  function gambar(t) {
+    x.clearRect(0, 0, k.w, k.h);
+    if (P.bg) { x.fillStyle = P.bg; x.fillRect(0, 0, k.w, k.h); }
+    var tt = t * (+P.speed || 1);
+    for (var i = 0; i < N; i++) {
+      var b = bintang[i], v = (b.lapis ? 26 : 10) * k.s * tt;                 // dua lapis paralaks
+      var px = wrap(b.x + vx * v, k.w), py = wrap(b.y + vy * v, k.h);
+      var kel = 1 - b.kel * (0.5 + 0.5 * Math.sin(t * b.f * 2 + b.ph));         // kelip
+      var d = Math.hypot(px - cx, py - cy) / rad, m = mk > 0 ? BLOCK.smooth((d - mk * 0.55) / (mk * 0.6 + 0.01)) : 1;
+      var al = b.a * kel * m; if (al < 0.02) continue;
+      x.globalAlpha = al; x.fillStyle = P.color;
+      x.beginPath(); x.arc(px, py, b.r, 0, 6.283); x.fill();
+      if (b.tier === 2) {
+        x.globalAlpha = al * 0.18; x.beginPath(); x.arc(px, py, b.r * 3.2, 0, 6.283); x.fill();
+        x.globalAlpha = al * 0.5; x.fillRect(px - b.r * 4, py - 0.5 * k.s, b.r * 8, 1 * k.s); x.fillRect(px - 0.5 * k.s, py - b.r * 4, 1 * k.s, b.r * 8);
+      }
+    }
+    x.globalAlpha = 1;
+  }
+  BLOCK.onTime(k.tl, gambar, k.dur);
+});
+</script>

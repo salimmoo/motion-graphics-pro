@@ -1,0 +1,132 @@
+{
+ "id": "textures/flare",
+ "name": "Flare",
+ "name_id": "Flare Lensa",
+ "category": "textures",
+ "description": {
+  "id": "Pantulan lensa dengan shader ringan yang dicampur screen di atas komposisi. Mode anamorfik: titik-titik terang hanyut pelan, masing-masing melempar garis horizontal panjang biru-ungu khas lensa sinema anamorfik. Mode lensa: semburat bintang, halo pelangi tipis, dan hantu-hantu di sepanjang sumbu optik yang berkilau pelan.",
+  "en": "Lens flare overlay from a lightweight shader, screen-blended. Anamorphic mode: drifting bright points throwing long blue-violet horizontal streaks. Lens mode: star burst, faint rainbow halo and ghosts along the optical axis, gently shimmering."
+ },
+ "tags": [
+  "tekstur",
+  "texture",
+  "flare",
+  "lens-flare",
+  "anamorfik",
+  "anamorphic",
+  "cahaya",
+  "shader",
+  "overlay",
+  "vfx",
+  "textures"
+ ],
+ "props": {
+  "mode": {
+   "default": "anamorphic",
+   "type": "enum",
+   "options": [
+    "anamorphic",
+    "lens"
+   ],
+   "option_aliases": {
+    "anamorfik": "anamorphic",
+    "lensa": "lens"
+   }
+  },
+  "color": {
+   "default": "#7a8aff",
+   "type": "color",
+   "hint": "Rona garis / flare",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "count": {
+   "default": 7,
+   "type": "number",
+   "hint": "Jumlah titik terang mode anamorfik (maks 12)",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "intensity": {
+   "default": 1,
+   "type": "number",
+   "aliases": [
+    "intensitas"
+   ]
+  },
+  "position_x": {
+   "default": 0.72,
+   "type": "number",
+   "hint": "Posisi sumber mode lensa (0-1 dari kiri)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 0.7,
+   "type": "number",
+   "hint": "Posisi sumber mode lensa (0-1 dari atas)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "mix": {
+   "default": "screen",
+   "type": "enum",
+   "options": [
+    "screen",
+    "lighten",
+    "normal"
+   ],
+   "hint": "Mode campur di atas komposisi",
+   "aliases": [
+    "campur"
+   ]
+  },
+  "enter": {
+   "default": 0.8,
+   "type": "number",
+   "hint": "Lama muncul (detik)",
+   "aliases": [
+    "masuk"
+   ]
+  },
+  "seed": {
+   "default": 3,
+   "type": "number"
+  },
+  "resolution": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Skala resolusi shader (0.2-1)",
+   "aliases": [
+    "resolusi"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "tekstur/flare",
+  "vfx-anamorphic-flare",
+  "lens-flare"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

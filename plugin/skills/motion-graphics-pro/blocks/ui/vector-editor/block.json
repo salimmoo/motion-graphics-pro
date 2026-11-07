@@ -1,0 +1,120 @@
+{
+ "id": "ui/vector-editor",
+ "name": "Vector Editor",
+ "name_id": "Editor Vektor",
+ "category": "ui",
+ "description": {
+  "id": "Krom aplikasi desain gelap yang generik (bilah alat, lapisan, panel properti) dengan alat pena yang menggambar jalur vektor secara langsung: titik jangkar muncul berurutan, pegangan bezier ditarik keluar, segmen tergambar, lalu bentuk terisi dan kotak seleksi muncul. Aksen biru mengikuti tema.",
+  "en": "Generic dark design-tool chrome with a live pen path: sequential anchor points, bezier handles pulled out, segments drawn, then a fill and selection frame. Theme-driven blue accents."
+ },
+ "tags": [
+  "ui",
+  "desain",
+  "vektor",
+  "pen-tool",
+  "bezier",
+  "editor",
+  "aplikasi",
+  "vector"
+ ],
+ "props": {
+  "file_name": {
+   "default": "Bentuk Organik — Draf 3",
+   "type": "text",
+   "aliases": [
+    "nama_berkas"
+   ]
+  },
+  "dot": {
+   "default": [
+    [
+     0.5,
+     0.12,
+     0.2,
+     0.0
+    ],
+    [
+     0.82,
+     0.5,
+     0.0,
+     0.24
+    ],
+    [
+     0.5,
+     0.9,
+     -0.22,
+     0.02
+    ],
+    [
+     0.2,
+     0.52,
+     0.02,
+     -0.26
+    ]
+   ],
+   "type": "list",
+   "hint": "[[x, y, pegangan_x, pegangan_y]] relatif papan (0..1), pegangan simetris",
+   "aliases": [
+    "titik"
+   ]
+  },
+  "closed": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Jalur ditutup kembali ke titik pertama",
+   "aliases": [
+    "tertutup"
+   ]
+  },
+  "fill": {
+   "default": "#33c07a",
+   "type": "color",
+   "aliases": [
+    "isi"
+   ]
+  },
+  "accent_color": {
+   "default": "#2f80ff",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "chrome": {
+   "default": "#1e1f24",
+   "type": "color"
+  },
+  "canvas": {
+   "default": "#2a2b31",
+   "type": "color",
+   "aliases": [
+    "kanvas"
+   ]
+  },
+  "board": {
+   "default": "#f4f4f2",
+   "type": "color",
+   "aliases": [
+    "papan"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700",
+   "type": "font"
+  }
+ },
+ "duration": 7,
+ "aspect": [
+  "16:9",
+  "1:1",
+  "9:16"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/editor-vektor",
+  "vector-editor-rig"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

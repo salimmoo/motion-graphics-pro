@@ -1,0 +1,159 @@
+{
+ "id": "ui/cursor",
+ "name": "Cursor",
+ "name_id": "Kursor Demo",
+ "category": "ui",
+ "description": {
+  "id": "Kursor yang menjalankan demo antarmuka: bergerak dari titik ke titik, mengklik dengan riak dan tekanan, bisa menekan tombol sungguhan di adegan. Lima gaya: agen berlabel yang mengetik langkahnya, panah besar penunjuk, mata panah dart yang menukik dari kedalaman, titik magnet yang berubah jadi pelat hover, dan tekan-riak dengan label target yang berganti centang.",
+  "en": "A demo cursor that walks a list of points, clicks with ripples and a press, and can press real host elements. Five styles: labelled AI agent typing its steps, oversized look-here arrow, dart arrowhead diving from depth, magnetic dot morphing into hover plates, and press-ripple with a label swap to a check."
+ },
+ "tags": [
+  "ui",
+  "kursor",
+  "cursor",
+  "klik",
+  "demo produk",
+  "agen",
+  "ripple",
+  "hover"
+ ],
+ "props": {
+  "style": {
+   "default": "labeled-agent",
+   "type": "enum",
+   "options": [
+    "labeled-agent",
+    "large",
+    "dart-arrow",
+    "magnet",
+    "press-ripple"
+   ],
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "agen-berlabel": "labeled-agent",
+    "besar": "large",
+    "panah-dart": "dart-arrow",
+    "tekan-riak": "press-ripple"
+   }
+  },
+  "dot": {
+   "default": [
+    {
+     "x": 40,
+     "y": 31,
+     "klik": true,
+     "label": "Membuka laporan bulanan"
+    },
+    {
+     "x": 58,
+     "y": 72,
+     "klik": false,
+     "label": "Membaca ringkasan"
+    },
+    {
+     "sel": "#tombol-contoh",
+     "x": 83,
+     "y": 43.5,
+     "klik": true,
+     "label": "Menyimpan perubahan"
+    }
+   ],
+   "type": "list",
+   "hint": "Langkah [{x %, y %, klik, label, sel?}]; sel = selektor elemen host (pusatnya dipakai, elemen ikut tertekan)",
+   "aliases": [
+    "titik"
+   ]
+  },
+  "step_duration": {
+   "default": 1.15,
+   "type": "number",
+   "hint": "Detik per langkah",
+   "aliases": [
+    "durasi_langkah"
+   ]
+  },
+  "name": {
+   "default": "Asisten",
+   "type": "text",
+   "hint": "Nama agen (gaya agen-berlabel)",
+   "aliases": [
+    "nama"
+   ]
+  },
+  "done_text": {
+   "default": "Selesai",
+   "type": "text",
+   "hint": "Teks label di akhir (agen-berlabel)",
+   "aliases": [
+    "teks_selesai"
+   ]
+  },
+  "target_label": {
+   "default": "Tersimpan",
+   "type": "text",
+   "hint": "Label baru target setelah ditekan (tekan-riak); kosong = tidak diganti",
+   "aliases": [
+    "label_target"
+   ]
+  },
+  "color": {
+   "default": "#111827",
+   "type": "color",
+   "hint": "Isi panah",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#6d4aff",
+   "type": "color",
+   "hint": "Label, riak, dart, titik magnet",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "size": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali ukuran kursor (gaya besar = 3.5x lagi)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "press_target": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Elemen sel ikut tertekan saat diklik",
+   "aliases": [
+    "tekan_target"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;600;700",
+   "type": "font"
+  }
+ },
+ "duration": 5.5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/kursor",
+  "agent-cursor",
+  "oversized-cursor",
+  "dart-cursor",
+  "magnetic-cursor",
+  "press-ripple"
+ ],
+ "example": {
+  "bg": "ui",
+  "start": 0.3,
+  "duration": 6.2
+ }
+}

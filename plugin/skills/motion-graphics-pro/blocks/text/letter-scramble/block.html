@@ -1,0 +1,63 @@
+<!-- Block text/letter-scramble · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="text/letter-scramble" data-start="0" data-duration="4" data-track-index="10" class="blk blk-text-letter-scramble">
+<script type="application/json" data-block-props>
+{"text": "AKSES *DITERIMA*", "font": "JetBrains Mono:wght@500;800", "size": 110, "weight": 800, "color": "#e9f5ef", "accent_color": "#38f29a", "position_y": 50, "width": 80, "align": "center", "mode": "left-right", "glyph": "symbol", "start": 0.3, "pause": 0.06, "scramble_duration": 0.55, "random_fps": 20, "random_color": "#38f29a", "exit": "random"}
+</script>
+<div class="blk-tk"></div>
+</div>
+<style>
+.blk-text-letter-scramble {position:absolute;inset:0;pointer-events:none}
+.blk-text-letter-scramble .blk-tk{position:absolute;left:50%;transform:translate(-50%,-50%);line-height:1.08}
+.blk-text-letter-scramble .blk-kunci{color:var(--aksen)}
+.blk-text-letter-scramble .blk-u{position:relative}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl;
+  var rata = { left: "left", right: "right" }[P.align] || "center";
+  function gayaTeks(el, px) {
+    el.style.cssText += ";top:" + P.position_y + "%;width:" + P.width + "%;color:" + P.color + ";--aksen:" + P.accent_color +
+      ";font-family:" + BLOCK.family(P.font) + ";font-weight:" + P.weight + ";font-size:" + Math.round((px || P.size) * k.s) + "px;text-align:" + rata;
+  }
+  // tunggu stylesheet Google Fonts + wajah font benar-benar termuat sebelum mengukur teks
+  function siapFont(spec) {
+    var ln = Array.prototype.slice.call(document.querySelectorAll('link[href*="fonts.googleapis"]'));
+    return Promise.all(ln.map(function (l) { return l.sheet ? 0 : new Promise(function (ok) { l.addEventListener("load", ok); l.addEventListener("error", ok); }); }))
+      .then(function () { return document.fonts && document.fonts.load ? document.fonts.load(spec || (P.weight + " 100px " + BLOCK.family(P.font))) : 0; })
+      .catch(function () {});
+  }
+  function markupKunci(s) { return BLOCK.esc(s).replace(/\*([^*]+)\*/g, '<span class="blk-kunci">$1</span>').replace(/\\n|\n/g, "<br>"); }
+  return siapFont().then(function () {
+  var el = k.root.querySelector(".blk-tk");
+  gayaTeks(el);
+  var G = { symbol: "!<>-_\\/[]{}=+*^?#%&$", binary: "01", letters: "ABCDEFGHIJKLMNOPQRSTUVWXYZ", katakana: "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホ" }[P.glyph] || "!<>-_\\/[]{}=+*^?#";
+  var u = BLOCK.split(el, P.text, "letters"), n = u.length, r = k.random;
+  var perm = u.map(function (_, i) { return i; });
+  for (var i = n - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)), tmp = perm[i]; perm[i] = perm[j]; perm[j] = tmp; }
+  var ch = u.map(function (e, i) {
+    var o = P.mode === "random" ? perm[i] : P.mode === "center" ? Math.abs(i - (n - 1) / 2) * 2 : i;
+    var kunci = !!e.closest(".blk-kunci");
+    return { el: e, c: e.textContent, o: o, k: kunci, L: P.start + P.scramble_duration + o * P.pause, S: P.start + o * P.pause * 0.5, cur: null };
+  });
+  var tE = k.dur - 0.95;
+  function glif(i, t) { var f = Math.floor(t * P.random_fps), h = Math.imul(i + 1, 73856093) ^ Math.imul(f + 7, 19349663); h = (h ^ (h >>> 13)) >>> 0; return G[h % G.length]; }
+  BLOCK.onTime(tl, function (t) {
+    ch.forEach(function (c, i) {
+      var s, col, op = 1, glow = 0;
+      var eS = tE + c.o * P.pause * 0.35, eL = eS + 0.35;
+      if (t < c.S) { s = c.c; op = 0; }
+      else if (t < c.L) { s = glif(i, t); col = P.random_color; op = 0.85; }
+      else {
+        s = c.c; col = c.k ? P.accent_color : P.color; glow = Math.max(0, 1 - (t - c.L) / 0.3);
+        if (P.exit === "random" && t >= eS) { if (t < eL) { s = glif(i + 31, t); col = P.random_color; op = 0.85 * (1 - (t - eS) / 0.35); glow = 0; } else op = 0; }
+      }
+      if (s !== c.cur) { c.el.textContent = s; c.cur = s; }
+      c.el.style.opacity = op;
+      c.el.style.color = col || P.color;
+      c.el.style.textShadow = glow > 0 ? "0 0 " + (0.25 * glow).toFixed(3) + "em " + BLOCK.rgba(P.random_color, 0.9 * glow) : "none";
+    });
+  }, k.dur);
+  if (P.exit === "fade") tl.to(el, { opacity: 0, duration: 0.45, ease: "power2.in" }, k.dur - 0.5);
+  });
+}, { font: true });
+</script>

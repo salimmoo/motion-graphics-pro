@@ -1,0 +1,176 @@
+{
+ "id": "hands/handwritten-title",
+ "name": "Handwritten Title",
+ "name_id": "Tulis Judul Tangan",
+ "category": "hands",
+ "description": {
+  "id": "Judul tulisan tangan yang tertulis huruf demi huruf: topeng menyapu tiap glif kiri ke kanan dengan laju pena dan jeda angkat pena antar kata, lalu garis bawah coretan seukuran teks tergambar. Mode sorot: stabilo menyapu kata demi kata. Teks dan coretan bergoyang (boil).",
+  "en": "Handwritten title with a letter-by-letter write-on (a mask sweeps each glyph with pen pacing and pen lifts between words) and a squiggle underline sized to the text. Highlight mode sweeps a marker word by word. Boils."
+ },
+ "tags": [
+  "tangan",
+  "tulisan-tangan",
+  "judul",
+  "write-on",
+  "coretan",
+  "stabilo",
+  "caveat",
+  "hands",
+  "handwritten",
+  "title"
+ ],
+ "props": {
+  "text": {
+   "default": "Belajar itu *perjalanan*",
+   "type": "text",
+   "hint": "Teks judul; *kata* = kata kunci berwarna, \n = baris baru",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "mode": {
+   "default": "write",
+   "type": "enum",
+   "options": [
+    "write",
+    "highlight"
+   ],
+   "hint": "tulis = huruf tertulis berurutan; sorot = stabilo per kata",
+   "option_aliases": {
+    "tulis": "write",
+    "sorot": "highlight"
+   }
+  },
+  "speed": {
+   "default": 13,
+   "type": "number",
+   "hint": "Laju pena (huruf per detik, kira-kira)",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "underline": {
+   "default": "strike",
+   "type": "enum",
+   "options": [
+    "strike",
+    "straight",
+    "double",
+    "no"
+   ],
+   "aliases": [
+    "garis_bawah"
+   ],
+   "option_aliases": {
+    "coret": "strike",
+    "lurus": "straight",
+    "ganda": "double",
+    "tidak": "no"
+   }
+  },
+  "texture": {
+   "default": "plain",
+   "type": "enum",
+   "options": [
+    "plain",
+    "soft",
+    "sharp",
+    "spray"
+   ],
+   "hint": "Tekstur goresan: polos, lembut (kabur halus), tajam (tipis), semprot (cat semprot berbintik)",
+   "aliases": [
+    "tekstur"
+   ],
+   "option_aliases": {
+    "polos": "plain",
+    "lembut": "soft",
+    "tajam": "sharp",
+    "semprot": "spray"
+   }
+  },
+  "color": {
+   "default": "#26211d",
+   "type": "color",
+   "hint": "Warna tinta",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "line_color": {
+   "default": "#e4572e",
+   "type": "color",
+   "hint": "Warna garis bawah & kata kunci",
+   "aliases": [
+    "warna_garis"
+   ]
+  },
+  "highlight_color": {
+   "default": "#ffd84d",
+   "type": "color",
+   "hint": "Warna stabilo (mode sorot)",
+   "aliases": [
+    "warna_sorot"
+   ]
+  },
+  "font": {
+   "default": "Caveat:wght@700",
+   "type": "font",
+   "hint": "Google Font tulisan tangan: Caveat, Kalam, Patrick Hand, Permanent Marker"
+  },
+  "size": {
+   "default": 170,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "position_y": {
+   "default": 46,
+   "type": "number",
+   "hint": "Posisi vertikal (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "width": {
+   "default": 86,
+   "type": "number",
+   "hint": "Lebar kotak teks (%)",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "wobble": {
+   "default": 1,
+   "type": "number",
+   "hint": "Kekuatan goyang/boil tangan (0 = diam)",
+   "aliases": [
+    "goyang"
+   ]
+  },
+  "seed": {
+   "default": 21,
+   "type": "number",
+   "hint": "Seed goyangan"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "tangan/tulis-judul",
+  "hw-write-title",
+  "hw-title"
+ ],
+ "example": {
+  "bg": "paper",
+  "font": [
+   "Caveat:wght@700"
+  ]
+ }
+}

@@ -1,0 +1,245 @@
+{
+ "id": "accents/staggered-grid",
+ "name": "Staggered Grid",
+ "name_id": "Kisi Bertahap",
+ "category": "accents",
+ "description": {
+  "id": "Kartu atau ubin dalam kisi muncul bertahap dengan pola stagger dari props: berurutan, per baris, dari tengah, dari sudut, atau acak. Gaya kartu (ikon garis tipis tergambar, label mono, isi redup), ubin polos untuk kisi besar, atau tumpukan kartu berkeyframe yang saling mendorong ke belakang.",
+  "en": "Grid cards or tiles assemble with a stagger pattern from props: ordered, by row, from centre, from corner or random. Capability cards (thin-line icon drawing on, mono label, muted body), plain tiles for a large lattice, or a keyframed card stack."
+ },
+ "tags": [
+  "aksen",
+  "kisi",
+  "grid",
+  "stagger",
+  "kartu",
+  "fitur",
+  "lattice",
+  "tumpuk",
+  "accents",
+  "staggered"
+ ],
+ "props": {
+  "style": {
+   "default": "card",
+   "type": "enum",
+   "options": [
+    "card",
+    "tile",
+    "stack"
+   ],
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "kartu": "card",
+    "ubin": "tile",
+    "tumpuk": "stack"
+   }
+  },
+  "pattern": {
+   "default": "center",
+   "type": "enum",
+   "options": [
+    "order",
+    "row",
+    "center",
+    "corner",
+    "random"
+   ],
+   "hint": "Asal gelombang stagger",
+   "aliases": [
+    "pola"
+   ],
+   "option_aliases": {
+    "urut": "order",
+    "baris": "row",
+    "tengah": "center",
+    "sudut": "corner",
+    "acak": "random"
+   }
+  },
+  "item": {
+   "default": [
+    {
+     "label": "01 Pantau",
+     "judul": "Grafik waktu nyata",
+     "isi": "Lihat lonjakan sebelum jadi masalah."
+    },
+    {
+     "label": "02 Aman",
+     "judul": "Akses terkunci",
+     "isi": "Izin per peran, tercatat rapi."
+    },
+    {
+     "label": "03 Cepat",
+     "judul": "Respons kilat",
+     "isi": "Halaman terbuka di bawah satu detik."
+    },
+    {
+     "label": "04 Ukur",
+     "judul": "Laporan otomatis",
+     "isi": "Ringkasan terkirim setiap Senin."
+    },
+    {
+     "label": "05 Simpan",
+     "judul": "Cadangan awan",
+     "isi": "Data tersalin di dua wilayah."
+    },
+    {
+     "label": "06 Lindungi",
+     "judul": "Enkripsi penuh",
+     "isi": "Dari perangkat sampai server."
+    }
+   ],
+   "type": "list",
+   "hint": "[{label, judul, isi}] untuk gaya kartu/tumpuk"
+  },
+  "cols": {
+   "default": 3,
+   "type": "number",
+   "aliases": [
+    "kolom"
+   ]
+  },
+  "rows": {
+   "default": 5,
+   "type": "number",
+   "hint": "Jumlah baris (gaya ubin)",
+   "aliases": [
+    "baris"
+   ]
+  },
+  "pause": {
+   "default": 0.14,
+   "type": "number",
+   "hint": "Jeda per langkah stagger (detik)",
+   "aliases": [
+    "jeda"
+   ]
+  },
+  "ease": {
+   "default": "power3.out",
+   "type": "ease"
+  },
+  "exit": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "keluar"
+   ]
+  },
+  "gap": {
+   "default": 28,
+   "type": "number",
+   "hint": "Jarak antar kartu (px pada 1080)",
+   "aliases": [
+    "celah"
+   ]
+  },
+  "radius": {
+   "default": 22,
+   "type": "number",
+   "hint": "Radius sudut kartu",
+   "aliases": [
+    "sudut"
+   ]
+  },
+  "stack_height": {
+   "default": 300,
+   "type": "number",
+   "hint": "Tinggi kartu (gaya tumpuk)",
+   "aliases": [
+    "tinggi_tumpuk"
+   ]
+  },
+  "color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "card_color": {
+   "default": "#1d2030",
+   "type": "color",
+   "aliases": [
+    "warna_kartu"
+   ]
+  },
+  "accent_color": {
+   "default": "#9ad1ff",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;700",
+   "type": "font"
+  },
+  "font2": {
+   "default": "JetBrains Mono:wght@500",
+   "type": "font",
+   "hint": "Font label"
+  },
+  "left": {
+   "default": 8,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "kiri"
+   ]
+  },
+  "top": {
+   "default": 12,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "atas"
+   ]
+  },
+  "width": {
+   "default": 84,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "height": {
+   "default": 76,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "tinggi"
+   ]
+  },
+  "seed": {
+   "default": 5,
+   "type": "number"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "1:1",
+  "4:5",
+  "9:16"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "aksen/kisi-bertahap",
+  "stagger-cascade",
+  "stagger-lattice",
+  "grid-card-assemble",
+  "keyframe-scrub-stack"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@400;700",
+   "JetBrains Mono:wght@500"
+  ]
+ }
+}

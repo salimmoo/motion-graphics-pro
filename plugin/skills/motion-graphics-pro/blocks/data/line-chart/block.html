@@ -1,0 +1,89 @@
+<!-- Block data/line-chart · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="data/line-chart" data-start="0" data-duration="5" data-track-index="10" class="blk blk-data-line-chart">
+<script type="application/json" data-block-props>
+{"mode": "line", "title": "Kunjungan naik sejak aplikasi baru", "subtitle": "Rata-rata kunjungan harian, dalam ribuan", "label": ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu"], "series": [{"nama": "Aplikasi", "nilai": [12, 14.5, 13.8, 18.2, 22.6, 27.1, 31.4, 36.8], "warna": "#ff7a45"}, {"nama": "Situs web", "nilai": [21, 20.4, 22.1, 21.3, 20.2, 19.6, 18.8, 18.1], "warna": "#5aa9e6"}], "prefix": "", "suffix": " rb", "decimals": 1, "draw_duration": 2.6, "ease": "power2.inOut", "fill": true, "dark": 0.55, "text_color": "#f5f3ee", "accent_color": "#ff5d5d", "guide_color": "rgba(255,255,255,0.16)", "dot_color": "#14151f", "font": "Inter:wght@400;600;700;800", "font2": "Source Serif 4:wght@600;700", "left": 9, "top": 9, "width": 80, "height": 80}
+</script>
+<div class="blk-gelap"></div>
+<div class="blk-k"><div class="blk-kepala"><div><div class="blk-j"></div><div class="blk-sj"></div></div><div class="blk-leg"></div></div><div class="blk-besar"></div><div class="blk-plot"></div></div>
+</div>
+<style>
+.blk-data-line-chart{position:absolute;inset:0;pointer-events:none}
+.blk-data-line-chart .blk-gelap{position:absolute;inset:0;background:#000;opacity:0}
+.blk-data-line-chart .blk-k{position:absolute;display:flex;flex-direction:column}
+.blk-data-line-chart .blk-kepala{display:flex;justify-content:space-between;align-items:flex-start;gap:1em}
+.blk-data-line-chart .blk-j{font-weight:700;line-height:1.1;letter-spacing:-.01em}
+.blk-data-line-chart .blk-sj{opacity:.65;margin-top:.3em}
+.blk-data-line-chart .blk-leg{display:flex;gap:1.4em;white-space:nowrap;padding-top:.4em}
+.blk-data-line-chart .blk-leg i{display:inline-block;width:.6em;height:.6em;border-radius:50%;margin-right:.45em;vertical-align:.05em}
+.blk-data-line-chart .blk-besar{font-weight:800;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
+.blk-data-line-chart .blk-plot{position:relative;flex:1;min-height:0}
+.blk-data-line-chart svg{position:absolute;left:0;top:0;overflow:visible}
+.blk-data-line-chart .blk-lbl{position:absolute;left:0;top:0;white-space:nowrap;font-weight:700;font-variant-numeric:tabular-nums;padding:.2em .45em;border-radius:.3em}
+.blk-data-line-chart .blk-x{position:absolute;top:100%;transform:translate(-50%,.7em);white-space:nowrap;opacity:.6}
+.blk-data-line-chart .blk-yl{position:absolute;left:0;transform:translateY(-120%);opacity:.5;font-variant-numeric:tabular-nums}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, S = P.series || [], X = P.label || [];
+  function fmt(v, d) { var a = Math.abs(v).toFixed(d).split("."); a[0] = a[0].replace(/\B(?=(\d{3})+(?!\d))/g, "."); return (v < 0 ? "−" : "") + a[0] + (a[1] ? "," + a[1] : ""); }
+  function af(v, d) { return P.prefix + fmt(v, d == null ? P.decimals : d) + P.suffix; }
+  function rapi(m) { var e = Math.pow(10, Math.floor(Math.log10(m || 1))), f = m / e; return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10) * e; }
+  var fs = function (v) { return Math.round(v * s) + "px"; }, turun = P.mode === "down";
+  if (turun) S = S.slice(0, 1);
+  var kk = R.querySelector(".blk-k"), plot = R.querySelector(".blk-plot"), besar = R.querySelector(".blk-besar");
+  kk.style.cssText += ";left:" + P.left + "%;top:" + P.top + "%;width:" + P.width + "%;height:" + P.height + "%;color:" + P.text_color + ";font-family:" + BLOCK.family(P.font) + ";font-size:" + fs(26);
+  var J = R.querySelector(".blk-j"), SJ = R.querySelector(".blk-sj"), LG = R.querySelector(".blk-leg");
+  J.textContent = P.title; J.style.cssText += ";font-family:" + BLOCK.family(P.font2, "Georgia, serif") + ";font-size:" + fs(54);
+  SJ.textContent = P.subtitle; SJ.style.fontSize = fs(28);
+  besar.style.cssText += ";font-size:" + fs(turun ? 150 : 0) + ";margin-top:" + fs(turun ? 24 : 0) + ";color:" + (S[0] && S[0].warna || P.accent_color);
+  plot.style.cssText += ";margin-top:" + fs(70) + ";margin-bottom:" + fs(50);
+  if (!turun) S.forEach(function (q) { LG.insertAdjacentHTML("beforeend", '<span><i style="background:' + q.warna + '"></i>' + BLOCK.esc(q.nama) + "</span>"); });
+  var W = plot.clientWidth || k.w * 0.8, H = plot.clientHeight || k.h * 0.5;
+  var mx = 0, n = 0; S.forEach(function (q) { q.nilai.forEach(function (v) { mx = Math.max(mx, +v); }); n = Math.max(n, q.nilai.length); });
+  var top = rapi(mx * 1.1), xs = function (i) { return n > 1 ? i / (n - 1) * W : W / 2; }, ys = function (v) { return H - v / top * H; };
+  var svg = BLOCK.svg("svg", { width: W, height: H, viewBox: "0 0 " + W + " " + H }, plot);
+  for (var g = 0; g <= 4; g++) {
+    var y = H * (1 - g / 4);
+    BLOCK.svg("line", { x1: 0, x2: W, y1: y, y2: y, stroke: P.guide_color, "stroke-width": g === 0 ? 2 * s : 1 }, svg);
+    if (g) BLOCK.el("div", { class: "blk-yl", style: "top:" + y + "px;font-size:" + fs(20) }, plot).textContent = af(top * g / 4, (top / 4) % 1 ? P.decimals : 0);
+  }
+  X.forEach(function (l, i) { if (i < n) BLOCK.el("div", { class: "blk-x", style: "left:" + xs(i) + "px;font-size:" + fs(22) }, plot).textContent = l; });
+  // kurva halus Catmull-Rom -> Bezier
+  function jalur(pts) {
+    var d = "M" + pts[0][0] + "," + pts[0][1];
+    for (var i = 0; i < pts.length - 1; i++) {
+      var p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
+      d += " C" + (p1[0] + (p2[0] - p0[0]) / 6) + "," + (p1[1] + (p2[1] - p0[1]) / 6) + " " + (p2[0] - (p3[0] - p1[0]) / 6) + "," + (p2[1] - (p3[1] - p1[1]) / 6) + " " + p2[0] + "," + p2[1];
+    }
+    return d;
+  }
+  var t0 = 0.6, dg = Math.min(P.draw_duration, k.dur - 1.4), ez = gsap.parseEase(P.ease), defs = BLOCK.svg("defs", null, svg);
+  var ser = S.map(function (q, si) {
+    var pts = q.nilai.map(function (v, i) { return [xs(i), ys(+v)]; }), d = jalur(pts), c = q.warna || P.accent_color;
+    var cp = BLOCK.svg("clipPath", { id: k.id + "-c" + si }, defs), cr = BLOCK.svg("rect", { x: 0, y: -H, width: 0, height: 3 * H }, cp);
+    BLOCK.svg("path", { d: d + " L" + pts[pts.length - 1][0] + "," + H + " L" + pts[0][0] + "," + H + " Z", fill: c, opacity: P.fill ? 0.12 : 0, "clip-path": "url(#" + k.id + "-c" + si + ")" }, svg);
+    var pa = BLOCK.svg("path", { d: d, fill: "none", stroke: c, "stroke-width": 5 * s, "stroke-linecap": "round", "stroke-linejoin": "round" }, svg);
+    var L = BLOCK.prepareStroke(pa);
+    var dots = pts.map(function (p) { return BLOCK.svg("circle", { cx: p[0], cy: p[1], r: 8 * s, fill: c, stroke: P.dot_color, "stroke-width": 3 * s, transform: "scale(0)", style: "transform-box:fill-box;transform-origin:center" }, svg); });
+    var lbl = BLOCK.el("div", { class: "blk-lbl", style: "font-size:" + fs(24) + ";background:" + c + ";color:" + P.dot_color }, plot);
+    return { q: q, pts: pts, pa: pa, L: L, cr: cr, dots: dots, lbl: lbl, c: c };
+  });
+  var gelap = R.querySelector(".blk-gelap");
+  BLOCK.onTime(tl, function (t) {
+    var p = ez(BLOCK.progress(t, t0, t0 + dg));
+    ser.forEach(function (o, si) {
+      o.pa.style.strokeDashoffset = o.L * (1 - p);
+      var f = o.pa.getPointAtLength(o.L * p), v = top * (1 - f.y / H);
+      o.cr.setAttribute("width", f.x);
+      o.dots.forEach(function (d, i) { var u = BLOCK.clamp((f.x - o.pts[i][0]) / (W * 0.04) + 1, 0, 1); d.setAttribute("transform", "scale(" + gsap.parseEase("back.out(3)")(u).toFixed(3) + ")"); });
+      o.lbl.textContent = af(v);
+      o.lbl.style.opacity = BLOCK.clamp(p * 8, 0, 1);
+      o.lbl.style.transform = "translate(" + (f.x + 16 * s).toFixed(1) + "px," + (f.y - (si ? -10 : 52) * s).toFixed(1) + "px)";
+      if (turun && si === 0) { besar.textContent = af(v); gelap.style.opacity = (p * P.dark).toFixed(3); }
+    });
+  }, k.dur);
+  tl.fromTo([J, SJ, LG], { opacity: 0, y: 18 * s }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out", stagger: 0.08 }, 0);
+  tl.fromTo(plot, { opacity: 0 }, { opacity: 1, duration: 0.5 }, 0.25);
+  tl.to(kk, { opacity: 0, duration: 0.45, ease: "power2.in" }, k.dur - 0.5);
+}, { font: true });
+</script>

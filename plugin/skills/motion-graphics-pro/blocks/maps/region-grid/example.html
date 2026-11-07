@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Region Grid · block example maps/region-grid</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="6.5">
+<div id="adegan" class="adegan ad-terang"></div>
+<!-- Block maps/region-grid · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-region-grid" data-block="maps/region-grid" data-start="0" data-duration="6" data-track-index="4" class="blk blk-maps-region-grid">
+<script type="application/json" data-block-props>
+{"preset": "indonesia", "shape": "hex", "values": {}, "title": "Akses internet rumah tangga", "sub": "Data contoh, ilustratif", "unit": "%", "low_color": "#f3e7c9", "high_color": "#b3362c", "empty_color": "#d9d4c7", "text_color": "#1d1b18", "show_value": true, "legend": true, "order": "west-east", "pause": 0.035, "font": "Inter:wght@500;600;700;800", "seed": 7}
+</script>
+</div>
+<style>
+.blk-maps-region-grid{position:absolute;inset:0;pointer-events:none}
+.blk-maps-region-grid svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.blk-maps-region-grid .blk-judul{position:absolute;left:6%;top:5%;right:6%;font-weight:800;line-height:1.05;letter-spacing:-.01em}
+.blk-maps-region-grid .blk-judul small{display:block;font-weight:500;opacity:.6;letter-spacing:.04em;margin-top:.35em}
+</style>
+<script>
+BLOCK.mount("blk-region-grid", function (k) {
+// ---- peta ubin bersama (geografi ilustratif: ubin sama besar, susunan kira-kira geografis) ----
+  var PETA = {
+    raw: { indonesia: "AC:Aceh:0:0|SU:Sumatera Utara:1:1|RI:Riau:2:1|KR:Kepulauan Riau:3:0|SB:Sumatera Barat:1:2|JA:Jambi:2:2|BE:Bengkulu:2:3|SS:Sumatera Selatan:3:2|BB:Bangka Belitung:4:2|LA:Lampung:3:3|BT:Banten:4:4|JK:DKI Jakarta:5:3|JB:Jawa Barat:5:4|JT:Jawa Tengah:6:4|YO:DI Yogyakarta:6:5|JI:Jawa Timur:7:4|BA:Bali:8:4|NB:Nusa Tenggara Barat:9:4|NT:Nusa Tenggara Timur:10:4|KB:Kalimantan Barat:5:1|KT:Kalimantan Tengah:6:1|KI:Kalimantan Timur:7:1|KU:Kalimantan Utara:7:0|KS:Kalimantan Selatan:7:2|GO:Gorontalo:9:1|SA:Sulawesi Utara:10:1|ST:Sulawesi Tengah:9:2|SR:Sulawesi Barat:8:3|SN:Sulawesi Selatan:9:3|SG:Sulawesi Tenggara:10:3|MU:Maluku Utara:11:1|MA:Maluku:11:2|PD:Papua Barat Daya:12:1|PB:Papua Barat:13:1|PA:Papua:15:1|PT:Papua Tengah:14:2|PP:Papua Pegunungan:15:2|PS:Papua Selatan:15:3", as: "AK:Alaska:0:0|ME:Maine:10:0|VT:Vermont:9:1|NH:New Hampshire:10:1|WA:Washington:0:2|ID:Idaho:1:2|MT:Montana:2:2|ND:North Dakota:3:2|MN:Minnesota:4:2|IL:Illinois:5:2|WI:Wisconsin:6:2|MI:Michigan:7:2|NY:New York:8:2|RI:Rhode Island:9:2|MA:Massachusetts:10:2|OR:Oregon:0:3|NV:Nevada:1:3|WY:Wyoming:2:3|SD:South Dakota:3:3|IA:Iowa:4:3|IN:Indiana:5:3|OH:Ohio:6:3|PA:Pennsylvania:7:3|NJ:New Jersey:8:3|CT:Connecticut:9:3|CA:California:0:4|UT:Utah:1:4|CO:Colorado:2:4|NE:Nebraska:3:4|MO:Missouri:4:4|KY:Kentucky:5:4|WV:West Virginia:6:4|VA:Virginia:7:4|MD:Maryland:8:4|DE:Delaware:9:4|AZ:Arizona:1:5|NM:New Mexico:2:5|KS:Kansas:3:5|AR:Arkansas:4:5|TN:Tennessee:5:5|NC:North Carolina:6:5|SC:South Carolina:7:5|OK:Oklahoma:3:6|LA:Louisiana:4:6|MS:Mississippi:5:6|AL:Alabama:6:6|GA:Georgia:7:6|HI:Hawaii:0:7|TX:Texas:3:7|FL:Florida:8:7" },
+    data: function (preset) {
+      return (this.raw[preset] || this.raw.indonesia).split("|").map(function (s) { var a = s.split(":"); return { k: a[0], n: a[1], c: +a[2], r: +a[3] }; });
+    },
+    // susun ubin di kotak {x,y,w,h}; bentuk "square" | "hex"
+    tata: function (D, bentuk, box) {
+      var hex = bentuk === "hex", cols = 0, rows = 0;
+      D.forEach(function (d) { cols = Math.max(cols, d.c + 1); rows = Math.max(rows, d.r + 1); });
+      var cw = cols + (hex ? 0.5 : 0), rh = hex ? 0.866 : 1, ch = (rows - 1) * rh + 1;
+      var s = Math.min(box.w / cw, box.h / ch), ox = box.x + (box.w - cw * s) / 2, oy = box.y + (box.h - ch * s) / 2;
+      D.forEach(function (d) { d.cx = ox + (d.c + 0.5 + (hex && d.r % 2 ? 0.5 : 0)) * s; d.cy = oy + (d.r * rh + 0.5) * s; d.s = s; });
+      return { s: s, hex: hex, x: ox, y: oy, w: cw * s, h: ch * s };
+    },
+    bentuk: function (hex, s, gap) {
+      var R = hex ? s / Math.sqrt(3) * (1 - gap) : 0, h = s * (1 - gap) / 2;
+      if (!hex) return "M" + (-h) + "," + (-h + h * 0.2) + "Q" + (-h) + "," + (-h) + " " + (-h + h * 0.2) + "," + (-h) + "H" + (h - h * 0.2) + "Q" + h + "," + (-h) + " " + h + "," + (-h + h * 0.2) +
+        "V" + (h - h * 0.2) + "Q" + h + "," + h + " " + (h - h * 0.2) + "," + h + "H" + (-h + h * 0.2) + "Q" + (-h) + "," + h + " " + (-h) + "," + (h - h * 0.2) + "Z";
+      var p = []; for (var i = 0; i < 6; i++) { var a = Math.PI / 3 * i - Math.PI / 2; p.push((R * Math.cos(a)).toFixed(2) + "," + (R * Math.sin(a)).toFixed(2)); }
+      return "M" + p.join("L") + "Z";
+    },
+    cari: function (D, kode) { for (var i = 0; i < D.length; i++) if (D[i].k === String(kode).toUpperCase()) return D[i]; return null; },
+    // lengkung busur kuadrat dari a ke b, naik ke atas sebesar fraksi jarak
+    busur: function (a, b, lengkung) {
+      var mx = (a.cx + b.cx) / 2, my = (a.cy + b.cy) / 2, dx = b.cx - a.cx, dy = b.cy - a.cy, L = Math.sqrt(dx * dx + dy * dy) || 1;
+      var nx = dy / L, ny = -dx / L; if (ny > 0) { nx = -nx; ny = -ny; }
+      return "M" + a.cx + "," + a.cy + "Q" + (mx + nx * L * lengkung) + "," + (my + ny * L * lengkung) + " " + b.cx + "," + b.cy;
+    }
+  };
+
+  var P = k.P, tl = k.tl, s = k.s, W = k.w, H = k.h, fam = BLOCK.family(P.font), R = BLOCK.random(+P.seed || 7);
+  var D = PETA.data(P.preset), V = P.values || {}, ada = Object.keys(V).length > 0;
+  D.forEach(function (d) { d.v = ada ? (V[d.k] != null ? +V[d.k] : null) : Math.round(18 + R() * 70 + (d.c / 16) * -10); });
+  var vs = D.filter(function (d) { return d.v != null; }).map(function (d) { return d.v; });
+  var lo = Math.min.apply(null, vs), hi = Math.max.apply(null, vs);
+  var warna = function (v) { return v == null ? P.empty_color : BLOCK.mix(P.low_color, P.high_color, Math.pow((v - lo) / (hi - lo || 1), 0.9)); };
+  if (P.title) {
+    var j = BLOCK.el("div", { class: "blk-judul", style: "font-family:" + fam + ";color:" + P.text_color + ";font-size:" + Math.round(64 * s) + "px" }, k.root, BLOCK.esc(P.title) + (P.sub ? "<small style='font-size:" + Math.round(26 * s) + "px'>" + BLOCK.esc(P.sub) + "</small>" : ""));
+    tl.fromTo(j, { autoAlpha: 0, y: 24 * s }, { autoAlpha: 1, y: 0, duration: 0.7, ease: "power3.out", immediateRender: true }, 0.05);
+  }
+  var top = (P.title ? 0.05 * H + 150 * s : 60 * s), bot = P.legend ? 150 * s : 60 * s, pad = 0.06 * W;
+  var T = PETA.tata(D, P.shape, { x: pad, y: top, w: W - 2 * pad, h: H - top - bot });
+  var svg = BLOCK.svg("svg", { viewBox: "0 0 " + W + " " + H }, k.root), d0 = PETA.bentuk(T.hex, T.s, 0.08);
+  var urut = D.slice();
+  if (P.order === "random") urut.forEach(function (d) { d.o = R(); });
+  else if (P.order === "value") urut.forEach(function (d) { d.o = d.v == null ? 999 : -d.v; });
+  else urut.forEach(function (d) { d.o = d.c + d.r * 0.35; });
+  urut.sort(function (a, b) { return a.o - b.o; });
+  var t0 = 0.45;
+  urut.forEach(function (d, i) {
+    var outer = BLOCK.svg("g", { transform: "translate(" + d.cx.toFixed(1) + "," + d.cy.toFixed(1) + ")" }, svg);
+    var g = BLOCK.svg("g", {}, outer);
+    var p = BLOCK.svg("path", { d: d0, stroke: "rgba(255,255,255,.75)", "stroke-width": Math.max(1, T.s * 0.025) }, g);
+    var c = warna(d.v), gelap = BLOCK.hexToRgb(c).reduce(function (a, b) { return a + b; }, 0) < 400;
+    var tc = gelap ? "#fffaf0" : P.text_color, fs = T.s * 0.27;
+    var tx = BLOCK.svg("text", { "text-anchor": "middle", y: P.show_value ? -fs * 0.25 : fs * 0.35, "font-size": fs.toFixed(1), "font-weight": 800, fill: tc, "font-family": fam }, g);
+    tx.textContent = d.k;
+    if (P.show_value && d.v != null) { var tv = BLOCK.svg("text", { "text-anchor": "middle", y: fs * 0.95, "font-size": (fs * 0.72).toFixed(1), "font-weight": 500, fill: tc, opacity: 0.85, "font-family": fam }, g); tv.textContent = d.v + (P.unit || ""); }
+    var at = t0 + i * +P.pause;
+    tl.fromTo(g, { scale: 0.2, autoAlpha: 0, transformOrigin: "50% 50%" }, { scale: 1, autoAlpha: 1, duration: 0.55, ease: "back.out(2.2)", immediateRender: true }, at)
+      .fromTo(p, { fill: P.empty_color }, { fill: c, duration: 0.5, ease: "power2.out", immediateRender: true }, at + 0.15);
+  });
+  var tEnd = t0 + urut.length * +P.pause + 0.5;
+  if (P.legend) {
+    var lw = Math.min(W * 0.42, 620 * s), lx = (W - lw) / 2, ly = H - 95 * s, lh = 16 * s;
+    var defs = BLOCK.svg("defs", {}, svg), gid = k.id + "-grad", lg = BLOCK.svg("linearGradient", { id: gid }, defs);
+    BLOCK.svg("stop", { offset: "0", "stop-color": P.low_color }, lg); BLOCK.svg("stop", { offset: "1", "stop-color": P.high_color }, lg);
+    var L = BLOCK.svg("g", {}, svg);
+    var bar = BLOCK.svg("rect", { x: lx, y: ly, width: lw, height: lh, rx: lh / 2, fill: "url(#" + gid + ")" }, L);
+    [[lx, lo, "start"], [lx + lw, hi, "end"]].forEach(function (a) { var t = BLOCK.svg("text", { x: a[0], y: ly + lh + 34 * s, "text-anchor": a[2], "font-size": 24 * s, "font-weight": 600, fill: P.text_color, "font-family": fam }, L); t.textContent = a[1] + (P.unit || ""); });
+    var mid = BLOCK.svg("text", { x: lx + lw / 2, y: ly - 14 * s, "text-anchor": "middle", "font-size": 20 * s, "font-weight": 600, "letter-spacing": 2 * s, fill: P.text_color, opacity: 0.6, "font-family": fam }, L); mid.textContent = "RENDAH  →  TINGGI";
+    tl.fromTo(L, { autoAlpha: 0, y: 16 * s }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "power3.out", immediateRender: true }, Math.min(tEnd, k.dur - 1))
+      .fromTo(bar, { attr: { width: 0 } }, { attr: { width: lw }, duration: 0.8, ease: "power2.inOut", immediateRender: true }, Math.min(tEnd, k.dur - 1));
+  }
+  // napas pelan: ubin tertinggi berdenyut
+  var top3 = D.filter(function (d) { return d.v != null; }).sort(function (a, b) { return b.v - a.v; }).slice(0, 3);
+  top3.forEach(function (d, i) {
+    var ring = BLOCK.svg("path", { d: d0, transform: "translate(" + d.cx + "," + d.cy + ")", fill: "none", stroke: P.high_color, "stroke-width": 3 * s }, svg);
+    var tp = Math.min(tEnd + 0.3 + i * 0.25, k.dur - 0.8);
+    tl.fromTo(ring, { autoAlpha: 0, scale: 1, transformOrigin: "50% 50%" }, { keyframes: [{ autoAlpha: 0.9, scale: 1.08, duration: 0.25 }, { autoAlpha: 0, scale: 1.35, duration: 0.6 }], immediateRender: true }, tp);
+  });
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 6.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 6.5);
+</script>
+</body>
+</html>

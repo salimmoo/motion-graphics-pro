@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP lipat pola · Miura-ori, Yoshimura, Kresling</title>
+<style>html,body{margin:0;background:#1c2236}#stage{position:relative;width:1280px;height:720px;overflow:hidden;background:#1c2236}#stage canvas{position:absolute}</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../origami-fold.js"></script>
+<script src="../fold-pattern.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720" data-fps="24">
+  <canvas id="m" style="left:0;top:0"></canvas><canvas id="y" style="left:640px;top:0"></canvas><canvas id="k" style="left:640px;top:360px"></canvas><canvas id="m2" style="left:0;top:360px"></canvas>
+</div>
+<script>
+const D = 6;
+// kartu judul dicetak di lembar datar; Miura membukanya dengan satu derajat kebebasan
+const kartu = (g, w, h) => { const gr = g.createLinearGradient(0, 0, w, h); gr.addColorStop(0, "#ffb347"); gr.addColorStop(1, "#e8553d"); g.fillStyle = gr; g.fillRect(0, 0, w, h);
+  g.fillStyle = "#fff7ea"; g.font = `900 ${Math.round(h * 0.3)}px system-ui, Segoe UI, Arial`; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText("MIURA-ORI", w / 2, h * 0.45);
+  g.font = `600 ${Math.round(h * 0.1)}px system-ui, Segoe UI, Arial`; g.fillText("lipat kaku · 1 derajat kebebasan", w / 2, h * 0.7); };
+const base = { width: 640, height: 360, duration: D };
+const A = MGP.foldPattern.create("#m", Object.assign({ pattern: "miura", cols: 14, rows: 5, fill: kartu, motion: "open", start: 0.5, foldDuration: 2.5, ease: "spring.snappy", yaw: [[0, -25], [6, -8]], pitch: 58 }, base));
+const B = MGP.foldPattern.create("#y", Object.assign({ pattern: "yoshimura", front: "#7ee0d6", back: "#2d6cdf", rotate: 18 }, base));
+const K = MGP.foldPattern.create("#k", Object.assign({ pattern: "kresling", front: "#f2d796", back: "#9c7a3c", rotate: -10 }, base));
+const M2 = MGP.foldPattern.create("#m2", Object.assign({ pattern: "miura", cols: 10, rows: 8, gamma: 70, front: "#8fa7d8", back: "#f4ecd8", yaw: 20, pitch: 60 }, base));
+const all = [A, B, K, M2];
+window.__curves = () => ({ miura: A.state.kurva.lipat, yoshimura: B.state.kurva.lipat });
+MGP.core.expose({ duration: D, ready: Promise.all(all.map((x) => x.ready)), seek(t) { all.forEach((x) => x.seek(t)); return this; }, timeline() { return MGP.core.timeline(this); } });
+</script>
+</body>
+</html>

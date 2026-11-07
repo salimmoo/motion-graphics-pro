@@ -1,0 +1,115 @@
+{
+ "id": "accents/checkmark",
+ "name": "Checkmark",
+ "name_id": "Centang Berhasil",
+ "category": "accents",
+ "description": {
+  "id": "Tanda sukses: cincin tergambar dan meletup, isi lingkaran memantul, centang tergores, dengan putaran dan blur kecil saat masuk serta label opsional.",
+  "en": "Success check: ring draws and pops, the disc bounces in, the check stroke draws, with a subtle rotate-blur entrance and optional label."
+ },
+ "tags": [
+  "aksen",
+  "centang",
+  "sukses",
+  "check",
+  "ikon",
+  "accents",
+  "checkmark"
+ ],
+ "props": {
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi horizontal pusat (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 45,
+   "type": "number",
+   "hint": "Posisi vertikal pusat (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "size": {
+   "default": 220,
+   "type": "number",
+   "hint": "Diameter ikon (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "color": {
+   "default": "#22c55e",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffffff",
+   "type": "color",
+   "hint": "Warna centang (saat isi aktif)",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "text": {
+   "default": "Berhasil disimpan",
+   "type": "text",
+   "hint": "Label di bawah ikon (kosong = tanpa label)",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@600;700",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "fill": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Lingkaran terisi; mati = cincin saja",
+   "aliases": [
+    "isi"
+   ]
+  },
+  "start": {
+   "default": 0.3,
+   "type": "number",
+   "hint": "Waktu mulai lokal (detik)",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "exit": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "keluar"
+   ]
+  }
+ },
+ "duration": 3,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "aksen/centang",
+  "success-check"
+ ],
+ "example": {
+  "bg": "dark",
+  "aspect": "16:9",
+  "font": [
+   "Inter:wght@600;700"
+  ]
+ }
+}

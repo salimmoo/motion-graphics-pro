@@ -1,0 +1,136 @@
+{
+ "id": "ui/tab",
+ "name": "Tab",
+ "name_id": "Tab & Rel Status",
+ "category": "ui",
+ "description": {
+  "id": "Navigasi keadaan yang rapi. Mode tab: indikator pil meluncur antar tab aktif pada isyarat, tepi depannya berangkat lebih dulu sehingga pil meregang lalu mengerut, isi panel berganti halus. Mode chip: rel chip status bertipe mono maju keadaan demi keadaan; yang selesai redup bercentang, yang aktif bertinta penuh, yang menunggu masih kosong, garis penghubung terisi dan lencana muncul di satu keadaan.",
+  "en": "Tidy state navigation. Tab mode: a pill indicator slides between active tabs on cues, leading edge first so it stretches and settles, while the panel content swaps. Chip mode: a rail of mono status chips advances state by state; done chips dim with a check, the active one is solid ink, pending ones stay hollow, connectors fill and a badge pops on one state."
+ },
+ "tags": [
+  "ui",
+  "tab",
+  "indikator",
+  "segmented",
+  "status",
+  "chip",
+  "stepper",
+  "pipeline"
+ ],
+ "props": {
+  "mode": {
+   "default": "tab",
+   "type": "enum",
+   "options": [
+    "tab",
+    "chip"
+   ]
+  },
+  "tab": {
+   "default": [
+    "Ringkasan",
+    "Aktivitas",
+    "Laporan",
+    "Tim"
+   ],
+   "type": "list",
+   "hint": "Label tab"
+  },
+  "order": {
+   "default": [
+    0,
+    2,
+    1,
+    3
+   ],
+   "type": "list",
+   "hint": "Indeks tab aktif berurutan per isyarat",
+   "aliases": [
+    "urutan"
+   ]
+  },
+  "status": {
+   "default": [
+    "ANTRE",
+    "MEMBANGUN",
+    "MENGUJI",
+    "RILIS",
+    "AKTIF"
+   ],
+   "type": "list",
+   "hint": "Label chip status (mode chip)"
+  },
+  "badge": {
+   "default": [
+    2,
+    "3 lulus"
+   ],
+   "type": "list",
+   "hint": "[indeks chip, teks lencana]",
+   "aliases": [
+    "lencana"
+   ]
+  },
+  "pause": {
+   "default": 0.9,
+   "type": "number",
+   "hint": "Detik antar isyarat",
+   "aliases": [
+    "jeda"
+   ]
+  },
+  "accent_color": {
+   "default": "#111827",
+   "type": "color",
+   "hint": "Warna indikator / tinta chip aktif",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "text_color": {
+   "default": "#ffffff",
+   "type": "color",
+   "hint": "Teks di atas indikator",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "bg": {
+   "default": "#eef0f5",
+   "type": "color",
+   "hint": "Kosong = transparan",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;600;700",
+   "type": "font"
+  },
+  "font2": {
+   "default": "JetBrains Mono:wght@500;700",
+   "type": "font",
+   "hint": "Font mono chip"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/tab",
+  "tabs-slide-indicator",
+  "state-chip-rail"
+ ],
+ "example": {
+  "bg": "empty",
+  "font": [
+   "Inter:wght@500;600;700",
+   "JetBrains Mono:wght@500;700"
+  ]
+ }
+}

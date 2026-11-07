@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Push · block example camera/push</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="5.5">
+<div id="adegan" class="adegan ad-gelap"><div id="judul-contoh" class="ad-judul">Gerak bercerita</div><div class="ad-sub">contoh komposisi</div></div>
+<!-- Block camera/push · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-push" data-block="camera/push" data-start="0" data-duration="5" data-track-index="30" class="blk blk-camera-push">
+<script type="application/json" data-block-props>
+{"target": "#adegan", "mode": "enter", "strength": 0.18, "dot_x": 50, "dot_y": 50, "pause": 0.8, "angle": 9, "ease": "", "fade_end": true, "edge_focus": true, "edge_blur": 10}
+</script>
+</div>
+<style>
+.blk-camera-push{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-camera-push .blk-tepi{position:absolute;inset:0;opacity:0;
+  -webkit-mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,transparent 45%,#000 100%);
+  mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,transparent 45%,#000 100%)}
+</style>
+<script>
+BLOCK.mount("blk-push", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, T = BLOCK.find(P.target);
+  if (!T) { console.warn("[camera/push] target not found: " + P.target); return; }
+  var A = +P.strength || 0.18, j = BLOCK.clamp(+P.pause || 0, 0, D * 0.6), mode = P.mode;
+  T.style.transformOrigin = P.dot_x + "% " + P.dot_y + "%";
+  var tepi = null;
+  if (P.edge_focus) {
+    var b = "blur(" + Math.round(P.edge_blur * k.s) + "px)";
+    tepi = BLOCK.el("div", { class: "blk-tepi", style: "backdrop-filter:" + b + ";-webkit-backdrop-filter:" + b }, k.root);
+  }
+  // denyut defokus tepi: naik saat kamera bergerak, turun saat berhenti
+  function denyut(t0, naik, puncak, turun) {
+    if (tepi) tl.fromTo(tepi, { opacity: 0 }, { opacity: puncak, duration: naik, ease: "power2.out", immediateRender: false }, t0)
+      .to(tepi, { opacity: 0, duration: turun, ease: "power2.inOut" }, t0 + naik);
+  }
+  if (mode === "pull") {
+    // detail rapat ditahan, lalu satu tarikan mundur yang melambat
+    var S = 1 + A * 2.6, gd = Math.max(0.8, D - j - 0.4);
+    tl.fromTo(T, { scale: S }, { scale: 1, duration: gd, ease: P.ease || "expo.out" }, j);
+    BLOCK.initial(tl, T, { scale: S });
+    denyut(j, 0.25, 0.9, 0.9);
+  } else if (mode === "punch") {
+    // hentakan zoom cepat dengan sedikit lewat, tahan, lalu kendur
+    tl.fromTo(T, { scale: 1 }, { scale: 1 + A, duration: 0.42, ease: P.ease || "back.out(2.2)" }, j)
+      .to(T, { scale: 1 + A * 1.12, duration: Math.max(0.3, D - j - 1.3), ease: "none" }, j + 0.42)
+      .to(T, { scale: 1, duration: 0.7, ease: "power3.inOut" }, D - 0.8);
+    denyut(j, 0.08, 1, 0.5);
+    denyut(D - 0.8, 0.3, 0.6, 0.4);
+  } else if (mode === "skew") {
+    // geser + tilt 3D dengan perspektif, seperti kamera di atas rel melengkung
+    var sd = +P.angle || 9, px = Math.round(1400 * k.s);
+    tl.fromTo(T, { transformPerspective: px, rotationY: -sd, rotationX: sd * 0.25, xPercent: 4, scale: 1 + A },
+      { transformPerspective: px, rotationY: sd, rotationX: -sd * 0.25, xPercent: -4, scale: 1 + A * 0.6, duration: D, ease: P.ease || "sine.inOut" }, 0);
+    denyut(0, D * 0.3, 0.7, D * 0.6);
+  } else {
+    // masuk: satu dorongan pelan dan terus-menerus
+    tl.fromTo(T, { scale: 1, y: 0 }, { scale: 1 + A, y: -12 * k.s, duration: D, ease: P.ease || "sine.inOut" }, 0);
+    denyut(0, D * 0.45, 0.75, D * 0.5);
+  }
+  if (P.fade_end) tl.fromTo(T, { opacity: 1 }, { opacity: 0, duration: 0.7, ease: "power2.in", immediateRender: false }, D - 0.75);
+});
+</script>
+</div>
+<script>
+  window.__duration = 5.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5.5);
+</script>
+</body>
+</html>

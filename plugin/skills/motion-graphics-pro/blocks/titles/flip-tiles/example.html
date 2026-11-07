@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Flip Tiles · block example titles/flip-tiles</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="5.5">
+<div id="adegan" class="adegan ad-gelap"></div>
+<!-- Block titles/flip-tiles · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-flip-tiles" data-block="titles/flip-tiles" data-start="0" data-duration="5" data-track-index="20" class="blk blk-titles-flip-tiles">
+<script type="application/json" data-block-props>
+{"front_text": "kode lama", "back_text": "WAJAH BARU", "front_color": "#9aa4b8", "foreground": "#11141b", "back_color": "#0d0f14", "background": "#c6ff3d", "cols": 12, "rows": 4, "gap": 3, "start": 0.9, "sweep_duration": 1.6, "font": "Space Grotesk:wght@500;700", "font2": "JetBrains Mono:wght@500;700", "size": 190}
+</script>
+<div class="blk-papan"></div>
+</div>
+<style>
+.blk-titles-flip-tiles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-titles-flip-tiles .blk-papan{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
+.blk-titles-flip-tiles .blk-u{position:absolute}
+.blk-titles-flip-tiles .blk-m{position:absolute;inset:0;overflow:hidden;backface-visibility:hidden}
+.blk-titles-flip-tiles .blk-m>span{position:absolute;display:flex;align-items:center;justify-content:center;white-space:nowrap;line-height:1}
+.blk-titles-flip-tiles .blk-sorot{position:absolute;top:-10%;bottom:-10%;width:30%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);mix-blend-mode:overlay}
+</style>
+<script>
+BLOCK.mount("blk-flip-tiles", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, D = k.dur, E = BLOCK.el, R = k.root, ac = k.random;
+  var pp = R.querySelector(".blk-papan");
+  var W = Math.round(k.w * (k.w > k.h ? 0.82 : 0.9)), H = Math.round(Math.min(k.h * 0.5, W * 0.34));
+  pp.style.cssText = "width:" + W + "px;height:" + H + "px";
+  var C = Math.max(2, Math.round(P.cols)), Rw = Math.max(1, Math.round(P.rows)), gp = P.gap * s, tw = W / C, th = H / Rw;
+  var fsA = Math.min(P.size * s * 0.62, W / Math.max(4, String(P.front_text).length * 0.62));
+  var fsB = Math.min(P.size * s, W * 0.94 / Math.max(4, String(P.back_text).length * 0.6), H * 0.8);
+  function muka(u, c, r, teks, fg, bg, fam, fs, berat) {
+    var m = E("div", { class: "blk-m", style: "background:" + bg }, u);
+    var sp = E("span", { style: "left:" + (-c * tw) + "px;top:" + (-r * th) + "px;width:" + W + "px;height:" + H + "px;color:" + fg + ";font-family:" + fam + ";font-size:" + Math.round(fs) + "px;font-weight:" + berat }, m);
+    sp.textContent = teks; return m;
+  }
+  var ubin = [], f1 = BLOCK.family(P.font2, "monospace"), f2 = BLOCK.family(P.font);
+  for (var r = 0; r < Rw; r++) for (var c = 0; c < C; c++) {
+    var u = E("div", { class: "blk-u", style: "left:" + (c * tw + gp / 2) + "px;top:" + (r * th + gp / 2) + "px;width:" + (tw - gp) + "px;height:" + (th - gp) + "px" }, pp);
+    var a = muka(u, c, r, P.front_text, P.front_color, P.foreground, f1, fsA, 500), b = muka(u, c, r, P.back_text, P.back_color, P.background, f2, fsB, 700);
+    a.firstChild.style.left = (-c * tw - gp / 2) + "px"; a.firstChild.style.top = (-r * th - gp / 2) + "px";
+    b.firstChild.style.left = (-c * tw - gp / 2) + "px"; b.firstChild.style.top = (-r * th - gp / 2) + "px";
+    var x = (c + 0.5) / C, y = (r + 0.5) / Rw;
+    ubin.push({ a: a, b: b, u: u, x: x, y: y, tunda: x * 0.8 + y * 0.2 + ac() * 0.06 });
+  }
+  var sorot = E("div", { class: "blk-sorot" }, E("div", { style: "position:absolute;inset:0;overflow:hidden;z-index:3" }, pp));
+  var per = 600 * s, T0 = +P.start, S = +P.sweep_duration, lamaBalik = 0.55;
+  // balik per ubin di bawah medan kedalaman yang menyapu: ubin yang sedang berbalik kabur & redup
+  BLOCK.onTime(tl, function (t) {
+    ubin.forEach(function (u) {
+      var p = BLOCK.clamp((t - T0 - u.tunda * S) / lamaBalik, 0, 1), sudut = 180 * (p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2);
+      var depan = sudut < 90, dalam = Math.sin(sudut * Math.PI / 180);
+      u.a.style.visibility = depan ? "visible" : "hidden"; u.b.style.visibility = depan ? "hidden" : "visible";
+      u.a.style.transform = "perspective(" + per + "px) rotateY(" + (-sudut).toFixed(2) + "deg)";
+      u.b.style.transform = "perspective(" + per + "px) rotateY(" + (180 - sudut).toFixed(2) + "deg)";
+      var dof = Math.abs(t - T0 - u.tunda * S - lamaBalik / 2);
+      var blur = Math.max(0, 1 - dof / 0.6) * 3 * s + dalam * 2 * s;
+      u.u.style.filter = blur > 0.05 ? "blur(" + blur.toFixed(2) + "px) brightness(" + (1 - dalam * 0.35).toFixed(3) + ")" : "none";
+      u.u.style.zIndex = dalam > 0.01 ? 2 : 1;
+    });
+    var ps = BLOCK.clamp((t - T0) / (S + lamaBalik), 0, 1);
+    sorot.style.left = (-30 + ps * 130).toFixed(2) + "%"; sorot.style.opacity = ps > 0 && ps < 1 ? 1 : 0;
+  }, D);
+  tl.fromTo(pp, { autoAlpha: 0, scale: 0.94 }, { autoAlpha: 1, scale: 1, duration: 0.7, ease: "power3.out" }, 0.05)
+    .fromTo(pp, { rotation: 0 }, { rotation: -0.6, duration: Math.max(0.5, D - T0 - S - 1), ease: "sine.inOut", immediateRender: false }, T0 + S + 0.6)
+    .to(pp, { autoAlpha: 0, duration: 0.45, ease: "power2.in" }, D - 0.5);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 5.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5.5);
+</script>
+</body>
+</html>

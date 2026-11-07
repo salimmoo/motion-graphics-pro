@@ -1,0 +1,115 @@
+{
+ "id": "transitions/ink",
+ "name": "Ink",
+ "name_id": "Rembesan Tinta",
+ "category": "transitions",
+ "description": {
+  "id": "Tinta cair mekar merembes di kertas, tetes-tetesnya menyatu menutup layar, lalu mengerut menjadi satu tanda tajam dan adegan baru muncul di bawahnya. Tepi diacak turbulensi berseed dengan butir kertas yang ikut menempel.",
+  "en": "Liquid ink blooms through paper, droplets merge to cover the frame, then contract into one crisp mark as the next scene resolves beneath, with seeded turbulent edges and paper grain."
+ },
+ "tags": [
+  "transisi",
+  "tinta",
+  "ink",
+  "bleed",
+  "gooey",
+  "kertas",
+  "organik",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "color": {
+   "default": "#1c2440",
+   "type": "color",
+   "hint": "Warna tinta",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "wet_color": {
+   "default": "#2f3d6b",
+   "type": "color",
+   "hint": "Warna pusat tetes (tinta basah)",
+   "aliases": [
+    "warna_basah"
+   ]
+  },
+  "dot": {
+   "default": 7,
+   "type": "number",
+   "hint": "Jumlah pusat mekar",
+   "aliases": [
+    "titik"
+   ]
+  },
+  "origin": {
+   "default": "random",
+   "type": "enum",
+   "options": [
+    "random",
+    "center"
+   ],
+   "hint": "Sebaran pusat mekar",
+   "aliases": [
+    "asal"
+   ],
+   "option_aliases": {
+    "acak": "random",
+    "tengah": "center"
+   }
+  },
+  "viscous": {
+   "default": 1,
+   "type": "number",
+   "hint": "Seberapa liar tepi tinta (0.3 - 2)",
+   "aliases": [
+    "kental"
+   ]
+  },
+  "grain": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Butir kertas statis di atas tinta",
+   "aliases": [
+    "butir"
+   ]
+  },
+  "seed": {
+   "default": 11,
+   "type": "number",
+   "hint": "Seed sebaran tetes"
+  }
+ },
+ "duration": 2.4,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/tinta",
+  "ink-bleed-reveal"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.8,
+  "duration": 3.4
+ }
+}

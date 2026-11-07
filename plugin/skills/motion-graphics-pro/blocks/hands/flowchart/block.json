@@ -1,0 +1,306 @@
+{
+ "id": "hands/flowchart",
+ "name": "Flowchart",
+ "name_id": "Alur Tangan",
+ "category": "hands",
+ "description": {
+  "id": "Diagram alur coretan tangan dari daftar simpul dan sambungan: kotak bergoyang atau kertas tempel berlabel tulisan tangan, dihubungkan konektor lengkung berpanah yang tergambar berurutan. Mode horizontal atau vertikal, label cabang untuk pohon keputusan, dan opsi kursor yang mengklik simpul lalu mengetik koreksi.",
+  "en": "Hand-drawn flow from a node and edge list: wobbled boxes or sticky notes with handwritten labels, joined by curved arrow connectors drawing on in sequence. Horizontal or vertical, branch labels for decision trees, optional cursor that clicks a node and types a correction."
+ },
+ "tags": [
+  "tangan",
+  "alur",
+  "flowchart",
+  "diagram",
+  "pohon-keputusan",
+  "pipeline",
+  "kursor",
+  "hands"
+ ],
+ "props": {
+  "node": {
+   "default": [
+    {
+     "id": "a",
+     "teks": "Ada ide"
+    },
+    {
+     "id": "b",
+     "teks": "Coba kecil"
+    },
+    {
+     "id": "c",
+     "teks": "Berhasil?"
+    },
+    {
+     "id": "d",
+     "teks": "Rilis"
+    },
+    {
+     "id": "e",
+     "teks": "Perbaiki"
+    }
+   ],
+   "type": "list",
+   "hint": "Daftar simpul {id, teks, x?, y?}; x/y (%) opsional, bawaan tata otomatis per tingkat",
+   "aliases": [
+    "simpul"
+   ]
+  },
+  "links": {
+   "default": [
+    [
+     "a",
+     "b"
+    ],
+    [
+     "b",
+     "c"
+    ],
+    [
+     "c",
+     "d",
+     "ya"
+    ],
+    [
+     "c",
+     "e",
+     "belum"
+    ]
+   ],
+   "type": "list",
+   "hint": "Daftar sambungan [dari, ke, label?]",
+   "aliases": [
+    "sambungan"
+   ]
+  },
+  "mode": {
+   "default": "horizontal",
+   "type": "enum",
+   "options": [
+    "horizontal",
+    "vertical"
+   ],
+   "option_aliases": {
+    "vertikal": "vertical"
+   }
+  },
+  "style": {
+   "default": "box",
+   "type": "enum",
+   "options": [
+    "box",
+    "note"
+   ],
+   "hint": "kotak = kotak coretan; catatan = kertas tempel",
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "kotak": "box",
+    "catatan": "note"
+   }
+  },
+  "node_width": {
+   "default": 250,
+   "type": "number",
+   "hint": "Lebar simpul (px pada 1080)",
+   "aliases": [
+    "lebar_simpul"
+   ]
+  },
+  "node_height": {
+   "default": 120,
+   "type": "number",
+   "hint": "Tinggi simpul",
+   "aliases": [
+    "tinggi_simpul"
+   ]
+  },
+  "branch_spacing": {
+   "default": 200,
+   "type": "number",
+   "hint": "Jarak antar simpul setingkat",
+   "aliases": [
+    "jarak_cabang"
+   ]
+  },
+  "edge": {
+   "default": 9,
+   "type": "number",
+   "hint": "Margin tepi (%)",
+   "aliases": [
+    "tepi"
+   ]
+  },
+  "cursor": {
+   "default": false,
+   "type": "boolean",
+   "hint": "Tampilkan kursor yang mengetik koreksi",
+   "aliases": [
+    "kursor"
+   ]
+  },
+  "fix": {
+   "default": {
+    "simpul": "e",
+    "teks": "Ulangi"
+   },
+   "type": "text",
+   "hint": "{simpul, teks}: simpul yang teksnya dikoreksi",
+   "aliases": [
+    "koreksi"
+   ]
+  },
+  "fix_time": {
+   "default": 4.2,
+   "type": "number",
+   "hint": "Detik kursor mulai bergerak",
+   "aliases": [
+    "waktu_koreksi"
+   ]
+  },
+  "texture": {
+   "default": "plain",
+   "type": "enum",
+   "options": [
+    "plain",
+    "soft",
+    "sharp",
+    "spray"
+   ],
+   "hint": "Tekstur goresan: polos, lembut (kabur halus), tajam (tipis), semprot (cat semprot berbintik)",
+   "aliases": [
+    "tekstur"
+   ],
+   "option_aliases": {
+    "polos": "plain",
+    "lembut": "soft",
+    "tajam": "sharp",
+    "semprot": "spray"
+   }
+  },
+  "color": {
+   "default": "#26211d",
+   "type": "color",
+   "hint": "Warna garis & teks",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "fill_color": {
+   "default": "#fffaf0",
+   "type": "color",
+   "hint": "Warna isi kotak",
+   "aliases": [
+    "warna_isi"
+   ]
+  },
+  "note_color": {
+   "default": [
+    "#ffe27a",
+    "#ffb8c8",
+    "#a8e6cf",
+    "#a7d3ff"
+   ],
+   "type": "list",
+   "hint": "Daftar warna kertas tempel",
+   "aliases": [
+    "warna_catatan"
+   ]
+  },
+  "connector_color": {
+   "default": "#3c5a99",
+   "type": "color",
+   "hint": "Warna konektor",
+   "aliases": [
+    "warna_konektor"
+   ]
+  },
+  "label_color": {
+   "default": "#e4572e",
+   "type": "color",
+   "hint": "Warna label cabang",
+   "aliases": [
+    "warna_label"
+   ]
+  },
+  "thickness": {
+   "default": 6,
+   "type": "number",
+   "hint": "Tebal garis",
+   "aliases": [
+    "tebal"
+   ]
+  },
+  "font": {
+   "default": "Patrick Hand",
+   "type": "font",
+   "hint": "Google Font tulisan tangan: Caveat, Kalam, Patrick Hand, Permanent Marker"
+  },
+  "size": {
+   "default": 46,
+   "type": "number",
+   "hint": "Ukuran teks simpul",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "start": {
+   "default": 0.2,
+   "type": "number",
+   "hint": "Detik mulai",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "pause": {
+   "default": 0.55,
+   "type": "number",
+   "hint": "Jeda antar tingkat (detik, x2)",
+   "aliases": [
+    "jeda"
+   ]
+  },
+  "wobble": {
+   "default": 1,
+   "type": "number",
+   "hint": "Kekuatan goyang/boil tangan (0 = diam)",
+   "aliases": [
+    "goyang"
+   ]
+  },
+  "seed": {
+   "default": 18,
+   "type": "number",
+   "hint": "Seed"
+  }
+ },
+ "duration": 7,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "tangan/alur",
+  "hw-pipeline",
+  "flowchart",
+  "flowchart-vertical",
+  "decision-tree"
+ ],
+ "example": {
+  "bg": "paper",
+  "font": [
+   "Patrick Hand"
+  ],
+  "props": {
+   "cursor": true,
+   "fix_time": 4.5,
+   "style": "note",
+   "mode": "vertical"
+  },
+  "aspect": "9:16"
+ }
+}

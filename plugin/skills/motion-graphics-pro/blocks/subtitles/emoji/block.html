@@ -1,0 +1,44 @@
+<!-- Block subtitles/emoji · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="subtitles/emoji" data-start="0" data-duration="5" data-track-index="30" class="blk blk-subtitles-emoji">
+<script type="application/json" data-block-props>
+{"text": "Hasilnya bikin semua orang senang dan makin semangat", "words": [], "kps": 2.5, "max_words": 3, "font": "Poppins:wght@800;900", "size": 80, "color": "#ffffff", "bottom": 17, "uppercase": true, "line_color": "#111111", "line_thickness": 9, "accent_color": "#ffd84a", "emoji": {"hasilnya": "✨", "senang": "😄", "semangat": "🔥"}, "emoji_size": 1.15}
+</script>
+<div class="blk-cap"></div>
+</div>
+<style>
+.blk-subtitles-emoji{position:absolute;inset:0;pointer-events:none}
+.blk-subtitles-emoji .blk-cap{position:absolute;left:5%;right:5%;text-align:center;line-height:1.2}
+.blk-subtitles-emoji .blk-hal{position:absolute;left:0;right:0;bottom:0}
+.blk-subtitles-emoji .blk-w{position:relative;display:inline-block;margin:0 .1em;paint-order:stroke fill}
+.blk-subtitles-emoji .blk-emo{position:absolute;left:50%;bottom:88%;font-family:"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif;-webkit-text-stroke:0;text-transform:none;line-height:1;text-shadow:none}
+.blk-subtitles-emoji .blk-emo-i{display:inline-block}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, cap = k.root.querySelector(".blk-cap"), peta = {};
+  Object.keys(P.emoji || {}).forEach(function (x) { peta[x.toLowerCase()] = P.emoji[x]; });
+  cap.style.cssText += ";bottom:" + P.bottom + "%;color:" + P.color + ";font-family:" + BLOCK.family(P.font) + ";font-weight:900;font-size:" +
+    Math.round(P.size * s) + "px" + (P.uppercase ? ";text-transform:uppercase" : "");
+  var garis = "-webkit-text-stroke:" + (P.line_thickness * s * 2).toFixed(1) + "px " + P.line_color + ";text-shadow:0 " + Math.round(6 * s) + "px 0 " + P.line_color;
+  BLOCK.pages(BLOCK.words(P), P.max_words).forEach(function (pg) {
+    var h = BLOCK.el("div", { class: "blk-hal" }, cap);
+    BLOCK.initial(tl, h, { autoAlpha: 0 }).set(h, { autoAlpha: 1 }, pg.mulai).set(h, { autoAlpha: 0 }, pg.akhir);
+    pg.kata.forEach(function (w) {
+      var polos = String(w.teks).replace(/\*/g, ""), kunci = polos.toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
+      var e = BLOCK.el("span", { class: "blk-w", style: garis }, h);
+      e.appendChild(document.createTextNode(polos));
+      // masuk: terjepit horizontal lalu memantul ke bentuk penuh
+      tl.fromTo(e, { opacity: 0, scaleX: 0.2, scaleY: 1.4 }, { opacity: 1, scaleX: 1, scaleY: 1, duration: 0.5, ease: "elastic.out(1,0.55)" }, w.mulai);
+      if (peta[kunci]) {
+        e.style.color = P.accent_color;
+        var em = BLOCK.el("span", { class: "blk-emo", style: "font-size:" + P.emoji_size + "em" }, e), ei = BLOCK.el("span", { class: "blk-emo-i" }, em);
+        ei.textContent = peta[kunci];
+        tl.fromTo(em, { xPercent: -50, scale: 0, rotation: -35, y: 30 * s }, { xPercent: -50, scale: 1, rotation: 8, y: 0, duration: 0.45, ease: "back.out(3)" }, w.mulai + 0.06)
+          .to(em, { rotation: 0, duration: 0.3, ease: "power2.out" }, w.mulai + 0.5);
+        var nb = Math.max(0, Math.floor((pg.akhir - w.mulai - 0.5) / 0.45));
+        if (nb) tl.fromTo(ei, { y: 0 }, { y: -10 * s, duration: 0.45, ease: "sine.inOut", yoyo: true, repeat: nb - 1 }, w.mulai + 0.5);
+      }
+    });
+  });
+}, { font: true });
+</script>

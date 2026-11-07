@@ -1,0 +1,16 @@
+{
+  "No transcription engine found.\nPick one:\n  1. faster-whisper (Python, MIT):  python -m pip install faster-whisper\n     (the venv in render/.venv is used automatically; another venv: --python <path> or env MGP_PYTHON)\n  2. whisper.cpp: put whisper-cli on PATH (or env MGP_WHISPER_CPP) and download a ggml model,\n     e.g. ggml-small.bin, then pass --model-file <path> or env MGP_WHISPER_MODEL.\n.en models (small.en etc.) translate other languages into English; for Indonesian use --model small --language id.": "Tidak ada mesin transkripsi.\nPilih salah satu:\n  1. faster-whisper (Python, MIT):  python -m pip install faster-whisper\n     (venv di render/.venv dipakai otomatis; venv lain: --python <path> atau env MGP_PYTHON)\n  2. whisper.cpp: pasang whisper-cli di PATH (atau env MGP_WHISPER_CPP) dan unduh model ggml,\n     mis. ggml-small.bin, lalu beri --model-file <path> atau env MGP_WHISPER_MODEL.\nModel .en (small.en dll.) menerjemahkan bahasa lain ke Inggris; untuk bahasa Indonesia pakai --model small --language id.",
+  "ffmpeg failed: {}": "ffmpeg gagal: {}",
+  "whisper.cpp found ({}) but not the model ggml-{}.bin. Pass --model-file <path> or env MGP_WHISPER_MODEL.": "whisper.cpp ditemukan ({}) tetapi model ggml-{}.bin tidak. Beri --model-file <path> atau env MGP_WHISPER_MODEL.",
+  "whisper.cpp failed: {}": "whisper.cpp gagal: {}",
+  "Name a file: mgp transcribe voice.wav -o words.json --language id [--model small] [--fix-with script.txt]": "Sebutkan berkas: mgp transcribe suara.wav -o words.json --language id [--model small] [--fix-with naskah.txt]",
+  "file not found: {}": "berkas tidak ditemukan: {}",
+  "warning: model {} is English only and translates other languages; use --model {}": "peringatan: model {} hanya untuk bahasa Inggris dan menerjemahkan bahasa lain; pakai --model {}",
+  ", language {}": ", bahasa {}",
+  ", language auto": ", bahasa otomatis",
+  "transcribe: faster-whisper, model {}{} ({})": "transkrip: faster-whisper, model {}{} ({})",
+  "transcribe: whisper.cpp ({}), model {}": "transkrip: whisper.cpp ({}), model {}",
+  "fix to script: {} script words, {} ASR words; match {}, respelled {}, merged {}, split {}, inserted {}, dropped {}": "rapikan ke naskah: {} kata naskah, {} kata ASR; cocok {}, ganti ejaan {}, gabung {}, pecah {}, sisip {}, dibuang {}",
+  "{} words -> {}": "{} kata -> {}",
+  "(language {})": "(bahasa {})"
+}

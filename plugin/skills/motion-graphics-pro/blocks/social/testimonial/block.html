@@ -1,0 +1,123 @@
+<!-- Block social/testimonial · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="social/testimonial" data-start="0" data-duration="6" data-track-index="30" class="blk blk-social-testimonial">
+<script type="application/json" data-block-props>
+{"style": "quote", "text": "Dulu laporan bulanan makan dua hari. Sekarang *selesai sebelum makan siang*, dan timku bisa fokus ke pelanggan.", "name": "Laras Wibowo", "role": "Kepala Operasional", "account": "@laraswibowo", "company": "Toko Rempah", "avatar": "", "brand": "Catatku", "star": 5, "proof_line": "Dipakai 2 juta orang di Indonesia", "feature": ["Cepat", "Aman", "Gratis"], "button": "Coba Gratis", "accent_color": "#ff6a3d", "theme": "light", "kps": 3.2, "font": "Inter:wght@400;500;700;800", "font2": "JetBrains Mono:wght@500", "size": 52}
+</script>
+</div>
+<style>
+.blk-social-testimonial{position:absolute;inset:0;pointer-events:none}
+.blk-social-testimonial .blk-pos{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
+.blk-social-testimonial .blk-kar{box-sizing:border-box;border-radius:calc(var(--s)*36px);padding:calc(var(--s)*64px) calc(var(--s)*70px);box-shadow:0 calc(var(--s)*30px) calc(var(--s)*90px) rgba(0,0,0,.3);line-height:1.3}
+.blk-social-testimonial .blk-q{font-weight:800;font-size:calc(var(--s)*150px);line-height:.6;height:calc(var(--s)*70px);color:var(--a);font-family:Georgia,serif}
+.blk-social-testimonial .blk-tx{font-weight:600;letter-spacing:-.01em}
+.blk-social-testimonial .blk-kunci{position:relative;color:var(--a)}
+.blk-social-testimonial .blk-gb{position:absolute;left:0;right:0;bottom:-.04em;height:.12em;background:var(--a);border-radius:99px;transform-origin:0 50%}
+.blk-social-testimonial .blk-org{display:flex;align-items:center;gap:calc(var(--s)*24px);margin-top:calc(var(--s)*46px)}
+.blk-social-testimonial .blk-av{flex:none;width:calc(var(--s)*96px);height:calc(var(--s)*96px);border-radius:50%;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:calc(var(--s)*34px)}
+.blk-social-testimonial .blk-nm{font-weight:800;font-size:calc(var(--s)*34px)}
+.blk-social-testimonial .blk-pr{font-size:calc(var(--s)*26px);opacity:.6;margin-top:calc(var(--s)*4px)}
+.blk-social-testimonial .blk-mono{font-family:var(--f2);text-transform:uppercase;letter-spacing:.08em}
+.blk-social-testimonial .blk-prs{margin-left:auto;font-weight:800;font-size:calc(var(--s)*30px);letter-spacing:-.01em;opacity:.5;padding-left:calc(var(--s)*24px);border-left:calc(var(--s)*2px) solid currentColor}
+.blk-social-testimonial .blk-toko{display:flex;flex-direction:column;align-items:center;text-align:center;gap:calc(var(--s)*30px)}
+.blk-social-testimonial .blk-wm{display:flex;align-items:center;gap:calc(var(--s)*20px);font-weight:800;font-size:calc(var(--s)*64px);letter-spacing:-.03em}
+.blk-social-testimonial .blk-app{width:calc(var(--s)*96px);height:calc(var(--s)*96px);border-radius:calc(var(--s)*26px)}
+.blk-social-testimonial .blk-bin{display:flex;gap:calc(var(--s)*10px)}
+.blk-social-testimonial .blk-bin svg{width:calc(var(--s)*60px);height:calc(var(--s)*60px)}
+.blk-social-testimonial .blk-bk{font-size:calc(var(--s)*38px);font-weight:600}
+.blk-social-testimonial .blk-ft{display:flex;gap:calc(var(--s)*60px)}
+.blk-social-testimonial .blk-f{display:flex;flex-direction:column;align-items:center;gap:calc(var(--s)*12px);font-size:calc(var(--s)*28px);font-weight:600}
+.blk-social-testimonial .blk-fi{width:calc(var(--s)*92px);height:calc(var(--s)*92px);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.blk-social-testimonial .blk-fi svg{width:50%;height:50%}
+.blk-social-testimonial .blk-cta{background:var(--a);color:#fff;font-weight:800;font-size:calc(var(--s)*38px);padding:calc(var(--s)*26px) calc(var(--s)*72px);border-radius:999px;box-shadow:0 calc(var(--s)*14px) calc(var(--s)*34px) var(--a2)}
+</style>
+<script>
+(function () {
+// tunggu font benar-benar termuat sebelum mengukur teks (stylesheet Google Fonts + FontFace)
+function blkTungguFont(spek, berat) {
+  var fam = String(spek || "").split(":")[0];
+  if (!fam || !document.fonts || !document.fonts.load) return Promise.resolve();
+  var ls = Array.prototype.filter.call(document.querySelectorAll('link[href*="fonts.googleapis"]'), function (l) { return l.href.indexOf(fam.replace(/ /g, "+")) >= 0; });
+  return Promise.all(ls.map(function (l) { return l.sheet ? 0 : new Promise(function (r) { l.addEventListener("load", r); l.addEventListener("error", r); }); }))
+    .then(function () { return document.fonts.load((berat || 700) + ' 64px "' + fam + '"'); }).catch(function () {});
+}
+BLOCK.mount("__ID__", function (k) {
+  return blkTungguFont(k.P.font, 600).then(function () { bangun(k); });
+}, { font: true });
+function bangun(k) {
+  var P = k.P, tl = k.tl, s = k.s, D = k.dur, E = BLOCK.el, R = k.root, A = P.accent_color;
+  var gelap = P.theme === "dark", bg = gelap ? "#17181d" : "#ffffff", fg = gelap ? "#f4f2ee" : "#16171b";
+  R.style.cssText += ";--s:" + s + ";--a:" + A + ";--a2:" + BLOCK.rgba(A, 0.4) + ";--f2:" + BLOCK.family(P.font2, "monospace");
+  var g = { quote: 1, proof: 1, store: 1 }[P.style] ? P.style : "quote";
+  var pos = E("div", { class: "blk-pos" }, R);
+  var kar = E("div", { class: "blk-kar" + (g === "store" ? " blk-toko" : ""), style: "width:" + Math.min((g === "store" ? 880 : 1100) * s, k.w * 0.88) + "px;background:" + bg + ";color:" + fg + ";font-family:" + BLOCK.family(P.font) }, pos);
+  var t0 = 0.1;
+  tl.fromTo(kar, { y: 50 * s, scale: 0.96, autoAlpha: 0 }, { y: 0, scale: 1, autoAlpha: 1, duration: 0.7, ease: "power3.out" }, t0);
+  tl.to(kar, { y: -30 * s, autoAlpha: 0, duration: 0.45, ease: "power2.in" }, D - 0.5);
+  if (g === "store") {
+    var wm = E("div", { class: "blk-wm" }, kar);
+    var app = E("div", { class: "blk-app", style: "background:linear-gradient(135deg," + BLOCK.mix(A, "#ffffff", 0.25) + "," + BLOCK.mix(A, "#000000", 0.3) + ")" }, wm,
+      '<svg viewBox="0 0 24 24" style="width:100%;height:100%"><path d="M8 7h8M8 12h8M8 17h5" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>');
+    E("span", null, wm, BLOCK.esc(P.brand));
+    var bin = E("div", { class: "blk-bin" }, kar), bs = [];
+    for (var i = 0; i < 5; i++) bs.push(E("span", null, bin, '<svg viewBox="0 0 24 24"><path d="M12 2.8l2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2 6.4 20.2l1.1-6.3L2.9 9.5l6.3-.9z" fill="' + (i < Math.round(P.star) ? "#ffc23d" : (gelap ? "#3a3b42" : "#e3e3e3")) + '"/></svg>'));
+    var bk = E("div", { class: "blk-bk" }, kar, BLOCK.esc(P.proof_line));
+    var ft = E("div", { class: "blk-ft" }, kar), fs = [];
+    var IK = ['<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>', '<path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/>', '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>'];
+    (P.feature || []).slice(0, 3).forEach(function (f, j) {
+      var el = E("div", { class: "blk-f" }, ft);
+      E("div", { class: "blk-fi", style: "background:" + BLOCK.rgba(A, 0.14) + ";color:" + A }, el, '<svg viewBox="0 0 24 24" fill="currentColor">' + IK[j % 3] + "</svg>");
+      E("span", null, el, BLOCK.esc(f)); fs.push(el);
+    });
+    var cta = E("div", { class: "blk-cta" }, kar, BLOCK.esc(P.button));
+    tl.fromTo(wm, { y: 24 * s, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6, ease: "power3.out" }, 0.3)
+      .fromTo(app, { scale: 0.4, rotation: -20 }, { scale: 1, rotation: 0, duration: 0.7, ease: "back.out(2)" }, 0.3)
+      .fromTo(bs, { scale: 0, rotation: -60 }, { scale: 1, rotation: 0, duration: 0.45, ease: "back.out(2.6)", stagger: 0.08 }, 0.65)
+      .fromTo(bk, { y: 16 * s, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5, ease: "power2.out" }, 1.0)
+      .fromTo(fs, { y: 24 * s, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.5, ease: "power3.out", stagger: 0.1 }, 1.2)
+      .fromTo(cta, { scale: 0.5, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.55, ease: "back.out(2.4)" }, 1.6)
+      .fromTo(cta, { scale: 1 }, { scale: 1.04, duration: 0.6, ease: "sine.inOut", yoyo: true, repeat: Math.max(1, Math.floor((D - 3) / 0.6)), immediateRender: false }, 2.3);
+    return;
+  }
+  if (g === "quote") E("div", { class: "blk-q" }, kar, "“");
+  var tx = E("div", { class: "blk-tx", style: "font-size:" + Math.round(P.size * s) + "px" }, kar);
+  var kata = BLOCK.split(tx, P.text, "words"), dalam = false;
+  // sorotan *beberapa kata*: tandai semua kata di antara bintang
+  String(P.text).split(/\n|\\n/).join(" ").split(/\s+/).filter(Boolean).forEach(function (w, i) {
+    var buka = /^\*/.test(w), tutup = /\*[.,!?;:]*$/.test(w) && !(buka && w.length === 1);
+    if (buka) dalam = true;
+    if (kata[i]) kata[i].classList.toggle("blk-kunci", dalam);
+    if (tutup) dalam = false;
+  });
+  var org = E("div", { class: "blk-org" }, kar);
+  var ini = String(P.name).split(/\s+/).map(function (w) { return w[0]; }).join("").slice(0, 2).toUpperCase();
+  var av = E("div", { class: "blk-av", style: P.avatar ? "background-image:url(" + P.avatar + ")" : "background:linear-gradient(135deg," + A + "," + BLOCK.mix(A, "#000000", 0.4) + ")" }, org, P.avatar ? "" : ini);
+  var idt = E("div", null, org);
+  E("div", { class: "blk-nm" + (g === "proof" ? " blk-mono" : "") }, idt, BLOCK.esc(P.name));
+  E("div", { class: "blk-pr" + (g === "proof" ? " blk-mono" : "") }, idt, BLOCK.esc(g === "proof" ? P.role : P.account));
+  var prs = g === "proof" && P.company ? E("div", { class: "blk-prs" }, org, BLOCK.esc(P.company)) : null;
+  var tm = 0.5, akhir;
+  if (g === "quote") {
+    // laju baca: kata muncul sesuai kecepatan baca
+    var jd = 1 / Math.max(0.5, P.kps);
+    tl.fromTo(kar.querySelector(".blk-q"), { scale: 0.4, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 0.5, ease: "back.out(2)" }, 0.3);
+    kata.forEach(function (w, i) { tl.fromTo(w, { y: 18 * s, autoAlpha: 0, filter: "blur(6px)" }, { y: 0, autoAlpha: 1, filter: "blur(0px)", duration: 0.5, ease: "power2.out" }, tm + i * jd * 0.5); });
+    akhir = tm + kata.length * jd * 0.5 + 0.3;
+  } else {
+    // per baris lewat topeng lembut: kelompokkan kata menurut barisnya
+    var baris = [], atas = null;
+    kata.forEach(function (w) { if (w.offsetTop !== atas) { baris.push([]); atas = w.offsetTop; } baris[baris.length - 1].push(w); });
+    baris.forEach(function (b, i) {
+      tl.fromTo(b, { y: 0.6 * P.size * s, autoAlpha: 0, clipPath: "inset(0% 0% 100% 0%)" }, { y: 0, autoAlpha: 1, clipPath: "inset(0% 0% -20% 0%)", duration: 0.7, ease: "power3.out" }, tm + i * 0.32);
+    });
+    akhir = tm + baris.length * 0.32 + 0.4;
+    var kunci = tx.querySelectorAll(".blk-kunci"), gbs = [];
+    Array.prototype.forEach.call(kunci, function (w, i) { var nx = w.nextSibling && w.nextSibling.nextSibling; var lanjut = nx && nx.classList && nx.classList.contains("blk-kunci") && nx.offsetTop === w.offsetTop; gbs.push(E("span", { class: "blk-gb", style: lanjut ? "right:-.3em" : null }, w)); });
+    if (gbs.length) tl.fromTo(gbs, { scaleX: 0 }, { scaleX: 1, duration: 0.35, ease: "power2.inOut", stagger: 0.12 }, akhir + 0.5);
+  }
+  tl.fromTo(av, { scale: 0 }, { scale: 1, duration: 0.5, ease: "back.out(2.2)" }, akhir)
+    .fromTo(idt.children, { x: -16 * s, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.45, ease: "power3.out", stagger: 0.08 }, akhir + 0.1);
+  if (prs) tl.fromTo(prs, { autoAlpha: 0 }, { autoAlpha: 0.5, duration: 0.5 }, akhir + 0.3);
+  tl.fromTo(tx, { y: 0 }, { y: -6 * s, duration: Math.max(0.5, D - akhir - 0.6), ease: "sine.inOut", immediateRender: false }, akhir);
+}
+})();
+</script>

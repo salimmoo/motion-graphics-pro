@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1080x1920">
+<title>Form · block example ui/form</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1080" data-height="1920" data-duration="5.5">
+
+<!-- Block ui/form · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-form" data-block="ui/form" data-start="0" data-duration="5" data-track-index="40" class="blk blk-ui-form">
+<script type="application/json" data-block-props>
+{"mode": "list", "title": "Buat akun", "email": "nadia@contoh.id", "invalid_email": "nadia@contoh", "password_length": 10, "button": "Daftar", "success_text": "Akun berhasil dibuat", "error_text": "Format surel belum benar", "valid_text": "Surel valid", "steps": [["Profil", "Ceritakan sedikit tentang kamu"], ["Minat", "Pilih topik yang kamu suka"], ["Tim", "Undang rekan kerja"], ["Selesai", "Semua siap digunakan"]], "accent_color": "#4f46e5", "bg": "#eef0f6", "font": "Inter:wght@400;500;600;700"}
+</script>
+</div>
+<style>
+.blk-ui-form{position:absolute;inset:0;pointer-events:none;overflow:hidden;color:#1b2333}
+.blk-ui-form .blk-kt{position:absolute;background:#fff;box-sizing:border-box;box-shadow:0 20px 60px rgba(20,30,60,.12);overflow:hidden}
+.blk-ui-form .blk-h{font-weight:700}
+.blk-ui-form .blk-lab{font-weight:600;color:#555d70}
+.blk-ui-form .blk-fl{position:relative;display:flex;align-items:center;box-sizing:border-box;border-style:solid;background:#fff;white-space:nowrap;overflow:hidden}
+.blk-ui-form .blk-ph{color:#a5abb8}
+.blk-ui-form .blk-bt{position:relative;display:flex;align-items:center;justify-content:center;font-weight:700;box-sizing:border-box}
+.blk-ui-form .blk-ms{font-weight:600}
+.blk-ui-form .blk-ok{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;font-weight:700}
+.blk-ui-form .blk-rail{position:relative}
+.blk-ui-form .blk-ln{position:absolute;border-radius:99px}
+.blk-ui-form .blk-nd{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;box-sizing:border-box}
+.blk-ui-form .blk-nl{position:absolute;font-weight:600;white-space:nowrap;transform:translateX(-50%)}
+.blk-ui-form .blk-win{position:relative;overflow:hidden}
+.blk-ui-form .blk-pg{position:absolute;left:0;top:0;width:100%}
+</style>
+<script>
+BLOCK.mount("blk-form", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, W = k.w, H = k.h, A = P.accent_color, M = P.mode, ER = "#e5484d", OK = "#16a34a";
+  R.style.fontFamily = BLOCK.family(P.font); if (P.bg) R.style.background = P.bg;
+  var kw = Math.min(W * 0.86, 760 * s), pd = 52 * s, fs = 30 * s, fh = 84 * s;
+  var kt = BLOCK.el("div", { class: "blk-kt", style: "width:" + kw + "px;left:" + (W - kw) / 2 + "px;border-radius:" + 32 * s + "px;padding:" + pd + "px" }, R);
+  var ceklis = function (z, c) { return '<svg width="' + z + '" height="' + z + '" viewBox="0 0 20 20"><circle cx="10" cy="10" r="10" fill="' + c + '"/><path d="M5.5 10.5l3 3 6-7" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>'; };
+  function bidang(lab, ph) {
+    if (lab) BLOCK.el("div", { class: "blk-lab", style: "font-size:" + 24 * s + "px;margin:" + 22 * s + "px 0 " + 10 * s + "px" }, kt, BLOCK.esc(lab));
+    var f = BLOCK.el("div", { class: "blk-fl", style: "height:" + fh + "px;border-width:" + 2.5 * s + "px;border-color:#d9dde6;border-radius:" + 18 * s + "px;padding:0 " + 24 * s + "px;font-size:" + fs + "px" }, kt);
+    var tx = BLOCK.el("span", null, f), ic = BLOCK.el("span", { style: "position:absolute;right:" + 20 * s + "px;top:50%;margin-top:" + -18 * s + "px;display:flex" }, f);
+    return { f: f, tx: tx, ic: ic, ph: ph };
+  }
+  // ketik(teks, a, b) -> potongan teks pada waktu t; caret berkedip saat fokus
+  var F = [], ket = function (tx, a, b, t) { return String(tx).slice(0, Math.round(BLOCK.progress(t, a, b) * String(tx).length)); };
+  function tulis(fld, isiFn, fokusFn, t) {
+    var str = isiFn(t), foc = fokusFn(t), car = foc && Math.floor(t * 2.4) % 2 === 0 ? '<span style="color:' + A + '">|</span>' : "";
+    var h = str ? BLOCK.esc(str) + car : car + '<span class="blk-ph">' + BLOCK.esc(fld.ph) + "</span>";
+    if (fld._h !== h) { fld.tx.innerHTML = h; fld._h = h; }
+  }
+  function fokus(fld, a, b, c) { tl.fromTo(fld.f, { borderColor: "#d9dde6", boxShadow: "0 0 0 0px " + BLOCK.rgba(A, 0) }, { borderColor: c || A, boxShadow: "0 0 0 " + 6 * s + "px " + BLOCK.rgba(c || A, 0.15), duration: 0.2 }, a); if (b != null) tl.to(fld.f, { borderColor: "#d9dde6", boxShadow: "0 0 0 0px " + BLOCK.rgba(A, 0), duration: 0.2 }, b); }
+  function tekan(el, t) { tl.to(el, { scale: 0.95, duration: 0.08, ease: "power2.out" }, t).to(el, { scale: 1, duration: 0.35, ease: "back.out(3)" }, t + 0.1); }
+  if (M === "onboarding") {
+    var L = P.steps || [], n = L.length, rw = kw - 2 * pd, nd = 46 * s;
+    var rail = BLOCK.el("div", { class: "blk-rail", style: "height:" + (nd + 50 * s) + "px" }, kt);
+    BLOCK.el("div", { class: "blk-ln", style: "left:" + nd / 2 + "px;right:" + nd / 2 + "px;top:" + (nd / 2 - 3 * s) + "px;height:" + 6 * s + "px;background:#e3e6ee" }, rail);
+    var fill = BLOCK.el("div", { class: "blk-ln", style: "left:" + nd / 2 + "px;top:" + (nd / 2 - 3 * s) + "px;height:" + 6 * s + "px;width:" + (rw - nd) + "px;background:" + A + ";transform-origin:0 50%" }, rail);
+    var nodes = L.map(function (l, i) {
+      var x = i * (rw - nd) / Math.max(1, n - 1), e = BLOCK.el("div", { class: "blk-nd", style: "left:" + x + "px;top:0;width:" + nd + "px;height:" + nd + "px;font-size:" + 20 * s + "px;border:" + 3 * s + "px solid #d5d9e3;background:#fff;color:#8a91a1" }, rail, String(i + 1));
+      BLOCK.el("div", { class: "blk-nl", style: "left:" + (x + nd / 2) + "px;top:" + (nd + 12 * s) + "px;font-size:" + 20 * s + "px;color:#8a91a1" }, rail, BLOCK.esc(l[0]));
+      return e;
+    });
+    var win = BLOCK.el("div", { class: "blk-win", style: "height:" + 300 * s + "px;margin-top:" + 30 * s + "px" }, kt), pgs = L.map(function (l, i) {
+      var p = BLOCK.el("div", { class: "blk-pg" }, win, '<div class="blk-h" style="font-size:' + 44 * s + 'px">' + BLOCK.esc(l[0]) + '</div><div style="font-size:' + 26 * s + 'px;color:#6b7385;margin-top:' + 10 * s + 'px">' + BLOCK.esc(l[1]) + "</div>");
+      var g = BLOCK.el("div", { style: "display:flex;gap:" + 14 * s + "px;margin-top:" + 30 * s + "px" }, p);
+      for (var q = 0; q < 3; q++) BLOCK.el("div", { style: "flex:1;height:" + 120 * s + "px;border-radius:" + 18 * s + "px;background:" + (q === i % 3 ? BLOCK.rgba(A, 0.14) : "#f1f3f8") + ";border:" + 2 * s + "px solid " + (q === i % 3 ? A : "transparent") }, g);
+      BLOCK.initial(tl, p, { xPercent: i ? 110 : 0 }); return p;
+    });
+    var bt = BLOCK.el("div", { class: "blk-bt", style: "height:" + fh + "px;border-radius:" + 18 * s + "px;background:" + A + ";color:#fff;font-size:" + fs + "px;margin-top:" + 20 * s + "px" }, kt, "Lanjut");
+    kt.style.top = (H - kt.offsetHeight) / 2 + "px";
+    BLOCK.initial(tl, fill, { scaleX: 0 });
+    var aktif = function (i, t) { tl.to(nodes[i], { borderColor: A, color: A, scale: 1.12, duration: 0.3, ease: "back.out(3)" }, t).to(nodes[i], { scale: 1, duration: 0.3 }, t + 0.3); };
+    aktif(0, 0.5);
+    var dt = Math.max(0.9, (k.dur - 1.6) / Math.max(1, n - 1));
+    for (var i = 1; i < n; i++) {
+      var t = 0.6 + i * dt - 0.3; tekan(bt, t - 0.15);
+      tl.to(pgs[i - 1], { xPercent: -110, duration: 0.5, ease: "power3.inOut" }, t).to(pgs[i], { xPercent: 0, duration: 0.5, ease: "power3.inOut" }, t)
+        .to(fill, { scaleX: i / (n - 1), duration: 0.5, ease: "power3.inOut" }, t)
+        .to(nodes[i - 1], { backgroundColor: A, color: "#fff", duration: 0.25 }, t);
+      aktif(i, t + 0.35);
+    }
+    tl.fromTo(kt, { autoAlpha: 0, y: 40 * s }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "blockSpringSoft" }, 0.05);
+    return;
+  }
+  BLOCK.el("div", { class: "blk-h", style: "font-size:" + 46 * s + "px" }, kt, BLOCK.esc(M === "input" ? "Masukkan surel" : P.title));
+  if (M === "input") {
+    var fe = bidang("Surel", "nama@contoh.id"), ms = BLOCK.el("div", { class: "blk-ms", style: "font-size:" + 22 * s + "px;margin-top:" + 12 * s + "px;height:" + 30 * s + "px" }, kt);
+    var cl = BLOCK.el("div", { style: "width:" + 36 * s + "px;height:" + 36 * s + "px;border-radius:50%;background:#e6e8ee;display:flex;align-items:center;justify-content:center" }, fe.ic, '<svg width="45%" height="45%" viewBox="0 0 10 10"><path d="M1.5 1.5l7 7M8.5 1.5l-7 7" stroke="#5b6375" stroke-width="1.8" stroke-linecap="round"/></svg>');
+    var ck = BLOCK.el("div", { style: "position:absolute;right:0;top:0;display:none" }, fe.ic, ceklis(36 * s, OK));
+    kt.style.top = (H - kt.offsetHeight) / 2 + "px";
+    var a1 = 0.5, b1 = a1 + P.invalid_email.length * 0.06, te = b1 + 0.35, tc = te + 1.0, a2 = tc + 0.35, b2 = a2 + P.email.length * 0.05, tv = b2 + 0.3;
+    fokus(fe, a1 - 0.1);
+    tl.to(fe.f, { borderColor: ER, boxShadow: "0 0 0 " + 6 * s + "px " + BLOCK.rgba(ER, 0.15), duration: 0.15 }, te);
+    [14, -12, 9, -6, 3, 0].forEach(function (x, i) { tl.to(fe.f, { x: x * s, duration: 0.06, ease: "sine.inOut" }, te + i * 0.06); });
+    tl.to(fe.f, { borderColor: A, boxShadow: "0 0 0 " + 6 * s + "px " + BLOCK.rgba(A, 0.15), duration: 0.2 }, tc + 0.05);
+    tekan(cl, tc - 0.08);
+    tl.to(fe.f, { borderColor: OK, boxShadow: "0 0 0 " + 6 * s + "px " + BLOCK.rgba(OK, 0.15), duration: 0.25 }, tv);
+    tl.fromTo(ck, { scale: 0 }, { scale: 1, duration: 0.4, ease: "back.out(3)" }, tv);
+    var lm = "";
+    BLOCK.onTime(tl, function (t) {
+      tulis(fe, function (t) { return t < tc ? ket(P.invalid_email, a1, b1, t) : ket(P.email, a2, b2, t); }, function (t) { return t >= a1 - 0.1 && t < tv; }, t);
+      cl.style.display = t >= b1 * 0.6 && t < tc + 0.1 ? "flex" : "none"; ck.style.display = t >= tv ? "flex" : "none";
+      var m = t >= tv ? '<span style="color:' + OK + '">' + BLOCK.esc(P.valid_text) + "</span>" : t >= te && t < tc ? '<span style="color:' + ER + '">' + BLOCK.esc(P.error_text) + "</span>" : "";
+      if (m !== lm) { ms.innerHTML = m; lm = m; }
+    }, k.dur);
+    tl.fromTo(kt, { autoAlpha: 0, y: 40 * s }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "blockSpringSoft" }, 0.05);
+    return;
+  }
+  // ---- daftar: tombol sosial, surel, sandi, kirim, sukses
+  var so = BLOCK.el("div", { class: "blk-bt", style: "height:" + fh + "px;border-radius:" + 18 * s + "px;border:" + 2.5 * s + "px solid #d9dde6;font-size:" + 27 * s + "px;margin-top:" + 30 * s + "px;gap:" + 14 * s + "px;color:#2a3242" }, kt, '<span style="width:' + 34 * s + 'px;height:' + 34 * s + 'px;border-radius:50%;background:conic-gradient(#ff5a5f 0 25%,#ffc145 0 50%,#2ec27e 0 75%,#3b82f6 0)"></span>Lanjut dengan akun sosial');
+  BLOCK.el("div", { style: "text-align:center;color:#9aa1af;font-size:" + 22 * s + "px;margin:" + 26 * s + "px 0 0" }, kt, "atau");
+  var f1 = bidang("Surel", "nama@contoh.id"), f2 = bidang("Kata sandi", "Minimal 8 karakter");
+  var bt2 = BLOCK.el("div", { class: "blk-bt", style: "height:" + fh + "px;border-radius:" + 18 * s + "px;background:" + A + ";color:#fff;font-size:" + fs + "px;margin-top:" + 34 * s + "px" }, kt, '<span class="blk-bl">' + BLOCK.esc(P.button) + '</span><svg class="blk-sp" style="position:absolute" width="' + 40 * s + '" height="' + 40 * s + '" viewBox="-10 -10 20 20"><circle r="7.5" fill="none" stroke="#fff" stroke-width="2.6" stroke-dasharray="30 18" stroke-linecap="round"/></svg>');
+  var sp = bt2.querySelector(".blk-sp"), bl = bt2.querySelector(".blk-bl");
+  var ok = BLOCK.el("div", { class: "blk-ok", style: "font-size:" + 40 * s + "px;gap:" + 24 * s + "px" }, kt, ceklis(120 * s, OK) + "<div>" + BLOCK.esc(P.success_text) + "</div>");
+  kt.style.top = (H - kt.offsetHeight) / 2 + "px";
+  var sandi = new Array((P.password_length | 0) + 1).join("•"), e1 = 0.6, e2 = e1 + P.email.length * 0.05, p1 = e2 + 0.35, p2 = p1 + sandi.length * 0.06, tk = p2 + 0.35, tok = tk + 1.0;
+  fokus(f1, e1 - 0.1, e2 + 0.2); fokus(f2, p1 - 0.1, p2 + 0.2); tekan(bt2, tk);
+  BLOCK.initial(tl, ok, { autoAlpha: 0 });
+  tl.fromTo(ok, { autoAlpha: 0, scale: 0.94 }, { autoAlpha: 1, scale: 1, duration: 0.45, ease: "back.out(1.6)" }, tok).fromTo(ok.querySelector("svg"), { scale: 0, rotation: -30 }, { scale: 1, rotation: 0, duration: 0.55, ease: "back.out(2.6)" }, tok + 0.1);
+  BLOCK.onTime(tl, function (t) {
+    tulis(f1, function (t) { return ket(P.email, e1, e2, t); }, function (t) { return t >= e1 - 0.1 && t < e2 + 0.2; }, t);
+    tulis(f2, function (t) { return ket(sandi, p1, p2, t); }, function (t) { return t >= p1 - 0.1 && t < p2 + 0.2; }, t);
+    var ld = t >= tk + 0.12; bl.style.opacity = ld ? "0" : "1"; sp.style.display = ld ? "block" : "none"; sp.style.transform = "rotate(" + ((t - tk) * 420).toFixed(1) + "deg)";
+  }, k.dur);
+  tl.fromTo(kt, { autoAlpha: 0, y: 40 * s }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "blockSpringSoft" }, 0.05);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 5.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5.5);
+</script>
+</body>
+</html>

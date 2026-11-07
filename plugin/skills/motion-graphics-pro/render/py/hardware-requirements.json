@@ -1,0 +1,66 @@
+{
+  "_desc": "Single table of thresholds and memory estimates for the mgp device manager. Read by py/device.py (Python) and src/device.mjs (Node, mgp doctor). Unit GB (1 GB = 1024^3 bytes). 'Measured' numbers come from an RTX 500 Ada 4 GB laptop, Core Ultra 7 165H, 05-11-2026.",
+  "margin_gb": 0.5,
+  "gpu_wait_seconds": 120,
+  "tasks": {
+    "chatterbox": {
+      "_desc": "Chatterbox Multilingual fp32 (t3 + s3gen + voice encoder). Measured 05-11-2026 (RTX 500 Ada 4 GB): reserved peak 3.54 GB while speaking; 3.2 GB + margin 0.5 = needs 3.7 GB free, which just fits a free 4 GB card (3.8 GB). When the VRAM is in use by another app, CPU; OOM midway -> retried on the CPU.",
+      "vram_gb": 3.2,
+      "ram_gb": 4.5,
+      "offload": false
+    },
+    "openvoice": {
+      "_desc": "OpenVoice V2 ToneColorConverter only (Chatterbox counted separately).",
+      "vram_gb": 0.5,
+      "ram_gb": 1.0,
+      "offload": false
+    },
+    "whisper-small": {
+      "_desc": "faster-whisper small; GPU float16, CPU int8.",
+      "vram_gb": 1.0,
+      "ram_gb": 1.5,
+      "offload": false
+    },
+    "flux2-klein-4b-gguf": {
+      "_desc": "mgp image local (py/image_engine.py). FLUX.2 klein 4B: GGUF Q4_K_M transformer 2.6 GB + VAE 0.17 GB on the GPU; the Qwen3-4B text encoder runs first on the CPU and is then dropped. Measured 05-11-2026: text encoder phase bf16 RSS peak 11.0 GB (load 63 s + encode 34 s; fp32 18.4 GB, encode 9 s). ram_gb = the peak of that phase.",
+      "vram_gb": 3.4,
+      "ram_gb": 11.0,
+      "offload": true,
+      "vram_min_offload_gb": 1.5,
+      "ram_offload_gb": 4.0
+    },
+    "flux-schnell": {
+      "_desc": "Estimate (not measured yet) for FLUX.1 schnell GGUF in mgp image. Diffusers with enable_model_cpu_offload / sequential offload.",
+      "vram_gb": 12.0,
+      "ram_gb": 16.0,
+      "offload": true,
+      "vram_min_offload_gb": 3.5,
+      "ram_offload_gb": 16.0
+    }
+  },
+  "recommendation": {
+    "voice": {
+      "_desc": "RTF = compute seconds per audio second. The default numbers are used while this machine has no measurement in its cache (ukur.json).",
+      "rtf_cpu_default": 5.2,
+      "rtf_cuda_default": 1.2,
+      "rtf_weak": 8.0,
+      "free_ram_min_gb": 5.0,
+      "vram_min_gb": 3.5
+    },
+    "image": {
+      "_desc": "Measured 05-11-2026 with FLUX.2 klein 4B GGUF Q4_K_M (mgp image local): a 4 GB GPU is enough (VRAM peak 3.5-3.8 GB without references), 11 GB free RAM for the text encoder phase.",
+      "vram_min_gb": 3.5,
+      "free_ram_min_gb": 11.0,
+      "vram_full_gb": 4.0
+    },
+    "render": {
+      "_desc": "One worker = one headless Chrome tab + one ffmpeg.",
+      "ram_per_worker_gb": 0.8,
+      "threads_per_worker": 4,
+      "workers_max": 4,
+      "workers_shared": 2,
+      "ram_preview_scale_gb": 4.0,
+      "vram_nvenc_gb": 0.3
+    }
+  }
+}

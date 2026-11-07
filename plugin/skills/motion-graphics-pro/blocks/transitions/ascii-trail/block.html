@@ -1,0 +1,51 @@
+<!-- Block transitions/ascii-trail · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/ascii-trail" data-start="0" data-duration="2.4" data-track-index="20" class="blk blk-transitions-ascii-trail">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "color": "#12140f", "text_color": "#b8f5a0", "character": " .:-=+*#%@", "size": 22, "trail_width": 0.22, "curve": 0.2, "seed": 2, "font": "JetBrains Mono:wght@500;700"}
+</script>
+</div>
+<style>
+.blk-transitions-ascii-trail{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, W = k.w, H = k.h, s = k.s, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to);
+  var cv = BLOCK.canvas(k.root, W, H), g = cv.ctx, CH = String(P.character || " .:-=+*#%@");
+  var cw = Math.max(8, (+P.size || 22) * s), chh = cw * 1.55, kol = Math.ceil(W / cw), bar = Math.ceil(H / chh);
+  var band = +P.trail_width || 0.22, lk = P.curve == null ? 0.2 : +P.curve, sd = (+P.seed || 0) * 7.13;
+  var hs = function (i, j) { var v = Math.sin(i * 127.1 + j * 311.7 + sd) * 43758.5453; return v - Math.floor(v); };
+  g.font = "700 " + Math.round(cw * 1.25) + "px " + BLOCK.family(P.font, "Consolas, monospace");
+  g.textAlign = "center"; g.textBaseline = "middle";
+  var t0 = D * 0.04, t1 = D * 0.94;
+  // tepi depan kurva-S: posisi x (0..1) untuk baris v; maju linear lalu melambat
+  function depan(t, v) { var p = BLOCK.progress(t, t0, t1); p = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; return BLOCK.lerp(-lk, 1 + band * 1.4 + lk * 1.1, p) + lk * Math.sin(Math.PI * 2 * v) * 0.5 + lk * (v - 0.5); }
+  function gambar(t) {
+    g.clearRect(0, 0, W, H);
+    var path = "", fase = Math.floor(t * 14);
+    for (var j = 0; j < bar; j++) {
+      var y = j * chh, v = (j + 0.5) / bar, xf = depan(t, v), buka = 0;
+      for (var i = 0; i < kol; i++) {
+        var u = (i + 0.5) / kol, ph = (xf - u) / band + (hs(i, j) - 0.5) * 0.5;
+        if (ph >= 0.55) buka = i + 1;
+        if (ph >= 0.8) continue;
+        if (ph <= 0) continue;
+        // sel ASCII: makin padat lalu membalik (pipih vertikal) menyingkap panel baru
+        var fl = ph > 0.55 ? 1 - (ph - 0.55) / 0.25 : 1, x = i * cw;
+        g.fillStyle = P.color; g.fillRect(x, y + chh * (1 - fl) / 2, cw + 0.5, chh * fl + 0.5);
+        var ci = Math.floor(BLOCK.clamp(Math.sin(Math.PI * Math.min(1, ph / 0.55)) * 0.7 + hs(i + fase, j) * 0.45, 0, 0.999) * CH.length);
+        g.save(); g.translate(x + cw / 2, y + chh / 2); g.scale(1, fl);
+        g.fillStyle = hs(i, j + fase) > 0.93 ? "#ffffff" : P.text_color; g.fillText(CH[ci], 0, 0); g.restore();
+      }
+      if (buka > 0) path += "M0 " + y.toFixed(1) + "H" + Math.min(W, buka * cw).toFixed(1) + "V" + Math.min(H, y + chh + 0.5).toFixed(1) + "H0Z";
+    }
+    if (Bk) Bk.style.clipPath = t >= t1 ? "none" : path ? "path('" + path + "')" : "circle(0 at 50% 50%)";
+  }
+  // font kanvas dimuat malas: tunggu dulu supaya frame pertama sama dengan frame berikutnya
+  var siap = document.fonts && document.fonts.load ? document.fonts.load(g.font, CH).catch(function () {}) : Promise.resolve();
+  return siap.then(function () {
+    BLOCK.onTime(tl, gambar, D);
+    if (Bk) BLOCK.initial(tl, Bk, { autoAlpha: 1 });
+    if (A) BLOCK.initial(tl, A, { autoAlpha: 1 }).set(A, { autoAlpha: 0 }, t1);
+  });
+}, { font: true });
+</script>

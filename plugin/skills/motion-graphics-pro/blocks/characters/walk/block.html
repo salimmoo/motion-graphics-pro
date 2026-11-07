@@ -1,0 +1,42 @@
+<!-- Block characters/walk · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="characters/walk" data-start="0" data-duration="6" data-track-index="6" class="blk blk-characters-walk">
+<script type="application/json" data-block-props>
+{"style": "vector", "action": "walk", "shirt_color": "#d8693f", "pants_color": "#2d4068", "skin_color": "#f3b892", "hair_color": "#3b2620", "bg": "auto", "bg_color": "#f3ead8", "scale": 0.66, "angle": 45, "card": "Langkah pertama selalu paling berat", "card_start": 3.2, "card_color": "#fbf6ea", "text_color": "#1c2b45", "font": "Inter:wght@500;700;800"}
+</script>
+</div>
+<style>
+.blk-characters-walk{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.blk-characters-walk .blk-wadah{position:absolute;inset:0}
+.blk-characters-walk canvas{position:absolute;inset:0;width:100% !important;height:100% !important}
+.blk-characters-walk .blk-kartu{position:absolute;left:62%;top:24%;max-width:30%;padding:1.1em 1.3em;border-radius:.5em;font-weight:700;line-height:1.2;box-shadow:0 .5em 1.2em rgba(20,20,40,.18);transform-origin:0% 100%}
+.blk-characters-walk .blk-kartu::after{content:"";position:absolute;left:-.55em;bottom:1em;border:.6em solid transparent;border-right-color:inherit}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+var P = k.P;
+  if (!window.MGP || !MGP.characterStyles) { console.error("[blok] characters/walk needs lib:mgp.js"); return; }
+  // ukuran logis: sisi pendek 720 (skala rancangan modul), piksel kanvas = resolusi penuh lewat dpr
+  var f = Math.min(k.w, k.h) / 720, W = Math.round(k.w / f), H = Math.round(k.h / f);
+  var wadah = BLOCK.el("div", { class: "blk-wadah" }, k.root);
+  var pal = { top: P.shirt_color, pants: P.pants_color, skin: P.skin_color, hair: P.hair_color };
+  var bg = P.bg === "color" ? P.bg_color : P.bg === "transparent" ? null : "auto";
+  var aksi = { walk: "walk", wave: "wave", still: "idle" }[P.action] || "walk", inst;
+  if (P.style === "3d" && MGP.figure3d) {
+    inst = MGP.figure3d.create(wadah, { width: W, height: H, dpr: f, fit: true, duration: k.dur, action: aksi === "walk" ? "walk" : "stand",
+      view: +P.angle, pal: pal, scale: (+P.scale || 0.66) / 0.66, bg: bg === "auto" ? null : bg });
+  } else {
+    inst = MGP.characterStyles.create(wadah, { width: W, height: H, dpr: f, fit: true, duration: k.dur, action: aksi,
+      style: { vector: "vector", pixel: "pixel", origami: "origami" }[P.style] || "vector", palette: pal, scale: +P.scale || 0.66,
+      bg: bg === null ? "" : bg, stepLabels: false });
+  }
+  if (P.card) {
+    var c = BLOCK.el("div", { class: "blk-kartu", style: "background:" + P.card_color + ";color:" + P.text_color + ";border-color:" + P.card_color +
+      ";font-family:" + BLOCK.family(P.font) + ";font-size:" + Math.round(40 * k.s) + "px" }, k.root);
+    c.textContent = P.card;
+    var t0 = +P.card_start;
+    k.tl.fromTo(c, { autoAlpha: 0, scale: 0.6, rotation: -6, y: 30 * k.s }, { autoAlpha: 1, scale: 1, rotation: -2, y: 0, duration: 0.6, ease: "blockSpring", immediateRender: true }, t0)
+      .to(c, { rotation: 1, y: -6 * k.s, duration: 1.6, ease: "sine.inOut", yoyo: true, repeat: 1 }, t0 + 0.6);
+  }
+  return Promise.resolve(inst.ready).then(function () { BLOCK.onTime(k.tl, function (t) { inst.seek(t); }, k.dur); });
+}, { font: true });
+</script>

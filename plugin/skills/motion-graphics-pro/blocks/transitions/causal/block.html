@@ -1,0 +1,49 @@
+<!-- Blok transisi/bersebab · Motion Graphics Pro. Membungkus MGP.causalTransitions (lib:mgp.js). Props: lihat blok.json. -->
+<div data-composition-id="__ID__" data-block="transitions/causal" data-start="0" data-duration="2.6" data-track-index="20" class="blk blk-transitions-causal">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "mode": "wipe", "title_a": "Di Desa", "title_b": "Di Kota", "label_a": "Bab satu", "label_b": "Bab dua", "color_a": "#2c67b0", "color_b": "#f3e8cf", "text_color_a": "#fbf6ea", "text_color_b": "#1d1b18", "duration": 0.8, "fade": 0.25, "focus_x": 50, "focus_y": 55, "paper": "#f1e6d0", "font": "Fraunces:wght@600;800", "seed": 9}
+</script>
+</div>
+<style>
+.blk-transitions-causal{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-transitions-causal .blk-wadah{position:absolute;inset:0}
+.blk-transitions-causal .blk-wadah canvas{position:absolute;inset:0}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, W = k.w, H = k.h, s = k.s, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to), CT = window.MGP && MGP.causalTransitions;
+  if (!CT) { console.error("[blok] transitions/causal needs lib:mgp.js"); return; }
+  var wadah = BLOCK.el("div", { class: "blk-wadah" }, k.root), fam = BLOCK.family(P.font, "Georgia, serif");
+  // butir kertas tetap (berseed) untuk kedua kartu adegan
+  var R = BLOCK.random(+P.seed || 9), butir = [];
+  for (var i = 0; i < 900; i++) butir.push([R() * W, R() * H, (0.6 + R() * 1.6) * s, R()]);
+  function kartu(warna, teksW, label, judul) {
+    return function (g) {
+      var lg = g.createLinearGradient(0, 0, W * 0.4, H);
+      lg.addColorStop(0, BLOCK.mix(warna, "#ffffff", 0.12)); lg.addColorStop(1, BLOCK.mix(warna, "#000000", 0.12));
+      g.fillStyle = lg; g.fillRect(0, 0, W, H);
+      butir.forEach(function (b) { g.fillStyle = b[3] < 0.5 ? "rgba(255,255,255,.07)" : "rgba(40,25,10,.08)"; g.fillRect(b[0], b[1], b[2], b[2]); });
+      g.strokeStyle = BLOCK.rgba(teksW, 0.35); g.lineWidth = 2 * s; g.strokeRect(W * 0.04, H * 0.06, W * 0.92, H * 0.88);
+      g.fillStyle = teksW; g.textAlign = "center"; g.textBaseline = "middle";
+      g.font = "600 " + Math.round(34 * s) + "px " + fam; g.globalAlpha = 0.75; g.fillText(String(label).toUpperCase().split("").join(String.fromCharCode(8202)), W / 2, H * 0.5 - 130 * s);
+      g.globalAlpha = 1; g.font = "800 " + Math.round(150 * s) + "px " + fam; g.fillText(judul, W / 2, H * 0.5 + 10 * s);
+      g.fillRect(W / 2 - 60 * s, H * 0.5 + 110 * s, 120 * s, 5 * s);
+    };
+  }
+  var pd = BLOCK.clamp(+P.fade || 0, 0, D * 0.25), lama = P.mode === "cut" ? 0 : Math.max(0.1, +P.duration || 0.8);
+  var at = Math.max(pd + 0.15, (D - lama) * 0.42);
+  var inst = CT.create(wadah, {
+    width: W, height: H, dpr: 1, fit: true, type: P.mode || "wipe", at: at, duration: lama, after: D, seed: +P.seed || 9,
+    from: kartu(P.color_a, P.text_color_a, P.label_a, P.title_a), to: kartu(P.color_b, P.text_color_b, P.label_b, P.title_b),
+    focus: [(+P.focus_x || 50) / 100, (+P.focus_y || 50) / 100], paper: P.paper, ring: BLOCK.rgba(P.paper, 0.95), bg: "#000",
+  });
+  var siap = document.fonts && document.fonts.load ? Promise.all([document.fonts.load("800 40px " + fam, P.title_a + P.title_b), document.fonts.load("600 40px " + fam, "AB")]).catch(function () {}) : Promise.resolve();
+  return Promise.all([siap, inst.ready]).then(function () {
+    BLOCK.onTime(tl, function (t) { inst.seek(t); }, D);
+    // kartu adegan pudar masuk menutupi host, lalu pudar keluar ke host adegan baru
+    if (pd > 0) tl.fromTo(wadah, { autoAlpha: 0 }, { autoAlpha: 1, duration: pd, ease: "power1.inOut" }, 0).to(wadah, { autoAlpha: 0, duration: pd, ease: "power1.inOut" }, D - pd);
+    if (A) BLOCK.initial(tl, A, { autoAlpha: 1 }).set(A, { autoAlpha: 0 }, pd + 0.01);
+    if (Bk) BLOCK.initial(tl, Bk, { autoAlpha: 0 }).set(Bk, { autoAlpha: 1 }, D - pd - 0.01);
+  });
+}, { font: true });
+</script>

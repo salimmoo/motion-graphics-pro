@@ -1,0 +1,76 @@
+<!-- Block transitions/distortion · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/distortion" data-start="0" data-duration="1.3" data-track-index="20" class="blk blk-transitions-distortion">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "mode": "ripple", "strength": 1, "position_x": 50, "position_y": 50, "ease": "power2.inOut"}
+</script>
+</div>
+<style>
+.blk-transitions-distortion{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-transitions-distortion .blk-lubang{position:absolute;inset:0;opacity:0}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to), D = k.dur, W = k.w, H = k.h, s = k.s;
+  function gaya(el, o) { if (el) for (var n in o) el.style[n] = o[n]; }
+  function bersih(el, tampil) { gaya(el, { transform: "", filter: "", opacity: "", clipPath: "", webkitMaskImage: "", maskImage: "", transformOrigin: "", zIndex: "", borderRadius: "", boxShadow: "", backfaceVisibility: "", visibility: tampil ? "" : "hidden" }); }
+  function ez(n) { return gsap.parseEase(n || "none") || gsap.parseEase("none"); }
+  function peta(n, fn, cx, cy) {
+    var mw = 192, mh = Math.max(2, Math.round(mw * H / W)), md = Math.min(W, H);
+    var c = document.createElement("canvas"); c.width = mw; c.height = mh * n;
+    var x = c.getContext("2d"), im = x.createImageData(mw, mh * n), dt = im.data;
+    for (var f = 0; f < n; f++) for (var j = 0; j < mh; j++) for (var i = 0; i < mw; i++) {
+      var v = fn(((i + 0.5) / mw * W - cx) / md, ((j + 0.5) / mh * H - cy) / md, f / n), o = ((f * mh + j) * mw + i) * 4;
+      dt[o] = 128 + 127 * BLOCK.clamp(v[0], -1, 1); dt[o + 1] = 128 + 127 * BLOCK.clamp(v[1], -1, 1); dt[o + 2] = 128; dt[o + 3] = 255;
+    }
+    x.putImageData(im, 0, 0);
+    return c.toDataURL("image/png");
+  }
+
+  var E = ez(P.ease), mode = P.mode, kk = +P.strength || 1, cx = W * P.position_x / 100, cy = H * P.position_y / 100, md = Math.min(W, H);
+  var fid = "blkf-" + k.id, sv = BLOCK.svg("svg", { width: 0, height: 0, style: "position:absolute" }, k.root);
+  var ekstra = mode === "heat" ? 0.35 : 0;
+  var fl = BLOCK.svg("filter", { id: fid, filterUnits: "userSpaceOnUse", primitiveUnits: "userSpaceOnUse", x: 0, y: -H * ekstra, width: W, height: H * (1 + 2 * ekstra), "color-interpolation-filters": "sRGB" }, sv);
+  var NF = mode === "ripple" ? 12 : 1, img = null, off = null, wd = null, dm;
+  var g = function (ux, uy, sg) { return Math.exp(-(ux * ux + uy * uy) / (2 * sg * sg)); };
+  if (mode === "heat") {
+    BLOCK.svg("feTurbulence", { type: "fractalNoise", baseFrequency: (0.004 / s).toFixed(5) + " " + (0.022 / s).toFixed(5), numOctaves: 2, seed: 4, result: "n0" }, fl);
+    off = BLOCK.svg("feOffset", { "in": "n0", dx: 0, dy: 0, result: "m" }, fl);
+  } else if (mode === "warp") {
+    BLOCK.svg("feTurbulence", { type: "fractalNoise", baseFrequency: (0.0025 / s).toFixed(5), numOctaves: 2, seed: 3, result: "w" }, fl);
+    BLOCK.svg("feTurbulence", { type: "fractalNoise", baseFrequency: (0.006 / s).toFixed(5), numOctaves: 3, seed: 9, result: "n" }, fl);
+    wd = BLOCK.svg("feDisplacementMap", { "in": "n", in2: "w", scale: 0, xChannelSelector: "R", yChannelSelector: "G", result: "m0" }, fl);
+    BLOCK.svg("feColorMatrix", { "in": "m0", type: "matrix", values: "1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0 1", result: "m" }, fl);
+  } else {
+    var fn = mode === "lens" ? function (x, y) { var q = g(x, y, 0.32) * 3.5; return [-x * q, -y * q]; }
+      : mode === "magnet" ? function (x, y) { var q = g(x, y, 0.26) * 4; return [x * q, y * q]; }
+      : mode === "swirl" ? function (x, y) { var q = g(x, y, 0.38) * 3; return [-y * q, x * q]; }
+      : function (x, y, ph) { var r = Math.hypot(x, y) + 1e-4, a = Math.sin(r * Math.PI * 2 / 0.11 - ph * Math.PI * 2) * Math.exp(-r * 1.4) * Math.min(1, r * 25); return [x / r * a, y / r * a]; };
+    img = BLOCK.svg("feImage", { x: 0, y: 0, width: W, height: H * NF, preserveAspectRatio: "none", result: "m" }, fl);
+    img.setAttribute("href", peta(NF, fn, cx, cy));
+  }
+  dm = BLOCK.svg("feDisplacementMap", { "in": "SourceGraphic", in2: "m", scale: 0, xChannelSelector: "R", yChannelSelector: "G" }, fl);
+  var lub = mode === "lens" ? BLOCK.el("div", { class: "blk-lubang" }, k.root) : null;
+  var dasar = { ripple: 70, swirl: 420, lens: 300, magnet: 300, heat: 60, warp: 230 }[mode] || 100;
+  BLOCK.onTime(tl, function (t) {
+    var u = t / D;
+    if (lub) lub.style.opacity = 0;
+    if (u <= 0 || u >= 1) { bersih(A, u <= 0); bersih(Bk, u >= 1); return; }
+    var e = Math.pow(Math.sin(Math.PI * u), 1.2), S = dasar * kk * e * s, x = E(BLOCK.progress(u, 0.35, 0.65)), q = E(u);
+    dm.setAttribute("scale", S.toFixed(2));
+    if (img && NF > 1) img.setAttribute("y", -H * (Math.floor(t * 30) % NF));
+    if (off) off.setAttribute("dy", (-t * 160 * s).toFixed(1));
+    if (wd) wd.setAttribute("scale", (160 * s * e).toFixed(1));
+    var cov = 1 + S / md * 0.6, org = cx + "px " + cy + "px", ta = "", tb = "";
+    if (mode === "swirl") { var th = 24 * (q - (u < 0.5 ? 0 : 1)) * kk; ta = tb = "rotate(" + th + "deg) scale(" + (cov + 0.6 * e) + ")"; }
+    else if (mode === "lens") { ta = tb = "scale(" + (cov + 0.1 * e) + ")"; }
+    else ta = tb = "scale(" + (cov + 0.03 * e) + ")";
+    var f = "url(#" + fid + ")" + (mode === "heat" ? " brightness(" + (1 + 0.12 * e) + ") saturate(" + (1 + 0.2 * e) + ")" : "");
+    gaya(A, { visibility: u < 0.65 ? "" : "hidden", filter: f, transformOrigin: org, transform: ta });
+    gaya(Bk, { visibility: x > 0 ? "" : "hidden", filter: f, transformOrigin: org, transform: tb, opacity: x });
+    if (lub) {
+      var r = 0.2 * md * e * kk;
+      gaya(lub, { opacity: Math.pow(e, 2.5), background: "radial-gradient(circle at " + cx + "px " + cy + "px, rgba(0,0,0,.92) 0px, rgba(0,0,0,.75) " + (r * 0.45) + "px, rgba(255,236,210,.55) " + (r * 0.62) + "px, rgba(255,236,210,0) " + (r * 1.05) + "px)" });
+    }
+  }, D);
+});
+</script>

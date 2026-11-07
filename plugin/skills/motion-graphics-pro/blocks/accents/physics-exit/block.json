@@ -1,0 +1,163 @@
+{
+ "id": "accents/physics-exit",
+ "name": "Physics Exit",
+ "name_id": "Keluar Fisik",
+ "category": "accents",
+ "description": {
+  "id": "Kartu keluar bingkai dengan momentum fisik: dilempar, dijatuhkan, atau digeser, membawa percepatan dan rotasi sampai pose akhir di luar layar tanpa memudar. Ada antisipasi kecil sebelum lepas; lintasan dihitung dengan rumus tertutup.",
+  "en": "A card exits with physical momentum in toss, drop or slide mode, carrying acceleration and rotation to its final offscreen pose without fading. A small anticipation before release; closed-form trajectories."
+ },
+ "tags": [
+  "aksen",
+  "keluar",
+  "fisika",
+  "lempar",
+  "jatuh",
+  "geser",
+  "momentum",
+  "kartu",
+  "accents",
+  "physics",
+  "exit"
+ ],
+ "props": {
+  "mode": {
+   "default": "throw",
+   "type": "enum",
+   "options": [
+    "throw",
+    "drop",
+    "slide"
+   ],
+   "option_aliases": {
+    "lempar": "throw",
+    "jatuh": "drop",
+    "geser": "slide"
+   }
+  },
+  "direction": {
+   "default": "right",
+   "type": "enum",
+   "options": [
+    "right",
+    "left"
+   ],
+   "aliases": [
+    "arah"
+   ],
+   "option_aliases": {
+    "kanan": "right",
+    "kiri": "left"
+   }
+  },
+  "text": {
+   "default": "Tugas selesai",
+   "type": "text",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "sub": {
+   "default": "Laporan bulanan sudah terkirim ke tim.",
+   "type": "text"
+  },
+  "exit_time": {
+   "default": 0.45,
+   "type": "number",
+   "hint": "Saat lepas (fraksi durasi)",
+   "aliases": [
+    "waktu_keluar"
+   ]
+  },
+  "speed": {
+   "default": 1500,
+   "type": "number",
+   "hint": "Kecepatan awal (px/detik pada 1080)",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "gravity": {
+   "default": 4200,
+   "type": "number",
+   "hint": "px/detik² pada 1080",
+   "aliases": [
+    "gravitasi"
+   ]
+  },
+  "width": {
+   "default": 620,
+   "type": "number",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "height": {
+   "default": 300,
+   "type": "number",
+   "aliases": [
+    "tinggi"
+   ]
+  },
+  "card_color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna_kartu"
+   ]
+  },
+  "text_color": {
+   "default": "#16181d",
+   "type": "color",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;800",
+   "type": "font"
+  },
+  "size": {
+   "default": 60,
+   "type": "number",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_y"
+   ]
+  }
+ },
+ "duration": 3,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "aksen/keluar-fisik",
+  "physical-exit"
+ ],
+ "example": {
+  "bg": "dark",
+  "block_duration": 2.6,
+  "font": [
+   "Inter:wght@400;800"
+  ]
+ }
+}

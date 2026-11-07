@@ -1,0 +1,119 @@
+{
+ "id": "transitions/before-after",
+ "name": "Before After",
+ "name_id": "Sebelum / Sesudah",
+ "category": "transitions",
+ "description": {
+  "id": "Pembanding sebelum dan sesudah: garis pembatas bergagang menyapu adegan baru di atas adegan lama yang diredam, berhenti di belahan untuk dibandingkan, lalu menuntaskan. Mode grade membandingkan gambar yang sama versi datar dan versi jadi.",
+  "en": "Before/after comparison: a handled divider wipes the vivid after layer over the muted before layer, rests at a split to compare, then commits. Grade mode compares one picture flat versus finished."
+ },
+ "tags": [
+  "transisi",
+  "sebelum sesudah",
+  "before after",
+  "perbandingan",
+  "split",
+  "grade",
+  "wipe",
+  "transitions",
+  "before",
+  "after"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen 'sebelum' (mode grade: gambar yang dibandingkan)",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen 'sesudah' (tidak dipakai di mode grade)",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "mode": {
+   "default": "hold",
+   "type": "enum",
+   "options": [
+    "slide",
+    "hold",
+    "grade"
+   ],
+   "hint": "geser = berhenti di belahan sampai akhir blok; tahan = berhenti lalu menuntaskan ke adegan baru; grade = gambar sama, datar vs jadi",
+   "option_aliases": {
+    "geser": "slide",
+    "tahan": "hold"
+   }
+  },
+  "position": {
+   "default": 50,
+   "type": "number",
+   "hint": "Letak belahan saat berhenti (% dari kiri)",
+   "aliases": [
+    "posisi"
+   ]
+  },
+  "label_a": {
+   "default": "Sebelum",
+   "type": "text",
+   "hint": "Label sisi kiri"
+  },
+  "label_b": {
+   "default": "Sesudah",
+   "type": "text",
+   "hint": "Label sisi kanan"
+  },
+  "dim_before": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Redam warna adegan lama (geser/tahan)",
+   "aliases": [
+    "redam_sebelum"
+   ]
+  },
+  "color": {
+   "default": "#fffaf0",
+   "type": "color",
+   "hint": "Warna garis, gagang, dan label",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "text_color": {
+   "default": "#1d1b18",
+   "type": "color",
+   "hint": "Warna teks label",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@600;700",
+   "type": "font",
+   "hint": "Font label"
+  }
+ },
+ "duration": 3.2,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/sebelum-sesudah",
+  "before-after-wipe",
+  "comparison-split",
+  "grade-split-reveal"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.5,
+  "duration": 4
+ }
+}

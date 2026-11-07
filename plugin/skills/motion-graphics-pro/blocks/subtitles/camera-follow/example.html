@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1080x1920">
+<title>Camera Follow · block example subtitles/camera-follow</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black:wght@400&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1080" data-height="1920" data-duration="6.5">
+<div id="adegan" class="adegan ad-gelap"></div>
+<!-- Block subtitles/camera-follow · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-camera-follow" data-block="subtitles/camera-follow" data-start="0" data-duration="6" data-track-index="30" class="blk blk-subtitles-camera-follow">
+<script type="application/json" data-block-props>
+{"text": "Satu kalimat tumbuh makin besar setiap kata terucap hingga memenuhi dunia", "words": [], "kps": 2.0, "max_words": 14, "font": "Archivo Black:wght@400", "size": 120, "color": "#ffffff", "bottom": 50, "uppercase": true, "accent_color": "#ffd23f", "old_opacity": 0.7, "screen_fill": 0.84}
+</script>
+</div>
+<style>
+.blk-subtitles-camera-follow{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-subtitles-camera-follow .blk-dunia{position:absolute;left:0;top:0;transform-origin:0 0;line-height:1}
+.blk-subtitles-camera-follow .blk-k{position:absolute;left:0;top:0;transform-origin:0 0;white-space:nowrap;font-size:100px}
+.blk-subtitles-camera-follow .blk-ki{display:inline-block;transform-origin:50% 60%}
+</style>
+<script>
+BLOCK.mount("blk-camera-follow", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, root = k.root;
+  var cy0 = k.h * (1 - P.bottom / 100), dunia = [];
+  BLOCK.pages(BLOCK.words(P), P.max_words).forEach(function (pg) {
+    var D = BLOCK.el("div", { class: "blk-dunia", style: "color:" + P.color + ";font-family:" + BLOCK.family(P.font, "Arial Black, sans-serif") + (P.uppercase ? ";text-transform:uppercase" : "") }, root);
+    BLOCK.initial(tl, D, { autoAlpha: 0 }).set(D, { autoAlpha: 1 }, pg.mulai).set(D, { autoAlpha: 0 }, pg.akhir);
+    var bb = null, kam = [];
+    pg.kata.forEach(function (w, i) {
+      var o = BLOCK.el("span", { class: "blk-k" }, D), ii = BLOCK.el("span", { class: "blk-ki" }, o);
+      ii.textContent = String(w.teks).replace(/\*/g, "");
+      var W0 = o.offsetWidth, H0 = o.offsetHeight * 0.86, sc, x, y;
+      // setiap kata diukur terhadap semua yang sudah tertulis: kanan = setinggi blok, bawah = selebar blok
+      if (!bb) { sc = 1; x = 0; y = 0; }
+      else if (i % 2) { sc = (bb.y1 - bb.y0) / H0; x = bb.x1 + 0.18 * H0 * sc; y = bb.y0; }
+      else { sc = (bb.x1 - bb.x0) / W0; x = bb.x0; y = bb.y1 + 0.06 * H0 * sc; }
+      o.style.transform = "translate(" + x + "px," + y + "px) scale(" + sc + ")";
+      var x1 = x + W0 * sc, y1 = y + H0 * sc;
+      bb = bb ? { x0: bb.x0, y0: bb.y0, x1: Math.max(bb.x1, x1), y1: Math.max(bb.y1, y1) } : { x0: 0, y0: 0, x1: x1, y1: y1 };
+      var bw = bb.x1 - bb.x0, bh = bb.y1 - bb.y0;
+      var z = Math.min(k.w * P.screen_fill / bw, k.h * 0.55 / bh, P.size * s * 1.4 / H0);
+      // pusat kamera: condong ke kata baru, tetap memuat blok
+      var cx = BLOCK.lerp((bb.x0 + bb.x1) / 2, x + W0 * sc / 2, 0.12), cy = BLOCK.lerp((bb.y0 + bb.y1) / 2, y + H0 * sc / 2, 0.12);
+      kam.push({ t: w.mulai, lz: Math.log(z), cx: cx, cy: cy });
+      tl.fromTo(ii, { opacity: 0, scale: 0.55, color: P.accent_color }, { opacity: 1, scale: 1, duration: 0.42, ease: "back.out(2.2)" }, w.mulai)
+        .to(ii, { color: P.color, opacity: P.old_opacity, duration: 0.5, ease: "power2.inOut" }, Math.max(w.akhir, w.mulai + 0.5));
+    });
+    dunia.push({ D: D, kam: kam, pg: pg });
+  });
+  // kamera: zoom log-linear (laju tetap) antar kata, pusat bergeser halus; murni dari t
+  BLOCK.onTime(tl, function (t) {
+    dunia.forEach(function (d) {
+      var K = d.kam; if (!K.length) return;
+      var a = K[0], b = K[0], f = 0;
+      for (var i = 0; i < K.length; i++) {
+        if (t >= K[i].t) { a = K[i]; b = K[i + 1] || K[i]; f = b === a ? 0 : BLOCK.clamp((t - a.t) / (b.t - a.t), 0, 1); }
+      }
+      var g = BLOCK.smooth(f), lz = BLOCK.lerp(a.lz, b.lz, BLOCK.lerp(f, g, 0.5));
+      var z = Math.exp(lz), cx = BLOCK.lerp(a.cx, b.cx, g), cy = BLOCK.lerp(a.cy, b.cy, g);
+      d.D.style.transform = "translate(" + (k.w / 2 - cx * z).toFixed(2) + "px," + (cy0 - cy * z).toFixed(2) + "px) scale(" + z.toFixed(6) + ")";
+    });
+  }, k.dur);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 6.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 6.5);
+</script>
+</body>
+</html>

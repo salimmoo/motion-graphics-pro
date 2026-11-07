@@ -1,0 +1,135 @@
+{
+ "id": "backgrounds/orb",
+ "name": "Orb",
+ "name_id": "Orb Studio",
+ "category": "backgrounds",
+ "description": {
+  "id": "Bola tunggal di latar hitam dengan pencahayaan studio, empat belas bahan: krom, plastik, obsidian, holografik, lapisan tipis, es, termal, hologram, nebula, goo, logam cair, air, tepi cahaya, dan gumpal. Shader WebGL analitik.",
+  "en": "A single studio-lit orb on black in fourteen materials: chrome, plastic, obsidian, holographic, thin film, frost, thermal, hologram, nebula, goo, liquid metal, water, light edge and blob. Analytic WebGL shader."
+ },
+ "tags": [
+  "latar",
+  "background",
+  "orb",
+  "bola",
+  "krom",
+  "holografik",
+  "shader",
+  "webgl",
+  "3d",
+  "studio",
+  "backgrounds"
+ ],
+ "props": {
+  "material": {
+   "default": "chrome",
+   "type": "enum",
+   "options": [
+    "chrome",
+    "plastic",
+    "obsidian",
+    "holographic",
+    "thin-film",
+    "ice",
+    "thermal",
+    "hologram",
+    "nebula",
+    "goo",
+    "liquid-metal",
+    "water",
+    "rim-light",
+    "blob"
+   ],
+   "aliases": [
+    "bahan"
+   ],
+   "option_aliases": {
+    "krom": "chrome",
+    "plastik": "plastic",
+    "holografik": "holographic",
+    "lapisan-tipis": "thin-film",
+    "es": "ice",
+    "termal": "thermal",
+    "logam-cair": "liquid-metal",
+    "air": "water",
+    "tepi-cahaya": "rim-light",
+    "gumpal": "blob"
+   }
+  },
+  "color1": {
+   "default": "",
+   "type": "color",
+   "hint": "Kosong = warna bawaan bahan",
+   "aliases": [
+    "warna1"
+   ]
+  },
+  "color2": {
+   "default": "",
+   "type": "color",
+   "hint": "Kosong = warna bawaan bahan",
+   "aliases": [
+    "warna2"
+   ]
+  },
+  "bg": {
+   "default": "#000000",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "size": {
+   "default": 0.34,
+   "type": "number",
+   "hint": "Jari-jari bola (fraksi sisi terpendek)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali kecepatan gerak",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "resolution": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Skala resolusi shader (0.25-1); kecil = lebih cepat",
+   "aliases": [
+    "resolusi"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "latar/orb",
+  "chrome-orb",
+  "plastic",
+  "obsidian",
+  "holographic",
+  "thin-film",
+  "frost",
+  "heatmap",
+  "hologram",
+  "nebula",
+  "goo",
+  "liquid-metal",
+  "water",
+  "light-edge",
+  "blob"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

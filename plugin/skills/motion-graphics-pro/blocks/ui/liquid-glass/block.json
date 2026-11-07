@@ -1,0 +1,142 @@
+{
+ "id": "ui/liquid-glass",
+ "name": "Liquid Glass",
+ "name_id": "Kaca Cair",
+ "category": "ui",
+ "description": {
+  "id": "Kartu kaca buram (blur latar + saturasi + tepi terang) melayang di atas latar gradien bergerak buatan blok. Mode widget: kartu statistik, panel unggulan dengan grafik, dan chip pil. Mode notifikasi: notifikasi kaca jatuh satu per satu dan menumpuk.",
+  "en": "Frosted liquid-glass cards (backdrop blur, saturation, lit edge) floating over a moving gradient background. Widget mode: stat cards, showcase panel and pill chips. Notification mode: glass notifications dropping and stacking."
+ },
+ "tags": [
+  "ui",
+  "glassmorphism",
+  "kaca",
+  "liquid-glass",
+  "widget",
+  "notifikasi",
+  "gradien",
+  "liquid",
+  "glass"
+ ],
+ "props": {
+  "mode": {
+   "default": "widget",
+   "type": "enum",
+   "options": [
+    "widget",
+    "notification"
+   ],
+   "option_aliases": {
+    "notifikasi": "notification"
+   }
+  },
+  "bg": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Gambar latar gradien bergerak sendiri; false = kaca di atas adegan host",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "bg_color": {
+   "default": [
+    "#2a1b6e",
+    "#ff5f8f",
+    "#36c6ff",
+    "#7b5cff",
+    "#ffb86b"
+   ],
+   "type": "list",
+   "hint": "Warna dasar lalu warna gumpalan",
+   "aliases": [
+    "warna_latar"
+   ]
+  },
+  "title": {
+   "default": "Aktivitas minggu ini",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "stat": {
+   "default": [
+    [
+     "Langkah",
+     "48.210"
+    ],
+    [
+     "Tidur",
+     "7 j 20 m"
+    ]
+   ],
+   "type": "list"
+  },
+  "chip": {
+   "default": [
+    "Lari",
+    "Yoga",
+    "Sepeda",
+    "Renang"
+   ],
+   "type": "list"
+  },
+  "notification": {
+   "default": [
+    [
+     "Pesan",
+     "Rani: Jadi ketemu jam tujuh?"
+    ],
+    [
+     "Kalender",
+     "Rapat tim dimulai 10 menit lagi"
+    ],
+    [
+     "Kesehatan",
+     "Target langkah hari ini tercapai"
+    ],
+    [
+     "Musik",
+     "Daftar putar baru siap untukmu"
+    ]
+   ],
+   "type": "list",
+   "hint": "[[aplikasi, pesan]]",
+   "aliases": [
+    "notifikasi"
+   ]
+  },
+  "blur": {
+   "default": 26,
+   "type": "number",
+   "hint": "Blur kaca (px pada 1080)",
+   "aliases": [
+    "kabur"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700;800",
+   "type": "font"
+  },
+  "seed": {
+   "default": 5,
+   "type": "number"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/kaca-cair",
+  "liquid-glass-widgets",
+  "liquid-glass-notification",
+  "vfx-liquid-glass"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

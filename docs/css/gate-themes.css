@@ -1,0 +1,102 @@
+/* ==========================================================================
+   Gate themes · Yunani, Timur Tengah, Romawi, Persia, Mesir, China, Jepang
+   Geometry is derived per theme in js/gate.js (applyTheme) from js/layout.js
+   (LAYOUT.themes[key].arch.open / poly, gates, padlock, trees) and set as inline styles.
+   The px values below are only the fallback for the Timur Tengah set before JS runs.
+   ========================================================================== */
+
+/* ===== gate: Islamic iwan (moved from guide-v2.css; fallback geometry, arch.open = .325 .395 .677 1) ===== */
+.archbox { left: 521px; top: 80px; width: 878px; height: 1040px; }
+.gates { left: 268px; top: 411px; width: 342px; height: 629px; }
+.leaf { filter: drop-shadow(0 10px 18px rgba(0,0,0,.5)); }
+.lock { left: 407px; top: 672px; width: 64px; height: 109px; }
+.peek-img { left: 29%; top: 36%; width: 42%; height: 66%; }
+.peek-stars { left: 32.5%; top: 39.5%; width: 35.2%; height: 60.5%; }
+.rays { left: 32.5%; top: 39.5%; width: 35.2%; height: 60.5%; }
+.tree { width: 540px; height: 1014px; }
+.tree.tl { left: -60px; top: 110px; }
+.tree.tr { right: -60px; top: 90px; }
+body.portal .cosmos-ui { opacity: 0; transition: opacity .6s; }
+
+/* ===== theme picker: glass pill, opens upward ===== */
+.theme-pick { position: absolute; right: 26px; bottom: 28px; font: 500 13px/1 var(--f-ui); letter-spacing: .01em; }
+.theme-btn { display: inline-flex; align-items: center; gap: 10px; height: 40px; padding: 0 14px 0 6px; border-radius: 999px; color: var(--ivory);
+  background: rgba(18, 14, 8, .38); border: 1px solid rgba(242, 215, 150, .34); backdrop-filter: blur(14px) saturate(1.3); -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  box-shadow: 0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.12); transition: background .3s, border-color .3s; }
+.theme-btn:hover, .theme-btn[aria-expanded="true"] { background: rgba(40, 30, 14, .55); border-color: rgba(242, 215, 150, .7); }
+.theme-btn:focus-visible, .theme-opt:focus-visible { outline: 2px solid var(--gold-2); outline-offset: 2px; }
+.theme-btn .lbl { color: rgba(244, 236, 216, .66); }
+.theme-btn .lbl i { display: none; }
+.theme-btn .lbl b { color: var(--ivory); font-weight: 600; }
+.theme-btn svg { width: 14px; height: 14px; fill: none; stroke: var(--gold-2); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; transition: transform .3s var(--ease); }
+.theme-btn[aria-expanded="true"] svg { transform: rotate(180deg); }
+.theme-sw { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--sw, #a28d6f) center 70% / 92% auto no-repeat; border: 1px solid rgba(255, 240, 210, .45);
+  box-shadow: inset 0 0 0 2px rgba(0,0,0,.12); }
+.theme-sw.none { background-image: none !important; background: repeating-linear-gradient(135deg, rgba(255,255,255,.08) 0 3px, transparent 3px 6px), rgba(255,255,255,.06); border-style: dashed; }
+.theme-list { position: absolute; right: 0; bottom: calc(100% + 10px); min-width: 268px; margin: 0; padding: 6px; list-style: none; border-radius: 18px;
+  background: rgba(18, 14, 8, .62); border: 1px solid rgba(242, 215, 150, .3); backdrop-filter: blur(18px) saturate(1.3); -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  box-shadow: 0 24px 60px rgba(0,0,0,.5); transform-origin: 100% 100%; }
+.theme-list[hidden] { display: none; }
+.theme-list.in { animation: pickIn .28s var(--ease); }
+@keyframes pickIn { from { opacity: 0; transform: translateY(8px) scale(.97); } }
+.theme-opt { display: flex; align-items: center; gap: 11px; padding: 7px 10px 7px 7px; border-radius: 12px; cursor: pointer; color: var(--ivory); outline: none; }
+.theme-opt:hover, .theme-opt.act { background: rgba(242, 215, 150, .13); }
+.theme-opt[aria-selected="true"] { background: rgba(242, 215, 150, .2); }
+.theme-opt[aria-selected="true"]::after { content: ""; width: 7px; height: 7px; margin-left: auto; border-radius: 50%; background: var(--gold-2); box-shadow: 0 0 10px var(--gold-2); }
+.theme-opt[aria-disabled="true"] { cursor: default; color: rgba(244, 236, 216, .38); }
+.theme-opt[aria-disabled="true"]:hover { background: none; }
+.theme-opt[aria-disabled="true"] .theme-sw { opacity: .5; }
+.theme-opt em { margin-left: auto; font: 500 10.5px/1 var(--f-ui); font-style: normal; letter-spacing: .06em; text-transform: uppercase; color: rgba(244, 236, 216, .4);
+  padding: 4px 7px; border-radius: 999px; border: 1px solid rgba(244, 236, 216, .16); }
+.theme-opt span.nm { display: flex; flex-direction: column; gap: 4px; }
+.theme-opt small { white-space: nowrap; font: 400 11px/1 var(--f-ui); color: rgba(244, 236, 216, .5); }
+.theme-opt[aria-disabled="true"] small { color: rgba(244, 236, 216, .3); }
+@media (max-width: 760px) {
+  .theme-pick { right: 16px; bottom: 20px; }
+  .theme-btn { height: 36px; gap: 8px; font-size: 12.5px; }
+  .theme-btn .lbl i { display: none; }
+  .theme-sw { width: 24px; height: 24px; }
+}
+
+/* ===== paper-fold theme morph (built in js/gate.js): sheets fold along a vertical then a horizontal crease ===== */
+.ori-layer { position: absolute; pointer-events: none; perspective: 1700px; will-change: transform; }
+.pf-sheet, .pf-half, .pf-hinge, .pf-panel { position: absolute; transform-style: preserve-3d; }
+.pf-sheet { inset: 0; will-change: transform; }
+.pf-half { left: 0; width: 100%; }
+.pf-hinge { left: 0; top: 0; will-change: transform; }
+.pf-front, .pf-back { position: absolute; inset: 0; background-repeat: no-repeat; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+/* kraft back of the print: canvases baked once per panel in js/gate.js (silhouette + kraft gradient + fibre) */
+.pf-kraft { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.pf-shade-c { opacity: 0; }
+/* low-quality tier / images not decoded: a plain kraft sheet (no images, no filters) */
+.pf-back-plain { position: absolute; inset: 0; background: linear-gradient(135deg, #c9a77a, #e8d3ad); box-shadow: inset 0 0 0 1.5px rgba(255,246,226,.6); }
+.pf-dark-plain { position: absolute; inset: 0; background: #24160a; opacity: 0; }
+/* soft shadow of the folded packet on the clouds (opacity only) */
+.pf-shadow { position: absolute; opacity: 0; pointer-events: none; background: radial-gradient(closest-side, rgba(38,22,6,.5), rgba(38,22,6,.2) 55%, transparent); }
+/* fold shading: a black silhouette of the face; only its opacity moves */
+.pf-dark { position: absolute; inset: 0; background-repeat: no-repeat; filter: brightness(0); opacity: 0; pointer-events: none; }
+
+/* ===== entry FX: dust/petal/star canvas + light that stays inside the doorway ===== */
+.gate-warp { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 3; }
+.gate-flash { position: absolute; pointer-events: none; opacity: 0; mix-blend-mode: screen;
+  background: radial-gradient(ellipse 58% 46% at 50% 74%, rgba(255,250,236,.85), rgba(255,236,190,.38) 42%, rgba(242,200,130,.1) 72%, transparent 92%); }
+/* lower quality tier (slow device): no animated wind ribbons (their dash animation repaints a full-size SVG) */
+.gate-lite .wind { display: none; }
+.gate-seq .wind { visibility: hidden; }   /* during open/close */
+.gate-lite .rays::before, .gate-lite .rays::after { animation: none; filter: none; opacity: .5; }
+
+/* ===== sky canvas (drawn by js/gate.js with the portal hole punched in the same frame) ===== */
+.gate-back canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.gate-back.cv i { visibility: hidden; animation: none; }
+
+/* v2.4 · weight: the gate parts come from the active theme (inline, js/gate.js), never the unthemed defaults;
+   the orbit's atelier photo waits until the visitor leaves the gate; phones get lighter copies (tools/build_mobile_img.py) */
+.arch, .leaf.l, .leaf.r, .lock-img, .tree > div { background-image: none; }
+html:not(.late-bg) .orbit-bg { background-image: none; }
+.ori-cv { position: absolute; pointer-events: none; }
+@media (max-width: 760px) {
+  .gate-back i, .sky { background-image: url(../assets/img/m/sky.jpg); }
+  .peek-img, .cosmos-bg { background-image: url(../assets/img/m/cosmos.jpg); }
+  .orbit-bg { background-image: url(../assets/img/m/atelier.jpg); }
+  .clouds { background-image: url(../assets/img/m/clouds.webp); }
+}

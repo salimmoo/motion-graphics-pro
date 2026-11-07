@@ -1,0 +1,173 @@
+{
+ "id": "hands/checklist-card",
+ "name": "Checklist Card",
+ "name_id": "Kartu Checklist Spidol",
+ "category": "hands",
+ "description": {
+  "id": "Kartu kertas bertulisan spidol: judul dengan garis bawah dan lingkaran di satu kata, lalu tiga baris checklist yang kotaknya tergambar, label diketik ala mesin tik, centang menggambar sendiri, dan nilai spidol meletup di kanan.",
+  "en": "A hand-lettered paper card: marker headline with an underline and an ellipse around one word, then checklist rows whose boxes and checks draw themselves, typewriter labels and marker values."
+ },
+ "tags": [
+  "tangan",
+  "checklist",
+  "kartu",
+  "spidol",
+  "mesin-tik",
+  "centang",
+  "daftar",
+  "hands",
+  "card"
+ ],
+ "props": {
+  "title": {
+   "default": "Rencana *minggu* ini",
+   "type": "text",
+   "hint": "Judul; *kata* = kata yang dilingkari",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "rows": {
+   "default": [
+    {
+     "label": "Riset pengguna",
+     "nilai": "beres"
+    },
+    {
+     "label": "Draf desain",
+     "nilai": "80%"
+    },
+    {
+     "label": "Uji coba",
+     "nilai": "Jumat"
+    }
+   ],
+   "type": "list",
+   "hint": "Daftar baris {label, nilai}",
+   "aliases": [
+    "baris"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Pusat X (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Pusat Y (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "width": {
+   "default": 860,
+   "type": "number",
+   "hint": "Lebar kartu (px pada 1080)",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "skew": {
+   "default": -1.5,
+   "type": "number",
+   "hint": "Kemiringan kartu (derajat)",
+   "aliases": [
+    "miring"
+   ]
+  },
+  "card_color": {
+   "default": "#fbf6e9",
+   "type": "color",
+   "hint": "Warna kertas",
+   "aliases": [
+    "warna_kartu"
+   ]
+  },
+  "color": {
+   "default": "#1d1b18",
+   "type": "color",
+   "hint": "Warna tinta",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#e4572e",
+   "type": "color",
+   "hint": "Warna lingkaran & nilai",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "check_color": {
+   "default": "#2f8f6a",
+   "type": "color",
+   "hint": "Warna centang",
+   "aliases": [
+    "warna_centang"
+   ]
+  },
+  "font": {
+   "default": "Permanent Marker",
+   "type": "font",
+   "hint": "Font spidol (Google Font)"
+  },
+  "font2": {
+   "default": "Courier Prime:wght@400;700",
+   "type": "font",
+   "hint": "Font mesin tik (Google Font)"
+  },
+  "size": {
+   "default": 76,
+   "type": "number",
+   "hint": "Ukuran judul",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "start": {
+   "default": 0.3,
+   "type": "number",
+   "hint": "Detik mulai",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "wobble": {
+   "default": 1,
+   "type": "number",
+   "hint": "Kekuatan goyang/boil tangan (0 = diam)",
+   "aliases": [
+    "goyang"
+   ]
+  },
+  "seed": {
+   "default": 22,
+   "type": "number",
+   "hint": "Seed"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "tangan/kartu-checklist",
+  "marker-checklist-card"
+ ],
+ "example": {
+  "bg": "paper",
+  "font": [
+   "Permanent Marker",
+   "Courier Prime:wght@400;700"
+  ]
+ }
+}

@@ -1,0 +1,20 @@
+{
+  "ffmpeg is not on PATH (or set MGP_FFMPEG).": "ffmpeg is not on PATH (or set MGP_FFMPEG).",
+  "{} script errors on the page; render stopped (add --ignore-errors to render anyway):": "{} script errors on the page; render stopped (add --ignore-errors to render anyway):",
+  "warning: {} script errors ignored (--ignore-errors):": "warning: {} script errors ignored (--ignore-errors):",
+  "mgp: {}  {}x{}  {} fps  {} → {}  ({} frames, driver: {}, {} workers)": "mgp: {}  {}x{}  {} fps  {} → {}  ({} frames, driver: {}, {} workers)",
+  "  ·  animation engine: {}": "  ·  animation engine: {}",
+  "encoder: {}": "encoder: {}",
+  "encoder: --encoder {} is for MP4 only; {} uses the CPU encoder": "encoder: --encoder {} is for MP4 only; {} uses the CPU encoder",
+  "  {}%  {}/{} frames": "  {}%  {}/{} frames",
+  "(encoder {} failed during the render; run again with --encoder cpu)": "(encoder {} failed during the render; run again with --encoder cpu)",
+  "  warning: audio {} not found locally, skipped": "  warning: audio {} not found locally, skipped",
+  "--audio not found: {}": "--audio not found: {}",
+  "  audio written to {}": "  audio written to {}",
+  "  audio: {} tracks mixed": "  audio: {} tracks mixed",
+  "done: {}  ({} frames in {} s, {} frames/s)": "done: {}  ({} frames in {} s, {} frames/s)",
+  "warning: {} page notes:": "warning: {} page notes:",
+  "{} script errors appeared while rendering ({} was written, but its frames may be wrong; --ignore-errors to accept):": "{} script errors appeared while rendering ({} was written, but its frames may be wrong; --ignore-errors to accept):",
+  "warning: {} script errors while rendering ignored (--ignore-errors):": "warning: {} script errors while rendering ignored (--ignore-errors):",
+  "warning: {} script errors on the page (the frame is taken anyway):": "warning: {} script errors on the page (the frame is taken anyway):"
+}

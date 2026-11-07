@@ -1,0 +1,135 @@
+<!-- Block code/code-typing · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="code/code-typing" data-start="0" data-duration="8" data-track-index="30" class="blk blk-code-code-typing">
+<script type="application/json" data-block-props>
+{"code": "// hitung total belanja dengan diskon\nimport { format } from \"./uang.js\";\n\nexport function total(keranjang, diskon = 0) {\n  const jumlah = keranjang.reduce((a, b) => a + b.harga * b.qty, 0);\n  if (diskon > 0) {\n    return format(jumlah * (1 - diskon / 100));\n  }\n  return format(jumlah);\n}\n\nconsole.log(total([{ harga: 25000, qty: 2 }], 10));", "lang": "js", "theme": "dark-2026", "chrome": "full", "unit": "token", "file": "belanja.js", "project": "toko-kecil", "size": 24, "start": 0.5, "font": "JetBrains Mono:wght@400;500;700", "seed": 4}
+</script>
+</div>
+<style>
+.blk-code-code-typing{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-code-code-typing .ed{position:absolute;overflow:hidden}
+.blk-code-code-typing .isi{position:absolute;left:0;right:0;top:0}
+.blk-code-code-typing .ln{position:relative;white-space:pre;font-variant-ligatures:none}
+.blk-code-code-typing .no{display:inline-block;text-align:right;box-sizing:border-box}
+.blk-code-code-typing .kr{position:absolute;left:0;top:0}
+.blk-code-code-typing .pn{position:absolute;box-sizing:border-box;overflow:hidden;white-space:nowrap}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, E = BLOCK.el, s = k.s, W = k.w, H = k.h, rng = k.random;
+  // --- penyorot sintaks kecil (token regex) + tema; ditulis sendiri, disalin per blok kode ---
+  var TEMA = {
+    "dark-2026": { bg: "#15161c", panel: "#1c1d25", garis: "#2a2c37", teks: "#d8dbe6", redup: "#5f6478", kw: "#c792ea", str: "#a6dc78", num: "#f7a26c", kom: "#6a7089", fn: "#80b4ff", tag: "#ff7d9e", atr: "#ffd27a", aksen: "#7c9cff", kursor: "#9fb4ff", hapus: "#ff5c6c", tambah: "#3fd07f" },
+    "modern-dark": { bg: "#1f1f1f", panel: "#181818", garis: "#2b2b2b", teks: "#cccccc", redup: "#6e7681", kw: "#569cd6", str: "#ce9178", num: "#b5cea8", kom: "#6a9955", fn: "#dcdcaa", tag: "#569cd6", atr: "#9cdcfe", aksen: "#0078d4", kursor: "#aeafad", hapus: "#f14c4c", tambah: "#2ea043" },
+    "light": { bg: "#ffffff", panel: "#f3f4f6", garis: "#e3e5e9", teks: "#1f2328", redup: "#8c959f", kw: "#cf222e", str: "#0a3069", num: "#0550ae", kom: "#6e7781", fn: "#8250df", tag: "#116329", atr: "#953800", aksen: "#0969da", kursor: "#0969da", hapus: "#cf222e", tambah: "#1a7f37" },
+    "terminal-pro": { bg: "#050505", panel: "#161616", garis: "#262626", teks: "#c8c8c8", redup: "#6c6c6c", kw: "#ececec", str: "#b8e86a", num: "#d8d8d8", kom: "#6c6c6c", fn: "#ffffff", tag: "#b8e86a", atr: "#c8c8c8", aksen: "#a6ff00", kursor: "#a6ff00", hapus: "#ff6b6b", tambah: "#a6ff00" }
+  };
+  var KW = {
+    js: "const|let|var|function|return|if|else|for|while|of|in|new|class|extends|import|from|export|default|async|await|try|catch|throw|true|false|null|undefined|this|typeof",
+    py: "def|class|return|if|elif|else|for|while|in|not|and|or|import|from|as|with|try|except|raise|lambda|True|False|None|yield|async|await|pass",
+    bash: "if|then|else|fi|for|do|done|in|case|esac|function|export|echo|cd|sudo|return|while|local"
+  };
+  function aturan(bhs) {
+    if (bhs === "html") return [[/<!--.*?(-->|$)/y, "kom"], [/"[^"]*"|'[^']*'/y, "str"], [/<\/?[\w-]+|\/?>/y, "tag"], [/[\w-]+(?==)/y, "atr"], [/\s+/y, "sp"], [/[^\s<>"'=]+|=/y, "teks"]];
+    var kw = new RegExp("(?:" + (KW[bhs] || KW.js) + ")(?![\\w$])", "y"), r = [];
+    r.push([bhs === "js" ? /\/\/.*/y : /#.*/y, "kom"]);
+    r.push([/"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`[^`]*`/y, "str"]);
+    if (bhs === "bash") r.push([/--?[A-Za-z][\w-]*/y, "num"], [/\$[\w{}]+/y, "atr"]);
+    r.push([/\d+(?:\.\d+)?(?![\w$])/y, "num"], [kw, "kw"], [/[A-Za-z_$][\w$]*(?=\s*\()/y, "fn"], [/\s+/y, "sp"], [bhs === "bash" ? /[A-Za-z_$~.][\w$.\/~-]*/y : /[A-Za-z_$][\w$]*/y, "teks"], [/[^\sA-Za-z_$\d]+?/y, "tanda"]);
+    return r;
+  }
+  /** sorot(kode, bahasa) -> [[{t, c}]] per baris */
+  function sorot(kode, bhs) {
+    var R = aturan(bhs);
+    return String(kode).split("\n").map(function (ln) {
+      var out = [], i = 0;
+      while (i < ln.length) {
+        var ok = false;
+        for (var j = 0; j < R.length; j++) {
+          R[j][0].lastIndex = i; var m = R[j][0].exec(ln);
+          if (m && m[0].length) { out.push({ t: m[0], c: R[j][1] }); i += m[0].length; ok = true; break; }
+        }
+        if (!ok) { out.push({ t: ln[i], c: "teks" }); i++; }
+      }
+      return out;
+    });
+  }
+  function warnaTok(T, c) { return T[c] || T.teks; }
+  /** tunggu berkas font termuat (fonts.ready saja belum cukup untuk mengukur) */
+  function muatFont(spec, berat) {
+    if (!document.fonts || !document.fonts.load) return Promise.resolve();
+    var fam = BLOCK.family(spec, "monospace");
+    return Promise.all((berat || [400]).map(function (b) { return document.fonts.load(b + " 20px " + fam, "Aa{}"); })).catch(function () {});
+  }
+  /** jendela generik: bilah judul + tiga titik, isi di bawahnya */
+  function jendela(par, T, w, h, judul, s, mono) {
+    var win = BLOCK.el("div", { style: "position:absolute;left:50%;top:50%;width:" + w + "px;height:" + h + "px;margin:" + (-h / 2) + "px 0 0 " + (-w / 2) + "px;border-radius:" + 14 * s + "px;background:" + T.bg + ";box-shadow:0 " + 30 * s + "px " + 80 * s + "px rgba(0,0,0,.5),0 0 0 1px " + T.garis + ";overflow:hidden" }, par);
+    var bar = BLOCK.el("div", { style: "position:absolute;left:0;right:0;top:0;height:" + 44 * s + "px;background:" + T.panel + ";border-bottom:1px solid " + T.garis + ";display:flex;align-items:center;justify-content:center;color:" + T.redup + ";font:500 " + 16 * s + "px " + mono }, win, BLOCK.esc(judul));
+    ["#ff5f57", "#febc2e", "#28c840"].forEach(function (c, i) { BLOCK.el("div", { style: "position:absolute;left:" + (18 + i * 22) * s + "px;top:50%;width:" + 12 * s + "px;height:" + 12 * s + "px;margin-top:" + (-6 * s) + "px;border-radius:50%;background:" + c }, bar); });
+    var isi = BLOCK.el("div", { style: "position:absolute;left:0;right:0;top:" + 44 * s + "px;bottom:0;overflow:hidden" }, win);
+    return { win: win, bar: bar, isi: isi };
+  }
+  // --- akhir penyorot ---
+  var T = TEMA[P.theme] || TEMA["dark-2026"], mono = BLOCK.family(P.font, "ui-monospace, monospace"), lebar = W > H * 1.2, penuh = P.chrome === "full";
+  return muatFont(P.font, [400, 700]).then(function () {
+    var ww = Math.min(W * 0.92, H * (lebar ? 1.62 : 0.6)), wh = Math.min(H * 0.86, ww * (lebar ? 0.62 : 1.5)), j = jendela(k.root, T, ww, wh, (penuh ? P.project + " — " : "") + P.file, s, mono);
+    var isi = j.isi, fs = P.size * s * (penuh ? 0.9 : 1), lh = fs * 1.6, x0 = 0, y0 = 0, x1 = 0, y1 = 0, status = null;
+    if (penuh) {
+      // krom editor generik: bilah aktivitas, penjelajah berkas, tab, terminal, bilah status
+      var ab = 56 * s, sb = lebar ? 250 * s : 0, tb = 40 * s, tp = wh * 0.2, st = 30 * s;
+      var A = E("div", { class: "pn", style: "left:0;top:0;bottom:" + st + "px;width:" + ab + "px;background:" + T.panel + ";border-right:1px solid " + T.garis }, isi);
+      for (var i = 0; i < 4; i++) E("div", { style: "position:absolute;left:" + 16 * s + "px;top:" + (16 + i * 52) * s + "px;width:" + 24 * s + "px;height:" + 24 * s + "px;border-radius:" + 6 * s + "px;border:" + 2 * s + "px solid " + (i ? T.redup : T.teks) + ";box-sizing:border-box;opacity:" + (i ? 0.6 : 1) }, A);
+      if (sb) {
+        var S = E("div", { class: "pn", style: "left:" + ab + "px;top:0;bottom:" + st + "px;width:" + sb + "px;background:" + T.panel + ";border-right:1px solid " + T.garis + ";padding:" + 14 * s + "px " + 16 * s + "px;font:" + 15 * s + "px/2 " + mono + ";color:" + T.redup }, isi);
+        S.innerHTML = '<div style="letter-spacing:.1em;font-size:' + 12 * s + 'px">PENJELAJAH</div>&#9662; ' + BLOCK.esc(P.project) + '<br>&nbsp;&nbsp;&#9656; src<br>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:' + T.teks + ';background:' + BLOCK.rgba(T.aksen, 0.22) + ';padding:0 ' + 6 * s + 'px">' + BLOCK.esc(P.file) + '</span><br>&nbsp;&nbsp;&nbsp;&nbsp;uang.js<br>&nbsp;&nbsp;package.json<br>&nbsp;&nbsp;README.md';
+      }
+      x0 = ab + sb;
+      var tab = E("div", { class: "pn", style: "left:" + x0 + "px;right:0;top:0;height:" + tb + "px;background:" + T.panel + ";border-bottom:1px solid " + T.garis }, isi);
+      E("div", { style: "position:absolute;left:0;top:0;bottom:0;padding:0 " + 20 * s + "px;display:flex;align-items:center;background:" + T.bg + ";border-top:" + 2 * s + "px solid " + T.aksen + ";color:" + T.teks + ";font:" + 15 * s + "px " + mono }, tab, BLOCK.esc(P.file));
+      var term = E("div", { class: "pn", style: "left:" + x0 + "px;right:0;bottom:" + st + "px;height:" + tp + "px;border-top:1px solid " + T.garis + ";padding:" + 12 * s + "px " + 20 * s + "px;font:" + 15 * s + "px/1.8 " + mono + ";color:" + T.redup }, isi);
+      term.innerHTML = '<span style="letter-spacing:.1em;color:' + T.teks + '">TERMINAL</span><br><span style="color:' + T.tambah + '">&#10140;</span> ' + BLOCK.esc(P.project) + ' <span style="color:' + T.teks + '">npm run dev</span><br>siap di http://localhost:5173';
+      var stb = E("div", { class: "pn", style: "left:0;right:0;bottom:0;height:" + st + "px;background:" + T.aksen + ";color:#fff;display:flex;align-items:center;gap:" + 26 * s + "px;padding:0 " + 16 * s + "px;font:" + 14 * s + "px " + mono }, isi);
+      E("span", null, stb, "&#9095; main"); status = E("span", { style: "margin-left:auto" }, stb); E("span", null, stb, "UTF-8"); E("span", null, stb, { js: "JavaScript", py: "Python", html: "HTML", bash: "Shell" }[P.lang] || P.lang);
+      y0 = tb; y1 = tp + st;
+    }
+    var ed = E("div", { class: "ed", style: "left:" + x0 + "px;right:" + x1 + "px;top:" + y0 + "px;bottom:" + y1 + "px;font:" + fs + "px/" + lh + "px " + mono + ";color:" + T.teks }, isi);
+    var box = E("div", { class: "isi", style: "padding-top:" + 14 * s + "px" }, ed), gw = fs * 3.2;
+    // susun semua baris lengkap (tersembunyi), lalu ungkap unit demi unit
+    var units = [], rows = [], t = +P.start, baris = sorot(P.code, P.lang);
+    baris.forEach(function (toks, li) {
+      var ln = E("div", { class: "ln", style: "height:" + lh + "px" }, box), hl = E("div", { style: "position:absolute;inset:0;background:" + BLOCK.rgba(T.aksen, 0.08) + ";opacity:0" }, ln);
+      var no = E("span", { class: "no", style: "width:" + gw + "px;padding-right:" + fs * 1.1 + "px;color:" + T.redup }, ln, String(li + 1));
+      rows.push({ ln: ln, hl: hl, no: no, t: t });
+      toks.forEach(function (tk) {
+        var parts = P.unit === "letters" && tk.c !== "sp" ? Array.from(tk.t) : [tk.t];
+        parts.forEach(function (pt) {
+          var sp = E("span", { style: "color:" + warnaTok(T, tk.c) + (tk.c === "kom" ? ";font-style:italic" : "") }, ln); sp.textContent = pt;
+          if (tk.c !== "sp") t += (P.unit === "letters" ? 0.035 : 0.075 + pt.length * 0.012) * (0.6 + rng() * 0.8);
+          units.push({ el: sp, t: t, li: li });
+        });
+      });
+      t += toks.length ? 0.16 : 0.08;
+      if (!toks.length) units.push({ el: E("span", null, ln, "​"), t: t, li: li, kosong: true });
+    });
+    var akhir = D - 1.0, sk = Math.min(1, (akhir - P.start) / (t - P.start));
+    units.forEach(function (u) { u.t = +P.start + (u.t - P.start) * sk; });
+    rows.forEach(function (r) { r.t = +P.start + (r.t - P.start) * sk; });
+    var kr = E("div", { class: "kr", style: "width:" + Math.max(2, 2.5 * s) + "px;height:" + fs * 1.25 + "px;background:" + T.kursor }, box);
+    var pos = units.map(function (u) { return { x: u.el.offsetLeft + (u.kosong ? 0 : u.el.offsetWidth), y: rows[u.li].ln.offsetTop + (lh - fs * 1.25) / 2 }; });
+    var tinggiEd = ed.clientHeight, last = -1;
+    BLOCK.onTime(tl, function (tt) {
+      var n = 0; while (n < units.length && units[n].t <= tt) n++;
+      if (n !== last) { units.forEach(function (u, i) { var v = i < n ? "visible" : "hidden"; if (u.el.style.visibility !== v) u.el.style.visibility = v; }); last = n; }
+      var li = n ? units[n - 1].li : 0, p = n ? pos[n - 1] : { x: gw, y: rows[0].ln.offsetTop + (lh - fs * 1.25) / 2 };
+      rows.forEach(function (r, i) { r.no.style.opacity = tt >= r.t - 0.3 || i === 0 ? 1 : 0.35; r.hl.style.opacity = i === li ? 1 : 0; });
+      kr.style.transform = "translate(" + p.x + "px," + p.y + "px)";
+      var idle = tt - (n ? units[n - 1].t : 0);
+      kr.style.opacity = idle > 0.4 && Math.floor(tt * 2) % 2 ? 0 : 1;
+      // gulir bila baris aktif mendekati dasar editor
+      var target = Math.max(0, p.y + lh * 3 - tinggiEd);
+      box.style.transform = "translateY(" + (-target) + "px)";
+      if (status) status.textContent = "Ln " + (li + 1) + ", Kol " + (n ? (units[n - 1].el.offsetLeft + units[n - 1].el.offsetWidth - gw) / (fs * 0.6) + 1 | 0 : 1);
+    }, D);
+    tl.fromTo(j.win, { autoAlpha: 0, y: 30 * s, scale: 0.97 }, { autoAlpha: 1, y: 0, scale: 1, duration: 0.6, ease: "power3.out" }, 0);
+  });
+}, { font: true });
+</script>

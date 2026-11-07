@@ -1,0 +1,88 @@
+{
+ "id": "backgrounds/aurora",
+ "name": "Aurora",
+ "name_id": "Aurora",
+ "category": "backgrounds",
+ "description": {
+  "id": "Tirai cahaya aurora hijau-ungu beriak pelan di langit malam berbintang. Shader WebGL ringan, warna bisa diganti.",
+  "en": "Green-violet aurora curtains ripple slowly across a starry night sky. Lightweight WebGL shader with editable colours."
+ },
+ "tags": [
+  "latar",
+  "background",
+  "aurora",
+  "shader",
+  "webgl",
+  "malam",
+  "cahaya",
+  "backgrounds"
+ ],
+ "props": {
+  "color1": {
+   "default": "#21e6a1",
+   "type": "color",
+   "aliases": [
+    "warna1"
+   ]
+  },
+  "color2": {
+   "default": "#8a5cff",
+   "type": "color",
+   "aliases": [
+    "warna2"
+   ]
+  },
+  "sky": {
+   "default": "#050b1a",
+   "type": "color",
+   "aliases": [
+    "langit"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "strength": {
+   "default": 1,
+   "type": "number",
+   "aliases": [
+    "kekuatan"
+   ]
+  },
+  "star": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "bintang"
+   ]
+  },
+  "resolution": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Skala resolusi shader (0.25-1); kecil = lebih cepat",
+   "aliases": [
+    "resolusi"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "latar/aurora",
+  "aurora",
+  "aurora-drift"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

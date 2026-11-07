@@ -1,0 +1,106 @@
+{
+ "id": "textures/stop-motion",
+ "name": "Stop Motion",
+ "name_id": "Stop Motion",
+ "category": "textures",
+ "description": {
+  "id": "Hukum waktu stop motion: semua gerak dibaca dari waktu bertangga (on-twos, 12 fps) sehingga terasa dianimasikan dengan tangan. Bila target diisi, elemen host 'mendidih' (posisi dan rotasi bergoyang tiap langkah, berseed). Tanpa target, tampil demo empat bentuk kertas yang dilempar, mendarat dengan squash, tepi guntingnya bergetar, dan percikan yang hidup tepat 2-3 frame.",
+  "en": "Stop-motion time law: all motion reads stepped time (on twos, 12 fps). With a target, host elements boil with seeded per-step jitter; without one, a demo of four paper-cut shapes throws and lands with squash, boiling cut edges and sparkles living exactly 2-3 frames."
+ },
+ "tags": [
+  "tekstur",
+  "texture",
+  "stop-motion",
+  "boil",
+  "on-twos",
+  "kertas",
+  "paper-cut",
+  "hand-drawn",
+  "jitter",
+  "textures",
+  "stop",
+  "motion"
+ ],
+ "props": {
+  "target": {
+   "default": "",
+   "type": "selector",
+   "hint": "Kosong = demo bentuk kertas; isi = semua elemen yang cocok diberi boil"
+  },
+  "fps": {
+   "default": 12,
+   "type": "number",
+   "hint": "Laju langkah (12 = on twos pada 24 fps)"
+  },
+  "boil": {
+   "default": 3,
+   "type": "number",
+   "hint": "Amplitudo goyang posisi (px pada 1080)"
+  },
+  "boil_rotation": {
+   "default": 1.2,
+   "type": "number",
+   "hint": "Amplitudo goyang rotasi (derajat)",
+   "aliases": [
+    "boil_rotasi"
+   ]
+  },
+  "color": {
+   "default": [
+    "#e8553d",
+    "#2d6cdf",
+    "#f2b632",
+    "#3f8f6b"
+   ],
+   "type": "list",
+   "hint": "Warna empat bentuk demo",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "ground_color": {
+   "default": "#c9b48a",
+   "type": "color",
+   "aliases": [
+    "warna_tanah"
+   ]
+  },
+  "pause": {
+   "default": 0.32,
+   "type": "number",
+   "hint": "Jeda antar lemparan (detik)",
+   "aliases": [
+    "jeda"
+   ]
+  },
+  "splash": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Percikan saat mendarat",
+   "aliases": [
+    "percikan"
+   ]
+  },
+  "seed": {
+   "default": 8,
+   "type": "number"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "tekstur/stop-motion",
+  "stop-motion-cadence",
+  "hw-boil",
+  "play-mode"
+ ],
+ "example": {
+  "bg": "paper"
+ }
+}

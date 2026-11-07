@@ -1,0 +1,123 @@
+{
+ "id": "backgrounds/galaxy",
+ "name": "Galaxy",
+ "name_id": "Galaksi",
+ "category": "backgrounds",
+ "description": {
+  "id": "Galaksi spiral dilihat dari luar dengan rotasi diferensial sungguhan: bintang dalam mengorbit lebih cepat sehingga lengan makin menggulung; atau planet kosmik berkilau seperti gelembung sabun dengan pita nebula dan tepi kaca berpendar.",
+  "en": "A spiral galaxy seen from outside with true differential rotation, inner stars orbiting faster so the arms wind up; or an iridescent cosmic orb with nebula bands and a refracting glass limb."
+ },
+ "tags": [
+  "latar",
+  "background",
+  "galaksi",
+  "luar-angkasa",
+  "bintang",
+  "spiral",
+  "planet",
+  "kosmik",
+  "kanvas",
+  "shader",
+  "backgrounds",
+  "galaxy"
+ ],
+ "props": {
+  "style": {
+   "default": "spiral",
+   "type": "enum",
+   "options": [
+    "spiral",
+    "orb"
+   ],
+   "aliases": [
+    "gaya"
+   ]
+  },
+  "color1": {
+   "default": "#7fb2ff",
+   "type": "color",
+   "hint": "Warna lengan / pita nebula",
+   "aliases": [
+    "warna1"
+   ]
+  },
+  "color2": {
+   "default": "#ff6fb5",
+   "type": "color",
+   "hint": "Warna aksen (nebula merah muda)",
+   "aliases": [
+    "warna2"
+   ]
+  },
+  "core_color": {
+   "default": "#ffe2b0",
+   "type": "color",
+   "aliases": [
+    "warna_inti"
+   ]
+  },
+  "bg": {
+   "default": "#03040a",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "count": {
+   "default": 6000,
+   "type": "number",
+   "hint": "Jumlah bintang (gaya spiral)",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "tilt": {
+   "default": 58,
+   "type": "number",
+   "hint": "Kemiringan piringan (derajat, gaya spiral)",
+   "aliases": [
+    "kemiringan"
+   ]
+  },
+  "size": {
+   "default": 1,
+   "type": "number",
+   "hint": "Skala ukuran",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali kecepatan gerak",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "resolution": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Skala resolusi shader (0.25-1); kecil = lebih cepat",
+   "aliases": [
+    "resolusi"
+   ]
+  }
+ },
+ "duration": 10,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "latar/galaksi",
+  "spiral-galaxy",
+  "cosmic-orb"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

@@ -1,0 +1,129 @@
+{
+ "id": "data/beat-timeline",
+ "name": "Beat Timeline",
+ "name_id": "Timeline Ketukan",
+ "category": "data",
+ "description": {
+  "id": "Tulang punggung timeline vertikal: setiap baris ketukan (label + judul) dipasang pada label bernama yang berjarak sama di timeline induk, masuk tepat pada labelnya, bertahan mengikuti urutan, lalu keluar bersama sebagai satu grup. Penanda aktif meluncur dari ketukan ke ketukan.",
+  "en": "A vertical timeline spine: each beat row (label + title) is pinned to an evenly spaced named label on the master timeline, enters on its label, holds with the sequence and exits with the group. An active marker glides beat to beat."
+ },
+ "tags": [
+  "data",
+  "timeline",
+  "ketukan",
+  "agenda",
+  "urutan",
+  "langkah",
+  "kronologi",
+  "beat"
+ ],
+ "props": {
+  "beats": {
+   "default": [
+    {
+     "label": "Minggu 1",
+     "judul": "Riset dan wawancara pengguna"
+    },
+    {
+     "label": "Minggu 2",
+     "judul": "Rancangan alur dan prototipe"
+    },
+    {
+     "label": "Minggu 3",
+     "judul": "Uji coba dengan 40 peserta"
+    },
+    {
+     "label": "Minggu 4",
+     "judul": "Rilis bertahap ke semua kota"
+    }
+   ],
+   "type": "list",
+   "hint": "[{label, judul}]",
+   "aliases": [
+    "ketukan"
+   ]
+  },
+  "color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#7cc4ff",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg_color": {
+   "default": "#14151f",
+   "type": "color",
+   "hint": "Isi tik sebelum aktif (samakan dengan latar)",
+   "aliases": [
+    "warna_latar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;700",
+   "type": "font"
+  },
+  "font2": {
+   "default": "JetBrains Mono:wght@500",
+   "type": "font",
+   "hint": "Font label"
+  },
+  "size": {
+   "default": 54,
+   "type": "number",
+   "hint": "Ukuran judul (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "position_x": {
+   "default": 14,
+   "type": "number",
+   "hint": "Tepi kiri (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 52,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "width": {
+   "default": 70,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "lebar"
+   ]
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "1:1",
+  "4:5",
+  "9:16"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "data/timeline-ketukan",
+  "beat-timeline"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@500;700",
+   "JetBrains Mono:wght@500"
+  ]
+ }
+}

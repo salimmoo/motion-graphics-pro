@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP characterStyles · vektor, pixel art, origami</title>
+<style>html,body{margin:0;background:#0e1116}#stage{position:relative;width:1280px;height:720px;overflow:hidden;background:#111}
+#stage canvas{position:absolute}</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../figure3d.js"></script>
+<script src="../origami-fold.js"></script>
+<script src="../character-styles.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720"></div>
+<script>
+// One character, three looks. Top row: the same walk in vector, pixel art and origami (the origami sheets unfold at the start).
+// Bottom row: the example motion of each look: vector wave, pixel sprite sheet, origami crane.
+const C = MGP.core, CS = MGP.characterStyles, stage = document.getElementById("stage");
+const cv = (x, y) => { const c = document.createElement("canvas"); c.style.left = x + "px"; c.style.top = y + "px"; stage.appendChild(c); return c; };
+const D = 10, W = 424, H1 = 420, H2 = 296;
+const insts = [
+  CS.create(cv(0, 0), { width: W, height: H1, duration: D, style: "vector", action: "walk" }),
+  CS.create(cv(428, 0), { width: W, height: H1, duration: D, style: "pixel", action: "walk" }),
+  CS.create(cv(856, 0), { width: W, height: H1, duration: D, style: "origami", action: "walk", unfoldAt: 0.3 }),
+  CS.create(cv(0, 424), { width: W, height: H2, duration: D, style: "vector", action: "wave" }),
+  CS.create(cv(428, 424), { width: W, height: H2, duration: D, style: "pixel", action: "sheet" }),
+  CS.create(cv(856, 424), { width: W, height: H2, duration: D, style: "origami", action: "crane", stepLabels: false }),
+];
+const comp = { duration: D, ready: Promise.all(insts.map((x) => x.ready)), seek(t) { insts.forEach((x) => x.seek(t)); return comp; }, timeline() { return C.timeline(this); } };
+C.expose(comp);
+</script>
+</body>
+</html>

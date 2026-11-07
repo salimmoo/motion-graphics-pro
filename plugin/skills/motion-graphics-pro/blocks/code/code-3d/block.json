@@ -1,0 +1,120 @@
+{
+ "id": "code/code-3d",
+ "name": "Code 3D",
+ "name_id": "Lempeng Kode 3D",
+ "category": "code",
+ "description": {
+  "id": "Kode bersorot sintaks di atas lempeng 3D tebal berlapis (CSS 3D, tanpa WebGL) yang berputar melintasi ruang, dengan kilau cahaya yang bergeser mengikuti sudut, lalu mendarat dan mengendap ke posisi yang nyaman dibaca.",
+  "en": "Syntax-highlighted code on a thick layered CSS-3D slab that spins through space with an angle-driven sheen, then lands and settles to a readable rest. No WebGL needed."
+ },
+ "tags": [
+  "kode",
+  "3d",
+  "extrude",
+  "slab",
+  "reveal",
+  "syntax-highlight",
+  "developer",
+  "code"
+ ],
+ "props": {
+  "code": {
+   "default": "async function muat(id) {\n  const res = await fetch(`/api/produk/${id}`);\n  if (!res.ok) throw new Error(\"gagal\");\n  return res.json();\n}",
+   "type": "text",
+   "aliases": [
+    "kode"
+   ]
+  },
+  "lang": {
+   "default": "js",
+   "type": "enum",
+   "options": [
+    "js",
+    "py",
+    "html",
+    "bash"
+   ],
+   "aliases": [
+    "bahasa"
+   ]
+  },
+  "theme": {
+   "default": "dark-2026",
+   "type": "enum",
+   "options": [
+    "dark-2026",
+    "modern-dark",
+    "light",
+    "terminal-pro"
+   ],
+   "aliases": [
+    "tema"
+   ],
+   "option_aliases": {
+    "gelap-2026": "dark-2026",
+    "gelap-modern": "modern-dark",
+    "terang": "light"
+   }
+  },
+  "size": {
+   "default": 30,
+   "type": "number",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "thickness": {
+   "default": 46,
+   "type": "number",
+   "hint": "Tebal lempeng (px pada 1080)",
+   "aliases": [
+    "tebal"
+   ]
+  },
+  "layer": {
+   "default": 12,
+   "type": "number",
+   "hint": "Jumlah lapisan ekstrusi",
+   "aliases": [
+    "lapis"
+   ]
+  },
+  "turns": {
+   "default": 1,
+   "type": "number",
+   "hint": "Putaran penuh sebelum mendarat",
+   "aliases": [
+    "putaran"
+   ]
+  },
+  "landing": {
+   "default": 3.0,
+   "type": "number",
+   "hint": "Detik lempeng mendarat",
+   "aliases": [
+    "mendarat"
+   ]
+  },
+  "font": {
+   "default": "JetBrains Mono:wght@400;500;700",
+   "type": "font"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "1:1",
+  "9:16"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "kode/kode-3d",
+  "code-3d-extrude"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "JetBrains Mono:wght@400;500;700"
+  ]
+ }
+}

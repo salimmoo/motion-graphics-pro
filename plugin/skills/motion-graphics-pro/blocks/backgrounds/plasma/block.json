@@ -1,0 +1,85 @@
+{
+ "id": "backgrounds/plasma",
+ "name": "Plasma",
+ "name_id": "Plasma",
+ "category": "backgrounds",
+ "description": {
+  "id": "Plasma ungu pekat melipat dan bergolak memenuhi layar. Shader WebGL ringan dengan tiga warna yang bisa diganti.",
+  "en": "Deep violet plasma folds and churns across the whole frame. Lightweight WebGL shader with three editable colours."
+ },
+ "tags": [
+  "latar",
+  "background",
+  "plasma",
+  "shader",
+  "webgl",
+  "ungu",
+  "cair",
+  "backgrounds"
+ ],
+ "props": {
+  "color1": {
+   "default": "#0d0221",
+   "type": "color",
+   "hint": "Warna gelap",
+   "aliases": [
+    "warna1"
+   ]
+  },
+  "color2": {
+   "default": "#5b1fbf",
+   "type": "color",
+   "hint": "Warna tengah",
+   "aliases": [
+    "warna2"
+   ]
+  },
+  "color3": {
+   "default": "#e0a8ff",
+   "type": "color",
+   "hint": "Warna sorot",
+   "aliases": [
+    "warna3"
+   ]
+  },
+  "scale": {
+   "default": 3,
+   "type": "number",
+   "hint": "Kerapatan lipatan",
+   "aliases": [
+    "skala"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali kecepatan gerak",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "resolution": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Skala resolusi shader (0.25-1); kecil = lebih cepat",
+   "aliases": [
+    "resolusi"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "latar/plasma",
+  "plasma"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

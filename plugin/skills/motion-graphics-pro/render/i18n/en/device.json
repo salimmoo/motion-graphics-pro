@@ -1,0 +1,14 @@
+{
+ "Apple Silicon (unified memory)": "Apple Silicon (unified memory)",
+ "this ffmpeg has no {}": "this ffmpeg has no {}",
+ "NVIDIA driver too old for this ffmpeg (needs >= {}); update the driver, or point MGP_FFMPEG to ffmpeg 7.x/8.0 [{}]": "NVIDIA driver too old for this ffmpeg (needs >= {}); update the driver, or point MGP_FFMPEG to ffmpeg 7.x/8.0 [{}]",
+ "code {}": "code {}",
+ "libx264 (CPU, deterministic)": "libx264 (CPU, deterministic)",
+ "unknown --encoder \"{}\" (auto, cpu, nvenc, qsv, amf, videotoolbox)": "unknown --encoder \"{}\" (auto, cpu, nvenc, qsv, amf, videotoolbox)",
+ "nvenc: free VRAM {} GB, needs ~{} GB": "nvenc: free VRAM {} GB, needs ~{} GB",
+ "{} ({}, test encode passed in {} ms)": "{} ({}, test encode passed in {} ms)",
+ "this ffmpeg has no hardware H.264 encoder": "this ffmpeg has no hardware H.264 encoder",
+ "libx264 (CPU); hardware encoder cannot be used: {}": "libx264 (CPU); hardware encoder cannot be used: {}",
+ "GPU free after {} s": "GPU free after {} s",
+ "GPU in use by '{}' (PID {}); waiting at most {} s...": "GPU in use by '{}' (PID {}); waiting at most {} s..."
+}

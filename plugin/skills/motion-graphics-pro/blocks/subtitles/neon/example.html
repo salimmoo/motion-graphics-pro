@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1080x1920">
+<title>Neon · block example subtitles/neon</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tilt+Neon:wght@400&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1080" data-height="1920" data-duration="5.5">
+<div id="adegan" class="adegan ad-gelap"></div>
+<!-- Block subtitles/neon · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-neon" data-block="subtitles/neon" data-start="0" data-duration="5" data-track-index="30" class="blk blk-subtitles-neon">
+<script type="application/json" data-block-props>
+{"text": "Malam ini kota bersinar lebih *terang* dari *biasanya*", "words": [], "kps": 2.4, "max_words": 3, "font": "Tilt Neon:wght@400", "size": 84, "color": "#f4fdff", "bottom": 16, "uppercase": true, "style": "glow", "neon_color": "#19e6ff", "accent_color": "#ff2bd6", "palette": ["#ff2bd6", "#ffe14a", "#5cff8a", "#ff8a2b"], "keywords": [], "wobble": 1}
+</script>
+<div class="blk-cap"></div>
+</div>
+<style>
+.blk-subtitles-neon{position:absolute;inset:0;pointer-events:none}
+.blk-subtitles-neon .blk-cap{position:absolute;left:5%;right:5%;text-align:center;line-height:1.2}
+.blk-subtitles-neon .blk-hal{position:absolute;left:0;right:0;bottom:0}
+.blk-subtitles-neon .blk-w{display:inline-block;margin:0 .14em}
+</style>
+<script>
+BLOCK.mount("blk-neon", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, cap = k.root.querySelector(".blk-cap");
+  var KL = (P.keywords || []).map(function (x) { return String(x).toLowerCase(); });
+  var polos = function (t) { return String(t).replace(/\*/g, ""); };
+  var kunci = function (t) { return /\*/.test(t) || KL.indexOf(polos(t).toLowerCase().replace(/[^\p{L}\p{N}]/gu, "")) >= 0; };
+  cap.style.cssText += ";bottom:" + P.bottom + "%;color:" + P.color + ";font-family:" + BLOCK.family(P.font) + ";font-size:" +
+    Math.round(P.size * s) + "px" + (P.uppercase ? ";text-transform:uppercase" : "");
+  var px = function (v) { return Math.round(v * s) + "px"; };
+  var glow = function (c) { return "0 0 " + px(3) + " #fff,0 0 " + px(10) + " " + c + ",0 0 " + px(22) + " " + c + ",0 0 " + px(44) + " " + c + ",0 0 " + px(80) + " " + BLOCK.rgba(c, 0.6); };
+  var redup = function (c) { return "0 0 " + px(6) + " " + BLOCK.rgba(c, 0.35); };
+  var aksen = P.style === "accent", nk = 0, semua = [];
+  BLOCK.pages(BLOCK.words(P), P.max_words).forEach(function (pg) {
+    var h = BLOCK.el("div", { class: "blk-hal" }, cap);
+    BLOCK.initial(tl, h, { autoAlpha: 0 }).set(h, { autoAlpha: 1 }, pg.mulai).set(h, { autoAlpha: 0 }, pg.akhir);
+    pg.kata.forEach(function (w) {
+      var e = BLOCK.el("span", { class: "blk-w" }, h), kk = kunci(w.teks);
+      e.textContent = polos(w.teks);
+      var c = kk ? (aksen ? P.palette[nk++ % P.palette.length] : P.accent_color) : (aksen && semua.length % 2 ? P.palette[(semua.length >> 1) % P.palette.length] : P.neon_color);
+      if (kk) e.style.color = BLOCK.mix(c, "#ffffff", 0.55);
+      // tabung belum menyala -> berkedip -> menyala penuh
+      BLOCK.initial(tl, e, { opacity: 0.16, textShadow: redup(c) });
+      var t0 = w.mulai;
+      tl.set(e, { opacity: 0.9, textShadow: glow(c) }, t0).set(e, { opacity: 0.25 }, t0 + 0.04).set(e, { opacity: 1 }, t0 + 0.08)
+        .set(e, { opacity: 0.55 }, t0 + 0.13).set(e, { opacity: 1 }, t0 + 0.16);
+      semua.push({ e: e, i: semua.length });
+    });
+  });
+  // gaya aksen: setiap kata melayang dan bergoyang pelan (noise berseed, murni dari t)
+  if (aksen && P.wobble > 0) BLOCK.onTime(tl, function (t) {
+    semua.forEach(function (o) {
+      var r = BLOCK.noise(t * 1.3 + o.i * 3.1, 7) * 4 * P.wobble, y = BLOCK.noise(t * 1.1 + o.i * 5.7, 3) * 7 * s * P.wobble;
+      o.e.style.transform = "translateY(" + y.toFixed(2) + "px) rotate(" + r.toFixed(2) + "deg)";
+    });
+  }, k.dur);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 5.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5.5);
+</script>
+</body>
+</html>

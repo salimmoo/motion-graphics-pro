@@ -1,0 +1,147 @@
+{
+ "id": "code/code-typing",
+ "name": "Code Typing",
+ "name_id": "Kode Diketik",
+ "category": "code",
+ "description": {
+  "id": "Jendela editor kode generik yang mengetik kode per token atau per huruf dengan penyorotan sintaks, caret mengikuti ujung ketikan, baris aktif tersorot, nomor baris, dan gulir otomatis. Krom penuh (bilah aktivitas, penjelajah, tab, terminal, bilah status) atau ringkas. Tema gelap-2026, gelap-modern, terang, terminal-pro.",
+  "en": "A generic code editor window typing code token by token or per character with syntax highlighting, a frontier-tracking caret, active line, gutter and auto-scroll. Full chrome (activity bar, explorer, tabs, terminal, status bar) or compact. Four themes."
+ },
+ "tags": [
+  "kode",
+  "editor",
+  "typing",
+  "syntax-highlight",
+  "pemrograman",
+  "caret",
+  "developer",
+  "code"
+ ],
+ "props": {
+  "code": {
+   "default": "// hitung total belanja dengan diskon\nimport { format } from \"./uang.js\";\n\nexport function total(keranjang, diskon = 0) {\n  const jumlah = keranjang.reduce((a, b) => a + b.harga * b.qty, 0);\n  if (diskon > 0) {\n    return format(jumlah * (1 - diskon / 100));\n  }\n  return format(jumlah);\n}\n\nconsole.log(total([{ harga: 25000, qty: 2 }], 10));",
+   "type": "text",
+   "hint": "Kode sumber (\n = baris baru)",
+   "aliases": [
+    "kode"
+   ]
+  },
+  "lang": {
+   "default": "js",
+   "type": "enum",
+   "options": [
+    "js",
+    "py",
+    "html",
+    "bash"
+   ],
+   "aliases": [
+    "bahasa"
+   ]
+  },
+  "theme": {
+   "default": "dark-2026",
+   "type": "enum",
+   "options": [
+    "dark-2026",
+    "modern-dark",
+    "light",
+    "terminal-pro"
+   ],
+   "aliases": [
+    "tema"
+   ],
+   "option_aliases": {
+    "gelap-2026": "dark-2026",
+    "gelap-modern": "modern-dark",
+    "terang": "light"
+   }
+  },
+  "chrome": {
+   "default": "full",
+   "type": "enum",
+   "options": [
+    "full",
+    "compact"
+   ],
+   "aliases": [
+    "krom"
+   ],
+   "option_aliases": {
+    "penuh": "full",
+    "ringkas": "compact"
+   }
+  },
+  "unit": {
+   "default": "token",
+   "type": "enum",
+   "options": [
+    "token",
+    "letters"
+   ],
+   "aliases": [
+    "satuan"
+   ],
+   "option_aliases": {
+    "huruf": "letters"
+   }
+  },
+  "file": {
+   "default": "belanja.js",
+   "type": "text",
+   "aliases": [
+    "berkas"
+   ]
+  },
+  "project": {
+   "default": "toko-kecil",
+   "type": "text",
+   "aliases": [
+    "proyek"
+   ]
+  },
+  "size": {
+   "default": 24,
+   "type": "number",
+   "hint": "Ukuran huruf kode (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "start": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Detik mulai mengetik (ketikan dipadatkan agar selesai 1 detik sebelum akhir)",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "font": {
+   "default": "JetBrains Mono:wght@400;500;700",
+   "type": "font"
+  },
+  "seed": {
+   "default": 4,
+   "type": "number"
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "1:1",
+  "9:16"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "kode/ketik-kode",
+  "code-typing",
+  "code-snippet-dark-2026",
+  "code-snippet-dark-modern"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "JetBrains Mono:wght@400;500;700"
+  ]
+ }
+}

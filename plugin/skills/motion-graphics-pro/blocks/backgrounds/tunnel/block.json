@@ -1,0 +1,85 @@
+{
+ "id": "backgrounds/tunnel",
+ "name": "Tunnel",
+ "name_id": "Terowongan Panel",
+ "category": "backgrounds",
+ "description": {
+  "id": "Lorong tanpa ujung: terowongan persegi menuju titik hilang, lantai, langit-langit, dan dindingnya berlapis panel warna bertekstur yang membesar ke arah kamera lalu lewat, ujung jauhnya larut dalam cahaya.",
+  "en": "An endless corridor: a square tunnel receding to a vanishing point, its floor, ceiling and walls tiled with textured colour panels that swell toward camera and pass by, the far end dissolving into light."
+ },
+ "tags": [
+  "latar",
+  "background",
+  "terowongan",
+  "lorong",
+  "perspektif",
+  "3d",
+  "panel",
+  "kanvas",
+  "titik-hilang",
+  "backgrounds",
+  "tunnel"
+ ],
+ "props": {
+  "color": {
+   "default": [
+    "#ff3d6e",
+    "#ffb000",
+    "#21c7a8",
+    "#3a6bff",
+    "#9b5cff"
+   ],
+   "type": "list",
+   "hint": "Daftar warna panel",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "bg": {
+   "default": "#07070c",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "end_color": {
+   "default": "#ffffff",
+   "type": "color",
+   "hint": "Cahaya di ujung lorong",
+   "aliases": [
+    "warna_ujung"
+   ]
+  },
+  "tile": {
+   "default": 3,
+   "type": "number",
+   "hint": "Jumlah panel per lebar dinding",
+   "aliases": [
+    "ubin"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali kecepatan gerak",
+   "aliases": [
+    "kecepatan"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "latar/terowongan",
+  "gallery-tunnel"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

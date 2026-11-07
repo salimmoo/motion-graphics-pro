@@ -1,0 +1,13 @@
+# requirements-voice-openvoice.txt (old syarat-suara-openvoice.txt): optional extras for the openvoice engine (mgp install voice --openvoice).
+# Installed with --no-deps after requirements-voice.txt. GitHub zip archives are used so git is not needed.
+MyShell-OpenVoice @ https://github.com/myshell-ai/OpenVoice/archive/74a1d147b17a8c3092dd5430504bd83ef6c7eb23.zip
+eng_to_ipa==0.0.2
+inflect==7.6.0
+jaraco.functools==4.6.0
+more-itertools==11.2.1
+typeguard==4.6.0
+Unidecode==1.4.0
+pypinyin==0.55.0
+cn2an==0.5.24
+proces==0.1.7
+jieba==0.42.1

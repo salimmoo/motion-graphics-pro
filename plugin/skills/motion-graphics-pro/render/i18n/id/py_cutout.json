@@ -1,0 +1,15 @@
+{
+ "cutout - Python part of `mgp cutout` and the magenta key of `mgp image` (mgp, Motion Graphics Pro).\nOld module name: potong_latar.py (thin shim kept).\n\nModes:\n  image   <input> <output.png> [--model u2net]               remove the background of one image with rembg (old: gambar)\n  folder  <input_dir> <output_dir> [--model] [--plate dir]   every PNG in the folder (video frames)\n  magenta <input> <output> [--clean [--components 0.02] [--threshold 128]]\n                                                             key a magenta #FF00FF background (numpy + Pillow); --clean = remove magenta leftovers\n\nrembg (MIT) uses the U2-Net model; the model is downloaded once to ~/.u2net on first use.\nOutput is always RGBA PNG. --plate writes the background layer (inverted alpha) for text between layers.\n": "cutout - bagian Python dari `mgp cutout` dan kunci magenta `mgp image` (mgp, Motion Graphics Pro).\nNama modul lama: potong_latar.py (shim tipis tetap ada).\n\nMode:\n  image   <masuk> <keluar.png> [--model u2net]               potong latar satu gambar dengan rembg (lama: gambar)\n  folder  <dir_masuk> <dir_keluar> [--model] [--plate dir]   setiap PNG di folder (frame video)\n  magenta <masuk> <keluar> [--clean [--components 0.02] [--threshold 128]]\n                                                             kunci latar magenta #FF00FF (numpy + Pillow); --clean = buang sisa magenta\n\nrembg (MIT) memakai model U2-Net; model diunduh sekali ke ~/.u2net saat pertama dipakai.\nKeluaran selalu PNG RGBA. --plate menulis lapisan latar (alfa terbalik) untuk teks di antara lapisan.\n",
+ "magenta: remove magenta leftovers (mgp image --cutout)": "magenta: pembersih sisa magenta (mgp image --cutout)",
+ "--clean: drop components < frac x the largest (0 = keep all, for kit sheets)": "--clean: buang komponen < frac x terbesar (0 = simpan semua, untuk lembar kit)",
+ "--clean: alpha < threshold becomes transparent": "--clean: alfa < ambang menjadi transparan",
+ "{}: {}x{} in {} s": "{}: {}x{} dalam {} s",
+ "frame {}/{}  ({} frame/s)": "frame {}/{}  ({} frame/s)",
+ "clean: {} magenta px, {} loose speck px, {} semi-transparent px removed": "bersih: {} px magenta, {} px bercak lepas, {} px semi-transparan dibuang",
+ "despill: key colour must be magenta, green, blue or #rrggbb, not {}": "despill: warna kunci harus magenta, green, blue atau #rrggbb, bukan {}",
+ "magenta: keep the key-colour tint along the edge (no despill)": "magenta: biarkan semburat warna kunci di tepi (tanpa despill)",
+ "despill band width in px (default 1.5 % of the short side)": "lebar pita despill dalam px (bawaan 1,5 % sisi pendek)",
+ "despill: key colour magenta | green | blue | #rrggbb": "despill: warna kunci magenta | green | blue | #rrggbb",
+ "despill: the whole subject, not only the edge band": "despill: seluruh subjek, bukan hanya pita tepi",
+ "despill {}: {} px along the edge (band {} px), tint {}% -> {}%": "despill {}: {} px di sepanjang tepi (pita {} px), semburat {}% -> {}%"
+}

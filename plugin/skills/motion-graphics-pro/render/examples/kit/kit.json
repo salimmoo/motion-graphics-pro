@@ -1,0 +1,155 @@
+{
+ "sumber": "contoh bawaan: kit rekam gambar kit (FLUX.2 klein 4B lokal, Apache-2.0), diperkecil 40%",
+ "lembar": [
+  410,
+  230
+ ],
+ "satuan": "px dalam PNG bagian; pivot = titik putar, ujung = sendi anak",
+ "bagian": [
+  {
+   "nama": "kepala",
+   "file": "kepala.png",
+   "x": 34,
+   "y": 22,
+   "w": 84,
+   "h": 90,
+   "luas": 5261,
+   "putar": 0,
+   "pivot": [
+    40.4,
+    84.4
+   ],
+   "ujung": [
+    42.0,
+    5.2
+   ]
+  },
+  {
+   "nama": "badan",
+   "file": "badan.png",
+   "x": 148,
+   "y": 14,
+   "w": 62,
+   "h": 107,
+   "luas": 5416,
+   "putar": 0,
+   "pivot": [
+    31.2,
+    5.8
+   ],
+   "ujung": [
+    30.0,
+    100.8
+   ]
+  },
+  {
+   "nama": "lengan_atas",
+   "file": "lengan_atas.png",
+   "x": 239,
+   "y": 38,
+   "w": 30,
+   "h": 60,
+   "luas": 1219,
+   "putar": 0,
+   "pivot": [
+    15.0,
+    3.8
+   ],
+   "ujung": [
+    14.8,
+    55.8
+   ]
+  },
+  {
+   "nama": "lengan_bawah",
+   "file": "lengan_bawah.png",
+   "x": 298,
+   "y": 39,
+   "w": 24,
+   "h": 57,
+   "luas": 965,
+   "putar": 0,
+   "pivot": [
+    11.8,
+    3.8
+   ],
+   "ujung": [
+    11.4,
+    52.8
+   ]
+  },
+  {
+   "nama": "tangan",
+   "file": "tangan.png",
+   "x": 346,
+   "y": 48,
+   "w": 30,
+   "h": 36,
+   "luas": 631,
+   "putar": 180.0,
+   "pivot": [
+    15.8,
+    2.7
+   ],
+   "ujung": [
+    15.4,
+    32.9
+   ]
+  },
+  {
+   "nama": "paha",
+   "file": "paha.png",
+   "x": 70,
+   "y": 128,
+   "w": 42,
+   "h": 77,
+   "luas": 2246,
+   "putar": 0,
+   "pivot": [
+    20.8,
+    4.4
+   ],
+   "ujung": [
+    20.8,
+    72.2
+   ]
+  },
+  {
+   "nama": "betis",
+   "file": "betis.png",
+   "x": 181,
+   "y": 132,
+   "w": 28,
+   "h": 72,
+   "luas": 1540,
+   "putar": 0,
+   "pivot": [
+    14.0,
+    4.4
+   ],
+   "ujung": [
+    13.2,
+    67.2
+   ]
+  },
+  {
+   "nama": "kaki",
+   "file": "kaki.png",
+   "x": 282,
+   "y": 150,
+   "w": 57,
+   "h": 32,
+   "luas": 1077,
+   "putar": 0,
+   "pivot": [
+    23.5,
+    2.8
+   ],
+   "ujung": [
+    22.1,
+    28.8
+   ]
+  }
+ ],
+ "peringatan": []
+}

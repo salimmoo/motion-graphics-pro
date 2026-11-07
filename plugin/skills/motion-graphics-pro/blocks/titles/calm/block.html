@@ -1,0 +1,77 @@
+<!-- Block titles/calm · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="titles/calm" data-start="0" data-duration="5" data-track-index="20" class="blk blk-titles-calm">
+<script type="application/json" data-block-props>
+{"style": "calm", "kicker": "Bab 02", "title": "Ruang yang memberi napas", "label": "Arsip Kota · 2026", "number": "02", "color": "#f2efe8", "accent_color": "#e63b2e", "bg": "#121315", "font": "Inter Tight:wght@500;600;700;800", "font2": "JetBrains Mono:wght@400;500", "size": 132}
+</script>
+</div>
+<style>
+.blk-titles-calm{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-titles-calm .blk-c{position:absolute;left:50%;top:50%;width:84%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;text-align:center}
+.blk-titles-calm .blk-mono{font-family:var(--f2);text-transform:uppercase;letter-spacing:.22em;font-size:calc(var(--s)*28px)}
+.blk-titles-calm .blk-jd{font-weight:600;letter-spacing:-.035em;line-height:1.02;margin:calc(var(--s)*28px) 0}
+.blk-titles-calm .blk-rule{height:1px;width:calc(var(--s)*360px);background:currentColor;opacity:.5;transform-origin:0 50%;margin:calc(var(--s)*6px) 0 calc(var(--s)*26px)}
+.blk-titles-calm .blk-sw{position:absolute;inset:7%}
+.blk-titles-calm .blk-gl{position:absolute;background:currentColor;opacity:.18}
+.blk-titles-calm .blk-abs{position:absolute}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, D = k.dur, E = BLOCK.el, R = k.root, A = P.accent_color, g = P.style;
+  var lat = P.bg || "", wr = P.color;
+  if (g === "vignelli" && P.bg === "#121315") { lat = "#f4f1ea"; wr = "#111111"; }
+  if (lat) R.style.background = lat;
+  R.style.cssText += ";--s:" + s + ";--f2:" + BLOCK.family(P.font2, "monospace") + ";color:" + wr + ";font-family:" + BLOCK.family(P.font);
+  var fs = Math.round(P.size * s), tk = D - 0.7;
+  if (g === "calm" || g === "lockup") {
+    var c = E("div", { class: "blk-c" }, R);
+    var kick = P.kicker ? E("div", { class: "blk-mono", style: "opacity:.7" }, c, BLOCK.esc(P.kicker)) : null;
+    var jd = E("div", { class: "blk-jd", style: "font-size:" + (g === "lockup" ? Math.round(fs * 1.15) : fs) + "px;" + (g === "lockup" ? "font-weight:800;letter-spacing:-.045em" : "") }, c, BLOCK.esc(P.title));
+    var rule = g === "lockup" ? E("div", { class: "blk-rule" }, c) : null;
+    var lb = g === "lockup" && P.label ? E("div", { class: "blk-mono", style: "opacity:.6;font-size:" + Math.round(20 * s) + "px" }, c, BLOCK.esc(P.label)) : null;
+    if (kick) tl.fromTo(kick, { y: 14 * s, autoAlpha: 0 }, { y: 0, autoAlpha: 0.7, duration: 0.9, ease: "power2.out" }, 0.2);
+    if (g === "calm") {
+      tl.fromTo(jd, { y: 34 * s, autoAlpha: 0, filter: "blur(6px)" }, { y: 0, autoAlpha: 1, filter: "blur(0px)", duration: 1.3, ease: "power3.out" }, 0.4)
+        .to(jd, { y: -8 * s, duration: tk - 1.7, ease: "none" }, 1.7)
+        .to(c.children, { autoAlpha: 0, y: "-=10", duration: 0.6, ease: "power2.in", stagger: 0.06 }, tk);
+    } else {
+      // satu gerak yang tertahan, garis rambut tergambar, lalu benar-benar diam
+      tl.fromTo(jd, { scale: 0.965, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 1.2, ease: "power3.out" }, 0.45)
+        .fromTo(rule, { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "power3.inOut" }, 1.1)
+        .fromTo(lb, { y: 8 * s, autoAlpha: 0 }, { y: 0, autoAlpha: 0.6, duration: 0.7, ease: "power2.out" }, 1.6)
+        .to(c, { autoAlpha: 0, duration: 0.6, ease: "power1.in" }, tk);
+    }
+    return;
+  }
+  var sw = E("div", { class: "blk-sw" }, R), gl = [];
+  if (g === "swiss") {
+    // grid Swiss: garis kisi tergambar, nomor besar, judul rata kiri, kotak aksen
+    [0, 1 / 3, 2 / 3, 1].forEach(function (x) { gl.push(E("div", { class: "blk-gl", style: "left:" + x * 100 + "%;top:0;bottom:0;width:1px;transform-origin:50% 0" }, sw)); });
+    [0.18, 1].forEach(function (y) { gl.push(E("div", { class: "blk-gl", style: "top:" + y * 100 + "%;left:0;right:0;height:1px;transform-origin:0 50%" }, sw)); });
+    var no = E("div", { class: "blk-abs", style: "left:0;top:0;font-weight:800;font-size:" + Math.round(fs * 0.9) + "px;line-height:.8;letter-spacing:-.05em" }, sw, BLOCK.esc(P.number));
+    var kt = E("div", { class: "blk-abs", style: "left:33.4%;top:0;padding-left:" + Math.round(14 * s) + "px;width:30%;font-weight:500;font-size:" + Math.round(24 * s) + "px;line-height:1.35" }, sw, BLOCK.esc(P.kicker) + "<br><span style='opacity:.55'>" + BLOCK.esc(P.label) + "</span>");
+    var kot = E("div", { class: "blk-abs", style: "right:0;top:0;width:" + Math.round(90 * s) + "px;height:" + Math.round(90 * s) + "px;background:" + A }, sw);
+    var jd2 = E("div", { class: "blk-abs", style: "left:0;bottom:" + Math.round(18 * s) + "px;width:" + (k.w > k.h ? "66%" : "100%") + ";font-weight:700;font-size:" + fs + "px;line-height:.98;letter-spacing:-.04em" }, sw);
+    var baris = BLOCK.split(jd2, P.title, "words");
+    tl.fromTo(gl, { scaleX: 0, scaleY: 0 }, { scaleX: 1, scaleY: 1, duration: 0.9, ease: "power3.inOut", stagger: 0.06 }, 0.1)
+      .fromTo(no, { yPercent: 40, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: 0.7, ease: "power3.out" }, 0.5)
+      .fromTo(kot, { scale: 0, transformOrigin: "100% 0%" }, { scale: 1, duration: 0.55, ease: "power3.out" }, 0.7)
+      .fromTo(kt, { x: -20 * s, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.6, ease: "power3.out" }, 0.8)
+      .fromTo(baris, { x: -40 * s, autoAlpha: 0 }, { x: 0, autoAlpha: 1, duration: 0.7, ease: "power4.out", stagger: 0.06 }, 0.9)
+      .fromTo(kot, { rotation: 0, transformOrigin: "50% 50%" }, { rotation: 90, transformOrigin: "50% 50%", duration: 1.2, ease: "power2.inOut", immediateRender: false }, tk - 1.4)
+      .to(sw.children, { autoAlpha: 0, duration: 0.5, ease: "power1.in", stagger: 0.02 }, tk);
+  } else {
+    // Vignelli: pita tebal di atas, Helvetica-ish huruf kecil tebal, satu warna aksen merah
+    var pita = E("div", { class: "blk-abs", style: "left:0;right:0;top:0;height:" + Math.round(26 * s) + "px;background:" + wr + ";transform-origin:0 50%" }, sw);
+    var mer = E("div", { class: "blk-abs", style: "left:0;top:" + Math.round(46 * s) + "px;width:" + Math.round(220 * s) + "px;height:" + Math.round(26 * s) + "px;background:" + A + ";transform-origin:0 50%" }, sw);
+    var jd3 = E("div", { class: "blk-abs", style: "left:0;top:" + Math.round(120 * s) + "px;width:100%;font-weight:700;font-size:" + Math.round(fs * 1.1) + "px;line-height:.96;letter-spacing:-.035em;text-transform:lowercase" }, sw);
+    var kata = BLOCK.split(jd3, P.title, "words");
+    var cap = E("div", { class: "blk-abs blk-mono", style: "left:0;bottom:0;letter-spacing:.12em;font-size:" + Math.round(22 * s) + "px" }, sw, BLOCK.esc(P.kicker) + " &nbsp;—&nbsp; " + BLOCK.esc(P.label));
+    tl.fromTo(pita, { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power4.inOut" }, 0.15)
+      .fromTo(mer, { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power4.out" }, 0.55)
+      .fromTo(kata, { y: 30 * s, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6, ease: "power3.out", stagger: 0.08 }, 0.75)
+      .fromTo(cap, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.6 }, 1.3)
+      .fromTo(mer, { width: Math.round(220 * s) }, { width: Math.round(420 * s), duration: tk - 2, ease: "sine.inOut", immediateRender: false }, 1.6)
+      .to(sw.children, { autoAlpha: 0, duration: 0.5, ease: "power1.in", stagger: 0.03 }, tk);
+  }
+}, { font: true });
+</script>

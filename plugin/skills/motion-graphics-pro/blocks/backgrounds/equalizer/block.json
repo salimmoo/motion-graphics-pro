@@ -1,0 +1,92 @@
+{
+ "id": "backgrounds/equalizer",
+ "name": "Equalizer",
+ "name_id": "Equalizer",
+ "category": "backgrounds",
+ "description": {
+  "id": "Batang equalizer bergradasi biru ke merah muda berdenyut di tengah layar seperti visualisasi audio. Deterministik, tidak membaca audio.",
+  "en": "Equalizer bars in a blue-to-pink gradient pulse across the middle of the frame like an audio visualiser. Deterministic, no audio input."
+ },
+ "tags": [
+  "latar",
+  "background",
+  "equalizer",
+  "audio",
+  "musik",
+  "batang",
+  "visualizer",
+  "shader",
+  "webgl",
+  "backgrounds"
+ ],
+ "props": {
+  "color1": {
+   "default": "#3d7bff",
+   "type": "color",
+   "aliases": [
+    "warna1"
+   ]
+  },
+  "color2": {
+   "default": "#ff4fb8",
+   "type": "color",
+   "aliases": [
+    "warna2"
+   ]
+  },
+  "bg": {
+   "default": "#05060d",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "count": {
+   "default": 48,
+   "type": "number",
+   "hint": "Jumlah batang",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "height": {
+   "default": 0.55,
+   "type": "number",
+   "hint": "Tinggi maksimum (fraksi tinggi layar)",
+   "aliases": [
+    "tinggi"
+   ]
+  },
+  "speed": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali kecepatan gerak",
+   "aliases": [
+    "kecepatan"
+   ]
+  },
+  "resolution": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Skala resolusi shader (0.25-1); kecil = lebih cepat",
+   "aliases": [
+    "resolusi"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "latar/equalizer",
+  "waveform"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

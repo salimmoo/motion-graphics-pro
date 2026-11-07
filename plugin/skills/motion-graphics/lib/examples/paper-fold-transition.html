@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP paperFoldTransition · lipat kertas, versi DOM, dan portal</title>
+<style>
+html,body{margin:0;background:#1a1410}
+#stage{position:relative;width:1280px;height:720px;overflow:hidden;background:#1a1410}
+.cell{position:absolute;top:0;width:426px;height:240px;overflow:hidden}
+#domCell{background:linear-gradient(180deg,#bcd3e6,#f1e4c8)}
+#domFold{position:absolute;left:40px;top:22px;width:346px;height:196px}
+.card{border-radius:0;font-family:Georgia,'Times New Roman',serif;padding:22px 26px;box-sizing:border-box;overflow:hidden}
+.card h2{margin:0 0 8px;font-weight:400;font-size:34px;letter-spacing:.01em}
+.card p{margin:0;font:400 14px/1.45 system-ui,'Segoe UI',Arial,sans-serif;max-width:230px}
+.card i{position:absolute;right:22px;bottom:18px;width:64px;height:64px;border-radius:50%}
+.c1{background:linear-gradient(135deg,#f7d9a8,#e9a46b);color:#3b1f0c}
+.c1 i{background:radial-gradient(circle at 40% 40%,#fff6d8,#f4b65a)}
+.c2{background:linear-gradient(135deg,#1d2b55,#3b4f8f);color:#f4ecd8}
+.c2 i{background:radial-gradient(circle at 35% 35%,#fffbe8,#cfd6f0);box-shadow:0 0 24px rgba(255,250,220,.6)}
+#portalCell{position:absolute;left:0;top:240px;width:1280px;height:480px}
+</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../constellation-lines.js"></script>
+<script src="../paper-fold-transition.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720">
+  <div class="cell" id="c1" style="left:0"></div>
+  <div class="cell" id="c2" style="left:427px"></div>
+  <div class="cell" id="domCell" style="left:854px">
+    <div id="domFold">
+      <div class="card c1"><h2>Pagi</h2><p>Kartu pertama, dibuat dengan HTML dan CSS biasa.</p><i></i></div>
+      <div class="card c2"><h2>Malam</h2><p>Kartu kedua muncul dari lipatan kertas.</p><i></i></div>
+    </div>
+  </div>
+  <div id="portalCell"></div>
+</div>
+<script>
+const C = MGP.core, PF = MGP.paperFoldTransition;
+// procedural card A (a function: redrawn every frame, the sun drifts) and card B (a static canvas)
+function cardA(g, t, w, h) {
+  const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, "#fbe3b0"); gr.addColorStop(1, "#f0a066"); g.fillStyle = gr; g.fillRect(0, 0, w, h);
+  g.fillStyle = "#fff4d2"; g.beginPath(); g.arc(w * 0.7, h * 0.42 - 6 * Math.sin(t * 1.5), h * 0.17, 0, C.TAU); g.fill();
+  g.fillStyle = "#c9714a"; g.beginPath(); g.moveTo(0, h); g.lineTo(0, h * 0.7); g.quadraticCurveTo(w * 0.3, h * 0.48, w * 0.6, h * 0.72); g.quadraticCurveTo(w * 0.8, h * 0.62, w, h * 0.7); g.lineTo(w, h); g.fill();
+  g.fillStyle = "#8f4a35"; g.beginPath(); g.moveTo(0, h); g.lineTo(0, h * 0.86); g.quadraticCurveTo(w * 0.45, h * 0.7, w, h * 0.9); g.lineTo(w, h); g.fill();
+  g.fillStyle = "#3b1f0c"; g.font = "400 34px Georgia, serif"; g.fillText("Pagi", 22, 48);
+  g.font = "400 13px system-ui, Arial"; g.fillText("gambar prosedural, bukan foto", 22, 70);
+}
+const cardB = (() => {
+  const w = 346, h = 196, c = C.offscreen(w * 2, h * 2), g = c.getContext("2d"); g.scale(2, 2);
+  const gr = g.createLinearGradient(0, 0, 0, h); gr.addColorStop(0, "#101a3a"); gr.addColorStop(1, "#33467e"); g.fillStyle = gr; g.fillRect(0, 0, w, h);
+  const R = C.rng(4); g.fillStyle = "#fff6e0"; for (let i = 0; i < 70; i++) g.fillRect(R() * w, R() * h * 0.7, 1.4, 1.4);
+  g.fillStyle = "#fffbe8"; g.beginPath(); g.arc(w * 0.74, h * 0.34, h * 0.13, 0, C.TAU); g.fill();
+  g.fillStyle = "#101a3a"; g.beginPath(); g.arc(w * 0.77, h * 0.31, h * 0.12, 0, C.TAU); g.fill();
+  g.fillStyle = "#0b1230"; g.beginPath(); g.moveTo(0, h); g.lineTo(0, h * 0.78); g.quadraticCurveTo(w * 0.5, h * 0.6, w, h * 0.8); g.lineTo(w, h); g.fill();
+  g.fillStyle = "#f4ecd8"; g.font = "400 34px Georgia, serif"; g.fillText("Malam", 22, 48);
+  return c;
+})();
+function clouds(g, t, W, H) {
+  const gr = g.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, "#b9d0e4"); gr.addColorStop(1, "#f3e6ca"); g.fillStyle = gr; g.fillRect(0, 0, W, H);
+  g.fillStyle = "rgba(255,250,240,.85)";
+  [[60, 210, 70], [150, 225, 60], [280, 215, 80], [380, 230, 60], [0, 235, 50]].forEach(([x, y, r], i) => { g.beginPath(); g.ellipse(x + 4 * Math.sin(t + i), y, r, r * 0.45, 0, 0, C.TAU); g.fill(); });
+}
+const box = { x: 40, y: 22, w: 346, h: 196 };
+const f1 = PF.create(document.getElementById("c1"), { width: 426, height: 240, box, from: cardA, to: cardB, background: clouds, start: 0.2 });
+const f2 = PF.create(document.getElementById("c2"), { width: 426, height: 240, box, from: cardA, to: cardB, background: clouds, start: 0.2, mode: "accordion", panels: 5, axis: "x", direction: "right" });
+const f3 = PF.createDOM(document.getElementById("domFold"), { start: 0.2 });
+
+// portal: a wall with an arch opening; the sky behind is the constellation module, drawn through the hole
+const hole = { x: 548, y: 160, w: 184, h: 320 };
+const skyOpts = { width: 1280, height: 480, seed: 4, labels: false, drawIn: null, rings: [[0.4, 0.38, -8], [0.26, 0.26, 6]] };
+function wall(g, t, W, H) {
+  const gr = g.createLinearGradient(0, 0, 0, H); gr.addColorStop(0, "#8e1f17"); gr.addColorStop(1, "#5b120d"); g.fillStyle = gr; g.fillRect(-W, -H, W * 3, H * 3);
+  // pillars and moulding around the opening
+  const px = [[200, 70], [1010, 70]]; px.forEach(([x, w]) => { const pg = g.createLinearGradient(x, 0, x + w, 0); pg.addColorStop(0, "#6e1610"); pg.addColorStop(0.5, "#b8342a"); pg.addColorStop(1, "#5a110c"); g.fillStyle = pg; g.fillRect(x, -H, w, H * 3); });
+  g.strokeStyle = "#c9a45a"; g.lineWidth = 14; g.beginPath(); const r = hole.w / 2 + 16;
+  g.moveTo(hole.x - 16, hole.y + hole.h + 40); g.lineTo(hole.x - 16, hole.y + r - 16); g.arc(hole.x + hole.w / 2, hole.y + r - 16, r, Math.PI, 2 * Math.PI); g.lineTo(hole.x + hole.w + 16, hole.y + hole.h + 40); g.stroke();
+  g.strokeStyle = "rgba(0,0,0,.35)"; g.lineWidth = 3; g.stroke();
+  g.fillStyle = "#c9a45a"; g.fillRect(0, 14, W, 10); g.fillStyle = "#3d0b08"; g.fillRect(0, 24, W, 4);
+}
+const portal = PF.portal.create(document.getElementById("portalCell"), {
+  width: 1280, height: 480, hole, shape: "arch", start: 0.5, zoom: 2.5,
+  from: wall, to: (g, t, W, H) => MGP.constellationLines.render(g, t, skyOpts),
+});
+
+const all = [f1, f2, f3, portal];
+const comp = { duration: 3.6, ready: Promise.all(all.map((i) => i.ready)), seek(t) { all.forEach((i) => i.seek(t)); return comp; }, timeline() { return C.timeline(this); } };
+C.expose(comp);
+</script>
+</body>
+</html>

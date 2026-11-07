@@ -1,0 +1,153 @@
+{
+ "id": "ui/hud-telemetry",
+ "name": "HUD Telemetry",
+ "name_id": "HUD Telemetri",
+ "category": "ui",
+ "description": {
+  "id": "Pembacaan HUD bergaya debug yang tenang membingkai subjek: braket sudut tergambar, baris label:nilai berdetak ke angka baru pada setiap isyarat, satu pembacaan disorot warna aksen. Subjek tidak digerakkan; HUD-nya diam tanpa goyang.",
+  "en": "Quiet mono debug-HUD readouts frame a subject: corner brackets draw on, label:value lines tick on cues, one readout emphasised in accent. The subject never moves and the HUD holds still."
+ },
+ "tags": [
+  "ui",
+  "hud",
+  "telemetri",
+  "overlay",
+  "mono",
+  "data",
+  "teknologi",
+  "telemetry"
+ ],
+ "props": {
+  "box": {
+   "default": [
+    33,
+    36,
+    22,
+    54
+   ],
+   "type": "list",
+   "hint": "[x, y, lebar, tinggi] kotak subjek dalam % layar",
+   "aliases": [
+    "kotak"
+   ]
+  },
+  "title": {
+   "default": "SUBJEK 01 · TERKUNCI",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "rows": {
+   "default": [
+    {
+     "label": "JARAK",
+     "nilai": [
+      14.2,
+      12.8,
+      11.6
+     ],
+     "satuan": "m",
+     "desimal": 1
+    },
+    {
+     "label": "KECEPATAN",
+     "nilai": [
+      0.8,
+      1.4,
+      1.1
+     ],
+     "satuan": "m/s",
+     "desimal": 1
+    },
+    {
+     "label": "SUHU",
+     "nilai": [
+      27,
+      27,
+      28
+     ],
+     "satuan": "°C",
+     "desimal": 0
+    },
+    {
+     "label": "KEYAKINAN",
+     "nilai": [
+      86,
+      93,
+      98
+     ],
+     "satuan": "%",
+     "desimal": 0
+    }
+   ],
+   "type": "list",
+   "hint": "[{label, nilai:[per isyarat], satuan, desimal}]",
+   "aliases": [
+    "baris"
+   ]
+  },
+  "highlight": {
+   "default": 3,
+   "type": "number",
+   "hint": "Indeks baris yang disorot",
+   "aliases": [
+    "sorot"
+   ]
+  },
+  "gesture": {
+   "default": [
+    0.9,
+    2.6,
+    4.1
+   ],
+   "type": "list",
+   "hint": "Detik isyarat; nilai ke-n tampil pada isyarat ke-n",
+   "aliases": [
+    "isyarat"
+   ]
+  },
+  "color": {
+   "default": "#e8f0ff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#7dff9a",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "size": {
+   "default": 28,
+   "type": "number",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "font": {
+   "default": "JetBrains Mono:wght@400;500;700",
+   "type": "font"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/hud-telemetri",
+  "telemetry-hud"
+ ],
+ "example": {
+  "bg": "photo",
+  "font": [
+   "JetBrains Mono:wght@400;500;700"
+  ]
+ }
+}

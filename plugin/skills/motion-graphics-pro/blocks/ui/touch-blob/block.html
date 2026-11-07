@@ -1,0 +1,66 @@
+<!-- Block ui/touch-blob · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="ui/touch-blob" data-start="0" data-duration="6" data-track-index="20" class="blk blk-ui-touch-blob">
+<script type="application/json" data-block-props>
+{"color1": "#ff8fb1", "color2": "#7a6bff", "color3": "#ffd08a", "bg": "#f3eee8", "size": 300, "touch": [0.71, 0.4], "arrive": 1.4, "release": 3.6, "pull": 0.92, "grain": 0.18, "dot": "#1d1b22", "seed": 9}
+</script>
+</div>
+<style>
+.blk-ui-touch-blob{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, W = k.w, H = k.h, s = k.s, rng = k.random;
+  var kv = BLOCK.canvas(k.root, W, H), c0 = kv.ctx, lb = document.createElement("canvas"); lb.width = W; lb.height = H;
+  var c = lb.getContext("2d");
+  // tekstur butiran dibuat sekali (berseed), lalu ditumpuk di atas gumpalan
+  var gs = 256, gr = document.createElement("canvas"); gr.width = gr.height = gs;
+  var gc = gr.getContext("2d"), id = gc.createImageData(gs, gs);
+  for (var i = 0; i < gs * gs; i++) { var v = rng() * 255; id.data[i * 4] = id.data[i * 4 + 1] = id.data[i * 4 + 2] = v; id.data[i * 4 + 3] = 255; }
+  gc.putImageData(id, 0, 0);
+  var pola = c.createPattern(gr, "repeat");
+  var R = P.size * s, cx0 = W / 2, cy0 = H / 2, tx = P.touch[0] * W, ty = P.touch[1] * H;
+  if (W < H) { tx = W * 0.8; ty = H * 0.4; }
+  var jangkau = Math.max(0, Math.hypot(tx - cx0, ty - cy0) / R - 1) * P.pull;
+  var t1 = +P.arrive, t2 = +P.release, F = 1.5, Z = 0.28, w = 2 * Math.PI * F, wd = w * Math.sqrt(1 - Z * Z);
+  function kontak(t) { return t < t1 ? 0 : BLOCK.spring(t - t1, 1.1, 0.6); }
+  // setelah lepas: pegas teredam yang membawa simpangan DAN kecepatan saat lepas
+  var x0 = kontak(t2), v0 = (kontak(t2) - kontak(t2 - 0.005)) / 0.005;
+  function A(t) {
+    if (t <= t2) return kontak(t);
+    var u = t - t2; return Math.exp(-Z * w * u) * (x0 * Math.cos(wd * u) + (v0 + Z * w * x0) / wd * Math.sin(wd * u));
+  }
+  // titik sentuh: datang melambat, menekan, lalu pergi
+  function dot(t) {
+    var a = BLOCK.clamp((t - (t1 - 0.8)) / 0.8, 0, 1), e = 1 - Math.pow(1 - a, 4), b = BLOCK.clamp((t - t2) / 0.6, 0, 1), eb = b * b * b;
+    return { x: BLOCK.lerp(W * 1.05, tx, e) + eb * W * 0.3, y: BLOCK.lerp(H * 0.95, ty, e) - eb * H * 0.2, al: a > 0 ? 1 - b : 0, tekan: BLOCK.clamp((t - t1) / 0.15, 0, 1) * (1 - b) };
+  }
+  BLOCK.onTime(tl, function (t) {
+    c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, W, H);
+    var a = A(t), ang = Math.atan2(ty - cy0, tx - cx0), dist = Math.hypot(tx - cx0, ty - cy0);
+    var cx = cx0 + Math.cos(ang) * a * R * 0.12, cy = cy0 + Math.sin(ang) * a * R * 0.12;
+    // bentuk kutub: napas internal pelan + tonjolan tarikan ke arah sentuhan
+    c.save(); c.filter = "blur(" + (18 * s).toFixed(1) + "px)"; c.beginPath();
+    for (var i = 0; i <= 120; i++) {
+      var th = i / 120 * Math.PI * 2, d = Math.atan2(Math.sin(th - ang), Math.cos(th - ang));
+      var r = R * (1 + 0.06 * BLOCK.noise(th * 1.6 + t * 0.35, 2) + 0.05 * Math.sin(th * 3 + t * 0.6) + a * jangkau * Math.exp(-d * d / 0.55));
+      var x = cx + Math.cos(th) * r, y = cy + Math.sin(th) * r * 0.96;
+      if (i) c.lineTo(x, y); else c.moveTo(x, y);
+    }
+    c.closePath();
+    var g = c.createRadialGradient(cx - R * 0.3 + Math.sin(t * 0.5) * R * 0.15, cy - R * 0.35, R * 0.05, cx, cy, R * 1.3);
+    g.addColorStop(0, P.color3); g.addColorStop(0.45, P.color1); g.addColorStop(1, P.color2);
+    c.fillStyle = g; c.fill(); c.restore();
+    // butiran hanya di atas gumpalan
+    c.save(); c.globalCompositeOperation = "source-atop"; c.globalAlpha = P.grain; c.fillStyle = pola;
+    c.setTransform(1, 0, 0, 1, Math.floor(t * 12) * 37 % gs, Math.floor(t * 12) * 53 % gs); c.fillRect(-gs, -gs, W + 2 * gs, H + 2 * gs); c.restore();
+    c0.fillStyle = P.bg; c0.fillRect(0, 0, W, H); c0.drawImage(lb, 0, 0); c = c0;
+    var o = dot(t);
+    if (o.al > 0) {
+      c.save(); c.globalAlpha = o.al; c.filter = "blur(" + (2 * s).toFixed(1) + "px)";
+      var rr = (30 - 6 * o.tekan) * s; c.fillStyle = P.dot; c.beginPath(); c.arc(o.x, o.y, rr, 0, 7); c.fill();
+      c.globalAlpha = o.al * 0.25 * o.tekan; c.beginPath(); c.arc(o.x, o.y, rr * 2.2, 0, 7); c.fill(); c.restore();
+    }
+    c = lb.getContext("2d");
+  }, D);
+}, {});
+</script>

@@ -1,0 +1,118 @@
+{
+ "id": "ui/pull-refresh",
+ "name": "Pull Refresh",
+ "name_id": "Tarik untuk Memuat",
+ "category": "ui",
+ "description": {
+  "id": "Daftar di ponsel ditarik turun dengan resistansi karet yang makin berat, indikator bersiap saat ambang tercapai, dilepas ke posisi memuat dengan spinner, lalu pesan baru masuk di atas dan daftar menjepret kembali tepat ke posisi semula.",
+  "en": "A mobile list pulls through non-linear rubber-band resistance, arms at a threshold, commits to a loading spinner, then a new item lands on top and the list snaps exactly back to rest."
+ },
+ "tags": [
+  "ui",
+  "ponsel",
+  "pull to refresh",
+  "gestur",
+  "daftar",
+  "loading",
+  "karet",
+  "pull",
+  "refresh"
+ ],
+ "props": {
+  "title": {
+   "default": "Kotak Masuk",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "item": {
+   "default": [
+    [
+     "Rina",
+     "Draf presentasi sudah siap ditinjau"
+    ],
+    [
+     "Tim Desain",
+     "Jadwal rapat dipindah ke Kamis"
+    ],
+    [
+     "Bima",
+     "Foto acara kemarin sudah diunggah"
+    ],
+    [
+     "Sari",
+     "Terima kasih atas bantuannya!"
+    ],
+    [
+     "Dodi",
+     "Anggaran kuartal sudah disetujui"
+    ],
+    [
+     "Admin",
+     "Pembaruan kebijakan cuti"
+    ]
+   ],
+   "type": "list",
+   "hint": "[[nama, cuplikan]]"
+  },
+  "new_item": {
+   "default": [
+    "Nadia",
+    "Kabar baik: proyek kita lolos seleksi"
+   ],
+   "type": "list",
+   "hint": "Baris yang masuk setelah memuat",
+   "aliases": [
+    "item_baru"
+   ]
+  },
+  "pull_text": {
+   "default": "Tarik untuk memuat",
+   "type": "text",
+   "aliases": [
+    "teks_tarik"
+   ]
+  },
+  "release_text": {
+   "default": "Lepaskan untuk memuat",
+   "type": "text",
+   "aliases": [
+    "teks_lepas"
+   ]
+  },
+  "accent_color": {
+   "default": "#2d6cdf",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg": {
+   "default": "#dfe5ef",
+   "type": "color",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700",
+   "type": "font"
+  }
+ },
+ "duration": 4,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/tarik-segar",
+  "pull-to-refresh"
+ ],
+ "example": {
+  "bg": "empty"
+ }
+}

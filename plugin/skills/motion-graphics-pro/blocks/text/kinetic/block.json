@@ -1,0 +1,148 @@
+{
+ "id": "text/kinetic",
+ "name": "Kinetic",
+ "name_id": "Tipografi Kinetik (MGP)",
+ "category": "text",
+ "description": {
+  "id": "Pembungkus modul tipografi kinetik pustaka Motion Graphics Pro: daftar ketukan berwaktu, masing-masing dengan preset gerak (kartu, naik, pop, geser, topeng, kaskade, mesin ketik, karaoke, zoom, sapu). Kata kunci *bintang* diberi warna dan stabilo.",
+  "en": "Wrapper for the Motion Graphics Pro library kinetic-type module: a list of timed beats, each with a motion preset (card, rise, pop, slide, mask, cascade, typewriter, karaoke, zoom, wipe). *Starred* keywords get colour and a highlighter."
+ },
+ "tags": [
+  "teks",
+  "kinetik",
+  "kinetic-type",
+  "beats",
+  "preset",
+  "lib",
+  "mgp",
+  "text",
+  "kinetic"
+ ],
+ "props": {
+  "beats": {
+   "default": [
+    {
+     "t": 0.2,
+     "dur": 1.8,
+     "preset": "rise",
+     "text": "Setiap *kata* punya irama"
+    },
+    {
+     "t": 2.1,
+     "dur": 1.8,
+     "preset": "slide",
+     "text": "Tiga *ketukan*\nsatu pesan",
+     "from": "l"
+    },
+    {
+     "t": 4.0,
+     "dur": 1.8,
+     "preset": "pop",
+     "text": "Lalu *selesai*"
+    }
+   ],
+   "type": "list",
+   "hint": "Ketukan [{t, dur, text, preset, from?, kicker?, size?, x?, y?, align?}]; preset: card|rise|pop|slide|mask|cascade|typewriter|karaoke|zoom|wipe"
+  },
+  "font": {
+   "default": "Inter:wght@500;800",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "size": {
+   "default": 96,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "weight": {
+   "default": 800,
+   "type": "number",
+   "aliases": [
+    "berat"
+   ]
+  },
+  "color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffcf4a",
+   "type": "color",
+   "hint": "Warna kata kunci",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "highlighter": {
+   "default": "#c2410c",
+   "type": "color",
+   "hint": "Warna stabilo kata kunci",
+   "aliases": [
+    "stabilo"
+   ]
+  },
+  "bg": {
+   "default": "",
+   "type": "color",
+   "hint": "Warna latar (kosong = transparan)",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "width": {
+   "default": 80,
+   "type": "number",
+   "hint": "Lebar maksimum teks (%)",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "exit": {
+   "default": "fade",
+   "type": "enum",
+   "options": [
+    "fade",
+    "up",
+    "none"
+   ],
+   "aliases": [
+    "keluar"
+   ]
+  },
+  "keyword_italic": {
+   "default": false,
+   "type": "boolean",
+   "hint": "Kata kunci miring (italic)",
+   "aliases": [
+    "miring_kunci"
+   ]
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [
+  "lib:mgp.js"
+ ],
+ "aliases": [
+  "teks/kinetik",
+  "kinetic-type"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@500;800",
+   "Inter:wght@400;500;600;700;800;900"
+  ]
+ }
+}

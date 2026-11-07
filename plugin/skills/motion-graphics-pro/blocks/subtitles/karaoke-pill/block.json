@@ -1,0 +1,142 @@
+{
+ "id": "subtitles/karaoke-pill",
+ "name": "Karaoke Pill",
+ "name_id": "Pil Karaoke",
+ "category": "subtitles",
+ "description": {
+  "id": "Subtitle dalam kapsul gelap: kata yang sedang diucapkan menyala warna aksen dan membesar sedikit, kata yang sudah lewat tetap terang, yang belum masih redup.",
+  "en": "Captions inside a dark pill: the spoken word lights up in an accent colour with a small scale bump; past words stay bright, upcoming words stay dim."
+ },
+ "tags": [
+  "subtitle",
+  "caption",
+  "karaoke",
+  "pil",
+  "sosial",
+  "subtitles",
+  "pill"
+ ],
+ "props": {
+  "text": {
+   "default": "Hari ini kita belajar menata waktu dengan lebih tenang",
+   "type": "text",
+   "hint": "Teks subtitle; *kata* = kata kunci (bila didukung). Dipakai bila kata kosong",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "words": {
+   "default": [],
+   "type": "timed-words",
+   "hint": "[{teks, mulai, akhir}] dari transkrip; kosong = dihitung dari teks",
+   "aliases": [
+    "kata"
+   ]
+  },
+  "kps": {
+   "default": 2.6,
+   "type": "number",
+   "hint": "Kata per detik bila tanpa transkrip"
+  },
+  "max_words": {
+   "default": 3,
+   "type": "number",
+   "hint": "Maksimum kata per halaman subtitle",
+   "aliases": [
+    "maks_kata"
+   ]
+  },
+  "font": {
+   "default": "Poppins:wght@700;800",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "size": {
+   "default": 62,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "bottom": {
+   "default": 14,
+   "type": "number",
+   "hint": "Jarak dari bawah (%)",
+   "aliases": [
+    "bawah"
+   ]
+  },
+  "uppercase": {
+   "default": false,
+   "type": "boolean",
+   "aliases": [
+    "huruf_besar"
+   ]
+  },
+  "active_color": {
+   "default": "#ffd84a",
+   "type": "color",
+   "aliases": [
+    "warna_aktif"
+   ]
+  },
+  "dim_color": {
+   "default": "#8d93a1",
+   "type": "color",
+   "aliases": [
+    "warna_redup"
+   ]
+  },
+  "pill_bg": {
+   "default": "#15171d",
+   "type": "color",
+   "aliases": [
+    "latar_pil"
+   ]
+  },
+  "pill_opacity": {
+   "default": 0.88,
+   "type": "number",
+   "aliases": [
+    "opasitas_pil"
+   ]
+  },
+  "active_scale": {
+   "default": 1.1,
+   "type": "number",
+   "aliases": [
+    "skala_aktif"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "subtitle/pil-karaoke",
+  "caption-pill-karaoke"
+ ],
+ "example": {
+  "bg": "photo",
+  "aspect": "9:16",
+  "font": [
+   "Poppins:wght@700;800"
+  ],
+  "props": {
+   "kps": 2.1
+  }
+ }
+}

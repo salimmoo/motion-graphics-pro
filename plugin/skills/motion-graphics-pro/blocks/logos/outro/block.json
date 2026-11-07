@@ -1,0 +1,120 @@
+{
+ "id": "logos/outro",
+ "name": "Outro",
+ "name_id": "Penutup Logo",
+ "category": "logos",
+ "description": {
+  "id": "Penutup identitas merek: wordmark besar mengalir huruf demi huruf ke tengah dengan titik aksen yang mendarat terakhir, atau tanda logo yang dirakit dari kepingan dengan pendar cahaya. Tagline dan URL berspasi lebar menyusul lalu semuanya bertahan tenang.",
+  "en": "Brand close: a display wordmark cascades letter by letter into a centred lockup with the accent period landing last, or a mark assembles piece by piece with a glow bloom. Tagline and wide-tracked URL settle beneath and the identity holds."
+ },
+ "tags": [
+  "logo",
+  "penutup",
+  "outro",
+  "wordmark",
+  "merek",
+  "tagline",
+  "url",
+  "logos"
+ ],
+ "props": {
+  "style": {
+   "default": "cascade",
+   "type": "enum",
+   "options": [
+    "cascade",
+    "assemble"
+   ],
+   "hint": "kaskade = huruf mengalir + titik aksen; rakit = tanda dari kepingan + pendar + URL kapsul",
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "kaskade": "cascade",
+    "rakit": "assemble"
+   }
+  },
+  "brand_name": {
+   "default": "rumpun",
+   "type": "text",
+   "aliases": [
+    "nama_merek"
+   ]
+  },
+  "tagline": {
+   "default": "Tumbuh bersama, pelan tapi pasti.",
+   "type": "text"
+  },
+  "url": {
+   "default": "rumpun.id",
+   "type": "text"
+  },
+  "dot": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Titik aksen di akhir wordmark",
+   "aliases": [
+    "titik"
+   ]
+  },
+  "color": {
+   "default": "#f4f1ea",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#3ddc97",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg": {
+   "default": "#0f1714",
+   "type": "color",
+   "hint": "Kosong = transparan",
+   "aliases": [
+    "latar"
+   ]
+  },
+  "font": {
+   "default": "Manrope:wght@500;700;800",
+   "type": "font"
+  },
+  "font2": {
+   "default": "JetBrains Mono:wght@400;500",
+   "type": "font",
+   "hint": "Font mono URL"
+  },
+  "size": {
+   "default": 210,
+   "type": "number",
+   "hint": "Ukuran wordmark (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "logo/penutup",
+  "logo-brand-close",
+  "logo-outro"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Manrope:wght@500;700;800",
+   "JetBrains Mono:wght@400;500"
+  ]
+ }
+}

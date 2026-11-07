@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1080x1920">
+<title>Kinetik 9:16</title>
+<!-- GSAP dari CDN; saat dirender, Rekam memakai salinan lokal dari node_modules -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<style>
+  html, body { margin: 0; background: #0f0e17; }
+  #stage { position: relative; width: 1080px; height: 1920px; overflow: hidden;
+    background: radial-gradient(120% 80% at 50% 30%, #2b2250 0%, #0f0e17 70%);
+    font-family: system-ui, "Segoe UI", Arial, sans-serif; color: #fffffe; }
+  .line { position: absolute; left: 0; right: 0; text-align: center; font-weight: 900; letter-spacing: -0.02em; }
+  .line span { display: inline-block; }
+  #l1 { top: 560px; font-size: 150px; }
+  #l2 { top: 760px; font-size: 220px; color: #ff8906; }
+  #l3 { top: 1040px; font-size: 120px; font-weight: 700; }
+  #bar { position: absolute; left: 140px; top: 1240px; width: 800px; height: 18px; border-radius: 9px; background: #f25f4c; transform-origin: 0 50%; }
+  #dot { position: absolute; width: 60px; height: 60px; border-radius: 50%; background: #e53170; left: 510px; top: 1400px; }
+  #tag { position: absolute; bottom: 220px; left: 0; right: 0; text-align: center; font-size: 44px; color: #a7a9be; letter-spacing: 0.3em; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="line" id="l1">GERAK</div>
+  <div class="line" id="l2">ITU</div>
+  <div class="line" id="l3">BERCERITA</div>
+  <div id="bar"></div>
+  <div id="dot"></div>
+  <div id="tag">REKAM · 5 DETIK · 30 FPS</div>
+</div>
+<script>
+  // Pecah teks menjadi huruf agar tiap huruf bisa dianimasikan
+  for (const el of document.querySelectorAll(".line")) {
+    el.innerHTML = [...el.textContent].map((c) => "<span>" + c + "</span>").join("");
+  }
+  const tl = gsap.timeline({ paused: true });
+  tl.fromTo("#l1 span", { y: 140, opacity: 0, rotate: 8 }, { y: 0, opacity: 1, rotate: 0, duration: 0.6, ease: "back.out(2)", stagger: 0.05 }, 0.2)
+    .fromTo("#l2 span", { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.5, ease: "elastic.out(1, 0.5)", stagger: 0.08 }, 0.9)
+    .fromTo("#l3 span", { y: -80, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "power3.out", stagger: 0.035 }, 1.6)
+    .fromTo("#bar", { scaleX: 0 }, { scaleX: 1, duration: 0.9, ease: "expo.inOut" }, 2.0)
+    .fromTo("#dot", { x: -380 }, { x: 380, duration: 1.6, ease: "sine.inOut", yoyo: true, repeat: 1 }, 2.2)
+    .fromTo("#tag", { opacity: 0, letterSpacing: "0.6em" }, { opacity: 1, letterSpacing: "0.3em", duration: 0.8 }, 2.6)
+    .to("#l2", { color: "#e53170", duration: 0.3 }, 3.6)
+    .to(".line span", { y: -60, opacity: 0, duration: 0.35, ease: "power2.in", stagger: 0.012 }, 4.4);
+  // Kontrak Rekam: durasi + timeline yang bisa di-seek
+  window.__duration = 5;
+  window.__fps = 30;
+  window.__timeline = tl;
+</script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!-- Block code/line-highlight · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="code/line-highlight" data-start="0" data-duration="7" data-track-index="30" class="blk blk-code-line-highlight">
+<script type="application/json" data-block-props>
+{"mode": "scroll", "code": "import json\nfrom pathlib import Path\n\nBATAS = 100\n\n\ndef baca(jalur):\n    \"\"\"Baca berkas pesanan.\"\"\"\n    with open(jalur) as f:\n        return json.load(f)\n\n\ndef saring(pesanan, minimal=BATAS):\n    hasil = []\n    for p in pesanan:\n        if p[\"total\"] >= minimal:\n            hasil.append(p)\n    return hasil\n\n\ndef ringkas(pesanan):\n    total = sum(p[\"total\"] for p in pesanan)\n    rata = total / max(len(pesanan), 1)\n    return {\"jumlah\": len(pesanan), \"rata\": round(rata, 2)}\n\n\ndef utama():\n    data = baca(Path(\"pesanan.json\"))\n    besar = saring(data)\n    print(ringkas(besar))\n\n\nif __name__ == \"__main__\":\n    utama()", "lang": "py", "target": [16, 23], "theme": "modern-dark", "file": "laporan.py", "size": 26, "dim": 0.3, "visible_lines": 13, "font": "JetBrains Mono:wght@400;500;700"}
+</script>
+</div>
+<style>
+.blk-code-line-highlight{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-code-line-highlight .rw{position:relative;white-space:pre;font-variant-ligatures:none}
+.blk-code-line-highlight .no{display:inline-block;text-align:right;box-sizing:border-box}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, E = BLOCK.el, s = k.s, W = k.w, H = k.h, gulir = P.mode === "scroll";
+  // --- penyorot sintaks kecil (token regex) + tema; ditulis sendiri, disalin per blok kode ---
+  var TEMA = {
+    "dark-2026": { bg: "#15161c", panel: "#1c1d25", garis: "#2a2c37", teks: "#d8dbe6", redup: "#5f6478", kw: "#c792ea", str: "#a6dc78", num: "#f7a26c", kom: "#6a7089", fn: "#80b4ff", tag: "#ff7d9e", atr: "#ffd27a", aksen: "#7c9cff", kursor: "#9fb4ff", hapus: "#ff5c6c", tambah: "#3fd07f" },
+    "modern-dark": { bg: "#1f1f1f", panel: "#181818", garis: "#2b2b2b", teks: "#cccccc", redup: "#6e7681", kw: "#569cd6", str: "#ce9178", num: "#b5cea8", kom: "#6a9955", fn: "#dcdcaa", tag: "#569cd6", atr: "#9cdcfe", aksen: "#0078d4", kursor: "#aeafad", hapus: "#f14c4c", tambah: "#2ea043" },
+    "light": { bg: "#ffffff", panel: "#f3f4f6", garis: "#e3e5e9", teks: "#1f2328", redup: "#8c959f", kw: "#cf222e", str: "#0a3069", num: "#0550ae", kom: "#6e7781", fn: "#8250df", tag: "#116329", atr: "#953800", aksen: "#0969da", kursor: "#0969da", hapus: "#cf222e", tambah: "#1a7f37" },
+    "terminal-pro": { bg: "#050505", panel: "#161616", garis: "#262626", teks: "#c8c8c8", redup: "#6c6c6c", kw: "#ececec", str: "#b8e86a", num: "#d8d8d8", kom: "#6c6c6c", fn: "#ffffff", tag: "#b8e86a", atr: "#c8c8c8", aksen: "#a6ff00", kursor: "#a6ff00", hapus: "#ff6b6b", tambah: "#a6ff00" }
+  };
+  var KW = {
+    js: "const|let|var|function|return|if|else|for|while|of|in|new|class|extends|import|from|export|default|async|await|try|catch|throw|true|false|null|undefined|this|typeof",
+    py: "def|class|return|if|elif|else|for|while|in|not|and|or|import|from|as|with|try|except|raise|lambda|True|False|None|yield|async|await|pass",
+    bash: "if|then|else|fi|for|do|done|in|case|esac|function|export|echo|cd|sudo|return|while|local"
+  };
+  function aturan(bhs) {
+    if (bhs === "html") return [[/<!--.*?(-->|$)/y, "kom"], [/"[^"]*"|'[^']*'/y, "str"], [/<\/?[\w-]+|\/?>/y, "tag"], [/[\w-]+(?==)/y, "atr"], [/\s+/y, "sp"], [/[^\s<>"'=]+|=/y, "teks"]];
+    var kw = new RegExp("(?:" + (KW[bhs] || KW.js) + ")(?![\\w$])", "y"), r = [];
+    r.push([bhs === "js" ? /\/\/.*/y : /#.*/y, "kom"]);
+    r.push([/"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|`[^`]*`/y, "str"]);
+    if (bhs === "bash") r.push([/--?[A-Za-z][\w-]*/y, "num"], [/\$[\w{}]+/y, "atr"]);
+    r.push([/\d+(?:\.\d+)?(?![\w$])/y, "num"], [kw, "kw"], [/[A-Za-z_$][\w$]*(?=\s*\()/y, "fn"], [/\s+/y, "sp"], [bhs === "bash" ? /[A-Za-z_$~.][\w$.\/~-]*/y : /[A-Za-z_$][\w$]*/y, "teks"], [/[^\sA-Za-z_$\d]+?/y, "tanda"]);
+    return r;
+  }
+  /** sorot(kode, bahasa) -> [[{t, c}]] per baris */
+  function sorot(kode, bhs) {
+    var R = aturan(bhs);
+    return String(kode).split("\n").map(function (ln) {
+      var out = [], i = 0;
+      while (i < ln.length) {
+        var ok = false;
+        for (var j = 0; j < R.length; j++) {
+          R[j][0].lastIndex = i; var m = R[j][0].exec(ln);
+          if (m && m[0].length) { out.push({ t: m[0], c: R[j][1] }); i += m[0].length; ok = true; break; }
+        }
+        if (!ok) { out.push({ t: ln[i], c: "teks" }); i++; }
+      }
+      return out;
+    });
+  }
+  function warnaTok(T, c) { return T[c] || T.teks; }
+  /** tunggu berkas font termuat (fonts.ready saja belum cukup untuk mengukur) */
+  function muatFont(spec, berat) {
+    if (!document.fonts || !document.fonts.load) return Promise.resolve();
+    var fam = BLOCK.family(spec, "monospace");
+    return Promise.all((berat || [400]).map(function (b) { return document.fonts.load(b + " 20px " + fam, "Aa{}"); })).catch(function () {});
+  }
+  /** jendela generik: bilah judul + tiga titik, isi di bawahnya */
+  function jendela(par, T, w, h, judul, s, mono) {
+    var win = BLOCK.el("div", { style: "position:absolute;left:50%;top:50%;width:" + w + "px;height:" + h + "px;margin:" + (-h / 2) + "px 0 0 " + (-w / 2) + "px;border-radius:" + 14 * s + "px;background:" + T.bg + ";box-shadow:0 " + 30 * s + "px " + 80 * s + "px rgba(0,0,0,.5),0 0 0 1px " + T.garis + ";overflow:hidden" }, par);
+    var bar = BLOCK.el("div", { style: "position:absolute;left:0;right:0;top:0;height:" + 44 * s + "px;background:" + T.panel + ";border-bottom:1px solid " + T.garis + ";display:flex;align-items:center;justify-content:center;color:" + T.redup + ";font:500 " + 16 * s + "px " + mono }, win, BLOCK.esc(judul));
+    ["#ff5f57", "#febc2e", "#28c840"].forEach(function (c, i) { BLOCK.el("div", { style: "position:absolute;left:" + (18 + i * 22) * s + "px;top:50%;width:" + 12 * s + "px;height:" + 12 * s + "px;margin-top:" + (-6 * s) + "px;border-radius:50%;background:" + c }, bar); });
+    var isi = BLOCK.el("div", { style: "position:absolute;left:0;right:0;top:" + 44 * s + "px;bottom:0;overflow:hidden" }, win);
+    return { win: win, bar: bar, isi: isi };
+  }
+  // --- akhir penyorot ---
+  var T = TEMA[P.theme] || TEMA["modern-dark"], mono = BLOCK.family(P.font, "ui-monospace, monospace");
+  return muatFont(P.font, [400, 700]).then(function () {
+    var baris = sorot(P.code, P.lang), n = baris.length;
+    var ww = Math.min(W * 0.9, H * 1.5), maxH = H * 0.86 - 44 * s - 40 * s;
+    var fs = P.size * s, lh = fs * 1.55;
+    if (!gulir && n * lh > maxH) { lh = maxH / n; fs = lh / 1.55; }
+    var tampak = gulir ? Math.min(n, P.visible_lines) : n, wh = tampak * lh + 44 * s + 40 * s;
+    var j = jendela(k.root, T, ww, wh, P.file, s, mono);
+    var view = E("div", { style: "position:absolute;left:0;right:0;top:" + 20 * s + "px;bottom:" + 20 * s + "px;overflow:hidden;font:" + fs + "px/" + lh + "px " + mono + ";color:" + T.teks }, j.isi);
+    var box = E("div", { style: "position:absolute;left:0;right:0;top:0" }, view);
+    var pita = E("div", { style: "position:absolute;left:0;right:0;top:0;height:" + lh + "px;background:" + BLOCK.rgba(T.aksen, 0.22) + ";border-left:" + 4 * s + "px solid " + T.aksen + ";transform-origin:0 50%" }, box);
+    var rows = baris.map(function (toks, i) {
+      var r = E("div", { class: "rw", style: "height:" + lh + "px" }, box);
+      E("span", { class: "no", style: "width:" + fs * 3.4 + "px;padding-right:" + fs * 1.2 + "px;color:" + T.redup }, r, String(i + 1));
+      toks.forEach(function (tk) { var sp = E("span", { style: "color:" + warnaTok(T, tk.c) + (tk.c === "kom" ? ";font-style:italic" : "") }, r); sp.textContent = tk.t; });
+      return r;
+    });
+    var tg = (P.target || []).map(function (x) { return BLOCK.clamp((x | 0) - 1, 0, n - 1); });
+    tl.fromTo(j.win, { autoAlpha: 0, y: 30 * s }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0);
+    BLOCK.initial(tl, pita, { scaleX: 0, y: (tg[0] || 0) * lh, opacity: 1 });
+    var seg = (D - 1.0) / Math.max(1, tg.length), yNow = 0;
+    tg.forEach(function (b, i) {
+      var t0 = 0.6 + i * seg;
+      if (gulir) {
+        // kamera menggulir berkas sampai baris target di tengah
+        var y = BLOCK.clamp(b * lh - (tampak * lh) / 2 + lh / 2, 0, Math.max(0, n * lh - tampak * lh));
+        tl.fromTo(box, { y: -yNow }, { y: -y, duration: 1.2, ease: "power3.inOut", immediateRender: false }, t0);
+        yNow = y; t0 += 1.0;
+      }
+      // pita menyapu baris target, sekitarnya meredup
+      if (i) tl.to(pita, { scaleX: 0, duration: 0.25, ease: "power2.in" }, t0 - 0.3).set(pita, { y: b * lh }, t0 - 0.05);
+      tl.to(pita, { scaleX: 1, duration: 0.55, ease: "power3.out" }, t0);
+      rows.forEach(function (r, ri) { tl.to(r, { opacity: ri === b ? 1 : +P.dim, duration: 0.45, ease: "power2.out" }, t0 + 0.05); });
+      tl.fromTo(rows[b], { x: 0 }, { x: 8 * s, duration: 0.3, ease: "power2.out", yoyo: true, repeat: 1, immediateRender: false }, t0 + 0.1);
+    });
+  });
+}, { font: true });
+</script>

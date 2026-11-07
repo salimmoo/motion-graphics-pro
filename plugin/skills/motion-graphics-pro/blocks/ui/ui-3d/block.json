@@ -1,0 +1,122 @@
+{
+ "id": "ui/ui-3d",
+ "name": "UI 3D",
+ "name_id": "Ungkap UI 3D",
+ "category": "ui",
+ "description": {
+  "id": "Dasbor tiruan terungkap dalam perspektif 3D. Mode miring: bidang dasbor rebah jauh lalu terangkat menghadap kamera. Mode lipat: tiap panel terlipat turun dari engselnya bergantian. Mode tumpuk: panel terurai berlapis di kedalaman lalu merapat jadi satu layar.",
+  "en": "A mock dashboard revealed in 3D perspective: tilted plane rising to face camera, panels folding down one by one, or layers exploded in depth collapsing into one screen."
+ },
+ "tags": [
+  "ui",
+  "3d",
+  "perspektif",
+  "dasbor",
+  "reveal",
+  "dashboard",
+  "panel"
+ ],
+ "props": {
+  "mode": {
+   "default": "skew",
+   "type": "enum",
+   "options": [
+    "skew",
+    "fold",
+    "stack"
+   ],
+   "option_aliases": {
+    "miring": "skew",
+    "lipat": "fold",
+    "tumpuk": "stack"
+   }
+  },
+  "title": {
+   "default": "Ringkasan Penjualan",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "stat": {
+   "default": [
+    [
+     "Pendapatan",
+     "Rp84 jt"
+    ],
+    [
+     "Pesanan",
+     "1.284"
+    ],
+    [
+     "Pelanggan baru",
+     "312"
+    ]
+   ],
+   "type": "list",
+   "hint": "[[label, nilai]] tiga kartu statistik"
+  },
+  "bar": {
+   "default": [
+    42,
+    58,
+    51,
+    70,
+    66,
+    82,
+    94
+   ],
+   "type": "list",
+   "hint": "Tinggi batang grafik (%)",
+   "aliases": [
+    "batang"
+   ]
+  },
+  "accent_color": {
+   "default": "#4f7cff",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "surface": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "permukaan"
+   ]
+  },
+  "panel_bg": {
+   "default": "#eef1f7",
+   "type": "color",
+   "aliases": [
+    "latar_panel"
+   ]
+  },
+  "ink": {
+   "default": "#1a2030",
+   "type": "color",
+   "aliases": [
+    "tinta"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700;800",
+   "type": "font"
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/ui-3d",
+  "ui-3d-reveal"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

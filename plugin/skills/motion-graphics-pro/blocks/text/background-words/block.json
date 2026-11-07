@@ -1,0 +1,161 @@
+{
+ "id": "text/background-words",
+ "name": "Background Words",
+ "name_id": "Kata Latar Raksasa",
+ "category": "text",
+ "description": {
+  "id": "Satu kata raksasa berkontras rendah hanyut pelan di belakang subjek, tipografi sebagai tekstur. Isi padat atau garis luar, dengan mode campur opsional. Taruh di track bawah agar berada di belakang adegan.",
+  "en": "One oversized low-contrast word drifting slowly behind the subject, typography as texture. Solid or outline, optional blend mode. Place it on a low track so it sits behind the scene."
+ },
+ "tags": [
+  "teks",
+  "latar",
+  "background",
+  "tekstur",
+  "oversized",
+  "drift",
+  "editorial",
+  "text",
+  "words"
+ ],
+ "props": {
+  "text": {
+   "default": "TENANG",
+   "type": "text",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "font": {
+   "default": "Anton",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "size": {
+   "default": 560,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "weight": {
+   "default": 400,
+   "type": "number",
+   "aliases": [
+    "berat"
+   ]
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "contrast": {
+   "default": 0.12,
+   "type": "number",
+   "hint": "Opasitas puncak (0-1)",
+   "aliases": [
+    "kontras"
+   ]
+  },
+  "style": {
+   "default": "fill",
+   "type": "enum",
+   "options": [
+    "fill",
+    "line"
+   ],
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "isi": "fill",
+    "garis": "line"
+   }
+  },
+  "line_thickness": {
+   "default": 2.5,
+   "type": "number",
+   "hint": "Mode garis: tebal (px pada 1080)",
+   "aliases": [
+    "tebal_garis"
+   ]
+  },
+  "direction": {
+   "default": "left",
+   "type": "enum",
+   "options": [
+    "left",
+    "right"
+   ],
+   "aliases": [
+    "arah"
+   ],
+   "option_aliases": {
+    "kiri": "left",
+    "kanan": "right"
+   }
+  },
+  "slide": {
+   "default": 10,
+   "type": "number",
+   "hint": "Total hanyut horizontal (% lebar layar)",
+   "aliases": [
+    "geser"
+   ]
+  },
+  "scale": {
+   "default": 1.06,
+   "type": "number",
+   "hint": "Skala di akhir blok (zoom pelan)",
+   "aliases": [
+    "skala"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi vertikal (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "mix": {
+   "default": "normal",
+   "type": "enum",
+   "options": [
+    "normal",
+    "screen",
+    "overlay",
+    "soft-light",
+    "multiply"
+   ],
+   "hint": "Mode campur CSS",
+   "aliases": [
+    "campur"
+   ]
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "teks/kata-latar",
+  "mk-emphasis-type"
+ ],
+ "example": {
+  "bg": "photo",
+  "font": [
+   "Anton",
+   "Inter:wght@400;500;600;700;800;900"
+  ]
+ }
+}

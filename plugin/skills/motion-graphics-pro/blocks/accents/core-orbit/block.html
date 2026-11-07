@@ -1,0 +1,59 @@
+<!-- Block accents/core-orbit · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="accents/core-orbit" data-start="0" data-duration="5" data-track-index="30" class="blk blk-accents-core-orbit">
+<script type="application/json" data-block-props>
+{"core": "Inti Data", "satellite": ["Keamanan", "Integrasi", "Otomasi", "Pelaporan", "Cadangan"], "scale": 0.78, "tilt": 0.42, "core_size": 230, "color": "#f5f3ee", "core_color": "#7048e8", "accent_color": "#20c997", "font": "Inter:wght@600;800", "position_x": 50, "position_y": 50}
+</script>
+<svg class="blk-svg"></svg>
+<div class="blk-lapis"><div class="blk-inti"></div></div>
+</div>
+<style>
+.blk-accents-core-orbit{position:absolute;inset:0;pointer-events:none}
+.blk-accents-core-orbit .blk-svg{position:absolute;inset:0;width:100%;height:100%}
+.blk-accents-core-orbit .blk-lapis{position:absolute;inset:0}
+.blk-accents-core-orbit .blk-inti{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:800;line-height:1.05;z-index:50}
+.blk-accents-core-orbit .blk-sat{position:absolute;left:0;top:0;display:flex;align-items:center;white-space:nowrap}
+.blk-accents-core-orbit .blk-sat i{display:flex;align-items:center;justify-content:center;border-radius:50%;flex:none;font-style:normal;font-weight:800;color:#fff}
+.blk-accents-core-orbit .blk-sat span{font-weight:600}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, fs = function (v) { return (v * s).toFixed(1) + "px"; };
+  var sv = R.querySelector(".blk-svg"), lap = R.querySelector(".blk-lapis"), inti = R.querySelector(".blk-inti");
+  sv.setAttribute("viewBox", "0 0 " + k.w + " " + k.h);
+  R.style.fontFamily = BLOCK.family(P.font); R.style.color = P.color;
+  var cx = k.w * P.position_x / 100, cy = k.h * P.position_y / 100, nr = P.core_size * s / 2;
+  inti.style.cssText += ";left:" + (cx - nr) + "px;top:" + (cy - nr) + "px;width:" + 2 * nr + "px;height:" + 2 * nr + "px;font-size:" + fs(P.core_size * 0.17) +
+    ";background:radial-gradient(circle at 35% 30%," + BLOCK.mix(P.core_color, "#fff", 0.35) + "," + P.core_color + " 60%," + BLOCK.mix(P.core_color, "#000", 0.3) + ");box-shadow:0 0 " + fs(90) + " " + BLOCK.rgba(P.core_color, 0.55);
+  inti.textContent = P.core;
+  var S = P.satellite || [], n = S.length, base = Math.min(k.w, k.h) * 0.5 * P.scale, Ts = k.dur * 0.62, ez = gsap.parseEase("power3.out");
+  var sats = S.map(function (lb, i) {
+    var f = (i + 1) / n, rx = base * (0.55 + 0.45 * f) * (k.w > k.h ? 1.45 : 1), ry = rx * P.tilt, tilt = (i % 2 ? -1 : 1) * (10 + i * 7);
+    var ring = BLOCK.svg("ellipse", { cx: cx, cy: cy, rx: rx, ry: ry, fill: "none", stroke: BLOCK.rgba(P.color, 0.22), "stroke-width": 1.4 * s, transform: "rotate(" + tilt + " " + cx + " " + cy + ")" }, sv);
+    var L = BLOCK.prepareStroke(ring);
+    var el = BLOCK.el("div", { class: "blk-sat", style: "font-size:" + fs(26) }, lap), z = 44 * s;
+    var ic = BLOCK.el("i", { style: "width:" + z + "px;height:" + z + "px;font-size:" + fs(19) + ";background:" + BLOCK.mix(P.accent_color, P.core_color, i / Math.max(n - 1, 1)) + ";box-shadow:0 0 0 " + fs(5) + " " + BLOCK.rgba(P.accent_color, 0.18) }, el);
+    ic.textContent = String(lb).charAt(0).toUpperCase();
+    var tx = BLOCK.el("span", { style: "margin-left:" + fs(12) }, el); tx.textContent = lb;
+    // sudut akhir lockup tersebar rata; putaran awal berlawanan arah per orbit
+    var akhir = -Math.PI * 0.75 + i / n * Math.PI * 2, sapu = (1.2 + 0.35 * (n - i)) * Math.PI * 2 * (i % 2 ? -1 : 1);
+    return { ring: ring, L: L, el: el, tx: tx, rx: rx, ry: ry, tilt: tilt * Math.PI / 180, akhir: akhir, sapu: sapu, z: z, i: i };
+  });
+  BLOCK.onTime(tl, function (t) {
+    var u = ez(BLOCK.progress(t, 0.2, 0.2 + Ts)), lock = BLOCK.smooth(BLOCK.progress(t, 0.2 + Ts * 0.8, 0.2 + Ts + 0.4));
+    sats.forEach(function (o) {
+      var th = o.akhir - o.sapu * (1 - u), lx = Math.cos(th) * o.rx, ly = Math.sin(th) * o.ry;
+      var x = cx + lx * Math.cos(o.tilt) - ly * Math.sin(o.tilt), y = cy + lx * Math.sin(o.tilt) + ly * Math.cos(o.tilt);
+      var dep = Math.sin(th), sc = 0.8 + 0.2 * (dep + 1) / 2, ada = BLOCK.progress(t, 0.25 + o.i * 0.12, 0.6 + o.i * 0.12);
+      o.el.style.transform = "translate(" + (x - o.z / 2).toFixed(1) + "px," + (y - o.z / 2).toFixed(1) + "px) scale(" + sc.toFixed(3) + ")";
+      o.el.style.zIndex = dep < 0 ? 10 : 60;
+      o.el.style.opacity = (ada * (0.55 + 0.45 * (dep + 1) / 2 * (1 - lock) + 0.45 * lock)).toFixed(3);
+      o.tx.style.opacity = lock.toFixed(3);
+      o.ring.style.strokeDashoffset = (o.L * (1 - BLOCK.smooth(BLOCK.progress(t, 0.1 + o.i * 0.1, 0.9 + o.i * 0.1)))).toFixed(1);
+      o.ring.style.opacity = 1 - lock * 0.5;
+    });
+  }, k.dur);
+  tl.fromTo(inti, { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.7, ease: "back.out(1.6)" }, 0);
+  tl.to(inti, { scale: 1.07, duration: 0.22, ease: "power2.out", yoyo: true, repeat: 1 }, 0.2 + Ts);
+  tl.to(R, { opacity: 0, duration: 0.4, ease: "power2.in" }, k.dur - 0.45);
+}, { font: true });
+</script>

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP constellationLines · rasi bintang dengan garis halus</title>
+<style>html,body{margin:0;background:#050816}#stage{position:relative;width:1280px;height:720px;overflow:hidden}</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../constellation-lines.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720"></div>
+<script>
+// Default demo set (neutral labels): rings and lines draw on, sparks travel, then one constellation is "picked".
+const inst = MGP.constellationLines.create(document.getElementById("stage"), { seed: 11, duration: 8, focus: { index: 1, t: 6.2 } });
+MGP.core.expose(inst);
+</script>
+</body>
+</html>

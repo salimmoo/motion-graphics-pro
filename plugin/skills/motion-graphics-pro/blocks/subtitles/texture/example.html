@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1080x1920">
+<title>Texture · block example subtitles/texture</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton:wght@400&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1080" data-height="1920" data-duration="5.5">
+<div id="adegan" class="adegan ad-foto"><div class="mth"></div><div class="bk1"></div><div class="bk2"></div><div class="tanah"></div><div class="sosok"></div></div>
+<!-- Block subtitles/texture · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-texture" data-block="subtitles/texture" data-start="0" data-duration="5" data-track-index="30" class="blk blk-subtitles-texture">
+<script type="application/json" data-block-props>
+{"text": "Kekuatan lahir dari tekanan yang panjang", "words": [], "kps": 1.8, "max_words": 2, "font": "Anton:wght@400", "size": 210, "color": "#ffffff", "bottom": 36, "uppercase": true, "texture": "lava", "speed": 40, "texture_scale": 1, "shadow": true, "seed": 5}
+</script>
+<div class="blk-cap"></div>
+</div>
+<style>
+.blk-subtitles-texture{position:absolute;inset:0;pointer-events:none}
+.blk-subtitles-texture .blk-cap{position:absolute;left:4%;right:4%;text-align:center;line-height:.98}
+.blk-subtitles-texture .blk-hal{position:absolute;left:0;right:0;bottom:0}
+.blk-subtitles-texture .blk-w{display:inline-block;margin:0 .08em;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;background-repeat:repeat}
+</style>
+<script>
+BLOCK.mount("blk-texture", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, cap = k.root.querySelector(".blk-cap");
+  cap.style.cssText += ";bottom:" + P.bottom + "%;color:" + P.color + ";font-family:" + BLOCK.family(P.font, "Impact, sans-serif") + ";font-size:" +
+    Math.round(P.size * s) + "px" + (P.uppercase ? ";text-transform:uppercase" : "");
+  // ---- tekstur prosedural yang bisa diubin (noise periodik), digambar sekali ke kanvas
+  var N = 256, sd = (+P.seed || 1) * 7919;
+  function hs(i, j, o) { var x = Math.imul(i * 374761393 + j * 668265263 + o * 1013904223 + sd, 1274126177); x ^= x >>> 13; x = Math.imul(x, 1103515245); return ((x ^ (x >>> 16)) >>> 0) / 4294967296; }
+  function vn(x, y, px, py, o) {
+    var i = Math.floor(x), j = Math.floor(y), fx = x - i, fy = y - j, ux = fx * fx * (3 - 2 * fx), uy = fy * fy * (3 - 2 * fy);
+    var i0 = ((i % px) + px) % px, j0 = ((j % py) + py) % py, i1 = (i0 + 1) % px, j1 = (j0 + 1) % py;
+    var a = hs(i0, j0, o), b = hs(i1, j0, o), c = hs(i0, j1, o), d = hs(i1, j1, o);
+    return a + (b - a) * ux + (c - a) * uy + (a - b - c + d) * ux * uy;
+  }
+  function fbm(u, v, bx, by, okt) { var t = 0, a = 0.5, n = 0; for (var o = 0; o < okt; o++) { var px = bx << o, py = by << o; t += a * vn(u * px, v * py, px, py, o); n += a; a *= 0.5; } return t / n; }
+  function ramp(st, x) {
+    x = BLOCK.clamp(x, 0, 1);
+    for (var i = 1; i < st.length; i++) if (x <= st[i][0]) { var a = st[i - 1], b = st[i], f = (x - a[0]) / (b[0] - a[0] || 1); return [0, 1, 2].map(function (c) { return a[1][c] + (b[1][c] - a[1][c]) * f; }); }
+    return st[st.length - 1][1];
+  }
+  var TAU = Math.PI * 2, J = P.texture;
+  var RAMP = {
+    lava: [[0, [20, 3, 2]], [0.35, [70, 10, 4]], [0.55, [190, 38, 8]], [0.7, [255, 110, 10]], [0.85, [255, 200, 60]], [1, [255, 250, 200]]],
+    marble: [[0, [70, 72, 78]], [0.3, [170, 170, 176]], [0.6, [228, 226, 222]], [1, [252, 251, 248]]],
+    metal: [[0, [52, 57, 66]], [0.35, [125, 133, 144]], [0.55, [222, 228, 234]], [0.7, [150, 158, 168]], [1, [246, 248, 250]]],
+    wood: [[0, [74, 40, 18]], [0.4, [128, 74, 36]], [0.7, [176, 112, 58]], [1, [214, 158, 96]]],
+    concrete: [[0, [88, 88, 86]], [0.5, [152, 151, 147]], [1, [204, 202, 197]]],
+    stone: [[0, [44, 40, 36]], [0.35, [92, 84, 74]], [0.65, [140, 130, 116]], [1, [190, 182, 168]]]
+  };
+  function warna(u, v) {
+    var n, x;
+    if (J === "marble") { n = fbm(u, v, 3, 3, 5); var vein = Math.abs(Math.sin(TAU * (u * 2 + v + n * 1.6))); x = 0.35 + 0.65 * fbm(u, v, 2, 2, 3) - 0.75 * Math.pow(1 - vein, 10); }
+    else if (J === "metal") { n = fbm(u, v, 2, 32, 4); x = 0.5 + 0.45 * Math.sin(TAU * (v * 2 + fbm(u, v, 2, 2, 2) * 0.6)) * 0.8 + (n - 0.5) * 0.5; }
+    else if (J === "wood") { n = fbm(u, v, 2, 2, 4); var g = v * 5 + n * 1.8 + 0.25 * Math.sin(TAU * u); var r = g - Math.floor(g); x = 0.25 + 0.6 * Math.pow(r, 2.2) + (fbm(u, v, 32, 2, 3) - 0.5) * 0.5; }
+    else if (J === "concrete") { n = fbm(u, v, 4, 4, 5); x = 0.45 + (n - 0.5) * 0.9 + (fbm(u, v, 64, 64, 2) - 0.5) * 0.5; if (hs(Math.floor(u * N), Math.floor(v * N), 9) > 0.985) x -= 0.45; }
+    else if (J === "stone") { n = fbm(u, v, 3, 3, 5); var rg = 1 - Math.abs(fbm(u, v, 4, 4, 4) * 2 - 1); x = 0.25 + n * 0.75 - Math.pow(rg, 14) * 0.6; }
+    else { n = fbm(u, v, 3, 3, 4); var m = fbm(u + n * 0.5, v + n * 0.5, 3, 3, 5); var cr = 1 - Math.abs(m * 2 - 1); x = 0.12 + 0.3 * n + Math.pow(cr, 5) * 0.95; }
+    return ramp(RAMP[J] || RAMP.lava, x);
+  }
+  var cv = document.createElement("canvas"); cv.width = cv.height = N;
+  var cx = cv.getContext("2d"), img = cx.createImageData(N, N);
+  for (var y = 0; y < N; y++) for (var x = 0; x < N; x++) {
+    var c = warna(x / N, y / N), p = (y * N + x) * 4;
+    img.data[p] = c[0]; img.data[p + 1] = c[1]; img.data[p + 2] = c[2]; img.data[p + 3] = 255;
+  }
+  cx.putImageData(img, 0, 0);
+  var url = cv.toDataURL("image/png"), uk = Math.round(460 * s * P.texture_scale), semua = [];
+  BLOCK.pages(BLOCK.words(P), P.max_words).forEach(function (pg) {
+    var h = BLOCK.el("div", { class: "blk-hal" }, cap);
+    if (P.shadow) h.style.filter = "drop-shadow(0 " + Math.round(10 * s) + "px " + Math.round(22 * s) + "px rgba(0,0,0,.55))";
+    BLOCK.initial(tl, h, { autoAlpha: 0 }).set(h, { autoAlpha: 1 }, pg.mulai).set(h, { autoAlpha: 0 }, pg.akhir);
+    tl.fromTo(h, { scale: 1.12 }, { scale: 1, duration: 0.6, ease: "power3.out" }, pg.mulai);
+    pg.kata.forEach(function (w, i) {
+      var e = BLOCK.el("span", { class: "blk-w", style: "background-image:url(" + url + ");background-size:" + uk + "px " + uk + "px" }, h);
+      e.textContent = String(w.teks).replace(/\*/g, ""); semua.push({ e: e, o: semua.length * 97 });
+      tl.fromTo(e, { opacity: 0, y: 40 * s }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, w.mulai - 0.05);
+    });
+  });
+  // tekstur mengalir: posisi latar = fungsi murni dari t
+  BLOCK.onTime(tl, function (t) {
+    var dx = t * P.speed * s, dy = t * P.speed * 0.45 * s;
+    semua.forEach(function (o) { o.e.style.backgroundPosition = (o.o + dx).toFixed(1) + "px " + (-dy).toFixed(1) + "px"; });
+  }, k.dur);
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 5.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5.5);
+</script>
+</body>
+</html>

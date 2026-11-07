@@ -1,0 +1,160 @@
+{
+ "id": "labels/neon",
+ "name": "Neon",
+ "name_id": "Label Neon",
+ "category": "labels",
+ "description": {
+  "id": "Dua busur cahaya berlari di tepi panel membulat, melompat dari sudut ke sudut dengan pendar tiga lapis, lalu menyatu menjadi bingkai neon utuh di sekitar nama dan peran.",
+  "en": "Two arcs of light travel the edge of a rounded panel, snapping corner to corner with a three-layer bloom, then join into a full neon frame around name and role."
+ },
+ "tags": [
+  "label",
+  "lower-third",
+  "neon",
+  "cahaya",
+  "bingkai",
+  "glow",
+  "labels"
+ ],
+ "props": {
+  "name": {
+   "default": "Bayu Saputra",
+   "type": "text",
+   "aliases": [
+    "nama"
+   ]
+  },
+  "role": {
+   "default": "Produser Musik Elektronik",
+   "type": "text",
+   "aliases": [
+    "peran"
+   ]
+  },
+  "accent_color": {
+   "default": "#38e8ff",
+   "type": "color",
+   "hint": "Warna busur pertama",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "color2": {
+   "default": "#ff4fd8",
+   "type": "color",
+   "hint": "Warna busur kedua",
+   "aliases": [
+    "warna2"
+   ]
+  },
+  "panel": {
+   "default": "#0b0f1a",
+   "type": "color",
+   "hint": "Warna panel"
+  },
+  "position": {
+   "default": "bottom-left",
+   "type": "enum",
+   "options": [
+    "bottom-left",
+    "bottom-right",
+    "bottom-center"
+   ],
+   "aliases": [
+    "posisi"
+   ],
+   "option_aliases": {
+    "kiri-bawah": "bottom-left",
+    "kanan-bawah": "bottom-right",
+    "tengah-bawah": "bottom-center"
+   }
+  },
+  "enter": {
+   "default": "fade",
+   "type": "enum",
+   "options": [
+    "fade",
+    "up",
+    "pop"
+   ],
+   "aliases": [
+    "masuk"
+   ],
+   "option_aliases": {
+    "pudar": "fade",
+    "naik": "up"
+   }
+  },
+  "exit": {
+   "default": "fade",
+   "type": "enum",
+   "options": [
+    "fade",
+    "down",
+    "no"
+   ],
+   "aliases": [
+    "keluar"
+   ],
+   "option_aliases": {
+    "pudar": "fade",
+    "turun": "down",
+    "tidak": "no"
+   }
+  },
+  "font": {
+   "default": "Sora:wght@400;600;800",
+   "type": "font"
+  },
+  "size": {
+   "default": 52,
+   "type": "number",
+   "hint": "Ukuran nama (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "jump": {
+   "default": 5,
+   "type": "number",
+   "hint": "Jumlah lompatan sudut ke sudut",
+   "aliases": [
+    "lompatan"
+   ]
+  },
+  "bottom": {
+   "default": 11,
+   "type": "number",
+   "hint": "Jarak dari bawah (%)",
+   "aliases": [
+    "bawah"
+   ]
+  },
+  "edge": {
+   "default": 6,
+   "type": "number",
+   "hint": "Jarak dari tepi samping (%)",
+   "aliases": [
+    "tepi"
+   ]
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "label/neon",
+  "lt-neon-border"
+ ],
+ "example": {
+  "bg": "photo",
+  "font": [
+   "Sora:wght@400;600;800"
+  ]
+ }
+}

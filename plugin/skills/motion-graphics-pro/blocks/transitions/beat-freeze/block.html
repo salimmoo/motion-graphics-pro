@@ -1,0 +1,44 @@
+<!-- Block transitions/beat-freeze · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/beat-freeze" data-start="0" data-duration="2.2" data-track-index="20" class="blk blk-transitions-beat-freeze">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "beats": 0.9, "hold": 0.6, "flash": true, "frame": true, "text": "", "bg_color": "#16130f", "frame_color": "#fbf7ee", "font": "Inter:wght@800;900"}
+</script>
+</div>
+<style>
+.blk-transitions-beat-freeze{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-transitions-beat-freeze .blk-latar,.blk-transitions-beat-freeze .blk-kilat{position:absolute;inset:0}
+.blk-transitions-beat-freeze .blk-foto{position:absolute;inset:0;overflow:hidden}
+.blk-transitions-beat-freeze .blk-foto>*{position:absolute;inset:0}
+.blk-transitions-beat-freeze .blk-stempel{position:absolute;left:50%;top:78%;white-space:nowrap;font-weight:900;letter-spacing:.06em;text-transform:uppercase}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, s = k.s, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to);
+  var tb = BLOCK.clamp(+P.beats || 0.9, 0.2, D - 0.4), th = BLOCK.clamp(+P.hold || 0.6, 0.1, D - tb - 0.2), tc = tb + th;
+  var lat = BLOCK.el("div", { class: "blk-latar", style: "background:radial-gradient(80% 80% at 50% 45%," + BLOCK.mix(P.bg_color, "#ffffff", 0.08) + "," + P.bg_color + ")" }, k.root);
+  var foto = BLOCK.el("div", { class: "blk-foto" }, k.root);
+  if (A) { var c = A.cloneNode(true); c.removeAttribute("id"); c.querySelectorAll("[id]").forEach(function (e) { e.removeAttribute("id"); }); c.style.cssText += ";visibility:inherit;opacity:1;transform:none"; foto.appendChild(c); }
+  var stp = null;
+  if (P.text) { stp = BLOCK.el("div", { class: "blk-stempel", style: "font-family:" + BLOCK.family(P.font) + ";font-size:" + Math.round(64 * s) + "px;color:" + P.bg_color + ";background:" + P.frame_color + ";padding:" + Math.round(10 * s) + "px " + Math.round(28 * s) + "px" }, k.root); stp.textContent = P.text; }
+  var kil = BLOCK.el("div", { class: "blk-kilat", style: "background:#fff" }, k.root);
+  var bw = Math.round(22 * s), sh = "0 0 0 " + bw + "px " + P.frame_color + ", 0 " + Math.round(30 * s) + "px " + Math.round(70 * s) + "px " + Math.round(bw) + "px rgba(0,0,0,.55)";
+  // 1) ramp kecepatan: dorongan pelan yang makin cepat menuju ketukan (adegan asli bergerak)
+  if (A) tl.fromTo(A, { scale: 1, rotation: 0 }, { scale: 1.22, rotation: -1.5, duration: tb, ease: "expo.in" }, 0);
+  // 2) beku: salinan diam menjadi foto berbingkai yang menghantam, latar gelap di belakangnya
+  BLOCK.initial(tl, [lat, foto], { autoAlpha: 0 });
+  tl.set([lat, foto], { autoAlpha: 1 }, tb);
+  if (A) tl.set(A, { autoAlpha: 0 }, tb);
+  tl.fromTo(foto, { scale: 1.22, rotation: -1.5, boxShadow: "0 0 0 0px " + P.frame_color + ", 0 0 0 0 rgba(0,0,0,0)", filter: "contrast(1) saturate(1)" },
+    { scale: P.frame ? 0.82 : 1.05, rotation: P.frame ? -3 : 0, boxShadow: P.frame ? sh : "0 0 0 0px " + P.frame_color + ", 0 0 0 0 rgba(0,0,0,0)", filter: "contrast(1.18) saturate(1.35)", duration: 0.28, ease: "blockSpringStrong" }, tb);
+  tl.to(foto, { scale: P.frame ? 0.8 : 1.04, duration: th - 0.28, ease: "none" }, tb + 0.28);
+  if (stp) tl.fromTo(stp, { xPercent: -50, scale: 2.4, rotation: -8, autoAlpha: 0 }, { xPercent: -50, scale: 1, rotation: -4, autoAlpha: 1, duration: 0.22, ease: "power4.in" }, tb + 0.08);
+  BLOCK.initial(tl, kil, { autoAlpha: 0 });
+  if (P.flash) tl.fromTo(kil, { autoAlpha: 0.95 }, { autoAlpha: 0, duration: 0.16, ease: "power2.out", immediateRender: false }, tb)
+    .fromTo(kil, { autoAlpha: 0.5 }, { autoAlpha: 0, duration: 0.1, ease: "power2.out", immediateRender: false }, tc);
+  // 3) potong keras ke adegan baru yang masuk dengan hentakan
+  tl.set([lat, foto], { autoAlpha: 0 }, tc);
+  if (stp) tl.set(stp, { autoAlpha: 0 }, tc);
+  if (Bk) { BLOCK.initial(tl, Bk, { autoAlpha: 0 }); tl.set(Bk, { autoAlpha: 1 }, tc).fromTo(Bk, { scale: 1.14 }, { scale: 1, duration: Math.min(0.5, D - tc), ease: "power3.out", immediateRender: false }, tc); }
+  if (A) tl.set(A, { scale: 1, rotation: 0 }, D);
+});
+</script>

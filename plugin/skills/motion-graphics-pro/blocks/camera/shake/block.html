@@ -1,0 +1,43 @@
+<!-- Block camera/shake · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="camera/shake" data-start="0" data-duration="4" data-track-index="30" class="blk blk-camera-shake">
+<script type="application/json" data-block-props>
+{"target": "#adegan", "profile": "handheld", "intensity": 1, "speed": 1, "seed": 7, "enter": 0.4, "exit": 0.4, "motion_blur": true}
+</script>
+</div>
+<style>
+.blk-camera-shake{position:absolute;inset:0;pointer-events:none}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, T = BLOCK.find(P.target), D = k.dur, sd = +P.seed || 1, N = BLOCK.noise;
+  if (!T) { console.warn("[camera/shake] target not found: " + P.target); return; }
+  // profil terukur: amp (px), rot (derajat), f (Hz dasar), zoom (crop lensa), denyut (ledakan gempa)
+  var PR = {
+    handheld: { amp: 14, rot: 0.55, f: 0.7, zoom: 0, okt: [1, 0.45, 0.18], blur: 0.06 },
+    tele:    { amp: 22, rot: 0.18, f: 1.4, zoom: 0.08, okt: [1, 0.6, 0.35], blur: 0.12 },
+    quake:   { amp: 36, rot: 1.4, f: 7.5, zoom: 0.02, okt: [1, 0.55, 0.3], blur: 0.3, denyut: true }
+  }[P.profile] || null;
+  if (!PR) PR = { amp: 14, rot: 0.55, f: 0.7, zoom: 0, okt: [1, 0.45, 0.18], blur: 0.06 };
+  var I = +P.intensity || 0, amp = PR.amp * I * k.s, fr = PR.f * (+P.speed || 1);
+  function lap(t, s) { // noise berlapis (oktaf), bentuk tertutup dari t
+    var v = 0, n = 0;
+    for (var o = 0; o < PR.okt.length; o++) { v += PR.okt[o] * N(t * fr * Math.pow(2.1, o) + o * 17.3, s + o * 31); n += PR.okt[o]; }
+    return v / n;
+  }
+  function dasar(t) { return BLOCK.smooth(BLOCK.progress(t, 0, P.enter || 0.001)) * (1 - BLOCK.smooth(BLOCK.progress(t, D - (P.exit || 0.001), D))); }
+  function amplop(t) {
+    var e = dasar(t);
+    if (PR.denyut) e *= 0.35 + 0.65 * BLOCK.clamp(0.5 + 0.9 * N(t * 0.9, sd + 99), 0, 1);
+    return e;
+  }
+  function pose(t) { var e = amplop(t); return [lap(t, sd) * amp * e, lap(t, sd + 7) * amp * e * 0.8, lap(t, sd + 13) * PR.rot * I * e]; }
+  var sc = 1 + PR.zoom + (2.4 * amp + PR.rot * I * 0.0175 * (k.w + k.h)) / Math.min(k.w, k.h); // cukup besar supaya tepi tak terbuka
+  T.style.transformOrigin = "50% 50%";
+  BLOCK.onTime(k.tl, function (t) {
+    var p = pose(t), q = pose(Math.max(0, t - 1 / 60));
+    var v = Math.hypot(p[0] - q[0], p[1] - q[1]);
+    T.style.transform = "translate(" + p[0].toFixed(2) + "px," + p[1].toFixed(2) + "px) rotate(" + p[2].toFixed(4) + "deg) scale(" + (1 + (sc - 1) * dasar(t)).toFixed(5) + ")";
+    T.style.filter = P.motion_blur && v > 0.05 ? "blur(" + Math.min(v * PR.blur, 5 * k.s).toFixed(2) + "px)" : "";
+  }, D);
+});
+</script>

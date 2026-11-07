@@ -1,0 +1,8 @@
+{
+  "--times poses: project.json not found in the composition folder": "--times poses: project.json tidak ditemukan di folder komposisi",
+  "--times poses: project.json has no scenes[].poses yet": "--times poses: project.json belum punya scenes[].poses (adegan[].kunci)",
+  "--times: invalid list of seconds: {}": "--times: daftar detik tidak sah: {}",
+  "key poses off the 1/{} s grid, the next frame is taken: {}": "pose kunci di luar kisi 1/{} s, diambil frame sesudahnya: {}",
+  "contact sheet of {} frames → {}": "lembar kontak {} frame → {}",
+  "warning: {} of {} frames are fully black: {}. Intended (before a scene, after a block) or not (a scene that never shows, a lost GPU canvas)? Check with mgp frame --t <s>.": "peringatan: {} dari {} frame hitam total: {}. Disengaja (sebelum adegan, sesudah blok) atau tidak (adegan yang tak pernah tampil, kanvas GPU yang hilang)? Cek dengan mgp frame --t <s>."
+}

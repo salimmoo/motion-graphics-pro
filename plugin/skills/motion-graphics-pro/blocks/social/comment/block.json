@@ -1,0 +1,133 @@
+{
+ "id": "social/comment",
+ "name": "Comment",
+ "name_id": "Komentar Mengetik",
+ "category": "social",
+ "description": {
+  "id": "Kartu komentar media sosial di atas rekaman: avatar meletup (inisial atau gambar), nama akun dan waktu, teks yang diketik per karakter dengan kursor berkedip, lalu baris suka yang menghitung naik. Beberapa komentar muncul bergantian.",
+  "en": "Social comment cards over footage: popping avatar (initials or image), username and time, per-character typewriter with blinking caret, then a counting likes row. Several comments appear in turn."
+ },
+ "tags": [
+  "sosial",
+  "komentar",
+  "mesin-ketik",
+  "typewriter",
+  "ui",
+  "rekaman",
+  "social",
+  "comment"
+ ],
+ "props": {
+  "comments": {
+   "default": [
+    {
+     "nama": "@rinaputri",
+     "waktu": "2 jam lalu",
+     "teks": "Akhirnya ada yang jelasin ini dengan sabar. Terima kasih!",
+     "suka": 1240,
+     "avatar": ""
+    },
+    {
+     "nama": "@bimo.kopi",
+     "waktu": "45 menit lalu",
+     "teks": "Menit 3:20 itu bikin aku langsung paham.",
+     "suka": 386,
+     "avatar": ""
+    }
+   ],
+   "type": "list",
+   "hint": "[{nama, waktu, teks, suka, avatar(url opsional)}]",
+   "aliases": [
+    "komentar"
+   ]
+  },
+  "platform": {
+   "default": "youtube",
+   "type": "enum",
+   "options": [
+    "youtube",
+    "tiktok",
+    "instagram",
+    "x"
+   ],
+   "hint": "Hanya warna aksen generik"
+  },
+  "theme": {
+   "default": "dark",
+   "type": "enum",
+   "options": [
+    "dark",
+    "light"
+   ],
+   "aliases": [
+    "tema"
+   ],
+   "option_aliases": {
+    "gelap": "dark",
+    "terang": "light"
+   }
+  },
+  "kps": {
+   "default": 32,
+   "type": "number",
+   "hint": "Karakter per detik"
+  },
+  "pause": {
+   "default": 0.5,
+   "type": "number",
+   "hint": "Jeda antar komentar (detik)",
+   "aliases": [
+    "jeda"
+   ]
+  },
+  "position": {
+   "default": "bottom-left",
+   "type": "enum",
+   "options": [
+    "bottom-left",
+    "bottom-right",
+    "center",
+    "top-left"
+   ],
+   "aliases": [
+    "posisi"
+   ],
+   "option_aliases": {
+    "kiri-bawah": "bottom-left",
+    "kanan-bawah": "bottom-right",
+    "tengah": "center",
+    "kiri-atas": "top-left"
+   }
+  },
+  "width": {
+   "default": 820,
+   "type": "number",
+   "hint": "Lebar kartu (px pada 1080)",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;500;700",
+   "type": "font"
+  }
+ },
+ "duration": 7,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "sosial/komentar",
+  "yt-comment-card"
+ ],
+ "example": {
+  "bg": "photo",
+  "font": [
+   "Inter:wght@400;500;700"
+  ]
+ }
+}

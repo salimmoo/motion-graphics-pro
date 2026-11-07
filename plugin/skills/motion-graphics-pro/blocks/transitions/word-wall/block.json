@@ -1,0 +1,112 @@
+{
+ "id": "transitions/word-wall",
+ "name": "Word Wall",
+ "name_id": "Dinding Kata",
+ "category": "transitions",
+ "description": {
+  "id": "Transisi penutup: dinding kata berulang menyapu masuk baris demi baris dari kiri dan kanan, membalik warna lewat blend difference saat menutup penuh, adegan diganti di baliknya, lalu dinding bubar ke sisi seberang.",
+  "en": "Overlay transition: a tiled word wall sweeps in row by row from alternating sides, inverts via difference blending while covering, the scene hard-cuts beneath, then the wall clears to the opposite sides."
+ },
+ "tags": [
+  "transisi",
+  "kata",
+  "tipografi",
+  "word wall",
+  "difference",
+  "invert",
+  "overlay",
+  "transitions",
+  "word",
+  "wall"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "text": {
+   "default": "GERAK",
+   "type": "text",
+   "hint": "Kata yang diulang di dinding",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "rows": {
+   "default": 7,
+   "type": "number",
+   "hint": "Jumlah baris",
+   "aliases": [
+    "baris"
+   ]
+  },
+  "color": {
+   "default": "#111111",
+   "type": "color",
+   "hint": "Warna latar baris",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "text_color": {
+   "default": "#f4ead5",
+   "type": "color",
+   "hint": "Warna kata",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "flip": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Kedip balik warna (difference) saat menutup",
+   "aliases": [
+    "balik"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@900",
+   "type": "font",
+   "hint": "Font kata"
+  },
+  "pause": {
+   "default": 0.05,
+   "type": "number",
+   "hint": "Jeda antar baris (detik)",
+   "aliases": [
+    "jeda"
+   ]
+  }
+ },
+ "duration": 2.2,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/dinding-kata",
+  "mk-clone-wall-transition"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 1,
+  "duration": 3.4,
+  "font": [
+   "Inter:wght@400;500;600;700;800;900"
+  ]
+ }
+}

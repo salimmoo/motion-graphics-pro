@@ -1,0 +1,114 @@
+{
+ "id": "paper/origami",
+ "name": "Origami",
+ "name_id": "Origami Bangau",
+ "category": "paper",
+ "description": {
+  "id": "Selembar kertas persegi terlipat langkah demi langkah menjadi bangau origami, ditahan sebentar, lalu terbuka lagi. Lipatan datar sungguhan dengan bayangan lembut; warna kertas bisa diganti.",
+  "en": "A square sheet folds step by step into an origami crane, holds, then unfolds. Real flat-fold simulation with soft shading and editable paper colours."
+ },
+ "tags": [
+  "kertas",
+  "origami",
+  "lipat",
+  "bangau",
+  "paper",
+  "fold",
+  "craft"
+ ],
+ "props": {
+  "front_color": {
+   "default": "#d94a3f",
+   "type": "color",
+   "hint": "Warna muka kertas",
+   "aliases": [
+    "warna_depan"
+   ]
+  },
+  "front_color2": {
+   "default": "#e8675a",
+   "type": "color",
+   "hint": "Nada kedua muka kertas",
+   "aliases": [
+    "warna_depan2"
+   ]
+  },
+  "back_color": {
+   "default": "#f7eedb",
+   "type": "color",
+   "hint": "Warna punggung kertas",
+   "aliases": [
+    "warna_belakang"
+   ]
+  },
+  "fold_lines": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Tampilkan garis lipat",
+   "aliases": [
+    "garis_lipat"
+   ]
+  },
+  "open": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Buka kembali setelah jadi",
+   "aliases": [
+    "buka"
+   ]
+  },
+  "label": {
+   "default": false,
+   "type": "boolean",
+   "hint": "Label nomor langkah"
+  },
+  "bg": {
+   "default": "paper",
+   "type": "enum",
+   "options": [
+    "paper",
+    "color",
+    "transparent"
+   ],
+   "aliases": [
+    "latar"
+   ],
+   "option_aliases": {
+    "kertas": "paper",
+    "warna": "color",
+    "transparan": "transparent"
+   }
+  },
+  "bg_color": {
+   "default": "#efe6d2",
+   "type": "color",
+   "hint": "Dipakai bila latar = warna",
+   "aliases": [
+    "warna_latar"
+   ]
+  },
+  "size": {
+   "default": 1,
+   "type": "number",
+   "hint": "Skala bangau",
+   "aliases": [
+    "ukuran"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [
+  "lib:mgp.js"
+ ],
+ "aliases": [
+  "kertas/origami"
+ ],
+ "example": {
+  "bg": "paper"
+ }
+}

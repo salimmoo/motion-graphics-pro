@@ -1,0 +1,47 @@
+<!-- Block backgrounds/snow · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="backgrounds/snow" data-start="0" data-duration="8" data-track-index="0" class="blk blk-backgrounds-snow">
+<script type="application/json" data-block-props>
+{"density": "sparse", "count": 1, "color": "#ffffff", "bg": "", "wind": 30, "center_mask": 0.3, "speed": 1}
+</script>
+</div>
+<style>
+.blk-backgrounds-snow{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-backgrounds-snow canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, A = k.random;
+  var K = BLOCK.canvas(k.root, k.w, k.h), x = K.ctx;
+  var luas = k.w * k.h / (1920 * 1080), N = Math.round((P.density === "dense" ? 380 : 140) * luas * (+P.count || 1));
+  // sprite kepingan lembut, dibuat sekali
+  var sp = document.createElement("canvas"); sp.width = sp.height = 64;
+  var sx = sp.getContext("2d"), gr = sx.createRadialGradient(32, 32, 0, 32, 32, 32);
+  gr.addColorStop(0, BLOCK.rgba(P.color, 1)); gr.addColorStop(0.45, BLOCK.rgba(P.color, 0.75)); gr.addColorStop(1, BLOCK.rgba(P.color, 0));
+  sx.fillStyle = gr; sx.fillRect(0, 0, 64, 64);
+  var kep = [];
+  for (var i = 0; i < N; i++) {
+    var z = Math.pow(A(), 1.6);                                     // kedalaman: kebanyakan jauh
+    kep.push({ x: A() * k.w, y: A() * k.h, z: z, r: (2 + z * 11) * k.s, v: (35 + z * 150) * k.s, a: 0.3 + z * 0.65,
+      amp: (6 + A() * 22) * k.s * (0.4 + z), f: 0.3 + A() * 0.7, ph: A() * 6.283 });
+  }
+  kep.sort(function (a, b) { return a.z - b.z; });
+  var cx = k.w / 2, cy = k.h / 2, rad = Math.hypot(cx, cy), mk = +P.center_mask, angin = (+P.wind || 0) * k.s;
+  function wrap(v, m) { return ((v % m) + m) % m; }
+  function gambar(t) {
+    x.clearRect(0, 0, k.w, k.h);
+    if (P.bg) { x.fillStyle = P.bg; x.fillRect(0, 0, k.w, k.h); }
+    var tt = t * (+P.speed || 1);
+    for (var i = 0; i < N; i++) {
+      var f = kep[i], m = f.r * 2;
+      var py = wrap(f.y + f.v * tt + m, k.h + 2 * m) - m;
+      var px = wrap(f.x + angin * tt * (0.4 + f.z) + f.amp * Math.sin(tt * f.f + f.ph), k.w + 2 * m) - m;
+      var d = Math.hypot(px - cx, py - cy) / rad, ms = mk > 0 ? BLOCK.smooth((d - mk * 0.55) / (mk * 0.6 + 0.01)) : 1;
+      var al = f.a * ms; if (al < 0.02) continue;
+      x.globalAlpha = al; x.drawImage(sp, px - f.r, py - f.r, f.r * 2, f.r * 2);
+    }
+    x.globalAlpha = 1;
+  }
+  BLOCK.onTime(k.tl, gambar, k.dur);
+});
+</script>

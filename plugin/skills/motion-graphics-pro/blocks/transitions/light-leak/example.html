@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Light Leak · block example transitions/light-leak</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="3">
+<div id="adegan-a" class="adegan ad-a"><div class="ad-judul">ADEGAN A</div><div class="ad-sub">sebelum transisi</div></div>
+<div id="adegan-b" class="adegan ad-b"><div class="ad-judul">ADEGAN B</div><div class="ad-sub">sesudah transisi</div></div>
+<!-- Block transitions/light-leak · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-light-leak" data-block="transitions/light-leak" data-start="0.7" data-duration="1.6" data-track-index="20" class="blk blk-transitions-light-leak">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "mode": "transition", "color": ["#ff7a2f", "#ffc15e", "#ff3d6e", "#ffe7c2"], "intensity": 1, "direction": "right", "seed": 3}
+</script>
+</div>
+<style>
+.blk-transitions-light-leak{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-transitions-light-leak .blk-bocor{position:absolute;inset:0;mix-blend-mode:screen}
+.blk-transitions-light-leak .blk-gumpal{position:absolute;border-radius:50%;opacity:0}
+.blk-transitions-light-leak .blk-garis-cahaya,.blk-transitions-light-leak .blk-silau{position:absolute;inset:0;opacity:0}
+</style>
+<script>
+BLOCK.mount("blk-light-leak", function (k) {
+  var P = k.P, tl = k.tl, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to), D = k.dur, W = k.w, H = k.h, s = k.s;
+  function gaya(el, o) { if (el) for (var n in o) el.style[n] = o[n]; }
+  function bersih(el, tampil) { gaya(el, { transform: "", filter: "", opacity: "", clipPath: "", webkitMaskImage: "", maskImage: "", transformOrigin: "", zIndex: "", borderRadius: "", boxShadow: "", backfaceVisibility: "", visibility: tampil ? "" : "hidden" }); }
+  function ez(n) { return gsap.parseEase(n || "none") || gsap.parseEase("none"); }
+  var warna = Array.isArray(P.color) ? P.color : String(P.color).split(","), r = BLOCK.random(+P.seed || 3), I = BLOCK.clamp(+P.intensity, 0, 1.5);
+  var trans = P.mode !== "overlay", dir = P.direction === "left" ? -1 : 1, M = Math.max(W, H);
+  var lap = BLOCK.el("div", { class: "blk-bocor" }, k.root), gm = [];
+  for (var i = 0; i < 6; i++) {
+    var c = warna[i % warna.length], sz = (0.55 + r() * 0.6) * M;
+    var g = BLOCK.el("div", { class: "blk-gumpal", style: "width:" + sz + "px;height:" + sz * (0.7 + r() * 0.5) + "px;background:radial-gradient(closest-side," + BLOCK.rgba(c, 0.95) + "," + BLOCK.rgba(c, 0.45) + " 45%," + BLOCK.rgba(c, 0) + " 100%)" }, lap);
+    gm.push({ el: g, sz: sz, x0: (dir > 0 ? -0.35 : 0.75) + r() * 0.5 - 0.1, y0: r() * 0.9 - 0.25, v: 0.55 + r() * 0.5, f: r() * 10 });
+  }
+  var gr = BLOCK.el("div", { class: "blk-garis-cahaya", style: "background:linear-gradient(" + (dir > 0 ? 105 : 75) + "deg,rgba(255,240,220,0) 38%,rgba(255,236,210,.75) 50%,rgba(255,240,220,0) 62%)" }, lap);
+  var sl = BLOCK.el("div", { class: "blk-silau", style: "background:radial-gradient(120% 100% at " + (dir > 0 ? 60 : 40) + "% 45%,#fff6e8 0%,#ffd9a8 45%,#ff9a62 100%)" }, k.root);
+  BLOCK.onTime(tl, function (t) {
+    var u = t / D;
+    sl.style.opacity = 0;
+    var e = trans ? Math.pow(Math.sin(Math.PI * BLOCK.clamp(u, 0, 1)), 0.7) : BLOCK.smooth(u / 0.25) * (1 - BLOCK.smooth((u - 0.6) / 0.4));
+    lap.style.opacity = u <= 0 || u >= 1 ? 0 : I;
+    gm.forEach(function (g, i) {
+      var x = g.x0 + dir * u * g.v + BLOCK.noise(t * 0.6 + g.f, i + 1) * 0.06, y = g.y0 + BLOCK.noise(t * 0.5 + g.f, i + 7) * 0.08;
+      gaya(g.el, { left: (x * W - g.sz / 2 + g.sz / 2) + "px", top: y * H + "px", opacity: Math.min(1, e * (0.85 + 0.3 * BLOCK.noise(t * 1.3 + g.f, i + 3))), transform: "scale(" + (0.9 + 0.2 * BLOCK.noise(t + g.f, i + 5)) + ")" });
+    });
+    gaya(gr, { opacity: e * 0.8, transform: "translateX(" + (dir * (u - 0.5) * 70) + "%)" });
+    if (!trans) return;
+    if (u <= 0 || u >= 1) { bersih(A, u <= 0); bersih(Bk, u >= 1); return; }
+    var pk = Math.exp(-Math.pow((u - 0.5) / 0.11, 2)), b = u >= 0.5;
+    sl.style.opacity = pk * 0.92 * Math.min(1, I);
+    var ff = "brightness(" + (1 + 0.7 * e) + ") sepia(" + 0.25 * e + ")";
+    gaya(A, { visibility: b ? "hidden" : "", filter: b ? "" : ff }); gaya(Bk, { visibility: b ? "" : "hidden", filter: b ? ff : "" });
+  }, D);
+});
+</script>
+</div>
+<script>
+  window.__duration = 3;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 3);
+</script>
+</body>
+</html>

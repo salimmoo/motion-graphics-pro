@@ -1,0 +1,131 @@
+{
+ "id": "titles/prism",
+ "name": "Prism",
+ "name_id": "Judul Prisma",
+ "category": "titles",
+ "description": {
+  "id": "Judul tampilan di atas akar transparan: masuk dari kabur ke fokus, pinggiran merah dan biru yang melebar lalu mengendap dan bernapas pelan, busur perspektif, serta hanyut skala yang lambat.",
+  "en": "Display title on a transparent root: blur-to-focus entrance, red/blue fringe that settles then breathes, a perspective bow and a slow scale drift."
+ },
+ "tags": [
+  "judul",
+  "prisma",
+  "kromatik",
+  "aberasi",
+  "rgb-split",
+  "blur",
+  "display",
+  "titles",
+  "prism"
+ ],
+ "props": {
+  "text": {
+   "default": "SINYAL\\nDARI JAUH",
+   "type": "text",
+   "hint": "\n = baris baru",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "left_color": {
+   "default": "#ff2d55",
+   "type": "color",
+   "hint": "Pinggiran kiri",
+   "aliases": [
+    "warna_kiri"
+   ]
+  },
+  "right_color": {
+   "default": "#2d7bff",
+   "type": "color",
+   "hint": "Pinggiran kanan",
+   "aliases": [
+    "warna_kanan"
+   ]
+  },
+  "slide": {
+   "default": 26,
+   "type": "number",
+   "hint": "Lebar pinggiran awal (px pada 1080)",
+   "aliases": [
+    "geser"
+   ]
+  },
+  "margin": {
+   "default": 6,
+   "type": "number",
+   "hint": "Lebar pinggiran setelah mengendap (px)",
+   "aliases": [
+    "sisa"
+   ]
+  },
+  "breath": {
+   "default": 4,
+   "type": "number",
+   "hint": "Amplitudo napas pinggiran (px)",
+   "aliases": [
+    "napas"
+   ]
+  },
+  "arc": {
+   "default": 22,
+   "type": "number",
+   "hint": "Kemiringan perspektif awal (derajat)",
+   "aliases": [
+    "busur"
+   ]
+  },
+  "font": {
+   "default": "Anton",
+   "type": "font"
+  },
+  "size": {
+   "default": 210,
+   "type": "number",
+   "hint": "Ukuran huruf (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "line_spacing": {
+   "default": 0.92,
+   "type": "number",
+   "aliases": [
+    "jarak_baris"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi vertikal (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "judul/prisma",
+  "yt-prism-title"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Anton"
+  ]
+ }
+}

@@ -1,0 +1,140 @@
+{
+ "id": "accents/feather-highlight",
+ "name": "Feather Highlight",
+ "name_id": "Sorotan Berbulu",
+ "category": "accents",
+ "description": {
+  "id": "Seluruh bingkai meredup kecuali satu elips bertepi lembut; lubang sorotan meluncur dari satu sasaran ke sasaran berikutnya (selektor elemen host atau kotak persen), dengan label kecil yang ikut menempel. Posisi dan ukuran lubang dikendalikan variabel CSS.",
+  "en": "Dims the frame except a feathered ellipse that glides between targets (host selectors or percent boxes), with a small caption riding along. Hole position and size are driven by CSS variables."
+ },
+ "tags": [
+  "aksen",
+  "sorotan",
+  "spotlight",
+  "fokus",
+  "tutorial",
+  "redup",
+  "ui",
+  "accents",
+  "feather",
+  "highlight"
+ ],
+ "props": {
+  "dot": {
+   "default": [
+    {
+     "x": 40,
+     "y": 31,
+     "lebar": 36,
+     "tinggi": 38,
+     "teks": "Ringkasan minggu ini"
+    },
+    {
+     "x": 83,
+     "y": 43.5,
+     "lebar": 18,
+     "tinggi": 7,
+     "teks": "Simpan perubahan"
+    },
+    {
+     "x": 59,
+     "y": 74,
+     "lebar": 74,
+     "tinggi": 40,
+     "teks": "Riwayat transaksi"
+    }
+   ],
+   "type": "list",
+   "hint": "Selektor (\"#id\") atau {x, y, lebar, tinggi, teks} dalam persen",
+   "aliases": [
+    "titik"
+   ]
+  },
+  "dark": {
+   "default": 0.72,
+   "type": "number",
+   "hint": "Kegelapan tirai (0..1)",
+   "aliases": [
+    "gelap"
+   ]
+  },
+  "feather": {
+   "default": 0.35,
+   "type": "number",
+   "hint": "Kelembutan tepi (0..1)",
+   "aliases": [
+    "bulu"
+   ]
+  },
+  "loose": {
+   "default": 1.25,
+   "type": "number",
+   "hint": "Pengali ukuran lubang terhadap sasaran",
+   "aliases": [
+    "longgar"
+   ]
+  },
+  "slide_duration": {
+   "default": 0.8,
+   "type": "number",
+   "aliases": [
+    "durasi_geser"
+   ]
+  },
+  "ease": {
+   "default": "power3.inOut",
+   "type": "ease"
+  },
+  "color": {
+   "default": "#05060b",
+   "type": "color",
+   "hint": "Warna tirai",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "label_color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna_label"
+   ]
+  },
+  "text_color": {
+   "default": "#141622",
+   "type": "color",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@600",
+   "type": "font"
+  },
+  "size": {
+   "default": 30,
+   "type": "number",
+   "aliases": [
+    "ukuran"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "aksen/sorotan-bulu",
+  "yt-feather-highlight"
+ ],
+ "example": {
+  "bg": "ui",
+  "font": [
+   "Inter:wght@600"
+  ]
+ }
+}

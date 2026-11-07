@@ -1,0 +1,15 @@
+{
+ "cutout - Python part of `mgp cutout` and the magenta key of `mgp image` (mgp, Motion Graphics Pro).\nOld module name: potong_latar.py (thin shim kept).\n\nModes:\n  image   <input> <output.png> [--model u2net]               remove the background of one image with rembg (old: gambar)\n  folder  <input_dir> <output_dir> [--model] [--plate dir]   every PNG in the folder (video frames)\n  magenta <input> <output> [--clean [--components 0.02] [--threshold 128]]\n                                                             key a magenta #FF00FF background (numpy + Pillow); --clean = remove magenta leftovers\n\nrembg (MIT) uses the U2-Net model; the model is downloaded once to ~/.u2net on first use.\nOutput is always RGBA PNG. --plate writes the background layer (inverted alpha) for text between layers.\n": "cutout - Python part of `mgp cutout` and the magenta key of `mgp image` (mgp, Motion Graphics Pro).\nOld module name: potong_latar.py (thin shim kept).\n\nModes:\n  image   <input> <output.png> [--model u2net]               remove the background of one image with rembg (old: gambar)\n  folder  <input_dir> <output_dir> [--model] [--plate dir]   every PNG in the folder (video frames)\n  magenta <input> <output> [--clean [--components 0.02] [--threshold 128]]\n                                                             key a magenta #FF00FF background (numpy + Pillow); --clean = remove magenta leftovers\n\nrembg (MIT) uses the U2-Net model; the model is downloaded once to ~/.u2net on first use.\nOutput is always RGBA PNG. --plate writes the background layer (inverted alpha) for text between layers.\n",
+ "magenta: remove magenta leftovers (mgp image --cutout)": "magenta: remove magenta leftovers (mgp image --cutout)",
+ "--clean: drop components < frac x the largest (0 = keep all, for kit sheets)": "--clean: drop components < frac x the largest (0 = keep all, for kit sheets)",
+ "--clean: alpha < threshold becomes transparent": "--clean: alpha < threshold becomes transparent",
+ "{}: {}x{} in {} s": "{}: {}x{} in {} s",
+ "frame {}/{}  ({} frame/s)": "frame {}/{}  ({} frame/s)",
+ "clean: {} magenta px, {} loose speck px, {} semi-transparent px removed": "clean: {} magenta px, {} loose speck px, {} semi-transparent px removed",
+ "despill: key colour must be magenta, green, blue or #rrggbb, not {}": "despill: key colour must be magenta, green, blue or #rrggbb, not {}",
+ "magenta: keep the key-colour tint along the edge (no despill)": "magenta: keep the key-colour tint along the edge (no despill)",
+ "despill band width in px (default 1.5 % of the short side)": "despill band width in px (default 1.5 % of the short side)",
+ "despill: key colour magenta | green | blue | #rrggbb": "despill: key colour magenta | green | blue | #rrggbb",
+ "despill: the whole subject, not only the edge band": "despill: the whole subject, not only the edge band",
+ "despill {}: {} px along the edge (band {} px), tint {}% -> {}%": "despill {}: {} px along the edge (band {} px), tint {}% -> {}%"
+}

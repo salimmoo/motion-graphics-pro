@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP sceneTanker · kapal tanker sandar satu take</title>
+<style>html,body{margin:0;background:#0e1116}#stage{position:relative;width:1280px;height:720px;overflow:hidden}</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../scene-tanker.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720"></div>
+<script>
+// One take: approach, straighten, tug push, contact, mooring lines, loading arms. The camera holds the aerial preset,
+// then drifts closer for the mooring and the loading arms (cameraKeys). Phase caption on, line names off.
+const tk = MGP.sceneTanker.create(document.getElementById("stage"), {
+  sky: "siang", caption: true,
+  cameraKeys: [[0, "udara"], [30, "udara"], [40, { az: 34, el: 15, d: 270 }]],
+});
+MGP.core.expose(tk);
+</script>
+</body>
+</html>

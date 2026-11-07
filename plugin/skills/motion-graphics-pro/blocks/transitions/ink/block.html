@@ -1,0 +1,58 @@
+<!-- Block transitions/ink · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="transitions/ink" data-start="0" data-duration="2.4" data-track-index="20" class="blk blk-transitions-ink">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "color": "#1c2440", "wet_color": "#2f3d6b", "dot": 7, "origin": "random", "viscous": 1, "grain": true, "seed": 11}
+</script>
+</div>
+<style>
+.blk-transitions-ink{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-transitions-ink svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, R = k.random, W = k.w, H = k.h, s = k.s, kt = +P.viscous || 1;
+  var A = BLOCK.find(P.from), Bk = BLOCK.find(P.to), id = k.id + "-f";
+  var sv = BLOCK.svg("svg", { viewBox: "0 0 " + W + " " + H, preserveAspectRatio: "none" }, k.root);
+  var df = BLOCK.svg("defs", null, sv), f = BLOCK.svg("filter", { id: id, x: 0, y: 0, width: W, height: H, filterUnits: "userSpaceOnUse", "color-interpolation-filters": "sRGB" }, df);
+  // tinta merembes: tepi diacak turbulensi, diburamkan, lalu di-threshold (gooey) supaya tetes menyatu
+  var fe = function (t, a) { return BLOCK.svg(t, a, f); };
+  fe("feTurbulence", { type: "fractalNoise", baseFrequency: (0.006 / s).toFixed(5), numOctaves: 3, seed: Math.floor(R() * 900), result: "n" });
+  fe("feDisplacementMap", { in: "SourceGraphic", in2: "n", scale: Math.round(90 * s * kt), xChannelSelector: "R", yChannelSelector: "G", result: "d" });
+  fe("feGaussianBlur", { in: "d", stdDeviation: (14 * s).toFixed(1), result: "b" });
+  fe("feColorMatrix", { in: "b", type: "matrix", values: "1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 26 -12", result: "goo" });
+  if (P.grain) {
+    // butir kertas statis yang ikut pada tinta
+    fe("feTurbulence", { type: "fractalNoise", baseFrequency: 0.85, numOctaves: 2, seed: 7, result: "g" });
+    fe("feColorMatrix", { in: "g", type: "matrix", values: "0 0 0 0 0.85 0 0 0 0 0.82 0 0 0 0 0.75 1.3 0 0 0 -0.62", result: "gm" });
+    fe("feComposite", { in: "gm", in2: "goo", operator: "in", result: "gi" });
+    fe("feBlend", { in: "gi", in2: "goo", mode: "screen" });
+  }
+  var gr = BLOCK.svg("g", { filter: "url(#" + id + ")" }, sv);
+  var grad = BLOCK.svg("radialGradient", { id: id + "-g", gradientUnits: "userSpaceOnUse", cx: W * 0.42, cy: H * 0.45, r: Math.hypot(W, H) * 0.55 }, df);
+  BLOCK.svg("stop", { offset: "0", "stop-color": P.wet_color }, grad);
+  BLOCK.svg("stop", { offset: "0.75", "stop-color": P.color }, grad);
+  // pusat-pusat mekar + tetes satelit
+  var n = Math.max(1, +P.dot || 7), diag = Math.hypot(W, H), tetes = [];
+  for (var i = 0; i < n; i++) {
+    var cx = P.origin === "center" ? W * (0.5 + (R() - 0.5) * 0.25) : W * (0.08 + R() * 0.84);
+    var cy = P.origin === "center" ? H * (0.5 + (R() - 0.5) * 0.25) : H * (0.1 + R() * 0.8);
+    var jauh = Math.max(Math.hypot(cx, cy), Math.hypot(W - cx, cy), Math.hypot(cx, H - cy), Math.hypot(W - cx, H - cy));
+    tetes.push({ x: cx, y: cy, r: jauh * (i ? 0.6 + R() * 0.2 : 1.12), t: i / n * 0.22 + R() * 0.05 });
+    for (var j = 0; j < 3; j++) { var a = R() * 6.283, d = (60 + R() * 140) * s; tetes.push({ x: cx + Math.cos(a) * d, y: cy + Math.sin(a) * d, r: (90 + R() * 160) * s, t: tetes[tetes.length - 1].t + 0.04 + R() * 0.08, kecil: 1 }); }
+  }
+  var tm = D * 0.48;
+  tetes.forEach(function (d) {
+    var c = BLOCK.svg("circle", { cx: d.x, cy: d.y, r: 0, fill: "url(#" + id + "-g)" }, gr);
+    var t0 = d.t * D, tb = tm - t0 + (d.kecil ? -0.1 * D : 0.05 * D);
+    tl.fromTo(c, { attr: { r: 0 } }, { attr: { r: d.r }, duration: Math.max(0.2, tb), ease: d.kecil ? "power2.out" : "power2.inOut" }, t0);
+    // mengerut menuju titik tengah tanda
+    tl.to(c, { attr: { r: 0, cx: W * 0.5 + (d.x - W * 0.5) * 0.35, cy: H * 0.5 + (d.y - H * 0.5) * 0.35 }, duration: D * 0.3 + (d.kecil ? 0 : R() * 0.06 * D), ease: "power3.in" }, tm + 0.03 * D + R() * 0.04 * D);
+  });
+  // tanda tinta tajam yang tersisa sejenak di tengah, lalu menutup
+  var tanda = BLOCK.svg("circle", { cx: W / 2, cy: H / 2, r: 0, fill: P.color }, sv);
+  tl.fromTo(tanda, { attr: { r: 0 } }, { attr: { r: 46 * s }, duration: D * 0.12, ease: "back.out(2)" }, D * 0.76)
+    .to(tanda, { attr: { r: 0 }, duration: D * 0.1, ease: "power3.in" }, D * 0.9);
+  if (A) BLOCK.initial(tl, A, { autoAlpha: 1 }).set(A, { autoAlpha: 0 }, tm);
+  if (Bk) BLOCK.initial(tl, Bk, { autoAlpha: 0 }).set(Bk, { autoAlpha: 1 }, tm);
+});
+</script>

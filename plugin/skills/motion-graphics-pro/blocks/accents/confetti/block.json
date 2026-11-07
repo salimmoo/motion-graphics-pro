@@ -1,0 +1,143 @@
+{
+ "id": "accents/confetti",
+ "name": "Confetti",
+ "name_id": "Konfeti",
+ "category": "accents",
+ "description": {
+  "id": "Ledakan konfeti berseed dengan gravitasi dan hambatan bentuk tertutup (tanpa simulasi bertahap): mode ledak dari satu titik, meriam dari dua sudut bawah, atau hujan dari atas.",
+  "en": "Seeded confetti with closed-form gravity and drag (no stepped simulation): burst from a point, cannons from the two bottom corners, or rain from the top."
+ },
+ "tags": [
+  "aksen",
+  "konfeti",
+  "perayaan",
+  "partikel",
+  "confetti",
+  "accents"
+ ],
+ "props": {
+  "mode": {
+   "default": "burst",
+   "type": "enum",
+   "options": [
+    "burst",
+    "cannon",
+    "rain"
+   ],
+   "option_aliases": {
+    "ledak": "burst",
+    "meriam": "cannon",
+    "hujan": "rain"
+   }
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi horizontal pusat (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 62,
+   "type": "number",
+   "hint": "Posisi vertikal pusat (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "size": {
+   "default": 16,
+   "type": "number",
+   "hint": "Ukuran partikel (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "color": {
+   "default": "#ffd23f",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#ff4d6d",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "palette": {
+   "default": [
+    "#4cc9f0",
+    "#7bd389",
+    "#b388ff",
+    "#ffffff"
+   ],
+   "type": "list",
+   "hint": "Warna tambahan selain warna dan warna_aksen",
+   "aliases": [
+    "palet"
+   ]
+  },
+  "count": {
+   "default": 160,
+   "type": "number",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "strength": {
+   "default": 1,
+   "type": "number",
+   "aliases": [
+    "kekuatan"
+   ]
+  },
+  "gravity": {
+   "default": 1,
+   "type": "number",
+   "aliases": [
+    "gravitasi"
+   ]
+  },
+  "spread": {
+   "default": 65,
+   "type": "number",
+   "hint": "Setengah sudut sebaran (derajat)",
+   "aliases": [
+    "sebaran"
+   ]
+  },
+  "start": {
+   "default": 0.15,
+   "type": "number",
+   "hint": "Waktu mulai lokal (detik)",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "seed": {
+   "default": 7,
+   "type": "number",
+   "hint": "Seed acak"
+  }
+ },
+ "duration": 3.5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "aksen/konfeti",
+  "confetti"
+ ],
+ "example": {
+  "bg": "dark",
+  "aspect": "16:9"
+ }
+}

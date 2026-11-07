@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Screen Carousel · block example ui/screen-carousel</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=block">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="7.5">
+<div id="adegan" class="adegan ad-gelap"></div>
+<!-- Block ui/screen-carousel · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-screen-carousel" data-block="ui/screen-carousel" data-start="0" data-duration="7" data-track-index="30" class="blk blk-ui-screen-carousel">
+<script type="application/json" data-block-props>
+{"mode": "rail", "screen": [{"judul": "Beranda", "ket": "Semua tugas hari ini di satu tempat", "warna": "#5b7cfa", "angka": "12"}, {"judul": "Fokus", "ket": "Mode tenang tanpa gangguan", "warna": "#ff7a59", "angka": "25:00"}, {"judul": "Laporan", "ket": "Kemajuan mingguan yang mudah dibaca", "warna": "#22b07d", "angka": "86%"}, {"judul": "Tim", "ket": "Bagikan rencana dalam satu ketukan", "warna": "#a466ff", "angka": "8"}], "text_color": "#f5f6fa", "base_screen": "#ffffff", "font": "Inter:wght@400;500;600;700;800", "font2": "JetBrains Mono:wght@400;500"}
+</script>
+</div>
+<style>
+.blk-ui-screen-carousel{position:absolute;inset:0;pointer-events:none;overflow:hidden;font-family:"Inter",system-ui,sans-serif}
+.blk-ui-screen-carousel .sc{position:absolute;left:50%;top:50%;overflow:hidden;box-sizing:border-box;color:#151a26}
+.blk-ui-screen-carousel .sc .hero{position:relative;color:#fff;font-weight:800}
+.blk-ui-screen-carousel .row{display:flex;align-items:center}
+.blk-ui-screen-carousel .tab{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-around;align-items:center;border-top:1px solid #eceff4;background:#fff}
+.blk-ui-screen-carousel .cap{position:absolute;white-space:nowrap}
+.blk-ui-screen-carousel .tx{position:absolute}
+</style>
+<script>
+BLOCK.mount("blk-screen-carousel", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, E = BLOCK.el, L = P.screen, n = L.length, rel = P.mode !== "swap", lebar = k.w > k.h * 1.2;
+  var sh = Math.min(k.h * (rel ? 0.66 : 0.78), k.w * (rel ? 0.5 : 0.8) * 2.05), sw = sh / 2.05, u = sw / 360, px = function (v) { return v * u + "px"; };
+  var mono = BLOCK.family(P.font2, "monospace");
+  function layar(d) {
+    var w = E("div", { style: "position:absolute;inset:0" }, k.root);
+    var s = E("div", { class: "sc", style: "width:" + sw + "px;height:" + sh + "px;margin:" + (-sh / 2) + "px 0 0 " + (-sw / 2) + "px;border-radius:" + px(40) + ";background:" + P.base_screen + ";padding:" + px(54) + " " + px(22) + " 0;box-shadow:0 " + px(30) + " " + px(70) + " rgba(0,0,0,.4),0 0 0 " + px(8) + " #0d0f14" }, w);
+    E("div", { style: "font-size:" + px(30) + ";font-weight:800;letter-spacing:-.02em" }, s, BLOCK.esc(d.judul));
+    var h = E("div", { class: "hero", style: "margin-top:" + px(18) + ";height:" + px(170) + ";border-radius:" + px(24) + ";padding:" + px(20) + ";box-sizing:border-box;font-size:" + px(56) + ";background:linear-gradient(140deg," + BLOCK.mix(d.warna, "#ffffff", .25) + "," + d.warna + " 55%," + BLOCK.mix(d.warna, "#111426", .35) + ")" }, s, BLOCK.esc(d.angka));
+    E("div", { style: "font-size:" + px(15) + ";font-weight:500;opacity:.85;margin-top:" + px(6) }, h, BLOCK.esc(d.ket));
+    for (var i = 0; i < 4; i++) {
+      var r = E("div", { class: "row", style: "gap:" + px(14) + ";margin-top:" + px(18) }, s);
+      E("div", { style: "flex:none;width:" + px(40) + ";height:" + px(40) + ";border-radius:" + px(12) + ";background:" + BLOCK.mix(d.warna, "#ffffff", 0.55 + i * 0.1) }, r);
+      var c = E("div", { style: "flex:1" }, r);
+      E("div", { style: "height:" + px(11) + ";width:" + (80 - i * 12) + "%;border-radius:99px;background:#dfe3ea" }, c);
+      E("div", { style: "height:" + px(9) + ";width:" + (50 - i * 6) + "%;border-radius:99px;background:#eceff4;margin-top:" + px(8) }, c);
+    }
+    var tb = E("div", { class: "tab", style: "height:" + px(70) }, s);
+    for (i = 0; i < 4; i++) E("div", { style: "width:" + px(26) + ";height:" + px(26) + ";border-radius:" + px(8) + ";background:" + (i === 0 ? d.warna : "#d5dae3") }, tb);
+    return s;
+  }
+  var sc = L.map(layar), seg = D / n;
+  if (rel) {
+    // rel horizontal: indeks kontinu c(t); lempar cepat yang menyamai kecepatan lalu tangkapan ekor panjang
+    var gx = sw * 1.12, tAdv = 0.9;
+    function c(t) { var v = 0; for (var i = 1; i < n; i++) { var q = BLOCK.clamp((t - i * seg + tAdv * 0.5) / tAdv, 0, 1); v += q < 0.18 ? 0.26 * Math.pow(q / 0.18, 2) : 1 - (1 - 0.26) * Math.pow(Math.max(0, 1 - (q - 0.18) / 0.82), 3.2); } return v; }
+    BLOCK.onTime(tl, function (t) {
+      var cc = c(t);
+      sc.forEach(function (s, i) {
+        var d = i - cc, a = Math.abs(d);
+        s.style.transform = "translateX(" + (d * gx - Math.sign(d) * Math.max(0, a - 1) * gx * 0.25) + "px) scale(" + (1 - 0.2 * Math.min(a, 1.5)) + ")";
+        s.style.opacity = BLOCK.clamp(1.6 - a * 0.75, 0, 1) * (a < 0.5 ? 1 : 0.75);
+        s.style.filter = "brightness(" + (1 - 0.35 * Math.min(a, 1)) + ")";
+        s.parentNode.style.zIndex = 10 - Math.round(a * 2);
+      });
+    }, D);
+    tl.fromTo(sc.map(function (s) { return s.parentNode; }), { y: 60 * u, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.8, ease: "power3.out", stagger: 0.06 }, 0);
+    // keterangan mono berganti tiap maju
+    L.forEach(function (d, i) {
+      var cp = E("div", { class: "cap", style: "left:50%;top:" + (50 + (sh / k.h) * 50 + 4) + "%;transform:translateX(-50%);font-family:" + mono + ";font-size:" + 24 * k.s + "px;color:" + P.text_color + ";letter-spacing:.04em" }, k.root);
+      cp.innerHTML = '<span style="opacity:.5">' + ("0" + (i + 1)).slice(-2) + " / " + ("0" + n).slice(-2) + "</span>&nbsp;&nbsp;" + BLOCK.esc(d.judul.toUpperCase());
+      var t0 = i ? i * seg - tAdv * 0.2 : 0.3;
+      tl.fromTo(cp, { autoAlpha: 0, y: 16 * k.s }, { autoAlpha: 1, y: 0, duration: 0.4, ease: "power3.out" }, t0);
+      if (i < n - 1) tl.to(cp, { autoAlpha: 0, y: -16 * k.s, duration: 0.25, ease: "power2.in" }, (i + 1) * seg - tAdv * 0.5);
+    });
+  } else {
+    // mock tetap, keadaan bertukar silang; teks naik, tahan, keluar di sampingnya
+    var mx = lebar ? -k.w * 0.17 : 0, my = lebar ? 0 : -k.h * 0.12;
+    sc.forEach(function (s) { s.style.left = "calc(50% + " + mx + "px)"; s.style.top = "calc(50% + " + my + "px)"; });
+    tl.fromTo(sc[0], { y: 50 * u, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.8, ease: "power3.out" }, 0);
+    if (n > 1) BLOCK.initial(tl, sc.slice(1), { autoAlpha: 0 });
+    L.forEach(function (d, i) {
+      var tx = E("div", { class: "tx", style: lebar ? "left:56%;top:50%;width:36%;transform:translateY(-50%)" : "left:10%;right:10%;top:" + (50 + (sh / k.h) * 38 + 2) + "%;text-align:center" }, k.root);
+      var a = E("div", { style: "font-family:" + mono + ";font-size:" + 22 * k.s + "px;color:" + d.warna + ";letter-spacing:.08em" }, tx, ("0" + (i + 1)).slice(-2) + " &mdash; " + BLOCK.esc(d.judul.toUpperCase()));
+      var b = E("div", { style: "font-size:" + 58 * k.s + "px;font-weight:800;line-height:1.08;letter-spacing:-.02em;color:" + P.text_color + ";margin-top:" + 14 * k.s + "px" }, tx, BLOCK.esc(d.ket));
+      var t0 = i * seg + (i ? 0.05 : 0.35);
+      if (i) tl.set(sc[i], { autoAlpha: 1 }, i * seg - 0.25).fromTo(sc[i], { clipPath: "inset(100% 0% 0% 0% round " + px(40) + ")" }, { clipPath: "inset(0% 0% 0% 0% round " + px(40) + ")", duration: 0.55, ease: "power3.inOut", immediateRender: false }, i * seg - 0.25).set(sc[i - 1], { autoAlpha: 0 }, i * seg + 0.3);
+      tl.fromTo([a, b], { autoAlpha: 0, y: 40 * k.s }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "power3.out", stagger: 0.08 }, t0);
+      if (i < n - 1) tl.to([a, b], { autoAlpha: 0, y: -30 * k.s, duration: 0.35, ease: "power2.in", stagger: 0.04 }, (i + 1) * seg - 0.4);
+    });
+  }
+}, { font: true });
+</script>
+</div>
+<script>
+  window.__duration = 7.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 7.5);
+</script>
+</body>
+</html>

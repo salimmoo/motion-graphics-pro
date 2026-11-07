@@ -1,0 +1,167 @@
+{
+ "id": "titles/leaf-curtain",
+ "name": "Leaf Curtain",
+ "name_id": "Judul Tirai Daun",
+ "category": "titles",
+ "description": {
+  "id": "Daun-daun berlapis kedalaman menyapu masuk menutupi layar, lalu membelah ke tepi dan membingkai judul yang muncul dari kabur di bawah cahaya hangat. Daun depan besar dan kabur, daun belakang meredup, memberi kesan ruang tajam. Sapuan kedua (opsional) mengganti judul ke frasa kedua.",
+  "en": "Depth-layered leaves sweep in to cover the frame, then part to the edges and frame a headline that resolves from blur under warm light. Large blurred foreground leaves and dimmed background leaves give depth of field. An optional second sweep swaps to a second headline."
+ },
+ "tags": [
+  "judul",
+  "title-card",
+  "daun",
+  "kanopi",
+  "organik",
+  "kedalaman",
+  "dof",
+  "sapuan",
+  "dua-judul",
+  "titles",
+  "leaf",
+  "curtain"
+ ],
+ "props": {
+  "text": {
+   "default": "HUTAN BERBISIK",
+   "type": "text",
+   "hint": "\\n = baris baru",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "text2": {
+   "default": "DENGARKAN PELAN",
+   "type": "text",
+   "hint": "Judul kedua setelah sapuan kedua (kosong = tanpa)",
+   "aliases": [
+    "teks2"
+   ]
+  },
+  "color": {
+   "default": "#fbf6ea",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "leaf_color": {
+   "default": "#2f6b3a",
+   "type": "color",
+   "hint": "Daun tua",
+   "aliases": [
+    "warna_daun"
+   ]
+  },
+  "leaf_color2": {
+   "default": "#9cc44f",
+   "type": "color",
+   "hint": "Daun muda",
+   "aliases": [
+    "warna_daun2"
+   ]
+  },
+  "light_color": {
+   "default": "#ffe6a8",
+   "type": "color",
+   "hint": "Cahaya di balik judul",
+   "aliases": [
+    "warna_cahaya"
+   ]
+  },
+  "direction": {
+   "default": "right",
+   "type": "enum",
+   "options": [
+    "right",
+    "left"
+   ],
+   "hint": "Daun datang dari sisi ini",
+   "aliases": [
+    "arah"
+   ],
+   "option_aliases": {
+    "kanan": "right",
+    "kiri": "left"
+   }
+  },
+  "count": {
+   "default": 80,
+   "type": "number",
+   "hint": "Jumlah daun tirai",
+   "aliases": [
+    "jumlah"
+   ]
+  },
+  "sweep_count": {
+   "default": 16,
+   "type": "number",
+   "hint": "Jumlah daun sapuan kedua",
+   "aliases": [
+    "jumlah_sapu"
+   ]
+  },
+  "open": {
+   "default": 1.4,
+   "type": "number",
+   "hint": "Detik daun mulai membelah",
+   "aliases": [
+    "buka"
+   ]
+  },
+  "second_sweep": {
+   "default": 3.6,
+   "type": "number",
+   "hint": "Detik sapuan kedua (0 = tanpa)",
+   "aliases": [
+    "ganti"
+   ]
+  },
+  "dark": {
+   "default": 0.35,
+   "type": "number",
+   "hint": "Kegelapan vinyet 0..1",
+   "aliases": [
+    "gelap"
+   ]
+  },
+  "font": {
+   "default": "DM Serif Display",
+   "type": "font"
+  },
+  "size": {
+   "default": 170,
+   "type": "number",
+   "hint": "Ukuran judul (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi vertikal judul (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "judul/tirai-daun",
+  "canopy-part-title"
+ ],
+ "example": {
+  "bg": "photo",
+  "font": [
+   "DM Serif Display"
+  ]
+ }
+}

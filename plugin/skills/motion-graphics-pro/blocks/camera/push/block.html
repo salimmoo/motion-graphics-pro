@@ -1,0 +1,55 @@
+<!-- Block camera/push · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="camera/push" data-start="0" data-duration="5" data-track-index="30" class="blk blk-camera-push">
+<script type="application/json" data-block-props>
+{"target": "#adegan", "mode": "enter", "strength": 0.18, "dot_x": 50, "dot_y": 50, "pause": 0.8, "angle": 9, "ease": "", "fade_end": false, "edge_focus": true, "edge_blur": 10}
+</script>
+</div>
+<style>
+.blk-camera-push{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-camera-push .blk-tepi{position:absolute;inset:0;opacity:0;
+  -webkit-mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,transparent 45%,#000 100%);
+  mask-image:radial-gradient(ellipse 70% 70% at 50% 50%,transparent 45%,#000 100%)}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, T = BLOCK.find(P.target);
+  if (!T) { console.warn("[camera/push] target not found: " + P.target); return; }
+  var A = +P.strength || 0.18, j = BLOCK.clamp(+P.pause || 0, 0, D * 0.6), mode = P.mode;
+  T.style.transformOrigin = P.dot_x + "% " + P.dot_y + "%";
+  var tepi = null;
+  if (P.edge_focus) {
+    var b = "blur(" + Math.round(P.edge_blur * k.s) + "px)";
+    tepi = BLOCK.el("div", { class: "blk-tepi", style: "backdrop-filter:" + b + ";-webkit-backdrop-filter:" + b }, k.root);
+  }
+  // denyut defokus tepi: naik saat kamera bergerak, turun saat berhenti
+  function denyut(t0, naik, puncak, turun) {
+    if (tepi) tl.fromTo(tepi, { opacity: 0 }, { opacity: puncak, duration: naik, ease: "power2.out", immediateRender: false }, t0)
+      .to(tepi, { opacity: 0, duration: turun, ease: "power2.inOut" }, t0 + naik);
+  }
+  if (mode === "pull") {
+    // detail rapat ditahan, lalu satu tarikan mundur yang melambat
+    var S = 1 + A * 2.6, gd = Math.max(0.8, D - j - 0.4);
+    tl.fromTo(T, { scale: S }, { scale: 1, duration: gd, ease: P.ease || "expo.out" }, j);
+    BLOCK.initial(tl, T, { scale: S });
+    denyut(j, 0.25, 0.9, 0.9);
+  } else if (mode === "punch") {
+    // hentakan zoom cepat dengan sedikit lewat, tahan, lalu kendur
+    tl.fromTo(T, { scale: 1 }, { scale: 1 + A, duration: 0.42, ease: P.ease || "back.out(2.2)" }, j)
+      .to(T, { scale: 1 + A * 1.12, duration: Math.max(0.3, D - j - 1.3), ease: "none" }, j + 0.42)
+      .to(T, { scale: 1, duration: 0.7, ease: "power3.inOut" }, D - 0.8);
+    denyut(j, 0.08, 1, 0.5);
+    denyut(D - 0.8, 0.3, 0.6, 0.4);
+  } else if (mode === "skew") {
+    // geser + tilt 3D dengan perspektif, seperti kamera di atas rel melengkung
+    var sd = +P.angle || 9, px = Math.round(1400 * k.s);
+    tl.fromTo(T, { transformPerspective: px, rotationY: -sd, rotationX: sd * 0.25, xPercent: 4, scale: 1 + A },
+      { transformPerspective: px, rotationY: sd, rotationX: -sd * 0.25, xPercent: -4, scale: 1 + A * 0.6, duration: D, ease: P.ease || "sine.inOut" }, 0);
+    denyut(0, D * 0.3, 0.7, D * 0.6);
+  } else {
+    // masuk: satu dorongan pelan dan terus-menerus
+    tl.fromTo(T, { scale: 1, y: 0 }, { scale: 1 + A, y: -12 * k.s, duration: D, ease: P.ease || "sine.inOut" }, 0);
+    denyut(0, D * 0.45, 0.75, D * 0.5);
+  }
+  if (P.fade_end) tl.fromTo(T, { opacity: 1 }, { opacity: 0, duration: 0.7, ease: "power2.in", immediateRender: false }, D - 0.75);
+});
+</script>

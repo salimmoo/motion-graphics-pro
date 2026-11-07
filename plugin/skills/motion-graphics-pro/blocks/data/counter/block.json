@@ -1,0 +1,173 @@
+{
+ "id": "data/counter",
+ "name": "Counter",
+ "name_id": "Hitung Angka",
+ "category": "data",
+ "description": {
+  "id": "Angka besar menghitung naik atau turun dengan format Indonesia (titik ribuan, koma desimal), lalu mendarat dengan denyut halus. Mode uang menambahkan kilat hijau dan koin yang meletup; mode pop memunculkan digit satu per satu dengan blur dan angkat.",
+  "en": "A big stat counts up or down in Indonesian number format and lands with a restrained pulse. Money mode adds a green flash and a burst of coins; pop mode reveals digits one by one with blur and lift."
+ },
+ "tags": [
+  "data",
+  "angka",
+  "counter",
+  "count-up",
+  "uang",
+  "statistik",
+  "digit"
+ ],
+ "props": {
+  "mode": {
+   "default": "number",
+   "type": "enum",
+   "options": [
+    "number",
+    "money",
+    "pop"
+   ],
+   "hint": "angka = hitung + denyut; uang = hitung + kilat hijau + koin; pop = digit muncul bertahap",
+   "option_aliases": {
+    "angka": "number",
+    "uang": "money"
+   }
+  },
+  "from": {
+   "default": 0,
+   "type": "number",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": 12480,
+   "type": "number",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "decimals": {
+   "default": 0,
+   "type": "number",
+   "hint": "Jumlah angka di belakang koma",
+   "aliases": [
+    "desimal"
+   ]
+  },
+  "prefix": {
+   "default": "",
+   "type": "text",
+   "hint": "Mis. Rp",
+   "aliases": [
+    "awalan"
+   ]
+  },
+  "suffix": {
+   "default": "",
+   "type": "text",
+   "hint": "Mis. % atau rb",
+   "aliases": [
+    "akhiran"
+   ]
+  },
+  "label": {
+   "default": "pengguna aktif bulan ini",
+   "type": "text"
+  },
+  "count_duration": {
+   "default": 1.8,
+   "type": "number",
+   "hint": "Lama hitungan (detik)",
+   "aliases": [
+    "durasi_hitung"
+   ]
+  },
+  "ease": {
+   "default": "power3.out",
+   "type": "ease"
+  },
+  "coin": {
+   "default": 16,
+   "type": "number",
+   "hint": "Jumlah koin (mode uang)",
+   "aliases": [
+    "koin"
+   ]
+  },
+  "color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#34c759",
+   "type": "color",
+   "hint": "Warna kilat (mode uang)",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;600;800",
+   "type": "font"
+  },
+  "size": {
+   "default": 200,
+   "type": "number",
+   "hint": "Ukuran angka (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "weight": {
+   "default": 800,
+   "type": "number",
+   "aliases": [
+    "berat"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 48,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_y"
+   ]
+  }
+ },
+ "duration": 4,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "data/hitung",
+  "count-up",
+  "apple-money-count",
+  "number-pop-in"
+ ],
+ "example": {
+  "bg": "dark",
+  "props": {
+   "mode": "money",
+   "prefix": "Rp",
+   "to": 10000000,
+   "label": "tabungan terkumpul"
+  },
+  "font": [
+   "Inter:wght@500;600;800"
+  ]
+ }
+}

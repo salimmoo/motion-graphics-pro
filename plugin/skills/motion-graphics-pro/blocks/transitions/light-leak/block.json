@@ -1,0 +1,111 @@
+{
+ "id": "transitions/light-leak",
+ "name": "Light Leak",
+ "name_id": "Kebocoran Cahaya",
+ "category": "transitions",
+ "description": {
+  "id": "Cahaya hangat bocor seperti film analog: gumpalan jingga dan merah muda menyapu layar. Mode transisi memuncak menjadi silau lalu berganti adegan; mode overlay hanya melapisi momen kenangan tanpa mengganti adegan.",
+  "en": "Analog film light leak: warm orange and pink blooms sweep the frame. Transition mode peaks into a flare and swaps scenes; overlay mode just washes over a memory beat."
+ },
+ "tags": [
+  "transisi",
+  "light-leak",
+  "cahaya",
+  "film",
+  "flare",
+  "overlay",
+  "hangat",
+  "transitions",
+  "light",
+  "leak"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "mode": {
+   "default": "transition",
+   "type": "enum",
+   "options": [
+    "transition",
+    "overlay"
+   ],
+   "hint": "transisi = memuncak lalu ganti adegan; overlay = lapisan cahaya tanpa mengganti adegan",
+   "option_aliases": {
+    "transisi": "transition"
+   }
+  },
+  "color": {
+   "default": [
+    "#ff7a2f",
+    "#ffc15e",
+    "#ff3d6e",
+    "#ffe7c2"
+   ],
+   "type": "list",
+   "hint": "Palet warna cahaya",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "intensity": {
+   "default": 1,
+   "type": "number",
+   "hint": "Kekuatan cahaya 0..1",
+   "aliases": [
+    "intensitas"
+   ]
+  },
+  "direction": {
+   "default": "right",
+   "type": "enum",
+   "options": [
+    "left",
+    "right"
+   ],
+   "hint": "Arah sapuan cahaya",
+   "aliases": [
+    "arah"
+   ],
+   "option_aliases": {
+    "kiri": "left",
+    "kanan": "right"
+   }
+  },
+  "seed": {
+   "default": 3,
+   "type": "number",
+   "hint": "Benih acak posisi gumpalan"
+  }
+ },
+ "duration": 1.6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/kebocoran-cahaya",
+  "light-leak",
+  "organic-light-leak-overlay"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.7,
+  "duration": 3
+ }
+}

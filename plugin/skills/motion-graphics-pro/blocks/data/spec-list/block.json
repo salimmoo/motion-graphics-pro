@@ -1,0 +1,127 @@
+{
+ "id": "data/spec-list",
+ "name": "Spec List",
+ "name_id": "Daftar Spesifikasi",
+ "category": "data",
+ "description": {
+  "id": "Daftar spesifikasi atau keunggulan rata kiri: setiap baris meluncur masuk bergiliran, ikon centang tergambar, dan garis aksen menyapu di bawahnya. Format \"Kunci: nilai\" memisahkan nama dan nilai. Skema terang dan gelap.",
+  "en": "Left-aligned specs / traits checklist: rows slide in staggered, a check icon draws on and an accent underline sweeps beneath. \"Key: value\" splits name and value. Light and dark schemes."
+ },
+ "tags": [
+  "data",
+  "daftar",
+  "spesifikasi",
+  "checklist",
+  "fitur",
+  "list",
+  "spec"
+ ],
+ "props": {
+  "title": {
+   "default": "Spesifikasi utama",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "item": {
+   "default": [
+    "Baterai: 5.000 mAh",
+    "Layar: 6,7 inci",
+    "Berat: 189 g",
+    "Pengisian cepat: 45 W",
+    "Tahan air: IP68"
+   ],
+   "type": "list",
+   "hint": "Teks per baris; \"Kunci: nilai\" opsional"
+  },
+  "scheme": {
+   "default": "dark",
+   "type": "enum",
+   "options": [
+    "dark",
+    "light"
+   ],
+   "aliases": [
+    "skema"
+   ],
+   "option_aliases": {
+    "gelap": "dark",
+    "terang": "light"
+   }
+  },
+  "panel": {
+   "default": true,
+   "type": "boolean"
+  },
+  "pause": {
+   "default": 0.22,
+   "type": "number",
+   "hint": "Jeda antar baris (detik)",
+   "aliases": [
+    "jeda"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffb547",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;600;700",
+   "type": "font"
+  },
+  "size": {
+   "default": 38,
+   "type": "number",
+   "hint": "Ukuran teks (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "position_x": {
+   "default": 8,
+   "type": "number",
+   "hint": "Tepi kiri (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "width": {
+   "default": 42,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "lebar"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "16:9",
+  "1:1",
+  "4:5",
+  "9:16"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "data/daftar-spek",
+  "mk-specs-list"
+ ],
+ "example": {
+  "bg": "photo",
+  "font": [
+   "Inter:wght@400;600;700"
+  ]
+ }
+}

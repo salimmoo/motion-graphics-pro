@@ -1,0 +1,193 @@
+{
+ "id": "ui/notification",
+ "name": "Notification",
+ "name_id": "Notifikasi Sistem",
+ "category": "ui",
+ "description": {
+  "id": "Spanduk notifikasi bergaya sistem yang muncul di atas adegan apa pun dengan pegas yang terasa nyata: tiba cepat, sedikit kebablasan, lalu mengendap, dengan latar kaca buram, ikon aplikasi, judul, dan satu baris isi. Gaya ponsel (turun dari atas), desktop (geser dari kanan), atau tumpuk (1-5 kartu bertumpuk, terbaru di atas, satu kartu jadi fokus).",
+  "en": "A system-style notification banner that drops over any scene on a believable spring: fast arrival, soft overshoot, settled mass, frosted glass, app icon, title and one body line. Phone (drops from top), desktop (slides from the right) or stack (1-5 cards, newest on top, one in focus)."
+ },
+ "tags": [
+  "ui",
+  "notifikasi",
+  "banner",
+  "ios",
+  "macos",
+  "spanduk",
+  "tumpukan",
+  "alert",
+  "notification"
+ ],
+ "props": {
+  "style": {
+   "default": "ios",
+   "type": "enum",
+   "options": [
+    "ios",
+    "macos",
+    "stack"
+   ],
+   "hint": "ios = spanduk ponsel; macos = spanduk desktop; tumpuk = tumpukan kartu",
+   "aliases": [
+    "gaya"
+   ],
+   "option_aliases": {
+    "tumpuk": "stack"
+   }
+  },
+  "app": {
+   "default": "Pesan",
+   "type": "text",
+   "hint": "Nama aplikasi generik",
+   "aliases": [
+    "aplikasi"
+   ]
+  },
+  "icon": {
+   "default": "message",
+   "type": "enum",
+   "options": [
+    "message",
+    "calendar",
+    "mail",
+    "bell"
+   ],
+   "aliases": [
+    "ikon"
+   ],
+   "option_aliases": {
+    "pesan": "message",
+    "kalender": "calendar",
+    "surat": "mail",
+    "lonceng": "bell"
+   }
+  },
+  "icon_color": {
+   "default": "#34c759",
+   "type": "color",
+   "aliases": [
+    "warna_ikon"
+   ]
+  },
+  "title": {
+   "default": "Nadia Putri",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "body": {
+   "default": "Fotonya bagus banget! Kirim versi aslinya ya.",
+   "type": "text",
+   "aliases": [
+    "isi"
+   ]
+  },
+  "time": {
+   "default": "sekarang",
+   "type": "text",
+   "aliases": [
+    "waktu"
+   ]
+  },
+  "list": {
+   "default": [
+    {
+     "aplikasi": "Kalender",
+     "ikon": "kalender",
+     "warna_ikon": "#ff3b30",
+     "judul": "Rapat tim 10.00",
+     "isi": "Ruang Merapi · 30 menit lagi"
+    },
+    {
+     "aplikasi": "Surel",
+     "ikon": "surat",
+     "warna_ikon": "#2f80ff",
+     "judul": "Laporan bulanan",
+     "isi": "Bima: lampiran sudah saya perbarui"
+    },
+    {
+     "aplikasi": "Pesan",
+     "ikon": "pesan",
+     "warna_ikon": "#34c759",
+     "judul": "Nadia Putri",
+     "isi": "Fotonya bagus banget! Kirim versi aslinya ya."
+    }
+   ],
+   "type": "list",
+   "hint": "Kartu gaya tumpuk [{aplikasi, ikon, warna_ikon, judul, isi}], maks 5, urut tiba",
+   "aliases": [
+    "daftar"
+   ]
+  },
+  "focus": {
+   "default": 0,
+   "type": "number",
+   "hint": "Kartu fokus (0 = paling atas) gaya tumpuk",
+   "aliases": [
+    "fokus"
+   ]
+  },
+  "pause": {
+   "default": 0.7,
+   "type": "number",
+   "hint": "Jeda antar kartu (tumpuk)",
+   "aliases": [
+    "jeda"
+   ]
+  },
+  "start": {
+   "default": 0.3,
+   "type": "number",
+   "hint": "Detik notifikasi pertama tiba",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "exit": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Menyingkir di akhir blok",
+   "aliases": [
+    "keluar"
+   ]
+  },
+  "theme": {
+   "default": "light",
+   "type": "enum",
+   "options": [
+    "light",
+    "dark"
+   ],
+   "aliases": [
+    "tema"
+   ],
+   "option_aliases": {
+    "terang": "light",
+    "gelap": "dark"
+   }
+  },
+  "font": {
+   "default": "Inter:wght@400;500;600;700",
+   "type": "font"
+  }
+ },
+ "duration": 4,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "ui/notifikasi",
+  "native-notification-pop",
+  "macos-notification",
+  "notification-stack"
+ ],
+ "example": {
+  "bg": "photo",
+  "aspect": "9:16"
+ }
+}

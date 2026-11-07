@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Media Grid · block example gallery/media-grid</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="5.5">
+
+<!-- Block gallery/media-grid · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-media-grid" data-block="gallery/media-grid" data-start="0" data-duration="5" data-track-index="6" class="blk blk-gallery-media-grid">
+<script type="application/json" data-block-props>
+{"layout": "hero-two", "image": [], "label": ["Pagi di pasar", "Jalan pulang", "Senja di dermaga", "Kopi pertama", "Hujan sore", "Lampu kota"], "side_fill": "blur", "edge": 4, "gap": 1.6, "radius": 22, "pause": 0.12, "start_scale": 1.22, "grid_texture": true, "bg_color": "#101219", "seed": 8}
+</script>
+</div>
+<style>
+.blk-gallery-media-grid{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-gallery-media-grid .blk-sel{position:absolute;overflow:hidden}
+.blk-gallery-media-grid .blk-media{position:absolute;inset:0;background-size:cover;background-position:center}
+.blk-gallery-media-grid .blk-lb{position:absolute;left:1.2em;bottom:1em;font:600 1.6em/1.1 "Inter",system-ui,sans-serif;color:#fff;text-shadow:0 .1em .6em rgba(0,0,0,.35)}
+.blk-gallery-media-grid .blk-kisi{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px)}
+</style>
+<script>
+BLOCK.mount("blk-media-grid", function (k) {
+  var P = k.P, tl = k.tl, w = k.w, h = k.h, root = k.root;
+  root.style.background = P.bg_color;
+  var PAL = [["#ffb36b", "#d9465f", "#5a1f3a"], ["#8ee6dc", "#2d6cdf", "#10233f"], ["#ffe08a", "#ef7b45", "#6b2b1e"], ["#c6b2ff", "#5b3fd1", "#1f1650"], ["#b9ec9b", "#2f8f6a", "#123b2e"], ["#ffb3d0", "#a23d8a", "#3a1235"]];
+  var off = k.random.int(0, 5), g = P.image || [];
+  // media placeholder: langit bergradien + matahari + dua lapis bukit
+  function media(i) {
+    if (g.length) return "url('" + g[i % g.length] + "')";
+    var p = PAL[(i + off) % PAL.length], sx = 25 + (i * 23) % 50;
+    return "radial-gradient(circle at " + sx + "% 34%,rgba(255,255,255,.85) 0 5%,rgba(255,255,255,0) 5.5%)," +
+      "radial-gradient(120% 60% at 30% 100%," + p[2] + " 0 55%,transparent 56%)," +
+      "radial-gradient(110% 55% at 85% 100%," + BLOCK.mix(p[1], p[2], 0.5) + " 0 60%,transparent 61%)," +
+      "linear-gradient(180deg," + p[0] + "," + p[1] + ")";
+  }
+  var sel = [], fs = 16 * k.s;
+  function buatSel(x, y, ww, hh, i, isi) {
+    var c = BLOCK.el("div", { class: "blk-sel", style: "left:" + x + "px;top:" + y + "px;width:" + ww + "px;height:" + hh + "px;border-radius:" + P.radius * k.s + "px;font-size:" + fs + "px" }, root);
+    var m = BLOCK.el("div", { class: "blk-media", style: "background-image:" + (isi || media(i)) }, c);
+    if (!g.length && P.label && P.label[i]) BLOCK.el("div", { class: "blk-lb" }, c, BLOCK.esc(P.label[i]));
+    sel.push({ c: c, m: m }); return c;
+  }
+  if (P.layout === "vertical") {
+    // media potret mengisi bingkai lebar: sisi diisi blur, cermin, atau salinan
+    var pw = Math.min(w, h * 9 / 16), px = (w - pw) / 2, sm = media(0), gaya = P.side_fill;
+    if (gaya === "blur") BLOCK.el("div", { class: "blk-media", style: "background-image:" + sm + ";filter:blur(" + 40 * k.s + "px) brightness(.6) saturate(1.2);transform:scale(1.15)" }, root);
+    else for (var s = -2; s <= 2; s++) if (s) {
+      var cp = BLOCK.el("div", { class: "blk-media", style: "left:" + (px + s * pw) + "px;width:" + pw + "px;right:auto;background-image:" + sm + ";filter:brightness(.55)" + (gaya === "mirror" && s % 2 ? ";transform:scaleX(-1)" : "") }, root);
+    }
+    if (P.grid_texture) BLOCK.el("div", { class: "blk-kisi", style: "background-size:" + 40 * k.s + "px " + 40 * k.s + "px" }, root);
+    var fg = buatSel(px, 0, pw, h, 0, sm); fg.style.borderRadius = 0; fg.style.filter = "contrast(1.08) saturate(1.08)";
+    fg.style.boxShadow = "0 0 " + 80 * k.s + "px rgba(0,0,0,.55)";
+  } else {
+    var T = { "2": [[0, 0, .5, 1], [.5, 0, .5, 1]], "3": [[0, 0, 1 / 3, 1], [1 / 3, 0, 1 / 3, 1], [2 / 3, 0, 1 / 3, 1]],
+      "4": [[0, 0, .5, .5], [.5, 0, .5, .5], [0, .5, .5, .5], [.5, .5, .5, .5]],
+      "3x2": [[0, 0, 1 / 3, .5], [1 / 3, 0, 1 / 3, .5], [2 / 3, 0, 1 / 3, .5], [0, .5, 1 / 3, .5], [1 / 3, .5, 1 / 3, .5], [2 / 3, .5, 1 / 3, .5]],
+      "hero-two": [[0, 0, .62, 1], [.62, 0, .38, .5], [.62, .5, .38, .5]] }[P.layout] || [[0, 0, .5, 1], [.5, 0, .5, 1]];
+    if (h > w && (P.layout === "2" || P.layout === "3")) T = T.map(function (r) { return [r[1], r[0], r[3], r[2]]; }); // potret: susun vertikal
+    if (h > w && P.layout === "hero-two") T = [[0, 0, 1, .6], [0, .6, .5, .4], [.5, .6, .5, .4]];
+    var tp = P.edge / 100 * Math.min(w, h), gp = P.gap / 100 * Math.min(w, h), aw = w - 2 * tp, ah = h - 2 * tp;
+    T.forEach(function (r, i) {
+      buatSel(tp + r[0] * aw + (r[0] > 0 ? gp / 2 : 0), tp + r[1] * ah + (r[1] > 0 ? gp / 2 : 0),
+        r[2] * aw - (r[0] > 0 ? gp / 2 : 0) - (r[0] + r[2] < 0.999 ? gp / 2 : 0), r[3] * ah - (r[1] > 0 ? gp / 2 : 0) - (r[1] + r[3] < 0.999 ? gp / 2 : 0), i);
+    });
+  }
+  // masuk berbingkai (clip menyapu keluar dari tengah), isi menyusut pelan lalu mengendap
+  sel.forEach(function (o, i) {
+    var t0 = 0.15 + i * P.pause;
+    tl.fromTo(o.c, { clipPath: "inset(50% 50% 50% 50% round " + P.radius * k.s + "px)" }, { clipPath: "inset(0% 0% 0% 0% round " + P.radius * k.s + "px)", duration: 0.8, ease: "expo.out" }, t0);
+    tl.fromTo(o.m, { scale: P.start_scale }, { scale: 1.06, duration: 1.0, ease: "power3.out" }, t0)
+      .to(o.m, { scale: 1, duration: Math.max(0.5, k.dur - t0 - 1.6), ease: "sine.inOut" }, t0 + 1.0);
+    var lb = o.c.querySelector(".blk-lb");
+    if (lb) tl.fromTo(lb, { autoAlpha: 0, y: 14 * k.s }, { autoAlpha: 1, y: 0, duration: 0.6, ease: "power3.out" }, t0 + 0.45);
+  });
+  tl.to(sel.map(function (o) { return o.c; }), { autoAlpha: 0, duration: 0.4, ease: "power2.in", stagger: 0.05 }, k.dur - 0.6);
+});
+</script>
+</div>
+<script>
+  window.__duration = 5.5;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 5.5);
+</script>
+</body>
+</html>

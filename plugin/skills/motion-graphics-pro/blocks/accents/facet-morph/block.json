@@ -1,0 +1,104 @@
+{
+ "id": "accents/facet-morph",
+ "name": "Facet Morph",
+ "name_id": "Morf Faset",
+ "category": "accents",
+ "description": {
+  "id": "Massa low-poly dari 36 segitiga yang terus berubah bentuk di antara tiga siluet (gumpal, tanda bintang, lencana) dengan bayangan datar per faset yang dihitung ulang setiap simpul bergerak. Cahaya dari kiri atas; faset yang terang sedikit terangkat.",
+  "en": "A faceted low-poly mass of 36 triangles reshaping between three silhouettes (blob, star mark, badge) with per-facet flat shading recomputed as vertices move. Light from the upper left; lit facets lift slightly."
+ },
+ "tags": [
+  "aksen",
+  "low-poly",
+  "faset",
+  "morph",
+  "bentuk",
+  "3d",
+  "logo",
+  "accents",
+  "facet"
+ ],
+ "props": {
+  "order": {
+   "default": [
+    "gumpal",
+    "tanda",
+    "lencana"
+   ],
+   "type": "list",
+   "hint": "Urutan siluet: gumpal, tanda, lencana",
+   "aliases": [
+    "urutan"
+   ]
+  },
+  "morph_amount": {
+   "default": 0.6,
+   "type": "number",
+   "hint": "Bagian setiap segmen untuk morph (sisanya tahan)",
+   "aliases": [
+    "porsi_morph"
+   ]
+  },
+  "rotate": {
+   "default": 9,
+   "type": "number",
+   "hint": "Rotasi lambat (derajat/detik)",
+   "aliases": [
+    "putar"
+   ]
+  },
+  "dark_color": {
+   "default": "#1b2a6b",
+   "type": "color",
+   "aliases": [
+    "warna_gelap"
+   ]
+  },
+  "light_color": {
+   "default": "#8fd3ff",
+   "type": "color",
+   "aliases": [
+    "warna_terang"
+   ]
+  },
+  "size": {
+   "default": 330,
+   "type": "number",
+   "hint": "Jari-jari (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_y"
+   ]
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "aksen/facet-morph",
+  "facet-morph"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

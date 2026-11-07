@@ -1,0 +1,130 @@
+{
+ "id": "accents/passing-rays",
+ "name": "Passing Rays",
+ "name_id": "Sinar Lintas",
+ "category": "accents",
+ "description": {
+  "id": "Ruas cahaya bercahaya menyusuri satu lintasan melewati tiga elemen; tiap elemen terangkat dan menyala saat sinar tiba. Pakai kartu bawaan atau elemen host lewat selektor.",
+  "en": "A glowing dash follows one path through three elements, lifting and brightening each as the beam arrives. Uses built-in cards or host elements by selector."
+ },
+ "tags": [
+  "aksen",
+  "sinar",
+  "beam",
+  "alur",
+  "ui",
+  "langkah",
+  "accents",
+  "passing",
+  "rays"
+ ],
+ "props": {
+  "label": {
+   "default": [
+    "Unggah",
+    "Proses",
+    "Terbit"
+   ],
+   "type": "list",
+   "hint": "Label kartu bawaan"
+  },
+  "element": {
+   "default": [],
+   "type": "list",
+   "hint": "Daftar selektor elemen host (minimal 2) untuk dilintasi; kosong = kartu bawaan",
+   "aliases": [
+    "elemen"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi horizontal pusat (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Posisi vertikal pusat (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "width": {
+   "default": 64,
+   "type": "number",
+   "hint": "Sebaran kartu (% layar)",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "size": {
+   "default": 260,
+   "type": "number",
+   "hint": "Lebar kartu (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "curve": {
+   "default": 16,
+   "type": "number",
+   "hint": "Lengkung lintasan (%)",
+   "aliases": [
+    "lengkung"
+   ]
+  },
+  "color": {
+   "default": "#1d2333",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "accent_color": {
+   "default": "#5ce1ff",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@600;700",
+   "type": "font",
+   "hint": "Google Font"
+  },
+  "start": {
+   "default": 0.4,
+   "type": "number",
+   "hint": "Waktu mulai lokal (detik)",
+   "aliases": [
+    "mulai"
+   ]
+  },
+  "cross_duration": {
+   "default": 2.2,
+   "type": "number",
+   "aliases": [
+    "durasi_lintas"
+   ]
+  }
+ },
+ "duration": 3.5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "aksen/sinar-lintas",
+  "tracing-beam"
+ ],
+ "example": {
+  "bg": "dark",
+  "aspect": "16:9"
+ }
+}

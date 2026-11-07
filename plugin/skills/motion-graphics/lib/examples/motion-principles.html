@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP prinsip gerak · pegas, inersia, tunda, squash volume</title>
+<style>
+html,body{margin:0;background:#0d1020}
+#stage{position:relative;width:1280px;height:720px;overflow:hidden;background:radial-gradient(120% 90% at 30% 10%,#1d2547 0%,#0d1020 70%);font:600 15px/1.2 system-ui,"Segoe UI",Arial,sans-serif;color:#e9e4d4}
+.jalur{position:absolute;left:40px;right:40px;height:92px;border-bottom:1px dashed rgba(233,228,212,.18)}
+.jalur b{position:absolute;left:0;top:6px;font-size:14px;color:#f2d796}
+.jalur i{position:absolute;left:0;top:26px;font:400 12px/1.3 ui-monospace,Consolas,monospace;color:#a7a08c;font-style:normal;width:300px}
+.kotak{position:absolute;left:330px;top:30px;width:48px;height:48px;border-radius:12px;background:#d6b06a}
+.bola{position:absolute;left:330px;top:28px;width:50px;height:50px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff1c7,#d6b06a 55%,#7d5c26);transform-origin:50% 100%}
+.titik{position:absolute;left:330px;top:40px;width:26px;height:26px;border-radius:50%;background:#8fa7d8}
+.target{position:absolute;left:1150px;top:22px;width:2px;height:64px;background:rgba(242,215,150,.35)}
+</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720" data-duration="6" data-fps="30">
+  <div class="jalur" style="top:8px"><b>1 · linier (salah)</b><i>ease "none": kecepatan tetap, mulai/berhenti mendadak</i><div class="kotak" id="linier"></div><div class="target"></div></div>
+  <div class="jalur" style="top:104px"><b>2 · pegas.memantul</b><i>zeta 0,45 · 2,1 Hz</i><div class="kotak" id="memantul"></div><div class="target"></div></div>
+  <div class="jalur" style="top:200px"><b>3 · pegas.sigap / berat</b><i>zeta 1 (atas) dan 1,5 (bawah)</i><div class="kotak" id="sigap" style="top:12px;height:30px"></div><div class="kotak" id="berat" style="top:50px;height:30px;background:#c98a7a"></div><div class="target"></div></div>
+  <div class="jalur" style="top:296px"><b>4 · inersia()</b><i>ease in ke target, lalu pantul dari kecepatan datang (amp .05, freq 2.5, decay 5)</i><div class="kotak" id="inersia"></div><div class="target"></div></div>
+  <div class="jalur" style="top:392px"><b>5 · tunda() 3 f per indeks</b><i>rantai mengikuti induk (follow-through)</i><div class="titik" id="t0" style="background:#f2d796"></div><div class="titik" id="t1"></div><div class="titik" id="t2"></div><div class="titik" id="t3"></div><div class="titik" id="t4"></div></div>
+  <div class="jalur" style="top:488px;height:108px"><b>6 · squash tanpa volume (salah)</b><i>hanya scaleY berubah</i><div class="bola" id="pipih" style="top:46px"></div></div>
+  <div class="jalur" style="top:600px;height:108px;border:0"><b>7 · squash volume tetap</b><i>MGP.core.regang(s): sx = 1/s</i><div class="bola" id="volume" style="top:46px"></div></div>
+</div>
+<script>
+const D = 6, X = 800;   // jarak tempuh px
+const tl = gsap.timeline({ paused: true });
+// 1 linier
+tl.fromTo("#linier", { x: 0 }, { x: X, duration: 1.4, ease: "none" }, 0.3).to("#linier", { x: 0, duration: 1.4, ease: "none" }, 3.3);
+// 2-3 preset pegas: durasi alami dari mgp.motion.spring(nama).duration
+const pm = mgp.motion.spring("bouncy"), ps = mgp.motion.spring("snappy"), pb = mgp.motion.spring("heavy");
+tl.fromTo("#memantul", { x: 0 }, { x: X, duration: pm.duration, ease: "spring.bouncy" }, 0.3).to("#memantul", { x: 0, duration: pm.duration, ease: "spring.bouncy" }, 3.3);
+tl.fromTo("#sigap", { x: 0 }, { x: X, duration: ps.duration, ease: "spring.snappy" }, 0.3).to("#sigap", { x: 0, duration: ps.duration, ease: "spring.snappy" }, 3.3);
+tl.fromTo("#berat", { x: 0 }, { x: X, duration: pb.duration, ease: "spring.heavy" }, 0.3).to("#berat", { x: 0, duration: pb.duration, ease: "spring.heavy" }, 3.3);
+// 4 inersia (Gerak): durasi + ekor 1 s
+tl.fromTo("#inersia", { x: 0 }, mgp.motion.inertia({ x: X, duration: 0.7, ease: "power2.in" }, { amp: 0.05, freq: 2.5, decay: 5 }), 0.3)
+  .to("#inersia", mgp.motion.inertia({ x: 0, duration: 0.7, ease: "power2.in" }, { amp: 0.05, freq: 2.5, decay: 5 }), 3.3);
+// 5 tunda: induk = fungsi waktu murni; anak ke-i = induk(t - 3 f * i). Digambar dari t di onUpdate (seek aman).
+const induk = (t) => X * MGP.core.springEase("bouncy")(MGP.core.seg(t, 0.5, 1.6)) * (1 - MGP.core.springEase("snappy")(MGP.core.seg(t, 3.5, 4.3)));
+const rantai = MGP.core.delayChain(induk, 5, { frame: 3, fps: 24 }), dots = [0, 1, 2, 3, 4].map((i) => document.getElementById("t" + i));
+const proxy = { t: 0 };
+tl.to(proxy, { t: D, duration: D, ease: "none", onUpdate() { rantai(proxy.t).forEach((x, i) => { dots[i].style.transform = `translate(${x}px, 0)`; }); } }, 0);
+// 6-7 bola memantul: tinggi lompat + regangan dari kecepatan
+const lompat = (u) => 4 * u * (1 - u);                        // 0..1..0
+const bola = (el, volume) => (t) => {
+  const P = 1.1, u = ((t % P) + P) % P / P, h = lompat(u) * 46, vy = Math.abs(1 - 2 * u);
+  const c = Math.min(u, 1 - u), s = 1 + 0.25 * vy * vy - 0.5 * Math.exp(-(c / 0.09) * (c / 0.09));  // pipih saat kontak, memanjang saat cepat (kontinu)
+  const r = volume ? MGP.core.stretch(s) : { sx: 1, sy: s };
+  el.style.transform = `translate(${t * 120}px, ${-h}px) scale(${r.sx.toFixed(4)}, ${r.sy.toFixed(4)})`;
+};
+const b6 = bola(document.getElementById("pipih"), false), b7 = bola(document.getElementById("volume"), true);
+const proxy2 = { t: 0 };
+tl.to(proxy2, { t: D, duration: D, ease: "none", onUpdate() { b6(proxy2.t); b7(proxy2.t); } }, 0);
+tl.to({}, { duration: 0.001 }, D - 0.001);
+window.__timelines = { main: tl };
+window.__duration = D;
+window.__seek = (t) => { tl.seek(t, false); return true; };
+window.__ready = Promise.resolve(true);
+tl.seek(0);
+</script>
+</body>
+</html>

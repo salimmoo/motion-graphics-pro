@@ -1,0 +1,22 @@
+{
+  "name": "motion-graphics-pro",
+  "version": "2.4.1",
+  "description": "Motion graphics videos from a plain-language brief to a finished file: concept, script, voice, assets, motion in code, QC and a local render with mgp. Three skills: motion-graphics-pro, motion-graphics, vector-character.",
+  "author": {
+    "name": "Salim Muhammad",
+    "url": "https://github.com/salimmoo"
+  },
+  "homepage": "https://salimmoo.github.io/motion-graphics-pro/",
+  "repository": "https://github.com/salimmoo/motion-graphics-pro",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "keywords": [
+    "motion-graphics",
+    "video",
+    "animation",
+    "explainer",
+    "render",
+    "kinetic-typography",
+    "paper-collage"
+  ],
+  "icon": ".claude-plugin/icon.png"
+}

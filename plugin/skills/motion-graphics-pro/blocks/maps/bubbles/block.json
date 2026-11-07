@@ -1,0 +1,195 @@
+{
+ "id": "maps/bubbles",
+ "name": "Bubbles",
+ "name_id": "Peta Gelembung",
+ "category": "maps",
+ "description": {
+  "id": "Gelembung proporsional (luas sebanding nilai) meletup di atas peta ubin, dengan garis penghubung dari pusat dan keterangan angka untuk nilai terbesar. Peta dasar memakai preset ubin Indonesia atau AS (geografi ilustratif); titik dan nilai dari props.",
+  "en": "Proportional bubbles (area by value) pop over a tile-grid base map, with connection lines from a hub and value callouts for the largest. Indonesia or US tile presets (illustrative geography); points and values from props."
+ },
+ "tags": [
+  "peta",
+  "map",
+  "bubble",
+  "gelembung",
+  "proporsional",
+  "kota",
+  "data",
+  "callout",
+  "maps",
+  "bubbles"
+ ],
+ "props": {
+  "preset": {
+   "default": "indonesia",
+   "type": "enum",
+   "options": [
+    "indonesia",
+    "as"
+   ]
+  },
+  "shape": {
+   "default": "square",
+   "type": "enum",
+   "options": [
+    "hex",
+    "square"
+   ],
+   "aliases": [
+    "bentuk"
+   ],
+   "option_aliases": {
+    "heksa": "hex",
+    "persegi": "square"
+   }
+  },
+  "dot": {
+   "default": [
+    {
+     "kode": "JK",
+     "nilai": 10.6,
+     "label": "Jakarta"
+    },
+    {
+     "kode": "JI",
+     "nilai": 3.0,
+     "label": "Surabaya"
+    },
+    {
+     "kode": "JB",
+     "nilai": 2.5,
+     "label": "Bandung"
+    },
+    {
+     "kode": "SU",
+     "nilai": 2.4,
+     "label": "Medan"
+    },
+    {
+     "kode": "SS",
+     "nilai": 1.7,
+     "label": "Palembang"
+    },
+    {
+     "kode": "JT",
+     "nilai": 1.7,
+     "label": "Semarang"
+    },
+    {
+     "kode": "SN",
+     "nilai": 1.4,
+     "label": "Makassar"
+    },
+    {
+     "kode": "KI",
+     "nilai": 0.9,
+     "label": "Balikpapan"
+    },
+    {
+     "kode": "BA",
+     "nilai": 0.9,
+     "label": "Denpasar"
+    },
+    {
+     "kode": "PA",
+     "nilai": 0.4,
+     "label": "Jayapura"
+    }
+   ],
+   "type": "list",
+   "hint": "[{kode, nilai, label}]; titik pertama = pusat garis",
+   "aliases": [
+    "titik"
+   ]
+  },
+  "title": {
+   "default": "Penduduk kota besar",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "sub": {
+   "default": "Juta jiwa, angka ilustratif",
+   "type": "text"
+  },
+  "unit": {
+   "default": " jt",
+   "type": "text",
+   "aliases": [
+    "satuan"
+   ]
+  },
+  "line": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Garis penghubung dari titik pertama",
+   "aliases": [
+    "garis"
+   ]
+  },
+  "caption": {
+   "default": 3,
+   "type": "number",
+   "hint": "Jumlah gelembung terbesar yang diberi keterangan",
+   "aliases": [
+    "keterangan"
+   ]
+  },
+  "map_color": {
+   "default": "#e4ddcf",
+   "type": "color",
+   "aliases": [
+    "warna_peta"
+   ]
+  },
+  "map_line_color": {
+   "default": "#b9ae98",
+   "type": "color",
+   "aliases": [
+    "warna_garis_peta"
+   ]
+  },
+  "bubble_color": {
+   "default": "#2d6cdf",
+   "type": "color",
+   "aliases": [
+    "warna_gelembung"
+   ]
+  },
+  "text_color": {
+   "default": "#1d1b18",
+   "type": "color",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "max_size": {
+   "default": 1.0,
+   "type": "number",
+   "hint": "Jari-jari gelembung terbesar (x ukuran ubin)",
+   "aliases": [
+    "ukuran_maks"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;600;700;800",
+   "type": "font"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "peta/gelembung",
+  "us-map-bubble"
+ ],
+ "example": {
+  "bg": "light"
+ }
+}

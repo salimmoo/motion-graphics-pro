@@ -1,0 +1,28 @@
+<!-- Block maps/route · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="maps/route" data-start="0" data-duration="10" data-track-index="4" class="blk blk-maps-route">
+<script type="application/json" data-block-props>
+{"style": "cardboard", "vehicle": "plane", "route": [[330, 600], [430, 565], [545, 585], [655, 625], [760, 660], [880, 640], [1000, 575], [1120, 505], [1235, 470]], "stopover": [{"i": 0, "nama": "Jakarta", "sub": "Berangkat"}, {"i": 4, "nama": "Surabaya", "sub": "Transit"}, {"i": 8, "nama": "Makassar", "sub": "Tiba"}], "follow": true, "route_color": "#b23a32", "label": false, "seed": 5}
+</script>
+</div>
+<style>
+.blk-maps-route{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.blk-maps-route .blk-wadah{position:absolute;inset:0}
+.blk-maps-route canvas{position:absolute;inset:0;width:100% !important;height:100% !important}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+var P = k.P;
+  if (!window.MGP || !MGP.routeMap) { console.error("[blok] maps/route needs lib:mgp.js"); return; }
+  // ukuran logis: sisi pendek 720 (skala rancangan modul), piksel kanvas = resolusi penuh lewat dpr
+  var f = Math.min(k.w, k.h) / 720, W = Math.round(k.w / f), H = Math.round(k.h / f);
+  var wadah = BLOCK.el("div", { class: "blk-wadah" }, k.root);
+  var stops = (P.stopover || []).map(function (s) { return { i: +s.i, name: s.nama != null ? s.nama : s.name, sub: s.sub || "" }; });
+  var n = Math.max(1, stops.length - 1), hold = 0.6, sh = 1, eh = 1.6;
+  var leg = Math.max(0.8, (k.dur - hold - sh * (n - 1) - eh) / n);
+  var inst = MGP.routeMap.create(wadah, { width: W, height: H, dpr: f, fit: true, style: P.style, coords: "map", route: P.route, stops: stops,
+    vehicle: { plane: "plane", ship: "boat", arrow: "chevron", dot: "dot" }[P.vehicle] || "plane",
+    hold: hold, stopHold: sh, endHold: eh, legDur: leg, follow: !!P.follow, labels: !!P.label,
+    landGen: { seed: +P.seed || 5 }, palette: { route: P.route_color } });
+  return Promise.resolve(inst.ready).then(function () { BLOCK.onTime(k.tl, function (t) { inst.seek(t); }, k.dur); });
+});
+</script>

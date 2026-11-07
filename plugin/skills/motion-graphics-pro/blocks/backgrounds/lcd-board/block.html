@@ -1,0 +1,55 @@
+<!-- Block backgrounds/lcd-board · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="backgrounds/lcd-board" data-start="0" data-duration="6" data-track-index="0" class="blk blk-backgrounds-lcd-board">
+<script type="application/json" data-block-props>
+{"label": "SIARAN 08", "title": "Catatan Malam", "subtitle": "Cerita kecil tentang cahaya kota", "font": "Space Mono:wght@400;700", "size": 170, "paper_color": "#e7e1cf", "text_color": "#1c1a16", "accent_color": "#e2412b", "fringe_color1": "#ff2a55", "fringe_color2": "#00b8ff", "pixel_grid": true, "scan_strength": 0.5}
+</script>
+</div>
+<style>
+.blk-backgrounds-lcd-board{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-backgrounds-lcd-board canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.blk-backgrounds-lcd-board .lcd-butir{mix-blend-mode:multiply;image-rendering:pixelated}
+.blk-backgrounds-lcd-board .lcd-lapis{position:absolute;inset:0}
+.blk-backgrounds-lcd-board .lcd-teks{position:absolute;left:8%;right:8%;top:50%;transform:translateY(-50%);text-align:left}
+.blk-backgrounds-lcd-board .lcd-label{font-weight:700;opacity:.75;margin-bottom:.6em}
+.blk-backgrounds-lcd-board .lcd-judul{font-weight:700;line-height:1;letter-spacing:-.02em;transform-origin:0 50%}
+.blk-backgrounds-lcd-board .lcd-sub{font-weight:400;opacity:.85}
+.blk-backgrounds-lcd-board .lcd-pita{position:absolute;left:8%;width:30%;top:70%;transform-origin:0 50%}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, s = k.s;
+  var R = k.root; R.style.background = P.paper_color;
+  var ink = P.text_color, ff = BLOCK.family(P.font, "monospace");
+  // butir statis (sekali, berseed)
+  var gc = BLOCK.el("canvas", { class: "lcd-butir" }, R); gc.width = Math.round(k.w / 2); gc.height = Math.round(k.h / 2);
+  var gx = gc.getContext("2d"), im = gx.createImageData(gc.width, gc.height), A = k.random;
+  for (var i = 0; i < im.data.length; i += 4) { var v = A() * 255; im.data[i] = im.data[i + 1] = im.data[i + 2] = v; im.data[i + 3] = 26; }
+  gx.putImageData(im, 0, 0);
+  var px = Math.max(3, Math.round(4 * s));
+  var scan = BLOCK.el("div", { class: "lcd-lapis", style: "background-image:repeating-linear-gradient(0deg," + BLOCK.rgba(ink, 0.09 * P.scan_strength * 2) + " 0 " + px / 2 + "px,transparent " + px / 2 + "px " + px + "px)" }, R);
+  if (P.pixel_grid) BLOCK.el("div", { class: "lcd-lapis", style: "background-image:repeating-linear-gradient(90deg," + BLOCK.rgba(ink, 0.05) + " 0 1px,transparent 1px " + px + "px)" }, R);
+  BLOCK.el("div", { class: "lcd-lapis", style: "background:radial-gradient(120% 90% at 50% 45%,transparent 55%," + BLOCK.rgba(ink, 0.22) + ")" }, R);
+  var pita = BLOCK.el("div", { class: "lcd-pita" }, R);
+  var kot = BLOCK.el("div", { class: "lcd-teks", style: "font-family:" + ff + ";color:" + ink }, R);
+  var lbl = BLOCK.el("div", { class: "lcd-label", style: "font-size:" + 30 * s + "px;letter-spacing:" + 0.3 * 30 * s + "px" }, kot, BLOCK.esc(P.label));
+  var jd = BLOCK.el("div", { class: "lcd-judul", style: "font-size:" + (+P.size || 170) * s + "px" }, kot, BLOCK.esc(P.title));
+  var sb = BLOCK.el("div", { class: "lcd-sub", style: "font-size:" + 42 * s + "px;margin-top:" + 22 * s + "px" }, kot, BLOCK.esc(P.subtitle));
+  pita.style.cssText = "height:" + 5 * s + "px;background:" + P.accent_color;
+  var o3 = gsap.parseEase("power3.out"), e2 = gsap.parseEase("power2.inOut");
+  function gambar(t) {
+    scan.style.backgroundPosition = "0 " + (t * 14 * s).toFixed(2) + "px";             // scanline hanyut pelan
+    var a = o3(BLOCK.progress(t, 0.25, 1.6)), b = o3(BLOCK.progress(t, 0.9, 2.0)), c = o3(BLOCK.progress(t, 0.1, 0.9));
+    var keluar = e2(BLOCK.progress(t, k.dur - 0.7, k.dur));
+    jd.style.opacity = (a * (1 - keluar)).toFixed(3);
+    jd.style.filter = "blur(" + ((1 - a) * 22 * s + keluar * 10 * s).toFixed(2) + "px)";
+    jd.style.transform = "scale(" + (1.06 - 0.06 * a).toFixed(4) + ")";
+    var f = (1.2 + (1 - a) * 14 + 1.1 * Math.max(0, Math.sin(t * 9.0)) * (BLOCK.boil(t, 3, 10) > 0.6 ? 1 : 0)) * s;   // fringe kromatik
+    jd.style.textShadow = (-f).toFixed(2) + "px 0 " + BLOCK.rgba(P.fringe_color1, 0.7) + "," + f.toFixed(2) + "px 0 " + BLOCK.rgba(P.fringe_color2, 0.7);
+    sb.style.opacity = (b * (1 - keluar)).toFixed(3); sb.style.filter = "blur(" + ((1 - b) * 10 * s).toFixed(2) + "px)";
+    sb.style.transform = "translateY(" + ((1 - b) * 18 * s).toFixed(2) + "px)";
+    lbl.style.opacity = (c * (1 - keluar)).toFixed(3); lbl.style.letterSpacing = ((0.3 + 0.5 * (1 - c)) * 30 * s).toFixed(2) + "px";
+    pita.style.transform = "scaleX(" + (o3(BLOCK.progress(t, 0.5, 1.5)) * (1 - keluar)).toFixed(4) + ")";
+  }
+  BLOCK.onTime(k.tl, gambar, k.dur);
+}, { font: true });
+</script>

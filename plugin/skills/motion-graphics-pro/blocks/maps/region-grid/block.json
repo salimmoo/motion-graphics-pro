@@ -1,0 +1,168 @@
+{
+ "id": "maps/region-grid",
+ "name": "Region Grid",
+ "name_id": "Peta Kisi Wilayah",
+ "category": "maps",
+ "description": {
+  "id": "Peta ubin choropleth: setiap wilayah satu ubin sama besar (persegi atau heksa) berkode singkat, diwarnai menurut nilainya, muncul bertahap dari barat ke timur, lengkap dengan legenda gradien. Preset 38 provinsi Indonesia dan 50 negara bagian AS; susunan ubin kira-kira geografis (ilustratif, bukan batas wilayah sebenarnya) dan tanpa data jaringan.",
+  "en": "Tile-grid choropleth: every region is one equal tile (square or hex) with a short code, filled by value, revealed west to east with a gradient legend. Presets for Indonesia's 38 provinces and the 50 US states; approximate geographic arrangement (illustrative, not real borders), no network data."
+ },
+ "tags": [
+  "peta",
+  "map",
+  "choropleth",
+  "hex",
+  "tile grid",
+  "provinsi",
+  "data",
+  "legenda",
+  "maps",
+  "region",
+  "grid"
+ ],
+ "props": {
+  "preset": {
+   "default": "indonesia",
+   "type": "enum",
+   "options": [
+    "indonesia",
+    "as"
+   ]
+  },
+  "shape": {
+   "default": "hex",
+   "type": "enum",
+   "options": [
+    "hex",
+    "square"
+   ],
+   "aliases": [
+    "bentuk"
+   ],
+   "option_aliases": {
+    "heksa": "hex",
+    "persegi": "square"
+   }
+  },
+  "values": {
+   "default": {},
+   "type": "list",
+   "hint": "{kode: nilai}, mis. {\"JK\": 82, \"JB\": 64}; kosong = data contoh berseed",
+   "aliases": [
+    "nilai"
+   ]
+  },
+  "title": {
+   "default": "Akses internet rumah tangga",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "sub": {
+   "default": "Data contoh, ilustratif",
+   "type": "text"
+  },
+  "unit": {
+   "default": "%",
+   "type": "text",
+   "aliases": [
+    "satuan"
+   ]
+  },
+  "low_color": {
+   "default": "#f3e7c9",
+   "type": "color",
+   "aliases": [
+    "warna_rendah"
+   ]
+  },
+  "high_color": {
+   "default": "#b3362c",
+   "type": "color",
+   "aliases": [
+    "warna_tinggi"
+   ]
+  },
+  "empty_color": {
+   "default": "#d9d4c7",
+   "type": "color",
+   "hint": "Ubin tanpa nilai",
+   "aliases": [
+    "warna_kosong"
+   ]
+  },
+  "text_color": {
+   "default": "#1d1b18",
+   "type": "color",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "show_value": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Angka di dalam ubin",
+   "aliases": [
+    "tampil_nilai"
+   ]
+  },
+  "legend": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "legenda"
+   ]
+  },
+  "order": {
+   "default": "west-east",
+   "type": "enum",
+   "options": [
+    "west-east",
+    "random",
+    "value"
+   ],
+   "aliases": [
+    "urutan"
+   ],
+   "option_aliases": {
+    "barat-timur": "west-east",
+    "acak": "random",
+    "nilai": "value"
+   }
+  },
+  "pause": {
+   "default": 0.035,
+   "type": "number",
+   "hint": "Jeda antar ubin (detik)",
+   "aliases": [
+    "jeda"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;600;700;800",
+   "type": "font"
+  },
+  "seed": {
+   "default": 7,
+   "type": "number"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "peta/kisi-wilayah",
+  "us-map-hex",
+  "us-map",
+  "spain-map"
+ ],
+ "example": {
+  "bg": "light"
+ }
+}

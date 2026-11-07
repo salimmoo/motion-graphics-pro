@@ -1,0 +1,10 @@
+<!doctype html><html><head><meta charset="utf-8"></head><body style="margin:0;background:#000">
+<div id="root" data-composition-id="main" data-no-timeline data-duration="2" data-fps="24" data-width="320" data-height="240"><canvas id="c" width="320" height="240"></canvas></div>
+<script>
+const gl = document.getElementById("c").getContext("webgl", { preserveDrawingBuffer: true });
+window.__seek = (t) => {
+  if (t >= 1 && !gl.isContextLost()) gl.getExtension("WEBGL_lose_context").loseContext(); // simulate a GPU process restart
+  if (gl.isContextLost()) return;
+  gl.clearColor(0.2, 0.6, 1, 1); gl.clear(gl.COLOR_BUFFER_BIT);
+};
+</script></body></html>

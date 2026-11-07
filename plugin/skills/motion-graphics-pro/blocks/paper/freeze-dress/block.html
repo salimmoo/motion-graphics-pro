@@ -1,0 +1,72 @@
+<!-- Block paper/freeze-dress · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="paper/freeze-dress" data-start="0" data-duration="4" data-track-index="12" class="blk blk-paper-freeze-dress">
+<script type="application/json" data-block-props>
+{"target": "#adegan .sosok", "scene": "#adegan", "label": "ITU DIA!", "paper_color": "#f6efe0", "scribble_color": "#ffd23f", "tape_color": "#e9dcb8", "label_color": "#e8443a", "loose": 0.35, "flash": true, "exit": false, "font": "Permanent Marker:wght@400", "seed": 9}
+</script>
+</div>
+<style>
+.blk-paper-freeze-dress{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-paper-freeze-dress svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.blk-paper-freeze-dress .blk-kilat{position:absolute;inset:0;background:#fff}
+.blk-paper-freeze-dress .blk-lab{position:absolute;transform:translate(-50%,-50%);white-space:nowrap;padding:.25em .6em .2em;box-shadow:0 .2em .5em rgba(0,0,0,.3)}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+var P = k.P, s = k.s, tl = k.tl, W = k.w, H = k.h, R = BLOCK.random(+P.seed || 9), fam = BLOCK.family(P.font, "cursive");
+  var el = BLOCK.find(P.target), rr = k.root.getBoundingClientRect(), bx;
+  if (el) { var b = el.getBoundingClientRect(); bx = { x: b.left - rr.left, y: b.top - rr.top, w: b.width, h: b.height }; }
+  else bx = { x: W * 0.4, y: H * 0.3, w: W * 0.2, h: H * 0.45 };
+  var m = Math.max(bx.w, 120 * s) * +P.loose, x0 = bx.x - m, y0 = bx.y - m * 1.5, x1 = bx.x + bx.w + m, y1 = bx.y + bx.h + m * 0.5;
+  var cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+  var svg = BLOCK.svg("svg", { viewBox: "0 0 " + W + " " + H }, k.root);
+  // tepi sobek: titik bergerigi sepanjang persegi
+  function sobek(ax, ay, bx2, by2, amp, langkah) {
+    var p = [], ed = [[ax, ay, bx2, ay], [bx2, ay, bx2, by2], [bx2, by2, ax, by2], [ax, by2, ax, ay]];
+    ed.forEach(function (e) { var L = Math.hypot(e[2] - e[0], e[3] - e[1]), n = Math.max(4, Math.round(L / langkah)); for (var i = 0; i < n; i++) { var u = i / n, j = (R() - 0.5) * amp; var nx = -(e[3] - e[1]) / L, ny = (e[2] - e[0]) / L; p.push((e[0] + (e[2] - e[0]) * u + nx * j).toFixed(1) + "," + (e[1] + (e[3] - e[1]) * u + ny * j).toFixed(1)); } });
+    return "M" + p.join("L") + "Z";
+  }
+  var bw = 44 * s;
+  var bingkai = BLOCK.svg("g", {}, svg);
+  var dSobek = sobek(x0 - bw, y0 - bw, x1 + bw, y1 + bw, 16 * s, 14 * s) + sobek(x0, y0, x1, y1, 10 * s, 12 * s);
+  BLOCK.svg("path", { d: dSobek, "fill-rule": "evenodd", fill: "rgba(0,0,0,.28)", transform: "translate(" + 8 * s + "," + 12 * s + ")" }, bingkai);
+  BLOCK.svg("path", { d: dSobek, "fill-rule": "evenodd", fill: P.paper_color }, bingkai);
+  tl.fromTo(bingkai, { autoAlpha: 0, scale: 1.18, rotation: -5, svgOrigin: cx + " " + cy }, { autoAlpha: 1, scale: 1, rotation: -1.5, duration: 0.35, ease: "back.out(2.5)", immediateRender: true }, 0.08);
+  // selotip di dua-tiga sudut
+  [[x0, y0, -38], [x1, y0, 34], [x1, y1, -30]].forEach(function (c, i) {
+    var tw = 150 * s, th = 46 * s, g = BLOCK.svg("g", { transform: "translate(" + c[0] + "," + c[1] + ") rotate(" + c[2] + ")" }, svg), z = [];
+    for (var q = 0; q <= 6; q++) z.push((-tw / 2 + (q % 2) * 5 * s) + "," + (-th / 2 + th * q / 6));
+    var z2 = []; for (q = 6; q >= 0; q--) z2.push((tw / 2 - (q % 2) * 5 * s) + "," + (-th / 2 + th * q / 6));
+    var inner = BLOCK.svg("g", {}, g);
+    BLOCK.svg("path", { d: "M" + z.concat(z2).join("L") + "Z", fill: P.tape_color, opacity: 0.88 }, inner);
+    BLOCK.svg("rect", { x: -tw / 2, y: -th / 2, width: tw, height: th * 0.35, fill: "#fff", opacity: 0.25 }, inner);
+    tl.fromTo(inner, { autoAlpha: 0, scale: 1.6, svgOrigin: "0 0" }, { autoAlpha: 1, scale: 1, duration: 0.22, ease: "power4.out", immediateRender: true }, 0.3 + i * 0.09);
+  });
+  // garis kejut di luar bingkai + coretan tangan (bergetar 8 fps)
+  var cor = [];
+  for (var i = 0; i < 10; i++) {
+    var a = -Math.PI * 0.95 + i * Math.PI * 0.21 + (R() - 0.5) * 0.2, rx = (x1 - x0) / 2 + bw + 40 * s, ry = (y1 - y0) / 2 + bw + 40 * s, L = (50 + R() * 60) * s;
+    cor.push({ pts: [[cx + Math.cos(a) * rx, cy + Math.sin(a) * ry], [cx + Math.cos(a) * (rx + L), cy + Math.sin(a) * (ry + L)]], w: 7 * s, t: 0.42 + i * 0.03 });
+  }
+  var sx = x1 + bw + 70 * s, sy = y0 + 40 * s, st = [];
+  for (i = 0; i < 10; i++) { var aa = -Math.PI / 2 + i * Math.PI / 5, r2 = i % 2 ? 18 * s : 46 * s; st.push([sx + Math.cos(aa) * r2, sy + Math.sin(aa) * r2]); }
+  st.push(st[0]); cor.push({ pts: st, w: 6 * s, t: 0.75 });
+  var ul = []; for (i = 0; i <= 8; i++) ul.push([x0 + (x1 - x0) * (0.1 + 0.8 * i / 8), y1 + bw + 30 * s + Math.sin(i * 1.7) * 8 * s]);
+  cor.push({ pts: ul, w: 7 * s, t: 0.95 });
+  var pth = cor.map(function (c) { var p = BLOCK.svg("path", { fill: "none", stroke: P.scribble_color, "stroke-width": c.w, "stroke-linecap": "round", "stroke-linejoin": "round" }, svg); c.el = p; return c; });
+  function bentuk(c, f) { return "M" + c.pts.map(function (p, j) { return (p[0] + BLOCK.noise(f * 3.1 + j * 1.7, 11) * 3 * s).toFixed(1) + "," + (p[1] + BLOCK.noise(f * 2.3 + j * 2.9, 23) * 3 * s).toFixed(1); }).join("L"); }
+  pth.forEach(function (c) { c.el.setAttribute("d", bentuk(c, 0)); c.L = BLOCK.prepareStroke(c.el) * 1.05; tl.fromTo(c.el, { strokeDashoffset: c.L }, { strokeDashoffset: 0, duration: 0.3, ease: "power2.out", immediateRender: true }, c.t); });
+  BLOCK.onTime(tl, function (t) { var f = Math.floor(t * 8); pth.forEach(function (c) { c.el.setAttribute("d", bentuk(c, f)); }); }, k.dur);
+  // sobekan kertas berlabel
+  if (P.label) {
+    var lb = BLOCK.el("div", { class: "blk-lab", style: "left:" + (cx / W * 100) + "%;top:" + ((y1 + bw + 95 * s) / H * 100) + "%;font-family:" + fam + ";font-size:" + Math.round(64 * s) + "px;background:" + P.label_color + ";color:#fff;clip-path:polygon(0 6%,8% 0,30% 5%,55% 0,80% 4%,100% 0,98% 50%,100% 96%,70% 100%,45% 95%,20% 100%,0 94%,2% 50%)" }, k.root);
+    lb.textContent = P.label;
+    if ((y1 + bw + 140 * s) > H) lb.style.top = ((y0 - bw - 60 * s) / H * 100) + "%";
+    tl.fromTo(lb, { autoAlpha: 0, scale: 0.3, rotation: 10 }, { autoAlpha: 1, scale: 1, rotation: -4, duration: 0.5, ease: "blockSpringStrong", immediateRender: true }, 1.05);
+  }
+  // beku: kilat putih + warna adegan
+  var sc = P.scene ? BLOCK.find(P.scene) : null;
+  if (sc) tl.fromTo(sc, { filter: "saturate(1) contrast(1) brightness(1)" }, { filter: "saturate(0.55) contrast(1.18) brightness(0.92)", duration: 0.12, ease: "none", immediateRender: true }, 0.02);
+  if (P.flash) { var kl = BLOCK.el("div", { class: "blk-kilat" }, k.root); tl.fromTo(kl, { autoAlpha: 0 }, { keyframes: [{ autoAlpha: 0.95, duration: 0.04 }, { autoAlpha: 0, duration: 0.35, ease: "power2.out" }], immediateRender: true }, 0); }
+  if (P.exit) tl.to(svg.childNodes, { autoAlpha: 0, duration: 0.3, stagger: 0.02 }, k.dur - 0.45).to(k.root.querySelectorAll(".blk-lab"), { autoAlpha: 0, duration: 0.25 }, k.dur - 0.45);
+}, { font: true });
+</script>

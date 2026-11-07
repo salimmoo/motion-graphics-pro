@@ -1,0 +1,21 @@
+{
+  "no global WebSocket (needs Node 22+). Use pipe mode (the default).": "WebSocket global tidak ada (butuh Node 22+). Pakai mode pipa (bawaan).",
+  "cannot connect to {}: {}": "gagal menyambung ke {}: {}",
+  "WebSocket error": "galat WebSocket",
+  "{}: CDP session already closed": "{}: sesi CDP sudah ditutup",
+  "{}: browser connection already closed": "{}: koneksi browser sudah tertutup",
+  "{}: browser connection closed": "{}: koneksi browser tertutup",
+  "executablePath is required": "executablePath wajib diisi",
+  "browser output": "keluaran browser",
+  "cannot start {}: {}": "gagal menjalankan {}: {}",
+  "browser exited before CDP was ready (code {})": "browser keluar sebelum CDP siap (kode {})",
+  "browser did not open the DevTools port within {} s": "browser tidak membuka port DevTools dalam {} s",
+  "browser did not answer CDP within {} s": "browser tidak menjawab CDP dalam {} s",
+  "script error": "galat skrip",
+  "page closed": "halaman ditutup",
+  "waiting for \"{}\" took longer than {} s": "menunggu \"{}\" melebihi {} s",
+  "cannot open {}: {}": "gagal membuka {}: {}",
+  "waitForFunction took longer than {} s": "waitForFunction melebihi {} s",
+  "the page renderer crashed (out of memory, or its renderer/GPU process was killed while other heavy jobs ran)": "renderer halaman mogok (memori habis, atau proses renderer/GPU-nya mati saat pekerjaan berat lain jalan)",
+  "{} did not finish within {} s": "{} tidak selesai dalam {} s"
+}

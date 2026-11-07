@@ -1,0 +1,101 @@
+{
+ "id": "transitions/aberration",
+ "name": "Aberration",
+ "name_id": "Aberasi Kromatik",
+ "category": "transitions",
+ "description": {
+  "id": "Kanal merah, hijau, dan biru terbelah saat adegan bergerak paling cepat: sapuan dorong cepat dengan pecahan RGB searah, atau zoom dengan pecahan RGB memancar dari tengah.",
+  "en": "RGB channels split on peak-velocity frames: fast push wipe with directional split, or a zoom with a radial chromatic split."
+ },
+ "tags": [
+  "transisi",
+  "chromatic",
+  "aberasi",
+  "rgb",
+  "split",
+  "wipe",
+  "zoom",
+  "transitions",
+  "aberration"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "mode": {
+   "default": "sweep",
+   "type": "enum",
+   "options": [
+    "sweep",
+    "radial"
+   ],
+   "hint": "sapu = dorong cepat + RGB searah; radial = zoom + RGB memancar",
+   "option_aliases": {
+    "sapu": "sweep"
+   }
+  },
+  "direction": {
+   "default": "left",
+   "type": "enum",
+   "options": [
+    "left",
+    "right",
+    "top",
+    "bottom"
+   ],
+   "hint": "Arah gerak adegan lama (mode sapu)",
+   "aliases": [
+    "arah"
+   ],
+   "option_aliases": {
+    "kiri": "left",
+    "kanan": "right",
+    "atas": "top",
+    "bawah": "bottom"
+   }
+  },
+  "strength": {
+   "default": 1,
+   "type": "number",
+   "hint": "Pengali pecahan warna",
+   "aliases": [
+    "kekuatan"
+   ]
+  },
+  "ease": {
+   "default": "expo.inOut",
+   "type": "ease",
+   "hint": "Easing gerak (mode sapu)"
+  }
+ },
+ "duration": 1.0,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/aberasi",
+  "chromatic-aberration-wipe",
+  "chromatic-radial-split"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 1.0,
+  "duration": 3
+ }
+}

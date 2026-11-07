@@ -1,0 +1,283 @@
+{
+ "id": "data/race",
+ "name": "Race",
+ "name_id": "Balapan Batang",
+ "category": "data",
+ "description": {
+  "id": "Bar chart race dari data deret waktu: batang tumbuh dan saling menyalip, urutan dihitung per waktu dengan rumus tertutup, sumbu menyesuaikan skala, dan warna aksen berpindah ke pemimpin. Mode lari: avatar huruf melompat di jalurnya dengan laju sesuai jumlahnya.",
+  "en": "Bar chart race from time-series props: bars grow and overtake, rank computed in closed form per time, axis rescales and the accent passes to the leader. Run mode: lettermark avatars hop along their rows at a pace set by their totals."
+ },
+ "tags": [
+  "data",
+  "grafik",
+  "bar-chart-race",
+  "peringkat",
+  "deret-waktu",
+  "balapan",
+  "avatar",
+  "race"
+ ],
+ "props": {
+  "mode": {
+   "default": "bar",
+   "type": "enum",
+   "options": [
+    "bar",
+    "run"
+   ],
+   "option_aliases": {
+    "batang": "bar",
+    "lari": "run"
+   }
+  },
+  "title": {
+   "default": "Kota dengan pengguna terbanyak",
+   "type": "text",
+   "aliases": [
+    "judul"
+   ]
+  },
+  "subtitle": {
+   "default": "Pengguna aktif, dalam ribuan",
+   "type": "text",
+   "aliases": [
+    "subjudul"
+   ]
+  },
+  "period": {
+   "default": [
+    "2017",
+    "2018",
+    "2019",
+    "2020",
+    "2021",
+    "2022",
+    "2023",
+    "2024"
+   ],
+   "type": "list",
+   "aliases": [
+    "periode"
+   ]
+  },
+  "series": {
+   "default": [
+    {
+     "label": "Jakarta",
+     "nilai": [
+      120,
+      160,
+      210,
+      260,
+      300,
+      340,
+      372,
+      410
+     ]
+    },
+    {
+     "label": "Surabaya",
+     "nilai": [
+      80,
+      130,
+      190,
+      240,
+      310,
+      360,
+      395,
+      425
+     ]
+    },
+    {
+     "label": "Bandung",
+     "nilai": [
+      95,
+      140,
+      175,
+      230,
+      270,
+      330,
+      400,
+      455
+     ]
+    },
+    {
+     "label": "Medan",
+     "nilai": [
+      60,
+      90,
+      120,
+      170,
+      220,
+      250,
+      280,
+      300
+     ]
+    },
+    {
+     "label": "Makassar",
+     "nilai": [
+      40,
+      70,
+      110,
+      150,
+      210,
+      270,
+      300,
+      330
+     ]
+    },
+    {
+     "label": "Semarang",
+     "nilai": [
+      55,
+      85,
+      115,
+      140,
+      180,
+      230,
+      260,
+      290
+     ]
+    },
+    {
+     "label": "Denpasar",
+     "nilai": [
+      30,
+      50,
+      90,
+      100,
+      140,
+      200,
+      250,
+      315
+     ]
+    }
+   ],
+   "type": "list",
+   "hint": "[{label, nilai: [satu per periode], warna?}]",
+   "aliases": [
+    "seri"
+   ]
+  },
+  "show": {
+   "default": 6,
+   "type": "number",
+   "hint": "Jumlah batang teratas yang tampil (mode batang)",
+   "aliases": [
+    "tampil"
+   ]
+  },
+  "prefix": {
+   "default": "",
+   "type": "text",
+   "aliases": [
+    "awalan"
+   ]
+  },
+  "suffix": {
+   "default": " rb",
+   "type": "text",
+   "aliases": [
+    "akhiran"
+   ]
+  },
+  "decimals": {
+   "default": 0,
+   "type": "number",
+   "aliases": [
+    "desimal"
+   ]
+  },
+  "text_color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "bar_color": {
+   "default": "#5b6b8c",
+   "type": "color",
+   "aliases": [
+    "warna_batang"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffb000",
+   "type": "color",
+   "hint": "Warna pemimpin",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "guide_color": {
+   "default": "rgba(255,255,255,0.14)",
+   "type": "color",
+   "aliases": [
+    "warna_bantu"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@400;600;700;800",
+   "type": "font"
+  },
+  "font2": {
+   "default": "Source Serif 4:wght@600;700",
+   "type": "font",
+   "hint": "Font judul"
+  },
+  "left": {
+   "default": 7,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "kiri"
+   ]
+  },
+  "top": {
+   "default": 8,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "atas"
+   ]
+  },
+  "width": {
+   "default": 86,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "lebar"
+   ]
+  },
+  "height": {
+   "default": 84,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "tinggi"
+   ]
+  }
+ },
+ "duration": 8,
+ "aspect": [
+  "16:9",
+  "1:1",
+  "4:5",
+  "9:16"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "data/balapan",
+  "bar-chart-race",
+  "week-in-merges"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@400;600;700;800",
+   "Source Serif 4:wght@600;700"
+  ]
+ }
+}

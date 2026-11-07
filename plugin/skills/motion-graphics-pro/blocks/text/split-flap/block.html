@@ -1,0 +1,82 @@
+<!-- Block text/split-flap · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="text/split-flap" data-start="0" data-duration="5" data-track-index="10" class="blk blk-text-split-flap">
+<script type="application/json" data-block-props>
+{"rows": ["BERANGKAT 07.45", "TUJUAN MAKASSAR", "*GERBANG 12*"], "cols": 16, "font": "Roboto Mono:wght@700", "size": 96, "weight": 700, "color": "#f2efe6", "accent_color": "#ffcf4a", "panel_color": "#1d1f25", "board_color": "#0c0d10", "position_y": 50, "alphabet": " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.:-", "steps": 0.05, "start": 0.3, "pause": 0.03, "line_pause": 0.18}
+</script>
+<div class="blk-papan"></div>
+</div>
+<style>
+.blk-text-split-flap {position:absolute;inset:0;pointer-events:none}
+.blk-text-split-flap .blk-papan{position:absolute;left:50%;transform:translate(-50%,-50%);display:grid;border-radius:.12em;line-height:1}
+.blk-text-split-flap .blk-sel{position:relative;perspective:4em}
+.blk-text-split-flap .blk-h{position:absolute;left:0;right:0;height:50%;overflow:hidden;background:var(--panel);}
+.blk-text-split-flap .blk-h span{position:absolute;left:0;right:0;text-align:center}
+.blk-text-split-flap .blk-at{top:0;border-radius:.1em .1em 0 0}
+.blk-text-split-flap .blk-bw{bottom:0;border-radius:0 0 .1em .1em}
+.blk-text-split-flap .blk-at span{top:0}
+.blk-text-split-flap .blk-bw span{bottom:0}
+.blk-text-split-flap .blk-ka{transform-origin:50% 100%}
+.blk-text-split-flap .blk-kb{transform-origin:50% 0%}
+.blk-text-split-flap .blk-sel::after{content:"";position:absolute;left:0;right:0;top:50%;height:.035em;margin-top:-.0175em;background:rgba(0,0,0,.55);z-index:3}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl;
+  var rata = { kiri: "left", kanan: "right" }[P.rata] || "center";
+  function gayaTeks(el, px) {
+    el.style.cssText += ";top:" + P.position_y + "%;width:" + P.lebar + "%;color:" + P.color + ";--aksen:" + P.accent_color +
+      ";font-family:" + BLOCK.family(P.font) + ";font-weight:" + P.weight + ";font-size:" + Math.round((px || P.size) * k.s) + "px;text-align:" + rata;
+  }
+  // tunggu stylesheet Google Fonts + wajah font benar-benar termuat sebelum mengukur teks
+  function siapFont(spec) {
+    var ln = Array.prototype.slice.call(document.querySelectorAll('link[href*="fonts.googleapis"]'));
+    return Promise.all(ln.map(function (l) { return l.sheet ? 0 : new Promise(function (ok) { l.addEventListener("load", ok); l.addEventListener("error", ok); }); }))
+      .then(function () { return document.fonts && document.fonts.load ? document.fonts.load(spec || (P.weight + " 100px " + BLOCK.family(P.font))) : 0; })
+      .catch(function () {});
+  }
+  function markupKunci(s) { return BLOCK.esc(s).replace(/\*([^*]+)\*/g, '<span class="blk-kunci">$1</span>').replace(/\\n|\n/g, "<br>"); }
+  return siapFont().then(function () {
+  var pp = k.root.querySelector(".blk-papan"), AB = String(P.alphabet || " ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), N = AB.length;
+  var kol = Math.max(1, Math.round(P.cols)), rows = (P.rows || []).map(String);
+  var ch = Math.min(P.size * k.s, k.w * 0.9 / (kol * 0.8), k.h * 0.8 / (rows.length * 1.15)), cw = ch * 0.7, gap = ch * 0.08;
+  pp.style.cssText += ";top:" + P.position_y + "%;font-family:" + BLOCK.family(P.font) + ";font-weight:" + P.weight + ";font-size:" + ch + "px;padding:" + gap * 2 + "px;gap:" + gap + "px;" +
+    "grid-template-columns:repeat(" + kol + "," + cw + "px);background:" + P.board_color + ";--panel:" + P.panel_color;
+  var sel = [];
+  rows.forEach(function (rw, ri) {
+    var aks = /^\*.*\*$/.test(rw), s = rw.replace(/\*/g, "").toUpperCase();
+    for (var ci = 0; ci < kol; ci++) {
+      var c = s[ci] || " "; if (AB.indexOf(c) < 0) c = " ";
+      var e = BLOCK.el("div", { class: "blk-sel" }, pp); e.style.cssText = "width:" + cw + "px;height:" + ch + "px;color:" + (aks ? P.accent_color : P.color);
+      var h = {};
+      [["at", "blk-at"], ["bw", "blk-bw"], ["ka", "blk-at blk-ka"], ["kb", "blk-bw blk-kb"]].forEach(function (q) {
+        var d = BLOCK.el("div", { class: "blk-h " + q[1] }, e), sp = BLOCK.el("span", null, d); sp.style.cssText = "height:" + ch + "px;line-height:" + ch + "px"; h[q[0]] = { d: d, s: sp, c: null };
+      });
+      var tgt = AB.indexOf(c), steps = tgt; // drum mulai dari spasi (indeks 0)
+      sel.push({ h: h, steps: steps, T: P.start + ri * P.line_pause + ci * P.pause });
+    }
+  });
+  function tulis(o, c) { if (o.c !== c) { o.s.textContent = c === " " ? " " : c; o.c = c; } }
+  // keping diam: lepas transform/filter supaya tidak ada lapisan komposit tersisa
+  function sembunyi(o) { o.d.style.visibility = "hidden"; o.d.style.transform = ""; o.d.style.filter = ""; }
+  BLOCK.onTime(tl, function (t) {
+    sel.forEach(function (s) {
+      var kk = (t - s.T) / P.steps, n = Math.floor(kk), f = kk - n, h = s.h;
+      if (kk < 0 || n >= s.steps) {
+        var cc = AB[kk < 0 ? 0 : s.steps]; tulis(h.at, cc); tulis(h.bw, cc); sembunyi(h.ka); sembunyi(h.kb); return;
+      }
+      var cur = AB[n % N], nx = AB[(n + 1) % N];
+      tulis(h.at, nx); tulis(h.bw, cur);
+      if (f < 0.5) {
+        tulis(h.ka, cur); h.ka.d.style.visibility = "visible"; sembunyi(h.kb);
+        h.ka.d.style.transform = "rotateX(" + (-180 * f) + "deg)"; h.ka.d.style.filter = "brightness(" + (1 - f * 0.9) + ")";
+      } else {
+        tulis(h.kb, nx); h.kb.d.style.visibility = "visible"; sembunyi(h.ka);
+        h.kb.d.style.transform = "rotateX(" + (90 - 180 * (f - 0.5)) + "deg)"; h.kb.d.style.filter = "brightness(" + (0.55 + (f - 0.5) * 0.9) + ")";
+      }
+    });
+  }, k.dur);
+  tl.fromTo(pp, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, 0);
+  tl.to(pp, { opacity: 0, duration: 0.4, ease: "power2.in" }, k.dur - 0.45);
+  });
+}, { font: true });
+</script>

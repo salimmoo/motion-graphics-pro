@@ -1,0 +1,142 @@
+{
+ "id": "3d/product-spin",
+ "name": "Product Spin",
+ "name_id": "Putar Produk",
+ "category": "3d",
+ "description": {
+  "id": "Produk berputar satu putaran penuh di atas panggung studio, mulus dan bisa diulang: kaleng, botol, atau kotak bergaya dengan label milikmu. Label membungkus badan silinder dalam CSS 3D, cahaya studio dan bayangan tetap di tempat, tanpa model 3D luar.",
+  "en": "A product turns a full revolution on a studio plinth in a seamless loop: a styled can, bottle or box with your own label. The label wraps a CSS 3D cylinder under fixed studio light and shadow; no external 3D model."
+ },
+ "tags": [
+  "3d",
+  "produk",
+  "turntable",
+  "putar",
+  "kaleng",
+  "botol",
+  "kemasan",
+  "studio",
+  "product",
+  "spin"
+ ],
+ "props": {
+  "shape": {
+   "default": "can",
+   "type": "enum",
+   "options": [
+    "can",
+    "bottle",
+    "box"
+   ],
+   "aliases": [
+    "bentuk"
+   ],
+   "option_aliases": {
+    "kaleng": "can",
+    "botol": "bottle",
+    "kotak": "box"
+   }
+  },
+  "label": {
+   "default": "SEGAR",
+   "type": "text"
+  },
+  "sub": {
+   "default": "teh melati dingin",
+   "type": "text"
+  },
+  "product_color": {
+   "default": "#e2483d",
+   "type": "color",
+   "aliases": [
+    "warna_produk"
+   ]
+  },
+  "label_color": {
+   "default": "#fff4e0",
+   "type": "color",
+   "aliases": [
+    "warna_label"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffcc4d",
+   "type": "color",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "bg_color": {
+   "default": "#232838",
+   "type": "color",
+   "aliases": [
+    "warna_latar"
+   ]
+  },
+  "plinth_color": {
+   "default": "#e9e3d7",
+   "type": "color",
+   "aliases": [
+    "warna_plinth"
+   ]
+  },
+  "turns": {
+   "default": 1,
+   "type": "number",
+   "hint": "Jumlah putaran selama durasi (bulat = loop mulus)",
+   "aliases": [
+    "putaran"
+   ]
+  },
+  "skew": {
+   "default": 10,
+   "type": "number",
+   "hint": "Sudut pandang dari atas (derajat)",
+   "aliases": [
+    "miring"
+   ]
+  },
+  "size": {
+   "default": 1,
+   "type": "number",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "font": {
+   "default": "Archivo Black:wght@400",
+   "type": "font"
+  },
+  "font2": {
+   "default": "Inter:wght@500;700",
+   "type": "font",
+   "hint": "Font teks kecil"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "3d/putar-produk",
+  "product-turntable"
+ ],
+ "example": {
+  "bg": "empty",
+  "font": [
+   "Archivo Black",
+   "Inter:wght@400;500;600;700;800;900"
+  ]
+ }
+}

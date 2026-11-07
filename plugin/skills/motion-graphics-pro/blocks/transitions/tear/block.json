@@ -1,0 +1,120 @@
+{
+ "id": "transitions/tear",
+ "name": "Tear",
+ "name_id": "Robek Kertas",
+ "category": "transitions",
+ "description": {
+  "id": "Adegan lama robek seperti kertas sungguhan: sobekan bergerigi berlari melintasi layar, inti serat putih terlihat di tepinya, lalu kedua sobekan terangkat dengan bayangan lembut dan adegan baru tertinggal di bawahnya.",
+  "en": "The outgoing scene tears like real paper: a jagged rip runs across the frame showing the white fibre core, then both pieces lift away on a soft shadow to leave the next scene."
+ },
+ "tags": [
+  "transisi",
+  "kertas",
+  "robek",
+  "sobek",
+  "paper",
+  "tear",
+  "collage",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama (yang dirobek)",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "direction": {
+   "default": "horizontal",
+   "type": "enum",
+   "options": [
+    "horizontal",
+    "vertical"
+   ],
+   "hint": "Arah garis sobekan",
+   "aliases": [
+    "arah"
+   ],
+   "option_aliases": {
+    "horisontal": "horizontal",
+    "vertikal": "vertical"
+   }
+  },
+  "mode": {
+   "default": "split",
+   "type": "enum",
+   "options": [
+    "split",
+    "drop"
+   ],
+   "hint": "belah = sobekan terbang berlawanan arah; jatuh = keduanya jatuh ke bawah",
+   "option_aliases": {
+    "belah": "split",
+    "jatuh": "drop"
+   }
+  },
+  "position": {
+   "default": 50,
+   "type": "number",
+   "hint": "Letak garis sobekan (% layar)",
+   "aliases": [
+    "posisi"
+   ]
+  },
+  "roughness": {
+   "default": 1,
+   "type": "number",
+   "hint": "Kekasaran tepi sobekan (0.3 halus - 2 kasar)",
+   "aliases": [
+    "kasar"
+   ]
+  },
+  "fiber_color": {
+   "default": "#fbf7ee",
+   "type": "color",
+   "hint": "Warna inti kertas di tepi sobekan",
+   "aliases": [
+    "warna_serat"
+   ]
+  },
+  "shadow": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Bayangan lembut di bawah sobekan",
+   "aliases": [
+    "bayangan"
+   ]
+  },
+  "seed": {
+   "default": 7,
+   "type": "number",
+   "hint": "Seed bentuk sobekan"
+  }
+ },
+ "duration": 1.8,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/robek",
+  "torn-paper-rip"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 1,
+  "duration": 3
+ }
+}

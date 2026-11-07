@@ -1,0 +1,138 @@
+{
+ "id": "paper/yoshimura",
+ "name": "Yoshimura",
+ "name_id": "Silinder Yoshimura",
+ "category": "paper",
+ "description": {
+  "id": "Silinder pola Yoshimura (berlian) memampat dan memanjang lagi. Pola ini tidak kaku: tepi cincin meregang sedikit, seperti kertas sungguhan yang tertekuk.",
+  "en": "A Yoshimura (diamond) pattern cylinder compresses and extends. The pattern is not rigid: ring edges stretch a little, like real buckling paper."
+ },
+ "tags": [
+  "yoshimura",
+  "silinder",
+  "lipat",
+  "origami",
+  "berlian",
+  "kompres",
+  "paper",
+  "fold",
+  "cylinder"
+ ],
+ "props": {
+  "motion": {
+   "default": "pingpong",
+   "type": "enum",
+   "options": [
+    "open",
+    "close",
+    "pingpong"
+   ],
+   "hint": "buka, tutup, bolak",
+   "aliases": [
+    "gerak"
+   ],
+   "option_aliases": {
+    "buka": "open",
+    "tutup": "close",
+    "bolak": "pingpong"
+   }
+  },
+  "front_color": {
+   "default": "#7ee0d6",
+   "type": "color",
+   "hint": "Warna luar",
+   "aliases": [
+    "warna_depan"
+   ]
+  },
+  "back_color": {
+   "default": "#2d6cdf",
+   "type": "color",
+   "hint": "Warna dalam",
+   "aliases": [
+    "warna_belakang"
+   ]
+  },
+  "side": {
+   "default": 8,
+   "type": "number",
+   "hint": "Jumlah sisi poligon",
+   "aliases": [
+    "sisi"
+   ]
+  },
+  "ring": {
+   "default": 6,
+   "type": "number",
+   "hint": "Jumlah cincin",
+   "aliases": [
+    "cincin"
+   ]
+  },
+  "rotate": {
+   "default": 18,
+   "type": "number",
+   "hint": "Putaran kamera, derajat per detik",
+   "aliases": [
+    "putar"
+   ]
+  },
+  "bg": {
+   "default": "color",
+   "type": "enum",
+   "options": [
+    "color",
+    "transparent"
+   ],
+   "hint": "Latar di belakang lembar",
+   "aliases": [
+    "latar"
+   ],
+   "option_aliases": {
+    "warna": "color",
+    "transparan": "transparent"
+   }
+  },
+  "bg_color": {
+   "default": "#1c2236",
+   "type": "color",
+   "hint": "Dipakai bila latar = warna",
+   "aliases": [
+    "warna_latar"
+   ]
+  },
+  "size": {
+   "default": 0.8,
+   "type": "number",
+   "hint": "Ukuran model (bagian sisi pendek)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "ease": {
+   "default": "pegas.sigap",
+   "type": "text",
+   "hint": "Ease lipat: pegas.sigap, pegas.memantul, pegas.berat, inOut"
+  },
+  "label": {
+   "default": false,
+   "type": "boolean",
+   "hint": "Label validator (Maekawa/Kawasaki)"
+  }
+ },
+ "duration": 6,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [
+  "lib:mgp.js"
+ ],
+ "aliases": [
+  "kertas/yoshimura"
+ ],
+ "example": {
+  "bg": "dark"
+ }
+}

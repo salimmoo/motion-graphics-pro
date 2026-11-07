@@ -1,0 +1,97 @@
+<!-- Block data/race · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="data/race" data-start="0" data-duration="8" data-track-index="10" class="blk blk-data-race">
+<script type="application/json" data-block-props>
+{"mode": "bar", "title": "Kota dengan pengguna terbanyak", "subtitle": "Pengguna aktif, dalam ribuan", "period": ["2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024"], "series": [{"label": "Jakarta", "nilai": [120, 160, 210, 260, 300, 340, 372, 410]}, {"label": "Surabaya", "nilai": [80, 130, 190, 240, 310, 360, 395, 425]}, {"label": "Bandung", "nilai": [95, 140, 175, 230, 270, 330, 400, 455]}, {"label": "Medan", "nilai": [60, 90, 120, 170, 220, 250, 280, 300]}, {"label": "Makassar", "nilai": [40, 70, 110, 150, 210, 270, 300, 330]}, {"label": "Semarang", "nilai": [55, 85, 115, 140, 180, 230, 260, 290]}, {"label": "Denpasar", "nilai": [30, 50, 90, 100, 140, 200, 250, 315]}], "show": 6, "prefix": "", "suffix": " rb", "decimals": 0, "text_color": "#f5f3ee", "bar_color": "#5b6b8c", "accent_color": "#ffb000", "guide_color": "rgba(255,255,255,0.14)", "font": "Inter:wght@400;600;700;800", "font2": "Source Serif 4:wght@600;700", "left": 7, "top": 8, "width": 86, "height": 84}
+</script>
+<div class="blk-k"><div class="blk-j"></div><div class="blk-sj"></div><div class="blk-plot"><div class="blk-per"></div></div></div>
+</div>
+<style>
+.blk-data-race{position:absolute;inset:0;pointer-events:none}
+.blk-data-race .blk-k{position:absolute;display:flex;flex-direction:column}
+.blk-data-race .blk-j{font-weight:700;line-height:1.1;letter-spacing:-.01em}
+.blk-data-race .blk-sj{opacity:.65;margin-top:.3em}
+.blk-data-race .blk-plot{position:relative;flex:1;min-height:0}
+.blk-data-race .blk-per{position:absolute;right:0;bottom:0;font-weight:800;line-height:.8;letter-spacing:-.04em;font-variant-numeric:tabular-nums;opacity:.16}
+.blk-data-race .blk-gl{position:absolute;top:0;bottom:0;width:0;border-left:1px solid}
+.blk-data-race .blk-gl span{position:absolute;top:-1.5em;left:0;transform:translateX(-50%);font-variant-numeric:tabular-nums;opacity:.6;white-space:nowrap}
+.blk-data-race .blk-row{position:absolute;left:0;right:0}
+.blk-data-race .blk-lb{position:absolute;right:100%;top:50%;transform:translateY(-50%);padding-right:.6em;white-space:nowrap;font-weight:600}
+.blk-data-race .blk-bar{position:absolute;top:12%;bottom:12%;left:0;border-radius:0 .3em .3em 0}
+.blk-data-race .blk-val{position:absolute;top:50%;transform:translateY(-50%);padding-left:.5em;white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:600}
+.blk-data-race .blk-trk{position:absolute;left:0;right:0;top:50%;border-top:1px dashed}
+.blk-data-race .blk-av{position:absolute;top:50%;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, R = k.root, S = P.series || [], PR = P.period || [];
+  function fmt(v, d) { var a = Math.abs(v).toFixed(d).split("."); a[0] = a[0].replace(/\B(?=(\d{3})+(?!\d))/g, "."); return (v < 0 ? "−" : "") + a[0] + (a[1] ? "," + a[1] : ""); }
+  function af(v) { return P.prefix + fmt(v, P.decimals) + P.suffix; }
+  function rapi(m) { var e = Math.pow(10, Math.floor(Math.log10(m || 1))), f = m / e; return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10) * e; }
+  var fs = function (v) { return Math.round(v * s) + "px"; };
+  var kk = R.querySelector(".blk-k"), plot = R.querySelector(".blk-plot"), per = R.querySelector(".blk-per");
+  var lari = P.mode === "run", LW = lari ? 20 : 18;
+  kk.style.cssText += ";left:" + P.left + "%;top:" + P.top + "%;width:" + P.width + "%;height:" + P.height + "%;color:" + P.text_color + ";font-family:" + BLOCK.family(P.font) + ";font-size:" + fs(26);
+  var J = R.querySelector(".blk-j"), SJ = R.querySelector(".blk-sj");
+  J.textContent = P.title; J.style.cssText += ";font-family:" + BLOCK.family(P.font2, "Georgia, serif") + ";font-size:" + fs(56);
+  SJ.textContent = P.subtitle; SJ.style.fontSize = fs(28);
+  plot.style.cssText += ";margin-top:" + fs(80) + ";margin-left:" + LW + "%";
+  per.style.fontSize = fs(lari ? 0 : 170);
+  tl.fromTo([J, SJ], { opacity: 0, y: 18 * s }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out", stagger: 0.08 }, 0);
+  var t0 = 0.6, t1 = k.dur - 1.0, N = S.length, nP = Math.max(PR.length, 1);
+  // nilai setiap seri pada waktu t: interpolasi antar periode (rumus tertutup, tanpa akumulasi)
+  function nilai(t) {
+    var f = BLOCK.progress(t, t0, t1) * (nP - 1), i = Math.min(Math.floor(f), nP - 2), u = f - Math.max(i, 0);
+    if (nP < 2) return { f: 0, v: S.map(function (q) { return +q.nilai[0] || 0; }) };
+    u = BLOCK.smooth(u) * 0.35 + u * 0.65;
+    return { f: f, v: S.map(function (q) { var a = +q.nilai[i] || 0, b = +q.nilai[i + 1] || 0; return a + (b - a) * u; }) };
+  }
+  var rows = S.map(function (q, i) {
+    var r = BLOCK.el("div", { class: "blk-row" }, plot), o = { r: r };
+    o.lb = BLOCK.el("div", { class: "blk-lb" }, r); o.lb.textContent = q.label;
+    if (lari) {
+      BLOCK.el("div", { class: "blk-trk", style: "border-color:" + P.guide_color }, r);
+      var az = 64 * s;
+      o.av = BLOCK.el("div", { class: "blk-av", style: "width:" + az + "px;height:" + az + "px;margin:" + (-az / 2) + "px 0 0 " + (-az / 2) + "px;font-size:" + fs(24) + ";background:" + (q.warna || BLOCK.mix(P.bar_color, P.accent_color, i / Math.max(N - 1, 1))) }, r);
+      o.av.textContent = String(q.label).split(/\s+/).map(function (w) { return w[0]; }).join("").slice(0, 2).toUpperCase();
+      o.val = BLOCK.el("div", { class: "blk-val", style: "font-size:" + fs(24) }, r);
+    } else {
+      o.bar = BLOCK.el("div", { class: "blk-bar" }, r);
+      o.val = BLOCK.el("div", { class: "blk-val", style: "font-size:" + fs(24) }, r);
+    }
+    return o;
+  });
+  var gls = [];
+  if (!lari) for (var g = 0; g < 7; g++) { var gl = BLOCK.el("div", { class: "blk-gl", style: "border-color:" + P.guide_color + ";font-size:" + fs(20) }, plot); gls.push({ el: gl, sp: BLOCK.el("span", null, gl) }); }
+  var tampil = Math.min(P.show, N), rh = 100 / (lari ? N : tampil), maxAkhir = Math.max.apply(null, S.map(function (q) { return +q.nilai[q.nilai.length - 1] || 0; }));
+  BLOCK.onTime(tl, function (t) {
+    var st = nilai(t), v = st.v, mx = Math.max.apply(null, v.concat([1e-9]));
+    if (!lari) {
+      per.textContent = PR[Math.round(st.f)] || "";
+      var top = mx * 1.1, step = rapi(top / 4);
+      gls.forEach(function (g, j) { var val = step * j, x = val / top * 86; g.el.style.left = x + "%"; g.el.style.opacity = val <= top && j > 0 ? 1 : (j === 0 ? 1 : 0); g.sp.textContent = af(val); });
+    }
+    rows.forEach(function (o, i) {
+      if (lari) {
+        // kecepatan sebanding jumlah: semua mulai bersama, yang terbanyak sampai ujung
+        var tot = +S[i].nilai[S[i].nilai.length - 1] || 0, u = BLOCK.progress(t, t0, t1), dist = tot / maxAkhir;
+        var x = dist * u * 84, hop = Math.abs(Math.sin(Math.PI * u * (2 + dist * 10))) * 26 * s * (u < 1 ? 1 : 0);
+        o.r.style.top = (i * rh) + "%"; o.r.style.height = rh + "%";
+        o.av.style.left = x + "%"; o.av.style.transform = "translateY(" + (-hop).toFixed(1) + "px)";
+        o.val.style.left = "calc(" + x + "% + " + fs(36) + ")"; o.val.textContent = af(tot * u);
+        return;
+      }
+      // peringkat halus: jumlah seri lain yang lebih besar, dilunakkan di sekitar persilangan
+      var pos = 0, eps = mx * 0.035;
+      for (var j = 0; j < N; j++) if (j !== i) pos += BLOCK.smooth(0.5 + (v[j] - v[i]) / (2 * eps));
+      var lead = BLOCK.clamp(1 - pos * 1.5, 0, 1), w = v[i] / (mx * 1.1) * 86;
+      o.r.style.top = (pos * rh) + "%"; o.r.style.height = rh + "%";
+      o.r.style.opacity = BLOCK.clamp((tampil - 0.45 - pos) * 2, 0, 1);
+      o.bar.style.width = w + "%"; o.bar.style.background = BLOCK.mix(S[i].warna || P.bar_color, P.accent_color, lead);
+      o.val.style.left = w + "%"; o.val.textContent = af(v[i]);
+      o.lb.style.fontWeight = lead > 0.5 ? 800 : 600;
+    });
+  }, k.dur);
+  tl.fromTo(plot, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 0.3);
+  tl.to(kk, { opacity: 0, duration: 0.45, ease: "power2.in" }, k.dur - 0.5);
+}, { font: true });
+</script>

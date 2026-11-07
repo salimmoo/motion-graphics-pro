@@ -1,0 +1,59 @@
+<!-- Block labels/hud-camera · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="labels/hud-camera" data-start="0" data-duration="6" data-track-index="40" class="blk blk-labels-hud-camera">
+<script type="application/json" data-block-props>
+{"rec_text": "REC", "date": "05 NOV 2026", "clock": "16:42", "mode": "SP", "color": "#ffffff", "rec_color": "#ff2b2b", "battery": 70, "initial_code": 754, "fps": 30, "corners": true, "aim": true, "scanlines": true, "font": "VT323", "size": 54}
+</script>
+</div>
+<style>
+.blk-labels-hud-camera{position:absolute;inset:0;pointer-events:none;line-height:1;text-shadow:0 0 calc(var(--s)*6px) rgba(0,0,0,.6)}
+.blk-labels-hud-camera .blk-x{position:absolute;display:flex;align-items:center;gap:calc(var(--s)*14px);white-space:nowrap}
+.blk-labels-hud-camera .blk-dot{width:.55em;height:.55em;border-radius:50%;background:var(--r);box-shadow:0 0 calc(var(--s)*12px) var(--r)}
+.blk-labels-hud-camera .blk-bat{position:relative;width:1.5em;height:.7em;border:calc(var(--s)*3px) solid currentColor;border-radius:calc(var(--s)*3px);padding:calc(var(--s)*3px);box-sizing:border-box}
+.blk-labels-hud-camera .blk-bat::after{content:"";position:absolute;right:calc(var(--s)*-9px);top:25%;height:50%;width:calc(var(--s)*5px);background:currentColor}
+.blk-labels-hud-camera .blk-isi{height:100%;background:currentColor}
+.blk-labels-hud-camera .blk-sd{position:absolute;width:calc(var(--s)*70px);height:calc(var(--s)*70px);border:0 solid currentColor;opacity:.9}
+.blk-labels-hud-camera .blk-bidik{position:absolute;left:50%;top:50%;width:calc(var(--s)*64px);height:calc(var(--s)*64px);margin:calc(var(--s)*-32px) 0 0 calc(var(--s)*-32px);opacity:.7}
+.blk-labels-hud-camera .blk-bidik::before,.blk-labels-hud-camera .blk-bidik::after{content:"";position:absolute;background:currentColor}
+.blk-labels-hud-camera .blk-bidik::before{left:50%;top:0;bottom:0;width:calc(var(--s)*2px);margin-left:calc(var(--s)*-1px)}
+.blk-labels-hud-camera .blk-bidik::after{top:50%;left:0;right:0;height:calc(var(--s)*2px);margin-top:calc(var(--s)*-1px)}
+.blk-labels-hud-camera .blk-pindai{position:absolute;inset:0;background:repeating-linear-gradient(180deg,rgba(255,255,255,.05) 0 2px,transparent 2px 5px);mix-blend-mode:overlay}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, D = k.dur, E = BLOCK.el, R = k.root;
+  R.style.cssText += ";--s:" + s + ";--r:" + P.rec_color + ";color:" + P.color + ";font-family:" + BLOCK.family(P.font, "monospace") + ";font-size:" + Math.round(P.size * s) + "px";
+  var m = Math.round(70 * s) + "px";
+  if (P.scanlines) E("div", { class: "blk-pindai" }, R);
+  var rec = E("div", { class: "blk-x", style: "left:" + m + ";top:" + m }, R), dot = E("div", { class: "blk-dot" }, rec);
+  E("span", null, rec).textContent = P.rec_text;
+  var kanan = E("div", { class: "blk-x", style: "right:" + m + ";top:" + m }, R);
+  E("span", null, kanan).textContent = P.mode;
+  var bat = E("div", { class: "blk-bat" }, kanan), isi = E("div", { class: "blk-isi", style: "width:" + BLOCK.clamp(P.battery, 0, 100) + "%" }, bat);
+  var kode = E("div", { class: "blk-x", style: "left:" + m + ";bottom:" + m + ";font-variant-numeric:tabular-nums" }, R);
+  var tgl = E("div", { class: "blk-x", style: "right:" + m + ";bottom:" + m + ";flex-direction:column;align-items:flex-end;gap:" + Math.round(8 * s) + "px" }, R);
+  E("span", null, tgl).textContent = P.clock; E("span", null, tgl).textContent = P.date;
+  var sd = [];
+  if (P.corners) {
+    var b = Math.round(4 * s) + "px", o = Math.round(36 * s) + "px";
+    [["left", "top"], ["right", "top"], ["left", "bottom"], ["right", "bottom"]].forEach(function (c) {
+      sd.push(E("div", { class: "blk-sd", style: c[0] + ":" + o + ";" + c[1] + ":" + o + ";border-" + c[0] + "-width:" + b + ";border-" + c[1] + "-width:" + b }, R));
+    });
+  }
+  var bidik = P.aim ? E("div", { class: "blk-bidik" }, R) : null;
+  var fps = Math.max(1, Math.round(P.fps));
+  function dua(n) { return (n < 10 ? "0" : "") + n; }
+  // penghitung kode waktu digerakkan timeline (HH:MM:SS:FF)
+  BLOCK.onTime(tl, function (t) {
+    var f = Math.floor((t + (+P.initial_code || 0)) * fps + 1e-6), ff = f % fps, sec = Math.floor(f / fps);
+    kode.textContent = dua(Math.floor(sec / 3600)) + ":" + dua(Math.floor(sec / 60) % 60) + ":" + dua(sec % 60) + ":" + dua(ff);
+  }, D);
+  // kedip REC (1 Hz), baterai berkedip bila lemah
+  tl.fromTo(dot, { opacity: 1 }, { opacity: 0, duration: 0.01, repeat: Math.max(1, Math.floor(D * 2) - 1), yoyo: true, repeatDelay: 0.49 }, 0.5);
+  if (P.battery <= 20) tl.fromTo(isi, { opacity: 1 }, { opacity: 0.15, duration: 0.4, yoyo: true, repeat: Math.max(1, Math.floor(D / 0.4) - 1) }, 0);
+  var semua = [rec, kanan, kode, tgl].concat(sd);
+  tl.fromTo(semua, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.05, stagger: 0.06, ease: "none" }, 0.1);
+  if (sd.length) tl.fromTo(sd, { scale: 1.25 }, { scale: 1, duration: 0.5, ease: "power3.out", stagger: 0.04 }, 0.1);
+  if (bidik) tl.fromTo(bidik, { scale: 1.6, autoAlpha: 0 }, { scale: 1, autoAlpha: 0.7, duration: 0.5, ease: "power3.out" }, 0.3)
+    .to(bidik, { scale: 0.92, duration: 0.25, yoyo: true, repeat: 1, ease: "sine.inOut" }, 1.2);
+}, { font: true });
+</script>

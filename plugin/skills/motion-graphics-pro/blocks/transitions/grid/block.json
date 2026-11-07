@@ -1,0 +1,98 @@
+{
+ "id": "transitions/grid",
+ "name": "Grid",
+ "name_id": "Grid Piksel",
+ "category": "transitions",
+ "description": {
+  "id": "Layar pecah menjadi kisi kotak: tiap kotak berganti ke adegan baru bergiliran, acak seperti piksel, menyapu diagonal, atau menyebar dari tengah, dengan kilau warna aksen di tiap kotak.",
+  "en": "The frame breaks into a grid of squares that switch to scene B with staggered timing: random pixelate, diagonal sweep or from the centre, with an accent flash per tile."
+ },
+ "tags": [
+  "transisi",
+  "grid",
+  "piksel",
+  "tile",
+  "mosaik",
+  "stagger",
+  "transitions"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "mode": {
+   "default": "sweep",
+   "type": "enum",
+   "options": [
+    "pixel",
+    "sweep",
+    "center"
+   ],
+   "hint": "piksel = acak; sapu = diagonal; tengah = dari tengah keluar",
+   "option_aliases": {
+    "piksel": "pixel",
+    "sapu": "sweep",
+    "tengah": "center"
+   }
+  },
+  "cols": {
+   "default": 12,
+   "type": "number",
+   "hint": "Jumlah kolom kisi (baris menyesuaikan rasio)",
+   "aliases": [
+    "kolom"
+   ]
+  },
+  "accent": {
+   "default": true,
+   "type": "boolean",
+   "hint": "Kilau warna aksen per kotak",
+   "aliases": [
+    "aksen"
+   ]
+  },
+  "accent_color": {
+   "default": "#ffd166",
+   "type": "color",
+   "hint": "Warna aksen",
+   "aliases": [
+    "warna_aksen"
+   ]
+  },
+  "ease": {
+   "default": "power2.out",
+   "type": "ease",
+   "hint": "Easing tiap kotak"
+  }
+ },
+ "duration": 1.2,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/grid",
+  "grid-pixelate-wipe",
+  "transitions-grid"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.9,
+  "duration": 3
+ }
+}

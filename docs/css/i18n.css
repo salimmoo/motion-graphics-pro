@@ -1,0 +1,16 @@
+/* language switch (js/i18n.js): round flag, bottom-left, glass ring + tooltip */
+.lang-sw { position: fixed; left: 18px; bottom: 18px; z-index: 80; width: 38px; height: 38px; padding: 3px; border: 0; border-radius: 50%;
+  background: rgba(255,246,224,.12); box-shadow: inset 0 0 0 1px rgba(242,215,150,.55), 0 6px 22px rgba(0,0,0,.45);
+  backdrop-filter: blur(8px) saturate(1.2); -webkit-backdrop-filter: blur(8px) saturate(1.2); cursor: pointer;
+  transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s; }
+.lang-sw:hover, .lang-sw:focus-visible { transform: translateY(-2px) scale(1.06); box-shadow: inset 0 0 0 1.5px #f2d796, 0 8px 26px rgba(0,0,0,.5), 0 0 0 4px rgba(242,215,150,.14); outline: none; }
+.lang-flag { display: block; width: 100%; height: 100%; border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 1px rgba(0,0,0,.25); }
+.lang-flag svg { display: block; width: 100%; height: 100%; }
+.lang-tip { position: absolute; left: calc(100% + 10px); top: 50%; transform: translate(-4px, -50%); white-space: nowrap; pointer-events: none;
+  padding: 6px 10px; border-radius: 999px; font: 500 12px/1 Geist, system-ui, sans-serif; letter-spacing: .01em; color: #fff6e0;
+  background: rgba(10,12,24,.78); box-shadow: inset 0 0 0 1px rgba(242,215,150,.35); backdrop-filter: blur(6px); opacity: 0; transition: opacity .25s, transform .25s; }
+.lang-sw:hover .lang-tip, .lang-sw:focus-visible .lang-tip { opacity: 1; transform: translate(0, -50%); }
+body.mode-guide .toc { bottom: 72px; }
+.sm:not([hidden]) ~ .lang-sw { visibility: hidden; }
+@media (max-width: 700px) { .lang-sw { left: 12px; bottom: 12px; width: 34px; height: 34px; } }
+@media (hover: none) { .lang-tip { display: none; } }

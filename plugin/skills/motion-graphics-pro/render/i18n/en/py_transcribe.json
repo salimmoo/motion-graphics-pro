@@ -1,0 +1,6 @@
+{
+ "mgp transcription (faster-whisper, word timing); one JSON line on stdout": "mgp transcription (faster-whisper, word timing); one JSON line on stdout",
+ "CTranslate2 compute type (int8, float16, ...)": "CTranslate2 compute type (int8, float16, ...)",
+ "model {} ready ({} s)": "model {} ready ({} s)",
+ "{} words, language {} ({}), {} s": "{} words, language {} ({}), {} s"
+}

@@ -1,0 +1,161 @@
+{
+ "id": "data/ring",
+ "name": "Ring",
+ "name_id": "Cincin Progres",
+ "category": "data",
+ "description": {
+  "id": "Cincin progres yang terisi ke persentase tertentu sementara angka di tengah menghitung serempak. Mode konik untuk cincin tebal berisi sudut, mode busur untuk pengukur tipis yang tergambar dengan titik di ujungnya.",
+  "en": "A progress ring that fills to a percentage while the centre number counts in sync. Conic mode for a thick angular fill, arc mode for a thin gauge drawing on with a leading dot."
+ },
+ "tags": [
+  "data",
+  "progres",
+  "persen",
+  "donat",
+  "gauge",
+  "cincin",
+  "ring"
+ ],
+ "props": {
+  "mode": {
+   "default": "conic",
+   "type": "enum",
+   "options": [
+    "conic",
+    "arc"
+   ],
+   "option_aliases": {
+    "konik": "conic",
+    "busur": "arc"
+   }
+  },
+  "value": {
+   "default": 72,
+   "type": "number",
+   "aliases": [
+    "nilai"
+   ]
+  },
+  "max": {
+   "default": 100,
+   "type": "number",
+   "aliases": [
+    "maks"
+   ]
+  },
+  "suffix": {
+   "default": "%",
+   "type": "text",
+   "aliases": [
+    "akhiran"
+   ]
+  },
+  "decimals": {
+   "default": 0,
+   "type": "number",
+   "aliases": [
+    "desimal"
+   ]
+  },
+  "label": {
+   "default": "kuota bulan ini terpakai",
+   "type": "text"
+  },
+  "fill_duration": {
+   "default": 2,
+   "type": "number",
+   "hint": "detik",
+   "aliases": [
+    "durasi_isi"
+   ]
+  },
+  "ease": {
+   "default": "power3.inOut",
+   "type": "ease"
+  },
+  "size": {
+   "default": 560,
+   "type": "number",
+   "hint": "Diameter (px pada 1080)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "thickness": {
+   "default": 0,
+   "type": "number",
+   "hint": "px; 0 = otomatis",
+   "aliases": [
+    "ketebalan"
+   ]
+  },
+  "color": {
+   "default": "#4ade80",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "end_color": {
+   "default": "#22d3ee",
+   "type": "color",
+   "hint": "Warna ujung gradien (mode konik)",
+   "aliases": [
+    "warna_ujung"
+   ]
+  },
+  "track_color": {
+   "default": "rgba(255,255,255,0.1)",
+   "type": "color",
+   "aliases": [
+    "warna_trek"
+   ]
+  },
+  "text_color": {
+   "default": "#f5f3ee",
+   "type": "color",
+   "aliases": [
+    "warna_teks"
+   ]
+  },
+  "font": {
+   "default": "Inter:wght@500;600;800",
+   "type": "font"
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "%",
+   "aliases": [
+    "posisi_y"
+   ]
+  }
+ },
+ "duration": 4,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "data/cincin",
+  "conic-progress-ring",
+  "mk-usage-arc"
+ ],
+ "example": {
+  "bg": "dark",
+  "font": [
+   "Inter:wght@500;600;800"
+  ]
+ }
+}

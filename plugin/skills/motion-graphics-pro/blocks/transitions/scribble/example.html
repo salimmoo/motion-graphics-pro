@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="id" data-block-preview>
+<head>
+<meta charset="utf-8">
+<meta name="mgp:size" content="1920x1080">
+<title>Scribble · block example transitions/scribble</title>
+<!-- Built by blocks/tools/build.py from block.html + block.json. Animation: mgp.motion (motion-graphics/lib/motion), GSAP-compatible API. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=block">
+<script src="../../../../motion-graphics/lib/motion/motion.js"></script>
+<script src="../../_core/block-core.js"></script>
+<style>
+html,body{margin:0;background:#000}
+#stage{position:relative;width:1920px;height:1080px;overflow:hidden;--s:1;font-family:"Inter",system-ui,sans-serif}
+
+.adegan{position:absolute;inset:0;overflow:hidden}
+.ad-judul{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font:900 calc(var(--s)*150px)/1 "Inter",system-ui,sans-serif;letter-spacing:-.02em}
+.ad-sub{position:absolute;left:0;right:0;top:calc(50% + var(--s)*110px);text-align:center;font:500 calc(var(--s)*40px)/1.2 "Inter",system-ui,sans-serif;opacity:.75;letter-spacing:.2em;text-transform:uppercase}
+.ad-a{background:radial-gradient(120% 90% at 30% 20%,#ffb347 0%,#e8553d 45%,#5a1f3a 100%);color:#fff7ea}
+.ad-b{background:radial-gradient(120% 90% at 70% 30%,#7ee0d6 0%,#2d6cdf 50%,#10233f 100%);color:#f2fbff}
+.ad-gelap{background:radial-gradient(110% 80% at 50% 35%,#2b2f45 0%,#12131c 70%);color:#f5f3ee}
+.ad-terang{background:linear-gradient(160deg,#f7f3ea 0%,#e9e2d3 100%);color:#1d1b18}
+.ad-kertas{background:#efe6d2;color:#2a2420}
+.ad-kertas::after{content:"";position:absolute;inset:0;opacity:.35;background-image:radial-gradient(rgba(90,60,30,.25) 1px,transparent 1.4px);background-size:7px 7px}
+.ad-foto{background:linear-gradient(180deg,#8fc3e8 0%,#f6d7b0 58%,#d98c5f 59%,#7a4b3a 100%)}
+.ad-foto .mth{position:absolute;width:calc(var(--s)*260px);height:calc(var(--s)*260px);border-radius:50%;left:62%;top:22%;background:radial-gradient(circle,#fff6d8 0%,#ffd27a 60%,rgba(255,210,122,0) 72%)}
+.ad-foto .bk1{position:absolute;left:-10%;right:-10%;bottom:28%;height:30%;background:#5f7f6a;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .bk2{position:absolute;left:30%;right:-30%;bottom:20%;height:34%;background:#3f5f52;border-radius:50% 50% 0 0/100% 100% 0 0}
+.ad-foto .tanah{position:absolute;left:0;right:0;bottom:0;height:24%;background:linear-gradient(180deg,#2f463d,#1f2e29)}
+.ad-foto .sosok{position:absolute;left:40%;bottom:18%;width:calc(var(--s)*120px);height:calc(var(--s)*330px);background:#18201d;border-radius:calc(var(--s)*60px) calc(var(--s)*60px) calc(var(--s)*14px) calc(var(--s)*14px)}
+.ad-foto .sosok::before{content:"";position:absolute;left:18%;top:-26%;width:64%;height:26%;border-radius:50%;background:#18201d}
+.ad-ui{background:#eef1f6;color:#1b2333;font-family:"Inter",system-ui,sans-serif}
+.ad-ui .bar{position:absolute;left:0;right:0;top:0;height:7%;background:#fff;border-bottom:1px solid #d9dee8}
+.ad-ui .side{position:absolute;left:0;top:7%;bottom:0;width:18%;background:#f7f8fb;border-right:1px solid #d9dee8}
+.ad-ui .kartu{position:absolute;background:#fff;border-radius:calc(var(--s)*18px);box-shadow:0 calc(var(--s)*6px) calc(var(--s)*24px) rgba(20,30,60,.08)}
+.ad-ui .tombol{position:absolute;background:#2d6cdf;color:#fff;border-radius:calc(var(--s)*12px);font:600 calc(var(--s)*30px)/1 "Inter",sans-serif;display:flex;align-items:center;justify-content:center}
+
+</style>
+</head>
+<body>
+<div id="stage" data-composition-id="example" data-width="1920" data-height="1080" data-duration="3.6">
+<div id="adegan-a" class="adegan ad-a"><div class="ad-judul">ADEGAN A</div><div class="ad-sub">sebelum transisi</div></div>
+<div id="adegan-b" class="adegan ad-b"><div class="ad-judul">ADEGAN B</div><div class="ad-sub">sesudah transisi</div></div>
+<!-- Block transitions/scribble · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="blk-scribble" data-block="transitions/scribble" data-start="1" data-duration="2.4" data-track-index="20" class="blk blk-transitions-scribble">
+<script type="application/json" data-block-props>
+{"from": "#adegan-a", "to": "#adegan-b", "color": "#1e2b4a", "color_2": "#2b3d66", "ribbon": 5, "thickness": 120, "roughness": 1, "seed": 4}
+</script>
+</div>
+<style>
+.blk-transitions-scribble{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.blk-transitions-scribble svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible}
+</style>
+<script>
+BLOCK.mount("blk-scribble", function (k) {
+  var P = k.P, tl = k.tl, D = k.dur, W = k.w, H = k.h, s = k.s, R = k.random, A = BLOCK.find(P.from), Bk = BLOCK.find(P.to);
+  var n = Math.max(1, Math.round(+P.ribbon || 5)), sw = (+P.thickness || 120) * s, kas = P.roughness == null ? 1 : +P.roughness, id = k.id + "-c";
+  var sv = BLOCK.svg("svg", { viewBox: "0 0 " + W + " " + H, preserveAspectRatio: "none" }, k.root);
+  var f = BLOCK.svg("filter", { id: id, x: "-5%", y: "-5%", width: "110%", height: "110%" }, BLOCK.svg("defs", null, sv));
+  // tepi spidol yang tidak rata: turbulensi kecil menggeser goresan
+  BLOCK.svg("feTurbulence", { type: "fractalNoise", baseFrequency: (0.04 / Math.max(0.3, s)).toFixed(4), numOctaves: 2, seed: Math.floor(R() * 99), result: "n" }, f);
+  BLOCK.svg("feDisplacementMap", { in: "SourceGraphic", in2: "n", scale: (10 * s * kas).toFixed(1), xChannelSelector: "R", yChannelSelector: "G" }, f);
+  var gr = BLOCK.svg("g", { filter: "url(#" + id + ")" }, sv);
+  var ganjal = BLOCK.svg("rect", { x: -10, y: -10, width: W + 20, height: H + 20, fill: P.color }, gr);
+  var tm = D * 0.47, tb = tm - D * 0.06, tc = tm + D * 0.06, pita = [];
+  var hb = H / n, dx = sw * 0.62, amp = hb / 2 + sw * 0.35;
+  for (var b = 0; b < n; b++) {
+    var y0 = (b + 0.5) * hb, ke = b % 2 ? -1 : 1, pts = [], m = Math.ceil((W + 2 * sw) / dx) + 1;
+    for (var i = 0; i <= m; i++) {
+      var x = -sw + i * dx * (1 + (R() - 0.5) * 0.25 * kas);
+      pts.push([ke > 0 ? x : W - x, y0 + (i % 2 ? amp : -amp) * (0.88 + R() * 0.24) + (R() - 0.5) * sw * 0.2 * kas]);
+    }
+    // goresan halus: kurva kuadrat melewati titik tengah antar titik zigzag
+    var d = "M" + pts[0][0].toFixed(1) + " " + pts[0][1].toFixed(1);
+    for (var j = 1; j < pts.length - 1; j++) d += "Q" + pts[j][0].toFixed(1) + " " + pts[j][1].toFixed(1) + " " + ((pts[j][0] + pts[j + 1][0]) / 2).toFixed(1) + " " + ((pts[j][1] + pts[j + 1][1]) / 2).toFixed(1);
+    var p = BLOCK.svg("path", { d: d, fill: "none", stroke: b % 2 ? P.color_2 : P.color, "stroke-width": (sw * (0.95 + R() * 0.15)).toFixed(1), "stroke-linecap": "round", "stroke-linejoin": "round" }, gr);
+    var L = Math.ceil(BLOCK.prepareStroke(p));
+    pita.push({ p: p, L: L });
+  }
+  BLOCK.initial(tl, ganjal, { autoAlpha: 0 });
+  pita.forEach(function (q, b) {
+    // menumpuk: pita digores bergiliran, lalu dihapus dari pangkalnya dengan urutan sama
+    var dIn = tb * 0.62, s0 = b * (tb - dIn) / Math.max(1, n - 1);
+    tl.fromTo(q.p, { strokeDashoffset: q.L }, { strokeDashoffset: 0, duration: dIn, ease: "power1.inOut" }, s0);
+    var dOut = (D - tc) * 0.62, s1 = tc + b * (D - tc - dOut - 0.02) / Math.max(1, n - 1);
+    tl.to(q.p, { strokeDashoffset: -q.L, duration: dOut, ease: "power1.inOut" }, s1);
+  });
+  // ganjal padat menjamin layar tertutup penuh saat potong
+  tl.set(ganjal, { autoAlpha: 1 }, tb).set(ganjal, { autoAlpha: 0 }, tc);
+  if (A) BLOCK.initial(tl, A, { autoAlpha: 1 }).set(A, { autoAlpha: 0 }, tm);
+  if (Bk) BLOCK.initial(tl, Bk, { autoAlpha: 0 }).set(Bk, { autoAlpha: 1 }, tm);
+});
+</script>
+</div>
+<script>
+  window.__duration = 3.6;
+  window.__timelines = window.__timelines || {};
+  window.__timelines["example"] = gsap.timeline({ paused: true }).set({}, {}, 3.6);
+</script>
+</body>
+</html>

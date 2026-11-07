@@ -1,0 +1,35 @@
+<!-- Block subtitles/karaoke-pill · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="subtitles/karaoke-pill" data-start="0" data-duration="5" data-track-index="30" class="blk blk-subtitles-karaoke-pill">
+<script type="application/json" data-block-props>
+{"text": "Hari ini kita belajar menata waktu dengan lebih tenang", "words": [], "kps": 2.6, "max_words": 3, "font": "Poppins:wght@700;800", "size": 62, "color": "#ffffff", "bottom": 14, "uppercase": false, "active_color": "#ffd84a", "dim_color": "#8d93a1", "pill_bg": "#15171d", "pill_opacity": 0.88, "active_scale": 1.1}
+</script>
+<div class="blk-cap"></div>
+</div>
+<style>
+.blk-subtitles-karaoke-pill{position:absolute;inset:0;pointer-events:none}
+.blk-subtitles-karaoke-pill .blk-cap{position:absolute;left:5%;right:5%;text-align:center}
+.blk-subtitles-karaoke-pill .blk-hal{position:absolute;left:0;right:0;bottom:0;text-align:center}
+.blk-subtitles-karaoke-pill .blk-pil{display:inline-block;line-height:1.3;border-radius:999px;white-space:normal}
+.blk-subtitles-karaoke-pill .blk-w{display:inline-block;margin:0 .17em}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, cap = k.root.querySelector(".blk-cap");
+  cap.style.cssText += ";bottom:" + P.bottom + "%;font-family:" + BLOCK.family(P.font) + ";font-weight:800;font-size:" +
+    Math.round(P.size * s) + "px" + (P.uppercase ? ";text-transform:uppercase" : "");
+  BLOCK.pages(BLOCK.words(P), P.max_words).forEach(function (pg) {
+    var h = BLOCK.el("div", { class: "blk-hal" }, cap);
+    var pil = BLOCK.el("div", { class: "blk-pil", style: "padding:" + Math.round(14 * s) + "px " + Math.round(34 * s) + "px;background:" +
+      BLOCK.rgba(P.pill_bg, P.pill_opacity) + ";box-shadow:0 " + Math.round(10 * s) + "px " + Math.round(30 * s) + "px rgba(0,0,0,.35)" }, h);
+    BLOCK.initial(tl, h, { autoAlpha: 0 }).set(h, { autoAlpha: 1 }, pg.mulai).set(h, { autoAlpha: 0 }, pg.akhir);
+    tl.fromTo(pil, { scale: 0.8, y: 16 * s }, { scale: 1, y: 0, duration: 0.34, ease: "back.out(2.4)" }, pg.mulai);
+    pg.kata.forEach(function (w) {
+      var e = BLOCK.el("span", { class: "blk-w" }, pil);
+      e.textContent = String(w.teks).replace(/\*/g, "");
+      // redup -> aktif (membesar sedikit) -> warna terucap
+      tl.fromTo(e, { color: P.dim_color, scale: 1 }, { color: P.active_color, scale: P.active_scale, duration: 0.1, ease: "power2.out" }, w.mulai)
+        .to(e, { color: P.color, scale: 1, duration: 0.2, ease: "power2.inOut" }, Math.max(w.mulai + 0.11, w.akhir - 0.04));
+    });
+  });
+}, { font: true });
+</script>

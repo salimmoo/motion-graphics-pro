@@ -1,0 +1,39 @@
+<!-- Block subtitles/gradient · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="subtitles/gradient" data-start="0" data-duration="5" data-track-index="30" class="blk blk-subtitles-gradient">
+<script type="application/json" data-block-props>
+{"text": "Warna baru untuk cerita yang lebih berani", "words": [], "kps": 2.0, "max_words": 3, "font": "Poppins:wght@800;900", "size": 94, "color": "#ffffff", "bottom": 16, "uppercase": true, "color_1": "#ff5f6d", "color_2": "#ffc371", "color_3": "#7b5cff", "angle": 100, "flow": 30}
+</script>
+<div class="blk-cap"></div>
+</div>
+<style>
+.blk-subtitles-gradient{position:absolute;inset:0;pointer-events:none}
+.blk-subtitles-gradient .blk-cap{position:absolute;left:5%;right:5%;text-align:center;line-height:1.1}
+.blk-subtitles-gradient .blk-hal{position:absolute;left:0;right:0;bottom:0}
+.blk-subtitles-gradient .blk-w{display:inline-block;margin:0 .1em;padding:0 .04em;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, cap = k.root.querySelector(".blk-cap");
+  cap.style.cssText += ";bottom:" + P.bottom + "%;color:" + P.color + ";font-family:" + BLOCK.family(P.font) + ";font-weight:900;font-size:" +
+    Math.round(P.size * s) + "px" + (P.uppercase ? ";text-transform:uppercase" : "");
+  var grad = "linear-gradient(" + P.angle + "deg," + P.color_1 + "," + P.color_2 + "," + P.color_3 + "," + P.color_1 + ")";
+  var semua = [];
+  BLOCK.pages(BLOCK.words(P), P.max_words).forEach(function (pg) {
+    var h = BLOCK.el("div", { class: "blk-hal", style: "filter:drop-shadow(0 " + Math.round(6 * s) + "px " + Math.round(14 * s) + "px rgba(0,0,0,.4))" }, cap);
+    var es = pg.kata.map(function (w) {
+      var e = BLOCK.el("span", { class: "blk-w", style: "background-image:" + grad }, h);
+      e.textContent = String(w.teks).replace(/\*/g, ""); return e;
+    });
+    // gradien kontinu satu halaman: ukuran = 2x lebar halaman, digeser per posisi kata (diukur sebelum tween)
+    var lebar = Math.max(1, h.offsetWidth);
+    es.forEach(function (e) { e.style.backgroundSize = (lebar * 2) + "px 100%"; semua.push({ e: e, x: -e.offsetLeft, L: lebar * 2 }); });
+    BLOCK.initial(tl, h, { autoAlpha: 0 }).set(h, { autoAlpha: 1 }, pg.mulai).set(h, { autoAlpha: 0 }, pg.akhir);
+    pg.kata.forEach(function (w, i) {
+      tl.fromTo(es[i], { opacity: 0, y: 70 * s, scale: 0.3, rotation: -8 }, { opacity: 1, y: 0, scale: 1, rotation: 0, duration: 0.9, ease: "elastic.out(1,0.45)" }, w.mulai - 0.04);
+    });
+  });
+  BLOCK.onTime(tl, function (t) {
+    semua.forEach(function (o) { o.e.style.backgroundPosition = ((o.x - t * P.flow * s * 4) % o.L).toFixed(1) + "px 0"; });
+  }, k.dur);
+}, { font: true });
+</script>

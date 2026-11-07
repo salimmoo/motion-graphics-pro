@@ -1,0 +1,106 @@
+{
+ "id": "transitions/zoom-through",
+ "name": "Zoom Through",
+ "name_id": "Zoom Tembus Kartu",
+ "category": "transitions",
+ "description": {
+  "id": "Sebuah kartu kecil berisi adegan baru muncul di atas adegan lama, lalu kamera mendorong masuk menembus kartu itu sampai adegan baru memenuhi layar.",
+  "en": "A small card holding scene B pops over scene A, then the camera pushes through the card until B fills the frame."
+ },
+ "tags": [
+  "transisi",
+  "zoom",
+  "kartu",
+  "push-in",
+  "portal",
+  "transitions",
+  "through"
+ ],
+ "props": {
+  "from": {
+   "default": "#adegan-a",
+   "type": "selector",
+   "hint": "Elemen adegan lama",
+   "aliases": [
+    "dari"
+   ]
+  },
+  "to": {
+   "default": "#adegan-b",
+   "type": "selector",
+   "hint": "Elemen adegan baru",
+   "aliases": [
+    "ke"
+   ]
+  },
+  "position_x": {
+   "default": 50,
+   "type": "number",
+   "hint": "Titik fokus kartu X (%)",
+   "aliases": [
+    "posisi_x"
+   ]
+  },
+  "position_y": {
+   "default": 50,
+   "type": "number",
+   "hint": "Titik fokus kartu Y (%)",
+   "aliases": [
+    "posisi_y"
+   ]
+  },
+  "size": {
+   "default": 0.3,
+   "type": "number",
+   "hint": "Ukuran kartu (fraksi layar)",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "radius": {
+   "default": 28,
+   "type": "number",
+   "hint": "Radius sudut kartu (px pada 1080)",
+   "aliases": [
+    "sudut"
+   ]
+  },
+  "frame": {
+   "default": "#ffffff",
+   "type": "color",
+   "hint": "Warna bingkai tipis kartu",
+   "aliases": [
+    "bingkai"
+   ]
+  },
+  "appear": {
+   "default": 0.25,
+   "type": "number",
+   "hint": "Porsi waktu kartu muncul sebelum dorong (fraksi)",
+   "aliases": [
+    "muncul"
+   ]
+  },
+  "ease": {
+   "default": "power2.inOut",
+   "type": "ease",
+   "hint": "Easing dorongan kamera"
+  }
+ },
+ "duration": 1.5,
+ "aspect": [
+  "16:9",
+  "9:16",
+  "1:1"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "transisi/zoom-tembus",
+  "zoom-through-transition"
+ ],
+ "example": {
+  "bg": "two-scenes",
+  "start": 0.75,
+  "duration": 3
+ }
+}

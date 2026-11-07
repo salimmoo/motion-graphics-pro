@@ -1,0 +1,114 @@
+{
+ "id": "subtitles/highlight",
+ "name": "Highlight",
+ "name_id": "Sorot Kata",
+ "category": "subtitles",
+ "description": {
+  "id": "Subtitle gaya TikTok: kotak warna menyapu di belakang setiap kata saat diucapkan. Waktu dari transkrip (kata berwaktu) atau dihitung dari teks.",
+  "en": "TikTok-style captions: a colour box sweeps behind each word as it is spoken. Timing from a word-level transcript or estimated from text."
+ },
+ "tags": [
+  "subtitle",
+  "caption",
+  "karaoke",
+  "highlight",
+  "tiktok",
+  "sosial",
+  "subtitles"
+ ],
+ "props": {
+  "text": {
+   "default": "Setiap proses tercatat dan bisa dilacak sampai ke sumbernya",
+   "type": "text",
+   "aliases": [
+    "teks"
+   ]
+  },
+  "words": {
+   "default": [],
+   "type": "timed-words",
+   "hint": "[{teks, mulai, akhir}] dari transkrip; kosong = dihitung dari teks",
+   "aliases": [
+    "kata"
+   ]
+  },
+  "kps": {
+   "default": 2.6,
+   "type": "number",
+   "hint": "Kata per detik bila tanpa transkrip"
+  },
+  "max_words": {
+   "default": 4,
+   "type": "number",
+   "aliases": [
+    "maks_kata"
+   ]
+  },
+  "color": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "warna"
+   ]
+  },
+  "highlight": {
+   "default": "#e8343a",
+   "type": "color",
+   "aliases": [
+    "sorot"
+   ]
+  },
+  "highlight_text": {
+   "default": "#ffffff",
+   "type": "color",
+   "aliases": [
+    "teks_sorot"
+   ]
+  },
+  "font": {
+   "default": "Montserrat:wght@800;900",
+   "type": "font"
+  },
+  "size": {
+   "default": 74,
+   "type": "number",
+   "aliases": [
+    "ukuran"
+   ]
+  },
+  "bottom": {
+   "default": 16,
+   "type": "number",
+   "hint": "Jarak dari bawah (%)",
+   "aliases": [
+    "bawah"
+   ]
+  },
+  "uppercase": {
+   "default": true,
+   "type": "boolean",
+   "aliases": [
+    "huruf_besar"
+   ]
+  }
+ },
+ "duration": 5,
+ "aspect": [
+  "9:16",
+  "16:9",
+  "1:1",
+  "4:5"
+ ],
+ "dependencies": [],
+ "aliases": [
+  "subtitle/sorot",
+  "caption-highlight"
+ ],
+ "example": {
+  "bg": "photo",
+  "aspect": "9:16",
+  "font": [
+   "Montserrat:wght@800;900"
+  ]
+ }
+}

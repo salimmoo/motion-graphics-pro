@@ -1,0 +1,49 @@
+<!-- Block subtitles/decode · Motion Graphics Pro. Props: see block.json. -->
+<div data-composition-id="__ID__" data-block="subtitles/decode" data-start="0" data-duration="5" data-track-index="30" class="blk blk-subtitles-decode">
+<script type="application/json" data-block-props>
+{"text": "Data terenkripsi kini terbuka untuk dibaca", "words": [], "kps": 1.8, "max_words": 3, "font": "JetBrains Mono:wght@700;800", "size": 66, "color": "#e9fff0", "bottom": 16, "uppercase": true, "accent_color": "#3dff8f", "character": "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#$%&@*+=<>/", "scramble_duration": 0.4, "fps": 18}
+</script>
+<div class="blk-cap"></div>
+</div>
+<style>
+.blk-subtitles-decode{position:absolute;inset:0;pointer-events:none}
+.blk-subtitles-decode .blk-cap{position:absolute;left:5%;right:5%;text-align:center;line-height:1.25}
+.blk-subtitles-decode .blk-hal{position:absolute;left:0;right:0;bottom:0}
+.blk-subtitles-decode .blk-w{display:inline-block;margin:0 .3em;white-space:nowrap}
+.blk-subtitles-decode .blk-c{display:inline-block;text-align:center}
+</style>
+<script>
+BLOCK.mount("__ID__", function (k) {
+  var P = k.P, tl = k.tl, s = k.s, cap = k.root.querySelector(".blk-cap"), C = Array.from(P.character || "#");
+  cap.style.cssText += ";bottom:" + P.bottom + "%;color:" + P.color + ";font-family:" + BLOCK.family(P.font, "Consolas, monospace") + ";font-weight:800;font-size:" +
+    Math.round(P.size * s) + "px;text-shadow:0 0 " + Math.round(14 * s) + "px " + BLOCK.rgba(P.accent_color, 0.45) + (P.uppercase ? ";text-transform:uppercase" : "");
+  var huruf = [], hs = function (a, b, c) { var x = Math.imul(a * 73856093 ^ b * 19349663 ^ c * 83492791, 2654435761); return ((x ^ (x >>> 15)) >>> 0) % C.length; };
+  BLOCK.pages(BLOCK.words(P), P.max_words).forEach(function (pg) {
+    var h = BLOCK.el("div", { class: "blk-hal" }, cap);
+    BLOCK.initial(tl, h, { autoAlpha: 0 }).set(h, { autoAlpha: 1 }, pg.mulai).set(h, { autoAlpha: 0 }, pg.akhir);
+    tl.fromTo(h, { y: 10 * s }, { y: 0, duration: 0.3, ease: "power2.out" }, pg.mulai);
+    pg.kata.forEach(function (w) {
+      var e = BLOCK.el("span", { class: "blk-w" }, h), ch = Array.from(String(w.teks).replace(/\*/g, ""));
+      ch.forEach(function (c, ci) {
+        var el = BLOCK.el("span", { class: "blk-c", style: "width:1ch" }, e);
+        huruf.push({ el: el, asli: P.uppercase ? c.toUpperCase() : c, t0: w.mulai, t1: w.mulai + 0.06 + (ci + 1) / ch.length * P.scramble_duration, id: huruf.length, st: "" });
+      });
+    });
+  });
+  // acak -> terkunci kiri ke kanan; karakter acak dari hash(frame, huruf) sehingga deterministik
+  BLOCK.onTime(tl, function (t) {
+    var f = Math.floor(t * P.fps + 1e-6);
+    huruf.forEach(function (o) {
+      var st, tx;
+      if (t < o.t0) { st = "x"; tx = o.asli; }
+      else if (t < o.t1 && /\S/.test(o.asli) && /[\p{L}\p{N}]/u.test(o.asli)) { st = "a" + f; tx = C[hs(f, o.id, 7)]; }
+      else { st = "k"; tx = o.asli; }
+      if (st === o.st) return;
+      o.el.textContent = tx;
+      o.el.style.opacity = st === "x" ? "0" : "1";
+      o.el.style.color = st.charAt(0) === "a" ? P.accent_color : "";
+      o.st = st;
+    });
+  }, k.dur);
+}, { font: true });
+</script>

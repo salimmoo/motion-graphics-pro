@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<title>MGP causalTransitions · 9 types</title>
+<style>
+html,body{margin:0;background:#0e1116}
+#stage{position:relative;width:1280px;height:720px;overflow:hidden;background:#0b0e14}
+#stage canvas{position:absolute}
+#stage .lb{position:absolute;font:600 12px/1 system-ui,Segoe UI,sans-serif;letter-spacing:.04em;color:#f4ecd8;background:rgba(9,12,26,.72);padding:5px 8px;border-radius:3px;z-index:2}
+#stage .lb small{font-weight:400;opacity:.75;margin-left:6px}
+</style>
+<script src="../motion/motion.js"></script>
+<script src="../core/mgp-core.js"></script>
+<script src="../causal-transitions.js"></script>
+</head>
+<body>
+<div id="stage" data-composition-id="main" data-start="0" data-width="1280" data-height="720"></div>
+<script>
+// Procedural paper scenes (drawn in 1280x720 units) and one cell per transition type.
+const C = MGP.core;
+const SKY = { day: [["#2C67B0", 0], ["#78ACDC", .33], ["#D9E8F2", .61]], dusk: [["#1E2152", 0], ["#6B4483", .28], ["#D2707A", .48], ["#F2AE6A", .62], ["#F7D39A", 1]], night: [["#060A1A", 0], ["#12204A", .42], ["#2C3D66", .7], ["#3E4C70", 1]] };
+const TONE = { day: "none", dusk: "brightness(.74) saturate(.9) sepia(.16)", night: "brightness(.42) saturate(.5) hue-rotate(10deg)" };
+function shadow(g, b = 10, y = 6, a = .32) { g.shadowColor = `rgba(45,28,12,${a})`; g.shadowBlur = b; g.shadowOffsetY = y; }
+function sun(g, x, y, r, col = "#F2A33A") { g.save(); shadow(g, 8, 4, .25); g.fillStyle = "#F0C45A"; for (let i = 0; i < 10; i++) { g.save(); g.translate(x, y); g.rotate(i / 10 * C.TAU); g.fillRect(r + 8, -4, 22, 8); g.restore(); } g.beginPath(); g.arc(x, y, r, 0, C.TAU); g.fillStyle = col; g.fill(); g.restore(); }
+function cloud(g, x, y, w) { g.save(); shadow(g, 6, 4, .2); g.fillStyle = "#EFE6D2"; g.beginPath(); [[0, 0, .28], [.25, -.18, .3], [.55, -.1, .26], [.78, .02, .2]].forEach(([a, b, r]) => { g.moveTo(x + a * w + r * w, y + b * w); g.arc(x + a * w, y + b * w, r * w, 0, C.TAU); }); g.rect(x - .1 * w, y, w, .18 * w); g.fill(); g.restore(); }
+function hills(g, base, col, amp, f, ph) { g.save(); shadow(g, 10, -3, .22); g.beginPath(); g.moveTo(-20, 760); for (let x = -20; x <= 1300; x += 16) g.lineTo(x, base - amp * (0.6 + 0.4 * Math.sin(x * f + ph)) - amp * .25 * Math.sin(x * f * 2.7 + ph * 2)); g.lineTo(1300, 760); g.closePath(); g.fillStyle = col; g.fill(); g.restore(); }
+function house(g, cx, b, w) { g.save(); shadow(g); const h = w * .62; g.fillStyle = "#EDE3CC"; g.fillRect(cx - w / 2, b - h, w, h); g.beginPath(); g.moveTo(cx - w * .6, b - h); g.lineTo(cx, b - h - w * .42); g.lineTo(cx + w * .6, b - h); g.closePath(); g.fillStyle = "#B9523F"; g.fill(); g.shadowColor = "transparent"; g.fillStyle = "#3E6FA8"; g.fillRect(cx - w * .32, b - h * .62, w * .16, h * .62); g.fillStyle = "#F6E7B8"; g.fillRect(cx + w * .08, b - h * .7, w * .2, h * .26); g.fillStyle = "#3E6FA8"; g.fillRect(cx + w * .29, b - h * .7, w * .05, h * .26); g.restore(); }
+function tree(g, cx, b, s) { g.save(); shadow(g); g.fillStyle = "#7a5a3a"; g.fillRect(cx - 9 * s, b - 90 * s, 18 * s, 90 * s); g.fillStyle = "#5E8C4A"; g.beginPath(); [[0, -130, 55], [-40, -105, 40], [40, -108, 42], [0, -170, 38]].forEach(([x, y, r]) => { g.moveTo(cx + x * s + r * s, b + y * s); g.arc(cx + x * s, b + y * s, r * s, 0, C.TAU); }); g.fill(); g.restore(); }
+function grass(g, cx, b, w, seed) { const r = C.rng(seed); g.save(); shadow(g, 8, 4, .25); for (let i = 0; i < 26; i++) { const x = cx - w / 2 + r() * w, h = 50 + r() * 80; g.beginPath(); g.moveTo(x - 7, b); g.quadraticCurveTo(x + (r() - .5) * 30, b - h * .6, x + (r() - .5) * 26, b - h); g.quadraticCurveTo(x + 4, b - h * .5, x + 7, b); g.fillStyle = r() > .5 ? "#6E9E4E" : "#55843F"; g.fill(); } g.shadowColor = "transparent"; for (let i = 0; i < 9; i++) { g.beginPath(); g.arc(cx - w / 2 + r() * w, b - 30 - r() * 70, 6, 0, C.TAU); g.fillStyle = "#F2C14E"; g.fill(); } g.restore(); }
+function sea(g, y) { g.save(); shadow(g, 6, -3, .25); const gr = g.createLinearGradient(0, y, 0, 760); gr.addColorStop(0, "#4C8CC2"); gr.addColorStop(.6, "#2D6296"); gr.addColorStop(1, "#244F7C"); g.fillStyle = gr; g.fillRect(-40, y, 1360, 400); g.restore(); g.fillStyle = "rgba(255,255,255,.18)"; g.beginPath(); for (let x = 0; x <= 1280; x += 40) g.lineTo(x, y + 80 + Math.sin(x * .05) * 6); g.lineTo(1280, y + 96); for (let x = 1280; x >= 0; x -= 40) g.lineTo(x, y + 96 + Math.sin(x * .05 + 1) * 4); g.fill(); }
+function boat(g, cx, b, w) { g.save(); shadow(g, 10, 6, .32); const h = w * .3; g.beginPath(); g.moveTo(cx - w * .5, b - h); g.lineTo(cx + w * .52, b - h * 1.25); g.quadraticCurveTo(cx + w * .38, b, cx + w * .25, b); g.lineTo(cx - w * .36, b); g.quadraticCurveTo(cx - w * .46, b - h * .4, cx - w * .5, b - h); g.fillStyle = "#3E6FA8"; g.fill(); g.shadowColor = "transparent"; g.fillStyle = "#FBF6EA"; g.fillRect(cx - w * .48, b - h * 1.08, w * .98, h * .12); g.fillStyle = "#EDE3CC"; g.fillRect(cx - w * .08, b - h * 1.9, w * .22, h * .8); g.fillStyle = "#6b4a2b"; g.fillRect(cx - w * .26, b - h * 2.6, w * .02, h * 1.5); g.restore(); }
+function grain(g, t) { const r = C.rng(5); g.save(); g.globalAlpha = .08; for (let i = 0; i < 500; i++) { g.fillStyle = r() > .5 ? "#000" : "#fff"; g.fillRect(r() * 1280, r() * 720, 2, 2); } g.restore(); }
+function scene(kind, opt = {}) {
+  return (g, t, S) => {
+    g.scale(S.W / 1280, S.H / 720);
+    if (kind === "chapter") {
+      g.fillStyle = "#F3E8CF"; g.fillRect(0, 0, 1280, 720); g.strokeStyle = "#C9A24A"; g.lineWidth = 5; g.strokeRect(34, 34, 1212, 652); g.lineWidth = 1.5; g.strokeRect(22, 22, 1236, 676);
+      sun(g, 640, 140, 34); g.textAlign = "center"; g.fillStyle = "#9c7a3c"; g.font = "500 26px Georgia, serif"; g.fillText("B A B   2", 640, 256);
+      g.fillStyle = "#1C2B45"; g.font = "400 150px Georgia, serif"; g.fillText("Pelabuhan", 640, 420); g.fillStyle = "#B88A2E"; g.font = "italic 400 40px Georgia, serif"; g.fillText("tempat muatan berangkat", 640, 505);
+      const lg = g.createLinearGradient(470, 0, 810, 0); lg.addColorStop(0, "rgba(201,162,74,0)"); lg.addColorStop(.5, "#C9A24A"); lg.addColorStop(1, "rgba(201,162,74,0)"); g.fillStyle = lg; g.fillRect(470, 545, 340, 3); return;
+    }
+    const sky = kind === "dusk" ? "dusk" : kind === "night" ? "night" : "day";
+    const gr = g.createLinearGradient(0, 0, 0, 720); SKY[sky].forEach(([c, p]) => gr.addColorStop(p, c)); g.fillStyle = gr; g.fillRect(0, 0, 1280, 720);
+    if (kind === "close") { g.translate(640 - 430 * 1.9, 400 - 455 * 1.9); g.scale(1.9, 1.9); }
+    g.filter = TONE[sky];
+    const drift = Math.sin(t * .4) * 6;
+    if (sky === "night") { g.filter = "none"; g.beginPath(); g.arc(1010, 160, 40, 0, C.TAU); g.fillStyle = "#E8ECF4"; g.fill(); g.filter = TONE[sky]; }
+    else sun(g, sky === "dusk" ? 960 : kind === "harbor" ? 250 : 1040, sky === "dusk" ? 470 : 190, 50, sky === "dusk" ? "#F07A3A" : "#F2A33A");
+    cloud(g, 220 + drift, 150, 200); cloud(g, 800 - drift, 110, 130);
+    if (kind === "harbor" || kind === "shore") {
+      hills(g, 440, "#7F95AE", 70, .006, 1);
+      if (kind === "harbor") { sea(g, 392); if (!opt.hideBoat) boat(g, 700, 612, 380); grass(g, 80, 730, 300, 3); grass(g, 1200, 730, 260, 4); }
+      else { hills(g, 600, "#7FA05A", 50, .008, 2); house(g, 230, 568, 190); tree(g, 1100, 565, .9); if (!opt.hideBoat) boat(g, 700, 612, 380); hills(g, 760, "#5E8746", 40, .01, 4); grass(g, 1150, 760, 300, 7); }
+    } else {
+      const flip = kind === "village2";
+      hills(g, 470, "#8EA3B9", 70, .005, flip ? 3 : 0);
+      hills(g, 600, "#86AD62", 55, .007, flip ? 4 : 1);
+      if (flip) { tree(g, 250, 566, 1); tree(g, 480, 556, .75); house(g, 960, 570, 220); }
+      else { tree(g, 700, 565, 1); house(g, 430, 568, 250); }
+      hills(g, 760, "#5E8746", 45, .009, flip ? 5 : 2);
+      grass(g, 180, 760, 360, 1); grass(g, 1110, 760, 380, 2);
+      if (sky !== "day") { g.filter = "none"; g.globalCompositeOperation = "screen"; [[355, 495], [502, 495]].forEach(([x, y]) => { if (flip) return; const rg = g.createRadialGradient(x, y, 0, x, y, 45); rg.addColorStop(0, "rgba(255,214,120,.9)"); rg.addColorStop(.45, "rgba(255,214,120,.25)"); rg.addColorStop(1, "rgba(255,214,120,0)"); g.fillStyle = rg; g.fillRect(x - 45, y - 45, 90, 90); }); g.globalCompositeOperation = "source-over"; }
+    }
+    g.filter = "none"; grain(g, t);
+  };
+}
+const CELLS = [
+  ["wipe", "Ganti lokasi", "village", "harbor"], ["page", "Waktu berlalu", "village", "dusk"], ["shut", "Ganti bab", "village", "chapter"],
+  ["iris", "Fokus", "village", "close"], ["slide", "Kontinuitas", "village", "village2"], ["bridge", "Benda pindah set", "harbor", "shore"],
+  ["split", "Pemutusan makna", "village", "night"], ["cut", "Impact", "village", "harbor"], ["fade", "Crossfade", "village", "dusk"],
+];
+const stage = document.getElementById("stage"), CW = 420, CH = 232, D = 4;
+const cells = CELLS.map(([type, n, a, b], i) => {
+  const box = document.createElement("div"); const x = (i % 3) * (CW + 10), y = Math.floor(i / 3) * (CH + 12);
+  Object.assign(box.style, { position: "absolute", left: x + "px", top: y + "px", width: CW + "px", height: CH + "px" }); stage.appendChild(box);
+  const d = MGP.causalTransitions.TYPES[type].d, hide = type === "bridge" ? { hideBoat: true } : {};
+  const inst = MGP.causalTransitions.create(box, {
+    type, width: CW, height: CH, from: scene(a, hide), to: scene(b, hide), at: type === "cut" ? 1.9 : 2 - d / 2, after: D,
+    carry: type === "bridge" ? (g, t, u, S) => { g.scale(S.W / 1280, S.H / 720); boat(g, 700, 612, 380); } : null,
+  });
+  const lb = document.createElement("div"); lb.className = "lb"; lb.innerHTML = `${n}<small>${type} · ${d ? d.toFixed(2) + " s" : "0"}</small>`;
+  Object.assign(lb.style, { left: x + 8 + "px", top: y + 8 + "px" }); stage.appendChild(lb);
+  return inst;
+});
+const all = { duration: D, ready: Promise.resolve(), seek(t) { cells.forEach((c) => c.seek(t)); return all; }, timeline() { return C.timeline(all); } };
+C.expose(all);
+</script>
+</body>
+</html>
