@@ -1,7 +1,7 @@
 /**
  * MGP.paket \u2014 Paket Motion scene engine + registry (ported from the Paket Motion live previews).
  *
- * Renders any of the 104 Paket Motion packages (EXP-01 ... TRN-04) straight from its id, so a paket brief can be
+ * Renders any of the 105 Paket Motion packages (EXP-01 ... TRN-05) straight from its id, so a paket brief can be
  * previewed or rendered to video directly. Each package names a scene (fx.s) and a variant (fx.v); 76 scene
  * renderers live in scenes-a1 ... scenes-t. Every scene draws the WHOLE frame from t alone (an 8 s loop).
  *

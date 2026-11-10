@@ -15,6 +15,11 @@ pack the steps are run by `mgp image slice` (alpha sheet → one PNG per part + 
 `u2net` in `render/py/model-manifest.json` with sha256, CPU, ~0.6 GB); a venv with rembg made by hand (e.g. `~/vrb`)
 is registered with `mgp install cutout --adopt`. `mgp cutout` then finds it through `install.json` (no `--python`
 needed). The magenta key and `slice` despill the key colour along the edge by default (`--no-despill`; `references/image.md` 3.6 item 6).
+**White sheets and felt figures** (Sulam Kertas, `references/style.md` 17.5):
+- A kit sheet of paper or felt pieces on plain white is keyed with `mgp cutout in.png -o out.png --key white`. Only the near-white region that touches the image border becomes transparent, so cream paper and white thread inside a piece stay opaque. `--tolerance` sets the distance from white (default 22).
+- Felt or 3D-looking figures on a soft gradient backdrop are cut with `--model isnet-general-use`. U2-Net leaves pale blank faces semi-transparent and drops figures, which was proven on a felt character sheet (11-2026).
+- After either cut, run `mgp image slice`.
+
 Reference algorithm (proven):
 1. Background = median of the pixels 3 px in from all four edges; d = RGB distance to the background; d > tol (28) = piece.
 2. Open 3 x 3, close 5 x 5, flood fill from the corners; closed holes inside a piece are filled.

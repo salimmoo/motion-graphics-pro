@@ -1,5 +1,21 @@
 # Changelog
 
+## v2.5.0 (11-11-2026)
+
+### Gaya kertas baru
+- **Sulam Kertas** (`--style stitch`, alias `sulam`): relief kertas berlapis + sulaman (satin stitch, french knot) + tokoh flanel, wajah boleh polos.
+- **Lapis Kertas** (`--style layered`, alias `lapis`, `papercut`): diorama papercut berlapis dalam, cincin kertas konsentris, cocok untuk parallax dan pop-up.
+- **Diorama Kertas** (`--style diorama`, alias `papercraft`): maket karton lipat 3D, satu sudut tiga perempat, gerak 2.5D.
+- **Gulung Kertas** (`--style quilling`, alias `gulung`): pita kertas digulung.
+- Aturan produksi lengkap (lembar kit, prompt tokoh, potong, rakit 9:16, gerak, QC) di `references/style.md` 17.5-17.7, EN dan ID.
+
+### Potong latar
+- `mgp cutout --key white` (`py/cutout.py` mode `white`): lembar kit di atas putih polos; hanya putih yang menyambung ke tepi gambar yang dibuang, jadi kertas krem dan benang putih di dalam potongan tetap. `--tolerance` (bawaan 22).
+- Rujukan: tokoh flanel / berkesan 3D dipotong dengan `--model isnet-general-use` (u2net membuat wajah polos pucat jadi tembus); lembar dengan latar transparan dari pembuat gambar bisa langsung `mgp image slice`.
+
+### Paket motion
+- Paket baru **TRN-05 Sulam Kertas Kota Senja** (9:16, digambar penuh dengan kode): `lib/pack-scenes/scenes-s.js`, kategori TRN menjadi "piksel, origami & sulam", total 105 paket.
+
 ## v2.4.2 (08-11-2026)
 
 ### Dokumen

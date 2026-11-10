@@ -142,7 +142,7 @@ The same character drawn as ink-lined vector, pixel art (light, base and shadow 
 - v2.4, origami style: the new default `origamiStyle: "rigid"` (rigid folding: each part one paper strip with a continuous mountain crease down the middle, knees/elbows sharing mitre edges without gaps, every facet lit from one light direction, a paper backdrop without random flecks). The v2.3 look is still available with `origamiStyle: "old"`. Old option name `origamiGaya` with values `"kaku"`/`"lama"`. Example: `examples/origami-character.html` (`?gaya=lama` for the comparison).
 - v2.4, vector style: `limbs: "rubber"` (rubberhose: one arc of constant length from hip to ankle and shoulder to wrist; the leg line never drops below the sole; old `anggota: "karet"`) and `strokeFixed` (px; the ink stays that thick on screen at any scale; old `strokeTetap`).
 - Needs `figure3d.js`. The "crane" action uses `origami-fold.js`.
-- Used for: MG chapter 12.5, MGP templates T14 (pixel art) and T15 (origami), packs TRN-01 to TRN-04.
+- Used for: MG chapter 12.5, MGP templates T14 (pixel art) and T15 (origami), packs TRN-01 to TRN-05.
 
 ```js
 MGP.core.expose(MGP.characterStyles.create("#stage", { style: "pixel", action: "walk" }));
@@ -407,9 +407,9 @@ const out = MGP.field.apply(clone.grid({ kolom: 16, baris: 9, jarak: [60, 60], p
 
 ### Motion packs
 
-**`pack-scenes/`: 104 motion packs straight from their id (`MGP.packs`, old `MGP.paket`)**
+**`pack-scenes/`: 105 motion packs straight from their id (`MGP.packs`, old `MGP.paket`)**
 
-Every pack in the motion pack library (motion-graphics-pro skill, folder `packs/`, chapter 17.2), from EXP-01 to TRN-04, can be drawn directly from its id with its own palette, fonts, aspect ratio and scenes. There are 76 scene types, each an 8 second loop.
+Every pack in the motion pack library (motion-graphics-pro skill, folder `packs/`, chapter 17.2), from EXP-01 to TRN-05, can be drawn directly from its id with its own palette, fonts, aspect ratio and scenes. There are 76 scene types, each an 8 second loop.
 
 - Files: load `core/mgp-core.js`, `pack-scenes/engine.js`, `data.js`, then `scenes-a1.js` to `scenes-t.js`, or just `dist/mgp-packs.js`.
 - `MGP.packs.create(target, id, options)` → an instance ready to expose.
@@ -438,7 +438,7 @@ const p = MGP.packs.create("#stage", "DOK-03", { lines: [{ j: "Jalur yang terlup
 MGP.core.expose(p);
 ```
 
-`examples/pack-scenes.html?id=KIN-02` renders one pack. `examples/packs-gallery.html` shows all 104 packs on one canvas.
+`examples/pack-scenes.html?id=KIN-02` renders one pack. `examples/packs-gallery.html` shows all 105 packs on one canvas.
 
 ### Lottie (`lottie/`)
 

@@ -311,8 +311,8 @@
   },
   {
    "id": "TRN",
-   "nama": "Tren baru: piksel & origami",
-   "definisi": "Dua gaya kerajinan digital yang sedang naik daun: pixel art retro dan origami kertas lipat. Langsung terasa beda di feed.",
+   "nama": "Tren baru: piksel, origami & sulam",
+   "definisi": "Tiga gaya kerajinan digital yang sedang naik daun: pixel art retro, origami kertas lipat, dan sulam kertas (flanel + benang). Langsung terasa beda di feed.",
    "src": [
     "CV26",
     "PP26",
@@ -10554,6 +10554,88 @@
    "kapan": "Pakai untuk pengumuman, undangan digital, peluncuran produk ramah lingkungan, rangkuman 3 poin. Hindari untuk dokumenter panjang, topik teknologi futuristik.",
    "brief": "Buat video motion 15–60 detik rasio 16:9 bergaya \"Origami Lipat Buka\": kertas lipat akordeon terbuka memperlihatkan pesan, sudut terlipat jadi aksen, lalu pesawat kertas membawa ajakan. Palet #1F2A44, #FFF8EE, #F25F5C, #FFE066, #70C1B3; huruf Fraunces untuk judul dan Inter untuk isi. Gerak kunci: kertas akordeon terbuka lipat demi lipat membawa pesannya; sudut kartu terlipat ke bawah dengan bayangan dan kilau lipatan menyapu; pesawat kertas meluncur membawa ajakan di akhir. Irama sedang: 3 pesan per 8 dtk; audio akustik ringan 90-100 BPM, SFX lipat kertas.",
    "unggulan": false
+  },
+  {
+   "id": "TRN-05",
+   "kat": "TRN",
+   "nama": "Sulam Kertas Kota Senja",
+   "inti": "Kota tepi sungai dari flanel dan kertas berlapis, setiap tepi dijahit jelujur; langit, air, dan bunga dari benang, label kain berjahit silang, cahaya senja pelan.",
+   "cocok": "Kisah dan dongeng, potret kota/tempat, merek kuliner dan kriya, edukasi anak, ucapan hangat",
+   "hindari": "Topik teknologi futuristik, data padat angka",
+   "pal": [
+    "#3A2A1E",
+    "#F3E7CF",
+    "#C8553D",
+    "#7FA7B8",
+    "#F2B84B"
+   ],
+   "font": [
+    "Playfair Display",
+    "Poppins"
+   ],
+   "pv": {
+    "ar": "9:16",
+    "bg": "paper",
+    "lay": "center",
+    "txt": "rise",
+    "tr": "fade",
+    "cam": "drift",
+    "cap": "serif",
+    "acc": "badge",
+    "n": 4
+   },
+   "slot": {
+    "Gaya / latar": "Sulam Kertas: flanel dan kertas berlapis di atas kertas katun krem, tepi dijahit jelujur, langit/air/bunga dari benang",
+    "Komposisi": "Panel langit berjahit, bukit dan rumah flanel, sungai benang dengan perahu, bingkai daun satin stitch dan bunga french knot",
+    "Tulisan": "Playfair Display (judul) + Poppins (isi) di label kain; gerak: jatuh dengan pegas",
+    "Subtitle": "Label kain kecil di bawah judul",
+    "Aksen": "Jahitan silang di ujung label, jendela menyala saat senja",
+    "Irama": "Tenang: 4 label per 8 dtk",
+    "Transisi": "Kilat kertas tipis atau pan; jahitan muncul di awal",
+    "Kamera": "Diam, boil 12 fps",
+    "Audio": "Narasi hangat + SFX benang, gunting, dan kertas",
+    "Rasio": "9:16"
+   },
+   "reg": {
+    "tulisan": [
+     {
+      "name": "text/rising-words",
+      "type": "blok",
+      "title": "Kata Naik Bertahap",
+      "hf": "staggered-fade-up"
+     }
+    ],
+    "aksen": [
+     {
+      "name": "accents/spring-pop",
+      "type": "blok",
+      "title": "Lencana Pegas",
+      "hf": "badge-pop"
+     }
+    ],
+    "transisi": [
+     {
+      "name": "transitions/paper-collage",
+      "type": "blok",
+      "title": "Kolase Kertas",
+      "hf": "paper-collage-reveal"
+     }
+    ]
+   },
+   "alasan": "Tekstur benang dan flanel terasa buatan tangan dan hangat; jarang dipakai sehingga langsung menonjol di feed.",
+   "src": [
+    "CV26",
+    "PP26"
+   ],
+   "add": "mgp add text/rising-words accents/spring-pop transitions/paper-collage --into index.html",
+   "durasi": "20–60 detik",
+   "gerak": [
+    "jahitan tepi muncul di awal seolah baru dijahit",
+    "awan sulam bergeser dan perahu flanel terayun di sungai benang",
+    "senja turun pelan, jendela rumah menyala satu per satu, label kain jatuh dengan pegas"
+   ],
+   "kapan": "Pakai untuk kisah dan dongeng, potret kota/tempat, merek kuliner dan kriya, edukasi anak, ucapan hangat. Hindari untuk topik teknologi futuristik, data padat angka.",
+   "brief": "Buat video motion 20–60 detik rasio 9:16 bergaya \"Sulam Kertas Kota Senja\": kota tepi sungai dari flanel dan kertas berlapis, setiap tepi dijahit jelujur; langit, air, dan bunga dari benang, label kain berjahit silang, cahaya senja pelan. Palet #3A2A1E, #F3E7CF, #C8553D, #7FA7B8, #F2B84B; huruf Playfair Display untuk judul dan Poppins untuk isi. Gerak kunci: jahitan tepi muncul di awal seolah baru dijahit; awan sulam bergeser dan perahu flanel terayun di sungai benang; senja turun pelan, jendela rumah menyala satu per satu, label kain jatuh dengan pegas. Irama tenang: 4 label per 8 dtk; audio narasi hangat + SFX benang, gunting, dan kertas."
   }
  ],
  "sumber": {

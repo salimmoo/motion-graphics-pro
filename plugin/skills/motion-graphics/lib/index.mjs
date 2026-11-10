@@ -31,6 +31,7 @@ import "./pack-scenes/scenes-c.js";
 import "./pack-scenes/scenes-d.js";
 import "./pack-scenes/scenes-e.js";
 import "./pack-scenes/scenes-t.js";
+import "./pack-scenes/scenes-s.js";
 const MGP = globalThis.MGP;
 export const core = MGP.core;
 export const figure3d = MGP.figure3d;

@@ -39,9 +39,22 @@ export const STYLES = {
     "limited harmonious palette. Not 3D, not photographic, no gradients mesh, no texture noise.",
   origami: "Folded paper origami look: every shape built from flat triangular and kite facets with a light and a dark side per fold, " +
     "cream paper back visible, crisp creases, no ink outlines. Clean studio light.",
+  stitch: "Sulam Kertas (stitched paper) craft look: layered cut-paper relief combined with hand embroidery on warm cream cotton paper; " +
+    "sky, water, clouds, foliage and flowers worked in visible thread (satin stitch, french knots, running stitch), buildings and props as " +
+    "layered textured paper and felt with subtle 3D depth and soft shadows between layers; characters as felt-and-thread figures with " +
+    "stitched seams and embroidered trims. Warm soft daylight, visible thread and paper fibre texture. Not photographic, not 3D render, not glossy, not cartoon outlines.",
+  layered: "Lapis Kertas (deep layered paper-cut) look: a 3D papercut shadow-box diorama of many stacked sheets of matte coloured paper cut into " +
+    "wavy layers, visible spacing and soft drop shadows between every layer, thin curved cut lines etched inside each layer, clean crisp paper edges, " +
+    "suns and ripples as concentric paper rings, limited bold palette. Not flat vector, not photographic, not glossy, no ink outlines.",
+  diorama: "Diorama Kertas (3D papercraft miniature) look: buildings, boats, trees and props folded from matte coloured card into real 3D boxes and volumes, " +
+    "side faces and roofs visible, scored fold lines, tabs and seams hidden, set on a layered paper ground like a tabletop model photographed with a slight " +
+    "three-quarter view and soft studio light, gentle contact shadows. Not flat vector, not photographic city, not glossy plastic, no ink outlines.",
+  quilling: "Gulung Kertas (paper quilling) look: shapes built from narrow strips of coloured paper rolled into coils and scrolls or set on edge, " +
+    "visible strip edges and spirals, clouds and foliage as tight coils, combined with a few layered paper-cut planes, soft studio light, " +
+    "crisp paper edges. Not flat vector, not photographic, not glossy.",
   pixel: "Crisp pixel art sprite style, hard square pixels, limited 16-colour palette, 1-pixel dark outline, no anti-aliasing, no dithering on the background.",
 };
-const STYLE_OLD = { kertas: "paper", vektor: "vector" };
+const STYLE_OLD = { kertas: "paper", vektor: "vector", sulam: "stitch", "sulam-kertas": "stitch", embroidery: "stitch", lapis: "layered", "lapis-kertas": "layered", papercut: "layered", gulung: "quilling", "gulung-kertas": "quilling", "diorama-kertas": "diorama", papercraft: "diorama" };
 const styleText = (g) => { const k = (g || "paper").toLowerCase(); return STYLES[STYLE_OLD[k] || k] || g; };
 
 export const KIT_PARTS = [
@@ -551,10 +564,10 @@ const help = () => L`mgp image: free still images for kit sheets and plates (mot
                [--provider hf|cloudflare|pollinations|local] [--model klein|schnell]
                [--reference a.png (repeatable, max 4; klein only)] [--aspect 21:9|16:9|9:16|1:1]
                [--width 1536 --height 656 | --long-side 1344] [--seed 7] [--steps 4] [--magenta] [--cutout]
-               [--style paper|vector|origami|pixel|"<text>"]   adds a STYLE block (without --style: the prompt as it is)
+               [--style paper|vector|origami|pixel|stitch|layered|diorama|quilling|"<text>"]   adds a STYLE block (without --style: the prompt as it is)
                [--tries 3]   needs --cutout: next seeds until the cutout is clean (no magenta left, not
                              touching the edge, tint <= 2 %); best -> out.png, the other candidates out_s<seed>.png
-  mgp image kit "<character description>" -o kit/ [--style paper|vector|origami|pixel|"<text>"] [--face]
+  mgp image kit "<character description>" -o kit/ [--style paper|vector|origami|pixel|stitch|layered|diorama|quilling|"<text>"] [--face]
                [--reference model_sheet.png] [--method template|prompt] [--tries 3 (next seeds until the slice is clean)]   parts sheet (head, torso, upper/lower arm,
                hand, thigh, shin, foot) on a magenta background -> cutout -> slice -> kit/kit.json (+ pivots) + preview.
                template method (default with klein): a grey slot sheet is sent as reference 1 so that every part sits apart in its slot

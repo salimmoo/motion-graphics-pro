@@ -1,6 +1,6 @@
 // mgp cutout: remove the background of an image or video into alpha.
 //   model : rembg (MIT, U2-Net) through Python, per frame for video
-//   key   : colour key without a model (--key magenta | --key green | --key #00ff00)
+//   key   : colour key without a model (--key magenta | --key white | --key green | --key #00ff00)
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -18,7 +18,7 @@ Install it once (own small venv, locked packages + the U2-Net model with sha256,
   mgp install cutout              (progress: mgp install cutout --status)
 Already have a venv with rembg (e.g. made by hand)? Register it: mgp install cutout --adopt
   (found automatically in ~/vrb; any other venv: --python <path> or env MGP_PYTHON).
-Without a model, for assets on a flat colour background: --key magenta (background #FF00FF) or --key #00ff00.`;
+Without a model, for assets on a flat colour background: --key magenta (background #FF00FF), --key white (kit sheet of paper/felt pieces on plain white) or --key #00ff00.`;
 
 function ff(args) {
   return new Promise((res, rej) => {
@@ -55,6 +55,7 @@ function audioArgs(out, info, o) {
 function parseKey(k) {
   const s = String(k).toLowerCase();
   if (s === "magenta") return { magenta: true, hex: "FF00FF" };
+  if (s === "white" || s === "putih") return { white: true, hex: "FFFFFF" };
   if (s === "hijau" || s === "green") return { hex: "00FF00", despill: "green" };
   if (s === "biru" || s === "blue") return { hex: "0000FF", despill: "blue" };
   const m = /^#?([0-9a-f]{6})$/.exec(s);
@@ -79,6 +80,14 @@ export async function cutout(inp, o) {
   const py$ = { ...o, quiet: quiet(o), diam: quiet(o) };
 
   // colour key: magenta uses the magenta-key logic (Python numpy) when available, else ffmpeg
+  if (key && key.white) {   // white sheet: flood from the border, cream/white inside the pieces stays (py/cutout.py white)
+    const py = findPython("numpy, PIL", o.python);
+    if (!py) throw new Error(INSTALL());
+    if (!info.image) throw new Error(L`--key white is for still images (kit sheets)`);
+    await runPy(py, "cutout.py", ["white", inp, out, ...(o.tolerance != null ? ["--tolerance", String(o.tolerance)] : [])], py$);
+    say(o, L`cutout (white sheet key, numpy) -> ${out}  ${((Date.now() - t0) / 1000).toFixed(1)} s`);
+    return { out, method: "key-white" };
+  }
   if (key) {
     const py = key.magenta ? findPython("numpy, PIL", o.python) : null;
     if (key.magenta && py) {

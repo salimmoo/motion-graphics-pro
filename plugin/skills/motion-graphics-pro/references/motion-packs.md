@@ -1,4 +1,4 @@
-# References: library of 104 motion packs
+# References: library of 105 motion packs
 
 Part of the `motion-graphics-pro` skill. Read when: stage 2 (pack proposal per category), style frame/test clip from a pack id, and inserting blocks per slot.
 
@@ -6,7 +6,7 @@ Moved verbatim from SKILL.md v2.3 (17.2 Motion pack library); the old chapter nu
 
 ## 17.2 Motion pack library (from chapter 17)
 
-17.2 **Motion pack library** (folder `packs/` of this skill). 104 packs in 11 categories: EXP explainer, DOK documentary, NAR animated story, ADS ads, TLK talking head, SHO vertical short, KIN kinetic typography, DAT data/infographic, DEM product demo, EDU education, TRN new trends: pixel and origami (category 11, Version 2.1).
+17.2 **Motion pack library** (folder `packs/` of this skill). 105 packs in 11 categories: EXP explainer, DOK documentary, NAR animated story, ADS ads, TLK talking head, SHO vertical short, KIN kinetic typography, DAT data/infographic, DEM product demo, EDU education, TRN new trends: pixel and origami (category 11, Version 2.1).
 
 | File | Contents |
 |---|---|
@@ -14,7 +14,7 @@ Moved verbatim from SKILL.md v2.3 (17.2 Motion pack library); the old chapter nu
 | `packs/packs.json` | The same data for code to read (categories, packs, research sources) |
 | `packs/packs-preview.js` | Preview engine: `PaketPreview.build(host, pack, category)` makes a looping 10 s animation (Web Animations API) with `seek/play/pause` |
 | `packs/motion-packs.html` | Offline browser: open it in a browser, filter by category/aspect ratio, search, preview per tile, details in a dialog |
-| `motion-graphics` `lib/pack-scenes/` (Version 2.2) | Moving scenes for all 104 packs: `MGP.packs.create(target, id, options)` or `MGP.packs.render(id, ctx, t, { width, height })`, 76 scene types, 8 s loop, the pack's palette/fonts/aspect ratio |
+| `motion-graphics` `lib/pack-scenes/` (Version 2.2) | Moving scenes for all 105 packs: `MGP.packs.create(target, id, options)` or `MGP.packs.render(id, ctx, t, { width, height })`, 76 scene types, 8 s loop, the pack's palette/fonts/aspect ratio |
 
 How to use:
 1. In the concept/taste stage (2.2-2.3) Claude proposes 1 featured pack of that category + 1-2 alternatives; the `cocok` (fits) / `hindari` (avoid) fields are used to filter.
@@ -33,5 +33,6 @@ TRN category (Version 2.1):
 | TRN-02 16-bit Cozy Pixel Art | Warm pixel room: morning-dusk-night, rain, cat, dithered lamps | 9:16, 20-45 seconds | #2B2140 #FFF4E0 #F4A259 #8CB369 #F7D08A; Pixelify Sans + Inter | Time changes through palette swaps; rain, coffee steam, cat tail in steps; dialogue typed slowly |
 | TRN-03 Folding Origami Crane | Paper folded for real step by step into a crane that flaps and then flies | 16:9, 15-60 seconds | #F3EDE2 #2A2622 #D1495B #EDAE49 #00798C; Shippori Mincho + Zen Maru Gothic | Two folds with front and back sides in different colours; the crane bounces, then flaps; flies out, paper planes in the background |
 | TRN-04 Fold-Unfold Origami | Accordion paper opens to reveal a message, dog-ears as accents, a paper plane carries the call to action | 16:9, 15-60 seconds | #1F2A44 #FFF8EE #F25F5C #FFE066 #70C1B3; Fraunces + Inter | Accordion opens fold by fold; folded card corner + crease sheen; a paper plane carries the CTA |
+| TRN-05 Sulam Kertas Riverside Town at Dusk | Felt and layered-paper town with running-stitch edges, thread sky/river/flowers, fabric labels with cross-stitch ends, slow dusk light | 9:16, 20-60 seconds | #3A2A1E #F3E7CF #C8553D #7FA7B8 #F2B84B; Playfair Display + Poppins | Stitches sewn on at the start; clouds drift, a felt boat rocks; windows light up at dusk, labels drop on a spring |
 
-TRN audio: chiptune 140-150 BPM + coin/jump SFX (TRN-01); lo-fi 70-85 BPM + rain/typing (TRN-02); piano/koto 70-90 BPM + paper rustle (TRN-03); light acoustic 90-100 BPM + paper folding (TRN-04).
+TRN audio: chiptune 140-150 BPM + coin/jump SFX (TRN-01); lo-fi 70-85 BPM + rain/typing (TRN-02); piano/koto 70-90 BPM + paper rustle (TRN-03); light acoustic 90-100 BPM + paper folding (TRN-04); warm narration + thread/scissors/paper SFX (TRN-05, also strong with no music). AI-asset production of the stitched style: `references/style.md` 17.5.

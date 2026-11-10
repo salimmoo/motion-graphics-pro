@@ -1,4 +1,4 @@
-# Motion pack library (104 packs, 11 categories)
+# Motion pack library (105 packs, 11 categories)
 
 Data v2.1 (05-11-2026), blocks from our own block registry (`blocks/`, Motion Graphics Pro 1.0 blocks). Used by the motion-graphics-pro skill, chapter 17.2. Browser with previews: open `motion-packs.html` in a browser. Raw data: `packs.json`. ★ = featured pick of the category. Since v2.2 every pack can also be drawn straight from its id with `MGP.packs.create(target, id, options)` / `MGP.packs.render(id, ctx, t, options)` (motion-graphics skill, `lib/pack-scenes/`) and then rendered with `mgp` (`render/`). The **Add** line adds that pack's blocks to the composition with `mgp add <id ...> --into index.html` (folder `blocks/`, catalog: `mgp catalog --search <word>`).
 
@@ -16,7 +16,7 @@ Data v2.1 (05-11-2026), blocks from our own block registry (`blocks/`, Motion Gr
 | 8 | DAT | Data / infographic / maps | Moving numbers, charts, maps, timelines. | DAT-01: Bars overtaking each other keep viewers curious until the last second. |
 | 9 | DEM | Product demo / UI | Demonstration of an app/digital product: mock UI, cursor, screen, features. | DEM-02: A tilted floating screen instantly feels like a world-class product launch. |
 | 10 | EDU | Education / tutorial | Step-by-step lessons, courses, how-tos, microlearning. | EDU-02: Visual notes make viewers summarize along with the video; the material sticks better. |
-| 11 | TRN | New trends: pixel & origami | Two digital-craft styles on the rise: retro pixel art and folded paper origami. Stands out in the feed right away. | TRN-03: Origami crane: real paper folds that captivate and are rarely used, so it is easy to remember. |
+| 11 | TRN | New trends: pixel, origami & stitched paper | Three digital-craft styles on the rise: retro pixel art, folded paper origami and stitched paper (felt + thread). Stands out in the feed right away. | TRN-03: Origami crane: real paper folds that captivate and are rarely used, so it is easy to remember. |
 
 ## All packs
 
@@ -122,10 +122,11 @@ Data v2.1 (05-11-2026), blocks from our own block registry (`blocks/`, Motion Gr
 | [EDU-08](#edu-08) | Technical Blueprint | Education / tutorial | 16:9 | 2–6 min per lesson | #0B3D91 #EAF2FF #FFD166 #9AD1FF #0A3278 | IBM Plex Mono + IBM Plex Sans |
 | [EDU-09](#edu-09) | Narration + Graphics | Education / tutorial | 16:9 | 2–6 min per lesson | #FCFCFC #212529 #FF6B6B #4D96FF #F1F3F5 | Poppins + Inter |
 | [EDU-10](#edu-10) | Cheerful Kids | Education / tutorial | 16:9 | 2–6 min per lesson | #FFF4D6 #2D2A32 #FF595E #1982C4 #8AC926 | Baloo 2 + Nunito |
-| [TRN-01](#trn-01) | 8-bit Arcade Pixel Art | New trends: pixel & origami | 16:9 | 15–30 s | #0B0A1F #FFFFFF #FF3864 #2DE2E6 #F9C80E | Press Start 2P + Pixelify Sans |
-| [TRN-02](#trn-02) | 16-bit Cozy Pixel Art | New trends: pixel & origami | 9:16 | 20–45 s | #2B2140 #FFF4E0 #F4A259 #8CB369 #F7D08A | Pixelify Sans + Inter |
-| [TRN-03](#trn-03) ★ | Folding Origami Crane | New trends: pixel & origami | 16:9 | 15–60 s | #F3EDE2 #2A2622 #D1495B #EDAE49 #00798C | Shippori Mincho + Zen Maru Gothic |
-| [TRN-04](#trn-04) | Fold-Unfold Origami | New trends: pixel & origami | 16:9 | 15–60 s | #1F2A44 #FFF8EE #F25F5C #FFE066 #70C1B3 | Fraunces + Inter |
+| [TRN-01](#trn-01) | 8-bit Arcade Pixel Art | New trends: pixel, origami & stitched paper | 16:9 | 15–30 s | #0B0A1F #FFFFFF #FF3864 #2DE2E6 #F9C80E | Press Start 2P + Pixelify Sans |
+| [TRN-02](#trn-02) | 16-bit Cozy Pixel Art | New trends: pixel, origami & stitched paper | 9:16 | 20–45 s | #2B2140 #FFF4E0 #F4A259 #8CB369 #F7D08A | Pixelify Sans + Inter |
+| [TRN-03](#trn-03) ★ | Folding Origami Crane | New trends: pixel, origami & stitched paper | 16:9 | 15–60 s | #F3EDE2 #2A2622 #D1495B #EDAE49 #00798C | Shippori Mincho + Zen Maru Gothic |
+| [TRN-04](#trn-04) | Fold-Unfold Origami | New trends: pixel, origami & stitched paper | 16:9 | 15–60 s | #1F2A44 #FFF8EE #F25F5C #FFE066 #70C1B3 | Fraunces + Inter |
+| [TRN-05](#trn-05) | Sulam Kertas Riverside Town at Dusk | New trends: pixel, origami & stitched paper | 9:16 | 20–60 s | #3A2A1E #F3E7CF #C8553D #7FA7B8 #F2B84B | Playfair Display + Poppins |
 
 ## 1. Explainer (EXP)
 
@@ -2167,7 +2168,7 @@ Ready-to-copy brief:
 Make a 16:9 education video of 2–6 minutes per lesson in the "Cheerful Kids" style: bright colors, bouncing letters, confetti. Palette #FFF4D6, #2D2A32, #FF595E, #1982C4, #8AC926; Baloo 2 for titles and Nunito for body text. Key motion: colorful letters drop and bounce; a sun with a face spins and balloons float; shapes with faces pop in with a bounce, confetti falls. Medium-fast pacing: 4 shots per 10 s (±2.5 s/shot, about the average shot length of modern films [CUT]); audio: cheerful kids' song 120 BPM.
 ```
 
-## 11. New trends: pixel & origami (TRN)
+## 11. New trends: pixel, origami & stitched paper (TRN)
 
 Two digital craft styles on the rise: retro pixel art and folded paper origami. They stand out in the feed right away.
 
@@ -2249,6 +2250,27 @@ Ready-to-copy brief:
 
 ```text
 Make a 15–60 second 16:9 motion video in the "Fold-Unfold Origami" style: accordion-folded paper opens to reveal a message, a folded corner becomes the accent, then a paper plane carries the call to action. Palette #1F2A44, #FFF8EE, #F25F5C, #FFE066, #70C1B3; Fraunces for titles and Inter for body text. Key motion: the accordion paper opens fold by fold, carrying its message; the card corner folds down with a shadow and a fold sheen sweeps across; a paper plane glides in with the call to action at the end. Medium pacing: 3 messages per 8 s; audio: light acoustic 90-100 BPM, paper fold SFX.
+```
+
+
+### TRN-05
+
+**Sulam Kertas Riverside Town at Dusk** (Sulam Kertas Kota Senja). A riverside town of felt and layered paper with every edge sewn in a running stitch; sky, water and flowers in thread, fabric labels with cross-stitch ends, a slow dusk light.
+
+- **Use:** Use for stories and folk tales, portraits of a town or place, food and craft brands, children's education, warm greetings. Avoid for futuristic technology topics, number-heavy data.
+- **Duration:** 20–60 s · **Aspect:** 9:16
+- **Key motion:** edge stitches appear at the start as if just sewn; stitched clouds drift and a felt boat rocks on a river of thread; dusk falls slowly, windows light up one by one, fabric labels drop in on a spring
+- **Palette:** `#3A2A1E` `#F3E7CF` `#C8553D` `#7FA7B8` `#F2B84B`
+- **Font:** Playfair Display (titles) + Poppins (body)
+- **Slots:** Style / background: Sulam Kertas: felt and layered paper on cream cotton paper, edges sewn in a running stitch, sky/water/flowers in thread; Composition: Stitched sky panel, felt hills and houses, a river of thread with a boat, a frame of satin-stitch leaves and french-knot flowers; Lettering: Playfair Display (titles) + Poppins (body) on fabric labels; motion: spring drop; Subtitles: A small fabric label under the title; Accent: Cross-stitches on the label ends, windows lighting up at dusk; Pacing: Calm: 4 labels per 8 s; Transition: Thin paper flash or pan; stitches sewn on at the start; Camera: Static, 12 fps boil; Audio: Warm narration + thread, scissors and paper SFX; Aspect: 9:16
+- **Blocks:** `text/rising-words` (lettering), `accents/spring-pop` (accent), `transitions/paper-collage` (transition)
+- **Add:** `mgp add text/rising-words accents/spring-pop transitions/paper-collage --into index.html`
+- **Why:** Thread and felt texture feels handmade and warm; it is rarely used, so it stands out in the feed right away. Full production rules (AI kit sheets, cutting, assembly): `references/style.md` 17.5.
+
+Ready-to-copy brief:
+
+```text
+Make a 20–60 second 9:16 motion video in the "Sulam Kertas Riverside Town at Dusk" style: a riverside town of felt and layered paper with every edge sewn in a running stitch; sky, water and flowers in thread, fabric labels with cross-stitch ends, a slow dusk light. Palette #3A2A1E, #F3E7CF, #C8553D, #7FA7B8, #F2B84B; Playfair Display for titles and Poppins for body text. Key motion: edge stitches appear at the start as if just sewn; stitched clouds drift and a felt boat rocks on a river of thread; dusk falls slowly, windows light up one by one, fabric labels drop in on a spring. Calm pacing: 4 labels per 8 s; audio: warm narration + thread, scissors and paper SFX.
 ```
 
 ## Research sources

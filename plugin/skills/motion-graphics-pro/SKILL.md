@@ -1,6 +1,6 @@
 ---
 name: "motion-graphics-pro"
-description: "Use to make motion graphics videos, explainers, ads or music videos (9:16, 16:9, 1:1, 4:5, 21:9 or multi-format) in a paper collage style, from brief to render: brief, concept (incl. object personification), taste, assets (Higgsfield or free images via mgp image), kit/reverse stripe/AI video branches, sequence motion, lip-sync, kinetic typography, narration (ElevenLabs, local voice clone, own recording or none), local render with mgp (built-in renderer: mgp new, project.json, key-pose blocking, mgp curves QC), the JS motion library, 260 ready-made blocks, 104 motion packs (incl. pixel art and origami), magenta background trick, REQUIRED/REPORT gates, review, templates and sample briefs. (ID: video motion graphics, explainer, iklan, MV, kolase kertas, tipografi kinetik, narasi, klon suara, render video, template brief)"
+description: "Use to make motion graphics videos, explainers, ads or music videos (9:16, 16:9, 1:1, 4:5, 21:9 or multi-format) in a paper collage style, from brief to render: brief, concept (incl. object personification), taste, assets (Higgsfield or free images via mgp image), kit/reverse stripe/AI video branches, sequence motion, lip-sync, kinetic typography, narration (ElevenLabs, local voice clone, own recording or none), local render with mgp (built-in renderer: mgp new, project.json, key-pose blocking, mgp curves QC), the JS motion library, 260 ready-made blocks, 105 motion packs (incl. pixel art and origami), Sulam Kertas stitched-paper, Lapis Kertas layered papercut, Diorama Kertas papercraft and Gulung Kertas quilling styles, magenta background trick, REQUIRED/REPORT gates, review, templates and sample briefs. (ID: video motion graphics, explainer, iklan, MV, kolase kertas, sulam kertas, lapis kertas, diorama kertas, papercut, papercraft, quilling, tipografi kinetik, narasi, klon suara, render video, template brief)"
 ---
 
 # Motion Graphics Pro: paper collage + mgp
@@ -214,7 +214,7 @@ names. On the user's laptop, renders use `--workers 2` unless the user asks othe
 | File | Read when | Contents (old chapter) |
 |---|---|---|
 | `references/brief-concept.md` | Stages 1-2: T1 form, 3 T2a concepts, T2 taste, POV; the user writes a one-sentence brief | 2 (brief, concept, taste, POV, archetypes), 17.1 (sample briefs) |
-| `references/style.md` | Choosing/keeping a style (house style **Atelier Kertas**, 3.0); assembling a scene; the brief asks for pixel art or origami | 3 (collage visual system), 17.3 |
+| `references/style.md` | Choosing/keeping a style (house style **Atelier Kertas**, 3.0); assembling a scene; the brief asks for pixel art, origami, **Sulam Kertas** (stitched paper), **Lapis Kertas** (deep layered paper-cut), **Diorama Kertas** (3D papercraft miniature) or **Gulung Kertas** (paper quilling) | 3 (collage visual system), 17.3, 17.5-17.7 |
 | `references/image.md` | Stages 4-5: free image route (`mgp image`, template kits, `--tries N`, `--rotate`, a pose per image), Higgsfield (G3, settings, STYLE, prompt rules), magenta background | Part A (D, v2.4) + 4, 17.4 |
 | `references/hardware.md` | Project start (`mgp doctor`) and every voice/image/encoder choice; GPU queue | v2.4 |
 | `references/cutout.md` | Stage 6: kit cutter, gaps, anchors and sequence scale, cutout QC | 5 |

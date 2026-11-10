@@ -7,6 +7,9 @@ Modes:
   magenta <input> <output> [--clean [--components 0.02] [--threshold 128]] [--no-despill] [--despill-radius N]
                                                              key a magenta #FF00FF background (numpy + Pillow); --clean = remove magenta leftovers;
                                                              despill (on by default): magenta tint taken out along the alpha edge
+  white   <input> <output> [--tolerance 22]                  key a plain white sheet background (kit sheets of paper/felt pieces on white):
+                                                             only near-white pixels CONNECTED to the image border become transparent,
+                                                             so cream or white areas inside a piece stay opaque (numpy + Pillow)
   despill <input> <output> [--key-color magenta|green|blue|#rrggbb] [--despill-radius N] [--everywhere]
                                                              despill an RGBA cutout (file or folder of PNGs)
 
@@ -45,6 +48,30 @@ def magenta_key(img):
     al = Image.fromarray((a * 255).astype(np.uint8)).filter(ImageFilter.MinFilter(3)).filter(ImageFilter.GaussianBlur(.7))
     out = Image.fromarray(np.dstack([np.clip(r2, 0, 255), g, np.clip(b2, 0, 255)]).astype(np.uint8)).convert("RGBA")
     out.putalpha(al)
+    return out
+
+
+# ------------------------------------------------------------------ white sheet key (Sulam Kertas / paper kit sheets on white)
+# A plain colour key also eats cream paper and white thread inside the pieces. Here the background is only the near-white
+# region that touches the image border (geodesic flood from the edge), and the holes inside a piece are kept.
+def white_key(img, tol=22):
+    im = np.asarray(img.convert("RGB")).astype(np.int16)
+    near = ((255 - im.min(axis=2)) <= tol) & ((im.max(axis=2) - im.min(axis=2)) <= 18)
+    try:
+        from scipy import ndimage
+        lab, _ = ndimage.label(near)
+        edge = np.unique(np.concatenate([lab[0], lab[-1], lab[:, 0], lab[:, -1]]))
+        bg = np.isin(lab, edge[edge > 0])
+    except ImportError:   # fallback: grow the background from the border inside the near-white mask
+        bg = np.zeros_like(near); bg[0], bg[-1], bg[:, 0], bg[:, -1] = near[0], near[-1], near[:, 0], near[:, -1]
+        while True:
+            g = Image.fromarray((bg * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(3))
+            nb = (np.asarray(g) > 0) & near
+            if (nb == bg).all():
+                break
+            bg = nb
+    a = Image.fromarray(((~bg) * 255).astype(np.uint8)).filter(ImageFilter.MinFilter(3)).filter(ImageFilter.GaussianBlur(.7))
+    out = img.convert("RGBA"); out.putalpha(a)
     return out
 
 
@@ -286,13 +313,13 @@ potong = cutout
 plate_dari = plate_from
 daftar_png = list_png
 
-MODES = {"image": "image", "folder": "folder", "magenta": "magenta", "despill": "despill", "gambar": "image"}
+MODES = {"image": "image", "folder": "folder", "magenta": "magenta", "white": "white", "putih": "white", "despill": "despill", "gambar": "image"}
 
 
 def main():
     sys.stdout.reconfigure(encoding="utf-8")
     ap = argparse.ArgumentParser(description=T(__doc__), formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("mode", choices=list(MODES), metavar="{image,folder,magenta,despill}")
+    ap.add_argument("mode", choices=list(MODES), metavar="{image,folder,magenta,white,despill}")
     ap.add_argument("input")
     ap.add_argument("output")
     ap.add_argument("--model", default="u2net")
@@ -305,6 +332,7 @@ def main():
     ap.add_argument("--no-despill", dest="no_despill", action="store_true", help=T("magenta: keep the key-colour tint along the edge (no despill)"))
     ap.add_argument("--despill-radius", dest="despill_radius", type=int, default=0, help=T("despill band width in px (default 1.5 % of the short side)"))
     ap.add_argument("--key-color", dest="key_color", default="magenta", help=T("despill: key colour magenta | green | blue | #rrggbb"))
+    ap.add_argument("--tolerance", type=int, default=22, help=T("white: how far from pure white still counts as background (0-255)"))
     ap.add_argument("--everywhere", action="store_true", help=T("despill: the whole subject, not only the edge band"))
     a = ap.parse_args()
     mode = MODES[a.mode]
@@ -324,6 +352,18 @@ def main():
                 one_d(os.path.join(a.input, f), os.path.join(a.output, f))
         else:
             one_d(a.input, a.output)
+        print("ok")
+        return 0
+
+    if mode == "white":
+        def one_w(src, dst):
+            white_key(Image.open(src), a.tolerance).save(dst)
+        if os.path.isdir(a.input):
+            os.makedirs(a.output, exist_ok=True)
+            for f in list_png(a.input):
+                one_w(os.path.join(a.input, f), os.path.join(a.output, f))
+        else:
+            one_w(a.input, a.output)
         print("ok")
         return 0
 

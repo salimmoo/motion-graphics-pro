@@ -11,7 +11,7 @@
 "use strict";
 const fs = require("fs"), path = require("path"), vm = require("vm");
 const LIB = __dirname;
-const PAKET = ["pack-scenes/engine.js", "pack-scenes/data.js", ...["a1", "a2", "b", "c", "d", "e", "t"].map((k) => `pack-scenes/scenes-${k}.js`)];
+const PAKET = ["pack-scenes/engine.js", "pack-scenes/data.js", ...["a1", "a2", "b", "c", "d", "e", "t", "s"].map((k) => `pack-scenes/scenes-${k}.js`)];
 // modules that others depend on load first
 const FIRST = ["figure3d.js", "vector-kit.js", "spring.js"];
 // v2.4 renamed some files (peta.js -> map.js, ...): sort by the old names so the bundle order, and its output, stays the same

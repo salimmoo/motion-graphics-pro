@@ -2,12 +2,12 @@
   <img src="docs/assets/img/gate/timur/thumb.webp" width="88" alt="">
 </p>
 
-<h1 align="center">Motion Graphics Pro v2.4.2</h1>
+<h1 align="center">Motion Graphics Pro v2.5.0</h1>
 <p align="center"><b>Atelier Kertas</b> · a plugin for Claude that takes a motion graphics video from a plain-language brief to a finished file</p>
 <p align="center">
   <a href="https://salimmoo.github.io/motion-graphics-pro/"><b>Open the interactive guide ↗</b></a> ·
   <a href="#install"><b>Install</b></a> ·
-  <a href="docs/download/motion-graphics-pro-plugin-v2.4.2.zip">Download the plugin</a> ·
+  <a href="docs/download/motion-graphics-pro-plugin-v2.5.0.zip">Download the plugin</a> ·
   <a href="#free-and-ultra">Free and Ultra</a> ·
   <a href="CHANGELOG.md">Changelog</a> ·
   <a href="LICENSE.md">Licence</a> ·
@@ -36,7 +36,7 @@ One Claude plugin with three skills, for explainers, ads, music videos, document
 
 - **The whole job, not one step.** Brief → concept → script and voice → assets → motion → QC → render, with five decision points where Claude stops for your approval. Most tools cover one of these steps; tutorials usually cover a few.
 - **Everything stays editable.** Each video is an HTML composition you (or Claude) can change: move, retime or restyle any layer, swap a block, re-do one sentence of the voice-over. Nothing is locked inside a fixed template.
-- **Many looks, not one.** 104 motion packs in 11 categories and 260 blocks: paper collage, vector, isometric, pixel art, origami, kinetic type, maps, 3D, liquid glass and more.
+- **Many looks, not one.** 105 motion packs in 11 categories and 260 blocks: paper collage, stitched paper, vector, isometric, pixel art, origami, kinetic type, maps, 3D, liquid glass and more.
 - **Your voice, your images.** Clone your own voice locally (with recorded consent) or use ElevenLabs; generate images free on your own GPU or a free cloud, or use Higgsfield for premium assets.
 - **Measured quality.** `mgp curves` checks motion like a graph editor, `mgp audit` checks safe zones, VO errors, loudness, licences and approvals before the render.
 - **Local and free to run.** Renders on your own computer; no subscription for the toolkit itself. Paid services are optional and always quoted before use.
@@ -46,7 +46,7 @@ One Claude plugin with three skills, for explainers, ads, music videos, document
 |---|---|---|---|---|
 | From brief to finished file | ✅ Guided, with 5 decision points | ✅ Fast, mostly one-shot | ◐ You build the pipeline | ✗ Partial, step by step |
 | Edit any layer, timing or style | ✅ | ◐ Limited to the template | ✅ If you write the code | ◐ Depends on the tool shown |
-| Styles out of the box | ✅ 104 packs, 260 blocks | ◐ The app's templates | ◐ Starter templates / registries | ◐ One style per video |
+| Styles out of the box | ✅ 105 packs, 260 blocks | ◐ The app's templates | ◐ Starter templates / registries | ◐ One style per video |
 | Voice-over incl. your own cloned voice | ✅ Local or ElevenLabs | ◐ Usually stock voices or paid add-ons | ✗ Bring your own | ✗ |
 | Image generation | ✅ Free local/cloud or Higgsfield | ✅ Built in, credits | ✗ Bring your own | ✗ |
 | Motion QC and pre-render audit | ✅ `mgp curves`, `mgp audit` | ✗ | ◐ Manual | ✗ |
@@ -80,7 +80,7 @@ HyperFrames, GSAP, OpenCV and Skia are not needed.
 
 ### A. claude.ai or Cowork
 
-1. Download the plugin: [`motion-graphics-pro-plugin-v2.4.2.zip`](docs/download/motion-graphics-pro-plugin-v2.4.2.zip) (≈9.5 MB). **Do not unzip it.**
+1. Download the plugin: [`motion-graphics-pro-plugin-v2.5.0.zip`](docs/download/motion-graphics-pro-plugin-v2.5.0.zip) (≈9.5 MB). **Do not unzip it.**
 2. In Claude, open **Settings → Capabilities** and make sure **Code execution** is on.
 3. Open **Customize → Plugins**.
 4. Click **Upload plugin** and choose the ZIP. As an alternative to steps 1 and 4, click **Add marketplace**, type `salimmoo/motion-graphics-pro`, then install **motion-graphics-pro** from the list.
@@ -108,7 +108,7 @@ In the chat sandbox the brief, concept, script, templates, asset prompts, compos
 
 ### C. Manual install (plain skills)
 
-1. Download the [plugin ZIP](docs/download/motion-graphics-pro-plugin-v2.4.2.zip) and unzip it, or clone this repo.
+1. Download the [plugin ZIP](docs/download/motion-graphics-pro-plugin-v2.5.0.zip) and unzip it, or clone this repo.
 2. Copy the three folders inside `skills/` (repo: `plugin/skills/`) into your skills folder:
    - macOS / Linux: `~/.claude/skills/`
    - Windows: `%USERPROFILE%\.claude\skills\`
@@ -180,13 +180,13 @@ mgp render projects/ad/index.html -o ad.mp4                                   # 
 
 | Folder | Contents | For |
 |---|---|---|
-| [`motion-graphics-pro/`](plugin/skills/motion-graphics-pro/SKILL.md) | Core skill + [`references/`](plugin/skills/motion-graphics-pro/references/) + [`render/`](plugin/skills/motion-graphics-pro/render/README.md) (mgp) + [`blocks/`](plugin/skills/motion-graphics-pro/blocks/README.md) + [`packs/`](plugin/skills/motion-graphics-pro/packs/INDEX.md) + [`voice/`](plugin/skills/motion-graphics-pro/voice/README.md) | The full production flow from brief to render, decision gates, templates T1-T15 (EN + ID), **260 blocks**, **104 motion packs** |
+| [`motion-graphics-pro/`](plugin/skills/motion-graphics-pro/SKILL.md) | Core skill + [`references/`](plugin/skills/motion-graphics-pro/references/) + [`render/`](plugin/skills/motion-graphics-pro/render/README.md) (mgp) + [`blocks/`](plugin/skills/motion-graphics-pro/blocks/README.md) + [`packs/`](plugin/skills/motion-graphics-pro/packs/INDEX.md) + [`voice/`](plugin/skills/motion-graphics-pro/voice/README.md) | The full production flow from brief to render, decision gates, templates T1-T15 (EN + ID), **260 blocks**, **105 motion packs** |
 | [`motion-graphics/`](plugin/skills/motion-graphics/SKILL.md) | Skill + [`references/`](plugin/skills/motion-graphics/references/) + [`lib/`](plugin/skills/motion-graphics/lib/README.md) (JS motion library, mgp.motion) + `scripts/` (Python) | Motion principles in code: springs, walk cycles from gait data, 3D space, shadows from poses, advanced principles |
 | [`vector-character/`](plugin/skills/vector-character/SKILL.md) | Skill + [`references/`](plugin/skills/vector-character/references/) + `scripts/` (Python) | Vector characters in code: silhouette, face, hands, multi-angle rigs, character kits, vector/pixel/origami styles |
 | [`_shared/`](plugin/_shared/README.md) | Single source of the shared Python modules | For contributors; copied into each skill's `scripts/` by `sync.py` |
 | `docs/` (repo only) | Site | The same interactive guide as [salimmoo.github.io/motion-graphics-pro](https://salimmoo.github.io/motion-graphics-pro/) |
 
-Every engine belongs to this package, so no third-party skill or CLI is needed: **mgp** (the local renderer and CLI), **mgp.motion** (tween engine, `gsap`-compatible), **260 blocks**, **Studio** (visual layer editor), the **JS motion library** with moving scenes for all 104 packs, and a **numpy + Pillow** Python layer (`brush.py`, `image_ops.py`). Command list: `mgp --help`; details: [render/README.md](plugin/skills/motion-graphics-pro/render/README.md).
+Every engine belongs to this package, so no third-party skill or CLI is needed: **mgp** (the local renderer and CLI), **mgp.motion** (tween engine, `gsap`-compatible), **260 blocks**, **Studio** (visual layer editor), the **JS motion library** with moving scenes for all 105 packs, and a **numpy + Pillow** Python layer (`brush.py`, `image_ops.py`). Command list: `mgp --help`; details: [render/README.md](plugin/skills/motion-graphics-pro/render/README.md).
 
 ## Free images
 
@@ -268,7 +268,7 @@ Attach assets if you have them: a logo, product photos, lyrics or a recording of
 
 ## Motion pack library
 
-104 packs in 11 categories. Each pack has its use, when to use it, length, key motion, palette, fonts, audio, blocks per slot (one `mgp add ... --into index.html` command), a copy-ready brief, and a moving scene (`MGP.packs.create(target, id)`). Browse them in the [guide](https://salimmoo.github.io/motion-graphics-pro/#paket), offline in `motion-graphics-pro/packs/motion-packs.html`, or read [`INDEX.md`](plugin/skills/motion-graphics-pro/packs/INDEX.md). The pack data (names and descriptions in `packs.json` and `motion-packs.html`) is still in Indonesian; `INDEX.md` gives the English name first.
+105 packs in 11 categories. Each pack has its use, when to use it, length, key motion, palette, fonts, audio, blocks per slot (one `mgp add ... --into index.html` command), a copy-ready brief, and a moving scene (`MGP.packs.create(target, id)`). Browse them in the [guide](https://salimmoo.github.io/motion-graphics-pro/#paket), offline in `motion-graphics-pro/packs/motion-packs.html`, or read [`INDEX.md`](plugin/skills/motion-graphics-pro/packs/INDEX.md). The pack data (names and descriptions in `packs.json` and `motion-packs.html`) is still in Indonesian; `INDEX.md` gives the English name first.
 
 ## Comparison results
 
@@ -301,7 +301,7 @@ Motion Graphics Pro is **free** and complete: everything in this repo (the plugi
 | | **Pro (free, this repo)** | **Ultra (paid)** |
 |---|---|---|
 | Plugin with 3 skills, `mgp` CLI, local render | ✓ | ✓ |
-| 104 motion packs, 260 blocks, motion library, guide | ✓ | ✓ |
+| 105 motion packs, 260 blocks, motion library, guide | ✓ | ✓ |
 | Preview videos of the ad and the 12 example clips | ✓ | ✓ |
 | Editable source projects of the ad and all 12 clips | | ✓ |
 | Premium packs and blocks | | ✓ |
@@ -369,7 +369,7 @@ Motion Graphics Pro was written from scratch. It learned principles and ideas fr
 
 **Motion Graphics Pro** adalah tiga skill Claude untuk membuat video motion graphics dari brief sampai file video: explainer, iklan, music video, dokumenter, dan materi edukasi, bergaya kolase kertas, vektor, 3D, tipografi kinetik, pixel art, atau origami. Kamu cukup menulis brief seperti bicara ke tim kreatif; keputusan tetap di tanganmu di lima titik: konsep, naskah, biaya, contoh pertama, dan render.
 
-- **Keunggulan.** Satu alur lengkap dari brief sampai render dengan 5 titik keputusan; semua lapisan bisa diubah (bukan template terkunci); 104 paket motion dan 260 blok dengan banyak gaya; klon suara sendiri atau ElevenLabs; gambar gratis lokal/cloud atau Higgsfield; cek mutu gerak (`mgp curves`) dan audit sebelum render (`mgp audit`); render di komputer sendiri tanpa langganan. Perbandingan lengkap: [Why Motion Graphics Pro](#why-motion-graphics-pro).
+- **Keunggulan.** Satu alur lengkap dari brief sampai render dengan 5 titik keputusan; semua lapisan bisa diubah (bukan template terkunci); 105 paket motion dan 260 blok dengan banyak gaya; klon suara sendiri atau ElevenLabs; gambar gratis lokal/cloud atau Higgsfield; cek mutu gerak (`mgp curves`) dan audit sebelum render (`mgp audit`); render di komputer sendiri tanpa langganan. Perbandingan lengkap: [Why Motion Graphics Pro](#why-motion-graphics-pro).
 - **Bahasa.** Dokumen skill berbahasa Inggris, tetapi Claude membalas dalam bahasamu: pengguna Indonesia dilayani penuh dalam Bahasa Indonesia, termasuk brief T1, pesan gerbang, dan laporan (`references/template.id.md`). `mgp new --lang id` menulis `brief.md` dan `STATUS.md` dalam Bahasa Indonesia, dan `MGP_LANG=id` membuat pesan CLI berbahasa Indonesia. [Panduan interaktif](https://salimmoo.github.io/motion-graphics-pro/) tersedia dalam Bahasa Indonesia (bawaan) dan Inggris.
 - **Mulai cepat.** `mgp new` → `mgp check` → `mgp add` → `mgp contact --times poses` (blocking) → `mgp curves` → `mgp audit` → `mgp render` (lihat [Quick start](#quick-start)).
 - **Nama lama tetap jalan.** Sejak v2.4 perintah dan folder bernama Inggris (`rekam` → `mgp`, `blok/` → `blocks/`, `rujukan/` → `references/`, `proyek.json` → `project.json`, Gerak → `mgp.motion`). Nama lama berbahasa Indonesia (`rekam baru --rasio`, `rekam tambah … --ke`, `rekam pasang suara --latar`) tetap diterima sebagai alias, dan proyek lama tetap bisa dibuka dan dirender.
@@ -379,7 +379,7 @@ Motion Graphics Pro was written from scratch. It learned principles and ideas fr
 ### Cara pasang (langkah demi langkah)
 
 **A. claude.ai atau Cowork**
-1. Unduh [ZIP plugin](docs/download/motion-graphics-pro-plugin-v2.4.2.zip) (±9,5 MB). **Jangan diekstrak.**
+1. Unduh [ZIP plugin](docs/download/motion-graphics-pro-plugin-v2.5.0.zip) (±9,5 MB). **Jangan diekstrak.**
 2. Buka **Settings → Capabilities**, pastikan **Code execution** aktif.
 3. Buka **Customize → Plugins** → **Upload plugin** → pilih ZIP tadi. Bisa juga lewat **Add marketplace**, ketik `salimmoo/motion-graphics-pro`, lalu pasang **motion-graphics-pro**.
 4. Buka chat baru dan tulis brief, misalnya *"Buatkan iklan 15 detik 9:16 gaya kolase kertas untuk es kopi"*.

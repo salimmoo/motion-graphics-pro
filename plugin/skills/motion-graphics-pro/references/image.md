@@ -133,7 +133,7 @@ mgp image "a red paper coffee cup" --style paper --magenta --cutout --tries 3 --
 
 `--style paper` (default for `kit` and `plate`; for free prompts added only when written; the STYLE block 4.3,
 flat-background version: shadows only inside the piece = house style Atelier Kertas, `references/style.md` 3.0), `vector`, `origami`,
-`pixel`, or free text. For a paper style that is already approved, a style reference (an old kit) is stronger than words.
+`pixel`, `stitch` (Sulam Kertas: paper relief + embroidery + felt figures, alias `sulam`; kit, cutting and motion rules in `references/style.md` 17.5), `layered` (Lapis Kertas: deep layered paper-cut diorama) `diorama` (Diorama Kertas: folded-card 3D miniature, `references/style.md` 17.7) and `quilling` (Gulung Kertas: rolled paper strips; layered and quilling in `references/style.md` 17.6), or free text. For a paper style that is already approved, a style reference (an old kit) is stronger than words.
 
 ### 3.5 Animation from a kit
 
